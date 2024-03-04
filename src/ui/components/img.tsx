@@ -17,7 +17,7 @@ type ImgBox = {
 
 export const ImgBox = (
 		{
-			className, type, children, background, width, height, hover=1, ...props
+			className, type, children, background, width, height, hover=1, style, ...props
 		}: ComponentPropsWithoutRef<"figure"> & ImgBox,
 ) => {
 	let backgroundStyle
@@ -33,7 +33,7 @@ export const ImgBox = (
 	return (
 			<figure
 					className={`${styles.box} ${!!type ? styles[type] : ""} ${className}`}
-					style={{"--_hover": hover, ...backgroundStyle, width, height}}
+					style={{"--_hover": hover, ...backgroundStyle, width, height, ...style}}
 					{...props}
 			>
 				{children}

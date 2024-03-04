@@ -129,7 +129,7 @@ export function Case({caseType, chancesDrop, chancesRarity}: Case) {
 			<>
 				<ImgBox className={`${styles.pointer} ${styles.helper}`} onClick={() => setModal(true)} hover={1.1}>
 					<Img
-							src={`/media/shop/${caseType.name}.png`} alt={`${caseType.displayname} кейс`}
+							src={`/shop/${caseType.name}.png`} alt={`${caseType.displayname} кейс`}
 							width={185}
 					/>
 				</ImgBox>

@@ -21,7 +21,7 @@ export default function Crafts() {
 
 					<PBox>
 						<ImgBox type="post">
-							<Img alt="Невидимое освещение" src="/media/features/crafts/light_craft.png"/>
+							<Img alt="Невидимое освещение" src="/features/crafts/light_craft.png"/>
 						</ImgBox>
 						<PTitle>
 							<h2>
@@ -41,7 +41,7 @@ export default function Crafts() {
 
 					<PBox>
 						<ImgBox type="post">
-							<Img alt="Невидимое освещение" src="/media/features/crafts/dragon_breath.png"/>
+							<Img alt="Невидимое освещение" src="/features/crafts/dragon_breath.png"/>
 						</ImgBox>
 						<PTitle>
 							<h2>
@@ -57,7 +57,7 @@ export default function Crafts() {
 
 					<PBox>
 						<ImgBox type="post">
-							<Img alt="Костные блоки" src="/media/features/crafts/bone_block.png"/>
+							<Img alt="Костные блоки" src="/features/crafts/bone_block.png"/>
 						</ImgBox>
 						<PTitle>
 							<h2>
@@ -74,7 +74,7 @@ export default function Crafts() {
 					<h2 className="center_text">Камнерез</h2>
 					<PBox>
 						<ImgBox type="post">
-							<Img alt="Костные блоки" src="/media/features/crafts/strings.png"/>
+							<Img alt="Костные блоки" src="/features/crafts/strings.png"/>
 						</ImgBox>
 						<PTitle>
 							<h2>
@@ -90,7 +90,7 @@ export default function Crafts() {
 
 					<PBox>
 						<ImgBox type="post">
-							<Img alt="Лёд" src="/media/features/crafts/ice.png"/>
+							<Img alt="Лёд" src="/features/crafts/ice.png"/>
 						</ImgBox>
 						<PTitle>
 							<h2>
@@ -107,7 +107,7 @@ export default function Crafts() {
 					<h2 className="center_text">Другое</h2>
 					<PBox>
 						<ImgBox type="post">
-							<Img alt="Невидимая рамка" src="/media/features/crafts/invisible_item_frame.png"/>
+							<Img alt="Невидимая рамка" src="/features/crafts/invisible_item_frame.png"/>
 						</ImgBox>
 						<PTitle>
 							<h2>

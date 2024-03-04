@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Blacklist() {
 	return (
-			<main className="blacklist">
+			<main>
 				<MaxSize sideNav>
 					<Subsections menu="Меню правил">
 						<SubsectionItem href="/rules">

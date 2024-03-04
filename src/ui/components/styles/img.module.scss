@@ -1,4 +1,8 @@
 .box, .img {
+	translate: 0;
+	scale: 1;
+	rotate: 0;
+
 	transition:
 			scale var(--long-transition),
 			rotate var(--long-transition),

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Events() {
 	return (
-			<main className="news">
+			<main>
 				<MaxSize sideNav>
 					<Subsections menu="Меню новостей">
 						<SubsectionItem href="/news">

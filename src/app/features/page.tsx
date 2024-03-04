@@ -22,7 +22,7 @@ export default function Features() {
 				<MaxSize>
 					<h1>Фичи</h1>
 
-					<GContainer>
+					<GContainer border>
 						<GBox href="/features/lor" imgs="one">
 							<ImgBox className={styles.img} type="grid">
 								<BatSvg/>
@@ -33,10 +33,10 @@ export default function Features() {
 
 						<GBox href="/features/crafts" imgs="two">
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/crafts/light.png" alt="Свет" pixel/>
+								<Img src="/features/crafts/light.png" alt="Свет" pixel/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
+								<Img src="/features/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
 							</ImgBox>
 
 							<GText>Крафты</GText>
@@ -45,10 +45,10 @@ export default function Features() {
 
 						<GBox href="/features/guides" imgs="two">
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/guides/thinking.png" alt="Думающий чел"/>
+								<Img src="/features/guides/thinking.png" alt="Думающий чел"/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/guides/blocks.png" alt="Блоки"/>
+								<Img src="/features/guides/blocks.png" alt="Блоки"/>
 							</ImgBox>
 
 							<GText>Гайды</GText>
@@ -56,10 +56,10 @@ export default function Features() {
 
 						<GBox href="/rules/mods" imgs="two">
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/mods/replay_mod.png" alt="Реплей мод"/>
+								<Img src="/features/mods/replay_mod.png" alt="Реплей мод"/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/mods/voice_chat.png" alt="Войс чат"/>
+								<Img src="/features/mods/voice_chat.png" alt="Войс чат"/>
 							</ImgBox>
 
 							<GText>Моды</GText>
@@ -70,7 +70,7 @@ export default function Features() {
 								imgs="one"
 						>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/map.png" alt="Карта"/>
+								<Img src="/features/map.png" alt="Карта"/>
 							</ImgBox>
 
 							<GText>Карта</GText>
@@ -89,13 +89,13 @@ export default function Features() {
 
 						<GBox href="/features/stickers" imgs="three">
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/stickers/10.png" alt="Стикер"/>
+								<Img src="/features/stickers/10.png" alt="Стикер"/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/stickers/0.png" alt="Стикер"/>
+								<Img src="/features/stickers/0.png" alt="Стикер"/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/stickers/8.png" alt="Стикер"/>
+								<Img src="/features/stickers/8.png" alt="Стикер"/>
 							</ImgBox>
 
 							<GText>Стикеры</GText>
@@ -103,13 +103,13 @@ export default function Features() {
 
 						<GBox href="/features/totems" imgs="three">
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/totems/kawa11fox.png" alt="Тотем" pixel/>
+								<Img src="/features/totems/kawa11fox.png" alt="Тотем" pixel/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/totems/justcheburek.png" alt="Тотем" pixel/>
+								<Img src="/features/totems/justcheburek.png" alt="Тотем" pixel/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/media/features/totems/kaharirn.png" alt="Тотемы" pixel/>
+								<Img src="/features/totems/kaharirn.png" alt="Тотемы" pixel/>
 							</ImgBox>
 
 							<GText>Тотемы</GText>
@@ -134,7 +134,7 @@ export default function Features() {
 
 						{/*
                     <a href="/features/totems" className="plugins box">
-                        <ImgBox src="/media/features" alt="Плагины" className={styles.img}>
+                        <ImgBox src="/features" alt="Плагины" className={styles.img}>
 
                         <GText>Плагины</GText>
                     </a>

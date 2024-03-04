@@ -22,7 +22,7 @@ export function Video({name}) {
             onClick={() => play} muted
         >
             <source
-                src={`/media/index/${name}.mp4`}
+                src={`/index/${name}.mp4`}
                 className="video" type="video/mp4"
             />
             <p>
@@ -54,7 +54,7 @@ export function AdvantageSection() {
 				<Box>
 					<ImgBox className={styles.img_box} type="post">
 						<Img
-								src="/media/index/advantage/group.webp"
+								src="/index/advantage/group.webp"
 								alt="Ивент пандорума"
 						/>
 					</ImgBox>
@@ -73,7 +73,7 @@ export function AdvantageSection() {
 				<Box>
 					<ImgBox className={styles.img_box} type="post">
 						<Img
-								src="/media/index/advantage/project.webp"
+								src="/index/advantage/project.webp"
 								alt="Пандорум здание"
 						/>
 					</ImgBox>
@@ -87,7 +87,7 @@ export function AdvantageSection() {
 				<Box>
 					<ImgBox className={styles.img_box} type="post">
 						<Img
-								src="/media/index/advantage/dungeon.webp"
+								src="/index/advantage/dungeon.webp"
 								alt="Эндский данж"
 						/>
 					</ImgBox>
@@ -101,7 +101,7 @@ export function AdvantageSection() {
 				<Box>
 					<ImgBox className={styles.img_box} type="post">
 						<Img
-								src="/media/index/advantage/pet.webp"
+								src="/index/advantage/pet.webp"
 								alt="Питомец"
 						/>
 					</ImgBox>

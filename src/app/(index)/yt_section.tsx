@@ -20,7 +20,7 @@ export function YtSection() {
 					<ImgBox type="post">
 						{/* https://i.ytimg.com/vi/{id}/maxresdefault.jpg */}
 						<Img
-								src="/media/index/yt/preview.jpg"
+								src="/index/yt/preview.jpg"
 								alt="Ссылка на видео о Майнбридже"
 								width={700}
 								height={394}

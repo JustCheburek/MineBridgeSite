@@ -15,6 +15,7 @@ type GContainer = {
 	row?: number
 	column?: number
 	margin?: number
+	border?: boolean
 }
 
 export const GContainer = (
@@ -26,10 +27,11 @@ export const GContainer = (
 			row = 5,
 			column = 2,
 			margin = 3,
+			border = false,
 			...props
 		}: PropsWithChildren<GContainer>) => (
 		<div
-				className={`${styles.container} ${className}`}
+				className={`${styles.container} ${border ? styles.box_border : ""} ${className}`}
 				style={{
 					"--_width": `${width}px`,
 					"--_height": `${height}px`,

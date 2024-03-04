@@ -120,7 +120,7 @@ export default function Shop() {
 							<Link href="/features/stickers" className={styles.helper}>
 								<ImgBox hover={1.1}>
 									<Img
-											src="/media/features/stickers/4.png" alt="Стикер"
+											src="/features/stickers/4.png" alt="Стикер"
 											width={225}
 									/>
 								</ImgBox>
@@ -161,7 +161,7 @@ export default function Shop() {
 							<Link href="/features/stickers" className={styles.helper}>
 								<ImgBox hover={1.1}>
 									<Img
-											src="/media/features/stickers/13.png" alt="Стикер"
+											src="/features/stickers/13.png" alt="Стикер"
 											width={225}
 									/>
 								</ImgBox>

@@ -8,7 +8,7 @@ export function Box(
     return (
         <div className="box">
             <img
-                src={`/media/features/streamers/${name}.png`}
+                src={`/features/streamers/${name}.png`}
                 alt="Контент-мейкер"
                 className="img_box"
                 loading="lazy"

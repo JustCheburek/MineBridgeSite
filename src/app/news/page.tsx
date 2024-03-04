@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function News() {
 	return (
-			<main className="news">
+			<main>
 				<MaxSize sideNav>
 					<Subsections menu="Меню новостей">
 						<SubsectionItem href="/news">
@@ -44,7 +44,7 @@ export default function News() {
 						{/* date={new Date(2024, 0, 21)} */}
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/elytra.png" alt="Крафт элитр"/>
+								<Img src="/news/elytra.png" alt="Крафт элитр"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Открытие энда</h2>
@@ -77,7 +77,7 @@ export default function News() {
 						{/* date={new Date(2024, 0, 12)} */}
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/shop/sell_mobile.svg" alt="Распродажа"/>
+								<Img src="/shop/sell_mobile.svg" alt="Распродажа"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Распродажа</h2>
@@ -142,7 +142,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/pvp_arena.webp" alt="ПВП Арена"/>
+								<Img src="/news/pvp_arena.webp" alt="ПВП Арена"/>
 							</ImgBox>
 							<PTitle>
 								<h2>ПВП Арена</h2>
@@ -164,7 +164,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/social.webp" alt="Баллы"/>
+								<Img src="/news/social.webp" alt="Баллы"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Баллы</h2>
@@ -190,7 +190,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/assassin.webp" alt="Ассасинская бойня"/>
+								<Img src="/news/assassin.webp" alt="Ассасинская бойня"/>
 							</ImgBox>
 							<PTitle>
 								<h2>
@@ -221,7 +221,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/bestbuilding.webp" alt="Лучшая постройка"/>
+								<Img src="/news/bestbuilding.webp" alt="Лучшая постройка"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Лучшая постройка</h2>
@@ -243,7 +243,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/ender.webp" alt="Открытие энда"/>
+								<Img src="/news/ender.webp" alt="Открытие энда"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Открытие энда</h2>
@@ -275,7 +275,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/players.webp" alt="Игроки"/>
+								<Img src="/news/players.webp" alt="Игроки"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Конкурс в вк</h2>
@@ -301,7 +301,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/ender.webp" alt="Открытие энда"/>
+								<Img src="/news/ender.webp" alt="Открытие энда"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Открытие энда</h2>
@@ -321,7 +321,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/map.webp" alt="Карта сервера"/>
+								<Img src="/news/map.webp" alt="Карта сервера"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Карта сервера</h2>
@@ -338,7 +338,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/ender.webp" alt="Открытие энда"/>
+								<Img src="/news/ender.webp" alt="Открытие энда"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Открытие энда</h2>
@@ -358,7 +358,7 @@ export default function News() {
 
 						<PBox className="center_text">
 							<ImgBox type="post">
-								<Img src="/media/news/grifer.webp" alt="Coreprotect"/>
+								<Img src="/news/grifer.webp" alt="Coreprotect"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Coreprotect</h2>
@@ -371,7 +371,7 @@ export default function News() {
 
 						<PBox>
 							<ImgBox type="post">
-								<Img src="/media/news/ender.webp" alt="Открытие энда"/>
+								<Img src="/news/ender.webp" alt="Открытие энда"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Открытие энда</h2>
@@ -385,7 +385,7 @@ export default function News() {
 
 						<PBox className="center_text">
 							<ImgBox type="post">
-								<Img src="/media/news/grifer.webp" alt="Белый список"/>
+								<Img src="/news/grifer.webp" alt="Белый список"/>
 							</ImgBox>
 							<PTitle>
 								<h2>Белый список</h2>

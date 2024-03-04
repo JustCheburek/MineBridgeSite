@@ -66,7 +66,7 @@ export default function Mods() {
 	]
 
 	return (
-			<main className="mods">
+			<main>
 				<MaxSize sideNav>
 					<Subsections menu="Меню правил">
 						<SubsectionItem href="/rules">

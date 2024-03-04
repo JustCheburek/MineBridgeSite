@@ -122,7 +122,7 @@ export default function Brewery() {
 					</p>
 
 					<Box>
-						<Img src="/media/features/guides/brewery/kettle.webp" alt="Котёл"/>
+						<Img src="/features/guides/brewery/kettle.webp" alt="Котёл"/>
 
 						<Text>
 							<Heading number={1}>
@@ -151,7 +151,7 @@ export default function Brewery() {
 					</Box>
 
 					<Box>
-						<Img src="/media/features/guides/brewery/brewing_stand.webp" alt="Зельеварка"/>
+						<Img src="/features/guides/brewery/brewing_stand.webp" alt="Зельеварка"/>
 						<Text>
 							<Heading number={2}>
 								Дистилляция
@@ -181,7 +181,7 @@ export default function Brewery() {
 								Для различных рецептов нужны разные виды дерева
 							</p>
 						</Text>
-						<Img src="/media/features/guides/brewery/small_barrel.webp" alt="Маленькая бочка"/>
+						<Img src="/features/guides/brewery/small_barrel.webp" alt="Маленькая бочка"/>
 						<Text>
 							<div className="heading">
 								<h3 className="unic_color">
@@ -207,7 +207,7 @@ export default function Brewery() {
 								</ul>
 							</div>
 						</Text>
-						<Img src="/media/features/guides/brewery/big_barrel.webp" alt="Маленькая бочка"/>
+						<Img src="/features/guides/brewery/big_barrel.webp" alt="Маленькая бочка"/>
 						<Text>
 							<div className="heading">
 								<h3 className="unic_color">

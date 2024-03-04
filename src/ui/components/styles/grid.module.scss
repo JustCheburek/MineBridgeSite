@@ -9,6 +9,11 @@
 	place-content: center;
 
 	grid-template-columns: repeat(auto-fit, minmax(min($width, 100%), 1fr));
+
+	&.box_border .box {
+		@include border($background: var(--background-color));
+		@include no_select();
+	}
 }
 
 .box {
@@ -24,9 +29,6 @@
 	// Размеры
 	width: min(var(--_width), 100%);
 	height: var(--_height);
-
-	@include border($background: var(--background-color));
-	@include no_select();
 
 	figure {
 		&:first-child {

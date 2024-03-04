@@ -1,13 +1,12 @@
 // React
 import type {Metadata} from "next";
 
-// Стили
-import "./styles/stickers.scss"
-
 // Компоненты
 import {Url} from "@components/button";
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
+import {Img, ImgBox} from "@components/img";
+import {GContainer} from "@components/grid";
 
 export const metadata: Metadata = {
     title: "Стикеры | Майнбридж",
@@ -26,19 +25,19 @@ export default function Stickers() {
                     Добавить
                 </Url>
 
-                <div className="container">
+                <GContainer width={200} height={200}>
                     {
                         Array(14).fill(null).map((_, sticker) => {
-                            let path = `/media/features/stickers/${sticker}.png`
+                            let path = `/features/stickers/${sticker}.png`
 
                             return (
-                                <div className="box" key={sticker}>
-                                    <img src={path} alt="стикер" className="img_box" loading="lazy"/>
-                                </div>
+                                <ImgBox key={sticker} hover={1.1}>
+                                    <Img src={path} alt="стикер" width={200} height={200}/>
+                                </ImgBox>
                             )
                         })
                     }
-                </div>
+                </GContainer>
 
                 <h3 className="center_text">Тоже хотите попасть в стикер пак?</h3>
                 <Url href="https://t.me/MineBridgeOfficial/326">

@@ -46,7 +46,7 @@
 	// Замена цифры на ссылку
 	color: transparent;
 
-	background-image: url("/media/link.svg");
+	background-image: url("/link.svg");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -54,7 +54,7 @@
 	transform: rotate(-45deg);
 
 	&:active {
-		background-image: url("/media/active_link.svg");
+		background-image: url("/active_link.svg");
 	}
 }
 

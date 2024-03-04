@@ -158,7 +158,7 @@ export function Component() {
 
             // Если есть картинка
             item.img = !item.drop.noImg
-                ? `/media/shop/${item.type.name}/${item.drop.name}.webp`
+                ? `/shop/${item.type.name}/${item.drop.name}.webp`
                 : null
 
             itemsRestart.push(item)

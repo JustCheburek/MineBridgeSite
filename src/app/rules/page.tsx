@@ -20,7 +20,7 @@ export default function Rules() {
 	const lastUpdate = new Date(2024, 2 - 1, 15);
 
 	return (
-			<main className="rules">
+			<main>
 				<MaxSize sideNav>
 					<Subsections menu="Меню правил">
 						<SubsectionItem href="/rules">

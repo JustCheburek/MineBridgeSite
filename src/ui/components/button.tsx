@@ -1,14 +1,11 @@
 // React
-import type {PropsWithChildren} from "react";
-import Link from "next/link";
+import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
+import Link, {LinkProps} from "next/link";
 
 // Стили
 import styles from "./styles/button.module.scss"
 
 type Url = {
-	href: string
-	className?: string
-	target?: string
 	margin?: string
 }
 
@@ -20,7 +17,7 @@ export const Url = (
 			target = "_blank",
 			margin = "2.5rem",
 			...props
-		}: PropsWithChildren<Url>) => (
+		}: ComponentPropsWithoutRef<"a"> & Url) => (
 		<a
 				href={href}
 				target={target}
@@ -34,7 +31,6 @@ export const Url = (
 )
 
 type NavButton = {
-	href: string
 	className?: string
 	margin?: string
 }
@@ -46,7 +42,7 @@ export const NavButton = (
 			className = "",
 			margin = "2.5rem",
 			...props
-		}: PropsWithChildren<NavButton>) => (
+		}: PropsWithChildren<NavButton> & LinkProps) => (
 		<Link
 				href={href}
 				className={`${styles.button} ${className}`}
@@ -58,7 +54,6 @@ export const NavButton = (
 )
 
 type Button = {
-	className?: string
 	margin?: string
 }
 
@@ -68,7 +63,7 @@ export const Button = (
 			className = "",
 			margin = "2.5rem",
 			...props
-		}: PropsWithChildren<Button>) => (
+		}: ComponentPropsWithoutRef<"button"> & Button) => (
 		<button
 				className={`${styles.button} ${className}`}
 				style={{marginBlock: margin}}

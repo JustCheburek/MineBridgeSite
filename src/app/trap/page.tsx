@@ -4,7 +4,7 @@ import {MaxSize} from "@components/maxSize";
 
 export function Component() {
     return (
-        <main className="trap">
+        <main>
             <MaxSize width={900}>
                 <Helmet>
                     <title>Ловушка | Майнбридж</title>

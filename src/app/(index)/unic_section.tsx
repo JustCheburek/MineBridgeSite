@@ -20,8 +20,8 @@ export const UnicSection = () => (
 			<div className={`${styles.unic_div}`}>
 				{/* Цена */}
 				<Box>
-					<ImgBox className={styles.barrier} background={`/media/index/unic/barrier.webp`} width="172px" height="175px">
-						<Img width={80} height={80} src="/media/index/unic/moneta.webp" alt="Монета" className={styles.moneta} pixel/>
+					<ImgBox className={styles.barrier} background={`/index/unic/barrier.webp`} width="172px" height="175px">
+						<Img width={80} height={80} src="/index/unic/moneta.webp" alt="Монета" className={styles.moneta} pixel/>
 					</ImgBox>
 					<p>
 						Бесплатная<br/>
@@ -31,7 +31,7 @@ export const UnicSection = () => (
 
 				{/* Кастомизация */}
 				<Box>
-					<Img src="/media/index/unic/amogus.webp" alt="Амогус" width={170} className={styles.amogus} pixel/>
+					<Img src="/index/unic/amogus.webp" alt="Амогус" width={170} className={styles.amogus} pixel/>
 					<p>
 						Уникальная<br/>
 						кастомизация
@@ -40,7 +40,7 @@ export const UnicSection = () => (
 
 				{/* Ивенты */}
 				<Box>
-					<Img src="/media/index/unic/calendar.webp" alt="Календарь" width={170} className={styles.calendar} pixel/>
+					<Img src="/index/unic/calendar.webp" alt="Календарь" width={170} className={styles.calendar} pixel/>
 					<p>
 						Интересные<br/>
 						ивенты
@@ -49,7 +49,7 @@ export const UnicSection = () => (
 
 				{/* Комьюнити */}
 				<Box>
-					<Img src="/media/index/unic/heart.webp" alt="heart" width={170} className={styles.heart} pixel/>
+					<Img src="/index/unic/heart.webp" alt="heart" width={170} className={styles.heart} pixel/>
 					<p>
 						Дружелюбное<br/>
 						комьюнити

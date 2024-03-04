@@ -48,8 +48,8 @@ export default function Guides() {
 						</GBox>
 
 						{/*<Link href="./litematica" className="box two crafts">
-							<img src="/media/features/guides/litematica/house.jpg" alt="Дом из мема: ОЙ МАМА ПРИШЛА" className="img"/>
-							<img src="/media/features/guides/blocks.png" alt="Блоки" className="img"/>
+							<img src="/features/guides/litematica/house.jpg" alt="Дом из мема: ОЙ МАМА ПРИШЛА" className="img"/>
+							<img src="/features/guides/blocks.png" alt="Блоки" className="img"/>
 
 							<h3 className="text">Litematica</h3>
 						</Link>*/}
