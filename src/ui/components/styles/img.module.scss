@@ -1,0 +1,29 @@
+.box, .img {
+	transition:
+			scale var(--long-transition),
+			rotate var(--long-transition),
+			translate var(--long-transition),
+			filter var(--long-transition);
+}
+
+.box:hover .img {
+	scale: var(--_hover);
+}
+
+.post {
+	position: relative;
+	border-radius: var(--border-radius);
+	overflow: hidden;
+	aspect-ratio: 16 / 9;
+}
+
+.grid {
+	position: absolute;
+
+	width: 50%;
+	aspect-ratio: 1 / 1;
+}
+
+.pixel {
+	image-rendering: pixelated;
+}

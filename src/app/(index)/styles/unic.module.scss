@@ -1,0 +1,103 @@
+.unic_section {
+  // Уникальность
+  display: flex;
+  justify-content: center;
+  background: var(--black-color);
+  padding-inline: var(--indent-page);
+}
+
+.unic_div {
+  display: grid;
+  gap: 7rem;
+
+  width: min(1200px, 100%);
+
+  @media (width > 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (width > 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.unic {
+  display: grid;
+  place-items: center;
+
+  gap: 3rem;
+
+  &:nth-child(2) {
+    animation-range-start: 80px;
+  }
+
+  &:nth-child(3) {
+    animation-range-start: 160px;
+  }
+
+  &:nth-child(4) {
+    animation-range-start: 240px;
+  }
+
+  img {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.barrier {
+  // Расположение
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // Отображение
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 40px rgb(204, 25, 9));
+  rotate: -4deg;
+
+  .moneta {
+    filter: drop-shadow(0 0 30px rgb(255, 170, 0));
+    rotate: 4deg;
+  }
+
+  &:hover {
+    filter: drop-shadow(0 0 80px rgb(204, 25, 9));
+    rotate: -9deg;
+
+    .moneta {
+      rotate: 14deg;
+    }
+  }
+}
+
+.amogus {
+  filter: drop-shadow(0 0 60px rgba(255, 163, 0, .7));
+  rotate: 3.5deg;
+
+  &:hover {
+    filter: drop-shadow(0 0 80px rgb(255, 163, 0));
+    rotate: 8.5deg;
+  }
+}
+
+.calendar {
+  filter: drop-shadow(0 0 60px rgba(56, 104, 224, .7));
+  rotate: -5.5deg;
+
+  &:hover {
+    filter: drop-shadow(0 0 80px rgb(56, 104, 224));
+    rotate: -8.5deg;
+  }
+}
+
+.heart {
+  filter: drop-shadow(0 0 60px rgba(255, 9, 0, .7));
+  rotate: 4.6deg;
+
+  &:hover {
+    filter: drop-shadow(0 0 80px rgb(255, 9, 0));
+    rotate: 9.6deg;
+  }
+}

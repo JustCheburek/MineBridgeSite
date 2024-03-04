@@ -1,0 +1,14 @@
+// Градиенты
+.gradient_gray_black, .gradient_black_gray {
+	height: 15rem;
+}
+
+// Градиент из серого в чёрный
+.gradient_gray_black {
+	background: linear-gradient(to bottom, var(--background-color), var(--black-color));
+}
+
+// Градиент из чёрного в серый
+.gradient_black_gray {
+	background: linear-gradient(to bottom, var(--black-color), var(--background-color));
+}

@@ -1,0 +1,24 @@
+// Подвал
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // Отображение
+  background: var(--black-color);
+
+  // Размеры
+  min-height: 300px;
+}
+
+.footer {
+  // Расположение
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+
+  width: min(800px, 100%);
+  padding: var(--indent-page);
+}

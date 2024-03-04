@@ -1,0 +1,20 @@
+.success_box, .error_box {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  align-items: center;
+}
+
+.successSvg, .errorSvg {
+  display: inline-block;
+}
+
+.successSvg {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.errorSvg {
+  width: 1.2em;
+  height: 1.2em;
+}

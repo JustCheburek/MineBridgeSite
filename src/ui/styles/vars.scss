@@ -1,0 +1,77 @@
+// Переменные
+:root {
+  // Шрифты
+  --h1-size: 3.75rem;
+  --h1-line-height: 4rem;
+
+  --h2-size: 2.5rem;
+  --h2-line-height: 2.75rem;
+
+  --h3-size: 1.5rem;
+  --h3-line-height: 2rem;
+
+  --h4-size: 1.25rem;
+  --h4-line-height: 1.85rem;
+
+  --p-size: 1.125rem;
+  --p-line-height: 1.8rem;
+
+  // Цвета
+  --unic-color: #00A7B1;
+  --unic-color-rgb: 0, 173, 181;
+
+  // Текст
+  --text-color: #F1F1F1;
+
+  // Фон
+  --background-color: #161C1F;
+  --background-color-transparent: rgba(22, 28, 31, .8);
+
+  --black-color: #020202;
+  --black-color-transparent: rgba(2, 2, 2, .3);
+
+  // Инфа
+  --info-bg-color: #303338;
+  --info-border-color: #4C4A52;
+
+  // Оттенки серого
+  --gray-color: rgba(37, 40, 48, .5);
+  --light-gray-color: #A4A4A4;
+  --border-color: #52525b4d;
+
+  --red-color: rgb(255, 77, 77);
+  --green-color: rgb(133, 187, 101);
+
+  // Цвета на ссылки
+  --tg-color: #229ED9;
+  --ds-color: #5865F2;
+  --vk-color: #0077FF;
+  --boosty-color: #F15F2C;
+  --yt-color: #FF0000;
+  --twitch-color: #9146FF;
+
+  // border-radius
+  --border-radius: 35px;
+  --button-border-radius: 45px;
+
+  // Постепенное изменение цвета ссылок
+  --short-transition: 300ms;
+  --long-transition: 500ms;
+
+  // Длительность hover
+  // Сколько надо ждать перед появлением анимации
+  --hover-delay: 350ms;
+
+  // z index
+  ---1z: -1; // Для скрытия объектов за другими объектами
+  --1z: 1; // Дефолт
+  --2z: 2; // Для шапки
+  --3z: 3; // Для modal окна
+  --4z: 4; // Для текста modal окна
+
+  // Отступ с шапки до page и от page до footer
+  --indent-page: clamp(0.5rem, 5svw, 5rem);
+
+  // Размер шапки
+  --header-size: clamp(108px, 15svh, 180px);
+}

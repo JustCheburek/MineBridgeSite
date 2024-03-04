@@ -1,0 +1,30 @@
+main.profile {
+  // Информация о пользователе
+  .user_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .user_info {
+    margin-block: 10px;
+    font-weight: 500;
+  }
+
+  .user_icon {
+    width: 200px;
+    height: 200px;
+  }
+
+  // Белый список
+  .whitelist {
+    margin-top: 100px;
+  }
+
+  @media (width < 728px) {
+    .user_container {
+      flex-direction: column;
+    }
+  }
+}

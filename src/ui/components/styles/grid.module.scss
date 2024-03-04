@@ -1,0 +1,136 @@
+@import "@styles/mixins";
+
+.container {
+	$width: var(--_width);
+
+	position: relative;
+
+	display: grid;
+	place-content: center;
+
+	grid-template-columns: repeat(auto-fit, minmax(min($width, 100%), 1fr));
+}
+
+.box {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	margin-inline: auto;
+
+	// Размеры
+	width: min(var(--_width), 100%);
+	height: var(--_height);
+
+	@include border($background: var(--background-color));
+	@include no_select();
+
+	figure {
+		&:first-child {
+			z-index: var(--1z);
+		}
+		
+		&:nth-child(2) {
+			z-index: var(--2z);
+		}
+		
+		&:nth-child(3) {
+			z-index: var(--1z);
+		}
+	}
+}
+
+.one {
+	figure {
+		width: 70%;
+		translate: 0 -30px;
+	}
+
+	&:hover figure {
+		scale: 1.15;
+		rotate: 5deg;
+	}
+}
+
+.two {
+	figure:first-child {
+		translate: -70px -10px;
+		rotate: -13deg;
+	}
+
+	figure:nth-child(2) {
+		translate: 70px -10px;
+		rotate: 13deg;
+	}
+
+	&:hover {
+		figure:first-child {
+			translate: -80px -15px;
+			rotate: -17deg;
+		}
+
+		figure:nth-child(2) {
+			translate: 80px -15px;
+			rotate: 17deg;
+		}
+	}
+}
+
+.three {
+	figure:first-child {
+		rotate: -18deg;
+		translate: -85px;
+	}
+
+	figure:nth-child(2) {
+		translate: 0 -22px;
+	}
+
+	figure:nth-child(3) {
+		rotate: 18deg;
+		translate: 85px;
+	}
+
+	&:hover {
+		figure:first-child {
+			rotate: -25deg;
+			translate: -110px;
+		}
+
+		figure:nth-child(2) {
+			translate: 0 -45px;
+		}
+
+		figure:nth-child(3) {
+			rotate: 25deg;
+			translate: 110px;
+		}
+	}
+}
+
+.link {
+	// Расположение
+	position: absolute;
+	top: 10px;
+	right: 10px;
+
+	// Отображение
+	font-size: var(--p-size);
+
+	transition: var(--short-transition) color;
+}
+
+.box:hover .link {
+	color: var(--unic-color);
+}
+
+// Текст
+.text {
+	position: absolute;
+	bottom: 25px;
+	translate: 0 25%;
+	z-index: var(--2z);
+}

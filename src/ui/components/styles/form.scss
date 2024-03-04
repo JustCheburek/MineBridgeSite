@@ -1,0 +1,95 @@
+@import "@styles/mixins";
+
+.form, .form_group {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+
+  * {
+    flex: 1;
+  }
+}
+
+.form {
+  flex-wrap: wrap;
+  margin-block: 20px;
+  padding: 5px;
+}
+
+.form_label:has(input[type="radio"]),
+.form_label input:not([type="radio"]),
+.form_label textarea,
+.form_button {
+  // Отступы
+  padding: 1rem;
+
+  // Отображение
+  @include border($background: var(--gray-color));
+
+  transition:
+          border-color var(--long-transition),
+          color var(--short-transition);
+
+  &:active, &:focus-visible, &:hover, &:has(:checked) {
+    border-color: var(--unic-color);
+  }
+}
+
+input, textarea {
+  min-width: 100%;
+}
+
+textarea {
+  min-height: 100px;
+  max-height: 250px;
+
+  resize: vertical;
+}
+
+.form_button {
+  padding: 1rem 3rem;
+  transition: var(--short-transition) border-color, var(--short-transition) color;
+
+  color: var(--unic-color);
+
+  &.danger {
+    color: var(--red-color);
+  }
+
+  &:not(:disabled):not([aria-disabled="true"]) {
+    &:hover {
+      border-color: var(--unic-color);
+
+      &.danger {
+        border-color: var(--red-color);
+      }
+    }
+  }
+
+  &:disabled, &[aria-disabled="true"] {
+    color: var(--gray-color);
+    opacity: 0.5;
+  }
+}
+
+.edit, .add {
+  width: max(0.55em, 0.9rem);
+  height: 1em;
+  top: 0;
+  font-weight: 500;
+  transition: color var(--short-transition);
+
+  &:hover, &:active {
+    color: var(--unic-color);
+  }
+}
+
+.form_label:has(input[type="radio"]) {
+  display: flex;
+  place-content: center;
+
+  input {
+    display: none;
+  }
+}

@@ -1,0 +1,36 @@
+@import "@styles/mixins";
+
+.container {
+	// Расположение
+	display: flex;
+	place-content: center;
+	flex-direction: column;
+
+	margin-inline: auto;
+
+	// Размеры
+	width: min(var(--_width), 100%);
+
+	margin-block: 4rem;
+
+	overflow: hidden;
+
+	// Отображение
+	@include border();
+}
+
+.text {
+	display: grid;
+	place-content: center;
+
+	margin-inline: auto;
+	margin-bottom: 2rem;
+	padding-inline: 1.5rem;
+
+	max-width: 29rem;
+}
+
+.title {
+	text-align: center;
+	margin-block: 2rem;
+}

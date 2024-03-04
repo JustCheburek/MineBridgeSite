@@ -1,0 +1,19 @@
+@import "@styles/mixins";
+
+main.auth {
+  .max_size {
+    flex-direction: column;
+  }
+
+  .form {
+    margin-top: 2rem;
+  }
+
+  .ds {
+    scale: 2;
+  }
+
+  .google {
+    scale: 1.5;
+  }
+}

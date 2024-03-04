@@ -1,0 +1,14 @@
+@import "@styles/mixins";
+
+.section {
+  // Ютуб
+  display: grid;
+  place-items: center;
+  gap: 3rem;
+  margin-block: 60px;
+}
+
+.text {
+  display: grid;
+  gap: 1rem;
+}

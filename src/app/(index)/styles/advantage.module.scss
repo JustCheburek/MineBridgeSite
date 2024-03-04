@@ -1,0 +1,69 @@
+.advantage_section {
+	display: grid;
+	place-items: center;
+	padding-top: 100px;
+	padding-inline: var(--indent-page);
+	background: var(--black-color);
+	gap: 8rem;
+}
+
+.advantage {
+	--_size: 0;
+
+	display: grid;
+	place-items: center;
+	max-width: 1200px;
+	gap: 4rem;
+
+	// ПК
+	@media (width > 1024px) {
+		grid-template-columns: repeat(2, 1fr);
+
+		&:nth-child(even) {
+			--_size: 1;
+
+			.img_box {
+				grid-column: 2;
+				grid-row: 1;
+			}
+
+			.text {
+				grid-column: 1;
+				grid-row: 1;
+			}
+		}
+
+		&:nth-child(odd) {
+			--_size: -1;
+		}
+	}
+
+	// Планшет-
+	@media (width < 1024px) {
+		text-align: center;
+	}
+}
+
+.text {
+	min-width: 60%;
+}
+
+.img_box {
+	--_shadow-size: 5px;
+
+	// Размеры
+	width: 550px;
+
+	// Отображение
+	border: solid var(--light-gray-color) 3px;
+
+	// Анимация
+	transition: 1000ms opacity, 1000ms transform, border var(--long-transition), box-shadow var(--long-transition);
+
+	box-shadow: calc(5px * var(--_size)) 5px 20px var(--light-gray-color);
+
+	&:hover {
+		border: solid var(--unic-color) 3px;
+		box-shadow: calc(var(--_shadow-size) * var(--_size)) var(--_shadow-size) 35px var(--unic-color);
+	}
+}

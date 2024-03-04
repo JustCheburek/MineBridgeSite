@@ -1,0 +1,16 @@
+.book {
+  --_block-gap: 20px;
+  --_inline-gap: 45px;
+
+  color: var(--light-gray-color);
+
+  margin-block: var(--_block-gap);
+}
+
+.page {
+  padding: var(--_block-gap) var(--_inline-gap);
+}
+
+.day {
+  color: var(--unic-color);
+}

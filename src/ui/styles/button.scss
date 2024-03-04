@@ -1,0 +1,32 @@
+// Кнопка
+button, input {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-color);
+}
+
+a {
+  display: inline-block;
+}
+
+a:not(.white_color).active {
+  color: var(--unic-color);
+}
+
+.mini_button {
+  width: 100%;
+  padding: 9px 17px;
+  border-radius: var(--button-border-radius);
+
+  transition: color var(--short-transition), background-color var(--short-transition);
+
+  &:hover, &:focus-visible {
+    background-color: var(--gray-color);
+  }
+
+  &.active, &:focus-visible {
+    color: var(--unic-color);
+  }
+}

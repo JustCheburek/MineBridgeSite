@@ -1,0 +1,25 @@
+@import "@styles/mixins";
+
+main.totems {
+  .container {
+    @include grid_container($width: 180px);
+  }
+
+  .box {
+    @include grid_box($width: 180px, $height: 240px);
+
+    &:hover img {
+      scale: 1;
+      rotate: var(--_rotate);
+    }
+  }
+
+  .img_box {
+    --_rotate: 0deg;
+
+    scale: 0.9;
+
+    // Анимация
+    transition: scale var(--long-transition), rotate 1000ms;
+  }
+}

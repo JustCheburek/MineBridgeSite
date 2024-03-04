@@ -1,0 +1,193 @@
+@import "mixins";
+
+* {
+  box-sizing: border-box;
+}
+
+// Подвал всегда внизу
+html, body {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex: 0 0 auto;
+}
+
+// Весь сайт
+html {
+  // Скролл
+  scroll-behavior: smooth;
+  scroll-padding: calc(var(--header-size) + var(--indent-page)); // размер шапки
+
+  // Цвет
+  color-scheme: dark;
+
+  // Скролл
+  scrollbar-gutter: stable;
+}
+
+body {
+  // Шрифт
+  font-family: 'Montserrat', sans-serif;
+  font-size: var(--p-size);
+  line-height: var(--p-line-height);
+
+  // Цвет
+  background: var(--background-color);
+  color: var(--text-color);
+
+  accent-color: var(--unic-color);
+
+  & *::selection {
+    background: rgba(var(--unic-color-rgb), 0.2);
+  }
+}
+
+// Обнуление
+a {
+  color: var(--text-color);
+}
+
+// Прокрутка
+// Firefox
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--unic-color) var(--black-color);
+}
+
+// для Chrome/Edge/Safari
+*::-webkit-scrollbar {
+  height: 8px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--black-color);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--unic-color);
+  border-radius: var(--border-radius);
+}
+
+// Убрать возможность выделения текста
+button, input, fieldset, .no_select {
+  @include no_select();
+}
+
+:disabled, [aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+// SVG
+img {
+  object-fit: contain;
+}
+
+img,
+picture,
+svg {
+  width: 100%;
+  display: inline-block;
+}
+
+svg {
+  height: 100%;
+}
+
+path {
+  transition: var(--short-transition) fill, var(--short-transition) stroke;
+}
+
+// Отступ для ul и ol
+:is(ul, ol):not(.not_indent) {
+  margin-left: 30px;
+}
+
+// Нажатие
+a.unic_color:active, button.unic_color:active {
+  color: rgba(var(--unic-color-rgb), 0.8);
+}
+
+// Настройка отображения
+.grid_center {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.all_select {
+  // Safari
+  -webkit-user-select: all;
+
+  // Old versions of Firefox
+  -moz-user-select: all;
+
+  // Internet Explorer/Edge
+  -ms-user-select: all;
+
+  // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
+  user-select: all;
+}
+
+// Убирание маркера
+.remove_marker {
+  list-style-type: none;
+}
+
+.user_icon_box {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.user_icon {
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  border-radius: 50%;
+}
+
+.mostiki {
+  display: inline;
+  width: 1em;
+  height: 0.85em;
+}
+
+.border {
+  @include border();
+}
+
+@media (width >= 1024px) {
+  .for_mobile {
+    display: none !important;
+  }
+}
+
+// Адаптивность
+@media (width < 1024px) {
+  .for_pc {
+    display: none !important;
+  }
+
+  .user_icon_box {
+    width: 38px;
+    height: 38px;
+  }
+}

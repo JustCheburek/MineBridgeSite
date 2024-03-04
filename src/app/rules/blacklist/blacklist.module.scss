@@ -1,0 +1,43 @@
+.words_container {
+	position: relative;
+	margin-block: 0.5rem;
+	display: flex;
+}
+
+.stars, .words {
+	// Размеры
+	height: fit-content;
+
+	// Отображение
+	color: var(--light-gray-color);
+
+	// Анимация
+	opacity: 0;
+	transition: opacity var(--short-transition),
+	left var(--long-transition),
+	translate var(--long-transition);
+
+	&.show {
+		left: 0;
+		opacity: 1;
+		translate: 0;
+	}
+}
+
+.stars {
+	letter-spacing: 0.5px;
+	translate: 12%;
+}
+
+.words {
+	position: absolute;
+	left: -12%;
+}
+
+.list li {
+	margin-bottom: 20px;
+}
+
+.button {
+	max-width: 70%;
+}

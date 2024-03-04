@@ -1,0 +1,263 @@
+@import "@styles/mixins";
+
+// Шапка сайта
+header {
+  // Расположение
+  position: sticky;
+  top: 0;
+
+  z-index: var(--3z);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Размеры
+  min-height: var(--header-size);
+
+  // Бекграунд
+  backdrop-filter: blur(8px);
+  background: var(--background-color-transparent);
+
+  .header {
+    --_gap: 35px;
+
+    // Расположение
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    gap: var(--_gap);
+
+    // Размеры
+    width: min(1200px, 100%);
+
+    // Текст
+    font-weight: 500;
+
+    & > *:not(.nav_container) {
+      z-index: var(--3z) !important;
+    }
+  }
+
+  // Лого
+  .logo, .auth_icon {
+    width: 38px;
+    height: 38px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // Текстовая навигация
+  .nav_container {
+    // Расположение
+    display: grid;
+    place-items: center;
+    grid-template-columns: 3fr 1fr;
+    gap: var(--_gap);
+  }
+
+  .nav_box {
+    // Расположение
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .user_nav {
+    position: relative;
+  }
+
+  .user_info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--_gap)
+  }
+
+  .user_mostiki {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .user_menu {
+    position: absolute;
+    right: 0;
+
+    display: none;
+
+    padding: 15px;
+
+    @include border($background: var(--background-color-transparent));
+    border-top-right-radius: calc(var(--border-radius) / 4);
+
+    &.menu_active {
+      display: block;
+    }
+  }
+
+  // Регистрация
+  .registration_nav {
+    // Расположение
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+
+    &.active {
+      color: var(--unic-color);
+    }
+  }
+
+  @media (width < 1200px) {
+    .user_mostiki {
+      display: none;
+    }
+  }
+
+  @media (width > 1024px) {
+    .auth_icon {
+      width: 1.5em;
+      height: 1.5em;
+    }
+  }
+
+  @media (width < 1024px) {
+    .user_info {
+      grid-template-columns: 1fr;
+    }
+
+    // Навигация с бургер меню
+    .nav_container {
+      display: none;
+
+      // Расположение
+      justify-content: center;
+      align-items: center;
+
+      column-gap: 2rem;
+      row-gap: 0.5rem;
+
+      position: fixed;
+      inset: 0;
+
+      overflow-y: auto;
+
+      padding: var(--header-size) 1rem 1rem;
+
+      // Размеры
+      height: 100vh;
+      height: 100dvh;
+
+      // Бекграунд
+      background: var(--background-color-transparent);
+
+      &.burger_active {
+        display: flex;
+      }
+    }
+
+    .nav_box {
+      // Расположение
+      flex-direction: column;
+
+      padding: 1.5rem 2rem;
+
+      font-size: var(--h2-size);
+      line-height: var(--h2-line-height);
+
+      @include border();
+
+      row-gap: clamp(0.1rem, 1vh, 1.5rem);
+
+      animation: nav_appearance 700ms;
+    }
+  }
+
+  @media (width < 524px) {
+    .nav_container {
+      flex-direction: column;
+    }
+
+    .url_nav {
+      flex-direction: row;
+    }
+  }
+}
+
+// Анимация появления 
+@keyframes nav_appearance {
+  0% {
+    transform: translateY(-400px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@media (width < 1024px) {
+  // Бургер меню
+  .burger_icon {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    // Иконка
+    width: 38px;
+    height: 38px;
+
+    // Анимация
+    &.burger_active {
+      .short {
+        width: 100%;
+      }
+
+      .burger_stick:nth-child(1) {
+        translate: 0 11px;
+        rotate: 45deg;
+      }
+
+      .burger_stick:nth-child(2) {
+        opacity: 0;
+      }
+
+      .burger_stick:nth-child(3) {
+        translate: 0 -11px;
+        rotate: -45deg;
+      }
+    }
+  }
+
+  .burger_stick {
+    width: 100%;
+    height: 5px;
+    background: var(--unic-color);
+    border-radius: var(--border-radius);
+
+    &.short {
+      width: 75%;
+    }
+
+    transition: 400ms translate, 250ms opacity, 400ms rotate, width 250ms;
+  }
+
+  // Размытия фона
+  main, footer {
+    transition: var(--short-transition) filter;
+
+    & :has(~ header.burger_active) {
+      filter: blur(6px);
+    }
+  }
+}
+
+body:has(header.burger_active) {
+  overflow-y: hidden;
+}

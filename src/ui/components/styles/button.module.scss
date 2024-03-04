@@ -1,0 +1,72 @@
+.button {
+  // Расположение
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+  margin-inline: auto;
+
+  padding: 15px 45px;
+
+  // Текст
+  font-size: var(--h3-size);
+  line-height: var(--h3-line-height);
+  font-weight: 700;
+  color: #ffffff;
+
+  z-index: var(--1z);
+
+  // Анимация
+  transition: padding 600ms, filter 600ms,
+  left var(--long-transition),
+  background var(--long-transition),
+  opacity var(--long-transition),
+  left var(--long-transition);
+
+  // Отображение
+  &::before {
+    --_shadow: 10px;
+
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: var(--unic-color);
+    filter: drop-shadow(0 0 var(--_shadow) var(--unic-color));
+    opacity: .75;
+
+    border-radius: var(--border-radius);
+
+    z-index: var(---1z);
+
+    transition: scale 600ms,
+    filter 600ms,
+    background var(--long-transition),
+    opacity var(--long-transition);
+  }
+
+  &:not(:disabled) {
+    &:hover::before {
+      scale: 1.15;
+      opacity: 1;
+      --_shadow: 13px;
+    }
+
+    &:is(:active, :focus-visible)::before {
+      opacity: 0.5;
+      --_shadow: 7px;
+    }
+  }
+
+  &:disabled::before {
+    // Отображение
+    opacity: 0.5;
+    --_shadow: 0px;
+  }
+}

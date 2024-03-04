@@ -1,0 +1,15 @@
+.blur_box {
+  // Фон
+  background-size: cover;
+  background-position: center;
+
+  // Незагруженная
+  .blur {
+    opacity: 0;
+  }
+
+  // Загруженная
+  .blur.loaded {
+    opacity: 1;
+  }
+}
