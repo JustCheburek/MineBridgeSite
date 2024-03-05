@@ -2,51 +2,76 @@
 import type {Metadata} from "next";
 
 // Стили
-import "./styles/streamers.scss"
+import styles from "./streamers.module.scss"
 
 // Компоненты
-import {Box, Twitch, YT} from "./components";
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
+import {GBox, GContainer} from "@components/grid";
+import {Img, ImgBox} from "@components/img";
+import {TwitchSvg, YtSvg} from "@ui/svgs";
 
 export const metadata: Metadata = {
-    title: "Контент мейкеры | Майнбридж",
-    description: "Очень креативные игроки!",
+	title: "Контент мейкеры | Майнбридж",
+	description: "Очень креативные игроки!",
 };
 
 export default function Streamers() {
-    return (
-        <main className="streamers">
-            <MaxSize>
-                <RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "streamers", displayname: "Контент мейкеры"}]}/>
-                <h1>Контент мейкеры</h1>
+	const streamers = [{
+		name: "JustCheburek",
+		yt: "JustCheburek",
+		twitch: "justcheburek"
+	}, {
+		name: "Kawa11Fox",
+		yt: "Kawa11Fox",
+		twitch: "kawa11fox"
+	}, {
+		name: "rkrmv",
+		twitch: "rkrmv"
+	}, {
+		name: "Vebray",
+		yt: "Vebray_"
+	}, {
+		name: "TOXSER",
+		yt: "TOXwyr"
+	}]
 
-                <p className="center_text"><small>(будет переработка страницы)</small></p>
+	return (
+			<main className="streamers">
+				<MaxSize>
+					<RelativeNav
+							paths={[{name: "features", displayname: "Фичи"}, {name: "streamers", displayname: "Контент мейкеры"}]}/>
+					<h1>Контент мейкеры</h1>
 
-                <div className="container">
-                    <Box name="justcheburek">
-                        <YT name="JustCheburek"/>
-                        <Twitch name="justcheburek"/>
-                    </Box>
+					<GContainer width={300} height={250} border>
+						{streamers.map(({name, yt, twitch}) => (
+								<GBox key={name}>
+									<ImgBox hover={1.1}>
+										<Img src={`/features/streamers/${name}.png`} alt={name} width={160}/>
+									</ImgBox>
 
-                    <Box name="kawa11fox">
-                        <YT name="Kawa11Fox"/>
-                        <Twitch name="kawa11fox"/>
-                    </Box>
-
-                    <Box name="rkrmv">
-                        <Twitch name="rkrmv"/>
-                    </Box>
-
-                    <Box name="vebrau">
-                        <YT name="Vebray_"/>
-                    </Box>
-
-                    <Box name="toxser">
-                        <YT name="TOXwyr"/>
-                    </Box>
-                </div>
-            </MaxSize>
-        </main>
-    )
+									<ul className={`${styles.social} remove_marker not_indent`}>
+										{yt &&
+												<li>
+													{/* Ютуб */}
+													<a href={`https://www.youtube.com/@${yt}`} target="_blank" rel="noreferrer noopener">
+														<YtSvg width="100%" height="80%"/>
+													</a>
+												</li>
+										}
+										{twitch &&
+												<li>
+													{/* Твич */}
+													<a href={`https://www.twitch.tv/${twitch}`} target="_blank" rel="noreferrer noopener">
+														<TwitchSvg width="100%" height="80%"/>
+													</a>
+												</li>
+										}
+									</ul>
+								</GBox>
+						))}
+					</GContainer>
+				</MaxSize>
+			</main>
+	)
 }
