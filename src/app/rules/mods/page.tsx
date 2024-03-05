@@ -6,10 +6,8 @@ import styles from './mods.module.scss';
 
 // Компоненты
 import {NotFound} from "@components/notFound";
-import {SubsectionItem, Subsections} from '@components/subsections'
 import {OnThisPage, OnThisPageBox, OnThisPageItem} from "@components/onThisPage";
 import {ErrorSvg, SuccessSvg} from "@ui/svgs";
-import {MaxSize} from "@components/maxSize";
 
 export const metadata: Metadata = {
 	title: "Моды | Майнбридж",
@@ -66,20 +64,7 @@ export default function Mods() {
 	]
 
 	return (
-			<main>
-				<MaxSize sideNav>
-					<Subsections menu="Меню правил">
-						<SubsectionItem href="/rules">
-							Правила
-						</SubsectionItem>
-						<SubsectionItem href="/rules/mods">
-							Моды
-						</SubsectionItem>
-						<SubsectionItem href="/rules/blacklist">
-							Выражения
-						</SubsectionItem>
-					</Subsections>
-
+				<>
 					<div className="mods_content">
 						<h1>Моды</h1>
 
@@ -169,6 +154,6 @@ export default function Mods() {
 							Запрещено
 						</OnThisPageItem>
 					</OnThisPage>
-				</MaxSize>
-			</main>)
+				</>
+			)
 }

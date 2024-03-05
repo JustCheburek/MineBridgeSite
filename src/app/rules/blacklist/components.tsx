@@ -1,9 +1,14 @@
 "use client";
 
-import {PropsWithChildren, useState} from "react";
-import {Button} from "@components/button";
+// React
+import type {PropsWithChildren} from "react"
+import {useState} from "react";
 
+// Стили
 import styles from "./blacklist.module.scss";
+
+// Компоненты
+import {Button} from "@components/button";
 
 export function BlacklistContent() {
 	const [show, setShow] = useState<boolean>(false);

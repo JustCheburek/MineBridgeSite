@@ -2,9 +2,7 @@
 import type {Metadata} from "next";
 
 // Компоненты
-import {SubsectionItem, Subsections} from '@components/subsections'
 import {BlacklistContent} from "@app/rules/blacklist/components";
-import {MaxSize} from "@components/maxSize";
 
 export const metadata: Metadata = {
 	title: "Выражения | Майнбридж",
@@ -13,23 +11,7 @@ export const metadata: Metadata = {
 
 export default function Blacklist() {
 	return (
-			<main>
-				<MaxSize sideNav>
-					<Subsections menu="Меню правил">
-						<SubsectionItem href="/rules">
-							Правила
-						</SubsectionItem>
-						<SubsectionItem href="/rules/mods">
-							Моды
-						</SubsectionItem>
-						<SubsectionItem href="/rules/blacklist">
-							Выражения
-						</SubsectionItem>
-					</Subsections>
-
-					<BlacklistContent/>
-				</MaxSize>
-			</main>
+			<BlacklistContent/>
 	)
 }
 
