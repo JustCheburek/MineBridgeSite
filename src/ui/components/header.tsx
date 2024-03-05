@@ -86,7 +86,7 @@ function User() {
 
 	/*if (isError || isLoading) {
 		return (
-				<NavLink href="./auth" className="registration_nav">
+				<NavLink href="/auth" className="registration_nav">
 					<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
 					     className="unic_color auth_icon" viewBox="0 0 16 16">
 						<path
@@ -160,7 +160,7 @@ export function Header() {
 					<Burger burger={burger} setBurger={setBurger}/>
 
 					{/* Лого */}
-					<Link href="./" className="logo" rel="shortcut icon" aria-label="Переход на главную страницу">
+					<Link href="/" className="logo" rel="shortcut icon" aria-label="Переход на главную страницу">
 						<MinebridgeSvg/>
 					</Link>
 

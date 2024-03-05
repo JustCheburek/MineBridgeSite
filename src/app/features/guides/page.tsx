@@ -20,8 +20,8 @@ export default function Guides() {
 					<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "guides", displayname: "Гайды"}]}/>
 					<h1>Гайды</h1>
 
-					<GContainer>
-						<GBox href="./brewery" imgs="three">
+					<GContainer border>
+						<GBox href="/features/guides/brewery" imgs="three">
 							<ImgBox className={styles.img} type="grid">
 								<Img
 										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABK0lEQVR4XmMYBaMhMBoCoyEwGgLkhsDFHI//IAzTj84n1lymgY4CFnIdcOTUObDWi4++/AcxjoQokWUU05BLhBvPvvwPwrgcTkgeXd/QSQOwuM6ovQb2BCwUinImongqNSINRd7fWJwRXzQPeAgwEkqEMJ+7OkeDlc5eMQtMd0x6CKY/v7qEYsT3D/cg4m+ugmm3jEIwvaTYAatdQycN8IpoYw2sX99eg8XZuETBNKcAaeXB4A+BB6+/ovi8umYzCv/3j3coIRCbZATmz5n8goEYMPhDYPWB6yipGuYrWFyzsPODhWCpn4EBEgIfn5+GKrXBGxCDvxyAOT+m9wC41ts1ox8shJ4r0opCwOK9VY1gmlD+h5k7dEIAPSQYCABcJR+6tqHXHmAYbgAAR29oifwpnJwAAAAASUVORK5CYII="
@@ -47,7 +47,7 @@ export default function Guides() {
 							<GText>Brewery</GText>
 						</GBox>
 
-						{/*<Link href="./litematica" className="box two crafts">
+						{/*<Link href="/features/guides/litematica" className="box two crafts">
 							<img src="/features/guides/litematica/house.jpg" alt="Дом из мема: ОЙ МАМА ПРИШЛА" className="img"/>
 							<img src="/features/guides/blocks.png" alt="Блоки" className="img"/>
 

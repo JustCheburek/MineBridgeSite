@@ -15,7 +15,7 @@ export function RegistrationSection() {
                     </p>
                 </div>
 
-                <NavButton href="./auth">
+                <NavButton href="/auth">
                     Подать заявку
                 </NavButton>
             </article>

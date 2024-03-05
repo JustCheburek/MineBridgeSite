@@ -25,7 +25,7 @@ export function InfoSection() {
 						/>
 					</h1>
 
-					<NavButton href="./auth">
+					<NavButton href="/auth">
 						Влететь на сервер
 					</NavButton>
 
@@ -47,7 +47,7 @@ export function InfoSection() {
 						без приватов и команд
 					</p>
 
-					<NavButton href="./auth">
+					<NavButton href="/auth">
 						Влететь на сервер
 					</NavButton>
 

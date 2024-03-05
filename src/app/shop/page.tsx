@@ -1,6 +1,5 @@
 // React
 import type {Metadata} from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 // Компоненты
@@ -38,7 +37,7 @@ export default function Shop() {
 						<h3 className="center_text">
 							1 ₽ = 1 <MostikiSvg/>
 						</h3>
-						<NavButton href="./buy">
+						<NavButton href="/shop/buy">
 							Купить
 						</NavButton>
 						<p>

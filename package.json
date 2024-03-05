@@ -1,7 +1,7 @@
 {
   "name": "minebridge",
-  "version": "0.1.0",
-  "private": false,
+  "version": "большая",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-table": "^8.13.2",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

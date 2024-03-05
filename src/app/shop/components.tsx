@@ -6,7 +6,7 @@ import {useState} from "react";
 import Link from "next/link";
 
 // База данных кейсов
-import type {CaseTypeProps} from "@app/types/Case";
+import type {CaseTypeProps} from "@src/types/Case";
 import {RarityTranslate, TypeTranslate} from "./case/db"
 
 // Стили
@@ -105,7 +105,7 @@ export const CaseInfo = ({children, description}: PropsWithChildren<{ descriptio
 </>)
 
 export const CaseButton = () => (
-		<NavButton href="./case" margin="10px">
+		<NavButton href="/shop/case" margin="10px">
 			Купить
 		</NavButton>
 )

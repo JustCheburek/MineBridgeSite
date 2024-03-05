@@ -1,10 +1,19 @@
+"use client";
+
 // React
 import {flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table";
 
 // Стили
 import "./styles/table.scss"
+import {PropsWithChildren} from "react";
 
-export function Table({columns, data, className="", children}) {
+type Table = {
+	columns: any
+	data: any
+	className?: string
+}
+
+export function Table({columns, data, className="", children}: PropsWithChildren<Table>) {
 	const table = useReactTable({
 		data,
 		columns,

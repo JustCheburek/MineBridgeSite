@@ -213,7 +213,7 @@ export default function News() {
 									Если другие игроки заметили убийство, тогда ты выбываешь из игры
 								</p>
 								<br/>
-								<h4>Приз: <Link className="unic_color" href="./shop">2 легендарных кейса</Link>!</h4>
+								<h4>Приз: <Link className="unic_color" href="/shop">2 легендарных кейса</Link>!</h4>
 								<h4>Координаты: <span className="unic_color">-38 112 100</span></h4>
 								<h4>Победитель: <span className="unic_color">Kawa11Fox</span></h4>
 							</PText>
@@ -234,7 +234,7 @@ export default function News() {
 									Построить наилучшую по красоте (или показать уже вашу существующую) базу / здание
 								</p>
 								<br/>
-								<h4>Приз: <Link className="unic_color" href="./shop">Легендарный кейс</Link>!</h4>
+								<h4>Приз: <Link className="unic_color" href="/shop">Легендарный кейс</Link>!</h4>
 								<h4>
 									Победитель: <span className="unic_color">SES</span>
 								</h4>

@@ -75,7 +75,7 @@ export default function Rules() {
 								<strong>При общении</strong>
 								<ul>
 									<li>
-										Говорить <Link href="./blacklist" className="unic_color">бан-ворды</Link>
+										Говорить <Link href="/rules/blacklist" className="unic_color">бан-ворды</Link>
 									</li>
 									<li>
 										Оскорблять
@@ -156,7 +156,7 @@ export default function Rules() {
 								   target="_blank" className="twitch_url" rel="noopener noreferrer">
 									платформы Twitch
 								</a><br/>
-								<Link href="./blacklist" className="unic_color">Список банвордов</Link>
+								<Link href="/rules/blacklist" className="unic_color">Список банвордов</Link>
 							</Rule>
 							<Rule number={1.6} punishment={20}>
 								Мат не приветствуется, череда матов - наказание
@@ -354,7 +354,7 @@ export default function Rules() {
 							<Rule number={4.1} punishment={200}>
 								<p>
 									Читы запрещены в любом виде: {" "}
-									<Link href="./mods" className="unic_color medium-font">список модификаций</Link>
+									<Link href="/rules/mods" className="unic_color medium-font">список модификаций</Link>
 								</p>
 								<p>
 									Админы и модеры в праве вызвать вас на проверку читов.

@@ -18,10 +18,12 @@
       }
     ],
     "paths": {
+      "@src/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
       "@ui/*": ["./src/ui/*"],
       "@styles/*": ["./src/ui/styles/*"],
-      "@components/*": ["./src/ui/components/*"]
+      "@components/*": ["./src/ui/components/*"],
+      "@columns/*": ["./src/ui/columns/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

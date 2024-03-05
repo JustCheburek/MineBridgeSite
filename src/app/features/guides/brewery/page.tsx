@@ -1,134 +1,52 @@
 // React
-import {createColumnHelper} from "@tanstack/react-table";
+import type {Metadata} from "next";
 
-// Стили
-import "./styles/brewery.scss";
+// Типа база данных
+/*
+import recipes from "./recipes.json"
+import {columns} from "@columns/brewery"
+*/
 
 // Компоненты
 import {RelativeNav} from "@components/relativeNav";
-import {Table} from "@components/table";
-
-import recipes from "./recipes.json"
+/*import {Table} from "@components/table";*/
 import {MaxSize} from "@components/maxSize";
-import type {Metadata} from "next";
+import {PBox, PText, PTitle} from "@components/post";
+import {Img, ImgBox} from "@components/img";
 
 export const metadata: Metadata = {
 	title: "Brewery | Майнбридж",
 	description: "Гайд на плагин Brewery! Ферментация (горячий котёл), дистилляция (зельеварка), выдержка (маленькая и большая бочки). Рецепты алкоголя на сервере MineBridge!",
 };
 
-const Box = ({children}) => (
-		<div className="container">
-			{children}
-		</div>
-)
-
-const Img = ({src, alt}) => (
-		<div className="img_box">
-			<img src={src} alt={alt} className="img_box" loading="lazy"/>
-		</div>
-)
-
-const Text = ({children}) => (
-		<div className="text">
-			{children}
-		</div>
-)
-
-const Heading = ({children, number}) => (
-		<div className="heading center_text">
-			<h2 className="unic_color">{children}</h2>
-			{number &&
-					<h4>{number} этап</h4>
-			}
-		</div>
-)
-
-const columnHelper = createColumnHelper();
-
-const woods = [
-	"", "берёза", "дуб", "?", "ель", "акация", "тёмный дуб"
-]
-
-function IngredientsCell({getValue}) {
-	const ingredients = getValue()
-
-	return (
-			<ul className="not_indent">
-				{ingredients.map(ingredient => (
-						<li key={ingredient}>
-							{ingredient.split("/").reverse().join(" ")}
-						</li>
-				))}
-			</ul>
-	)
-}
-
-const columns = [
-	columnHelper.accessor(data => {
-		const names = data.name.split("/")
-		const nameIndex = names.length === 3 ? 1 : 0
-
-		return names[nameIndex]
-	}, {
-		header: "Рецепт"
-	}),
-	columnHelper.accessor(data => data.ingredients, {
-		header: "Ингредиенты",
-		cell: IngredientsCell
-	}),
-	columnHelper.accessor(data => (data.cookingtime || ""), {
-		header: "Котёл",
-		meta: {
-			className: "center_text"
-		}
-	}),
-	columnHelper.accessor(data => (data.distillruns || ""), {
-		header: "Светопыль",
-		meta: {
-			className: "center_text"
-		}
-	}),
-	columnHelper.accessor(data => {
-		if (!data.age) return ""
-
-		let year = 'год'
-
-		if (data.age % 100 > 1) year = 'года'
-		if (data.age % 100 > 4) year = 'лет'
-
-		const time = `${data.age} ${year}`
-
-		if (data.wood === 0) return time
-
-		return `${time} - ${woods[data.wood]}`
-	}, {
-		header: "Бочка",
-		meta: {
-			className: "center_text"
-		}
-	})
-]
-
 export default function Brewery() {
 	return (
-			<main className="brewery">
+			<main>
 				<MaxSize>
-					<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "guides", displayname: "Гайды"}, "Brewery"]}/>
+					<RelativeNav
+							paths={[
+								{name: "features", displayname: "Фичи"},
+								{name: "guides", displayname: "Гайды"},
+								{name: "brewery", displayname: "Brewery"}
+							]}
+					/>
 					<h1>Brewery</h1>
 
 					<p className="center_text">
 						Плагин на дополнительные алкогольные напитки
 					</p>
 
-					<Box>
-						<Img src="/features/guides/brewery/kettle.webp" alt="Котёл"/>
+					<PBox>
+						<ImgBox type="post">
+							<Img src="/features/guides/brewery/kettle.webp" alt="Котёл"/>
+						</ImgBox>
 
-						<Text>
-							<Heading number={1}>
-								Ферментация
-							</Heading>
+						<PTitle>
+							<h2>Ферментация</h2>
+							<h4>1 этап</h4>
+						</PTitle>
 
+						<PText>
 							<ul>
 								<li>
 									Поставьте <span className="medium-font">котёл</span> на источник тепла<br/>
@@ -147,16 +65,20 @@ export default function Brewery() {
 									Забирайте закваску <span className="medium-font">стеклянными бутыльками</span>
 								</li>
 							</ul>
-						</Text>
-					</Box>
+						</PText>
+					</PBox>
 
-					<Box>
-						<Img src="/features/guides/brewery/brewing_stand.webp" alt="Зельеварка"/>
-						<Text>
-							<Heading number={2}>
-								Дистилляция
-							</Heading>
+					<PBox>
+						<ImgBox type="post">
+							<Img src="/features/guides/brewery/brewing_stand.webp" alt="Зельеварка"/>
+						</ImgBox>
 
+						<PTitle>
+							<h2>Дистилляция</h2>
+							<h4>2 этап</h4>
+						</PTitle>
+
+						<PText>
 							<ul>
 								<li>
 									Положите бутылку с закваской в <span className="medium-font">зельеварку</span>
@@ -165,36 +87,41 @@ export default function Brewery() {
 									Поместите <span className="medium-font">светящуюся пыль</span> сверху в качестве ингредиента
 								</li>
 							</ul>
-						</Text>
-					</Box>
+						</PText>
+					</PBox>
 
-					<Box>
-						<Text>
-							<Heading number={3}>
-								Выдержка
-							</Heading>
+					<PBox>
+						<PTitle>
+							<h2>Выдержка</h2>
+							<h4>3 этап</h4>
+						</PTitle>
 
+						<PText>
 							<p>
 								Для выдержки необходимо построить <span className="medium-font">деревянную бочку</span>
 							</p>
 							<p>
 								Для различных рецептов нужны разные виды дерева
 							</p>
-						</Text>
-						<Img src="/features/guides/brewery/small_barrel.webp" alt="Маленькая бочка"/>
-						<Text>
-							<div className="heading">
-								<h3 className="unic_color">
-									Маленькая бочка
-								</h3>
-								<h4>
-									9 слотов
-								</h4>
-							</div>
+						</PText>
 
+						<ImgBox type="post">
+							<Img src="/features/guides/brewery/small_barrel.webp" alt="Маленькая бочка"/>
+						</ImgBox>
+
+						<PTitle>
+							<h3>
+								Маленькая бочка
+							</h3>
+							<h4>
+								9 слотов
+							</h4>
+						</PTitle>
+
+						<PText>
 							<div>
 								<p>
-									Для постройки нужно:
+								Для постройки нужно:
 								</p>
 
 								<ul>
@@ -206,21 +133,25 @@ export default function Brewery() {
 									</li>
 								</ul>
 							</div>
-						</Text>
-						<Img src="/features/guides/brewery/big_barrel.webp" alt="Маленькая бочка"/>
-						<Text>
-							<div className="heading">
-								<h3 className="unic_color">
-									Большая бочка
-								</h3>
-								<h4>
-									27 слотов
-								</h4>
-							</div>
+						</PText>
 
+						<ImgBox type="post">
+							<Img src="/features/guides/brewery/big_barrel.webp" alt="Маленькая бочка"/>
+						</ImgBox>
+
+						<PTitle>
+							<h3>
+								Большая бочка
+							</h3>
+							<h4>
+								27 слотов
+							</h4>
+						</PTitle>
+
+						<PText>
 							<div>
 								<p>
-									Для постройки нужно (полая внутри):
+								Для постройки нужно (полая внутри):
 								</p>
 								<ul>
 									<li>
@@ -237,12 +168,12 @@ export default function Brewery() {
 									</li>
 								</ul>
 							</div>
-						</Text>
-					</Box>
+						</PText>
+					</PBox>
 
-					<Table columns={columns} data={Object.values(recipes)}>
+					{/*<Table columns={columns} data={Object.values(recipes)}>
 						<h2 className="unic_color">Рецепты</h2>
-					</Table>
+					</Table>*/}
 				</MaxSize>
 			</main>
 	)

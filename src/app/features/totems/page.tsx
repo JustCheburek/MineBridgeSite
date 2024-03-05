@@ -8,7 +8,7 @@ import styles from "./totems.module.scss"
 import {Url} from "@components/button";
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
-import {Img, ImgBox} from "@components/img";
+import {Img} from "@components/img";
 import {GBox, GContainer} from "@components/grid";
 
 export const metadata: Metadata = {
