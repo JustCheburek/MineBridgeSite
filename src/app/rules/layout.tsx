@@ -5,7 +5,7 @@ import type {PropsWithChildren} from "react";
 import {SubsectionItem, Subsections} from "@components/subsections";
 import {MaxSize} from "@components/maxSize";
 
-export default function RootLayout(
+export default function RulesLayout(
 		{
 			children,
 		}: PropsWithChildren) {

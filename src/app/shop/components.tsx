@@ -6,7 +6,7 @@ import {useState} from "react";
 import Link from "next/link";
 
 // База данных кейсов
-import type {CaseTypeProps} from "@src/types/Case";
+import type {CaseTypeProps} from "@src/types/case";
 import {RarityTranslate, TypeTranslate} from "./case/db"
 
 // Стили
@@ -127,7 +127,7 @@ export function Case({caseType, chancesDrop, chancesRarity}: Case) {
 
 	return (
 			<>
-				<ImgBox className={`${styles.pointer} ${styles.helper}`} onClick={() => setModal(true)} hover={1.1}>
+				<ImgBox className={`${styles.pointer} ${styles.helper}`} onClick={() => setModal(true)} hover>
 					<Img
 							src={`/shop/${caseType.name}.png`} alt={`${caseType.displayname} кейс`}
 							width={185}

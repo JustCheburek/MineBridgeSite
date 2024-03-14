@@ -12,28 +12,32 @@ type ImgBox = {
 	background?: string
 	width?: string
 	height?: string,
-	hover?: 1 | 1.1
+	hover?: boolean
 }
 
 export const ImgBox = (
 		{
-			className, type, children, background, width, height, hover=1, style, ...props
+			className, type, children, background, width, height, hover=false, style, ...props
 		}: ComponentPropsWithoutRef<"figure"> & ImgBox,
 ) => {
-	let backgroundStyle
+	let backgroundStyle, hoverStyle
 
 	if (background) {
 		backgroundStyle = {backgroundImage: `url(${background})`}
 	}
 
 	if (type === "post") {
-		hover = 1.1
+		hover = true
+	}
+
+	if (hover) {
+		hoverStyle = {"--_hover": 1.1}
 	}
 
 	return (
 			<figure
 					className={`${styles.box} ${!!type ? styles[type] : ""} ${className}`}
-					style={{"--_hover": hover, ...backgroundStyle, width, height, ...style}}
+					style={{...hoverStyle, ...backgroundStyle, width, height, ...style}}
 					{...props}
 			>
 				{children}

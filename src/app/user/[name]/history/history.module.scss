@@ -1,0 +1,15 @@
+.integration_content {
+	display: grid;
+	gap: 40px;
+}
+
+.table_list > li {
+	position: relative;
+}
+
+.edit {
+	position: absolute;
+	right: 0;
+	margin-block: auto;
+	transition: var(--short-transition) color;
+}

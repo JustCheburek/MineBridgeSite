@@ -1,0 +1,34 @@
+@import "@styles/mixins";
+
+.providers_box {
+	display: grid;
+	place-content: center;
+	gap: 1rem;
+}
+
+.box {
+	display: grid;
+	align-items: center;
+	gap: 1.5rem;
+	grid-template-columns: auto 1fr auto;
+
+	padding: 1rem 3rem;
+	@include border($radius: 20px);
+}
+
+.ds {
+	scale: 1.3;
+}
+
+.for_smaller {
+	display: none;
+}
+
+@media (width < 370px) {
+	.for_smaller {
+		display: block;
+	}
+	.for_bigger {
+		display: none;
+	}
+}

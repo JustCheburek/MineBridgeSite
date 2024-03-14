@@ -1,19 +1,24 @@
 "use client";
 
 // React
-import {flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table";
+import {PropsWithChildren} from "react";
+import {type ColumnDef, flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table";
+import TimeAgo from "javascript-time-ago";
+import ru from "javascript-time-ago/locale/ru";
 
 // Стили
 import "./styles/table.scss"
-import {PropsWithChildren} from "react";
 
-type Table = {
-	columns: any
-	data: any
+TimeAgo.addDefaultLocale(ru);
+const timeAgo = new TimeAgo("ru-RU");
+
+type Table<T extends object> = {
+	columns: ColumnDef<T>[]
+	data: T[]
 	className?: string
 }
 
-export function Table({columns, data, className="", children}: PropsWithChildren<Table>) {
+export function Table<T extends object>({columns, data, className = "", children}: PropsWithChildren<Table<T>>) {
 	const table = useReactTable({
 		data,
 		columns,
@@ -42,10 +47,12 @@ export function Table({columns, data, className="", children}: PropsWithChildren
 					{table.getRowModel().rows.map(row => (
 							<tr key={row.id}>
 								{row.getVisibleCells().map(cell => {
-									const columnDef = cell.column.columnDef
-									const meta = columnDef.meta
+									const {columnDef} = cell.column
+									const {meta} = columnDef
 
 									let className = meta?.className
+									const isDate = meta?.isDate || false
+
 									if (typeof className === "function") {
 										className = className(cell.row.original)
 									}
@@ -57,7 +64,10 @@ export function Table({columns, data, className="", children}: PropsWithChildren
 														className
 													}
 											>
-												{flexRender(cell.column.columnDef.cell, cell.getContext())}
+												{!isDate
+														? flexRender(cell.column.columnDef.cell, cell.getContext())
+														: timeAgo.format(new Date(cell.getValue() as string), "mini")
+												}
 											</td>
 									)
 								})}

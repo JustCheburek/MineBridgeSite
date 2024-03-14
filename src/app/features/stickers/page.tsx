@@ -31,7 +31,7 @@ export default function Stickers() {
                             let path = `/features/stickers/${sticker}.png`
 
                             return (
-                                <ImgBox key={sticker} hover={1.1}>
+                                <ImgBox key={sticker} hover>
                                     <Img src={path} alt="стикер" width={200} height={200}/>
                                 </ImgBox>
                             )

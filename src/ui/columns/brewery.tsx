@@ -1,88 +1,69 @@
-import {createColumnHelper} from "@tanstack/react-table";
-import type {RecipeProps} from "@src/types/Recipe";
+"use client"
+
+import {ColumnDef} from "@tanstack/react-table";
+import type {RecipeProps} from "@src/types/recipe";
 
 const woods = [
-	"", "берёза", "дуб", "?", "ель", "акация", "тёмный дуб"
+	"любое", "берёза", "дуб", "?", "ель", "акация", "тёмный дуб"
 ]
 
-const columnHelper = createColumnHelper<RecipeProps>()
-
-export const columns = [
-	columnHelper.accessor(async data => {
-		"use server";
-		const names = data.name.split("/")
-		const nameIndex = names.length === 3 ? 1 : 0
-
-		return names[nameIndex]
-	}, {
-		header: "Рецепт"
-	}),
-	columnHelper.accessor("ingredients", {
+export const columns: ColumnDef<RecipeProps>[] = [
+	{
+		accessorKey: "name",
+		header: "Рецепт",
+		cell: ({getValue}: {getValue: Function}) => {
+			const names: string[] = getValue().split("/")
+			const nameIndex = names.length === 3 ? 1 : 0
+			return names[nameIndex]
+		}
+	},
+	{
+		accessorKey: "ingredients",
 		header: "Ингредиенты",
-		cell: IngredientsCell
-	}),
-	columnHelper.accessor(async data => {
-		"use server";
-		return data.cookingtime || ""
-	}, {
+		cell: ({getValue}: {getValue: Function}) => {
+			const ingredients: string[] = getValue()
+
+			return (
+					<ul className="not_indent">
+						{ingredients.map(ingredient => (
+								<li key={ingredient}>
+									{ingredient.split("/").reverse().join(" ")}
+								</li>
+						))}
+					</ul>
+			)
+		}
+	},
+	{
+		accessorKey: "cookingtime",
 		header: "Котёл",
 		meta: {
 			className: "center_text"
-		}
-	}),
-	columnHelper.accessor(async data => {
-		"use server";
-		return data.distillruns || ""
-	}, {
+		},
+		cell: ({getValue}: {getValue: Function}) => getValue() || ""
+	},
+	{
+		accessorKey: "distillruns",
 		header: "Светопыль",
 		meta: {
 			className: "center_text"
-		}
-	}),
-	columnHelper.accessor("age", {
+		},
+		cell: ({getValue}: {getValue: Function}) => getValue() || ""
+	},
+	{
+		accessorKey: "age",
 		header: "Бочка",
-		cell: AgeCell,
 		meta: {
 			className: "center_text"
-		}
-	}),
-	columnHelper.accessor(async data => {
-		"use client";
-		return woods[data.wood] || ""
-	}, {
+		},
+		cell: ({getValue}: {getValue: Function}) => getValue() || ""
+	},
+	{
+		accessorKey: "wood",
 		header: "Дерево",
 		meta: {
 			className: "center_text"
-		}
-	})
+		},
+		cell: ({getValue}: {getValue: Function}) => woods[Number(getValue())] || ""
+	},
 ]
-
-async function IngredientsCell({getValue}: any) {
-	"use server"
-	const ingredients: string[] = getValue()
-	console.log(ingredients)
-
-	return (
-			<ul className="not_indent">
-				{ingredients.map(ingredient => (
-						<li key={ingredient}>
-							{ingredient.split("/").reverse().join(" ")}
-						</li>
-				))}
-			</ul>
-	)
-}
-
-async function AgeCell({getValue}: any) {
-	"use server"
-	const age = await getValue()
-
-	if (!age) return ""
-
-	let year = 'г'
-	if (age % 100 > 4) {
-		year = 'л'
-	}
-
-	return `${age} ${year}`
-}

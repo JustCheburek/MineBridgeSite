@@ -1,27 +1,35 @@
 {
-  "name": "minebridge",
-  "version": "большая",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@tanstack/react-table": "^8.13.2",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-type-animation": "latest",
-    "sass": "latest"
-  },
-  "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest",
-    "typescript": "latest"
-  }
+	"name": "minebridge",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@tanstack/react-table": "latest",
+		"axios": "^1.6.7",
+		"javascript-time-ago": "^2.5.9",
+		"next": "latest",
+		"react": "latest",
+		"react-dom": "latest",
+		"react-type-animation": "latest",
+		"sass": "latest"
+	},
+	"devDependencies": {
+		"@lucia-auth/adapter-mongodb": "latest",
+		"@typegoose/typegoose": "latest",
+		"@types/node": "latest",
+		"@types/react": "latest",
+		"@types/react-dom": "latest",
+		"arctic": "latest",
+		"big-integer": "^1.6.52",
+		"eslint": "latest",
+		"eslint-config-next": "latest",
+		"minecraft-server-util": "^5.4.4",
+		"schema-dts": "latest",
+		"typescript": "latest"
+	}
 }

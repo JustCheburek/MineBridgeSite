@@ -1,10 +1,7 @@
 // React
-import {Navigate} from "react-router-dom";
-import {useForm} from "react-hook-form"
-import Cookies from 'js-cookie';
-
-// Hooks
-import {useAuth, useMe} from "../../hooks/userQueries";
+import {validate} from "@server/validate";
+import type {Metadata} from "next";
+import {redirect} from "next/navigation";
 
 // Стили
 import './styles/auth.scss';
@@ -13,97 +10,89 @@ import './styles/auth.scss';
 import {DiscordSvg, GoogleSvg} from "@ui/svgs";
 import {FormButton, FormGroup, FormLabel} from "@components/form";
 import {MaxSize} from "@components/maxSize";
+import {cookies} from "next/headers";
 
-export function Component() {
-    const {
-        register,
-        handleSubmit
-    } = useForm({defaultValues: {"name": Cookies.get("name") || ""}})
+export const metadata: Metadata = {
+	title: "Регистрация | Майнбридж",
+	description: "Нужен лишь гугл или дискорд и вы уже на сервере!",
+};
 
-    const {
-        data,
-        isSuccess
-    } = useMe()
-    const {
-        mutate,
-        isLoading,
-        error,
-        isError
-    } = useAuth()
+export default async function Auth() {
+	const {user} = await validate()
 
-    if (isSuccess) {
-        return <Navigate to={`/user/${data.user.name}`}/>
-    }
+	if (user) {
+		return redirect(`/user/${user.name}`)
+	}
 
-    return (
-        <main className="auth">
-            <MaxSize className="center_text grid_center">
-                <Helmet>
-                    <title>Регистрация | Майнбридж</title>
-                    <meta
-                        charSet="UTF-8"
-                        content="Нужен лишь гугл или дискорд и вы уже на сервере!"
-                        name="description"
-                    />
-                </Helmet>
+	const name = cookies().get("name")?.value || ""
 
-                <h1>Вход</h1>
-                <p>
-                    Вы уже близко к цели!
-                </p>
+	async function authProvider(formData: FormData) {
+		"use server";
 
-                <form className="form" onSubmit={handleSubmit(mutate)}>
-                    <FormLabel>
-                        <input
-                            type="text"
-                            placeholder="Майнкрафт никнейм"
-                            name="name"
-                            autoComplete="nickname"
-                            required
-                            minLength="4"
-                            maxLength="20"
-                            disabled={isLoading}
-                            {...register("name")}
-                        />
-                    </FormLabel>
+		const month = 60 * 60 * 24 * 30;
 
-                    <FormGroup>
-                        <FormLabel>
-                            <input
-                                type="radio"
-                                name="provider"
-                                autoComplete="provider"
-                                defaultChecked
-                                value="discord"
-                                disabled={isLoading}
-                                {...register("provider")}
-                            />
-                            <DiscordSvg className="color" width="1em" height="1em"/>
-                        </FormLabel>
+		cookies().set("name", formData.get("name") as string, {
+			path: "/",
+			secure: process.env.NODE_ENV === "production",
+			httpOnly: true,
+			maxAge: month,
+			sameSite: "lax"
+		})
 
-                        <FormLabel>
-                            <input
-                                type="radio"
-                                name="provider"
-                                autoComplete="provider"
-                                value="google"
-                                disabled={isLoading}
-                                {...register("provider")}
-                            />
-                            <GoogleSvg width="1em" height="1em"/>
-                        </FormLabel>
-                    </FormGroup>
+		return redirect(`/auth/${formData.get("provider")}`)
+	}
 
-                    <FormButton disabled={isLoading}>
-                        Погнали
-                    </FormButton>
-                </form>
-                {isError &&
-                    <p className="red_color" role="alert">
-                        <strong>Ошибка</strong>: {JSON.stringify(error?.message)}
-                    </p>
-                }
-            </MaxSize>
-        </main>
-    )
+	return (
+			<main className="auth">
+				<MaxSize className="center_text grid_center">
+					<h1>Вход</h1>
+					<p>
+						Вы уже близко к цели!
+					</p>
+
+					<form className="form" action={authProvider}>
+						<FormLabel>
+							<input
+									type="text"
+									placeholder="Майнкрафт никнейм"
+									name="name"
+									autoComplete="name"
+									required
+									minLength={4}
+									maxLength={20}
+									autoFocus
+									defaultValue={name}
+							/>
+						</FormLabel>
+
+						<FormGroup>
+							<FormLabel>
+								<input
+										type="radio"
+										name="provider"
+										autoComplete="provider"
+										defaultChecked
+										value="discord"
+								/>
+								<DiscordSvg className="color" width="1em" height="1em"/>
+							</FormLabel>
+
+							<FormLabel>
+								<input
+										type="radio"
+										name="provider"
+										autoComplete="provider"
+										value="google"
+								/>
+								<GoogleSvg width="1em" height="1em"/>
+							</FormLabel>
+						</FormGroup>
+
+						<FormButton>
+							Погнали
+						</FormButton>
+					</form>
+				</MaxSize>
+			</main>
+	)
 }

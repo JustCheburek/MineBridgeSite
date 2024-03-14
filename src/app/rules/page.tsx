@@ -1,7 +1,8 @@
 // React
 import type {Metadata} from "next";
 import Link from "next/link";
-// import {useTimeAgo} from "next-timeago";
+import TimeAgo from "javascript-time-ago";
+
 // Стили
 import styles from './rules.module.scss';
 
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
 	title: "Правила | Майнбридж",
 	description: "Социальный рейтинг — внутриигровая награда или наказание. Суды, баны, муты, всё это про нас!",
 };
+
+const timeAgo = new TimeAgo('ru-RU');
 
 export default function Rules() {
 	const lastUpdate = new Date(2024, 2 - 1, 15);
@@ -27,6 +30,7 @@ export default function Rules() {
 						Последнее изменение правил: {" "}
 						<time dateTime={lastUpdate.toISOString()}>
 							<strong className="unic_color">
+								{timeAgo.format(lastUpdate)}
 							</strong>
 							{" "}
 							<small>({lastUpdate.toLocaleDateString()})</small>

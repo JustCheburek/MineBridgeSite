@@ -2,14 +2,12 @@
 import type {Metadata} from "next";
 
 // Типа база данных
-/*
 import recipes from "./recipes.json"
 import {columns} from "@columns/brewery"
-*/
 
 // Компоненты
 import {RelativeNav} from "@components/relativeNav";
-/*import {Table} from "@components/table";*/
+import {Table} from "@components/table";
 import {MaxSize} from "@components/maxSize";
 import {PBox, PText, PTitle} from "@components/post";
 import {Img, ImgBox} from "@components/img";
@@ -171,9 +169,12 @@ export default function Brewery() {
 						</PText>
 					</PBox>
 
-					{/*<Table columns={columns} data={Object.values(recipes)}>
+					<Table
+							columns={columns}
+							data={Object.values(recipes)}
+					>
 						<h2 className="unic_color">Рецепты</h2>
-					</Table>*/}
+					</Table>
 				</MaxSize>
 			</main>
 	)

@@ -1,4 +1,4 @@
-import type {CaseTypeProps, DropTypeProps, RarityTranslateProps} from "@src/types/Case";
+import type {CaseTypeProps, DropTypeProps, RarityTranslateProps} from "@src/types/case";
 
 // Редкости в обычном сундуке
 export const RarityTranslate: RarityTranslateProps = {

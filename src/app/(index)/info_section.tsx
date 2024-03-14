@@ -34,10 +34,10 @@ export function InfoSection() {
 					</p>
 				</article>
 				<article className="for_mobile">
-					<h1 className={`unic_color ${styles.for_bigger}`}>
+					<h1 className={styles.for_bigger}>
 						MineBridge
 					</h1>
-					<h1 className={`unic_color ${styles.for_smaller}`}>
+					<h1 className={styles.for_smaller}>
 						Mine<br/>
 						Bridge
 					</h1>

@@ -1,7 +1,11 @@
 // React / next
+// noinspection JSUnusedGlobalSymbols
+
 import type {Metadata} from "next";
 import type {PropsWithChildren} from "react";
 import {Montserrat} from "next/font/google";
+import TimeAgo from "javascript-time-ago";
+import ru from 'javascript-time-ago/locale/ru'
 
 // Стили
 import "@styles/normalize.scss"
@@ -16,17 +20,27 @@ import "@styles/global.scss"
 import {Header} from "@components/header";
 import {Footer} from "@components/footer";
 
-const montserrat = Montserrat({subsets: ["latin"]});
+const montserrat = Montserrat({subsets: ["latin"], preload: true, style: "normal"});
 
 export const metadata: Metadata = {
 	title: "MineBridge",
 	description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
 }
 
+TimeAgo.addDefaultLocale(ru)
+
+declare module '@tanstack/react-table' {
+	// @ts-ignore
+	interface ColumnMeta<TData, TValue> {
+		className?: string | ((data: TData) => string),
+		isDate?: boolean
+	}
+}
+
 export default function RootLayout(
 		{
-			children,
-		}: Readonly<PropsWithChildren>) {
+			children
+		}: PropsWithChildren) {
 	return (
 			<html lang="ru">
 			<body className={montserrat.className}>

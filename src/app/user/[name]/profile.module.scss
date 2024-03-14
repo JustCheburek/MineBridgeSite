@@ -1,0 +1,23 @@
+// Информация о пользователе
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 50px;
+}
+
+.box {
+	margin-block: 10px;
+	font-weight: 500;
+}
+
+// Белый список
+.whitelist {
+	margin-top: 100px;
+}
+
+@media (width < 728px) {
+	.user_container {
+		flex-direction: column;
+	}
+}

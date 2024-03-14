@@ -42,7 +42,7 @@ table {
 @media (width >= 900px) {
 	table thead {
 		position: sticky;
-		top: var(--header-size);
+		top: 0;
 	}
 }
 

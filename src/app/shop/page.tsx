@@ -116,8 +116,8 @@ export default function Shop() {
 
 					<Section name="stickers">
 						<Box className={styles.preview_sticker}>
-							<Link href="/features/stickers" className={styles.helper}>
-								<ImgBox hover={1.1}>
+							<Link href="/features/stickers">
+								<ImgBox hover className={styles.helper}>
 									<Img
 											src="/features/stickers/4.png" alt="Стикер"
 											width={225}
@@ -157,8 +157,8 @@ export default function Shop() {
 
 					<Section name="stickers">
 						<Box className={styles.preview_sticker}>
-							<Link href="/features/stickers" className={styles.helper}>
-								<ImgBox hover={1.1}>
+							<Link href="/features/stickers">
+								<ImgBox hover className={styles.helper}>
 									<Img
 											src="/features/stickers/13.png" alt="Стикер"
 											width={225}
