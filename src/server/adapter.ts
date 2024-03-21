@@ -4,8 +4,8 @@ import {connect} from "./db";
 
 connect()
 
-// @ts-ignore
 export const adapter = new MongodbAdapter(
+		// @ts-ignore
 		connection.collection("sessions"),
 		connection.collection("users")
 );
