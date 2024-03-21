@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
 					Authorization: `Bot ${process.env.DISCORD_TOKEN}`
 				}
 			}
-	)
+	).catch(console.error)
 
 	if (!dsUser.email || !dsUser.verified) {
 		return new Response("Нету почты", {status: 400})

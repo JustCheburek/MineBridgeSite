@@ -10,8 +10,8 @@
 			filter var(--long-transition);
 }
 
-.box:hover .img {
-	scale: var(--_hover);
+.hover:hover .img {
+	scale: 1.1;
 }
 
 .post {

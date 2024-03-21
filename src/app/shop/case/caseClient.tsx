@@ -18,6 +18,13 @@ import {Img, ImgBox} from "@components/img";
 import {MostikiSvg} from "@ui/svgs";
 import {Button, NavButton} from "@components/button";
 
+declare module 'csstype' {
+	interface Properties {
+		'--_roll-time'?: string
+		'--_roll-width'?: string
+	}
+}
+
 type rollSettings = {
 	timeRoll: number
 	rollWidth: number
@@ -154,8 +161,8 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 			<main
 					className={styles.case}
 					style={{
-						"--_roll-time": `${rollSettings.current.timeRoll}ms`,
-						"--_roll-width": `-${rollSettings.current.rollWidth}px`
+						'--_roll-time': `${rollSettings.current.timeRoll}ms`,
+						'--_roll-width': `-${rollSettings.current.rollWidth}px`
 					}}
 			>
 				<MaxSize width={1440} className={styles.max_size}>
@@ -175,21 +182,20 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 							>
 								{/* Предметы которые можно выбить */}
 								{items?.map((info, index) => (
-												<ImgBox
-														className={`${styles.item} ${styles[`${info?.rarity?.name}_box`]} ${index === 48 ? styles.result : ""}`}
-														key={index}
-														onMouseEnter={() => selectedItem !== 48 && setSelectedItem(index)}
-														hover
-												>
-													{info.img
-															? <Img src={info.img} alt={info?.drop?.displayname || "Картинка"} className={styles.img}/>
-															: <h4>
-																{info?.drop?.displayname}
-															</h4>
-													}
-												</ImgBox>
-										)
-								)}
+										<ImgBox
+												className={`${styles.item} ${styles[`${info?.rarity?.name}_box`]} ${index === 48 ? styles.result : ""}`}
+												key={index}
+												onMouseEnter={() => selectedItem !== 48 && setSelectedItem(index)}
+												hover
+										>
+											{info.img
+													? <Img src={info.img} alt={info?.drop?.displayname || "Картинка"} className={styles.img}/>
+													: <h4>
+														{info?.drop?.displayname}
+													</h4>
+											}
+										</ImgBox>
+								))}
 							</div>
 						</div>
 
@@ -374,13 +380,13 @@ function RollButton(
 	}
 
 	// Недостаточно баланса
-	if (price > user.mostiki) {
+	/*if (price > user.mostiki) {
 		return (
 				<Button disabled>
 					Баланс
 				</Button>
 		)
-	}
+	}*/
 
 	// Всё успешно
 	return (

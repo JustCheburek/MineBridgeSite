@@ -17,10 +17,10 @@ type ImgBox = {
 
 export const ImgBox = (
 		{
-			className, type, children, background, width, height, hover=false, style, ...props
+			className = "", type, children, background, width, height, hover = false, style, ...props
 		}: ComponentPropsWithoutRef<"figure"> & ImgBox,
 ) => {
-	let backgroundStyle, hoverStyle
+	let backgroundStyle
 
 	if (background) {
 		backgroundStyle = {backgroundImage: `url(${background})`}
@@ -30,14 +30,10 @@ export const ImgBox = (
 		hover = true
 	}
 
-	if (hover) {
-		hoverStyle = {"--_hover": 1.1}
-	}
-
 	return (
 			<figure
-					className={`${styles.box} ${!!type ? styles[type] : ""} ${className}`}
-					style={{...hoverStyle, ...backgroundStyle, width, height, ...style}}
+					className={`${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${className}`}
+					style={{...backgroundStyle, width, height, ...style}}
 					{...props}
 			>
 				{children}
@@ -48,7 +44,7 @@ export const ImgBox = (
 export const Img = (
 		{
 			src, alt,
-			className,
+			className = "",
 			pixel = false,
 			...props
 		}: { pixel?: boolean } & ImageProps
@@ -62,7 +58,7 @@ export const Img = (
 
 	return (
 			<Image
-					className={`${styles.img} ${className} ${pixel ? styles.pixel : ""}`}
+					className={`${styles.img} ${pixel ? styles.pixel : ""} ${className}`}
 					src={src} alt={alt}
 					loading="lazy" {...props}
 			/>

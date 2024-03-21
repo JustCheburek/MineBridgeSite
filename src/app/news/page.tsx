@@ -41,8 +41,7 @@ export default function News() {
 								endData={new Date(2024, 6 - 1, 1)}
 						/>
 
-						{/* date={new Date(2024, 0, 21)} */}
-						<PBox>
+						<PBox createdAt={new Date(2024, 0, 21)}>
 							<ImgBox type="post">
 								<Img src="/news/elytra.png" alt="Крафт элитр"/>
 							</ImgBox>
@@ -74,8 +73,7 @@ export default function News() {
 							</PText>
 						</PBox>
 
-						{/* date={new Date(2024, 0, 12)} */}
-						<PBox>
+						<PBox createdAt={new Date(2024, 0, 12)}>
 							<ImgBox type="post">
 								<Img src="/shop/sell_mobile.svg" alt="Распродажа"/>
 							</ImgBox>
@@ -109,7 +107,7 @@ export default function News() {
 							</PText>
 						</PBox>
 
-						<PBox date={new Date(2024, 0, 9)}>
+						<PBox createdAt={new Date(2024, 0, 9)}>
 							<PTitle>
 								<h2>Мониторинг сервера</h2>
 							</PTitle>

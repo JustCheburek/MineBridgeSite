@@ -11,6 +11,12 @@ import {MaxSize} from "@components/maxSize";
 import {Img} from "@components/img";
 import {GBox, GContainer} from "@components/grid";
 
+declare module 'csstype' {
+	interface Properties {
+		'--_rotate'?: string
+	}
+}
+
 export const metadata: Metadata = {
 	title: "Тотемы | Майнбридж",
 	description: "Оставьте свой след в истории!",

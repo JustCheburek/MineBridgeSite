@@ -8,6 +8,13 @@ import styles from "./styles/grid.module.scss";
 // Компоненты
 import {AnotherSiteSvg} from "@ui/svgs";
 
+declare module 'csstype' {
+	interface Properties {
+		'--_width'?: string
+		'--_height'?: string
+	}
+}
+
 type GContainer = {
 	className?: string
 	width?: number
@@ -33,8 +40,8 @@ export const GContainer = (
 		<div
 				className={`${styles.container} ${border ? styles.box_border : ""} ${className}`}
 				style={{
-					"--_width": `${width}px`,
-					"--_height": `${height}px`,
+					'--_width': `${width}px`,
+					'--_height': `${height}px`,
 					rowGap: `${row}rem`,
 					columnGap: `${column}rem`,
 					marginBlock: `${margin}rem`

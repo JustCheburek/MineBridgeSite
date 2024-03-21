@@ -6,21 +6,20 @@ import styles from "./styles/post.module.scss";
 
 type PContainer = {
 	className?: string
-	width?: number,
-	date?: Date
+	createdAt?: Date
+	updatedAt?: Date
 }
 
 export const PBox = (
 		{
 			children,
 			className = "",
-			width = 750,
-			date
+			createdAt,
+			updatedAt
 		}: PropsWithChildren<PContainer>
 ) => (
 		<div
 				className={`${styles.container} ${className}`}
-				style={{"--_width": `${width}px`}}
 		>
 			{children}
 		</div>
