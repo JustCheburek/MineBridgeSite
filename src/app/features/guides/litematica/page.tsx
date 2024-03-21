@@ -14,7 +14,7 @@ export default function Litematica() {
 	return (
 			<main className="litematica">
 				<MaxSize>
-					<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "guides", displayname: "Гайды"}, "Litematica"]}/>
+					<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "guides", displayname: "Гайды"}, {name: "Litematica", displayname: "Litematica"}]}/>
 					<h1>Litematica</h1>
 				</MaxSize>
 			</main>
