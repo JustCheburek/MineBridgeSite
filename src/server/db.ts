@@ -7,10 +7,12 @@ const MONGO_URL = process.env.MONGO_URL!
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
+// @ts-ignore
 let cached = global.mongoose
 
 if (!cached) {
-	cached = global.mongoose = { conn: null, promise: null }
+	// @ts-ignore
+	cached = global.mongoose = {conn: null, promise: null}
 }
 
 export async function connect() {
