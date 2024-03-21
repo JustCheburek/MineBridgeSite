@@ -7,4 +7,13 @@ export class Role {
 
 	@prop({required: true, unique: true, trim: true})
 	public displayname!: string
+
+	@prop({required: true})
+	public color!: string
+
+	@prop({required: true})
+	public createdAt!: Date
+
+	@prop({required: true})
+	public updatedAt!: Date
 }

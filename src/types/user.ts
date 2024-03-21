@@ -49,6 +49,12 @@ export class User {
 
 	@prop({type: () => [StickerPurchase], required: true})
 	public stickersPurchases!: StickerPurchase[]
+
+	@prop({required: true})
+	public createdAt!: Date
+
+	@prop({required: true})
+	public updatedAt!: Date
 }
 
 export interface DSUser {

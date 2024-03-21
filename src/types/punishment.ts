@@ -10,4 +10,10 @@ export class Punishment {
 
 	@prop({required: true, trim: true})
 	public author!: string
+
+	@prop({required: true})
+	public createdAt!: Date
+
+	@prop({required: true})
+	public updatedAt!: Date
 }

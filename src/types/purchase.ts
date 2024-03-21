@@ -13,6 +13,12 @@ export class CasePurchase {
 
 	@prop({required: true, ref: () => Drop})
 	public drop!: Ref<Drop>
+
+	@prop({required: true})
+	public createdAt!: Date
+
+	@prop({required: true})
+	public updatedAt!: Date
 }
 
 @modelOptions({schemaOptions: {collection: "stickersPurchases", timestamps: true}})
@@ -25,4 +31,10 @@ export class StickerPurchase {
 
 	@prop({required: true, trim: true})
 	public text!: string
+
+	@prop({required: true})
+	public createdAt!: Date
+
+	@prop({required: true})
+	public updatedAt!: Date
 }
