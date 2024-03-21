@@ -1,36 +1,16 @@
-// Компоненты
-import {Table} from "@components/table";
-import TimeAgo from "javascript-time-ago";
-import {createColumnHelper} from "@tanstack/react-table";
+// Сервер
 import {User} from "lucia";
 
-const timeAgo = new TimeAgo('ru-RU')
-const columnHelper = createColumnHelper();
+// Колонны
+import {columns} from "@columns/casesPurchases";
 
-const columns = [
-	columnHelper.accessor(purchase => purchase.caseRarity.displayname, {
-		header: "Редкость"
-	}),
-	columnHelper.accessor(purchase => purchase.caseType.displayname, {
-		header: "Тип",
-	}),
-	columnHelper.accessor("price", {
-		header: "Цена",
-		meta: {
-			className: "green_color semibold-font"
-		}
-	}),
-	columnHelper.accessor(purchase => purchase.resultDrop.displayname, {
-		header: "Дроп"
-	}),
-	columnHelper.accessor(data => timeAgo.format(new Date(data.date), "mini"), {
-		header: "Время"
-	})
-]
+// Компоненты
+import {Table} from "@components/table";
+
 
 export function CasesPurchasesSection({user}: { user: User }) {
 	return (
-			<Table columns={columns} data={user.casesPurchases} className="center_text">
+			<Table columns={columns} data={user.casesPurchases}>
 				<h2>
 					Покупки кейсов
 				</h2>

@@ -18,6 +18,12 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 export default async function History({params: {name}}: { params: { name: string } }) {
 	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
 
+	if (!user) {
+		return new Response("Пользователь не найден", {
+			status: 404,
+		})
+	}
+
 	return (
 			<div className={styles.integration_content}>
 				<h1>История</h1>

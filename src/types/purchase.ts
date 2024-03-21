@@ -1,30 +1,28 @@
 import {modelOptions, prop} from "@typegoose/typegoose";
-import {Name} from "@src/types/props";
+import type {Ref} from "@typegoose/typegoose";
+import {Drop, Item, type RarityType} from "@src/types/case";
+import {Sticker} from "@src/types/sticker";
 
-@modelOptions({schemaOptions: {collection: "purchases", timestamps: true}})
-class Purchase {
-	@prop({required: true})
-	public price!: number
+@modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})
+export class CasePurchase {
+	@prop({required: true, ref: () => Item})
+	public item!: Ref<Item>
+
+	@prop({required: true, type: () => String})
+	public rarity!: RarityType
+
+	@prop({required: true, ref: () => Drop})
+	public drop!: Ref<Drop>
 }
 
-export class CasePurchase extends Purchase {
-	@prop({ref: () => Name})
-	public caseType!: Name
+@modelOptions({schemaOptions: {collection: "stickersPurchases", timestamps: true}})
+export class StickerPurchase {
+	@prop({ref: () => Sticker})
+	public sticker!: Ref<Sticker>
 
-	@prop({ref: () => Name})
-	public caseRarity!: Name
+	@prop({required: true, trim: true, unique: true})
+	public name!: string
 
-	@prop({ref: () => Name})
-	public resultDrop!: Name
-
-	@prop({ref: () => Name})
-	public resultType!: Name
-
-	@prop({ref: () => Name})
-	public resultRarity!: Name
-}
-
-export class StickerPurchase extends Purchase {
-	@prop({ref: () => Name})
-	public stickerType!: Name
+	@prop({required: true, trim: true})
+	public text!: string
 }

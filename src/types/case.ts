@@ -1,12 +1,5 @@
 import {modelOptions, prop} from "@typegoose/typegoose";
-
-class Name<N = string, D = string> {
-	@prop({required: true, unique: true, trim: true, type: () => String})
-	public name!: N
-
-	@prop({required: true, unique: true, trim: true, type: () => String})
-	public displayname!: D
-}
+import {Name} from "@src/types/name";
 
 export const CaseNames = {
 	common: "Обычный",

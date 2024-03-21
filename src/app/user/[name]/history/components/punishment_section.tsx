@@ -1,40 +1,12 @@
 // React
 import {User} from "lucia";
-import TimeAgo from "javascript-time-ago";
 
-// Utils
-import {ColorText} from "@app/utils";
+// Колонна
+import {columns} from "@columns/punishments";
 
 // Компоненты
 import {Table} from "@components/table";
-import {createColumnHelper} from "@tanstack/react-table";
 
-const timeAgo = new TimeAgo('ru-RU')
-const columnHelper = createColumnHelper();
-
-const columns = [
-	columnHelper.accessor("reason", {
-		header: "Причина"
-	}),
-	columnHelper.accessor("rating", {
-		header: "Рейтинг",
-		meta: {
-			className: ({rating}) => `center_text semibold-font ${ColorText(rating)}`
-		}
-	}),
-	columnHelper.accessor("author", {
-		header: "Автор",
-    meta: {
-      className: "center_text"
-    }
-	}),
-	columnHelper.accessor(data => timeAgo.format(new Date(data.date), "mini"), {
-		header: "Время",
-		meta: {
-			className: "center_text"
-		}
-	})
-]
 
 export function PunishmentSection({user}: { user: User }) {
 	return (
