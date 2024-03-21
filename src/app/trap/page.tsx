@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Ты попал в ловушку, поздравляю!",
 };
 
-export function Component() {
+export default function Trap() {
     return (
         <main>
             <MaxSize width={900}>
