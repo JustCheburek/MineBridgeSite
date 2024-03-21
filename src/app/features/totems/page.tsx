@@ -48,7 +48,7 @@ export default function Totems() {
 					<h1>Тотемы</h1>
 					<h3 className="center_text">Версия: 2.4</h3>
 
-					<Url href="/download/MineBridge_Totems.zip" download>
+					<Url href="https://modrinth.com/resourcepack/minebridge-totems/versions">
 						Скачать
 					</Url>
 

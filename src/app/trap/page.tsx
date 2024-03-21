@@ -1,20 +1,18 @@
 // React
-import {Helmet} from "react-helmet";
+import type {Metadata} from "next";
+
+// Компоненты
 import {MaxSize} from "@components/maxSize";
+
+export const metadata: Metadata = {
+    title: "Ловушка | Майнбридж",
+    description: "Ты попал в ловушку, поздравляю!",
+};
 
 export function Component() {
     return (
         <main>
             <MaxSize width={900}>
-                <Helmet>
-                    <title>Ловушка | Майнбридж</title>
-                    <meta
-                        charSet="UTF-8"
-                        content="Ты попал в ловушку, поздравляю!"
-                        name="description"
-                    />
-                </Helmet>
-
                 <h1>Горячая картошка</h1>
                 <p>
                     Если ты это читаешь, значит скорей всего тебе дали эту {" "}

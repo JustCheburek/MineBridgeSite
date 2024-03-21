@@ -6,12 +6,12 @@ import Link from "next/link";
 import styles from "../profile.module.scss"
 
 // Utils
-import {colorText} from "@app/utils";
+import {ColorText} from "@app/utils";
 
 export const Rating = ({user}: { user: User }) => (
 		<h4 className={styles.box}>
 			Соц рейтинг: {" "}
-			<strong className={colorText(user.rating)}>
+			<strong className={ColorText(user.rating)}>
 				{user.rating}
 			</strong> {" "}
 			<Link href="/rules" className="add">+</Link>

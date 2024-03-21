@@ -3,7 +3,7 @@ import {User} from "lucia";
 import TimeAgo from "javascript-time-ago";
 
 // Utils
-import {colorText} from "@app/utils";
+import {ColorText} from "@app/utils";
 
 // Компоненты
 import {Table} from "@components/table";
@@ -19,7 +19,7 @@ const columns = [
 	columnHelper.accessor("rating", {
 		header: "Рейтинг",
 		meta: {
-			className: ({rating}) => `center_text semibold-font ${colorText(rating)}`
+			className: ({rating}) => `center_text semibold-font ${ColorText(rating)}`
 		}
 	}),
 	columnHelper.accessor("author", {
@@ -87,7 +87,7 @@ function Punishment({punishment}) {
 				<p>
 					{punishment.reason}
 				</p>
-				<p className={colorText(punishment.rating)}>
+				<p className={ColorText(punishment.rating)}>
 					<strong>
 						{punishment.rating}
 					</strong>

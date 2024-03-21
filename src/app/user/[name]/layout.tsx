@@ -6,7 +6,7 @@ import {ProfilePage} from "schema-dts";
 import {api} from "@server/axios";
 
 export default async function UserLayout({children, params: {name}}: PropsWithChildren<{ params: { name: string } }>) {
-	const {data: user}: { data: User | null } = await api(`/user?name=${name}`)
+	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
 
 	if (!user) {
 		return new Response("Пользователь не найден", {

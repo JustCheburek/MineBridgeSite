@@ -5,7 +5,7 @@ import {cookies} from "next/headers";
 export async function GET() {
 	const state = generateState();
 	const url = await discord.createAuthorizationURL(state, {
-		scopes: ["identify", "email"],
+		scopes: ["identify", "email", "guilds", "guilds.join", "guilds.members.read"],
 	});
 
 	cookies().set("discord_oauth_state", state, {

@@ -67,7 +67,7 @@ const MainNav = ({burger, setBurger}: Burger) => (
 		</nav>
 )
 
-function User({user}: { user: User | null }) {
+function User({user, Logout}: { user: User | null, Logout: Function }) {
 	const [isMenu, setIsMenu] = useState(false)
 
 	useEffect(() => {
@@ -133,9 +133,9 @@ function User({user}: { user: User | null }) {
 							</NavLink>
 						</li>
 						<li>
-							<a href="/api/user/logout" className="mini_button red_color" rel="noopener noreferrer">
+							<button className="mini_button medium-font red_color logout" onClick={() => Logout()}>
 								Выход
-							</a>
+							</button>
 						</li>
 					</ul>
 				</nav>
@@ -143,7 +143,7 @@ function User({user}: { user: User | null }) {
 	)
 }
 
-export function HeaderClient({user}: {user: User | null}) {
+export function HeaderClient({user, Logout}: {user: User | null, Logout: Function}) {
 	const [burger, setBurger] = useState<boolean>(false)
 
 	return (
@@ -160,7 +160,7 @@ export function HeaderClient({user}: {user: User | null}) {
 					{/* Навигация */}
 					<MainNav burger={burger} setBurger={setBurger}/>
 
-					<User user={user}/>
+					<User user={user} Logout={Logout}/>
 				</div>
 			</header>
 	)

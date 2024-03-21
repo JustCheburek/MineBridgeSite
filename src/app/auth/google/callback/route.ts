@@ -6,6 +6,7 @@ import {OAuth2RequestError} from "arctic";
 import {userModel} from "@server/models";
 import {NextRequest} from "next/server";
 import {validate} from "@server/validate";
+import axios from "axios";
 
 export async function GET(request: NextRequest) {
 	const url = new URL(request.url);
@@ -26,11 +27,11 @@ export async function GET(request: NextRequest) {
 
 	try {
 		const tokens = await google.validateAuthorizationCode(code!, codeVerifier!);
-		const gUser: GUser = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
+		const gUser = await axios.get<GUser>("https://openidconnect.googleapis.com/v1/userinfo", {
 			headers: {
 				Authorization: `Bearer ${tokens.accessToken}`
 			}
-		}).then(res => res.json());
+		}).then(r => r.data);
 
 		if (!gUser.email || !gUser.email_verified) {
 			return new Response("Нету почты", {status: 400})

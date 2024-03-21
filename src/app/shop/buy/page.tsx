@@ -1,11 +1,11 @@
 // Сервер
+import type {Metadata} from "next";
+import {redirect} from "next/navigation";
 import {validate} from "@server/validate";
 
 // Компоненты
 import {MostikiSvg, SBPSvg} from "@ui/svgs";
 import {MaxSize} from "@components/maxSize";
-import {redirect} from "next/navigation";
-import type {Metadata} from "next";
 
 export const metadata: Metadata = {
 	title: "Покупка | MineBridge",

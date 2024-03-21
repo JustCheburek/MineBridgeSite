@@ -2,7 +2,7 @@
 import type {User} from "lucia"
 import Link from "next/link";
 
-import {colorText} from "@app/utils";
+import {ColorText} from "@app/utils";
 
 import {ColumnDef} from "@tanstack/react-table";
 import {Img} from "@components/img";
@@ -48,14 +48,14 @@ export const columns: ColumnDef<User>[] = [
 		accessorKey: "rating",
 		header: "Рейтинг",
 		meta: {
-			className: ({rating}) => `center_text semibold-font ${colorText(rating)}`
+			className: ({rating}) => `center_text semibold-font ${ColorText(rating)}`
 		}
 	},
 	{
 		accessorKey: "mostiki",
 		header: "Мостики",
 		meta: {
-			className: ({mostiki}) => `center_text semibold-font ${colorText(mostiki)}`
+			className: ({mostiki}) => `center_text semibold-font ${ColorText(mostiki)}`
 		}
 	},
 	{

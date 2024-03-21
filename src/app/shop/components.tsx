@@ -5,9 +5,8 @@ import type {PropsWithChildren} from "react";
 import {useState} from "react";
 import Link from "next/link";
 
-// База данных кейсов
-import type {CaseTypeProps} from "@src/types/case";
-import {RarityTranslate, TypeTranslate} from "./case/db"
+// Типы
+import {Case, DropNames, RarityNames} from "@src/types/case";
 
 // Стили
 import styles from "./shop.module.scss"
@@ -17,6 +16,7 @@ import {NavButton} from "@components/button";
 import {Modal} from "@components/modal";
 import {MostikiSvg} from "@ui/svgs";
 import {Img, ImgBox} from "@components/img";
+import {SumChances} from "@app/utils";
 
 export const Section = ({children, name}: PropsWithChildren<{ name: string }>) => (
 		<div className={`${styles.container} center_text ${name}`}>
@@ -116,13 +116,9 @@ export const StickerButton = () => (
 		</NavButton>
 )
 
-type Case = {
-	caseType: CaseTypeProps
-	chancesDrop: number
-	chancesRarity: number
-}
-
-export function Case({caseType, chancesDrop, chancesRarity}: Case) {
+export function CaseBox({caseType}: { caseType: Case }) {
+	const chancesRarity = SumChances(caseType.rarity)
+	const chancesDrop = SumChances(caseType.drop)
 	const [modal, setModal] = useState(false)
 
 	return (
@@ -141,7 +137,7 @@ export function Case({caseType, chancesDrop, chancesRarity}: Case) {
 								Редкости
 							</h2>
 							{caseType.rarity.map(rarity => {
-								const translate = RarityTranslate[rarity.name]
+								const translate = RarityNames[rarity.name]
 
 								return (
 										<p key={rarity.name}>
@@ -155,7 +151,7 @@ export function Case({caseType, chancesDrop, chancesRarity}: Case) {
 								Дроп
 							</h2>
 							{caseType.drop.map(drop => {
-								const translate = TypeTranslate[drop.name]
+								const translate = DropNames[drop.name]
 
 								return (
 										<p key={drop.name}>

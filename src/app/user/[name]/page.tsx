@@ -21,7 +21,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
-	const {data: user}: { data: User | null } = await api(`/user?name=${name}`)
+	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
 	const {user: author} = await validate()
 
 	if (!user) {

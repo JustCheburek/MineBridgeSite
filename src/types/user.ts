@@ -71,6 +71,21 @@ export interface DSUser {
 	avatar_decoration?: string
 }
 
+export interface GuildDSUser {
+	user: DSUser
+	nick?: string
+	avatar?: string
+	roles: string[]
+	joined_at: Date
+	premium_since?: Date
+	deaf: boolean
+	mute: boolean
+	flags: number
+	pending?: boolean
+	permissions?: string
+	communication_disabled_until?: Date
+}
+
 export interface GUser {
 	sub: string
 	email?: string

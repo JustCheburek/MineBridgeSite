@@ -3,14 +3,14 @@ import type {Metadata} from "next";
 import Link from "next/link";
 
 // Компоненты
-import {Author, Box, Case, CaseButton, CaseInfo, Heading, Price, Section, StickerButton, Text} from "./components";
+import {Author, Box, CaseBox, CaseButton, CaseInfo, Heading, Price, Section, StickerButton, Text} from "./components";
 
 // Стили
 import styles from "./shop.module.scss"
 
 // Скрипты
-import {RarityCase} from "./case/db";
-import {getSumChances} from "@app/utils";
+import {api} from "@server/axios";
+import {Case} from "@src/types/case";
 
 // Компоненты
 import {MostikiSvg} from "@ui/svgs";
@@ -24,7 +24,9 @@ export const metadata: Metadata = {
 };
 
 
-export default function Shop() {
+export default async function Shop() {
+	const cases = await api<Case[]>(`/cases`).then(r => r.data);
+
 	return (
 			<main className={styles.shop}>
 				<MaxSize width={1050}>
@@ -80,25 +82,20 @@ export default function Shop() {
 					</Heading>
 
 					<Section name="cases">
-						{RarityCase.map(caseType => {
-							const chancesRarity = getSumChances(caseType.rarity)
-							const chancesDrop = getSumChances(caseType.drop)
-
-							return (
-									<Box key={caseType.name}>
-										<Case caseType={caseType} chancesRarity={chancesRarity} chancesDrop={chancesDrop}/>
-										<Text>
-											<CaseInfo>
-												{caseType.displayname}
-											</CaseInfo>
-											<Price>
-												{caseType.price}
-											</Price>
-											<CaseButton/>
-										</Text>
-									</Box>
-							)
-						})}
+						{cases.map(caseType => (
+								<Box key={caseType.name}>
+									<CaseBox caseType={caseType}/>
+									<Text>
+										<CaseInfo>
+											{caseType.displayname}
+										</CaseInfo>
+										<Price>
+											{caseType.price}
+										</Price>
+										<CaseButton/>
+									</Text>
+								</Box>
+						))}
 					</Section>
 
 					<Heading heading="Стикеры" name="stickers" href="/features/stickers">

@@ -181,7 +181,6 @@ export const Case: DropTypeProps[] = [{
 }, /*{
             name: "projectileeffects",
             displayname: "эффект стрельбы",
-            rarity: "random",
 
             // Редкости
             common: null,

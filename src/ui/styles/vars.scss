@@ -50,6 +50,14 @@
   --yt-color: #FF0000;
   --twitch-color: #9146FF;
 
+  // Цвета редкостей
+  --common-color: 178, 178, 178; // Обычный
+  --uncommon-color: 73, 206, 73; // Необычный
+  --rare-color: 95, 145, 255; // Редкий
+  --epic-color: 189, 64, 255; // Эпический
+  --mythic-color: 249, 48, 48; // Мифический
+  --legendary-color: 255, 215, 0; // Легендарный
+
   // border-radius
   --border-radius: 35px;
   --button-border-radius: 45px;

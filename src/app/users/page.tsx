@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Component() {
-	const {data: users}: { data: User[] } = await api("/users")
+	const users = await api<User[]>("/users").then(r => r.data)
 
 	return (
 			<main className="users">

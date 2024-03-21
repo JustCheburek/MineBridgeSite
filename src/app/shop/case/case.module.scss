@@ -1,361 +1,325 @@
 @import "@styles/mixins";
 
-:root {
-  // Цвета
-  --common-color: 178, 178, 178; // Обычный
-  --uncommon-color: 73, 206, 73; // Необычный
-  --rare-color: 95, 145, 255; // Редкий
-  --epic-color: 189, 64, 255; // Эпический
-  --mythic-color: 249, 48, 48; // Мифический
-  --legendary-color: 255, 215, 0; // Легендарный
+.case {
+	--_block-gap: 15px;
+	--_inline-gap: 10%;
 }
 
-main.case {
-  --_block-gap: 15px;
-  --_inline-gap: 10%;
-
-  .max_size {
-    // Расположение
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    --max-width: 1450px;
-
-    // Размеры
-    height: 80%;
-  }
-
-  .main_container {
-    display: grid;
-    grid-template-columns: 1fr 700px 1fr;
-    gap: calc(var(--_block-gap) * 2);
-
-    width: 100%;
-  }
-
-  .box {
-    // Расположение
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-
-    padding: var(--_block-gap) var(--_inline-gap);
-
-    // Размеры
-    width: 100%;
-
-    // Отображение
-    @include border();
-
-    .heading {
-      padding-bottom: var(--_block-gap);
-    }
-  }
-
-  // Визуальный контейнер
-  .visual_container {
-    // Расположение
-    position: relative;
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-
-    // Размеры
-    min-height: 100%;
-    height: 350px;
-
-    overflow: hidden;
-
-    padding-inline: 45px;
-
-    mask: linear-gradient(to right,
-            var(--black-color-transparent) 0%,
-            var(--black-color) 30%,
-            var(--black-color) 70%,
-            var(--black-color-transparent) 100%
-    );
-
-    &.win:before {
-      opacity: 0;
-    }
-  }
-
-  // Линия
-  .visual_container:before {
-    content: " ";
-
-    // Расположение
-    position: absolute;
-    left: 50%;
-    z-index: var(--2z);
-
-    // Размеры
-    width: 2px;
-    height: 100%;
-
-    // Отображение
-    translate: -50% 0;
-    background: var(--unic-color);
-    opacity: 0.5;
-
-    // Анимация
-    transition: opacity 200ms;
-  }
-
-  // Информация о редкостях
-  .left_container {
-    // Расположение
-    padding: 10px 20px;
-  }
-
-  .info_case {
-    .text {
-      padding-block: 5px;
-      animation: change 800ms;
-    }
-
-    .heading {
-      min-height: 70px;
-    }
-
-    .description {
-      min-height: 70px;
-    }
-  }
-
-  @keyframes change {
-    0% {
-      opacity: 0.5;
-      translate: 20px;
-    }
-    100% {
-      opacity: 1;
-      translate: 0;
-    }
-  }
-
-  // Выбор кейса
-  .container {
-    // Расположение
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    gap: var(--_block-gap);
-
-    // Размеры
-    height: 100%;
-  }
-
-  .select_item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-    transition: 500ms color;
-
-    &:hover {
-      color: var(--unic-color);
-    }
-
-    &:has(.select_input:disabled) {
-      color: var(--light-gray-color);
-      cursor: not-allowed;
-    }
-
-    &:has(.select_input:checked) {
-      color: var(--unic-color);
-    }
-  }
-
-  .select_input {
-    display: none;
-  }
-
-  .mostiki_text {
-    display: inline-flex;
-    gap: 5px;
-    align-items: center;
-  }
-
-  // Реальный контейнер
-  .natural_container {
-    // Расположение
-    position: absolute;
-
-    display: flex;
-    flex-direction: row;
-  }
-
-  // Кручение
-  .natural_container.roll {
-    animation: roll var(--roll-time) forwards;
-  }
-
-  // Предмет
-  .item {
-    // Расположение
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin: 0 20px;
-
-    // Размеры
-    width: 300px;
-    height: 200px;
-
-    // Отображение
-    font-weight: 700;
-    font-size: 24px;
-
-    border-radius: var(--border-radius);
-    background: rgb(18, 13, 25);
-    overflow: hidden;
-
-    transition: transform 1000ms;
-
-    img {
-      // Картинка
-      width: 70%;
-      height: 70%;
-      object-fit: cover;
-      transition: width 400ms, height 400ms;
-    }
-
-    &:hover img {
-      // Увеличение при наведении
-      width: 100%;
-      height: 100%;
-      transition: width 600ms, height 600ms;
-      transition-delay: var(--hover-delay);
-    }
-  }
-
-  // Анимация победы
-  .natural_container.win {
-    .result {
-      transform: scale(1.3);
-
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .item:not(.result) {
-      animation: disappear 1s forwards;
-    }
-  }
-
-  // Редкости
-  @mixin box($color, $radius, $opacity) {
-    box-shadow: 0 0 $radius rgba($color, $opacity);
-    border: solid 1px rgb($color);
-  }
-
-  @mixin text($color, $radius, $opacity) {
-    color: rgb($color);
-    text-shadow: 0 0 $radius rgba($color, $opacity);
-  }
-
-  div.common {
-    @include box(var(--common-color), 10px, 0.9);
-  }
-
-  .common {
-    @include text(var(--common-color), 15px, 0.9);
-  }
-
-  div.uncommon {
-    @include box(var(--uncommon-color), 20px, 0.6);
-  }
-
-  .uncommon {
-    @include text(var(--uncommon-color), 20px, 0.6);
-  }
-
-  div.rare {
-    @include box(var(--rare-color), 30px, 1);
-  }
-
-  .rare {
-    @include text(var(--rare-color), 30px, 1);
-  }
-
-  div.epic {
-    @include box(var(--epic-color), 30px, 0.9)
-  }
-
-  .epic {
-    @include text(var(--epic-color), 30px, 0.9);
-  }
-
-  div.mythic {
-    @include box(var(--mythic-color), 35px, 1)
-  }
-
-  .mythic {
-    @include text(var(--mythic-color), 35px, 1);
-  }
-
-  div.legendary {
-    @include box(var(--legendary-color), 40px, 1);
-  }
-
-  .legendary {
-    @include text(var(--legendary-color), 40px, 1);
-  }
-
-  // Аккаунт
-  .account {
-    justify-content: center;
-    min-height: 150px;
-    gap: calc(var(--_block-gap) / 2);
-  }
-
-  // Анимации
-  @keyframes roll {
-    0% {
-      left: 0;
-    }
-    100% {
-      left: var(--roll-width);
-    }
-  }
-
-  @keyframes disappear {
-    0% {
-      opacity: 1;
-      filter: blur(0);
-      transform: scale(1);
-    }
-    30% {
-      filter: blur(10px);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(0.5);
-    }
-  }
-
-  // Адаптивность
-  @media (width < 1024px) {
-    --_block-gap: 40px;
-    --_inline-gap: 20%;
-
-    .main_container {
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr;
-      margin: 70px 0;
-    }
-
-    .left_container {
-      flex-direction: column-reverse;
-    }
-  }
+.max_size {
+	// Расположение
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.main_container {
+	display: grid;
+	grid-template-columns: 1fr 700px 1fr;
+	gap: calc(var(--_block-gap) * 2);
+
+	width: 100%;
+}
+
+.box {
+	// Расположение
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+
+	padding: var(--_block-gap) var(--_inline-gap);
+
+	// Размеры
+	width: 100%;
+
+	// Отображение
+	@include border();
+
+	.heading {
+		padding-bottom: var(--_block-gap);
+	}
+}
+
+// Визуальный контейнер
+.visual_container {
+	// Расположение
+	position: relative;
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: row;
+
+	// Размеры
+	min-height: 100%;
+	height: 350px;
+
+	overflow: hidden;
+
+	padding-inline: 45px;
+
+	mask: linear-gradient(to right,
+			var(--black-color-transparent) 0%,
+			var(--black-color) 30%,
+			var(--black-color) 70%,
+			var(--black-color-transparent) 100%
+	);
+
+	&.win:before {
+		opacity: 0;
+	}
+}
+
+// Линия
+.visual_container:before {
+	content: " ";
+
+	// Расположение
+	position: absolute;
+	left: 50%;
+	z-index: var(--2z);
+
+	// Размеры
+	width: 2px;
+	height: 100%;
+
+	// Отображение
+	translate: -50% 0;
+	background: var(--unic-color);
+	opacity: 0.5;
+
+	// Анимация
+	transition: opacity var(--short-transition);
+}
+
+// Информация о редкостях
+.left_container {
+	// Расположение
+	padding: 10px 20px;
+}
+
+.text {
+	padding-block: 5px;
+	animation: change 800ms;
+}
+
+.heading {
+	min-height: 70px;
+}
+
+.description {
+	min-height: 70px;
+}
+
+@keyframes change {
+	0% {
+		opacity: 0.5;
+		translate: 20px;
+	}
+	100% {
+		opacity: 1;
+		translate: 0;
+	}
+}
+
+// Выбор кейса
+.container {
+	// Расположение
+	display: grid;
+	grid-template-rows: 1fr auto;
+	gap: var(--_block-gap);
+
+	// Размеры
+	height: 100%;
+}
+
+.select_item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 15px;
+	cursor: pointer;
+	transition: 500ms color;
+
+	&:hover {
+		color: var(--unic-color);
+	}
+
+	&:has(.select_input:disabled) {
+		color: var(--light-gray-color);
+		cursor: not-allowed;
+	}
+
+	&:has(.select_input:checked) {
+		color: var(--unic-color);
+	}
+}
+
+.select_input {
+	display: none;
+}
+
+.mostiki_text {
+	display: inline-flex;
+	gap: 5px;
+	align-items: center;
+}
+
+// Реальный контейнер
+.natural_container {
+	// Расположение
+	position: absolute;
+
+	display: flex;
+	flex-direction: row;
+}
+
+// Кручение
+.natural_container.roll {
+	animation: roll var(--_roll-time) forwards;
+}
+
+// Предмет
+.item {
+	// Расположение
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	margin: 0 20px;
+
+	// Размеры
+	width: 300px;
+	height: 200px;
+
+	border-radius: var(--border-radius);
+	background: rgb(18, 13, 25);
+
+	transition: 1000ms scale;
+
+	overflow: hidden;
+}
+
+.img {
+	object-fit: cover;
+}
+
+// Анимация победы
+.win .natural_container {
+	.result {
+		scale: 1.3;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.item:not(.result) {
+		animation: disappear 1s forwards;
+	}
+}
+
+// Редкости
+@mixin box($color, $radius, $opacity) {
+	box-shadow: 0 0 $radius rgba($color, $opacity);
+	border: solid 1px rgb($color);
+}
+
+@mixin text($color, $radius, $opacity) {
+	color: rgb($color);
+	text-shadow: 0 0 $radius rgba($color, $opacity);
+}
+
+.common_box {
+	@include box(var(--common-color), 10px, 0.9);
+}
+
+.common {
+	@include text(var(--common-color), 15px, 0.9);
+}
+
+.uncommon_box {
+	@include box(var(--uncommon-color), 20px, 0.6);
+}
+
+.uncommon {
+	@include text(var(--uncommon-color), 20px, 0.6);
+}
+
+.rare_box {
+	@include box(var(--rare-color), 30px, 1);
+}
+
+.rare {
+	@include text(var(--rare-color), 30px, 1);
+}
+
+.epic_box {
+	@include box(var(--epic-color), 30px, 0.9)
+}
+
+.epic {
+	@include text(var(--epic-color), 30px, 0.9);
+}
+
+.mythic_box {
+	@include box(var(--mythic-color), 35px, 1)
+}
+
+.mythic {
+	@include text(var(--mythic-color), 35px, 1);
+}
+
+.legendary_box {
+	@include box(var(--legendary-color), 40px, 1);
+}
+
+.legendary {
+	@include text(var(--legendary-color), 40px, 1);
+}
+
+// Аккаунт
+.account {
+	justify-content: center;
+	min-height: 150px;
+	gap: calc(var(--_block-gap) / 2);
+}
+
+// Анимации
+@keyframes roll {
+	0% {
+		left: 0;
+	}
+	100% {
+		left: var(--_roll-width);
+	}
+}
+
+@keyframes disappear {
+	30% {
+		filter: blur(10px);
+	}
+	100% {
+		opacity: 0;
+		scale: 0.5;
+	}
+}
+
+// Адаптивность
+@media (width < 1024px) {
+	.case {
+		--_block-gap: 40px;
+		--_inline-gap: 20%;
+	}
+
+	.main_container {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		margin: 70px 0;
+	}
+
+	.left_container {
+		flex-direction: column-reverse;
+	}
 }
