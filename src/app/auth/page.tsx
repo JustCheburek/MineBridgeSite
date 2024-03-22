@@ -39,7 +39,7 @@ export default async function Auth() {
 			sameSite: "lax"
 		})
 
-		return redirect(`/auth/${formData.get("provider")}`)
+		redirect(`/auth/${formData.get("provider")}`)
 	}
 
 	return (
