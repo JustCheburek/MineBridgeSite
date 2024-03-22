@@ -1,11 +1,12 @@
 import "./styles/form.scss"
+import type {ComponentPropsWithoutRef} from "react";
 
 export const FormButton = (
     {
         children,
         className = "",
         ...props
-    }) => (
+    }: ComponentPropsWithoutRef<"button">) => (
     <button
         className={`form_button center_text ${className}`}
         type="submit"
@@ -17,19 +18,20 @@ export const FormButton = (
     </button>
 )
 
-export const FormLabel = ({children, className = ""}) => (
+export const FormLabel = ({children, className = ""}: ComponentPropsWithoutRef<"label">) => (
     <label className={`form_label ${className}`}>
         {children}
     </label>
 )
 
-export const FormGroup = ({children, className = ""}) => (
+export const FormGroup = ({children, className = ""}: ComponentPropsWithoutRef<"div">) => (
     <div className={`form_group ${className}`}>
         {children}
     </div>
 )
 
-export const Edit = ({setModal}) => (
+/*
+export const Edit = ({setModal}: { setModal?: (value: boolean) => void }) => (
     <button className="edit" onClick={() => setModal && setModal(true)}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="edit" viewBox="0 0 16 16">
             <path
@@ -39,8 +41,8 @@ export const Edit = ({setModal}) => (
     </button>
 )
 
-export const Add = ({setModal}) => (
-    <button className="add" onClick={() => setModal(true)}>
+export const Add = ({setModal}: { setModal?: (value: boolean) => void }) => (
+    <button className="add" onClick={() => setModal && setModal(true)}>
         +
     </button>
-)
+)*/
