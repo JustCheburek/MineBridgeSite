@@ -3,7 +3,7 @@ import type {Metadata} from "next";
 import Link from "next/link";
 
 // Компоненты
-import {Author, Box, CaseBox, CaseButton, CaseInfo, Heading, Price, Section, StickerButton, Text} from "./components";
+import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, Text} from "./components";
 
 // Стили
 import styles from "./shop.module.scss"
@@ -72,7 +72,7 @@ export default async function Shop() {
 						</ul>
 					</div>
 
-					<Heading heading="Кейсы" href="/case" name="cases">
+					<Heading heading="Кейсы" href="/case" id="cases">
 						<p>
 							С помощью кейсов можно кастомизировать свой внешний вид
 						</p>
@@ -92,13 +92,15 @@ export default async function Shop() {
 										<Price>
 											{caseType.price}
 										</Price>
-										<CaseButton/>
+										<NavButton href={`/shop/case?rarity=${caseType.name}`} margin="10px">
+											Купить
+										</NavButton>
 									</Text>
 								</Box>
 						))}
 					</Section>
 
-					<Heading heading="Стикеры" name="stickers" href="/features/stickers">
+					<Heading heading="Стикеры" id="stickers" href="/features/stickers">
 						<p>
 							При покупке можно указать свой скин, пожелания, идеи,
 						</p>

@@ -12,26 +12,26 @@ import {Case, DropNames, RarityNames} from "@src/types/case";
 import styles from "./shop.module.scss"
 
 // Компоненты
-import {NavButton} from "@components/button";
+import {Url} from "@components/button";
 import {Modal} from "@components/modal";
 import {MostikiSvg} from "@ui/svgs";
 import {Img, ImgBox} from "@components/img";
 import {SumChances} from "@app/utils";
 
 export const Section = ({children, name}: PropsWithChildren<{ name: string }>) => (
-		<div className={`${styles.container} center_text ${name}`}>
+		<div className={`${styles.container} center_text ${styles[name]}`}>
 			{children}
 		</div>
 )
 
 type Heading = {
-	name: string;
+	id: string;
 	heading: string;
 	href?: string;
 }
 
-export const Heading = ({children, heading, href, name}: PropsWithChildren<Heading>) => (
-		<div className={`${styles.section_heading} center_text`} id={name}>
+export const Heading = ({children, heading, href, id}: PropsWithChildren<Heading>) => (
+		<div className={`${styles.section_heading} center_text`} id={id}>
 			<h2>
 				{href
 						? <Link href={href}>
@@ -104,16 +104,10 @@ export const CaseInfo = ({children, description}: PropsWithChildren<{ descriptio
 	}
 </>)
 
-export const CaseButton = () => (
-		<NavButton href="/shop/case" margin="10px">
-			Купить
-		</NavButton>
-)
-
 export const StickerButton = () => (
-		<NavButton href="" margin="10px">
+		<Url href="https://t.me/MineBridgeOfficial/326" margin="10px">
 			Купить
-		</NavButton>
+		</Url>
 )
 
 export function CaseBox({caseType}: { caseType: Case }) {

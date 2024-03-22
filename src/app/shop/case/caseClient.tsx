@@ -208,7 +208,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 										<label key={type.name} className={`${styles.select_item} no_select`}>
 											<input
 													type="radio" value={type.name} name="select_case" className={styles.select_input}
-													defaultChecked={rarity === type.name}
+													checked={rarity === type.name}
 													disabled={isRolling}
 													onClick={() => setSettingCase(type.name)}
 											/>
@@ -230,7 +230,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 										<label key={type.name} className={`${styles.select_item} no_select`}>
 											<input
 													type="radio" value={type.name} name="select_drop"
-													defaultChecked={drop === type.name}
+													checked={drop === type.name}
 													className={styles.select_input}
 													disabled={isRolling}
 													onChange={() => setSettingDrop(type.name)}
@@ -380,13 +380,13 @@ function RollButton(
 	}
 
 	// Недостаточно баланса
-	/*if (price > user.mostiki) {
+	if (price > user.mostiki) {
 		return (
 				<Button disabled>
 					Баланс
 				</Button>
 		)
-	}*/
+	}
 
 	// Всё успешно
 	return (
