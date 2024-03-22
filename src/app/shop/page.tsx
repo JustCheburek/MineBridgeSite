@@ -14,7 +14,7 @@ import {Case} from "@src/types/case";
 
 // Компоненты
 import {MostikiSvg} from "@ui/svgs";
-import {NavButton} from "@components/button";
+import {Url} from "@components/button";
 import {MaxSize} from "@components/maxSize";
 import {Img, ImgBox} from "@components/img";
 
@@ -39,9 +39,9 @@ export default async function Shop() {
 						<h3 className="center_text">
 							1 ₽ = 1 <MostikiSvg/>
 						</h3>
-						<NavButton href="/shop/buy">
+						<Url href="/shop/buy">
 							Купить
-						</NavButton>
+						</Url>
 						<p>
 							Покупка <Link href="#stickers" className="unic_color"><strong>стикеров</strong></Link> {" "}
 							происходит только:
@@ -92,9 +92,9 @@ export default async function Shop() {
 										<Price>
 											{caseType.price}
 										</Price>
-										<NavButton href={`/shop/case?rarity=${caseType.name}`} margin="10px">
+										<Url href={`/shop/case?rarity=${caseType.name}`} margin="10px">
 											Купить
-										</NavButton>
+										</Url>
 									</Text>
 								</Box>
 						))}

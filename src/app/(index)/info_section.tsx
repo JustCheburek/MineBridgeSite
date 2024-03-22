@@ -1,7 +1,7 @@
 "use client"
 
 import {TypeAnimation} from "react-type-animation";
-import {NavButton} from "@components/button";
+import {Url} from "@components/button";
 
 // Стили
 import styles from "./styles/info.module.scss"
@@ -25,9 +25,9 @@ export function InfoSection() {
 						/>
 					</h1>
 
-					<NavButton href="/auth">
+					<Url href="/auth">
 						Влететь на сервер
-					</NavButton>
+					</Url>
 
 					<p>
 						1.20+ · Minecraft: Java Edition · Лицензия не обязательна
@@ -47,9 +47,9 @@ export function InfoSection() {
 						без приватов и команд
 					</p>
 
-					<NavButton href="/auth">
+					<Url href="/auth">
 						Влететь на сервер
-					</NavButton>
+					</Url>
 
 					<p>1.20+</p>
 					<p>Minecraft: Java Edition</p>

@@ -16,7 +16,7 @@ import {MaxSize} from "@components/maxSize";
 import {Random, RandomValue, SumChances} from "@app/utils";
 import {Img, ImgBox} from "@components/img";
 import {MostikiSvg} from "@ui/svgs";
-import {Button, NavButton} from "@components/button";
+import {Button, Url} from "@components/button";
 
 declare module 'csstype' {
 	interface Properties {
@@ -364,9 +364,9 @@ function RollButton(
 	// Не вошёл
 	if (!user) {
 		return (
-				<NavButton href="/auth">
+				<Url href="/auth">
 					Войти
-				</NavButton>
+				</Url>
 		)
 	}
 

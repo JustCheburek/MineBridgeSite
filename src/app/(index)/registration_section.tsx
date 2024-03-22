@@ -1,4 +1,4 @@
-import {NavButton} from "@components/button";
+import {Url} from "@components/button";
 import styles from "./styles/registation.module.scss"
 
 export function RegistrationSection() {
@@ -15,9 +15,9 @@ export function RegistrationSection() {
                     </p>
                 </div>
 
-                <NavButton href="/auth">
+                <Url href="/auth">
                     Подать заявку
-                </NavButton>
+                </Url>
             </article>
         </section>
     )
