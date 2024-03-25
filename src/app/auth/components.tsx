@@ -29,11 +29,11 @@ export function AuthForm() {
 				</FormLabel>
 
 				<FormGroup className={styles.providers}>
-					<Link href="/auth/discord" aria-disabled={!access} className={styles.provider}>
+					<Link href={`/auth/discord?name=${name}`} aria-disabled={!access} className={styles.provider}>
 						<DiscordSvg className={`color ${styles.ds}`} width="1em" height="1em"/>
 					</Link>
 
-					<Link href="/auth/google" aria-disabled={!access} className={styles.provider}>
+					<Link href={`/auth/google?name=${name}`} aria-disabled={!access} className={styles.provider}>
 						<GoogleSvg className={styles.google} width="1em" height="1em"/>
 					</Link>
 				</FormGroup>

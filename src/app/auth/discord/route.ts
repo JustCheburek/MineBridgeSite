@@ -1,8 +1,11 @@
 import {generateState} from "arctic";
 import {discord} from "@server/lucia";
 import {cookies} from "next/headers";
+import {NextRequest} from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+	const name = new URL(request.url).searchParams.get("name");
+
 	const state = generateState();
 	const url = await discord.createAuthorizationURL(state, {
 		scopes: ["identify", "email", "guilds", "guilds.join", "guilds.members.read"],
@@ -15,6 +18,16 @@ export async function GET() {
 		maxAge: 60 * 60,
 		sameSite: "lax"
 	});
+
+	if (name) {
+		cookies().set("name", name, {
+			path: "/",
+			secure: process.env.NODE_ENV === "production",
+			httpOnly: true,
+			maxAge: 60 * 60,
+			sameSite: "lax"
+		})
+	}
 
 	return Response.redirect(url)
 }
