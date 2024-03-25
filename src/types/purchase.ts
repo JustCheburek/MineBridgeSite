@@ -26,9 +26,6 @@ export class StickerPurchase {
 	@prop({ref: () => Sticker})
 	public sticker!: Ref<Sticker>
 
-	@prop({required: true, trim: true, unique: true})
-	public name!: string
-
 	@prop({required: true, trim: true})
 	public text!: string
 
