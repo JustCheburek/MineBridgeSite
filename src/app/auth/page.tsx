@@ -1,7 +1,7 @@
 // React
 import {validate} from "@server/validate";
 import type {Metadata} from "next";
-import {permanentRedirect, redirect} from "next/navigation";
+import {permanentRedirect, redirect, RedirectType} from "next/navigation";
 
 // Стили
 import './styles/auth.scss';
@@ -39,7 +39,7 @@ export default async function Auth() {
 			sameSite: "lax"
 		})
 
-		permanentRedirect(`/auth/${formData.get("provider")}`);
+		permanentRedirect(`/auth/${formData.get("provider")}`, RedirectType.push);
 	}
 
 	return (
