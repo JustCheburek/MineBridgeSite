@@ -40,7 +40,8 @@ export async function GET(request: NextRequest) {
 		await axios.put(
 				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
 				{
-					access_token: tokens.accessToken
+					access_token: tokens.accessToken,
+					nick: dsUser.username
 				},
 				{
 					headers: {
