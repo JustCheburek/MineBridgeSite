@@ -1,6 +1,7 @@
 // Сервер
 import Link from "next/link";
 import {api} from "@server/axios"
+import {notFound} from "next/navigation";
 import type {User} from "lucia";
 
 // Компоненты
@@ -18,11 +19,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 export default async function History({params: {name}}: { params: { name: string } }) {
 	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
 
-	if (!user) {
-		return new Response("Пользователь не найден", {
-			status: 404,
-		})
-	}
+	if (!user) notFound()
 
 	return (
 			<div className={styles.integration_content}>

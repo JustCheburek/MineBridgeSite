@@ -1,6 +1,6 @@
 import {discord, lucia} from "@server/lucia";
 import {cookies} from "next/headers";
-import {generateId} from "lucia";
+import {generateId, User} from "lucia";
 import type {DSUser, GuildDSUser} from "@src/types/user";
 import {userModel} from "@server/models";
 import {NextRequest} from "next/server";
@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
 	}
 
 	/*try {*/
+	// Получение пользователя
 	const tokens = await discord.validateAuthorizationCode(code);
 	const dsUser = await axios.get<DSUser>("https://discord.com/api/users/@me", {
 		headers: {
@@ -30,7 +31,12 @@ export async function GET(request: NextRequest) {
 		}
 	}).then(r => r.data);
 
-	const res = await axios.put(
+	if (!dsUser.email || !dsUser.verified) {
+		return new Response("Нету почты", {status: 400})
+	}
+
+	// Добавление в гильдию
+	await axios.put(
 			`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
 			{
 				access_token: tokens.accessToken
@@ -40,27 +46,33 @@ export async function GET(request: NextRequest) {
 					Authorization: `Bot ${process.env.DISCORD_TOKEN}`
 				}
 			}
-	)
+	).catch(console.error)
 
-	if (res.status >= 300) {
-		return new Response("Что-то пошло не так", {status: 500})
-	}
-
+	// Получение пользователя и смена ника
 	const guildMember = await axios.patch<GuildDSUser | null>(
 			`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
 			{
-				nick: "Вейк абоба",
-				roles: [process.env.DISCORD_GAMER_ROLE_ID]
+				nick: dsUser.username
 			},
 			{
 				headers: {
 					Authorization: `Bot ${process.env.DISCORD_TOKEN}`
 				}
 			}
-	).catch(console.error)
+	).then(r => r.data).catch(console.error)
 
-	if (!dsUser.email || !dsUser.verified) {
-		return new Response("Нету почты", {status: 400})
+	// Добавление роли
+	if (!guildMember?.roles?.includes(process.env.DISCORD_GAMER_ROLE_ID!)) {
+		console.log(`Добавление роли ${dsUser.username}`)
+		await axios.put(
+				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}/roles/${process.env.DISCORD_GAMER_ROLE_ID}`,
+				{},
+				{
+					headers: {
+						Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+					}
+				}
+		).catch(console.error)
 	}
 
 	const {user} = await validate()
@@ -99,22 +111,30 @@ export async function GET(request: NextRequest) {
 		});
 	}
 
-	const userId = generateId(15);
-	const name = cookies().get("name")?.value || dsUser.username
-	await userModel.create({
-		_id: userId,
-		name: name,
+	const userData = {
+		_id: generateId(15),
+		name: cookies().get("name")?.value || dsUser.username,
 		discordId: dsUser.id,
 		email: dsUser.email,
 		photo: `https://cdn.discordapp.com/avatars/${dsUser.id}/${dsUser.avatar}.png`
-	})
-	const session = await lucia.createSession(userId, {});
+	} as User
+
+	if (guildMember?.joined_at) {
+		userData.updatedAt = userData.createdAt = guildMember.joined_at
+	}
+
+	if (guildMember?.roles) {
+		console.log(guildMember.roles)
+	}
+
+	await userModel.create(userData)
+	const session = await lucia.createSession(userData._id, {});
 	const sessionCookie = lucia.createSessionCookie(session.id);
 	cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 	return new Response(null, {
 		status: 302,
 		headers: {
-			Location: `/user/${name}`
+			Location: `/user/${userData.name}`
 		}
 	});
 	/*} catch (e) {

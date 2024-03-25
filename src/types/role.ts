@@ -11,9 +11,9 @@ export class Role {
 	@prop({required: true})
 	public color!: string
 
-	@prop({required: true})
+	@prop()
 	public createdAt!: Date
 
-	@prop({required: true})
+	@prop()
 	public updatedAt!: Date
 }

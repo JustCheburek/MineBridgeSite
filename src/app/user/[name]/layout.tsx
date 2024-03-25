@@ -4,15 +4,12 @@ import {MaxSize} from "@components/maxSize";
 import type {User} from "lucia";
 import {ProfilePage} from "schema-dts";
 import {api} from "@server/axios";
+import {notFound} from "next/navigation";
 
 export default async function UserLayout({children, params: {name}}: PropsWithChildren<{ params: { name: string } }>) {
 	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
 
-	if (!user) {
-		return new Response("Пользователь не найден", {
-			status: 404,
-		})
-	}
+	if (!user) notFound()
 
 	const person: ProfilePage = {
 		"@type": "ProfilePage",

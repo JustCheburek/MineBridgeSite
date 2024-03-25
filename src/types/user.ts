@@ -50,10 +50,10 @@ export class User {
 	@prop({type: () => [StickerPurchase], required: true})
 	public stickersPurchases!: StickerPurchase[]
 
-	@prop({required: true})
+	@prop()
 	public createdAt!: Date
 
-	@prop({required: true})
+	@prop()
 	public updatedAt!: Date
 }
 

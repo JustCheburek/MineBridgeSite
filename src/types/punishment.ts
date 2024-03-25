@@ -11,9 +11,9 @@ export class Punishment {
 	@prop({required: true, trim: true})
 	public author!: string
 
-	@prop({required: true})
+	@prop()
 	public createdAt!: Date
 
-	@prop({required: true})
+	@prop()
 	public updatedAt!: Date
 }

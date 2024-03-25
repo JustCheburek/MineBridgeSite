@@ -14,10 +14,10 @@ export class CasePurchase {
 	@prop({required: true, ref: () => Drop})
 	public drop!: Ref<Drop>
 
-	@prop({required: true})
+	@prop()
 	public createdAt!: Date
 
-	@prop({required: true})
+	@prop()
 	public updatedAt!: Date
 }
 
@@ -32,9 +32,9 @@ export class StickerPurchase {
 	@prop({required: true, trim: true})
 	public text!: string
 
-	@prop({required: true})
+	@prop()
 	public createdAt!: Date
 
-	@prop({required: true})
+	@prop()
 	public updatedAt!: Date
 }

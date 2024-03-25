@@ -19,7 +19,8 @@
 		"react": "latest",
 		"react-dom": "latest",
 		"react-type-animation": "latest",
-		"sass": "latest"
+		"sass": "latest",
+		"sharp": "^0.33.3"
 	},
 	"devDependencies": {
 		"@lucia-auth/adapter-mongodb": "latest",

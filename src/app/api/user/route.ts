@@ -1,6 +1,7 @@
 import {userModel} from "@server/models";
 import type {User} from "lucia";
 import {NextRequest} from "next/server";
+import {notFound} from "next/navigation";
 
 export async function GET(request: NextRequest) {
 	const url = new URL(request.url)
@@ -19,7 +20,7 @@ export async function GET(request: NextRequest) {
 	});
 
 	if (!user) {
-		return new Response("Пользователь не найден", {
+		return new Response("Пользователи не найдены", {
 			status: 404
 		})
 	}

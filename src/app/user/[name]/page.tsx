@@ -3,6 +3,7 @@ import type {User} from "lucia";
 import {validate} from "@server/validate";
 import {Rcon} from "@server/console";
 import {api} from "@server/axios";
+import {notFound} from "next/navigation";
 import {userModel} from "@server/models";
 
 // Стили
@@ -24,11 +25,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
 	const {user: author} = await validate()
 
-	if (!user) {
-		return new Response("Пользователь не найден", {
-			status: 404,
-		})
-	}
+	if (!user) notFound()
 
 	const isMe = user.name === author?.name
 

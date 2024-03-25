@@ -1,7 +1,7 @@
 // Сервер
 import type {User} from "lucia";
 import type {PropsWithChildren} from "react";
-import {redirect} from "next/navigation";
+import {notFound, redirect} from "next/navigation";
 import {validate} from "@server/validate"
 import {userModel} from "@server/models";
 import {api} from "@server/axios";
@@ -23,11 +23,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
 	const {user: author} = await validate()
 
-	if (!user) {
-		return new Response("Пользователь не найден", {
-			status: 404,
-		})
-	}
+	if (!user) notFound()
 
 	const isMe = user.name === author?.name
 
