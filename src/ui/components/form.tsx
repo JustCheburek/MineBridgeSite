@@ -1,33 +1,81 @@
-import "./styles/form.scss"
 import type {ComponentPropsWithoutRef} from "react";
+import styles from "./styles/form.module.scss"
+
+export const Form = (
+		{
+			children,
+			className = "",
+			...props
+		}: ComponentPropsWithoutRef<"form">
+) => (
+		<form
+				className={`${styles.form} ${className}`}
+				{...props}
+		>
+			{children}
+		</form>
+)
 
 export const FormButton = (
-    {
-        children,
-        className = "",
-        ...props
-    }: ComponentPropsWithoutRef<"button">) => (
-    <button
-        className={`form_button center_text ${className}`}
-        type="submit"
-        {...props}
-    >
-        <strong>
-            {children}
-        </strong>
-    </button>
+		{
+			children,
+			className = "",
+			...props
+		}: ComponentPropsWithoutRef<"button">
+) => (
+		<button
+				className={`${styles.button} center_text ${className}`}
+				type="submit"
+				{...props}
+		>
+			<strong>
+				{children}
+			</strong>
+		</button>
 )
 
-export const FormLabel = ({children, className = ""}: ComponentPropsWithoutRef<"label">) => (
-    <label className={`form_label ${className}`}>
-        {children}
-    </label>
+export const FormLabel = (
+		{
+			children,
+			className = "",
+			...props
+		}: ComponentPropsWithoutRef<"label">
+) => (
+		<label className={`${styles.label} ${className}`} {...props}>
+			{children}
+		</label>
 )
 
-export const FormGroup = ({children, className = ""}: ComponentPropsWithoutRef<"div">) => (
-    <div className={`form_group ${className}`}>
-        {children}
-    </div>
+export const FormGroup = (
+		{
+			children,
+			className = "",
+			...props
+		}: ComponentPropsWithoutRef<"div">
+) => (
+		<div className={`${styles.group} ${className}`} {...props}>
+			{children}
+		</div>
+)
+
+export const FormInput = (
+		{
+			children,
+			className = "",
+			...props
+		}: ComponentPropsWithoutRef<"input">
+) => (
+		<input className={`${styles.input} ${className}`} {...props}/>
+)
+
+export const FormTextarea = (
+		{
+			children,
+			className = "",
+			...props
+		}: ComponentPropsWithoutRef<"textarea">
+) => (
+		<textarea className={`${styles.textarea} ${className}`} {...props}/>
 )
 
 /*

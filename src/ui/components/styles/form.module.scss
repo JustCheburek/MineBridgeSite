@@ -1,6 +1,6 @@
 @import "@styles/mixins";
 
-.form, .form_group {
+.group {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -12,15 +12,19 @@
 }
 
 .form {
-  flex-wrap: wrap;
+  // flex-wrap: wrap;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+
   margin-block: 20px;
   padding: 5px;
 }
 
-.form_label:has(input[type="radio"]),
-.form_label input:not([type="radio"]),
-.form_label textarea,
-.form_button {
+.label:has(.input[type="radio"]),
+.label .input:not([type="radio"]),
+.label .textarea,
+.button {
   // Отступы
   padding: 1rem;
 
@@ -36,18 +40,18 @@
   }
 }
 
-input, textarea {
+.input, .textarea {
   min-width: 100%;
 }
 
-textarea {
+.textarea {
   min-height: 100px;
   max-height: 250px;
 
   resize: vertical;
 }
 
-.form_button {
+.button {
   padding: 1rem 3rem;
   transition: var(--short-transition) border-color, var(--short-transition) color;
 
@@ -85,11 +89,11 @@ textarea {
   }
 }
 
-.form_label:has(input[type="radio"]) {
+.label:has(.input[type="radio"]) {
   display: flex;
   place-content: center;
 
-  input {
+  .input {
     display: none;
   }
 }

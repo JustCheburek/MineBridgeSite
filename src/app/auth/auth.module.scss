@@ -1,0 +1,16 @@
+@import "@styles/mixins";
+
+.provider {
+	padding: 1rem;
+	border-radius: 50%;
+
+	@include border($background: var(--gray-color), $hover: true);
+}
+
+.ds {
+	scale: 2;
+}
+
+.google {
+	scale: 1.5;
+}

@@ -14,7 +14,7 @@ export class User {
 	@prop({required: true, unique: true})
 	public _id!: string
 
-	@prop({required: true, unique: true, trim: true, maxlength: 30, minlength: 4})
+	@prop({required: true, unique: true, trim: true, maxlength: 22, minlength: 4})
 	public name!: string
 
 	@prop({required: true, unique: true})

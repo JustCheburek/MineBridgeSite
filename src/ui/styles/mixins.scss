@@ -1,7 +1,14 @@
-@mixin border($color: var(--border-color), $radius: var(--border-radius), $width: 1px, $background: var(--black-color-transparent)) {
+@mixin border($color: var(--border-color), $radius: var(--border-radius), $width: 1px, $background: var(--black-color-transparent), $hover: false) {
 	border: $color $width solid;
 	border-radius: $radius;
 	background: $background;
+	transition: border-color var(--long-transition);
+
+	@if $hover {
+		&:hover {
+			border-color: var(--unic-color);
+		}
+	}
 }
 
 @mixin no_select() {

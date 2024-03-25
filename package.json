@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@tanstack/react-table": "latest",
+		"@uidotdev/usehooks": "^2.4.1",
 		"@vercel/speed-insights": "latest",
 		"aws4": "^1.12.0",
 		"axios": "latest",
