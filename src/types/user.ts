@@ -41,13 +41,13 @@ export class User {
 	@prop({ref: () => Role})
 	public roles?: Ref<Role>[]
 
-	@prop({type: () => [Punishment], required: true})
+	@prop({type: () => [Punishment]})
 	public punishments!: Punishment[]
 
-	@prop({type: () => [CasePurchase], required: true})
+	@prop({type: () => [CasePurchase]})
 	public casesPurchases!: CasePurchase[]
 
-	@prop({type: () => [StickerPurchase], required: true})
+	@prop({type: () => [StickerPurchase]})
 	public stickersPurchases!: StickerPurchase[]
 
 	@prop()
