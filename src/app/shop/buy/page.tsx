@@ -1,6 +1,6 @@
 // Сервер
 import type {Metadata} from "next";
-import {redirect} from "next/navigation";
+import {permanentRedirect} from "next/navigation";
 import {validate} from "@server/validate";
 
 // Компоненты
@@ -16,7 +16,7 @@ export default async function Component() {
 	const {user: author} = await validate()
 
 	if (!author) {
-		return redirect("/auth")
+		return permanentRedirect("/auth")
 	}
 
 	return (
@@ -28,7 +28,7 @@ export default async function Component() {
 					<p>
 						Покупка происходит с помощью {" "}
 						<a
-								href="#sbp"
+								href={"#sbp"}
 						>
 							<strong className="unic_color">СБП</strong>
 						</a>
