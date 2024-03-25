@@ -46,14 +46,18 @@ export const Img = (
 			src, alt,
 			className = "",
 			pixel = false,
+			symmetrical=true,
 			...props
-		}: { pixel?: boolean } & ImageProps
+		}: { pixel?: boolean, symmetrical?: boolean } & ImageProps
 ) => {
 	if (!props.width && !props.height) {
 		props.fill = true
+		props.sizes = "100vw"
 	}
-	if (props.width && !props.height) {
-		props.height = props.width
+
+	if (symmetrical) {
+		if (!props.height) props.height = props.width
+		if (!props.width) props.width = props.height
 	}
 
 	return (

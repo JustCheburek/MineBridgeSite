@@ -6,9 +6,16 @@
   place-items: center;
   gap: 3rem;
   margin-block: 60px;
+
+  max-width: min(700px, 100%);
+  margin-inline: auto;
 }
 
 .text {
   display: grid;
   gap: 1rem;
+}
+
+.yt_link {
+  width: 100%;
 }

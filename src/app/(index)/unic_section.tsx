@@ -20,7 +20,7 @@ export const UnicSection = () => (
 			<div className={`${styles.unic_div}`}>
 				{/* Цена */}
 				<Box>
-					<ImgBox className={styles.barrier} background={`/index/unic/barrier.webp`} width="172px" height="175px">
+					<ImgBox className={styles.barrier} background="/index/unic/barrier.webp" width="172px" height="175px">
 						<Img width={80} height={80} src="/index/unic/moneta.webp" alt="Монета" className={styles.moneta} pixel/>
 					</ImgBox>
 					<p>

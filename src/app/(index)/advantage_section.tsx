@@ -4,6 +4,8 @@ import Link from "next/link";
 
 // Стили
 import styles from "./styles/advantage.module.scss"
+
+// Компоненты
 import {ImgBox, Img} from "@components/img";
 
 /*
