@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
 		const guildMember = await axios.patch<GuildDSUser | null>(
 				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
 				{
-					nick: dsUser.username
+					nick: cookies().get("name")?.value
 				},
 				{
 					headers: {
@@ -65,7 +65,6 @@ export async function GET(request: NextRequest) {
 
 		// Добавление роли
 		if (!guildMember?.roles?.includes(process.env.DISCORD_GAMER_ROLE_ID!)) {
-			console.log(`Добавление роли ${dsUser.username}`)
 			await axios.put(
 					`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}/roles/${process.env.DISCORD_GAMER_ROLE_ID}`,
 					{},
