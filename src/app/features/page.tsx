@@ -118,13 +118,13 @@ export default function Features() {
 						<GBox anotherSite>
 							<ul className={`not_indent remove_marker ${styles.vote_box}`}>
 								<li>
-									<Url href="https://minecraftrating.ru/server/minebridge" margin="inherit">
-										1
+									<Url href="https://hotmc.ru/minecraft-server-259948" margin="0">
+										HotMC
 									</Url>
 								</li>
 								<li>
-									<Url href="https://hotmc.ru/minecraft-server-259948" margin="inherit">
-										2
+									<Url href="https://minecraftrating.ru/server/minebridge" margin="0">
+										Rating
 									</Url>
 								</li>
 							</ul>
