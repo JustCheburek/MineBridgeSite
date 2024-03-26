@@ -1,10 +1,13 @@
 .advantage_section {
+	padding-top: 100px;
+	background: var(--black-color);
+}
+
+.max_size {
 	display: grid;
 	place-items: center;
-	padding-top: 100px;
-	padding-inline: var(--indent-page);
-	background: var(--black-color);
 	gap: 8rem;
+	background: var(--black-color);
 }
 
 .advantage {
@@ -12,7 +15,8 @@
 
 	display: grid;
 	place-items: center;
-	max-width: 1200px;
+	max-width: 800px;
+	min-width: 100%;
 	gap: 4rem;
 
 	// ПК
@@ -45,6 +49,7 @@
 }
 
 .text {
+	// Для отображения на одном уровне
 	min-width: 60%;
 }
 
@@ -52,7 +57,7 @@
 	--_shadow-size: 5px;
 
 	// Размеры
-	width: 550px;
+	width: min(550px, 100%);
 
 	// Отображение
 	border: solid var(--light-gray-color) 3px;

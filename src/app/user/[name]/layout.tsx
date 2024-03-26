@@ -1,15 +1,15 @@
-import {PropsWithChildren} from "react";
-import {SubsectionItem, Subsections} from "@components/subsections";
-import {MaxSize} from "@components/maxSize";
+import type {PropsWithChildren} from "react";
 import type {User} from "lucia";
 import {ProfilePage} from "schema-dts";
 import {api} from "@server/axios";
 import {notFound} from "next/navigation";
 
-export default async function UserLayout({children, params: {name}}: PropsWithChildren<{ params: { name: string } }>) {
-	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
+// Компоненты
+import {SubsectionItem, Subsections} from "@components/subsections";
+import {MaxSize} from "@components/maxSize";
 
-	if (!user) notFound()
+export default async function UserLayout({children, params: {name}}: PropsWithChildren<{ params: { name: string } }>) {
+	const user = await api<User>(`/user`, {params: {name}}).then(r => r.data).catch(notFound)
 
 	const person: ProfilePage = {
 		"@type": "ProfilePage",

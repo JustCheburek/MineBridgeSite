@@ -10,6 +10,7 @@ import "./styles/users.scss"
 import {Table} from "@components/table"
 import {MaxSize} from "@components/maxSize";
 import {columns} from "@columns/users"
+import {notFound} from "next/navigation";
 
 export const metadata: Metadata = {
 	title: "Игроки | Майнбридж",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Component() {
-	const users = await api<User[]>("/users").then(r => r.data)
+	const users = await api<User[]>("/users").then(r => r.data).catch(notFound)
 
 	return (
 			<main className="users">

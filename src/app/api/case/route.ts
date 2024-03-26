@@ -1,9 +1,9 @@
 import {caseModel} from "@server/models";
 import {Case} from "@src/types/case";
-import {NextRequest} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
-	const url = new URL(request.url)
+	const url = request.nextUrl
 	const _id = url.searchParams.get("_id");
 	const name = url.searchParams.get("name");
 	const displayname = url.searchParams.get("displayname");
@@ -19,10 +19,10 @@ export async function GET(request: NextRequest) {
 	})
 
 	if (!rarity) {
-		return new Response("Редкость не найдена", {
+		return new NextResponse("Редкость не найдена", {
 			status: 404
 		})
 	}
 
-	return Response.json(rarity)
+	return NextResponse.json(rarity)
 }

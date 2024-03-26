@@ -1,9 +1,9 @@
 import {userModel} from "@server/models";
 import {User} from "lucia";
-import {NextRequest} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
-	const url = new URL(request.url)
+	const url = request.nextUrl
 	const roles = url.searchParams.get("roles");
 	const whitelist = url.searchParams.get("whitelist");
 
@@ -21,10 +21,10 @@ export async function GET(request: NextRequest) {
 	const users = await userModel.find<User>(filter);
 
 	if (!users?.length) {
-		return new Response("Пользователи не найдены", {
+		return new NextResponse("Пользователи не найдены", {
 			status: 404
 		})
 	}
 
-	return Response.json(users)
+	return NextResponse.json(users)
 }

@@ -1,10 +1,10 @@
 import {generateState, generateCodeVerifier} from "arctic";
 import {google} from "@server/lucia";
 import {cookies} from "next/headers";
-import {NextRequest} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
-	const name = new URL(request.url).searchParams.get("name");
+	const name = request.nextUrl.searchParams.get("name");
 
 	const state = generateState();
 	const codeVerifier = generateCodeVerifier();
@@ -37,5 +37,5 @@ export async function GET(request: NextRequest) {
 		})
 	}
 
-	return Response.redirect(url)
+	return NextResponse.redirect(url)
 }

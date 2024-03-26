@@ -1,9 +1,9 @@
 import {roleModel} from "@server/models";
 import {Role} from "@src/types/role";
-import {NextRequest} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
-	const url = new URL(request.url)
+	const url = request.nextUrl
 	const _id = url.searchParams.get("_id");
 	const name = url.searchParams.get("name");
 	const displayname = url.searchParams.get("displayname");
@@ -17,10 +17,10 @@ export async function GET(request: NextRequest) {
 	})
 
 	if (!role) {
-		return new Response("Роль не найдена", {
+		return new NextResponse("Роль не найдена", {
 			status: 404
 		})
 	}
 
-	return Response.json(role)
+	return NextResponse.json(role)
 }

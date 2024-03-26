@@ -17,9 +17,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function History({params: {name}}: { params: { name: string } }) {
-	const user = await api<User | null>(`/user`, {params: {name}}).then(r => r.data)
-
-	if (!user) notFound()
+	const user = await api<User>(`/user`, {params: {name}}).then(r => r.data).catch(notFound)
 
 	return (
 			<div className={styles.integration_content}>

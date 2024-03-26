@@ -3,19 +3,19 @@ import {cookies} from "next/headers";
 import {generateId, User} from "lucia";
 import type {DSUser, GuildDSUser} from "@src/types/user";
 import {userModel} from "@server/models";
-import {NextRequest} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@server/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
 
 
 export async function GET(request: NextRequest) {
-	const url = new URL(request.url);
+	const url = request.nextUrl
 	const code = url.searchParams.get("code");
 	const state = url.searchParams.get("state");
 	const storedState = cookies().get("discord_oauth_state")?.value ?? null;
 	if (!code || !state || !storedState || state !== storedState) {
-		return new Response(
+		return new NextResponse(
 				"Неправильный код",
 				{
 					status: 400
@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
 		}).then(r => r.data);
 
 		if (!dsUser.email || !dsUser.verified) {
-			return new Response("Нету почты", {status: 400})
+			return new NextResponse("Нету почты", {status: 400})
 		}
 
 		// Добавление в гильдию
@@ -81,7 +81,7 @@ export async function GET(request: NextRequest) {
 		if (user) {
 			await userModel.findByIdAndUpdate(user._id, {email: dsUser.email, discordId: dsUser.id})
 
-			return new Response(null, {
+			return new NextResponse(null, {
 				status: 302,
 				headers: {
 					Location: `/user/${user.name}`
@@ -104,7 +104,7 @@ export async function GET(request: NextRequest) {
 			const session = await lucia.createSession(candidate._id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
 			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-			return new Response(null, {
+			return new NextResponse(null, {
 				status: 302,
 				headers: {
 					Location: `/user/${candidate.name}`
@@ -132,7 +132,7 @@ export async function GET(request: NextRequest) {
 		const session = await lucia.createSession(userData._id, {});
 		const sessionCookie = lucia.createSessionCookie(session.id);
 		cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-		return new Response(null, {
+		return new NextResponse(null, {
 			status: 302,
 			headers: {
 				Location: `/user/${userData.name}`
@@ -140,11 +140,11 @@ export async function GET(request: NextRequest) {
 		});
 	} catch (e) {
 		if (e instanceof OAuth2RequestError && e.message === "bad_verification_code") {
-			return new Response(`Ошибка в коде регистрации ${e}`, {
+			return new NextResponse(`Ошибка в коде регистрации ${e}`, {
 				status: 400
 			});
 		}
-		return new Response(`Ошибка: ${e}`, {
+		return new NextResponse(`Ошибка: ${e}`, {
 			status: 500
 		});
 	}

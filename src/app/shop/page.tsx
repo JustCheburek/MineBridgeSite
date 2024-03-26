@@ -1,5 +1,6 @@
 // React
 import type {Metadata} from "next";
+import {notFound} from "next/navigation";
 import Link from "next/link";
 
 // Компоненты
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
 
 
 export default async function Shop() {
-	const cases = await api<Case[]>(`/cases`).then(r => r.data);
+	const cases = await api<Case[]>(`/cases`).then(r => r.data).catch(notFound)
 
 	return (
 			<main className={styles.shop}>

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function Features() {
 	return (
-			<main>
+			<main style={{overflow: "hidden"}}>
 				<MaxSize>
 					<h1>Фичи</h1>
 

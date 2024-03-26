@@ -1,9 +1,9 @@
 import {dropModel} from "@server/models";
-import {NextRequest} from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 import {Drop} from "@src/types/case";
 
 export async function GET(request: NextRequest) {
-	const url = new URL(request.url)
+	const url = request.nextUrl
 	const _id = url.searchParams.get("_id");
 	const name = url.searchParams.get("name");
 	const displayname = url.searchParams.get("displayname");
@@ -21,10 +21,10 @@ export async function GET(request: NextRequest) {
 	})
 
 	if (!rarity) {
-		return new Response("Тип не найден", {
+		return new NextResponse("Тип не найден", {
 			status: 404
 		})
 	}
 
-	return Response.json(rarity)
+	return NextResponse.json(rarity)
 }
