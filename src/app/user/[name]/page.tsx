@@ -15,6 +15,7 @@ import {WhitelistSection} from "./components/whitelist_section";
 import {Name} from "./components/name";
 import {Mostiki} from "./components/mostiki";
 import {Rating} from "./components/rating";
+import {InviteSection} from "./components/invite_section";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -38,7 +39,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 	}
 
 	return (
-			<div>
+			<div className={styles.profile}>
 				<div className={styles.container}>
 					<Avatar user={user}/>
 
@@ -50,6 +51,8 @@ export default async function Profile({params: {name}}: { params: { name: string
 				</div>
 
 				<WhitelistSection user={user} isMe={isMe} func={whitelistFunc}/>
+
+				<InviteSection user={user}/>
 			</div>
 	)
 }

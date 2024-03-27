@@ -1,9 +1,18 @@
 // Информация о пользователе
+.profile {
+	display: grid;
+	place-content: center;
+	gap: 100px;
+}
+
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	display: grid;
+	place-content: center;
 	gap: 50px;
+
+	& > * {
+		margin: auto;
+	}
 }
 
 .box {
@@ -12,12 +21,8 @@
 }
 
 // Белый список
-.whitelist {
-	margin-top: 100px;
-}
-
-@media (width < 728px) {
-	.user_container {
-		flex-direction: column;
+@media (width > 728px) {
+	.container {
+		grid-template-columns: 1fr 2fr;
 	}
 }

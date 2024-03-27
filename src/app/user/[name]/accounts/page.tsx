@@ -64,7 +64,9 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					>
 						<GoogleSvg width="1.5em" height="1.5em"/>
 					</Provider>
-					<DeleteUser deleteFnc={DeleteFunction}/>
+					{isMe &&
+							<DeleteUser deleteFnc={DeleteFunction}/>
+					}
 				</div>
 			</div>
 	)
@@ -81,7 +83,10 @@ function Provider({id, name, isMe, children}: PropsWithChildren<{ id?: string, n
 				{id
 						? <>
 							<p className="all_select medium-font center_text">
-								{id}
+								{isMe
+									? id
+										: `${"×".repeat(id.length - 4)}${id.substring(id.length - 4)}`
+								}
 							</p>
 							<SuccessSvg/>
 						</>

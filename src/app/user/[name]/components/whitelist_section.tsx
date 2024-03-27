@@ -10,7 +10,7 @@ import styles from "../profile.module.scss"
 // Компоненты
 import {Button} from "@components/button";
 import {Modal} from "@components/modal";
-import {FormButton} from "@components/form";
+import {Form, FormButton} from "@components/form";
 
 const UserWhitelisted = ({setModal}: { setModal: Function }) => (
 		<section className={`${styles.whitelist} center_text`}>
@@ -65,11 +65,11 @@ export function WhitelistSection({user, isMe, func}: { user: User, isMe: boolean
 						Если <span className="red_color">нет</span>, тогда вы можете изменить<br/>
 						его в аккаунтах!
 					</p>
-					<form className="form" action={func}>
+					<Form className="form" action={func}>
 						<FormButton>
 							Подать заявку
 						</FormButton>
-					</form>
+					</Form>
 				</Modal>
 			</>
 	)

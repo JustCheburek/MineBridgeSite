@@ -1,0 +1,13 @@
+import type {User} from "lucia";
+
+export function InviteSection({user}: {user: User}) {
+	if (!user) return
+
+	return (
+			<section className="center_text">
+				<h2>Пригласи друга</h2>
+				<h3>и получи мостики</h3>
+				<p className="all_select unic_color">{process.env.MB_URL}?userId={user._id}&place=friend</p>
+			</section>
+	)
+}

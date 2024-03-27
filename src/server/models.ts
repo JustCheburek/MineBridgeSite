@@ -8,8 +8,8 @@ import {connect} from "./db";
 
 connect()
 
-export const userModel = models.User || getModelForClass(User)
-export const roleModel = models.Role || getModelForClass(Role)
-export const sessionModel = models.Session || getModelForClass(Session)
-export const dropModel = models.Drop || getModelForClass(Drop)
-export const caseModel = models.Case || getModelForClass(Case)
+export const userModel = models?.User || getModelForClass(User)
+export const roleModel = models?.Role || getModelForClass(Role)
+export const sessionModel = models?.Session || getModelForClass(Session)
+export const dropModel = models?.Drop || getModelForClass(Drop)
+export const caseModel = models?.Case || getModelForClass(Case)

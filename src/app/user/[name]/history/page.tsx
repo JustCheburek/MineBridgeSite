@@ -23,7 +23,7 @@ export default async function History({params: {name}}: { params: { name: string
 			<div className={styles.integration_content}>
 				<h1>История</h1>
 
-				{user.punishments?.length
+				{user?.punishments?.length
 						? <PunishmentSection user={user}/>
 						: <div className="center_text">
 							<h2>Рейтинг</h2>
@@ -31,7 +31,7 @@ export default async function History({params: {name}}: { params: { name: string
 						</div>
 				}
 
-				{user.casesPurchases?.length
+				{user?.casesPurchases?.length
 						? <CasesPurchasesSection user={user}/>
 						: <div className="center_text">
 							<h2>Покупки кейсов</h2>
