@@ -79,6 +79,10 @@ export async function GET(request: NextRequest) {
 			)
 
 			if (candidate) {
+				if (!candidate?.from) {
+					candidate.from = userData.from
+					await candidate.save()
+				}
 				if (!candidate.from?.place) {
 					candidate.from.place = userData.from.place
 					await candidate.save()
