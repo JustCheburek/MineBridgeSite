@@ -1,4 +1,6 @@
 import {Chance} from "@src/types/case";
+import {userModel} from "@server/models";
+import {User} from "lucia";
 
 /**
  * Красный < 0 < Зелёный
@@ -14,7 +16,7 @@ export function ColorText(number: number) {
  */
 export function SumChances<T extends Chance>(
 		array: T[]
-) {
+): number {
 	return array.reduce((sum, {chance}) =>
 			sum + chance, 0
 	)
@@ -28,12 +30,12 @@ export const Random = (maxNumber: number) => (
 )
 
 /**
- * Функция выдаёт рандомный value из списка
+ * Достаёт рандомный value из списка
  */
 export function RandomValue<T extends Chance>(
 		array: T[],
 		sumChances: number
-) {
+): T {
 	if (array.length <= 1) {
 		return array[0]
 	}
@@ -53,4 +55,17 @@ export function RandomValue<T extends Chance>(
 	}
 
 	return array[id]
+}
+
+/**
+ * Добавляет приглашение
+ * */
+export async function AddInvite(userId: string, inviterId?: string): Promise<string | undefined> {
+	const inviter = await userModel.findById<User>(inviterId)
+
+	if (inviter) {
+		inviter.invites.push(userId)
+	}
+
+	return inviter?._id
 }

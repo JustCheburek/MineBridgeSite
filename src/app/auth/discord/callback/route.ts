@@ -7,6 +7,7 @@ import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@server/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
+import {AddInvite} from "@app/utils";
 
 
 export async function GET(request: NextRequest) {
@@ -63,6 +64,8 @@ export async function GET(request: NextRequest) {
 				}
 		).then(r => r.data).catch(console.error)
 
+		console.log(`Участник гильдии ${dsUser.username}: ${guildMember || "его нет :/"}`)
+
 		// Добавление роли
 		if (!guildMember?.roles?.includes(process.env.DISCORD_GAMER_ROLE_ID!)) {
 			await axios.put(
@@ -76,63 +79,70 @@ export async function GET(request: NextRequest) {
 			).catch(console.error)
 		}
 
-		const {user} = await validate()
-
-		if (user) {
-			await userModel.findByIdAndUpdate(user._id, {email: dsUser.email, discordId: dsUser.id})
-
-			return new NextResponse(null, {
-				status: 302,
-				headers: {
-					Location: `/user/${user.name}`
-				}
-			});
-		}
-
-		const candidate = await userModel.findOne({
-			$or: [
-				{discordId: dsUser.id},
-				{email: dsUser.email}
-			]
-		})
-
-		if (candidate) {
-			candidate.email = dsUser.email
-			candidate.discordId = dsUser.id
-			await candidate.save()
-
-			const session = await lucia.createSession(candidate._id, {});
-			const sessionCookie = lucia.createSessionCookie(session.id);
-			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-			return new NextResponse(null, {
-				status: 302,
-				headers: {
-					Location: `/user/${candidate.name}`
-				}
-			});
-		}
-
+		const id = generateId(15)
 		const userData = {
-			_id: generateId(15),
+			_id: id,
 			name: cookies().get("name")?.value || dsUser.username,
 			discordId: dsUser.id,
 			email: dsUser.email,
-			photo: `https://cdn.discordapp.com/avatars/${dsUser.id}/${dsUser.avatar}.png`
+			photo: `https://cdn.discordapp.com/avatars/${dsUser.id}/${dsUser.avatar}.png`,
+			from: {
+				place: cookies().get("place")?.value,
+				userId: await AddInvite(id, cookies().get("from")?.value)
+			},
 		} as User
 
-		if (guildMember?.joined_at) {
-			userData.updatedAt = userData.createdAt = guildMember.joined_at
+		const {user} = await validate()
+
+		if (user) {
+			await userModel.findByIdAndUpdate(
+					user._id,
+					{
+						email: userData.email,
+						discordId: userData.discordId
+					}
+			)
+		} else {
+			const candidate = await userModel.findOneAndUpdate(
+					{
+						$or: [
+							{discordId: dsUser.id},
+							{email: dsUser.email}
+						]
+					},
+					{
+						email: dsUser.email,
+						discordId: dsUser.id,
+					}
+			)
+
+			if (candidate) {
+				if (!candidate.from?.place) {
+					candidate.from.place = userData.from.place
+					await candidate.save()
+				}
+				if (!candidate.from?.userId) {
+					candidate.from.userId = userData.from.userId
+					await candidate.save()
+				}
+			} else {
+				if (guildMember?.joined_at) {
+					userData.updatedAt = userData.createdAt = guildMember.joined_at
+				}
+
+				if (guildMember?.roles) {
+					console.log(guildMember.roles)
+				}
+
+				await userModel.create(userData)
+			}
+
+			const session = await lucia.createSession(userData._id, {});
+			const sessionCookie = lucia.createSessionCookie(session.id);
+			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 		}
 
-		if (guildMember?.roles) {
-			console.log(guildMember.roles)
-		}
-
-		await userModel.create(userData)
-		const session = await lucia.createSession(userData._id, {});
-		const sessionCookie = lucia.createSessionCookie(session.id);
-		cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-		return new NextResponse(null, {
+		return new NextResponse(`Всё успешно`, {
 			status: 302,
 			headers: {
 				Location: `/user/${userData.name}`

@@ -1,12 +1,13 @@
 import {google, lucia} from "@server/lucia";
 import {cookies} from "next/headers";
-import {generateId} from "lucia";
+import {generateId, User} from "lucia";
 import type {GUser} from "@src/types/user";
 import {OAuth2RequestError} from "arctic";
 import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@server/validate";
 import axios from "axios";
+import {AddInvite} from "@app/utils";
 
 export async function GET(request: NextRequest) {
 	const url = request.nextUrl
@@ -37,58 +38,68 @@ export async function GET(request: NextRequest) {
 			return new NextResponse("Нету почты", {status: 400})
 		}
 
+		const id = generateId(15)
+		const userData = {
+			_id: id,
+			name: cookies().get("name")?.value || gUser.given_name || gUser.name,
+			googleId: gUser.sub,
+			email: gUser.email,
+			photo: gUser.picture,
+			from: {
+				place: cookies().get("place")?.value,
+				userId: await AddInvite(id, cookies().get("from")?.value)
+			}
+		} as User
+
 		const {user} = await validate()
 
 		if (user) {
-			await userModel.findByIdAndUpdate(user._id,{email: gUser.email, discordId: gUser.sub})
+			await userModel.findByIdAndUpdate(
+					user._id,
+					{
+						email: userData.email,
+						googleId: userData.googleId
+					}
+			)
+		} else {
+			const candidate = await userModel.findOneAndUpdate(
+					{
+						$or: [
+							{googleId: userData.googleId},
+							{email: userData.email}
+						]
+					},
+					{
+						email: userData.email,
+						googleId: userData.googleId,
+					},
+					{
+						new: true
+					}
+			)
 
-			return new NextResponse(null, {
-				status: 302,
-				headers: {
-					Location: `/user/${user.name}`
+			if (candidate) {
+				if (!candidate.from?.place) {
+					candidate.from.place = userData.from.place
+					await candidate.save()
 				}
-			});
-		}
+				if (!candidate.from?.userId) {
+					candidate.from.userId = userData.from.userId
+					await candidate.save()
+				}
+			} else {
+				await userModel.create(userData)
+			}
 
-		const candidate = await userModel.findOne({
-			$or: [
-				{googleId: gUser.sub},
-				{email: gUser.email}
-			]
-		})
-
-		if (candidate) {
-			candidate.email = gUser.email
-			candidate.googleId = gUser.sub
-			await candidate.save()
-
-			const session = await lucia.createSession(candidate._id, {});
+			const session = await lucia.createSession(userData._id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
 			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-			return new NextResponse(null, {
-				status: 302,
-				headers: {
-					Location: `/user/${candidate.name}`
-				}
-			});
 		}
 
-		const userId = generateId(15);
-		const name = cookies().get("name")?.value || gUser.given_name || gUser.name
-		await userModel.create({
-			_id: userId,
-			name,
-			googleId: gUser.sub,
-			email: gUser.email,
-			photo: gUser.picture
-		})
-		const session = await lucia.createSession(userId, {});
-		const sessionCookie = lucia.createSessionCookie(session.id);
-		cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
-		return new NextResponse(null, {
+		return new NextResponse(`Всё успешно`, {
 			status: 302,
 			headers: {
-				Location: `/user/${name}`
+				Location: `/user/${userData.name}`
 			}
 		});
 	} catch (e) {

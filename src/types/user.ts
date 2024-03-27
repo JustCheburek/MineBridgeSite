@@ -4,6 +4,7 @@ import {Punishment} from "@src/types/punishment";
 import {CasePurchase, StickerPurchase} from "@src/types/purchase";
 import {modelOptions, pre, prop, Ref} from "@typegoose/typegoose";
 import {Role} from "@src/types/role";
+import {From} from "@src/types/invite";
 
 @pre<User>("save", function () {
 	this.rating = this.punishments?.reduce((accum, {rating}) => accum + rating, 0) || 0
@@ -49,6 +50,13 @@ export class User {
 
 	@prop({type: () => [StickerPurchase]})
 	public stickersPurchases!: StickerPurchase[]
+
+	@prop({type: () => From})
+	public from!: From
+
+	// Список с айди игроков
+	@prop({type: () => [String]})
+	public invites!: string[]
 
 	@prop()
 	public createdAt!: Date
