@@ -95,7 +95,7 @@ export async function GET(request: NextRequest) {
 				await userModel.create(userData)
 			}
 
-			const session = await lucia.createSession(userData._id, {});
+			const session = await lucia.createSession(candidate?._id || userData._id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
 			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 		}

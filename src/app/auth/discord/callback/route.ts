@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
 				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
 				{
 					access_token: accessToken,
-					nick: dsUser.username
+					nick: cookies().get("name")?.value
 				},
 				{
 					headers: {
@@ -155,12 +155,12 @@ export async function GET(request: NextRequest) {
 				await userModel.create(userData)
 			}
 
-			const session = await lucia.createSession(userData._id, {});
+			const session = await lucia.createSession(candidate?._id || userData._id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
 			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 		}
 
-		return new NextResponse(`Всё успешно`, {
+		return new NextResponse(null, {
 			status: 302,
 			headers: {
 				Location: `/user/${userData.name}`
