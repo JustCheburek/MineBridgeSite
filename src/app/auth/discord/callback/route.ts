@@ -26,12 +26,14 @@ export async function GET(request: NextRequest) {
 
 	try {
 		// Получение пользователя
-		const tokens = await discord.validateAuthorizationCode(code);
+		const {accessToken} = await discord.validateAuthorizationCode(code);
 		const dsUser = await axios.get<DSUser>("https://discord.com/api/users/@me", {
 			headers: {
-				Authorization: `Bearer ${tokens.accessToken}`
+				Authorization: `Bearer ${accessToken}`
 			}
 		}).then(r => r.data);
+
+		console.log(`Токен: ${accessToken}`)
 
 		if (!dsUser.email || !dsUser.verified) {
 			return new NextResponse("Нету почты", {status: 400})
@@ -41,7 +43,7 @@ export async function GET(request: NextRequest) {
 		await axios.put(
 				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
 				{
-					access_token: tokens.accessToken,
+					access_token: accessToken,
 					nick: dsUser.username
 				},
 				{
@@ -51,12 +53,9 @@ export async function GET(request: NextRequest) {
 				}
 		).catch(console.error)
 
-		// Получение пользователя и смена ника
-		const guildMember = await axios.patch<GuildDSUser | null>(
+		// Получение пользователя
+		const guildMember = await axios.get<GuildDSUser | null>(
 				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
-				{
-					nick: cookies().get("name")?.value
-				},
 				{
 					headers: {
 						Authorization: `Bot ${process.env.DISCORD_TOKEN}`
@@ -64,7 +63,22 @@ export async function GET(request: NextRequest) {
 				}
 		).then(r => r.data).catch(console.error)
 
-		console.log(`Участник гильдии ${dsUser.username}: ${guildMember || "его нет :/"}`)
+		console.log(`Участник гильдии ${dsUser.username}: ${JSON.stringify(guildMember) || "его нет :/"}`)
+
+		// Изменение ника
+		if (!guildMember?.nick) {
+			await axios.patch(
+					`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
+					{
+						nick: cookies().get("name")?.value
+					},
+					{
+						headers: {
+							Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+						}
+					}
+			).then(r => r.data).catch(console.error)
+		}
 
 		// Добавление роли
 		if (!guildMember?.roles?.includes(process.env.DISCORD_GAMER_ROLE_ID!)) {
