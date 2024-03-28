@@ -1,8 +1,8 @@
 import {MongodbAdapter} from "@lucia-auth/adapter-mongodb";
 import {connection} from 'mongoose';
-import {connect} from "./db";
+import {Connect} from "./db";
 
-connect()
+Connect()
 
 export const adapter = new MongodbAdapter(
 		// @ts-ignore

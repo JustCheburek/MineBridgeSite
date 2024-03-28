@@ -10,9 +10,9 @@
 	},
 	"dependencies": {
 		"@tanstack/react-table": "latest",
-		"@uidotdev/usehooks": "^2.4.1",
+		"@uidotdev/usehooks": "latest",
 		"@vercel/speed-insights": "latest",
-		"aws4": "^1.12.0",
+		"aws4": "latest",
 		"axios": "latest",
 		"javascript-time-ago": "latest",
 		"next": "latest",
@@ -21,7 +21,7 @@
 		"react-dom": "latest",
 		"react-type-animation": "latest",
 		"sass": "latest",
-		"sharp": "^0.33.3"
+		"sharp": "latest"
 	},
 	"devDependencies": {
 		"@lucia-auth/adapter-mongodb": "latest",

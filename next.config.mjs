@@ -6,6 +6,11 @@ const nextConfig = {
 			hostname: "cdn.discordapp.com",
 			port: "",
 			pathname: "/avatars/**"
+		}, {
+			protocol: "https",
+			hostname: "lh3.googleusercontent.com",
+			port: "",
+			pathname: "/**"
 		}]
 	},
 	experimental: {

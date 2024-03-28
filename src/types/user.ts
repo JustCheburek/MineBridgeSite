@@ -12,7 +12,7 @@ import {From} from "@src/types/invite";
 
 @modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false}})
 export class User {
-	@prop({required: true, unique: true})
+	@prop({required: true, unique: true, index: true})
 	public _id!: string
 
 	@prop({required: true, unique: true, trim: true, maxlength: 22, minlength: 4})
