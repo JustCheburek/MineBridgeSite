@@ -1,5 +1,6 @@
 // Сервер
-import {User} from "lucia";
+import {CasePurchase} from "@src/types/purchase";
+import type {User} from "lucia";
 
 // Колонны
 import {columns} from "@columns/casesPurchases";
@@ -10,7 +11,10 @@ import {Table} from "@components/table";
 
 export function CasesPurchasesSection({user}: { user: User }) {
 	return (
-			<Table columns={columns} data={user.casesPurchases}>
+			<Table<CasePurchase>
+					columns={columns}
+					data={user.casesPurchases}
+			>
 				<h2>
 					Покупки кейсов
 				</h2>

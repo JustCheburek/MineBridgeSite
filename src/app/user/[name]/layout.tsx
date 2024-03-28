@@ -1,4 +1,5 @@
-import type {PropsWithChildren} from "react";
+import {Suspense} from "react";
+import type {PropsWithChildren, ReactNode} from "react";
 import type {User} from "lucia";
 import {ProfilePage} from "schema-dts";
 import {api} from "@server/axios";
@@ -8,7 +9,17 @@ import {notFound} from "next/navigation";
 import {SubsectionItem, Subsections} from "@components/subsections";
 import {MaxSize} from "@components/maxSize";
 
-export default async function UserLayout({children, params: {name}}: PropsWithChildren<{ params: { name: string } }>) {
+type UserLayout = {
+	modal: ReactNode
+	params: { name: string }
+}
+
+export default async function UserLayout(
+		{
+			children,
+			modal,
+			params: {name}
+		}: PropsWithChildren<UserLayout>) {
 	const user = await api<User>(`/user`, {params: {name}}).then(r => r.data).catch(notFound)
 
 	const person: ProfilePage = {
@@ -38,8 +49,14 @@ export default async function UserLayout({children, params: {name}}: PropsWithCh
 
 					<script type="application/ld+json" dangerouslySetInnerHTML={{__html: person}}/>
 
-					{children}
+					<Suspense fallback={
+						<p className="center_text">Загрузка...</p>
+					}>
+						{children}
+					</Suspense>
 				</MaxSize>
+
+				{modal}
 			</main>
 	)
 }

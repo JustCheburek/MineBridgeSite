@@ -23,7 +23,9 @@ export default async function Component() {
 	return (
 			<main className="users">
 				<MaxSize>
-					<Table columns={columns} data={users} className="center_text">
+					<Table<User>
+							columns={columns} data={users} className="center_text"
+					>
 						<h1>
 							Игроки
 						</h1>

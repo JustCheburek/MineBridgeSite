@@ -1,6 +1,5 @@
 // React / next
 // noinspection JSUnusedGlobalSymbols
-
 import type {Metadata} from "next";
 import type {PropsWithChildren} from "react";
 import {Montserrat} from "next/font/google";

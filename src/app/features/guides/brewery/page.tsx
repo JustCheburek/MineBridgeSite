@@ -3,6 +3,7 @@ import type {Metadata} from "next";
 
 // Типа база данных
 import recipes from "./recipes.json"
+import {RecipeProps} from "@src/types/recipe";
 import {columns} from "@columns/brewery"
 
 // Компоненты
@@ -169,7 +170,7 @@ export default function Brewery() {
 						</PText>
 					</PBox>
 
-					<Table
+					<Table<RecipeProps>
 							columns={columns}
 							data={Object.values(recipes)}
 					>

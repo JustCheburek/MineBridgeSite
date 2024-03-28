@@ -10,7 +10,7 @@ import {api} from "@server/axios";
 import styles from "./accounts.module.scss"
 
 // Компоненты
-import {DiscordSvg, GoogleSvg, EmailSvg, SuccessSvg} from "@ui/svgs";
+import {DiscordSvg, EmailSvg, GoogleSvg, SuccessSvg} from "@ui/svgs";
 import {DeleteUser} from "./components";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
@@ -84,7 +84,7 @@ function Provider({id, name, isMe, children}: PropsWithChildren<{ id?: string, n
 						? <>
 							<p className="all_select medium-font center_text">
 								{isMe
-									? id
+										? id
 										: `${"×".repeat(id.length - 4)}${id.substring(id.length - 4)}`
 								}
 							</p>

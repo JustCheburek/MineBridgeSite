@@ -12,13 +12,13 @@ import "./styles/table.scss"
 TimeAgo.addDefaultLocale(ru);
 const timeAgo = new TimeAgo("ru-RU");
 
-type Table<T extends object> = {
+type Table<T> = {
 	columns: ColumnDef<T>[]
 	data: T[]
 	className?: string
 }
 
-export function Table<T extends object>({columns, data, className = "", children}: PropsWithChildren<Table<T>>) {
+export function Table<T>({columns, data, className = "", children}: PropsWithChildren<Table<T>>) {
 	const table = useReactTable({
 		data,
 		columns,

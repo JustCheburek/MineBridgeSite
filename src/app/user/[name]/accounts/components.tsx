@@ -10,7 +10,7 @@ export function DeleteUser({deleteFnc}: { deleteFnc?: (formData: FormData) => vo
 	return (
 			<>
 				<Form className="form" action={() => setModal(true)}>
-					<FormButton className="danger">
+					<FormButton type="danger">
 						Удалить аккаунт
 					</FormButton>
 				</Form>
@@ -20,7 +20,7 @@ export function DeleteUser({deleteFnc}: { deleteFnc?: (formData: FormData) => vo
 						Ты уверен, что хочешь удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
 					</p>
 					<Form className="form" action={deleteFnc}>
-						<FormButton className="danger">
+						<FormButton type="danger">
 							Да, удалить!
 						</FormButton>
 					</Form>

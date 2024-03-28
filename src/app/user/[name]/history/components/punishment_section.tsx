@@ -2,15 +2,18 @@
 import {User} from "lucia";
 
 // Колонна
+import {Punishment} from "@src/types/punishment";
 import {columns} from "@columns/punishments";
 
 // Компоненты
 import {Table} from "@components/table";
 
-
 export function PunishmentSection({user}: { user: User }) {
 	return (
-			<Table columns={columns} data={user.punishments}>
+			<Table<Punishment>
+					columns={columns}
+					data={user.punishments}
+			>
 				<h2>
 					Рейтинг
 				</h2>
