@@ -39,15 +39,16 @@ export async function GET(request: NextRequest) {
 		}
 
 		const id = generateId(15)
+		const name = cookies().get("name")?.value || gUser.given_name || gUser.name
 		const userData = {
 			_id: id,
-			name: cookies().get("name")?.value || gUser.given_name || gUser.name,
+			name,
 			googleId: gUser.sub,
 			email: gUser.email,
 			photo: gUser.picture,
 			from: {
 				place: cookies().get("place")?.value,
-				userId: await AddInvite(id, cookies().get("from")?.value)
+				userId: await AddInvite(id, name, cookies().get("from")?.value)
 			}
 		} as User
 

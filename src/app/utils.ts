@@ -60,12 +60,21 @@ export function RandomValue<T extends Chance>(
 /**
  * Добавляет приглашение
  * */
-export async function AddInvite(userId: string, inviterId?: string): Promise<string | undefined> {
+export async function AddInvite(userId: string, name: string, inviterId?: string): Promise<string | undefined> {
+	if (!inviterId || inviterId === userId) return
+
 	const inviter = await userModel.findByIdAndUpdate<User>(
 			inviterId,
 			{
 				$inc: {mostiki: 5},
-				$push: {invites: userId}
+				$push: {
+					invites: userId,
+					punishments: {
+						reason: `Позвал ${name}`,
+						rating: 5,
+						author: "AutoMod"
+					}
+				}
 			},
 			{
 				new: true

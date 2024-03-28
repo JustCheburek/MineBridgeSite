@@ -94,15 +94,16 @@ export async function GET(request: NextRequest) {
 		}
 
 		const id = generateId(15)
+		const name = cookies().get("name")?.value || dsUser.username
 		const userData = {
 			_id: id,
-			name: cookies().get("name")?.value || dsUser.username,
+			name,
 			discordId: dsUser.id,
 			email: dsUser.email,
 			photo: `https://cdn.discordapp.com/avatars/${dsUser.id}/${dsUser.avatar}.png`,
 			from: {
 				place: cookies().get("place")?.value,
-				userId: await AddInvite(id, cookies().get("from")?.value)
+				userId: await AddInvite(id, name, cookies().get("from")?.value)
 			},
 		} as User
 

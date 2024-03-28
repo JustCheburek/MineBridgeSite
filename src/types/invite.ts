@@ -4,6 +4,6 @@ export class From {
 	@prop()
 	public place?: string
 
-	@prop()
-	public userId?: string
+	@prop({unique: true, required: true})
+	public userId!: string
 }
