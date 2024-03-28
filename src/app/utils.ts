@@ -1,6 +1,4 @@
 import {Chance} from "@src/types/case";
-import {userModel} from "@server/models";
-import {User} from "lucia";
 
 /**
  * Красный < 0 < Зелёный
@@ -55,31 +53,4 @@ export function RandomValue<T extends Chance>(
 	}
 
 	return array[id]
-}
-
-/**
- * Добавляет приглашение
- * */
-export async function AddInvite(userId: string, name: string, inviterId?: string): Promise<string | undefined> {
-	if (!inviterId || inviterId === userId) return
-
-	const inviter = await userModel.findByIdAndUpdate<User>(
-			inviterId,
-			{
-				$inc: {mostiki: 5},
-				$push: {
-					invites: userId,
-					punishments: {
-						reason: `Позвал ${name}`,
-						rating: 5,
-						author: "AutoMod"
-					}
-				}
-			},
-			{
-				new: true
-			}
-	)
-
-	return inviter?._id
 }

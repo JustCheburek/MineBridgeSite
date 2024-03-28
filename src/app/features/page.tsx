@@ -115,6 +115,23 @@ export default function Features() {
 							<GText>Тотемы</GText>
 						</GBox>
 
+						<GBox href="/features/design">
+							<ImgBox className={styles.img} type="grid">
+
+							</ImgBox>
+
+							<GText>Дизайн</GText>
+						</GBox>
+
+
+						<GBox href="/features/plugins">
+							<ImgBox className={styles.img} type="grid">
+
+							</ImgBox>
+
+							<GText>Плагины</GText>
+						</GBox>
+
 						<GBox anotherSite>
 							<ul className={`not_indent remove_marker ${styles.vote_box}`}>
 								<li>
@@ -131,16 +148,8 @@ export default function Features() {
 
 							<GText>Голосование</GText>
 						</GBox>
-
-						{/*
-                    <a href="/features/totems" className="plugins box">
-                        <ImgBox src="/features" alt="Плагины" className={styles.img}>
-
-                        <GText>Плагины</GText>
-                    </a>
-                    */}
 					</GContainer>
 				</MaxSize>
 			</main>
-	)
+)
 }

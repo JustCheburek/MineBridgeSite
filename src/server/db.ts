@@ -1,6 +1,7 @@
+"use server"
 import {connect} from 'mongoose'
 
-const MONGO_URL = process.env.MONGO_URL
+const MONGO_URL = process.env.MONGO_URL!
 if (!MONGO_URL) {
 	throw new Error(
 			"MONGO_URL в .env"
@@ -15,7 +16,7 @@ export async function Connect() {
 	}
 
 	if (!cached.promise) {
-		cached.promise = await connect(MONGO_URL!).then(mongoose => mongoose)
+		cached.promise = await connect(MONGO_URL).then(mongoose => mongoose)
 	}
 
 	cached.conn = await cached.promise

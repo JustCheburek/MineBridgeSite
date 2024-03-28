@@ -13,10 +13,11 @@ const Avatar = ({getValue, cell}: { getValue: Function, cell: { row: { original:
 	const {name} = cell.row.original
 
 	return (
-			<Link href={`/user/${name}`} className="user_icon_box">
+			<Link href={`/user/${name}`}>
 				<Img
 						src={photo}
 						alt="Ава"
+						className="user_icon"
 						width={55}
 				/>
 			</Link>

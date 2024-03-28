@@ -1,0 +1,6 @@
+@import "@styles/mixins";
+
+.pie_box {
+	@include border($background: var(--gray-color));
+	padding: 2rem;
+}

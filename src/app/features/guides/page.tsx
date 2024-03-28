@@ -3,6 +3,8 @@ import type {Metadata} from "next";
 
 // Стили
 import styles from "../features.module.scss"
+
+// Компоненты
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GText} from "@components/grid";

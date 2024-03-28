@@ -147,6 +147,10 @@ a.unic_color:active, button.unic_color:active {
 
 .user_icon {
   border-radius: 50%;
+
+  &:hover {
+    border-radius: 25%;
+  }
 }
 
 .mostiki {
@@ -169,10 +173,5 @@ a.unic_color:active, button.unic_color:active {
 @media (width < 1024px) {
   .for_pc {
     display: none !important;
-  }
-
-  .user_icon_box {
-    width: 38px;
-    height: 38px;
   }
 }

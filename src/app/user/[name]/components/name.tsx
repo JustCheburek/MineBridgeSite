@@ -1,7 +1,7 @@
 import type {User} from "lucia";
 
 // Компоненты
-// import {Edit} from "@src/ui/components/form";
+// import {Edit} from "@components/form";
 
 export const Name = ({user}: { user: User }) => (
 		<h2 className="unic_color">

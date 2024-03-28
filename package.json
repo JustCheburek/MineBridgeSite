@@ -19,6 +19,7 @@
 		"nuqs": "latest",
 		"react": "latest",
 		"react-dom": "latest",
+		"react-minimal-pie-chart": "^8.4.0",
 		"react-type-animation": "latest",
 		"sass": "latest",
 		"sharp": "latest"

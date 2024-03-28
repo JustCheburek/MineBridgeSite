@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
-import {notFound} from "next/navigation";
 import Link from "next/link";
+import {CasesGet} from "@src/service";
 
 // Компоненты
 import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, Text} from "./components";
@@ -9,15 +9,12 @@ import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, 
 // Стили
 import styles from "./shop.module.scss"
 
-// Скрипты
-import {api} from "@server/axios";
-import {Case} from "@src/types/case";
-
 // Компоненты
 import {MostikiSvg} from "@ui/svgs";
 import {Url} from "@components/button";
 import {MaxSize} from "@components/maxSize";
 import {Img, ImgBox} from "@components/img";
+
 
 export const metadata: Metadata = {
 	title: "Магазин | Майнбридж",
@@ -26,7 +23,7 @@ export const metadata: Metadata = {
 
 
 export default async function Shop() {
-	const cases = await api<Case[]>(`/cases`).then(r => r.data).catch(notFound)
+	const cases = await CasesGet()
 
 	return (
 			<main className={styles.shop}>

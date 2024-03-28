@@ -7,7 +7,31 @@ import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@server/validate";
 import axios from "axios";
-import {AddInvite} from "@app/utils";
+
+async function AddInvite(userId: string, name: string, inviterId?: string): Promise<string | undefined> {
+	if (!inviterId || inviterId === userId) return
+
+	const inviter = await userModel.findByIdAndUpdate<User>(
+			inviterId,
+			{
+				$inc: {mostiki: 5},
+				$push: {
+					invites: userId,
+					punishments: {
+						reason: `Позвал ${name}`,
+						rating: 5,
+						author: "AutoMod"
+					}
+				}
+			},
+			{
+				new: true
+			}
+	)
+
+	return inviter?._id
+}
+
 
 export async function GET(request: NextRequest) {
 	const url = request.nextUrl

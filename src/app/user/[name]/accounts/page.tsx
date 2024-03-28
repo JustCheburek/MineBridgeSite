@@ -1,10 +1,9 @@
 // Сервер
-import type {User} from "lucia";
 import type {PropsWithChildren} from "react";
-import {notFound, redirect} from "next/navigation";
+import {redirect} from "next/navigation";
 import {validate} from "@server/validate"
 import {userModel} from "@server/models";
-import {api} from "@server/axios";
+import {UserGet} from "@src/service";
 
 // Стили
 import styles from "./accounts.module.scss"
@@ -13,6 +12,7 @@ import styles from "./accounts.module.scss"
 import {DiscordSvg, EmailSvg, GoogleSvg, SuccessSvg} from "@ui/svgs";
 import {DeleteUser} from "./components";
 
+
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Аккаунты | Майнбридж`,
 	description: `Привязанные интеграции игрока ${name}. Дискорд и гугл!`
@@ -20,7 +20,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
-	const user = await api<User>(`/user`, {params: {name}}).then(r => r.data).catch(notFound)
+	const user = await UserGet({name})
 	const {user: author} = await validate()
 
 	const isMe = user.name === author?.name

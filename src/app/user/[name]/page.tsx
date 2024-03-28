@@ -1,9 +1,7 @@
 // Сервер
-import type {User} from "lucia";
 import {validate} from "@server/validate";
 import {Rcon} from "@server/console";
-import {api} from "@server/axios";
-import {notFound} from "next/navigation";
+import {UserGet} from "@src/service";
 import {userModel} from "@server/models";
 
 // Стили
@@ -23,7 +21,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
-	const user = await api<User>(`/user`, {params: {name}}).then(r => r.data).catch(notFound)
+	const user = await UserGet({name})
 	const {user: author} = await validate()
 
 	const isMe = user.name === author?.name

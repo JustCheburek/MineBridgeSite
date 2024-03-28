@@ -1,9 +1,7 @@
 import {Suspense} from "react";
 import type {PropsWithChildren, ReactNode} from "react";
-import type {User} from "lucia";
 import {ProfilePage} from "schema-dts";
-import {api} from "@server/axios";
-import {notFound} from "next/navigation";
+import {UserGet} from "@src/service";
 
 // Компоненты
 import {SubsectionItem, Subsections} from "@components/subsections";
@@ -20,7 +18,7 @@ export default async function UserLayout(
 			modal,
 			params: {name}
 		}: PropsWithChildren<UserLayout>) {
-	const user = await api<User>(`/user`, {params: {name}}).then(r => r.data).catch(notFound)
+	const user = await UserGet({name})
 
 	const person: ProfilePage = {
 		"@type": "ProfilePage",

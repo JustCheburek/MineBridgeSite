@@ -7,7 +7,8 @@
 			scale var(--long-transition),
 			rotate var(--long-transition),
 			translate var(--long-transition),
-			filter var(--long-transition);
+			filter var(--long-transition),
+			border-radius var(--short-transition);
 }
 
 .hover:hover .img {

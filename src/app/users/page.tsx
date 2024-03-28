@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
 import type {User} from "lucia";
-import {api} from "@server/axios";
+import {UsersGet} from "@src/service";
 
 // Стили
 import "./styles/users.scss"
@@ -10,7 +10,6 @@ import "./styles/users.scss"
 import {Table} from "@components/table"
 import {MaxSize} from "@components/maxSize";
 import {columns} from "@columns/users"
-import {notFound} from "next/navigation";
 
 export const metadata: Metadata = {
 	title: "Игроки | Майнбридж",
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Component() {
-	const users = await api<User[]>("/users").then(r => r.data).catch(notFound)
+	const users = await UsersGet()
 
 	return (
 			<main className="users">
