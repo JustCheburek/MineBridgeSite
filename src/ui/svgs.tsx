@@ -1,3 +1,4 @@
+import {DS_URL, SUPPORT_URL, TG_URL, VK_URL} from "@src/const";
 import "./styles/state.scss";
 
 type Svg = {
@@ -48,7 +49,7 @@ export const MinebridgeSvg = ({className = "", width, height}: Svg) => (
 )
 
 export const TelegramUrl = () => (
-		<a target="_blank" href={process.env.TG_URL} title="Телеграм" rel="noopener noreferrer">
+		<a target="_blank" href={TG_URL} title="Телеграм" rel="noopener noreferrer">
 			<TelegramSvg/>
 		</a>
 )
@@ -66,7 +67,7 @@ export const TelegramSvg = ({className = "", width = "38px", height = "38px"}: S
 )
 
 export const DiscordUrl = () => (
-		<a target="_blank" href={process.env.DS_URL} title="Дискорд" rel="noopener noreferrer">
+		<a target="_blank" href={DS_URL} title="Дискорд" rel="noopener noreferrer">
 			<DiscordSvg/>
 		</a>
 )
@@ -85,7 +86,7 @@ export const DiscordSvg = ({className = "", width = "38px", height = "38px"}: Sv
 )
 
 export const VkUrl = () => (
-		<a target="_blank" href={process.env.VK_URL} title="ВКонтакте" rel="noopener noreferrer">
+		<a target="_blank" href={VK_URL} title="ВКонтакте" rel="noopener noreferrer">
 			<VKSvg/>
 		</a>
 )
@@ -104,7 +105,7 @@ export const VKSvg = ({className = "", width = "38px", height = "38px"}: Svg) =>
 )
 
 /*export const BoostyUrl = () => (
-		<a target="_blank" href={process.env.BOOSTY_URL} title="Бусти" rel="noopener noreferrer">
+		<a target="_blank" href={BOOSTY_URL} title="Бусти" rel="noopener noreferrer">
 			<BoostySvg/>
 		</a>
 )
@@ -124,7 +125,7 @@ export const BoostySvg = ({className = ""}) => (
 )*/
 
 export const SupportUrl = () => (
-		<a target="_blank" href={process.env.SUPPORT_URL} title="Поддержка" rel="noopener noreferrer">
+		<a target="_blank" href={SUPPORT_URL} title="Поддержка" rel="noopener noreferrer">
 			<SupportSvg/>
 		</a>
 )

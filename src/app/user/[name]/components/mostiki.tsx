@@ -2,9 +2,6 @@
 import type {User} from "lucia";
 import Link from "next/link";
 
-// Стили
-import styles from "../profile.module.scss"
-
 // Utils
 import {ColorText} from "@app/utils";
 
@@ -12,7 +9,7 @@ import {ColorText} from "@app/utils";
 import {MostikiSvg} from "@ui/svgs";
 
 export const Mostiki = ({user}: { user: User }) => (
-		<h4 className={styles.box}>
+		<h4>
 			Мостики: {" "}
 			<strong className={ColorText(user.mostiki)}>
 				{user.mostiki}

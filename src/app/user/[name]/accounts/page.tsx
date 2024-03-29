@@ -29,13 +29,11 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 	async function DeleteFunction(formData: FormData) {
 		"use server"
 
-		const name = formData.get("name")
+		const name = formData.get("name")?.toString()
 
-		if (name !== user.name) {
-			return
-		}
+		if (!name || !isMe || name !== user.name) return
 
-		await userModel.findOneAndDelete({name})
+		await userModel.findByIdAndDelete(user._id)
 
 		redirect("/auth")
 	}

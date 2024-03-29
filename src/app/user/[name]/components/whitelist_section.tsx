@@ -1,8 +1,12 @@
 "use client"
 
 // React
-import {User} from "lucia";
-import {useState} from "react";
+import {User} from "lucia"
+import {parseAsBoolean, useQueryState} from "nuqs";
+import {useFormState, useFormStatus} from "react-dom";
+import {WhitelistFunc} from "../service";
+import {useEffect} from "react";
+import {useRouter} from "next/navigation";
 
 // Стили
 import styles from "../profile.module.scss"
@@ -31,8 +35,23 @@ const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
 		</div>
 )
 
-export function WhitelistSection({user, isMe, func}: { user: User, isMe: boolean, func?: ((formData: FormData) => void) }) {
-	const [modal, setModal] = useState(false)
+export function WhitelistSection({user, isMe}: { user: User, isMe: boolean }) {
+	const [modal, setModal] = useQueryState("whitelist", parseAsBoolean.withDefault(false))
+	const router = useRouter()
+	const {pending} = useFormStatus()
+	const [state, formAction] = useFormState(
+			WhitelistFunc,
+			{
+				user, isMe: isMe, message: "", success: false, error: false
+			}
+	)
+
+	useEffect(() => {
+		if (state.success) {
+			setModal(false)
+			router.refresh()
+		}
+	}, [state.success])
 
 	if (!isMe) {
 		return (
@@ -63,10 +82,13 @@ export function WhitelistSection({user, isMe, func}: { user: User, isMe: boolean
 					</p>
 					<p>
 						Если <span className="red_color">нет</span>, тогда вы можете изменить<br/>
-						его в аккаунтах!
+						его нажав кнопку справа от своего ника!
 					</p>
-					<Form className="form" action={func}>
-						<FormButton>
+					<p aria-live="polite" className={state.error ? "red_color" : ""}>
+						{state.message}
+					</p>
+					<Form action={formAction}>
+						<FormButton disabled={pending}>
 							Подать заявку
 						</FormButton>
 					</Form>

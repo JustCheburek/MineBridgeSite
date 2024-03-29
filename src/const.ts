@@ -1,0 +1,5 @@
+export const DS_URL="https://discord.gg/rmWAuKGb69"
+export const TG_URL="https://t.me/MineBridgeOfficial"
+export const VK_URL="https://vk.com/minebridge"
+export const BOOSTY_URL="https://boosty.to/minebridge"
+export const SUPPORT_URL="https://discord.gg/f95V9Rezqy"

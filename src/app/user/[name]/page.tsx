@@ -1,8 +1,6 @@
 // Сервер
 import {validate} from "@server/validate";
-import {Rcon} from "@server/console";
 import {UserGet} from "@src/service";
-import {userModel} from "@server/models";
 
 // Стили
 import styles from "./profile.module.scss"
@@ -26,31 +24,21 @@ export default async function Profile({params: {name}}: { params: { name: string
 
 	const isMe = user.name === author?.name
 
-	async function whitelistFunc() {
-		"use server"
-
-		const client = await Rcon()
-		console.log(`Добавляю в Whitelist: ${name}`)
-		await client.run(`whitelist add ${name}`)
-
-		await userModel.findOneAndUpdate({name}, {whitelist: true})
-	}
-
 	return (
 			<div className={styles.profile}>
 				<div className={styles.container}>
-					<Avatar user={user}/>
+					<Avatar user={user} isMe={isMe}/>
 
-					<div>
-						<Name user={user}/>
+					<div className={styles.text}>
+						<Name user={user} isMe={isMe}/>
 						<Mostiki user={user}/>
 						<Rating user={user}/>
 					</div>
 				</div>
 
-				<WhitelistSection user={user} isMe={isMe} func={whitelistFunc}/>
+				<WhitelistSection user={user} isMe={isMe}/>
 
-				<InviteSection user={user}/>
+				<InviteSection user={user} isMe={isMe}/>
 			</div>
 	)
 }
