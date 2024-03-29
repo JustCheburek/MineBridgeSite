@@ -9,6 +9,7 @@ type Url = {
 	margin?: string
 	target?: string
 	className?: string
+	download?: boolean
 }
 
 export const Url = (
@@ -18,24 +19,31 @@ export const Url = (
 			target,
 			className = "",
 			margin = "2.5rem",
+			download = false,
 			...props
-		}: PropsWithChildren<Url> & LinkProps) => (
-		<Link
-				href={href}
-				target={
-					target
-							? target
-							: href.toString().startsWith("http")
-									? "_blank"
-									: "_self"
-				}
-				className={`${styles.button} ${className}`}
-				style={{marginBlock: margin}}
-				{...props}
-		>
-			{children}
-		</Link>
-)
+		}: PropsWithChildren<Url> & LinkProps) => {
+
+	if (!target) {
+		if (download || href.toString().startsWith("http")) {
+			target = "_blank"
+		} else {
+			target = "_self"
+		}
+	}
+
+	return (
+			<Link
+					href={href}
+					target={target}
+					className={`${styles.button} ${className}`}
+					style={{marginBlock: margin}}
+					download={download}
+					{...props}
+			>
+				{children}
+			</Link>
+	)
+}
 
 type Button = {
 	margin?: string
