@@ -24,6 +24,7 @@
 .label:has(.input[type="radio"]),
 .label .input:not([type="radio"]),
 .label .textarea,
+.select,
 .button {
   // Отступы
   padding: 1rem;
@@ -35,8 +36,14 @@
           border-color var(--long-transition),
           color var(--short-transition);
 
-  &:active, &:focus-visible, &:hover, &:has(:checked) {
+  &:active,  &:focus-visible, &:hover {
     border-color: var(--unic-color);
+  }
+
+  &:not(.select) {
+    &:has(:checked) {
+      border-color: var(--unic-color);
+    }
   }
 }
 
@@ -75,6 +82,10 @@
     color: var(--gray-color);
     opacity: 0.5;
   }
+}
+
+.select {
+  appearance: none;
 }
 
 .edit, .add {

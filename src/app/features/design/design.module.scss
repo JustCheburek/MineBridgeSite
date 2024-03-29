@@ -1,6 +1,53 @@
 @import "@styles/mixins";
 
 .pie_box {
+	display: grid;
+	place-content: center;
+
+	gap: 3rem;
+
 	@include border($background: var(--gray-color));
 	padding: 2rem;
+
+	@media (width > 728px) {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.pie_text_box {
+	margin-block: auto;
+}
+
+.pie_text {
+	display: grid;
+	grid-template-columns: 1fr 2fr 2fr 1fr;
+	gap: 0.3rem;
+	place-content: center;
+}
+
+.circle {
+	border-radius: 50%;
+
+	width: 1.2em;
+	height: 1.2em;
+
+	&.Фон {
+		border: solid 1px var(--unic-color);
+	}
+}
+
+.download {
+	display: flex;
+	flex-wrap: wrap;
+	place-content: center;
+	gap: 1rem 3rem;
+}
+
+@media (width < 728px) {
+	.pie_text {
+		grid-template-columns: 1fr 2fr 2fr;
+	}
+	.percent {
+		display: none;
+	}
 }

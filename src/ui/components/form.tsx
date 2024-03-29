@@ -83,6 +83,18 @@ export const FormTextarea = (
 		<textarea className={`${styles.textarea} ${className}`} {...props}/>
 )
 
+export const FormSelect = (
+		{
+			children,
+			className = "",
+			...props
+		}: ComponentPropsWithoutRef<"select">
+) => (
+		<select className={`${styles.select} ${className}`} {...props}>
+			{children}
+		</select>
+)
+
 export const Edit = ({...props}: LinkProps) => (
 		<Link className="edit" {...props}>
 			<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="edit" viewBox="0 0 16 16">

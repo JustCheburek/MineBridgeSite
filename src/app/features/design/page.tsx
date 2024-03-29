@@ -10,7 +10,7 @@ import {MaxSize} from "@components/maxSize";
 import {RelativeNav} from "@components/relativeNav";
 import {User} from "@components/user";
 import {PTitle} from "@components/post";
-import {ColorsPie} from "./components";
+import {ColorsPie, Download} from "./components";
 
 export const metadata: Metadata = {
 	title: "Дизайн | Майнбридж",
@@ -18,6 +18,12 @@ export const metadata: Metadata = {
 };
 
 export default function Design() {
+	const data = [
+		{ title: 'Акцент', value: 10, color: '#00A7B1' },
+		{ title: 'Текст', value: 30, color: '#F1F1F1' },
+		{ title: 'Фон', value: 60, color: '#161C1F' },
+	]
+
 	return (
 			<main style={{overflow: "hidden"}}>
 				<MaxSize width={900}>
@@ -55,9 +61,28 @@ export default function Design() {
 								Цвета
 							</h2>
 						</PTitle>
-						<div className={styles.pie_box}>
-							<ColorsPie/>
-						</div>
+							<div className={styles.pie_box}>
+								<div className={styles.pie_text_box}>
+									{data.map(color => (
+											<div key={color.title} className={styles.pie_text}>
+												<div style={{background: color.color}} className={`${styles.circle} ${styles[color.title]}`}></div>
+												<p>{color.title}</p>
+												<span className="all_select">{color.color}</span>
+												<small className={styles.percent}>{color.value}{"%"}</small>
+											</div>
+									))}
+								</div>
+								<ColorsPie data={data}/>
+							</div>
+					</section>
+
+					<section className="grid_center">
+						<PTitle>
+							<h2>
+								Лого
+							</h2>
+						</PTitle>
+						<Download/>
 					</section>
 				</MaxSize>
 			</main>
