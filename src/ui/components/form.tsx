@@ -63,14 +63,18 @@ export const FormGroup = (
 		</div>
 )
 
+type FormInput = {
+	danger?: boolean
+}
 export const FormInput = (
 		{
 			children,
 			className = "",
+			danger = false,
 			...props
-		}: ComponentPropsWithoutRef<"input">
+		}: FormInput & ComponentPropsWithoutRef<"input">
 ) => (
-		<input className={`${styles.input} ${className}`} {...props}/>
+		<input className={`${styles.input} ${danger ? styles.danger : ""} ${className}`} {...props}/>
 )
 
 export const FormTextarea = (

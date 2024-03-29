@@ -3,6 +3,7 @@ import type {PropsWithChildren} from "react";
 import {redirect} from "next/navigation";
 import {validate} from "@server/validate"
 import {userModel} from "@server/models";
+import Link from "next/link";
 import {UserGet} from "@src/service";
 
 // Стили
@@ -25,8 +26,14 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 
 	const isMe = user.name === author?.name
 
-	async function DeleteFunction() {
+	async function DeleteFunction(formData: FormData) {
 		"use server"
+
+		const name = formData.get("name")
+
+		if (name !== user.name) {
+			return
+		}
 
 		await userModel.findOneAndDelete({name})
 
@@ -64,10 +71,10 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					>
 						<GoogleSvg width="1.5em" height="1.5em"/>
 					</Provider>
-					{isMe &&
-							<DeleteUser deleteFnc={DeleteFunction}/>
-					}
 				</div>
+				{isMe &&
+						<DeleteUser name={user.name} deleteFnc={DeleteFunction}/>
+				}
 			</div>
 	)
 }
@@ -82,7 +89,7 @@ function Provider({id, name, isMe, children}: PropsWithChildren<{ id?: string, n
 				{children}
 				{id
 						? <>
-							<p className="all_select medium-font center_text">
+							<p className={`all_select medium-font center_text ${styles.id}`}>
 								{isMe
 										? id
 										: `${"×".repeat(id.length - 4)}${id.substring(id.length - 4)}`
@@ -90,9 +97,9 @@ function Provider({id, name, isMe, children}: PropsWithChildren<{ id?: string, n
 							</p>
 							<SuccessSvg/>
 						</>
-						: <a href={`/auth/${name}`} className="unic_color medium-font center_text" rel="noopener noreferrer">
+						: <Link href={`/auth/${name}`} className="unic_color medium-font center_text">
 							Привязать
-						</a>
+						</Link>
 				}
 			</div>
 	)

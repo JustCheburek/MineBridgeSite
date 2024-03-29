@@ -26,6 +26,11 @@
 .label .textarea,
 .select,
 .button {
+  --_color: var(--unic-color);
+  &.danger {
+    --_color: var(--red-color);
+  }
+
   // Отступы
   padding: 1rem;
 
@@ -37,12 +42,12 @@
           color var(--short-transition);
 
   &:active,  &:focus-visible, &:hover {
-    border-color: var(--unic-color);
+    border-color: var(--_color);
   }
 
   &:not(.select) {
     &:has(:checked) {
-      border-color: var(--unic-color);
+      border-color: var(--_color);
     }
   }
 }
@@ -62,19 +67,11 @@
   padding: 1rem 3rem;
   transition: var(--short-transition) border-color, var(--short-transition) color;
 
-  color: var(--unic-color);
-
-  &.danger {
-    color: var(--red-color);
-  }
+  color: var(--_color);
 
   &:not(:disabled):not([aria-disabled="true"]) {
     &:hover {
-      border-color: var(--unic-color);
-
-      &.danger {
-        border-color: var(--red-color);
-      }
+      border-color: var(--_color);
     }
   }
 

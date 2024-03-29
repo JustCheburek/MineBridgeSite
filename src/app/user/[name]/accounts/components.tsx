@@ -1,10 +1,11 @@
 "use client";
 
-import {Form, FormButton} from "@components/form";
+import {Form, FormButton, FormInput, FormLabel} from "@components/form";
 import {Modal} from "@components/modal";
 import {useState} from "react";
+import type {User} from "@src/types/user";
 
-export function DeleteUser({deleteFnc}: { deleteFnc?: (formData: FormData) => void }) {
+export function DeleteUser({name, deleteFnc}: { name: User["name"], deleteFnc?: (formData: FormData) => void }) {
 	const [modal, setModal] = useState<boolean>(false)
 
 	return (
@@ -17,11 +18,18 @@ export function DeleteUser({deleteFnc}: { deleteFnc?: (formData: FormData) => vo
 				<Modal modal={modal} setModal={setModal}>
 					<h1>Удаление</h1>
 					<p>
-						Ты уверен, что хочешь удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
+						Ты уверен, что хочешь
 					</p>
+					<p>
+						удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
+					</p>
+					<h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
 					<Form className="form" action={deleteFnc}>
+						<FormLabel>
+							<FormInput danger placeholder={name}/>
+						</FormLabel>
 						<FormButton danger>
-							Да, удалить!
+							Жми, жми!
 						</FormButton>
 					</Form>
 				</Modal>

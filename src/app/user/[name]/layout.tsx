@@ -45,7 +45,7 @@ export default async function UserLayout(
 						</SubsectionItem>
 					</Subsections>
 
-					<script type="application/ld+json" dangerouslySetInnerHTML={{__html: person}}/>
+					<script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(person)}}/>
 
 					<Suspense fallback={
 						<p className="center_text">Загрузка...</p>

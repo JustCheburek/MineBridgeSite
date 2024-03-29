@@ -7,17 +7,41 @@
 }
 
 .box {
-	display: grid;
-	align-items: center;
-	gap: 1.5rem;
-	grid-template-columns: auto 1fr auto;
-
-	padding: 1rem 3rem;
+	padding-block: 1rem;
+	padding-inline: clamp(0.2rem, 3vw, 3rem);
 	@include border($radius: 20px);
 }
 
 .ds {
 	scale: 1.3;
+}
+
+@media (width < 470px) {
+	.providers_box {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.box {
+		display: flex;
+		gap: 1rem;
+		width: fit-content;
+
+		* {
+			margin: auto;
+		}
+	}
+	.id {
+		display: none;
+	}
+}
+
+@media (width >= 470px) {
+	.box {
+		display: grid;
+		align-items: center;
+		gap: 1.5rem;
+		grid-template-columns: auto 1fr auto;
+	}
 }
 
 .for_smaller {
