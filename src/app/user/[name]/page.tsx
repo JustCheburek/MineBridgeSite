@@ -1,6 +1,6 @@
 // Сервер
 import {validate} from "@server/validate";
-import {UserGet} from "@src/service";
+import {getUser} from "@src/service";
 
 // Стили
 import styles from "./profile.module.scss"
@@ -19,7 +19,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
-	const user = await UserGet({name})
+	const user = await getUser({name})
 	const {user: author} = await validate()
 
 	const isMe = user.name === author?.name

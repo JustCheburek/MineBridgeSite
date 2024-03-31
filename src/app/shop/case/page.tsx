@@ -1,6 +1,6 @@
 // Next
 import type {Metadata} from "next";
-import {CasesGet, DropsGet} from "@src/service";
+import {getCases, getDrops} from "@src/service";
 import {validate} from "@server/validate";
 
 // Компоненты
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 
 export default async function CasePage() {
 	const {user} = await validate()
-	const cases = await CasesGet()
-	const drops = await DropsGet()
+	const cases = await getCases()
+	const drops = await getDrops()
 
 	return (
 			<CaseClient cases={cases} drops={drops} user={user}/>

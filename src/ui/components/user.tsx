@@ -1,6 +1,6 @@
 // Сервер
 import type {User} from "lucia"
-import {UserGet} from "@src/service";
+import {getUser} from "@src/service";
 import Link from "next/link";
 
 // Стили
@@ -10,7 +10,7 @@ import styles from "./styles/user.module.scss";
 import {Img} from "@components/img";
 
 export async function User(param: { id?: User["id"], name?: User["name"] }) {
-	const user = await UserGet(param)
+	const user = await getUser(param)
 
 	return (
 			<Link href={`/user/${user.name}`} className={styles.user_box}>

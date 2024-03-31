@@ -6,6 +6,7 @@ import {modelOptions, pre, prop, Ref} from "@typegoose/typegoose";
 import {Role} from "@src/types/role";
 import {From} from "@src/types/invite";
 
+
 @pre<User>("save", function () {
 	this.rating = this.punishments?.reduce((accum, {rating}) => accum + rating, 0) || 0
 })
@@ -40,7 +41,7 @@ export class User {
 	public rating!: number
 
 	@prop({ref: () => Role})
-	public roles?: Ref<Role>[]
+	public roles!: Ref<Role>[]
 
 	@prop({type: () => [Punishment]})
 	public punishments!: Punishment[]

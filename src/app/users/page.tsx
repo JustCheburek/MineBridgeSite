@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
 import type {User} from "lucia";
-import {UsersGet} from "@src/service";
+import {getUsers} from "@src/service";
 
 // Стили
 import "./styles/users.scss"
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Component() {
-	const users = await UsersGet()
+	const users = await getUsers()
 
 	return (
 			<main className="users">

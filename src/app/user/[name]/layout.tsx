@@ -1,7 +1,7 @@
 import {Suspense} from "react";
 import type {PropsWithChildren} from "react";
 import {ProfilePage} from "schema-dts";
-import {UserGet} from "@src/service";
+import {getUser} from "@src/service";
 
 // Компоненты
 import {SubsectionItem, Subsections} from "@components/subsections";
@@ -16,7 +16,7 @@ export default async function UserLayout(
 			children,
 			params: {name}
 		}: PropsWithChildren<UserLayout>) {
-	const user = await UserGet({name})
+	const user = await getUser({name})
 
 	const person: ProfilePage = {
 		"@type": "ProfilePage",

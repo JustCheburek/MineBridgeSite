@@ -6,7 +6,7 @@ import type {User} from "lucia";
 import {parseAsBoolean, useQueryState} from "nuqs";
 import {useEffect} from "react";
 import {NameChange} from "../service"
-import {redirect} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 // Компоненты
 import {Edit, Form, FormButton, FormInput, FormLabel} from "@components/form";
@@ -14,6 +14,7 @@ import {Modal} from "@components/modal";
 
 export const Name = ({user, isMe}: { user: User, isMe: boolean }) => {
 	const [modal, setModal] = useQueryState<boolean>("name", parseAsBoolean.withDefault(false))
+	const router = useRouter()
 	const {pending} = useFormStatus()
 	const [state, formAction] = useFormState(
 			NameChange,
@@ -25,7 +26,7 @@ export const Name = ({user, isMe}: { user: User, isMe: boolean }) => {
 	useEffect(() => {
 		if (state.success) {
 			setModal(false)
-			redirect(`/user/${user.name}`)
+			router.refresh()
 		}
 	}, [state.success])
 

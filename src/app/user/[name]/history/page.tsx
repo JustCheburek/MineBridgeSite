@@ -1,6 +1,6 @@
 // Сервер
 import Link from "next/link";
-import {UserGet} from "@src/service";
+import {getUser} from "@src/service";
 
 // Компоненты
 import {PunishmentSection} from "./components/punishment_section";
@@ -15,7 +15,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function History({params: {name}}: { params: { name: string } }) {
-	const user = await UserGet({name})
+	const user = await getUser({name})
 
 	return (
 			<div className={styles.integration_content}>

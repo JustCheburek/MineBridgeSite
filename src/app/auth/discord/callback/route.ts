@@ -2,11 +2,12 @@ import {discord, lucia} from "@server/lucia";
 import {cookies} from "next/headers";
 import {generateId, User} from "lucia";
 import type {DSUser, GuildDSUser} from "@src/types/user";
-import {userModel} from "@server/models";
+import {roleModel, userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@server/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
+import {Role, Roles} from "@src/types/role";
 
 
 async function AddInvite(userId: string, name: string, inviterId?: string): Promise<string | undefined> {
@@ -55,8 +56,6 @@ export async function GET(request: NextRequest) {
 				Authorization: `Bearer ${accessToken}`
 			}
 		}).then(r => r.data);
-
-		console.log(`Токен: ${accessToken}`)
 
 		if (!dsUser.email || !dsUser.verified) {
 			return new NextResponse("Нету почты", {status: 400})
@@ -141,6 +140,8 @@ export async function GET(request: NextRequest) {
 					}
 			)
 		} else {
+			const adminRole = await roleModel.findOne<Role>({name: "ADMIN"})
+
 			const candidate = await userModel.findOneAndUpdate(
 					{
 						$or: [
@@ -149,6 +150,7 @@ export async function GET(request: NextRequest) {
 						]
 					},
 					{
+						roles: [adminRole],
 						email: dsUser.email,
 						discordId: dsUser.id,
 					}
@@ -173,7 +175,14 @@ export async function GET(request: NextRequest) {
 				}
 
 				if (guildMember?.roles) {
-					console.log(guildMember.roles)
+					guildMember.roles.map(async id => {
+						// @ts-ignore
+						const role = await roleModel.findOne<Role>({name: Roles[id]})
+						if (!role) return
+
+						// @ts-ignore
+						userData.roles?.push(role)
+					})
 				}
 
 				await userModel.create(userData)

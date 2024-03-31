@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
 import Link from "next/link";
-import {CasesGet} from "@src/service";
+import {getCases} from "@src/service";
 
 // Компоненты
 import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, Text} from "./components";
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 
 export default async function Shop() {
-	const cases = await CasesGet()
+	const cases = await getCases()
 
 	return (
 			<main className={styles.shop}>
