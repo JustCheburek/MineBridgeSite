@@ -98,8 +98,8 @@ export class User {
 		).then(r => r.data);
 
 		const roles = allRoles.filter(({id}) => dsUser.roles.includes(id))
-		const isModer = roles?.some(({name}) => name.toLowerCase().includes("модер"))
-		const isAdmin = isModer || roles?.some(({name}) => name.toLowerCase().includes("админ"))
+		const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
+		const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
 
 		return {
 			roles,

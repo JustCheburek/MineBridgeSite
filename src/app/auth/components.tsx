@@ -15,7 +15,6 @@ export function AuthForm() {
 			<Form className={styles.form}>
 				<FormLabel>
 					<FormInput
-							type="text"
 							placeholder="Майнкрафт никнейм"
 							name="name"
 							autoComplete="name"

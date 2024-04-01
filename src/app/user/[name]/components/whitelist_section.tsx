@@ -51,7 +51,7 @@ export function WhitelistSection({user, access}: { user: User, access: boolean }
 			setModal(false)
 			router.refresh()
 		}
-	}, [state.success])
+	}, [state])
 
 	if (!access) {
 		return (

@@ -29,7 +29,7 @@ export const Avatar = ({user, access}: { user: User, access: boolean }) => {
 			setModal(false)
 			router.refresh()
 		}
-	}, [state.success])
+	}, [state])
 
 	return (<>
 		<ImgBox>

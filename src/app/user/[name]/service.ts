@@ -9,8 +9,6 @@ type State = {
 }
 
 export async function NameChange(prevState: State, formData: FormData) {
-	"use server"
-
 	const {user, access} = prevState
 	const name = formData.get("name")?.toString()
 
@@ -31,8 +29,6 @@ export async function NameChange(prevState: State, formData: FormData) {
 }
 
 export async function PhotoChange(prevState: State, formData: FormData) {
-	"use server"
-
 	const {user, access} = prevState
 	const photo = formData.get("photo")?.toString()
 
@@ -53,8 +49,6 @@ export async function PhotoChange(prevState: State, formData: FormData) {
 }
 
 export async function WhitelistFunc(prevState: State) {
-	"use server"
-
 	const {user, access} = prevState
 
 	if (!access) return {
@@ -68,6 +62,90 @@ export async function WhitelistFunc(prevState: State) {
 	await client.run(`whitelist add ${user.name}`)
 
 	await userModel.findByIdAndUpdate(user._id, {whitelist: true})
+
+	return {
+		...prevState,
+		error: false,
+		success: true,
+		message: "Успешно"
+	}
+}
+
+export async function MostikiChange(prevState: State, formData: FormData) {
+	const {user, access} = prevState
+	const mostiki = Number(formData.get("mostiki"))
+
+	if (!access || !mostiki || mostiki === 0) return {
+		...prevState,
+		error: true,
+		message: "Произошла ошибка, проверь мостики!"
+	}
+
+	await userModel.findByIdAndUpdate(
+			user._id,
+			{
+				$inc: {mostiki: mostiki}
+			}
+	)
+
+	return {
+		...prevState,
+		error: false,
+		success: true,
+		message: "Успешно"
+	}
+}
+
+export async function RatingChange(prevState: State, formData: FormData) {
+	const {user, access} = prevState
+	const reason = formData.get("reason")
+	const rating = Number(formData.get("rating"))
+	const author = formData.get("author")
+
+	if (!access || !reason || !rating || !author || rating === 0) return {
+		...prevState,
+		error: true,
+		message: "Произошла ошибка, проверь поля!"
+	}
+
+	await userModel.findByIdAndUpdate(
+			user._id,
+			{
+				$push: {
+					punishments: {
+						reason,
+						rating,
+						author
+					}
+				}
+			}
+	)
+
+	return {
+		...prevState,
+		error: false,
+		success: true,
+		message: "Успешно"
+	}
+}
+
+export async function UserDelete(prevState: State, formData: FormData) {
+	const {user, access} = prevState
+	const name = formData.get("name")
+
+	if (!access || !name) return {
+		...prevState,
+		error: true,
+		message: "Произошла ошибка, проверь поля!"
+	}
+
+	if (name !== user.name) return {
+		...prevState,
+		error: true,
+		message: "Ник не совпадает!"
+	}
+
+	await userModel.findByIdAndDelete(user._id)
 
 	return {
 		...prevState,

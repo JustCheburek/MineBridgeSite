@@ -84,7 +84,6 @@ function Punishment({punishment}) {
 						>
 							<FormLabel>
 								<input
-										type="text"
 										placeholder="Причина"
 										autoComplete="reason"
 										required
@@ -105,7 +104,6 @@ function Punishment({punishment}) {
 							</FormLabel>
 							<FormLabel>
 								<input
-										type="text"
 										placeholder="Автор"
 										autoComplete="author"
 										required

@@ -5,7 +5,7 @@ import {Case, Drop} from "@src/types/case";
 import type {Role} from "@src/types/role";
 
 export async function getUser(param: { id?: User["id"], name?: User["name"] }) {
-	return await api<{ user: User, roles?: Role[] }>(`/user`, {params: param}).then(r => r.data).catch(notFound)
+	return await api<{ user: User, roles?: Role[], isModer: boolean, isAdmin: boolean }>(`/user`, {params: param}).then(r => r.data).catch(notFound)
 }
 
 export async function getUsers() {

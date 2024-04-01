@@ -1,8 +1,6 @@
 // Сервер
 import type {PropsWithChildren} from "react";
-import {redirect} from "next/navigation";
 import {validate} from "@server/validate"
-import {userModel} from "@server/models";
 import Link from "next/link";
 import {getUser} from "@src/service";
 
@@ -21,22 +19,11 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
-	const {user, isAdmin} = await getUser({name})
-	const {user: author} = await validate()
+	const {user} = await getUser({name})
+	const {user: author, isAdmin} = await validate()
 
-	const access = isAdmin || user.name === author?.name
-
-	async function DeleteFunction(formData: FormData) {
-		"use server"
-
-		const name = formData.get("name")?.toString()
-
-		if (!name || !access || name !== user.name) return
-
-		await userModel.findByIdAndDelete(user._id)
-
-		redirect("/auth")
-	}
+	const isMe = user.name === author?.name
+	const access = isAdmin || isMe
 
 	return (
 			<div className="account_content">
@@ -51,36 +38,46 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					<Provider
 							name="email"
 							id={user.email}
-							access={access}
+							isMe={isMe}
+							isAdmin={isAdmin}
 					>
 						<EmailSvg width="1.5em" height="1.5em"/>
 					</Provider>
 					<Provider
 							name="discord"
 							id={user.discordId}
-							access={access}
+							isMe={isMe}
+							isAdmin={isAdmin}
 					>
 						<DiscordSvg className={`color ${styles.ds}`} width="1.5em" height="1.5em"/>
 					</Provider>
 					<Provider
 							name="google"
 							id={user.googleId}
-							access={access}
+							isMe={isMe}
+							isAdmin={isAdmin}
 					>
 						<GoogleSvg width="1.5em" height="1.5em"/>
 					</Provider>
 				</div>
 				{access &&
-						<DeleteUser name={user.name} deleteFnc={DeleteFunction}/>
+						<DeleteUser user={user} access={access}/>
 				}
 			</div>
 	)
 }
 
-function Provider({id, name, access, children}: PropsWithChildren<{ id?: string, name: string, access: boolean }>) {
-	if (!id && !access) {
+function Provider({id, name, isMe, isAdmin, children}: PropsWithChildren<{
+	id?: string,
+	name: string,
+	isAdmin: boolean,
+	isMe: boolean
+}>) {
+	if (!id && !isMe) {
 		return null
 	}
+
+	const access = isAdmin || isMe
 
 	return (
 			<div className={styles.box}>

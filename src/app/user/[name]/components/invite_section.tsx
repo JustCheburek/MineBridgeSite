@@ -1,7 +1,7 @@
 import type {User} from "lucia";
 
-export function InviteSection({user, isMe}: {user: User, isMe: boolean}) {
-	if (!isMe) return
+export function InviteSection({user, access}: {user: User, access: boolean}) {
+	if (!access) return
 
 	return (
 			<section className="center_text">

@@ -28,38 +28,35 @@ export function Name({user, access}: { user: User, access: boolean }) {
 			setModal(false)
 			router.refresh()
 		}
-	}, [state.success])
+	}, [state])
 
-	return (
-			<>
-				<h2 className="unic_color">
-					<span className="all_select">{user.name}</span>
+	return (<>
+		<h2 className="unic_color">
+			<span className="all_select">{user.name}</span>
 
-					{access && <Edit setModal={setModal}/>}
-				</h2>
-				<Modal modal={modal} setModal={setModal}>
-					<h1>Ник</h1>
-					<p aria-live="polite" className={state.error ? "red_color" : ""}>
-						{state.message}
-					</p>
-					<Form action={formAction}>
-						<FormLabel>
-							<FormInput
-									name="name"
-									type="text"
-									placeholder={user.name}
-									autoComplete="name"
-									required
-									minLength={4}
-									maxLength={20}
-									disabled={pending}
-							/>
-						</FormLabel>
-						<FormButton disabled={pending}>
-							Сменить
-						</FormButton>
-					</Form>
-				</Modal>
-			</>
-	)
+			{access && <Edit setModal={setModal}/>}
+		</h2>
+		<Modal modal={modal} setModal={setModal}>
+			<h1>Ник</h1>
+			<p aria-live="polite" className={state.error ? "red_color" : ""}>
+				{state.message}
+			</p>
+			<Form action={formAction}>
+				<FormLabel>
+					<FormInput
+							name="name"
+							placeholder={user.name}
+							autoComplete="name"
+							required
+							minLength={4}
+							maxLength={20}
+							disabled={pending}
+					/>
+				</FormLabel>
+				<FormButton disabled={pending}>
+					Сменить
+				</FormButton>
+			</Form>
+		</Modal>
+	</>)
 }

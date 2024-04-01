@@ -21,27 +21,27 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
 	const {user, roles} = await getUser({name})
-	const {user: author, isModer} = await validate()
+	const {user: author, isModer, isAdmin} = await validate()
 
 	const isMe = user.name === author?.name
-	const access = isModer || isMe
+	const moderAccess = isModer || isMe
 
 	return (
 			<div className={styles.profile}>
 				<div className={styles.container}>
-					<Avatar user={user} access={access}/>
+					<Avatar user={user} access={moderAccess}/>
 
 					<div className={styles.text}>
-						<Name user={user} access={access}/>
+						<Name user={user} access={moderAccess}/>
 						<Roles roles={roles}/>
-						<Mostiki user={user}/>
-						<Rating user={user}/>
+						<Mostiki user={user} access={isAdmin}/>
+						<Rating user={user} access={isModer}/>
 					</div>
 				</div>
 
-				<WhitelistSection user={user} access={access}/>
+				<WhitelistSection user={user} access={moderAccess}/>
 
-				<InviteSection user={user} isMe={isMe}/>
+				<InviteSection user={user} access={isMe}/>
 			</div>
 	)
 }
