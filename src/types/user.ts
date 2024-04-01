@@ -2,9 +2,9 @@
 
 import {Punishment} from "@src/types/punishment";
 import {CasePurchase, StickerPurchase} from "@src/types/purchase";
-import {modelOptions, pre, prop, Ref} from "@typegoose/typegoose";
-import {Role} from "@src/types/role";
+import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
 import {From} from "@src/types/invite";
+import axios from "axios";
 
 
 @pre<User>("save", function () {
@@ -40,9 +40,6 @@ export class User {
 	@prop({default: 0})
 	public rating!: number
 
-	@prop({ref: () => Role})
-	public roles!: Ref<Role>[]
-
 	@prop({type: () => [Punishment]})
 	public punishments!: Punishment[]
 
@@ -64,6 +61,28 @@ export class User {
 
 	@prop()
 	public updatedAt!: Date
+
+	public static async getRoles(this: ReturnModelType<typeof User>, discordId: string): Promise<Role[]> {
+		const roles = await axios.get<Role[]>(
+				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/roles`,
+				{
+					headers: {
+						Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+					}
+				}
+		).then(r => r.data);
+
+		const dsUser = await axios.get<GuildDSUser>(
+				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${discordId}`,
+				{
+					headers: {
+						Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+					}
+				}
+		).then(r => r.data);
+
+		return roles.filter(({id}) => dsUser.roles.includes(id))
+	}
 }
 
 export interface DSUser {

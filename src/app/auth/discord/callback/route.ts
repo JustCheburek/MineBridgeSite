@@ -2,37 +2,14 @@ import {discord, lucia} from "@server/lucia";
 import {cookies} from "next/headers";
 import {generateId, User} from "lucia";
 import type {DSUser, GuildDSUser} from "@src/types/user";
-import {roleModel, userModel} from "@server/models";
+import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@server/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
-import {Role, Roles} from "@src/types/role";
+import {DS_URL} from "@src/const";
+import {AddInvite} from "@app/auth/addInvite";
 
-
-async function AddInvite(userId: string, name: string, inviterId?: string): Promise<string | undefined> {
-	if (!inviterId || inviterId === userId) return
-
-	const inviter = await userModel.findByIdAndUpdate<User>(
-			inviterId,
-			{
-				$inc: {mostiki: 5},
-				$push: {
-					invites: userId,
-					punishments: {
-						reason: `Позвал ${name}`,
-						rating: 5,
-						author: "AutoMod"
-					}
-				}
-			},
-			{
-				new: true
-			}
-	)
-
-	return inviter?._id
-}
 
 export async function GET(request: NextRequest) {
 	const url = request.nextUrl
@@ -85,7 +62,11 @@ export async function GET(request: NextRequest) {
 				}
 		).then(r => r.data).catch(console.error)
 
-		console.log(`Участник гильдии ${dsUser.username}: ${JSON.stringify(guildMember) || "его нет :/"}`)
+		if (!guildMember) {
+			return new NextResponse(`Пожалуйста, присоединитесь к дс группе майнбриджа и попробуйте ещё раз! ${DS_URL}`, {
+				status: 400
+			});
+		}
 
 		// Изменение ника
 		if (!guildMember?.nick) {
@@ -140,8 +121,6 @@ export async function GET(request: NextRequest) {
 					}
 			)
 		} else {
-			const adminRole = await roleModel.findOne<Role>({name: "ADMIN"})
-
 			const candidate = await userModel.findOneAndUpdate(
 					{
 						$or: [
@@ -150,11 +129,14 @@ export async function GET(request: NextRequest) {
 						]
 					},
 					{
-						roles: [adminRole],
 						email: dsUser.email,
 						discordId: dsUser.id,
 					}
 			)
+
+			if ((guildMember?.joined_at || 0) > (candidate?.createdAt || 0)) {
+				userData.updatedAt = userData.createdAt = guildMember.joined_at
+			}
 
 			if (candidate) {
 				if (!candidate?.from) {
@@ -170,21 +152,6 @@ export async function GET(request: NextRequest) {
 					await candidate.save()
 				}
 			} else {
-				if (guildMember?.joined_at) {
-					userData.updatedAt = userData.createdAt = guildMember.joined_at
-				}
-
-				if (guildMember?.roles) {
-					guildMember.roles.map(async id => {
-						// @ts-ignore
-						const role = await roleModel.findOne<Role>({name: Roles[id]})
-						if (!role) return
-
-						// @ts-ignore
-						userData.roles?.push(role)
-					})
-				}
-
 				await userModel.create(userData)
 			}
 

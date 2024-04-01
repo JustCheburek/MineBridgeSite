@@ -1,13 +1,13 @@
 import {userModel} from "@server/models";
-import type {User} from "lucia";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
 	const url = request.nextUrl
-	const _id = url.searchParams.get("_id");
-	const name = url.searchParams.get("name");
+	const _id = url.searchParams.get("_id")
+	const name = url.searchParams.get("name")
 
-	const user = await userModel.findOne<User>({
+	// @ts-ignore
+	const user = await userModel.findOne({
 		$or: [
 			{_id},
 			{name}
@@ -20,5 +20,11 @@ export async function GET(request: NextRequest) {
 		})
 	}
 
-	return NextResponse.json(user)
+	let roles: Role[] | undefined
+
+	if (user.discordId) {
+		roles = await userModel.getRoles(user.discordId)
+	}
+
+	return NextResponse.json({user, roles})
 }

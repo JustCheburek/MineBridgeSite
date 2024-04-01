@@ -1,15 +1,13 @@
 import {models} from "mongoose"
-import {getModelForClass} from '@typegoose/typegoose';
+import {getModelForClass, ReturnModelType} from '@typegoose/typegoose';
 import {User} from "@src/types/user";
-import {Role} from "@src/types/role";
 import {Session} from "@src/types/session";
 import {Drop, Case} from "@src/types/case";
 import {Connect} from "./db";
 
 Connect()
 
-export const userModel = models?.User || getModelForClass(User)
-export const roleModel = models?.Role || getModelForClass(Role)
-export const sessionModel = models?.Session || getModelForClass(Session)
-export const dropModel = models?.Drop || getModelForClass(Drop)
-export const caseModel = models?.Case || getModelForClass(Case)
+export const userModel = (models?.User || getModelForClass(User)) as ReturnModelType<typeof User>
+export const sessionModel = (models?.Session || getModelForClass(Session)) as ReturnModelType<typeof Session>
+export const dropModel = (models?.Drop || getModelForClass(Drop)) as ReturnModelType<typeof Drop>
+export const caseModel = (models?.Case || getModelForClass(Case)) as ReturnModelType<typeof Case>

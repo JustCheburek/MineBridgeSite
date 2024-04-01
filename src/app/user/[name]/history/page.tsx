@@ -15,7 +15,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function History({params: {name}}: { params: { name: string } }) {
-	const user = await getUser({name})
+	const {user} = await getUser({name})
 
 	return (
 			<div className={styles.integration_content}>

@@ -16,7 +16,7 @@ export default async function UserLayout(
 			children,
 			params: {name}
 		}: PropsWithChildren<UserLayout>) {
-	const user = await getUser({name})
+	const {user} = await getUser({name})
 
 	const person: ProfilePage = {
 		"@type": "ProfilePage",

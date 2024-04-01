@@ -1,5 +1,4 @@
 import {userModel} from "@server/models";
-import {User} from "lucia";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -18,7 +17,7 @@ export async function GET(request: NextRequest) {
 		}
 	}
 
-	const users = await userModel.find<User>(filter);
+	const users = await userModel.find(filter);
 
 	if (!users?.length) {
 		return new NextResponse("Пользователи не найдены", {

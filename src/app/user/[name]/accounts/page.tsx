@@ -21,7 +21,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
-	const user = await getUser({name})
+	const {user} = await getUser({name})
 	const {user: author} = await validate()
 
 	const isMe = user.name === author?.name
