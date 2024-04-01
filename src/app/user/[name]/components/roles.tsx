@@ -9,7 +9,7 @@ export function Roles({roles}: { roles?: Role[] }) {
 	return (
 			<div className={styles.roles}>
 				{roles.map(role => (
-						<small className={styles.role}>
+						<small>
 							{role.name}
 						</small>
 				))}
