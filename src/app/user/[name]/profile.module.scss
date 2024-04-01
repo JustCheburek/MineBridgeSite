@@ -21,6 +21,14 @@
 	font-weight: 500;
 }
 
+.roles {
+	display: flex;
+	gap: 0.2rem 1rem;
+	flex-wrap: wrap;
+}
+
+
+
 // Белый список
 @media (width > 728px) {
 	.container {

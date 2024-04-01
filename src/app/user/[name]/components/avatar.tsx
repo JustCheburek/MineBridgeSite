@@ -13,14 +13,14 @@ import {Img, ImgBox} from "@components/img"
 import {Modal} from "@components/modal";
 import {Edit, Form, FormButton, FormLabel, FormTextarea} from "@components/form";
 
-export const Avatar = ({user, isMe}: { user: User, isMe: boolean }) => {
+export const Avatar = ({user, access}: { user: User, access: boolean }) => {
 	const [modal, setModal] = useQueryState<boolean>("photo", parseAsBoolean.withDefault(false))
 	const router = useRouter()
 	const {pending} = useFormStatus()
 	const [state, formAction] = useFormState(
 			PhotoChange,
 			{
-				user, isMe: isMe, message: "Введите ссылку на фотку", success: false, error: false
+				user, access, message: "Введите ссылку на фотку", success: false, error: false
 			}
 	)
 

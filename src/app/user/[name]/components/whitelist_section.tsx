@@ -35,14 +35,14 @@ const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
 		</div>
 )
 
-export function WhitelistSection({user, isMe}: { user: User, isMe: boolean }) {
+export function WhitelistSection({user, access}: { user: User, access: boolean }) {
 	const [modal, setModal] = useQueryState("whitelist", parseAsBoolean.withDefault(false))
 	const router = useRouter()
 	const {pending} = useFormStatus()
 	const [state, formAction] = useFormState(
 			WhitelistFunc,
 			{
-				user, isMe: isMe, message: "", success: false, error: false
+				user, access, message: "", success: false, error: false
 			}
 	)
 
@@ -53,7 +53,7 @@ export function WhitelistSection({user, isMe}: { user: User, isMe: boolean }) {
 		}
 	}, [state.success])
 
-	if (!isMe) {
+	if (!access) {
 		return (
 				<section className={`${styles.whitelist} center_text`}>
 					<h2>

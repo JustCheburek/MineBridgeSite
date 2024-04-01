@@ -21,17 +21,17 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
-	const {user} = await getUser({name})
+	const {user, isAdmin} = await getUser({name})
 	const {user: author} = await validate()
 
-	const isMe = user.name === author?.name
+	const access = isAdmin || user.name === author?.name
 
 	async function DeleteFunction(formData: FormData) {
 		"use server"
 
 		const name = formData.get("name")?.toString()
 
-		if (!name || !isMe || name !== user.name) return
+		if (!name || !access || name !== user.name) return
 
 		await userModel.findByIdAndDelete(user._id)
 
@@ -51,34 +51,34 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					<Provider
 							name="email"
 							id={user.email}
-							isMe={isMe}
+							access={access}
 					>
 						<EmailSvg width="1.5em" height="1.5em"/>
 					</Provider>
 					<Provider
 							name="discord"
 							id={user.discordId}
-							isMe={isMe}
+							access={access}
 					>
 						<DiscordSvg className={`color ${styles.ds}`} width="1.5em" height="1.5em"/>
 					</Provider>
 					<Provider
 							name="google"
 							id={user.googleId}
-							isMe={isMe}
+							access={access}
 					>
 						<GoogleSvg width="1.5em" height="1.5em"/>
 					</Provider>
 				</div>
-				{isMe &&
+				{access &&
 						<DeleteUser name={user.name} deleteFnc={DeleteFunction}/>
 				}
 			</div>
 	)
 }
 
-function Provider({id, name, isMe, children}: PropsWithChildren<{ id?: string, name: string, isMe: boolean }>) {
-	if (!id && !isMe) {
+function Provider({id, name, access, children}: PropsWithChildren<{ id?: string, name: string, access: boolean }>) {
+	if (!id && !access) {
 		return null
 	}
 
@@ -88,7 +88,7 @@ function Provider({id, name, isMe, children}: PropsWithChildren<{ id?: string, n
 				{id
 						? <>
 							<p className={`all_select medium-font center_text ${styles.id}`}>
-								{isMe
+								{access
 										? id
 										: `${"×".repeat(id.length - 4)}${id.substring(id.length - 4)}`
 								}

@@ -12,14 +12,14 @@ import {useRouter} from "next/navigation";
 import {Edit, Form, FormButton, FormInput, FormLabel} from "@components/form";
 import {Modal} from "@components/modal";
 
-export const Name = ({user, isMe}: { user: User, isMe: boolean }) => {
+export function Name({user, access}: { user: User, access: boolean }) {
 	const [modal, setModal] = useQueryState<boolean>("name", parseAsBoolean.withDefault(false))
 	const router = useRouter()
 	const {pending} = useFormStatus()
 	const [state, formAction] = useFormState(
 			NameChange,
 			{
-				user, isMe: isMe, message: "Введите свой майнкрафт никнейм", success: false, error: false
+				user, access, message: "Введите свой майнкрафт никнейм", success: false, error: false
 			}
 	)
 

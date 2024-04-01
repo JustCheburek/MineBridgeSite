@@ -5,16 +5,16 @@ import {Rcon} from "@server/console";
 import type {User} from "lucia";
 
 type State = {
-	message: string, user: User, isMe: boolean, success: boolean, error: boolean
+	message: string, user: User, access: boolean, success: boolean, error: boolean
 }
 
 export async function NameChange(prevState: State, formData: FormData) {
 	"use server"
 
-	const {user, isMe} = prevState
+	const {user, access} = prevState
 	const name = formData.get("name")?.toString()
 
-	if (!isMe || !name || name === user.name) return {
+	if (!access || !name || name === user.name) return {
 		...prevState,
 		error: true,
 		message: "Произошла ошибка, проверь ник!"
@@ -33,12 +33,12 @@ export async function NameChange(prevState: State, formData: FormData) {
 export async function PhotoChange(prevState: State, formData: FormData) {
 	"use server"
 
-	const {user, isMe} = prevState
+	const {user, access} = prevState
 	const photo = formData.get("photo")?.toString()
 
 	console.log(prevState, photo)
 
-	if (!isMe || !photo || photo === user.photo) return {
+	if (!access || !photo || photo === user.photo) return {
 		...prevState,
 		error: true,
 		message: "Произошла ошибка, проверь ссылку!"
@@ -57,12 +57,12 @@ export async function PhotoChange(prevState: State, formData: FormData) {
 export async function WhitelistFunc(prevState: State) {
 	"use server"
 
-	const {user, isMe} = prevState
+	const {user, access} = prevState
 
-	if (!isMe) return {
+	if (!access) return {
 		...prevState,
 		error: true,
-		message: "Это не ты!"
+		message: "Нет доступа!"
 	}
 
 	const client = await Rcon()

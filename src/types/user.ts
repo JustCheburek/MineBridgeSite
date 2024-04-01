@@ -5,6 +5,7 @@ import {CasePurchase, StickerPurchase} from "@src/types/purchase";
 import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
 import {From} from "@src/types/invite";
 import axios from "axios";
+import type {Role} from "@src/types/role";
 
 
 @pre<User>("save", function () {
