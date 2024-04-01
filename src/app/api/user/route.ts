@@ -1,6 +1,5 @@
 import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
-import type {Role} from "@src/types/role";
 
 export async function GET(request: NextRequest) {
 	const url = request.nextUrl
@@ -21,15 +20,7 @@ export async function GET(request: NextRequest) {
 		})
 	}
 
-	let roles: Role[] | undefined,
-			isModer = false,
-			isAdmin = false
-
-	if (user.discordId) {
-		roles = await userModel.getRoles(user.discordId)
-		isModer = roles?.some(({name}) => name.toLowerCase().includes("модер"))
-		isAdmin = isModer || roles?.some(({name}) => name.toLowerCase().includes("админ"))
-	}
+	const {roles, isModer, isAdmin} = await userModel.getRoles(user?.discordId)
 
 	return NextResponse.json({user, roles, isModer, isAdmin})
 }

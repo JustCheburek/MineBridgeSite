@@ -36,8 +36,6 @@ export async function PhotoChange(prevState: State, formData: FormData) {
 	const {user, access} = prevState
 	const photo = formData.get("photo")?.toString()
 
-	console.log(prevState, photo)
-
 	if (!access || !photo || photo === user.photo) return {
 		...prevState,
 		error: true,

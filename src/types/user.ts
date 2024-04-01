@@ -63,8 +63,23 @@ export class User {
 	@prop()
 	public updatedAt!: Date
 
-	public static async getRoles(this: ReturnModelType<typeof User>, discordId: string): Promise<Role[]> {
-		const roles = await axios.get<Role[]>(
+	public static async getRoles(
+			this: ReturnModelType<typeof User>,
+			discordId?: string
+	): Promise<{
+		roles: Role[] | [],
+		isModer: boolean,
+		isAdmin: boolean
+	}> {
+		if (!discordId) {
+			return {
+				roles: [],
+				isModer: false,
+				isAdmin: false
+			}
+		}
+
+		const allRoles = await axios.get<Role[]>(
 				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/roles`,
 				{
 					headers: {
@@ -82,7 +97,14 @@ export class User {
 				}
 		).then(r => r.data);
 
-		return roles.filter(({id}) => dsUser.roles.includes(id))
+		const roles = allRoles.filter(({id}) => dsUser.roles.includes(id))
+		const isModer = roles?.some(({name}) => name.toLowerCase().includes("модер"))
+		const isAdmin = isModer || roles?.some(({name}) => name.toLowerCase().includes("админ"))
+
+		return {
+			roles,
+			isModer, isAdmin
+		}
 	}
 }
 

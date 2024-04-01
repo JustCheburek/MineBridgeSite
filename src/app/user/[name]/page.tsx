@@ -20,8 +20,8 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
-	const {user, roles, isModer} = await getUser({name})
-	const {user: author} = await validate()
+	const {user, roles} = await getUser({name})
+	const {user: author, isModer} = await validate()
 
 	const isMe = user.name === author?.name
 	const access = isModer || isMe

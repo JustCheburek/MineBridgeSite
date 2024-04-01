@@ -34,7 +34,7 @@ export const Avatar = ({user, access}: { user: User, access: boolean }) => {
 	return (<>
 		<ImgBox>
 			<Img src={user.photo} alt="Ава" className="user_icon" width={180}/>
-			<Edit setModal={setModal}/>
+			{access && <Edit setModal={setModal}/>}
 		</ImgBox>
 		<Modal modal={modal} setModal={setModal}>
 			<h1>Аватарка</h1>

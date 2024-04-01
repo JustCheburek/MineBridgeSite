@@ -35,7 +35,7 @@ export function Name({user, access}: { user: User, access: boolean }) {
 				<h2 className="unic_color">
 					<span className="all_select">{user.name}</span>
 
-					<Edit setModal={setModal}/>
+					{access && <Edit setModal={setModal}/>}
 				</h2>
 				<Modal modal={modal} setModal={setModal}>
 					<h1>Ник</h1>

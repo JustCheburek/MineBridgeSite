@@ -95,7 +95,6 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 	}
 
 	function Update() {
-		console.log("Update")
 		const {caseType} = getInfo()
 
 		let dropDefault
