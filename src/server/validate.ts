@@ -35,8 +35,8 @@ export const validate = cache(
 			} catch {
 			}
 
-			const info = await userModel.getRoles(user?.discordId)
+			const {roles, isModer, isAdmin} = await userModel.getRoles(user?.discordId)
 
-			return {user, session, ...info};
+			return {user, session, roles, isModer, isAdmin};
 		}
 );
