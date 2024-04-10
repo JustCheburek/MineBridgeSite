@@ -34,7 +34,7 @@ interface EditableTableProps<T> {
 	data: T[]
 	className?: string
 	setModal: (value: boolean) => void
-	editable: true
+	editable: boolean
 	notFound: ReactNode
 	SaveAll: Function
 }
@@ -79,21 +79,6 @@ export function Table<T>(
 			[rowIndex]: !old[rowIndex],
 		}));
 	}
-
-
-	const updateData = (rowIndex: number, columnId: string, value: string | number) => (
-			setData(old =>
-					old.map((row, index) => {
-						if (index === rowIndex) {
-							return {
-								...old[rowIndex],
-								[columnId]: value,
-							};
-						}
-						return row;
-					})
-			)
-	)
 
 	const confirmData = (rowIndex: number) => (
 			(e: MouseEvent<HTMLButtonElement>) => {
