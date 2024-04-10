@@ -4,8 +4,12 @@ import {userModel} from "@server/models";
 import {Rcon} from "@server/console";
 import type {User} from "lucia";
 
-type State = {
-	message: string, user: User, access: boolean, success: boolean, error: boolean
+export interface State {
+	user: User
+	message: string
+	access: boolean
+	success: boolean
+	error: boolean
 }
 
 export async function NameChange(prevState: State, formData: FormData) {

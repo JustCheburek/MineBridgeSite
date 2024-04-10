@@ -3,43 +3,49 @@ table {
 	border-collapse: separate;
 	border-spacing: 0 1.5rem;
 	width: 100%;
+}
 
-	caption:not(:has(h1)) {
-		margin-block: 0.67em;
-	}
+caption:not(:has(h1)) {
+	margin-block: 0.67em;
+}
 
-	thead {
-		background: var(--background-color-transparent);
-		backdrop-filter: blur(8px);
-		z-index: var(--1z);
+thead {
+	background: var(--background-color-transparent);
+	backdrop-filter: blur(8px);
+	z-index: var(--1z);
+}
 
-		th {
-			padding: 1rem 1.5rem;
-		}
-	}
+th {
+	padding: 1rem 1.5rem;
+}
 
-	tbody {
-		tr:nth-child(even) {
-			background-color: var(--black-color-transparent);
-		}
-
-		td {
-			padding: 1rem 0.5rem;
-			text-wrap: balance;
-
-			&:first-child {
-				border-radius: var(--border-radius) 0 0 var(--border-radius);
-			}
-
-			&:last-child {
-				border-radius: 0 var(--border-radius) var(--border-radius) 0;
-			}
-		}
+tr {
+	&:nth-child(even) {
+		background-color: var(--black-color-transparent);
 	}
 }
 
+td {
+	padding: 1rem 0.5rem;
+	text-wrap: balance;
+
+	&:first-child {
+		border-radius: 15px 0 0 15px;
+	}
+
+	&:last-child {
+		border-radius: 0 15px 15px 0;
+	}
+}
+
+.func_buttons {
+	display: flex;
+	place-content: center;
+	gap: 10px;
+}
+
 @media (width >= 900px) {
-	table thead {
+	thead {
 		position: sticky;
 		top: 0;
 	}

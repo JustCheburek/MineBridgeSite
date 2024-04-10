@@ -1,5 +1,6 @@
 import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
+import {UserApi} from "@src/types/user";
 
 export async function GET(request: NextRequest) {
 	const url = request.nextUrl
@@ -22,5 +23,5 @@ export async function GET(request: NextRequest) {
 
 	const {roles, isModer, isAdmin} = await userModel.getRoles(user?.discordId)
 
-	return NextResponse.json({user, roles, isModer, isAdmin})
+	return NextResponse.json({user, roles, isModer, isAdmin} as UserApi)
 }

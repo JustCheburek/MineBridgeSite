@@ -6,6 +6,7 @@ import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
 import {From} from "@src/types/invite";
 import axios from "axios";
 import type {Role} from "@src/types/role";
+import type {User as UserLucia} from "lucia"
 
 
 @pre<User>("save", function () {
@@ -106,6 +107,13 @@ export class User {
 			isModer, isAdmin
 		}
 	}
+}
+
+export interface UserApi {
+	user: UserLucia,
+	roles?: Role[],
+	isModer: boolean,
+	isAdmin: boolean
 }
 
 export interface DSUser {

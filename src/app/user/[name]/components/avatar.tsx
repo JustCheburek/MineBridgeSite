@@ -1,12 +1,10 @@
 "use client"
 
 // Сервер
-import {useFormState, useFormStatus} from "react-dom"
 import type {User} from "lucia";
 import {parseAsBoolean, useQueryState} from "nuqs";
-import {PhotoChange} from "../service";
-import {useRouter} from "next/navigation";
-import {useEffect} from "react";
+import {PhotoChange} from "@services/user";
+import {useFormModalState} from "@hooks/useFormModalState";
 
 // Компоненты
 import {Img, ImgBox} from "@components/img"
@@ -15,21 +13,9 @@ import {Edit, Form, FormButton, FormLabel, FormTextarea} from "@components/form"
 
 export const Avatar = ({user, access}: { user: User, access: boolean }) => {
 	const [modal, setModal] = useQueryState<boolean>("photo", parseAsBoolean.withDefault(false))
-	const router = useRouter()
-	const {pending} = useFormStatus()
-	const [state, formAction] = useFormState(
-			PhotoChange,
-			{
-				user, access, message: "Введите ссылку на фотку", success: false, error: false
-			}
+	const [state, formAction, {pending}] = useFormModalState(
+			PhotoChange, {user, access, setModal}
 	)
-
-	useEffect(() => {
-		if (state.success) {
-			setModal(false)
-			router.refresh()
-		}
-	}, [state])
 
 	return (<>
 		<ImgBox>

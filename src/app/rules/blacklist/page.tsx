@@ -2,7 +2,7 @@
 import type {Metadata} from "next";
 
 // Компоненты
-import {BlacklistContent} from "@app/rules/blacklist/components";
+import {BlacklistContent} from "./components";
 
 export const metadata: Metadata = {
 	title: "Выражения | Майнбридж",

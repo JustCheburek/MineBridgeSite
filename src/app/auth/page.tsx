@@ -5,7 +5,7 @@ import {redirect} from "next/navigation";
 
 // Svgs
 import {MaxSize} from "@components/maxSize";
-import {AuthForm} from "@app/auth/components";
+import {AuthForm} from "./components";
 
 export const metadata: Metadata = {
 	title: "Регистрация | Майнбридж",

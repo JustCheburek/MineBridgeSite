@@ -10,7 +10,7 @@ export const columns: ColumnDef<CasePurchase>[] = [
 		accessorKey: "price",
 		header: "Цена",
 		meta: {
-			className: "green_color semibold-font center_text"
+			type: "number"
 		}
 	},
 	{
@@ -21,8 +21,7 @@ export const columns: ColumnDef<CasePurchase>[] = [
 		accessorKey: "date",
 		header: "Дата",
 		meta: {
-			className: "center_text",
-			isDate: true
+			type: "date"
 		}
 	}
 ]

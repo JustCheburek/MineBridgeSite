@@ -14,7 +14,7 @@ export const columns: ColumnDef<Punishment>[] = [
 		accessorKey: "rating",
 		header: "Рейтинг",
 		meta: {
-			className: ({rating}) => `center_text semibold-font ${ColorText(rating)}`
+			type: "number",
 		}
 	},
 	{
@@ -28,8 +28,7 @@ export const columns: ColumnDef<Punishment>[] = [
 		accessorKey: "createdAt",
 		header: "Создание",
 		meta: {
-			className: "center_text",
-			isDate: true
+			type: "date"
 		}
 	}
 ]

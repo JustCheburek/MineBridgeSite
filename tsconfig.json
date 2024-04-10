@@ -29,6 +29,12 @@
 			"@app/*": [
 				"./src/app/*"
 			],
+			"@hooks/*": [
+				"./src/hooks/*"
+			],
+			"@services/*": [
+				"./src/services/*"
+			],
 			"@ui/*": [
 				"./src/ui/*"
 			],
@@ -37,6 +43,9 @@
 			],
 			"@components/*": [
 				"./src/ui/components/*"
+			],
+			"@modals/*": [
+				"./src/ui/components/modals/*"
 			],
 			"@columns/*": [
 				"./src/ui/columns/*"

@@ -1,6 +1,6 @@
 // Сервер
 import type {User} from "lucia"
-import {getUser} from "@src/service";
+import {getUser} from "@src/services";
 import Link from "next/link";
 
 // Стили

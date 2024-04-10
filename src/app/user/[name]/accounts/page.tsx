@@ -2,7 +2,7 @@
 import type {PropsWithChildren} from "react";
 import {validate} from "@server/validate"
 import Link from "next/link";
-import {getUser} from "@src/service";
+import {getUser} from "@src/services";
 
 // Стили
 import styles from "./accounts.module.scss"

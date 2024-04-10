@@ -1,12 +1,12 @@
 "use client";
 
 // Сервер
-import {useFormState, useFormStatus} from "react-dom"
 import type {User} from "lucia";
 import {parseAsBoolean, useQueryState} from "nuqs";
-import {useEffect} from "react";
-import {UserDelete} from "../service"
-import {useRouter} from "next/navigation";
+import {UserDelete} from "@services/user"
+
+// Хуки
+import {useFormModalState} from "@hooks/useFormModalState";
 
 // Компоненты
 import {Form, FormButton, FormInput, FormLabel} from "@components/form";
@@ -14,20 +14,9 @@ import {Modal} from "@components/modal";
 
 export function DeleteUser({user, access}: { user: User, access: boolean }) {
 	const [modal, setModal] = useQueryState<boolean>("name", parseAsBoolean.withDefault(false))
-	const router = useRouter()
-	const {pending} = useFormStatus()
-	const [state, formAction] = useFormState(
-			UserDelete,
-			{
-				user, access, message: "", success: false, error: false
-			}
+	const [state, formAction, {pending}] = useFormModalState(
+			UserDelete, {user, access, setModal}
 	)
-
-	useEffect(() => {
-		if (state.success) {
-			router.push("/")
-		}
-	}, [state])
 
 	return (<>
 		<Form className="form" action={() => setModal(true)}>

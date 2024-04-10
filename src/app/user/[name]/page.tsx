@@ -1,17 +1,17 @@
 // Сервер
 import {validate} from "@server/validate";
-import {getUser} from "@src/service";
+import {getUser} from "@src/services";
 
 // Стили
 import styles from "./profile.module.scss"
 
 // Компоненты
 import {Avatar} from "./components/avatar";
-import {WhitelistSection} from "./components/whitelist_section";
+import {WhitelistSection} from "./components/whitelist";
 import {Name} from "./components/name";
 import {Mostiki} from "./components/mostiki";
 import {Rating} from "./components/rating";
-import {InviteSection} from "./components/invite_section";
+import {InviteSection} from "./components/invite";
 import {Roles} from "./components/roles";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
@@ -35,7 +35,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 						<Name user={user} access={moderAccess}/>
 						<Roles roles={roles}/>
 						<Mostiki user={user} access={isAdmin}/>
-						<Rating user={user} access={isModer}/>
+						<Rating user={user}/>
 					</div>
 				</div>
 

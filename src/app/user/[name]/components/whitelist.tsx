@@ -3,13 +3,13 @@
 // React
 import {User} from "lucia"
 import {parseAsBoolean, useQueryState} from "nuqs";
-import {useFormState, useFormStatus} from "react-dom";
-import {WhitelistFunc} from "../service";
-import {useEffect} from "react";
-import {useRouter} from "next/navigation";
+import {WhitelistFunc} from "@services/user";
 
 // Стили
 import styles from "../profile.module.scss"
+
+// Хуки
+import {useFormModalState} from "@hooks/useFormModalState";
 
 // Компоненты
 import {Button} from "@components/button";
@@ -37,21 +37,9 @@ const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
 
 export function WhitelistSection({user, access}: { user: User, access: boolean }) {
 	const [modal, setModal] = useQueryState("whitelist", parseAsBoolean.withDefault(false))
-	const router = useRouter()
-	const {pending} = useFormStatus()
-	const [state, formAction] = useFormState(
-			WhitelistFunc,
-			{
-				user, access, message: "", success: false, error: false
-			}
+	const [state, formAction, {pending}] = useFormModalState(
+			WhitelistFunc, {user, access, setModal}
 	)
-
-	useEffect(() => {
-		if (state.success) {
-			setModal(false)
-			router.refresh()
-		}
-	}, [state])
 
 	if (!access) {
 		return (

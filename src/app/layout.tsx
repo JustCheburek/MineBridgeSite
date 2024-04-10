@@ -1,7 +1,7 @@
 // React / next
 // noinspection JSUnusedGlobalSymbols
 import type {Metadata} from "next";
-import type {PropsWithChildren} from "react";
+import type {HTMLInputTypeAttribute, PropsWithChildren} from "react";
 import {Montserrat} from "next/font/google";
 import TimeAgo from "javascript-time-ago";
 import ru from 'javascript-time-ago/locale/ru'
@@ -31,9 +31,10 @@ TimeAgo.addDefaultLocale(ru)
 
 declare module '@tanstack/react-table' {
 	// @ts-ignore
-	interface ColumnMeta<TData, TValue> {
-		className?: string | ((data: TData) => string),
-		isDate?: boolean
+	interface ColumnMeta {
+		className?: string,
+		type?: HTMLInputTypeAttribute
+		notEditable?: boolean
 	}
 }
 

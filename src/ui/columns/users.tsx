@@ -38,7 +38,11 @@ export const columns: ColumnDef<User>[] = [
 	{
 		accessorKey: "photo",
 		header: "Ава",
-		cell: Avatar
+		cell: Avatar,
+		meta: {
+			className: "center_text",
+			notEditable: true
+		}
 	},
 	{
 		accessorKey: "name",
@@ -49,22 +53,21 @@ export const columns: ColumnDef<User>[] = [
 		accessorKey: "rating",
 		header: "Рейтинг",
 		meta: {
-			className: ({rating}) => `center_text semibold-font ${ColorText(rating)}`
+			type: "number",
 		}
 	},
 	{
 		accessorKey: "mostiki",
 		header: "Мостики",
 		meta: {
-			className: ({mostiki}) => `center_text semibold-font ${ColorText(mostiki)}`
+			type: "number",
 		}
 	},
 	{
 		accessorKey: "createdAt",
 		header: "Создание",
 		meta: {
-			className: "center_text",
-			isDate: true
+			type: "date"
 		}
 	}
 ]

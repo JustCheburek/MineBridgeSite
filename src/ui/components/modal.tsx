@@ -1,8 +1,10 @@
 // React
-import {PropsWithChildren} from "react";
+import type {Dispatch, PropsWithChildren, SetStateAction} from "react";
 
 // Стили
 import './styles/modal.scss'
+
+export type setModal = Dispatch<SetStateAction<boolean>>
 
 type Modal = {
 	modal: boolean

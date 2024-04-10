@@ -8,7 +8,7 @@ import {validate} from "@server/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
 import {DS_URL} from "@src/const";
-import {AddInvite} from "@app/auth/addInvite";
+import {AddInvite} from "../../addInvite";
 
 
 export async function GET(request: NextRequest) {

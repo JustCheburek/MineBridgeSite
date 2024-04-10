@@ -1,6 +1,6 @@
 // Next
 import type {Metadata} from "next";
-import {getCases, getDrops} from "@src/service";
+import {getCases, getDrops} from "@src/services";
 import {validate} from "@server/validate";
 
 // Компоненты

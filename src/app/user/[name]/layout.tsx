@@ -1,7 +1,7 @@
 import {Suspense} from "react";
 import type {PropsWithChildren} from "react";
 import {ProfilePage} from "schema-dts";
-import {getUser} from "@src/service";
+import {getUser} from "@src/services";
 
 // Компоненты
 import {SubsectionItem, Subsections} from "@components/subsections";

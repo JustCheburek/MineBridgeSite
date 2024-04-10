@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
 import Link from "next/link";
-import {getCases} from "@src/service";
+import {getCases} from "@src/services";
 
 // Компоненты
 import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, Text} from "./components";
