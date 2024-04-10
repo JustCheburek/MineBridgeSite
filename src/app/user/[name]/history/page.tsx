@@ -24,13 +24,21 @@ export default async function History({params: {name}}: { params: { name: string
 	async function PunishmentSave(data: Punishment[]){
 		"use server"
 
-		await userModel.findByIdAndUpdate(user._id, {punishments: data})
+		const userUpdate = await userModel.findById(user._id)
+		if (!userUpdate) return
+
+		userUpdate.punishments = data
+		await userUpdate.save()
 	}
 
 	async function CasesPurchasesSave(data: CasePurchase[]){
 		"use server"
 
-		await userModel.findByIdAndUpdate(user._id, {casesPurchases: data})
+		const userUpdate = await userModel.findById(user._id)
+		if (!userUpdate) return
+
+		userUpdate.casesPurchases = data
+		await userUpdate.save()
 	}
 
 	return (
