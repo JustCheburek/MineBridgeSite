@@ -19,24 +19,14 @@ import {Button} from "@components/button";
 TimeAgo.addDefaultLocale(ru);
 const timeAgo = new TimeAgo("ru-RU");
 
-interface TableProps<T> {
+type Table<T> = {
 	columns: ColumnDef<T>[]
 	data: T[]
-	editable?: false
+	editable?: boolean
 	className?: string
-	setModal?: undefined
-	notFound?: undefined
-	SaveAll?: undefined
-}
-
-interface EditableTableProps<T> {
-	columns: ColumnDef<T>[]
-	data: T[]
-	className?: string
-	setModal: (value: boolean) => void
-	editable: boolean
-	notFound: ReactNode
-	SaveAll: Function
+	setModal?: (value: boolean) => void
+	notFound?: ReactNode
+	SaveAll?: Function
 }
 
 export function Table<T>(
@@ -45,11 +35,11 @@ export function Table<T>(
 			data: defaultData,
 			editable = false,
 			className = "",
-			setModal=undefined,
-			notFound=undefined,
-			SaveAll=undefined,
+			setModal = undefined,
+			notFound = undefined,
+			SaveAll = undefined,
 			children
-		}: PropsWithChildren<EditableTableProps<T> | TableProps<T>>
+		}: PropsWithChildren<Table<T>>
 ) {
 	const [data, setData] = useState(() => [...defaultData])
 	const [originalData, setOriginalData] = useState(() => [...defaultData])
