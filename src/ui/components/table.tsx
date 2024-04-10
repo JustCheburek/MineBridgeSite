@@ -24,9 +24,9 @@ interface TableProps<T> {
 	data: T[]
 	editable?: false
 	className?: string
-	setModal: undefined
-	notFound: undefined
-	SaveAll: undefined
+	setModal?: undefined
+	notFound?: undefined
+	SaveAll?: undefined
 }
 
 interface EditableTableProps<T> {
@@ -45,9 +45,9 @@ export function Table<T>(
 			data: defaultData,
 			editable = false,
 			className = "",
-			setModal,
-			notFound,
-			SaveAll,
+			setModal=undefined,
+			notFound=undefined,
+			SaveAll=undefined,
 			children
 		}: PropsWithChildren<EditableTableProps<T> | TableProps<T>>
 ) {
@@ -65,7 +65,7 @@ export function Table<T>(
 		return (
 				<div className="center_text">
 					{children}
-					{editable
+					{editable && setModal
 							? <Button onClick={() => setModal(true)}>Добавить</Button>
 							: notFound
 					}
@@ -262,7 +262,7 @@ type Value<T> = {
 	className: string
 	value: string | number
 	meta: ColumnMeta<T, unknown>
-	columnDef: ColumnDef<T, unknown>
+	columnDef: ColumnDef<T>
 }
 
 function Value<T>({cell, row, editingRows, setData, className, value, meta, columnDef}: Value<T>) {
