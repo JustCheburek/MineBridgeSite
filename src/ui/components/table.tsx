@@ -268,12 +268,12 @@ function Value<T>({cell, row, editingRows, setData, className, value, meta, colu
 		}
 	}, [value, meta?.type])
 
+	if (meta?.type === "date") {
+		return time
+	}
+
 	// @ts-ignore
 	if (!editingRows[row.id] || meta?.notEditable) {
-		if (meta?.type === "date") {
-			return time
-		}
-
 		return flexRender(columnDef.cell, cell.getContext())
 	}
 
@@ -283,14 +283,10 @@ function Value<T>({cell, row, editingRows, setData, className, value, meta, colu
 					type={meta.type}
 					className={className}
 					onChange={e => {
-						let value: string | number | Date | null = e.target.value
+						let value: string | number = e.target.value
 
 						if (meta?.type === "number") {
 							value = e.target.valueAsNumber
-						}
-
-						if (meta?.type === "date") {
-							value = e.target.valueAsDate
 						}
 
 						const rowIndex = row.index
