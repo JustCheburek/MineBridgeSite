@@ -13,7 +13,7 @@ import {Edit, Form, FormButton, FormLabel, FormTextarea} from "@components/form"
 
 export const Avatar = ({user, access}: { user: User, access: boolean }) => {
 	const [modal, setModal] = useQueryState<boolean>("photo", parseAsBoolean.withDefault(false))
-	const [state, formAction, {pending}] = useFormModalState(
+	const [state, formAction, isPending] = useFormModalState(
 			PhotoChange, {user, access, setModal}
 	)
 
@@ -38,7 +38,7 @@ export const Avatar = ({user, access}: { user: User, access: boolean }) => {
 							defaultValue={user.photo}
 					/>
 				</FormLabel>
-				<FormButton disabled={pending}>
+				<FormButton disabled={isPending}>
 					Сменить
 				</FormButton>
 			</Form>

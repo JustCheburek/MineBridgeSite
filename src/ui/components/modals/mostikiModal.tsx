@@ -8,7 +8,7 @@ import {Modal, type setModal} from "@components/modal";
 import {useFormModalState} from "@hooks/useFormModalState";
 
 export const MostikiModal = ({user, access, modal, setModal}: { user: User, access: boolean, modal: boolean, setModal: setModal }) => {
-	const [state, formAction, {pending}] = useFormModalState(
+	const [state, formAction, isPending] = useFormModalState(
 			MostikiChange,
 			{
 				user, access, setModal, message: "Значение суммируется"
@@ -29,11 +29,11 @@ export const MostikiModal = ({user, access, modal, setModal}: { user: User, acce
 							placeholder="5 или -5"
 							autoComplete="mostiki"
 							required
-							disabled={pending}
+							disabled={isPending}
 					/>
 				</FormLabel>
 
-				<FormButton disabled={pending}>
+				<FormButton disabled={isPending}>
 					Добавить
 				</FormButton>
 			</Form>

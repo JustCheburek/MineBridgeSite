@@ -37,7 +37,7 @@ const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
 
 export function WhitelistSection({user, access}: { user: User, access: boolean }) {
 	const [modal, setModal] = useQueryState("whitelist", parseAsBoolean.withDefault(false))
-	const [state, formAction, {pending}] = useFormModalState(
+	const [state, formAction, isPending] = useFormModalState(
 			WhitelistFunc, {user, access, setModal}
 	)
 
@@ -76,7 +76,7 @@ export function WhitelistSection({user, access}: { user: User, access: boolean }
 						{state.message}
 					</p>
 					<Form action={formAction}>
-						<FormButton disabled={pending}>
+						<FormButton disabled={isPending}>
 							Подать заявку
 						</FormButton>
 					</Form>

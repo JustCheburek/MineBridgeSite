@@ -13,7 +13,7 @@ export const CasesPurchasesModal = ({user, access, modal, setModal}: {
 	modal: boolean,
 	setModal: setModal
 }) => {
-	const [state, formAction, {pending}] = useFormModalState(
+	const [state, formAction, isPending] = useFormModalState(
 			RatingChange,
 			{
 				user, access,
@@ -35,7 +35,7 @@ export const CasesPurchasesModal = ({user, access, modal, setModal}: {
 								placeholder="Кейс"
 								autoComplete="case"
 								required
-								disabled={pending}
+								disabled={isPending}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -45,7 +45,7 @@ export const CasesPurchasesModal = ({user, access, modal, setModal}: {
 								placeholder="Цена"
 								autoComplete="rating"
 								required
-								disabled={pending}
+								disabled={isPending}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -54,10 +54,10 @@ export const CasesPurchasesModal = ({user, access, modal, setModal}: {
 								placeholder="Дроп"
 								autoComplete="drop"
 								required
-								disabled={pending}
+								disabled={isPending}
 						/>
 					</FormLabel>
-					<FormButton disabled={pending}>
+					<FormButton disabled={isPending}>
 						Добавить
 					</FormButton>
 				</Form>

@@ -14,7 +14,7 @@ import {Modal} from "@components/modal";
 
 export function Name({user, access}: { user: User, access: boolean }) {
 	const [modal, setModal] = useQueryState<boolean>("name", parseAsBoolean.withDefault(false))
-	const [state, formAction, {pending}] = useFormModalState(
+	const [state, formAction, isPending] = useFormModalState(
 			NameChange, {user, access, setModal}
 	)
 
@@ -38,10 +38,10 @@ export function Name({user, access}: { user: User, access: boolean }) {
 							required
 							minLength={4}
 							maxLength={20}
-							disabled={pending}
+							disabled={isPending}
 					/>
 				</FormLabel>
-				<FormButton disabled={pending}>
+				<FormButton disabled={isPending}>
 					Сменить
 				</FormButton>
 			</Form>

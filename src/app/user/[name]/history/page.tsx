@@ -24,8 +24,6 @@ export default async function History({params: {name}}: { params: { name: string
 	async function PunishmentSave(data: Punishment[]){
 		"use server"
 
-		console.log(data)
-
 		await userModel.findByIdAndUpdate(user._id, {punishments: data})
 	}
 

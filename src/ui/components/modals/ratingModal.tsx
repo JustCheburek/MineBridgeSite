@@ -13,7 +13,7 @@ export const RatingModal = ({user, access, modal, setModal}: {
 	modal: boolean,
 	setModal: setModal
 }) => {
-	const [state, formAction, {pending}] = useFormModalState(
+	const [state, formAction, isPending] = useFormModalState(
 			RatingChange,
 			{
 				user, access,
@@ -36,7 +36,7 @@ export const RatingModal = ({user, access, modal, setModal}: {
 								autoComplete="reason"
 								required
 								maxLength={26}
-								disabled={pending}
+								disabled={isPending}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -46,7 +46,7 @@ export const RatingModal = ({user, access, modal, setModal}: {
 								placeholder="Рейтинг"
 								autoComplete="rating"
 								required
-								disabled={pending}
+								disabled={isPending}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -55,11 +55,11 @@ export const RatingModal = ({user, access, modal, setModal}: {
 								placeholder="Автор"
 								autoComplete="author"
 								required
-								disabled={pending}
+								disabled={isPending}
 								defaultValue={user.name}
 						/>
 					</FormLabel>
-					<FormButton disabled={pending}>
+					<FormButton disabled={isPending}>
 						Добавить
 					</FormButton>
 				</Form>

@@ -14,7 +14,7 @@ import {Modal} from "@components/modal";
 
 export function DeleteUser({user, access}: { user: User, access: boolean }) {
 	const [modal, setModal] = useQueryState<boolean>("name", parseAsBoolean.withDefault(false))
-	const [state, formAction, {pending}] = useFormModalState(
+	const [state, formAction, isPending] = useFormModalState(
 			UserDelete, {user, access, setModal}
 	)
 
@@ -44,10 +44,10 @@ export function DeleteUser({user, access}: { user: User, access: boolean }) {
 							placeholder={user.name}
 							autoComplete="off"
 							required
-							disabled={pending}
+							disabled={isPending}
 					/>
 				</FormLabel>
-				<FormButton danger disabled={pending}>
+				<FormButton danger disabled={isPending}>
 					Жми, жми!
 				</FormButton>
 			</Form>
