@@ -268,15 +268,17 @@ type Value<T> = {
 function Value<T>({cell, row, editingRows, setData, className, value, meta, columnDef}: Value<T>) {
 	const [time, setTime] = useState("...")
 
-	if (meta?.type === "date") {
-		useEffect(() => {
+	useEffect(() => {
+		if (meta?.type === "date") {
 			const timer = setInterval(() => {
 				setTime(timeAgo.format(new Date(value), "mini"))
 			}, 1000)
 
 			return () => clearInterval(timer)
-		})
+		}
+	}, [value, meta?.type])
 
+	if (meta?.type === "date") {
 		return time
 	}
 
