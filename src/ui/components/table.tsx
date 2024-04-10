@@ -35,9 +35,9 @@ export function Table<T>(
 			data: defaultData,
 			editable = false,
 			className = "",
-			setModal = undefined,
-			notFound = undefined,
-			SaveAll = undefined,
+			setModal,
+			notFound,
+			SaveAll,
 			children
 		}: PropsWithChildren<Table<T>>
 ) {

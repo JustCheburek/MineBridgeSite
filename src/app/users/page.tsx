@@ -7,7 +7,6 @@ import {getUsers} from "@src/services";
 import {Table} from "@components/table"
 import {MaxSize} from "@components/maxSize";
 import {columns} from "@columns/users"
-import {validate} from "@server/validate";
 
 export const metadata: Metadata = {
 	title: "Игроки | Майнбридж",
@@ -16,7 +15,6 @@ export const metadata: Metadata = {
 
 export default async function Component() {
 	const users = await getUsers()
-	const {isModer} = await validate()
 
 	return (
 			<main className="users">
@@ -24,7 +22,6 @@ export default async function Component() {
 					<Table<User>
 							columns={columns} 
 							data={users}
-							editable={isModer}
 					>
 						<h1>
 							Игроки
