@@ -4,7 +4,7 @@ import {ProfilePage} from "schema-dts";
 import {getUser} from "@src/services";
 
 // Компоненты
-import {SubsectionItem, Subsections} from "@components/subsections";
+import {SubsectionItem, Subsections} from "@components/sideNav";
 import {MaxSize} from "@components/maxSize";
 
 type UserLayout = {

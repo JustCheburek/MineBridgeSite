@@ -1,6 +1,5 @@
 // Стили
-import {SubsectionItem, Subsections} from "@components/subsections";
-import {OnThisPage} from "@components/onThisPage";
+import {SubsectionItem, Subsections, OnThisPage} from "@components/sideNav";
 import {MaxSize} from "@components/maxSize";
 import type {Metadata} from "next";
 

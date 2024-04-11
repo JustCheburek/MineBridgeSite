@@ -2,7 +2,7 @@
 import type {PropsWithChildren} from "react";
 
 // Компоненты
-import {SubsectionItem, Subsections} from "@components/subsections";
+import {SubsectionItem, Subsections} from "@components/sideNav";
 import {MaxSize} from "@components/maxSize";
 
 export default function RulesLayout(

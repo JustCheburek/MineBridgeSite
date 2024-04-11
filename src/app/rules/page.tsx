@@ -8,7 +8,7 @@ import styles from './rules.module.scss';
 
 // Компоненты
 import {Punishment, Rule, RulesBox} from "./components";
-import {OnThisPage, OnThisPageItem} from "@components/onThisPage";
+import {OnThisPage, OnThisPageItem} from "@components/sideNav";
 
 export const metadata: Metadata = {
 	title: "Правила | Майнбридж",

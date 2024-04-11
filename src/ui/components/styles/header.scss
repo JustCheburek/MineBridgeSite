@@ -206,52 +206,6 @@ header {
 }
 
 @media (width < 1024px) {
-  // Бургер меню
-  .burger_icon {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    // Иконка
-    width: 38px;
-    height: 38px;
-
-    // Анимация
-    &.burger_active {
-      .short {
-        width: 100%;
-      }
-
-      .burger_stick:nth-child(1) {
-        translate: 0 11px;
-        rotate: 45deg;
-      }
-
-      .burger_stick:nth-child(2) {
-        opacity: 0;
-      }
-
-      .burger_stick:nth-child(3) {
-        translate: 0 -11px;
-        rotate: -45deg;
-      }
-    }
-  }
-
-  .burger_stick {
-    width: 100%;
-    height: 5px;
-    background: var(--unic-color);
-    border-radius: var(--border-radius);
-
-    &.short {
-      width: 75%;
-    }
-
-    transition: 400ms translate, 250ms opacity, 400ms rotate, width 250ms;
-  }
-
   // Размытия фона
   main, footer {
     transition: var(--short-transition) filter;

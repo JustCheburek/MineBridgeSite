@@ -19,7 +19,7 @@
     "nuqs": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-minimal-pie-chart": "^8.4.0",
+    "react-minimal-pie-chart": "latest",
     "react-type-animation": "latest",
     "sass": "latest",
     "sharp": "latest"
@@ -27,16 +27,17 @@
   "devDependencies": {
     "@lucia-auth/adapter-mongodb": "latest",
     "@typegoose/typegoose": "latest",
+    "@types/bun": "latest",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "arctic": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "hono": "latest",
     "minecraft-server-util": "latest",
     "schema-dts": "latest",
-    "typescript": "latest",
-    "@types/bun": "latest"
+    "typescript": "latest"
   },
   "module": "index.ts",
   "type": "module"

@@ -16,7 +16,9 @@ export async function Connect() {
 	}
 
 	if (!cached.promise) {
+		console.log("Подключение к DB")
 		cached.promise = await connect(MONGO_URL).then(mongoose => mongoose)
+		console.log("Подключено к DB")
 	}
 
 	cached.conn = await cached.promise

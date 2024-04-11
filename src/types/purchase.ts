@@ -5,14 +5,14 @@ import {Sticker} from "@src/types/sticker";
 
 @modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})
 export class CasePurchase {
-	@prop({required: true, ref: () => Item})
-	public item!: Ref<Item>
+	@prop({ref: () => Item})
+	public item?: Ref<Item>
 
-	@prop({required: true, type: () => String})
-	public rarity!: RarityType
+	@prop({type: () => String})
+	public rarity?: RarityType
 
-	@prop({required: true, ref: () => Drop})
-	public drop!: Ref<Drop>
+	@prop({ref: () => Drop})
+	public drop?: Ref<Drop>
 
 	@prop()
 	public createdAt!: Date
@@ -26,7 +26,7 @@ export class StickerPurchase {
 	@prop({ref: () => Sticker})
 	public sticker!: Ref<Sticker>
 
-	@prop({required: true, trim: true})
+	@prop({trim: true})
 	public text!: string
 
 	@prop()

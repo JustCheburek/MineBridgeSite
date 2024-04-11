@@ -8,8 +8,7 @@ import styles from "./news.module.scss"
 // Компоненты
 import {NotFound} from "@components/notFound";
 import {Season} from "./components"
-import {SubsectionItem, Subsections} from "@components/subsections";
-import {OnThisPage, OnThisPageItem} from "@components/onThisPage";
+import {SubsectionItem, Subsections, OnThisPage, OnThisPageItem} from "@components/sideNav";
 import {MaxSize} from "@components/maxSize";
 import {PBox, PText, PTitle} from "@components/post";
 import {Img, ImgBox} from "@components/img";

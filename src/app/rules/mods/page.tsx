@@ -6,7 +6,7 @@ import styles from './mods.module.scss';
 
 // Компоненты
 import {NotFound} from "@components/notFound";
-import {OnThisPage, OnThisPageBox, OnThisPageItem} from "@components/onThisPage";
+import {OnThisPage, OnThisPageBox, OnThisPageItem} from "@components/sideNav";
 import {ErrorSvg, SuccessSvg} from "@ui/svgs";
 
 export const metadata: Metadata = {

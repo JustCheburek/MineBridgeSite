@@ -6,13 +6,14 @@ import {PropsWithChildren} from "react";
 
 type NavLink = {
 	href: string
+	activeClassName?: string
 	className?: string
 	exact?: boolean
 }
 
 export function NavLink(
 		{
-			href, children, className="", exact = false, ...props
+			href, children, activeClassName = "active", className="", exact = false, ...props
 		}: PropsWithChildren<NavLink>
 ) {
 	const pathname = usePathname()
@@ -22,7 +23,7 @@ export function NavLink(
 	const isActive = exact ? pathname === href : pathname.startsWith(href)
 
 	return (
-			<Link href={href} className={`${isActive ? "active" : ""} ${className}`} {...props}>
+			<Link href={href} className={`${isActive ? activeClassName : ""} ${className}`} {...props}>
 				{children}
 			</Link>
 	)

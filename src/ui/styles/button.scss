@@ -8,6 +8,8 @@ button, input {
 }
 
 a {
+  transition: color var(--short-transition);
+  color: var(--text-color);
   display: inline-block;
 }
 

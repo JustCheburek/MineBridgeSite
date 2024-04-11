@@ -8,11 +8,12 @@ import type {User} from "lucia";
 // Стили
 import "./styles/header.scss";
 
-// Urls
+// Компоненты
 import {Urls} from "./urls";
 import {MinebridgeSvg, MostikiSvg} from "@ui/svgs";
 import {NavLink} from "@components/navlink";
 import {Img} from "@components/img";
+import {Burger} from "@components/burger";
 
 export function generateMetadata() {
 	return {
@@ -26,18 +27,6 @@ type Burger = {
 	burger: boolean,
 	setBurger: any
 }
-
-const Burger = ({burger, setBurger}: Burger) => (
-		<button
-				className={`burger_icon for_mobile ${burger ? "burger_active" : ""}`}
-				onClick={() => setBurger((prev: boolean) => !prev)}
-				name="burger_icon"
-		>
-			<div className="burger_stick"/>
-			<div className="burger_stick"/>
-			<div className="burger_stick"/>
-		</button>
-)
 
 const MainNav = ({burger, setBurger}: Burger) => (
 		<nav
