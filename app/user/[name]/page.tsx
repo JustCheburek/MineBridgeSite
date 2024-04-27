@@ -11,7 +11,7 @@ import {WhitelistSection} from "./components/whitelist";
 import {Name} from "./components/name";
 import {Mostiki} from "./components/mostiki";
 import {Rating} from "./components/rating";
-import {InviteSection} from "./components/invite";
+// import {InviteSection} from "./components/invite";
 import {Roles} from "./components/roles";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
@@ -41,7 +41,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 
 				<WhitelistSection user={user} access={moderAccess}/>
 
-				<InviteSection user={user} access={isMe}/>
+				{/*<InviteSection user={user} access={isMe}/>*/}
 			</div>
 	)
 }
