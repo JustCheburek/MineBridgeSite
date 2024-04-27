@@ -23,35 +23,35 @@
 			}
 		],
 		"paths": {
-			"@src/*": [
-				"./src/*"
+			"@/*": [
+				"./*"
 			],
 			"@app/*": [
-				"./src/app/*"
+				"./app/*"
 			],
 			"@hooks/*": [
-				"./src/hooks/*"
+				"./hooks/*"
 			],
 			"@services/*": [
-				"./src/services/*"
+				"./services/*"
 			],
 			"@ui/*": [
-				"./src/ui/*"
+				"./ui/*"
 			],
 			"@styles/*": [
-				"./src/ui/styles/*"
+				"./ui/styles/*"
 			],
 			"@components/*": [
-				"./src/ui/components/*"
+				"./ui/components/*"
 			],
 			"@modals/*": [
-				"./src/ui/components/modals/*"
+				"./ui/components/modals/*"
 			],
 			"@columns/*": [
-				"./src/ui/columns/*"
+				"./ui/columns/*"
 			],
 			"@server/*": [
-				"./src/server/*"
+				"./server/*"
 			]
 		},
 		"experimentalDecorators": true,
