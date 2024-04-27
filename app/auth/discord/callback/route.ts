@@ -8,7 +8,7 @@ import {validate} from "@server/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
 import {DS_URL} from "@/const";
-import {AddInvite} from "../../addInvite";
+// import {AddInvite} from "../../addInvite";
 
 
 export async function GET(request: NextRequest) {
@@ -98,18 +98,18 @@ export async function GET(request: NextRequest) {
 
 		const id = generateId(15)
 		const name = cookies().get("name")?.value || dsUser.username
-		const place = cookies().get("place")?.value
-		const userId = await AddInvite(id, name, cookies().get("from")?.value)
+		/*const place = cookies().get("place")?.value
+		const userId = await AddInvite(id, name, cookies().get("from")?.value)*/
 		const userData = {
 			_id: id,
 			name,
 			discordId: dsUser.id,
 			email: dsUser.email,
 			photo: `https://cdn.discordapp.com/avatars/${dsUser.id}/${dsUser.avatar}.png`,
-			from: {
+			/*from: {
 				place,
 				userId
-			},
+			},*/
 		} as User
 
 		const {user} = await validate()
@@ -137,7 +137,7 @@ export async function GET(request: NextRequest) {
 			)
 
 			if (candidate) {
-				if (!candidate?.from) {
+				/*if (!candidate?.from) {
 					candidate.from = userData.from
 				}
 				if (!candidate.from?.place) {
@@ -145,7 +145,7 @@ export async function GET(request: NextRequest) {
 				}
 				if (!candidate.from?.userId) {
 					candidate.from.userId = userId
-				}
+				}*/
 				await candidate.save()
 			} else {
 				await userModel.create(userData)

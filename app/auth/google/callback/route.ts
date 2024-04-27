@@ -7,7 +7,7 @@ import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@server/validate";
 import axios from "axios";
-import {AddInvite} from "../../addInvite";
+// import {AddInvite} from "../../addInvite";
 
 
 export async function GET(request: NextRequest) {
@@ -41,18 +41,18 @@ export async function GET(request: NextRequest) {
 
 		const id = generateId(15)
 		const name = cookies().get("name")?.value || gUser.given_name || gUser.name
-		const place = cookies().get("place")?.value
-		const userId = await AddInvite(id, name, cookies().get("from")?.value)
+		/*const place = cookies().get("place")?.value
+		const userId = await AddInvite(id, name, cookies().get("from")?.value)*/
 		const userData = {
 			_id: id,
 			name,
 			googleId: gUser.sub,
 			email: gUser.email,
 			photo: gUser.picture,
-			from: {
+			/*from: {
 				place,
 				userId
-			}
+			}*/
 		} as User
 
 		const {user} = await validate()
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
 			)
 
 			if (candidate) {
-				if (!candidate?.from) {
+				/*if (!candidate?.from) {
 					candidate.from = userData.from
 				}
 				if (!candidate.from?.place) {
@@ -91,7 +91,7 @@ export async function GET(request: NextRequest) {
 				}
 				if (!candidate.from?.userId) {
 					candidate.from.userId = userId
-				}
+				}*/
 				await candidate.save()
 			} else {
 				await userModel.create(userData)
