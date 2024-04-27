@@ -115,21 +115,6 @@ export async function GET(request: NextRequest) {
 		const {user} = await validate()
 
 		if (user) {
-			if (typeof user._id !== "string") {
-				await userModel.findByIdAndUpdate(
-						user._id,
-						{
-							_id: id,
-							// @ts-ignore
-							createdAt: user?.date,
-							// @ts-ignore
-							updatedAt: user?.date,
-							googleId: user?.googleId?.toString(),
-							discordId: userData.discordId,
-							email: userData.email
-						}
-				)
-			} else {
 				await userModel.findByIdAndUpdate(
 						user._id,
 						{
@@ -137,7 +122,6 @@ export async function GET(request: NextRequest) {
 							discordId: userData.discordId
 						}
 				)
-			}
 		} else {
 			const candidate = await userModel.findOneAndUpdate(
 					{
@@ -153,6 +137,19 @@ export async function GET(request: NextRequest) {
 			)
 
 			if (candidate) {
+				if (typeof candidate._id !== "string") {
+					await userModel.findByIdAndUpdate(
+							candidate._id,
+							{
+								_id: id,
+								// @ts-ignore
+								createdAt: candidate?.date,
+								// @ts-ignore
+								updatedAt: candidate?.date,
+								googleId: candidate?.googleId?.toString()
+							}
+					)
+				}
 				/*if (!candidate?.from) {
 					candidate.from = userData.from
 				}
@@ -162,7 +159,7 @@ export async function GET(request: NextRequest) {
 				if (!candidate.from?.userId) {
 					candidate.from.userId = userId
 				}*/
-				await candidate.save()
+				// await candidate.save()
 			} else {
 				await userModel.create(userData)
 			}
