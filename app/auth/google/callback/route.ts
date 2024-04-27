@@ -7,6 +7,7 @@ import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@server/validate";
 import axios from "axios";
+
 // import {AddInvite} from "../../addInvite";
 
 
@@ -58,13 +59,29 @@ export async function GET(request: NextRequest) {
 		const {user} = await validate()
 
 		if (user) {
-			await userModel.findByIdAndUpdate(
-					user._id,
-					{
-						email: userData.email,
-						googleId: userData.googleId
-					}
-			)
+			if (typeof user._id !== "string") {
+				await userModel.findByIdAndUpdate(
+						user._id,
+						{
+							_id: id,
+							// @ts-ignore
+							createdAt: user?.date,
+							// @ts-ignore
+							updatedAt: user?.date,
+							googleId: userData.googleId,
+							discordId: userData?.discordId?.toString(),
+							email: userData.email
+						}
+				)
+			} else {
+				await userModel.findByIdAndUpdate(
+						user._id,
+						{
+							email: userData.email,
+							googleId: userData.googleId
+						}
+				)
+			}
 		} else {
 			const candidate = await userModel.findOneAndUpdate(
 					{

@@ -115,13 +115,29 @@ export async function GET(request: NextRequest) {
 		const {user} = await validate()
 
 		if (user) {
-			await userModel.findByIdAndUpdate(
-					user._id,
-					{
-						email: userData.email,
-						discordId: userData.discordId
-					}
-			)
+			if (typeof user._id !== "string") {
+				await userModel.findByIdAndUpdate(
+						user._id,
+						{
+							_id: id,
+							// @ts-ignore
+							createdAt: user?.date,
+							// @ts-ignore
+							updatedAt: user?.date,
+							googleId: user?.googleId?.toString(),
+							discordId: userData.discordId,
+							email: userData.email
+						}
+				)
+			} else {
+				await userModel.findByIdAndUpdate(
+						user._id,
+						{
+							email: userData.email,
+							discordId: userData.discordId
+						}
+				)
+			}
 		} else {
 			const candidate = await userModel.findOneAndUpdate(
 					{
