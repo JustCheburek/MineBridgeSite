@@ -24,8 +24,9 @@ export default async function UserLayout(
 		image: user.photo,
 		description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
 		url: `${process.env.MB_URL}/user/${name}`,
-		dateCreated: user.createdAt.toString(),
-		dateModified: user.updatedAt.toString()
+		// @ts-ignore
+		dateCreated: user?.createdAt?.toString() || user?.date?.toString() || new Date().toString(),
+		dateModified: user?.updatedAt?.toString() || new Date().toString()
 	}
 
 	return (
