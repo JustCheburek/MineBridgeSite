@@ -1,4 +1,8 @@
 // Шрифты
+h1, h2, h3 {
+  word-break: break-word;
+}
+
 h1 {
   text-align: center;
   font-size: var(--h1-size);

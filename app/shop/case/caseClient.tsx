@@ -152,6 +152,8 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 	}
 
 	useEffect(() => {
+		setSettingCase(rarity)
+		setSettingDrop(drop)
 		Update()
 		// eslint-disable-next-line
 	}, [rarity, drop]);
