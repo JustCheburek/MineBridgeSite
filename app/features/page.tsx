@@ -115,7 +115,7 @@ export default function Features() {
 							<GText>Тотемы</GText>
 						</GBox>
 
-						<GBox href="/features/design">
+						{/*<GBox href="/features/design">
 							<ImgBox className={styles.img} type="grid">
 
 							</ImgBox>
@@ -130,7 +130,7 @@ export default function Features() {
 							</ImgBox>
 
 							<GText>Плагины</GText>
-						</GBox>
+						</GBox>*/}
 
 						<GBox anotherSite>
 							<ul className={`not_indent remove_marker ${styles.vote_box}`}>

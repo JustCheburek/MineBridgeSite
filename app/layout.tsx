@@ -19,6 +19,7 @@ import "@styles/global.scss"
 // Компоненты
 import {Header} from "@components/header";
 import {Footer} from "@components/footer";
+import {Metrika} from "./script";
 
 const montserrat = Montserrat({subsets: ["latin"], preload: true, style: "normal"});
 
@@ -49,6 +50,7 @@ export default function RootLayout(
 			{children}
 			<Footer/>
 			<SpeedInsights/>
+			<Metrika/>
 			</body>
 			</html>
 	);
