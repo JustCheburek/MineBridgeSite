@@ -1,9 +1,17 @@
 import {prop} from "@typegoose/typegoose";
 
 export class Name<N = string, D = string> {
-	@prop({required: true, unique: true, trim: true, type: () => String})
+	@prop({trim: true, type: () => String})
 	public name!: N
 
-	@prop({required: true, unique: true, trim: true, type: () => String})
+	@prop({trim: true, type: () => String})
+	public displayname!: D
+}
+
+export class UniqueName<N = string, D = string> {
+	@prop({unique: true, required: true, trim: true, type: () => String})
+	public name!: N
+
+	@prop({unique: true, required: true, trim: true, type: () => String})
 	public displayname!: D
 }

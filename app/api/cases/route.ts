@@ -1,9 +1,8 @@
 import {caseModel} from "@server/models";
-import {Case} from "@/types/case";
 import {NextResponse} from "next/server";
 
 export async function GET() {
-	const rarities = await caseModel.find<Case>()
+	const rarities = await caseModel.find()
 
 	if (!rarities?.length) {
 		return new NextResponse("Редкости не найдена", {

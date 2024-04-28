@@ -1,5 +1,5 @@
 import {modelOptions, prop} from "@typegoose/typegoose";
-import {Name} from "@/types/name";
+import {Name, UniqueName} from "@/types/name";
 
 export const CaseNames = {
 	common: "Обычный",
@@ -40,7 +40,7 @@ export type RarityChance = Chance<RarityType>
 export type DropChance = Chance<DropType>
 
 @modelOptions({schemaOptions: {collection: "cases"}})
-export class Case extends Name<CaseType> {
+export class Case extends UniqueName<CaseType> {
 	@prop({required: true})
 	public price!: number
 
@@ -57,7 +57,7 @@ export class Item extends Name {
 }
 
 @modelOptions({schemaOptions: {collection: "drops"}})
-export class Drop extends Name<DropType> {
+export class Drop extends UniqueName<DropType> {
 	@prop({required: true, unique: true, trim: true})
 	public description!: string
 

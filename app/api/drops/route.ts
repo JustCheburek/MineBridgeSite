@@ -1,9 +1,8 @@
 import {dropModel} from "@server/models";
-import {Drop} from "@/types/case";
 import {NextResponse} from "next/server";
 
 export async function GET() {
-	const types = await dropModel.find<Drop>()
+	const types = await dropModel.find()
 
 	if (!types?.length) {
 		return new NextResponse("Типы не найдены", {
