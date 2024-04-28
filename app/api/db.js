@@ -100,18 +100,18 @@ export const RarityCase = [
 
 // Кейсы
 export const Case = [
-		 /*{
-            name: "projectileeffects",
-            displayname: "эффект стрельбы",
+	/*{
+				 name: "projectileeffects",
+				 displayname: "эффект стрельбы",
 
-            // Редкости
-            common: null,
-            uncommon: null,
-            rare: null,
-            epic: null,
-            mythic: null,
-            legendary: null
-        },*/
+				 // Редкости
+				 common: null,
+				 uncommon: null,
+				 rare: null,
+				 epic: null,
+				 mythic: null,
+				 legendary: null
+		 },*/
 	{
 		name: "pets", displayname: TypeTranslate.pets,
 		description: "Дружелюбный питомец",
@@ -277,6 +277,84 @@ export const Case = [
 		}]
 	},
 	{
+		name: "particleeffects", displayname: TypeTranslate.particleeffects,
+		description: "Красивые частицы",
+		price: 50,
+
+		// Дроп
+		common: [{
+			name: "arcaneflame", displayname: "Адские Мысли"
+		}, {
+			name: "enchanted", displayname: "Магия"
+		}, {
+			name: "frostlord", displayname: "Снежный Король"
+		}, {
+			name: "music", displayname: "Танцпол"
+		}, {
+			name: "notes", displayname: "Диджей Мысли"
+		}],
+
+		uncommon: [{
+			name: "crushedcandycane", displayname: "Конфетки"
+		}, {
+			name: "cursedfootprints", displayname: "Проклятые Следы"
+		}, {
+			name: "enderaura", displayname: "Эндермен"
+		}, {
+			name: "frozenwalk", displayname: "Снежные Следы"
+		}, {
+			name: "hearts", displayname: "Любовные мысли"
+		}, {
+			name: "inlove", displayname: "Любоф"
+		}, {
+			name: "shadowfootprints", displayname: "Теневые Следы"
+		}, {
+			name: "springfootprints", displayname: "Весенние Следы"
+		}],
+
+		rare: [{
+			name: "cursedhalo", displayname: "Проклятый Нимб"
+		}, {
+			name: "snowcloud", displayname: "Снежное Облако"
+		}, {
+			name: "snowfootprints", displayname: "Снежные Следы"
+		}],
+
+		epic: [{
+			name: "divinehalo", displayname: "Нимб Бога"
+		}, {
+			name: "enderfootprints", displayname: "Следы Эндермена"
+		}, {
+			name: "firewaves", displayname: "Огненные Волны"
+		}, {
+			name: "flamerings", displayname: "Огненные Кольца"
+		}, {
+			name: "greensparks", displayname: "Зеленые Волны"
+		}, {
+			name: "inferno", displayname: "Огненное Месиво"
+		}, {
+			name: "santahat", displayname: "Шапка Санты"
+		}, {
+			name: "volcanichalo", displayname: "Огненный Нимб"
+		}],
+
+		mythic: [{
+			name: "bloodhelix", displayname: "Кровавая Спираль"
+		}, {
+			name: "magicalrods", displayname: "Токсичные Ножи"
+		}, {
+			name: "rainycloud", displayname: "Дождевое Облако"
+		}],
+
+		legendary: [{
+			name: "angelwings", displayname: "Крылья Ангела"
+		}, {
+			name: "rainbowwings", displayname: "Радужные Крылья"
+		}, {
+			name: "superhero", displayname: "Геройский Плащ"
+		}]
+	},
+	{
 		name: "suffix", displayname: TypeTranslate.suffix, defaultRarity: "epic",
 		description: "Собственный суффикс",
 		price: 30,
@@ -285,4 +363,4 @@ export const Case = [
 		drop: [{
 			name: "suffix", displayname: TypeTranslate.suffix, noImg: true
 		}]
-	}, ]
+	},]

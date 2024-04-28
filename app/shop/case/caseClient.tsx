@@ -3,7 +3,7 @@
 import type {Dispatch, MutableRefObject, SetStateAction} from "react"
 // Next и сервер
 import {useEffect, useRef, useState} from "react";
-import {Case, CaseNamesList, CaseType, Drop, DropNamesList, DropType, Info, RarityNames} from "@/types/case";
+import {Case, CaseType, Drop, DropType, Info, RarityNames} from "@/types/case";
 import {User} from "lucia";
 import Link from "next/link";
 import {parseAsStringEnum, useQueryState} from "nuqs"
@@ -49,8 +49,12 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 		rollWidth: 16050 + Random(200)
 	})
 
-	const [rarity, setRarity] = useQueryState("rarity", parseAsStringEnum<CaseType>(CaseNamesList).withDefault("common"))
-	const [drop, setDrop] = useQueryState("drop", parseAsStringEnum<DropType>(DropNamesList).withDefault("all"))
+	const [rarity, setRarity] = useQueryState("rarity", parseAsStringEnum<CaseType>(
+			cases.map(({name}) => name)
+	).withDefault(cases[0].name))
+	const [drop, setDrop] = useQueryState("drop", parseAsStringEnum<DropType>(
+			drops.map(({name}) => name)
+	).withDefault(drops[0].name))
 
 	const getInfo = (caseName?: CaseType, dropName?: DropType) => {
 		if (!caseName) caseName = rarity
@@ -112,7 +116,6 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 
 			// Drop
 			if (!dropDefault) {
-				const {caseType} = getInfo()
 				const randomDrop = RandomValue(caseType.drop, sumChances.current.drop).name
 				info.drop = drops.find(({name}) => name === randomDrop)
 			}
@@ -131,7 +134,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 			// Item
 			let {drop: item} = info.drop
 
-			if (info.drop?.drop?.length === 0) {
+			if (item?.length === 0) {
 				item = info.drop[rarityName]
 			}
 
@@ -154,9 +157,12 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 	useEffect(() => {
 		setSettingCase(rarity)
 		setSettingDrop(drop)
+	}, []);
+
+	useEffect(() => {
 		Update()
 		// eslint-disable-next-line
-	}, [rarity, drop]);
+	}, [price]);
 
 	return (
 			<main
@@ -211,7 +217,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 													type="radio" value={type.name} name="select_case" className={styles.select_input}
 													checked={rarity === type.name}
 													disabled={isRolling}
-													onClick={() => setSettingCase(type.name)}
+													onChange={() => setSettingCase(type.name)}
 											/>
 											{type.displayname}
 											<p className={`${styles.mostiki_text} unic_color`}>

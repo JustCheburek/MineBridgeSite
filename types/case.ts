@@ -7,7 +7,6 @@ export const CaseNames = {
 	legendary: "Легендарный",
 }
 export type CaseType = keyof typeof CaseNames
-export const CaseNamesList = Object.keys(CaseNames) as CaseType[]
 
 export const RarityNames = {
 	...CaseNames,
@@ -16,7 +15,6 @@ export const RarityNames = {
 	mythic: "Мифический"
 }
 export type RarityType = keyof typeof RarityNames
-export const RarityNamesList = Object.keys(RarityNames) as RarityType[]
 
 export const DropNames = {
 	all: "Весь дроп",
@@ -26,7 +24,6 @@ export const DropNames = {
 	pets: "Питомец"
 }
 export type DropType = keyof typeof DropNames
-export const DropNamesList = Object.keys(DropNames) as DropType[]
 
 export class Chance<N = string> {
 	@prop({required: true, type: () => String})
