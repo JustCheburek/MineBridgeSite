@@ -39,5 +39,5 @@ export function Metrika() {
 		}, 1000)
 	}
 
-	return
+	return <></>
 }
