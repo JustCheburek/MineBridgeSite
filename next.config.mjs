@@ -16,6 +16,11 @@ const nextConfig = {
 			hostname: "media.tenor.com",
 			port: "",
 			pathname: "/**"
+		}, {
+			protocol: "https",
+			hostname: "gas-kvas.com",
+			port: "",
+			pathname: "/**"
 		}]
 	},
 	experimental: {
