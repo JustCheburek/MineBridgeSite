@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
 					}
 			)
 		} else {
-			const candidate = await userModel.findOneAndUpdate(
+			let candidate = await userModel.findOneAndUpdate(
 					{
 						$or: [
 							{googleId: userData.googleId},
@@ -95,7 +95,7 @@ export async function GET(request: NextRequest) {
 						name: userData.name
 					})
 
-					await userModel.create(userData)
+					candidate = await userModel.create(userData)
 				}
 				/*if (!candidate?.from) {
 					candidate.from = userData.from
@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
 				}*/
 				await candidate.save()
 			} else {
-				await userModel.create(userData)
+				candidate = await userModel.create(userData)
 			}
 
 			const session = await lucia.createSession(candidate?._id || userData._id, {});
