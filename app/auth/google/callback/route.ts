@@ -83,20 +83,18 @@ export async function GET(request: NextRequest) {
 			)
 
 			if (candidate) {
-				if (candidate._id.length > 15) {
-					userData.punishments = candidate.punishments
-					userData.casesPurchases = candidate.casesPurchases
-					userData.stickersPurchases = candidate.stickersPurchases
-					userData.mostiki = candidate.mostiki
-					userData.rating = candidate.rating
-					userData.discordId = candidate?.discordId?.toString()
+				if (candidate._id.length > 15 && candidate.casesPurchases.length === 0 && candidate.stickersPurchases.length === 0) {
+						userData.punishments = candidate.punishments
+						userData.mostiki = candidate.mostiki
+						userData.rating = candidate.rating
+						userData.discordId = candidate?.discordId?.toString()
 
-					await userModel.findOneAndDelete({
-						name: userData.name
-					})
+						await userModel.findOneAndDelete({
+							name: userData.name
+						})
 
-					candidate = await userModel.create(userData)
-				}
+						candidate = await userModel.create(userData)
+					}
 				/*if (!candidate?.from) {
 					candidate.from = userData.from
 				}

@@ -88,7 +88,7 @@ export class Drop extends UniqueName<DropType> {
 
 export interface Info {
 	item?: Item
-	rarity?: { name: RarityType, displayname: string }
+	rarity?: RarityType
 	drop?: Drop
 	img?: string
 }

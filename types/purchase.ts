@@ -1,18 +1,21 @@
 import {modelOptions, prop} from "@typegoose/typegoose";
 import type {Ref} from "@typegoose/typegoose";
-import {Drop, Item, type RarityType} from "@/types/case";
+import {Case, Drop, Item, type RarityType} from "@/types/case";
 import {Sticker} from "@/types/sticker";
 
 @modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})
 export class CasePurchase {
 	@prop({ref: () => Item})
-	public item?: Ref<Item>
+	public item!: Ref<Item>
 
 	@prop({type: () => String})
-	public rarity?: RarityType
+	public rarity!: RarityType
 
 	@prop({ref: () => Drop})
-	public drop?: Ref<Drop>
+	public drop!: Ref<Drop>
+
+	@prop({ref: () => Case})
+	public caseInfo!: Ref<Case>
 
 	@prop()
 	public createdAt!: Date

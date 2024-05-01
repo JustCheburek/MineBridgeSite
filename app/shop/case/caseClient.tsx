@@ -123,19 +123,14 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 			if (!info.drop) return console.error("Drop не найден")
 
 			// Rarity
-			const rarityName = info.drop?.defaultRarity ||
+			info.rarity = info.drop?.defaultRarity ||
 					RandomValue(caseType.rarity, sumChances.current.drop).name
-
-			info.rarity = {
-				name: rarityName,
-				displayname: RarityNames[rarityName]
-			}
 
 			// Item
 			let {drop: item} = info.drop
 
 			if (item?.length === 0) {
-				item = info.drop[rarityName]
+				item = info.drop[info.rarity]
 			}
 
 			if (!item) return console.error("Item не найден")
@@ -190,7 +185,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 								{/* Предметы которые можно выбить */}
 								{items?.map((info, index) => (
 										<ImgBox
-												className={`${styles.item} ${styles[`${info?.rarity?.name}_box`]} ${index === 48 ? styles.result : ""}`}
+												className={`${styles.item} ${styles[`${info?.rarity}_box`]} ${index === 48 ? styles.result : ""}`}
 												key={index}
 												onMouseEnter={() => selectedItem !== 48 && setSelectedItem(index)}
 												hover
@@ -288,11 +283,11 @@ function SelectedItem(
 				</h3>
 				<p className={styles.text}>
 					Редкость:<br/>
-					<span className={`${styles.changeable} ${styles[items[selectedItem]?.rarity?.name || ""]}`}>
-            {items[selectedItem]?.rarity?.displayname}
+					<span className={`${styles.changeable} ${styles[items[selectedItem]?.rarity || ""]}`}>
+            {RarityNames[items[selectedItem]?.rarity || "common"]}
           </span>
 				</p>
-				<p className={`${styles.text} ${styles.description} ${styles[items[selectedItem]?.rarity?.name || ""]}`}>
+				<p className={`${styles.text} ${styles.description} ${styles[items[selectedItem]?.rarity || ""]}`}>
 					{items[selectedItem]?.drop?.description}
 				</p>
 			</div>

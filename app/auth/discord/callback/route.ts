@@ -137,7 +137,7 @@ export async function GET(request: NextRequest) {
 			)
 
 			if (candidate) {
-				if (candidate._id.length > 15) {
+				if (candidate._id.length > 15 && candidate.casesPurchases.length === 0 && candidate.stickersPurchases.length === 0) {
 					userData.punishments = candidate.punishments
 					userData.casesPurchases = candidate.casesPurchases
 					userData.stickersPurchases = candidate.stickersPurchases
