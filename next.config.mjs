@@ -1,27 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		remotePatterns: [{
-			protocol: "https",
-			hostname: "cdn.discordapp.com",
-			port: "",
-			pathname: "/avatars/**"
-		}, {
-			protocol: "https",
-			hostname: "lh3.googleusercontent.com",
-			port: "",
-			pathname: "/**"
-		}, {
-			protocol: "https",
-			hostname: "media.tenor.com",
-			port: "",
-			pathname: "/**"
-		}, {
-			protocol: "https",
-			hostname: "gas-kvas.com",
-			port: "",
-			pathname: "/**"
-		}]
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: '**',
+			},
+		]
 	},
 	experimental: {
 		esmExternals: "loose",

@@ -175,9 +175,9 @@
 }
 
 // Кручение
-.natural_container.roll {
+.roll {
 	animation-name: roll;
-	animation-duration: attr(data-roll-width, 25000ms);
+	animation-duration: var(--_roll-width, 25000ms);
 	animation-fill-mode: forwards;
 }
 
@@ -294,7 +294,7 @@
 		left: 0;
 	}
 	100% {
-		left: attr(data-roll-width, -16150px);
+		left: var(--_roll-width, -16150px);
 	}
 }
 

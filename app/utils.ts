@@ -46,7 +46,7 @@ export function RandomValue<T extends Chance>(
 	for (
 			let chance = array[0].chance;
 			chance <= randomChance;
-			chance += array[id].chance
+			chance += array[id]?.chance | 1
 	) {
 		// Прибавляем айди
 		id++;

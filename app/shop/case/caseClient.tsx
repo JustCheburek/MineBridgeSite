@@ -1,7 +1,7 @@
 "use client"
 
-import type {Dispatch, MutableRefObject, SetStateAction} from "react"
 // Next и сервер
+import type {MouseEventHandler} from "react"
 import {useEffect, useRef, useState} from "react";
 import {Case, CaseType, Drop, DropType, Info, RarityNames} from "@/types/case";
 import {User} from "lucia";
@@ -138,8 +138,8 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 
 			// Картинка
 			info.img = info.item?.img
-					? undefined
-					: `/shop/${info.drop.name}/${info.item.name}.webp`
+					? `/shop/${info.drop.name}/${info.item.name}.webp`
+					: undefined
 
 			itemsRestart.push(info)
 		}
@@ -149,10 +149,24 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 		setSelectedItem(0)
 	}
 
-	useEffect(() => {
-		setSettingCase(rarity)
-		setSettingDrop(drop)
-	}, []);
+	function Roll() {
+		if (isWin) {
+			// Крутилка
+			rollSettings.current.rollWidth = 16050 + Random(200)
+
+			setIsRolling(false)
+			setIsWin(false)
+			Update()
+			return
+		}
+
+		setTimeout(() => {
+			setIsWin(true)
+			setSelectedItem(RESULT)
+		}, rollSettings.current.timeRoll)
+
+		setIsRolling(true)
+	}
 
 	useEffect(() => {
 		Update()
@@ -213,6 +227,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 													checked={rarity === type.name}
 													disabled={isRolling}
 													onChange={() => setSettingCase(type.name)}
+													onLoad={() => setSettingCase(rarity)}
 											/>
 											{type.displayname}
 											<p className={`${styles.mostiki_text} unic_color`}>
@@ -236,6 +251,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 													className={styles.select_input}
 													disabled={isRolling}
 													onChange={() => setSettingDrop(type.name)}
+													onLoad={() => setSettingDrop(drop)}
 											/>
 											{type.displayname}
 											<p className={`${styles.mostiki_text} unic_color`}>
@@ -249,12 +265,9 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 
 					<RollButton
 							user={user} price={price}
-							isRolling={isRolling} setIsRolling={setIsRolling}
-							isWin={isWin} setIsWin={setIsWin}
-							rollSettings={rollSettings}
-							RESULT={RESULT}
-							Update={Update}
-							setSelectedItem={setSelectedItem}
+							isRolling={isRolling}
+							isWin={isWin}
+							Roll={Roll}
 					/>
 				</MaxSize>
 			</main>
@@ -324,12 +337,7 @@ type RollButton = {
 	isWin: boolean
 	price: number
 	user: User | null
-	setIsWin: Dispatch<SetStateAction<boolean>>
-	Update: () => void
-	setIsRolling: Dispatch<SetStateAction<boolean>>
-	setSelectedItem: Dispatch<SetStateAction<number>>
-	RESULT: number
-	rollSettings: MutableRefObject<rollSettings>
+	Roll: MouseEventHandler<HTMLButtonElement>
 }
 
 function RollButton(
@@ -338,31 +346,8 @@ function RollButton(
 			isWin,
 			price,
 			user,
-			setIsWin,
-			Update,
-			setIsRolling,
-			setSelectedItem,
-			RESULT,
-			rollSettings
+			Roll
 		}: RollButton) {
-	function Roll() {
-		if (isWin) {
-			setIsWin(false)
-			Update()
-			setIsRolling(false)
-			return
-		}
-
-		rollSettings.current.rollWidth = 16050 + Random(200)
-
-		setTimeout(() => {
-			setIsWin(true)
-			setSelectedItem(RESULT)
-		}, rollSettings.current.timeRoll)
-
-		setIsRolling(true)
-	}
-
 	// Не вошёл
 	if (!user) {
 		return (
