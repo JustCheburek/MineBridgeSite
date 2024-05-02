@@ -15,6 +15,7 @@
     "aws4": "latest",
     "axios": "latest",
     "javascript-time-ago": "latest",
+    "mongoose": "latest",
     "next": "latest",
     "nuqs": "latest",
     "react": "latest",

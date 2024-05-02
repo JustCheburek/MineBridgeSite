@@ -177,7 +177,7 @@
 // Кручение
 .roll {
 	animation-name: roll;
-	animation-duration: var(--_roll-width, 25000ms);
+	animation-duration: var(--_roll-time, 25000ms);
 	animation-fill-mode: forwards;
 }
 
