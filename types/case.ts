@@ -48,6 +48,7 @@ export class Case extends UniqueName<CaseType> {
 	public drop!: DropChance[]
 }
 
+@modelOptions({schemaOptions: {collection: "items"}})
 export class Item extends Name {
 	@prop({default: true, required: true})
 	public img!: boolean

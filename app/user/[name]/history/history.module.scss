@@ -2,3 +2,7 @@
 	display: grid;
 	gap: 40px;
 }
+
+.item {
+	border-radius: var(--border-radius);
+}

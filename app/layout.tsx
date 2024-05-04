@@ -14,6 +14,7 @@ import "@styles/text.scss"
 import "@styles/urls.scss"
 import "@styles/appear.scss"
 import "@styles/button.scss"
+import "@styles/rarities.scss"
 import "@styles/global.scss"
 
 // Компоненты

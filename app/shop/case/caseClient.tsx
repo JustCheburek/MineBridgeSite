@@ -3,7 +3,8 @@
 // Next и сервер
 import type {MouseEventHandler} from "react"
 import {useEffect, useRef, useState} from "react";
-import {Case, CaseType, Drop, DropType, Info, RarityNames} from "@/types/case";
+import {Case, Drop, RarityNames} from "@/types/case";
+import type {CaseType, DropType, Info} from "@/types/case";
 import {User} from "lucia";
 import Link from "next/link";
 import {parseAsStringEnum, useQueryState} from "nuqs"
@@ -17,6 +18,7 @@ import {Random, RandomValue, SumChances} from "@app/utils";
 import {Img, ImgBox} from "@components/img";
 import {MostikiSvg} from "@ui/svgs";
 import {Button, Url} from "@components/button";
+import {Types} from "mongoose";
 
 declare module 'csstype' {
 	interface Properties {
@@ -34,9 +36,10 @@ type CaseClient = {
 	cases: Case[]
 	drops: Drop[]
 	user: User | null
+	Add: (caseId: Types.ObjectId, item: Info) => void
 }
 
-export function CaseClient({cases, drops, user}: CaseClient) {
+export function CaseClient({cases, drops, user, Add}: CaseClient) {
 	const AMOUNT = 50
 	const RESULT = AMOUNT - 2
 
@@ -107,7 +110,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 			dropDefault = drops.find(({name}) => name === drop)
 		}
 
-		const itemsRestart: Info[] = []
+		const infos: Info[] = []
 
 		for (let itemIndex = 0; itemIndex < AMOUNT; itemIndex++) {
 			const info: Info = {
@@ -127,31 +130,29 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 					RandomValue(caseType.rarity, sumChances.current.drop).name
 
 			// Item
-			let {drop: item} = info.drop
-
-			if (item?.length === 0) {
-				item = info.drop[info.rarity]
+			let {drop: items} = info.drop
+			if (items?.length === 0) {
+				items = info.drop[info.rarity]
 			}
 
-			if (!item) return console.error("Item не найден")
-			info.item = item[Random(item.length)]
+			if (!items) return console.error("Items не найден")
+			info.item = items[Random(items.length)]
 
 			// Картинка
 			info.img = info.item?.img
 					? `/shop/${info.drop.name}/${info.item.name}.webp`
 					: undefined
 
-			itemsRestart.push(info)
+			infos.push(info)
 		}
 
 		// Смена
-		setItems(itemsRestart)
+		setItems(infos)
 		setSelectedItem(0)
 	}
 
 	function Roll() {
 		if (isWin) {
-			// Крутилка
 			rollSettings.current.rollWidth = 16050 + Random(200)
 
 			setIsRolling(false)
@@ -164,6 +165,9 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 			setIsWin(true)
 			setSelectedItem(RESULT)
 		}, rollSettings.current.timeRoll)
+
+		const {caseType} = getInfo()
+		Add(caseType._id, items[RESULT])
 
 		setIsRolling(true)
 	}
@@ -199,7 +203,7 @@ export function CaseClient({cases, drops, user}: CaseClient) {
 								{/* Предметы которые можно выбить */}
 								{items?.map((info, index) => (
 										<ImgBox
-												className={`${styles.item} ${styles[`${info?.rarity}_box`]} ${index === 48 ? styles.result : ""}`}
+												className={`${styles.item} ${info?.rarity}_box ${index === 48 ? styles.result : ""}`}
 												key={index}
 												onMouseEnter={() => selectedItem !== 48 && setSelectedItem(index)}
 												hover
@@ -296,11 +300,11 @@ function SelectedItem(
 				</h3>
 				<p className={styles.text}>
 					Редкость:<br/>
-					<span className={`${styles.changeable} ${styles[items[selectedItem]?.rarity || ""]}`}>
+					<span className={`${styles.changeable} ${items[selectedItem]?.rarity || ""}`}>
             {RarityNames[items[selectedItem]?.rarity || "common"]}
           </span>
 				</p>
-				<p className={`${styles.text} ${styles.description} ${styles[items[selectedItem]?.rarity || ""]}`}>
+				<p className={`${styles.text} ${styles.description} ${items[selectedItem]?.rarity || ""}`}>
 					{items[selectedItem]?.drop?.description}
 				</p>
 			</div>

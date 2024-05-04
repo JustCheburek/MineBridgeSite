@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 		}
 	}
 
-	const users = await userModel.find(filter);
+	const users = await userModel.find(filter).lean();
 
 	if (!users?.length) {
 		return new NextResponse("Пользователи не найдены", {

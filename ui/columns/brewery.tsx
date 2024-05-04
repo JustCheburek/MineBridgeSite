@@ -64,6 +64,6 @@ export const columns: ColumnDef<RecipeProps>[] = [
 		meta: {
 			className: "center_text"
 		},
-		cell: ({getValue}: {getValue: Function}) => woods[Number(getValue())] || ""
+		cell: ({getValue}: {getValue: Function}) => woods[Number(getValue())] || "любое"
 	},
 ]

@@ -6,22 +6,22 @@ import {Sticker} from "@/types/sticker";
 @modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})
 export class CasePurchase {
 	@prop({ref: () => Item})
-	public item!: Ref<Item>
+	public Item!: Item["_id"]
 
 	@prop({type: () => String})
 	public rarity!: RarityType
 
 	@prop({ref: () => Drop})
-	public drop!: Ref<Drop>
+	public Drop!: Ref<Drop>
 
 	@prop({ref: () => Case})
-	public caseInfo!: Ref<Case>
+	public Case!: Ref<Case>
 
 	@prop()
-	public createdAt!: Date
+	public createdAt?: Date
 
 	@prop()
-	public updatedAt!: Date
+	public updatedAt?: Date
 }
 
 @modelOptions({schemaOptions: {collection: "stickersPurchases", timestamps: true}})

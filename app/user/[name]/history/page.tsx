@@ -1,7 +1,7 @@
 // Сервер
 import {getUser} from "@/services";
 import {validate} from "@server/validate";
-import {userModel} from "@server/models";
+import {caseModel, dropModel, userModel} from "@server/models";
 import {Punishment} from "@/types/punishment";
 import {CasePurchase} from "@/types/purchase";
 
@@ -20,6 +20,8 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 export default async function History({params: {name}}: { params: { name: string } }) {
 	const {user} = await getUser({name})
 	const {isModer, isAdmin} = await validate()
+	const Cases = await caseModel.find().lean()
+	const Drops = await dropModel.find().lean()
 
 	async function PunishmentSave(data: Punishment[]){
 		"use server"
@@ -47,7 +49,7 @@ export default async function History({params: {name}}: { params: { name: string
 
 				<PunishmentSection user={user} access={isModer} SaveAll={PunishmentSave}/>
 
-				<CasesPurchasesSection user={user} access={isAdmin} SaveAll={CasesPurchasesSave}/>
+				<CasesPurchasesSection user={user} access={isAdmin} SaveAll={CasesPurchasesSave} Cases={Cases} Drops={Drops}/>
 			</div>
 	)
 }

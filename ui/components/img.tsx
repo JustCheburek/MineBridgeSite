@@ -52,7 +52,7 @@ export const Img = (
 ) => {
 	if (!props.width && !props.height) {
 		props.fill = true
-		props.sizes = "100vw"
+		props.sizes = "50vw"
 	}
 
 	if (symmetrical) {

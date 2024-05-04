@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
 			{_id},
 			{name}
 		]
-	});
+	}).lean();
 
 	if (!user) {
 		return new NextResponse("Пользователь не найден", {
