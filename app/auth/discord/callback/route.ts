@@ -140,7 +140,7 @@ export async function GET(request: NextRequest) {
 			)
 
 			if (candidate) {
-				if (candidate._id.length > 15 && candidate.casesPurchases.length === 0) {
+				if (candidate._id.length > 15) {
 					userData.punishments = candidate.punishments
 					userData.mostiki = candidate.mostiki
 					userData.rating = candidate.rating
