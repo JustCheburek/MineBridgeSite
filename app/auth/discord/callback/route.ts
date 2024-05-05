@@ -2,12 +2,15 @@ import {discord, lucia} from "@server/lucia";
 import {cookies} from "next/headers";
 import {generateId, User} from "lucia";
 import type {DSUser, GuildDSUser} from "@/types/user";
-import {userModel} from "@server/models";
+import {caseModel, dropModel, userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@services/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
 import {DS_URL} from "@/const";
+import {RarityType} from "@/types/case";
+import {CasePurchase} from "@/types/purchase";
+
 // import {AddInvite} from "../../addInvite";
 
 
@@ -115,13 +118,13 @@ export async function GET(request: NextRequest) {
 		const {user} = await validate()
 
 		if (user) {
-				await userModel.findByIdAndUpdate(
-						user._id,
-						{
-							email: userData.email,
-							discordId: userData.discordId
-						}
-				)
+			await userModel.findByIdAndUpdate(
+					user._id,
+					{
+						email: userData.email,
+						discordId: userData.discordId
+					}
+			)
 		} else {
 			let candidate = await userModel.findOneAndUpdate(
 					{
@@ -137,13 +140,40 @@ export async function GET(request: NextRequest) {
 			)
 
 			if (candidate) {
-				if (candidate._id.length > 15 && candidate.casesPurchases.length === 0 && candidate.stickersPurchases.length === 0) {
+				if (candidate._id.length > 15 && candidate.casesPurchases.length === 0) {
 					userData.punishments = candidate.punishments
-					userData.casesPurchases = candidate.casesPurchases
-					userData.stickersPurchases = candidate.stickersPurchases
 					userData.mostiki = candidate.mostiki
 					userData.rating = candidate.rating
 					userData.googleId = candidate?.googleId?.toString()
+
+					const casesPurchases = [] as CasePurchase[]
+
+					candidate.casesPurchases.map(async purchase => {
+						// @ts-ignore
+						const Case = await caseModel.findOne({name: purchase.caseRarity.name})
+						// @ts-ignore
+						const Drop = await dropModel.findOne({name: purchase.caseType.name})
+						// @ts-ignore
+						const DropItem = await dropModel.findOne({name: purchase.resultType.name})
+						if (!Case || !Drop || !DropItem) return console.log("No case or drop or dropItem")
+						// @ts-ignore
+						const rarity: RarityType = purchase.resultRarity.name
+
+						// Items
+						let {drop: items} = Drop
+						if (items?.length === 0) {
+							items = DropItem[rarity]
+						}
+						if (items?.length === 0 || !items) return console.log("No items")
+
+						// @ts-ignore
+						const Item = items.find(item => item.name === purchase.resultDrop.name)
+						if (!Item) return console.log("Not item")
+
+						casesPurchases.push({Case: Case._id, Drop: Drop._id, DropItem: DropItem._id, Item: Item._id, rarity})
+					})
+
+					userData.casesPurchases = casesPurchases
 
 					await userModel.findOneAndDelete({
 						name: userData.name

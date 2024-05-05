@@ -3,10 +3,13 @@ import {cookies} from "next/headers";
 import {generateId, User} from "lucia";
 import type {GUser} from "@/types/user";
 import {OAuth2RequestError} from "arctic";
-import {userModel} from "@server/models";
+import {caseModel, dropModel, userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@services/validate";
 import axios from "axios";
+import {CasePurchase} from "@/types/purchase";
+import {RarityType} from "@/types/case";
+
 // import {AddInvite} from "../../addInvite";
 
 
@@ -84,17 +87,46 @@ export async function GET(request: NextRequest) {
 
 			if (candidate) {
 				if (candidate._id.length > 15 && candidate.casesPurchases.length === 0 && candidate.stickersPurchases.length === 0) {
-						userData.punishments = candidate.punishments
-						userData.mostiki = candidate.mostiki
-						userData.rating = candidate.rating
-						userData.discordId = candidate?.discordId?.toString()
+					userData.punishments = candidate.punishments
+					userData.mostiki = candidate.mostiki
+					userData.rating = candidate.rating
+					userData.discordId = candidate?.discordId?.toString()
 
-						await userModel.findOneAndDelete({
-							name: userData.name
-						})
+					const casesPurchases = [] as CasePurchase[]
 
-						candidate = await userModel.create(userData)
-					}
+					candidate.casesPurchases.map(async purchase => {
+						// @ts-ignore
+						const Case = await caseModel.findOne({name: purchase.caseRarity.name})
+						// @ts-ignore
+						const Drop = await dropModel.findOne({name: purchase.caseType.name})
+						// @ts-ignore
+						const DropItem = await dropModel.findOne({name: purchase.resultType.name})
+						if (!Case || !Drop || !DropItem) return console.log("No case or drop or dropItem")
+						// @ts-ignore
+						const rarity: RarityType = purchase.resultRarity.name
+
+						// Items
+						let {drop: items} = Drop
+						if (items?.length === 0) {
+							items = DropItem[rarity]
+						}
+						if (items?.length === 0 || !items) return console.log("No items")
+
+						// @ts-ignore
+						const Item = items.find(item => item.name === purchase.resultDrop.name)
+						if (!Item) return console.log("Not item")
+
+						casesPurchases.push({Case: Case._id, Drop: Drop._id, DropItem: DropItem._id, Item: Item._id, rarity})
+					})
+
+					userData.casesPurchases = casesPurchases
+
+					await userModel.findOneAndDelete({
+						name: userData.name
+					})
+
+					candidate = await userModel.create(userData)
+				}
 				/*if (!candidate?.from) {
 					candidate.from = userData.from
 				}
