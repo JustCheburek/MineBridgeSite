@@ -32,7 +32,7 @@ export const getAuthor = unstable_cache(
 )
 
 export const getUsers = unstable_cache(
-		async () => await userModel.find().lean(),
+		async () => await userModel.find().lean() as User[],
 		["users", "userLike", "all"],
 		{revalidate: 600, tags: ["users", "userLike", "all"]}
 )
