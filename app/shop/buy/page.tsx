@@ -1,7 +1,7 @@
 // Сервер
 import type {Metadata} from "next";
 import {permanentRedirect} from "next/navigation";
-import {validate} from "@server/validate";
+import {validate} from "@services/validate";
 
 // Компоненты
 import {MostikiSvg, SBPSvg} from "@ui/svgs";

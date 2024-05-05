@@ -67,11 +67,7 @@ export class User {
 	public static async getRoles(
 			this: ReturnModelType<typeof User>,
 			discordId?: string
-	): Promise<{
-		roles: Role[] | [],
-		isModer: boolean,
-		isAdmin: boolean
-	}> {
+	): Promise<RolesApi> {
 		if (!discordId) {
 			return {
 				roles: [],
@@ -96,9 +92,9 @@ export class User {
 						Authorization: `Bot ${process.env.DISCORD_TOKEN}`
 					}
 				}
-		).then(r => r.data);
+		).then(r => r.data).catch(console.error);
 
-		const roles = allRoles.filter(({id}) => dsUser.roles.includes(id))
+		const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
 		const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
 		const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
 
@@ -109,11 +105,14 @@ export class User {
 	}
 }
 
-export interface UserApi {
-	user: UserLucia,
-	roles?: Role[],
+export interface RolesApi {
+	roles: Role[],
 	isModer: boolean,
 	isAdmin: boolean
+}
+
+export interface UserApi extends RolesApi {
+	user?: UserLucia
 }
 
 export interface DSUser {

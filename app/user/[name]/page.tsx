@@ -1,5 +1,5 @@
 // Сервер
-import {validate} from "@server/validate";
+import {validate} from "@services/validate";
 import {getUser} from "@/services";
 
 // Стили

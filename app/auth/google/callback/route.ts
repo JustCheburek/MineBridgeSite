@@ -5,7 +5,7 @@ import type {GUser} from "@/types/user";
 import {OAuth2RequestError} from "arctic";
 import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
-import {validate} from "@server/validate";
+import {validate} from "@services/validate";
 import axios from "axios";
 // import {AddInvite} from "../../addInvite";
 

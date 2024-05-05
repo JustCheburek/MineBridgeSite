@@ -1,5 +1,5 @@
 // React
-import {validate} from "@server/validate";
+import {validate} from "@services/validate";
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 

@@ -4,7 +4,7 @@ import {generateId, User} from "lucia";
 import type {DSUser, GuildDSUser} from "@/types/user";
 import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
-import {validate} from "@server/validate";
+import {validate} from "@services/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
 import {DS_URL} from "@/const";
@@ -32,9 +32,9 @@ export async function GET(request: NextRequest) {
 			headers: {
 				Authorization: `Bearer ${accessToken}`
 			}
-		}).then(r => r.data);
+		}).then(r => r.data).catch(console.error);
 
-		if (!dsUser.email || !dsUser.verified) {
+		if (!dsUser || !dsUser.email || !dsUser.verified) {
 			return new NextResponse("Нету почты", {status: 400})
 		}
 

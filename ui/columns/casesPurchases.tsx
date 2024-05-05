@@ -1,9 +1,9 @@
 import {ColumnDef} from "@tanstack/react-table";
 import {Img, ImgBox} from "@components/img";
-import {data} from "@app/user/[name]/history/components/casesPurchasesSection";
 import styles from "@app/user/[name]/history/history.module.scss";
+import type {CaseData} from "@/types/purchase";
 
-export const columns: ColumnDef<data>[] = [
+export const columns: ColumnDef<CaseData>[] = [
 	{
 		accessorFn: ({Drop, Item}) => Item.img
 				? `/shop/${Drop.name}/${Item.name}.webp`
@@ -23,7 +23,7 @@ export const columns: ColumnDef<data>[] = [
 	{
 		accessorKey: "Case",
 		header: "Кейс",
-		cell: ({row, getValue}) => {
+		cell: ({row}) => {
 			const {Case, Drop} = row.original
 			return (<>
 				<p>{Case.displayname}</p>

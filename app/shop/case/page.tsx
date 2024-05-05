@@ -1,13 +1,14 @@
 // Next
 import type {Metadata} from "next";
 import {getCases, getDrops} from "@/services";
-import {validate} from "@server/validate";
-import {caseModel, dropModel, userModel} from "@server/models";
+import {validate} from "@services/validate";
+import {userModel} from "@server/models";
 import {Info} from "@/types/case";
 import {Types} from "mongoose";
 
 // Компоненты
 import {CaseClient} from "./caseClient";
+import {revalidateTag} from "next/cache";
 
 export const metadata: Metadata = {
 	title: "Кейсы | MineBridge",
@@ -19,32 +20,27 @@ export default async function CasePage() {
 	const cases = await getCases()
 	const drops = await getDrops()
 
-	async function Add(caseId: Types.ObjectId, info: Info) {
+	async function Add(
+			caseId: Types.ObjectId, dropId: Types.ObjectId,
+			price: number, {rarity, item, drop}: Info
+	) {
 		"use server"
 
-		const Case = await caseModel.findById(caseId)
-		const Drop = await dropModel.findById(info?.drop?._id)
-
-		if (!Case || !Drop) return console.log("No case or drop")
-
-		// Item
-		let {drop: items} = Drop
-		if (items?.length === 0) {
-			items = Drop[info.rarity!]
-		}
-
-		if (!items) return console.log("No items")
+		if (!rarity || !item || !drop) return console.log("Как")
 
 		const userM = await userModel.findOne({name: user?.name})
 		if (!userM) return console.log("No user")
 
-		userM.mostiki -= Case.price + Drop.price
+		userM.mostiki -= price
 		userM.casesPurchases.push({
-			Item: info.item!._id,
-			rarity: info.rarity!,
-			Case: Case,
-			Drop: Drop
+			Item: item._id,
+			rarity: rarity,
+			Case: caseId,
+			Drop: dropId,
+			DropItem: drop._id
 		})
+
+		revalidateTag("userLike")
 
 		await userM.save()
 	}

@@ -1,33 +1,21 @@
 import {cache} from "react";
-import type {Session, User} from "lucia";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
-import {userModel} from "@server/models";
-import {Role} from "@/types/role";
+import {getAuthor} from "@/services";
 
 export const validate = cache(
-		async (): Promise<
-				{
-					user: User | null, session: Session | null,
-					roles: Role[] | [], isModer: boolean, isAdmin: boolean
-				}
-		> => {
+		async () => {
 			const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
 
 			if (!sessionId) {
 				return {
-					user: null, session: null,
+					user: null,
 					roles: [], isModer: false, isAdmin: false
 				}
 			}
 
 			const {user, session} = await lucia.validateSession(sessionId);
 
-			if (user?._id) {
-				user._id = user._id.toString()
-			}
-
-			// next.js throws when you attempt to set cookie when rendering page
 			try {
 				if (session && session.fresh) {
 					const sessionCookie = lucia.createSessionCookie(session.id);
@@ -39,8 +27,6 @@ export const validate = cache(
 			} catch {
 			}
 
-			const {roles, isModer, isAdmin} = await userModel.getRoles(user?.discordId)
-
-			return {user, session, roles, isModer, isAdmin};
+			return await getAuthor(user?.id)
 		}
 );

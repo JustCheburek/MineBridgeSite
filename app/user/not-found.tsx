@@ -1,6 +1,6 @@
 import {MaxSize} from "@components/maxSize";
 import {Url} from "@components/button";
-import {validate} from "@server/validate";
+import {validate} from "@services/validate";
 import {redirect} from "next/navigation";
 
 export default async function NotFound() {

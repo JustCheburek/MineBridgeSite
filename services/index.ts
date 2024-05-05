@@ -1,23 +1,50 @@
-import {api} from "@server/axios";
+"use server"
 import type {User} from "lucia";
 import {notFound} from "next/navigation";
-import {Case, Drop} from "@/types/case";
-import type {UserApi} from "@/types/user";
+import {unstable_cache} from "next/cache";
+import {caseModel, dropModel, userModel} from "@server/models";
 
-export async function getUser(param: { id?: User["id"], name?: User["name"] }) {
-	return await api<UserApi>(`/user`, {params: param})
-			.then(r => r.data)
-			.catch(notFound)
-}
+export const getUser = unstable_cache(
+		async (
+				param: {
+					_id?: User["_id"],
+					name?: User["name"]
+				}
+		) => {
+			const user: User | null = await userModel.findOne(param).lean()
 
-export async function getUsers() {
-	return await api<User[]>(`/users`).then(r => r.data).catch(notFound)
-}
+			if (!user) notFound()
 
-export async function getCases() {
-	return await api<Case[]>(`/cases`).then(r => r.data).catch(notFound)
-}
+			return {user, ...await userModel.getRoles(user.discordId)}
+		},
+		["user", "userLike", "all"],
+		{revalidate: 600, tags: ["user", "userLike", "all"]}
+)
 
-export async function getDrops() {
-	return await api<Drop[]>(`/drops`).then(r => r.data).catch(notFound)
-}
+export const getAuthor = unstable_cache(
+		async (id?: string) => {
+			const user: User | null = await userModel.findById(id).lean()
+
+			return {user, ...await userModel.getRoles(user?.discordId)}
+		},
+		["author", "userLike", "all"],
+		{revalidate: 600, tags: ["user", "userLike", "all"]}
+)
+
+export const getUsers = unstable_cache(
+		async () => await userModel.find().lean(),
+		["users", "userLike", "all"],
+		{revalidate: 600, tags: ["users", "userLike", "all"]}
+)
+
+export const getCases = unstable_cache(
+		async () => await caseModel.find().lean(),
+		["cases", "shop", "all"],
+		{tags: ["cases", "shop", "all"]}
+)
+
+export const getDrops = unstable_cache(
+		async () => await dropModel.find().lean(),
+		["drops", "shop", "all"],
+		{tags: ["drops", "shop", "all"]}
+)

@@ -3,6 +3,7 @@
 import {userModel} from "@server/models";
 import {Rcon} from "@server/console";
 import type {User} from "lucia";
+import {revalidateTag} from "next/cache";
 
 export interface State {
 	user: User
@@ -24,6 +25,8 @@ export async function NameChange(prevState: State, formData: FormData) {
 
 	await userModel.findByIdAndUpdate(user._id, {name})
 
+	revalidateTag("userLike")
+
 	return {
 		...prevState,
 		error: false,
@@ -43,6 +46,8 @@ export async function PhotoChange(prevState: State, formData: FormData) {
 	}
 
 	await userModel.findByIdAndUpdate(user._id, {photo})
+
+	revalidateTag("userLike")
 
 	return {
 		...prevState,
@@ -66,6 +71,8 @@ export async function WhitelistFunc(prevState: State) {
 	await client.run(`whitelist add ${user.name}`)
 
 	await userModel.findByIdAndUpdate(user._id, {whitelist: true})
+
+	revalidateTag("userLike")
 
 	return {
 		...prevState,
@@ -91,6 +98,8 @@ export async function MostikiChange(prevState: State, formData: FormData) {
 				$inc: {mostiki: mostiki}
 			}
 	)
+
+	revalidateTag("userLike")
 
 	return {
 		...prevState,
@@ -125,6 +134,8 @@ export async function RatingChange(prevState: State, formData: FormData) {
 			}
 	)
 
+	revalidateTag("userLike")
+
 	return {
 		...prevState,
 		error: false,
@@ -150,6 +161,8 @@ export async function UserDelete(prevState: State, formData: FormData) {
 	}
 
 	await userModel.findByIdAndDelete(user._id)
+
+	revalidateTag("userLike")
 
 	return {
 		...prevState,

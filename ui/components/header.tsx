@@ -1,5 +1,5 @@
 import {HeaderClient} from "@components/headerClient";
-import {validate} from "@server/validate";
+import {validate} from "@services//validate";
 import {cookies} from "next/headers";
 
 export async function Header() {

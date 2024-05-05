@@ -1,9 +1,9 @@
 // Сервер
 import {getUser} from "@/services";
-import {validate} from "@server/validate";
+import {validate} from "@services/validate";
 import {caseModel, dropModel, userModel} from "@server/models";
 import {Punishment} from "@/types/punishment";
-import {CasePurchase} from "@/types/purchase";
+import type {CaseData} from "@/types/purchase";
 
 // Компоненты
 import {PunishmentSection} from "./components/ratingSection";
@@ -33,13 +33,24 @@ export default async function History({params: {name}}: { params: { name: string
 		await userUpdate.save()
 	}
 
-	async function CasesPurchasesSave(data: CasePurchase[]){
+	async function CasesPurchasesSave(datas: CaseData[]){
 		"use server"
 
 		const userUpdate = await userModel.findById(user._id)
 		if (!userUpdate) return
 
-		userUpdate.casesPurchases = data
+		userUpdate.casesPurchases = []
+
+		datas.forEach(data => {
+			userUpdate.casesPurchases.push({
+				...data,
+				Case: data.Case._id,
+				Drop: data.Drop._id,
+				DropItem: data.DropItem._id,
+				Item: data.Item._id
+			})
+		})
+
 		await userUpdate.save()
 	}
 

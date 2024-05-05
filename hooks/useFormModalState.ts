@@ -1,6 +1,5 @@
 "use client"
 import {useEffect} from "react";
-import {useRouter} from "next/navigation";
 import {useFormState} from "react-dom"
 import type {User} from "lucia";
 import type {setModal} from "@components/modal";
@@ -14,7 +13,6 @@ interface initState {
 }
 
 export const useFormModalState = (Func: (state: State, formData: FormData) => State | Promise<State>, {user, access = false, setModal, message = ""}: initState) => {
-	const router = useRouter()
 	const [state, formAction, isPending] = useFormState<State>(
 			// @ts-ignore
 			Func,
@@ -26,7 +24,6 @@ export const useFormModalState = (Func: (state: State, formData: FormData) => St
 	useEffect(() => {
 		if (state.success) {
 			setModal(false)
-			router.refresh()
 		}
 	}, [state])
 

@@ -7,7 +7,6 @@ import {Case, Drop, RarityNames} from "@/types/case";
 import type {CaseType, DropType, Info} from "@/types/case";
 import {User} from "lucia";
 import Link from "next/link";
-import {parseAsStringEnum, useQueryState} from "nuqs"
 
 // Стили
 import styles from "./case.module.scss"
@@ -36,7 +35,7 @@ type CaseClient = {
 	cases: Case[]
 	drops: Drop[]
 	user: User | null
-	Add: (caseId: Types.ObjectId, item: Info) => void
+	Add: (caseId: Types.ObjectId, dropId: Types.ObjectId, price: number, item: Info) => Promise<void>
 }
 
 export function CaseClient({cases, drops, user, Add}: CaseClient) {
@@ -52,12 +51,8 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 		rollWidth: 16050 + Random(200)
 	})
 
-	const [rarity, setRarity] = useQueryState("rarity", parseAsStringEnum<CaseType>(
-			cases.map(({name}) => name)
-	).withDefault(cases[0].name))
-	const [drop, setDrop] = useQueryState("drop", parseAsStringEnum<DropType>(
-			drops.map(({name}) => name)
-	).withDefault(drops[0].name))
+	const [rarity, setRarity] = useState<CaseType>(cases[0].name)
+	const [drop, setDrop] = useState<DropType>(drops[0].name)
 
 	const getInfo = (caseName?: CaseType, dropName?: DropType) => {
 		if (!caseName) caseName = rarity
@@ -166,8 +161,8 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 			setSelectedItem(RESULT)
 		}, rollSettings.current.timeRoll)
 
-		const {caseType} = getInfo()
-		Add(caseType._id, items[RESULT])
+		const {caseType, dropType} = getInfo()
+		Add(caseType._id, dropType._id, price, items[RESULT])
 
 		setIsRolling(true)
 	}
@@ -241,9 +236,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 								))}
 							</form>
 
-							<form
-									className={styles.box}
-							>
+							<form className={styles.box}>
 								<h3 className={`${styles.heading} unic_color center_text`}>
 									Тип дропа
 								</h3>

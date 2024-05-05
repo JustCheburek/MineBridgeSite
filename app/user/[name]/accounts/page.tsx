@@ -1,6 +1,6 @@
 // Сервер
 import type {PropsWithChildren} from "react";
-import {validate} from "@server/validate"
+import {validate} from "@services/validate"
 import Link from "next/link";
 import {getUser} from "@/services";
 
@@ -10,7 +10,6 @@ import styles from "./accounts.module.scss"
 // Компоненты
 import {DiscordSvg, EmailSvg, GoogleSvg, SuccessSvg} from "@ui/svgs";
 import {DeleteUser} from "./components";
-
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Аккаунты | Майнбридж`,

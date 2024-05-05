@@ -2,20 +2,34 @@ import {modelOptions, prop} from "@typegoose/typegoose";
 import type {Ref} from "@typegoose/typegoose";
 import {Case, Drop, Item, type RarityType} from "@/types/case";
 import {Sticker} from "@/types/sticker";
+import {Types} from "mongoose";
+
+export type CaseData = {
+	Case: Case
+	Drop: Drop
+	DropItem: Drop
+	Item: Item
+	rarity: RarityType
+	createdAt?: Date
+	updatedAt?: Date
+}
 
 @modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})
 export class CasePurchase {
-	@prop({ref: () => Item})
-	public Item!: Item["_id"]
+	@prop({type: () => Types.ObjectId})
+	public Item!: Types.ObjectId
 
 	@prop({type: () => String})
 	public rarity!: RarityType
 
-	@prop({ref: () => Drop})
-	public Drop!: Ref<Drop>
+	@prop({type: () => Types.ObjectId})
+	public Drop!: Types.ObjectId
 
-	@prop({ref: () => Case})
-	public Case!: Ref<Case>
+	@prop({type: () => Types.ObjectId})
+	public DropItem!: Types.ObjectId
+
+	@prop({type: () => Types.ObjectId})
+	public Case!: Types.ObjectId
 
 	@prop()
 	public createdAt?: Date

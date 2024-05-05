@@ -90,7 +90,7 @@ export default async function Shop() {
 										<Price>
 											{caseType.price}
 										</Price>
-										<Url href={`/shop/case?rarity=${caseType.name}`} margin="10px">
+										<Url href={`/shop/case`} margin="10px">
 											Купить
 										</Url>
 									</Text>

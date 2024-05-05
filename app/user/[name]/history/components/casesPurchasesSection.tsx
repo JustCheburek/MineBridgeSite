@@ -11,41 +11,35 @@ import {Table} from "@components/table";
 import Link from "next/link";
 import {CasesPurchasesModal} from "@modals/casesPurchasesModal";
 import {useState} from "react";
-import {Case, Drop, Item, type RarityType} from "@/types/case";
+import {Case, Drop} from "@/types/case";
+import type {CaseData} from "@/types/purchase";
 
 type CasesPurchasesSection = {
-	user: User,
+	user: User
 	access: boolean
-	Cases: Case[],
+	Cases: Case[]
 	Drops: Drop[]
 	SaveAll: Function
-}
-
-export type data = {
-	Case: Case
-	Drop: Drop
-	Item: Item
-	rarity: RarityType
-	createdAt?: Date
-	updatedAt?: Date
 }
 
 export async function CasesPurchasesSection({user, access, Cases, Drops, SaveAll}: CasesPurchasesSection) {
 	const [modal, setModal] = useState<boolean>(false)
 
-	const data = [] as data[]
+	const data = [] as CaseData[]
 
 	user.casesPurchases.forEach(purchase => {
+		console.log(purchase)
 		const Case = Cases.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Case))
 		const Drop = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Drop))
-		if (!Case || !Drop) return console.log("No case or drop")
+		const DropItem = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.DropItem))
+		if (!Case || !Drop || !DropItem) return console.log("No case or drop")
 
 		// Items
 		let {drop: items} = Drop
 		if (items?.length === 0) {
-			items = Drop[purchase.rarity!]
+			items = DropItem[purchase.rarity!]
 		}
-		if (!items) return console.log("No items")
+		if (items?.length === 0 || !items) return console.log("No items")
 
 		const Item = items.find(({_id}) =>
 				JSON.stringify(_id) === JSON.stringify(purchase.Item)
@@ -57,6 +51,7 @@ export async function CasesPurchasesSection({user, access, Cases, Drops, SaveAll
 			...purchase,
 			Case,
 			Drop,
+			DropItem,
 			Item
 		})
 	})
