@@ -19,6 +19,10 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 	description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
 })
 
+export async function preload({params: {name}}: { params: { name: string } }) {
+	void await getUser({name})
+}
+
 export default async function Profile({params: {name}}: { params: { name: string } }) {
 	const {user, roles} = await getUser({name})
 	const {user: author, isModer, isAdmin} = await validate()

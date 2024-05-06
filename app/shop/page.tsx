@@ -21,6 +21,9 @@ export const metadata: Metadata = {
 	description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",
 };
 
+export async function preload() {
+	void await getCases()
+}
 
 export default async function Shop() {
 	const cases = await getCases()

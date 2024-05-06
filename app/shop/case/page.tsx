@@ -15,6 +15,11 @@ export const metadata: Metadata = {
 	description: "Здесь можно расслабится и покрутить кейсы. Интересно, что же выпадет?",
 };
 
+export async function preload() {
+	void await getCases()
+	void await getDrops()
+}
+
 export default async function CasePage() {
 	const {user} = await validate()
 	const cases = await getCases()

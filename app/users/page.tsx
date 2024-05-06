@@ -13,6 +13,10 @@ export const metadata: Metadata = {
 	description: "Братья и сёстры всея Майнбридж!",
 };
 
+export async function preload() {
+	void await getUsers()
+}
+
 export default async function Component() {
 	const users = await getUsers()
 
@@ -20,7 +24,7 @@ export default async function Component() {
 			<main className="users">
 				<MaxSize>
 					<Table<User>
-							columns={columns} 
+							columns={columns}
 							data={users}
 					>
 						<h1>

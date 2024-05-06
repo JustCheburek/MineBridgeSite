@@ -16,6 +16,9 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 	description: `Привязанные интеграции игрока ${name}. Дискорд и гугл!`
 })
 
+export async function preload({params: {name}}: { params: { name: string } }) {
+	void await getUser({name})
+}
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
 	const {user} = await getUser({name})
