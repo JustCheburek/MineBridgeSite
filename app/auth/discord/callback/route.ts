@@ -148,30 +148,34 @@ export async function GET(request: NextRequest) {
 
 					const casesPurchases = [] as CasePurchase[]
 
+					const Cases = await caseModel.find()
+					const Drops = await dropModel.find()
+
 					candidate.casesPurchases.map(async purchase => {
-						// @ts-ignore
-						const Case = await caseModel.findOne({name: purchase.caseRarity.name})
-						// @ts-ignore
-						const Drop = await dropModel.findOne({name: purchase.caseType.name})
-						// @ts-ignore
-						const DropItem = await dropModel.findOne({name: purchase.resultType.name})
-						if (!Case || !Drop || !DropItem) return console.log("No case or drop or dropItem")
-						// @ts-ignore
-						const rarity: RarityType = purchase.resultRarity.name
+								// @ts-ignore
+								const Case = Cases.find(({name}) => name === purchase.caseRarity.name)
+								// @ts-ignore
+								const Drop = Drops.find(({name}) => name === purchase.caseType.name)
+								// @ts-ignore
+								const DropItem = Drops.find(({name}) => name === purchase.resultType.name)
+								if (!Case || !Drop || !DropItem) return console.error("No case or drop or dropItem")
+								// @ts-ignore
+								const rarity: RarityType = purchase.resultRarity.name
 
-						// Items
-						let {drop: items} = Drop
-						if (items?.length === 0) {
-							items = DropItem[rarity]
-						}
-						if (items?.length === 0 || !items) return console.log("No items")
+								// Items
+								let {drop: items} = Drop
+								if (items?.length === 0) {
+									items = DropItem[rarity]
+								}
+								if (items?.length === 0 || !items) return console.error("No items")
 
-						// @ts-ignore
-						const Item = items.find(item => item.name === purchase.resultDrop.name)
-						if (!Item) return console.log("Not item")
+								// @ts-ignore
+								const Item = items.find(item => item.name === purchase.resultDrop.name)
+								if (!Item) return console.error("Not item")
 
-						casesPurchases.push({Case: Case._id, Drop: Drop._id, DropItem: DropItem._id, Item: Item._id, rarity})
-					})
+								casesPurchases.push({Case: Case._id, Drop: Drop._id, DropItem: DropItem._id, Item: Item._id, rarity})
+							}
+					)
 
 					userData.casesPurchases = casesPurchases
 
@@ -206,7 +210,8 @@ export async function GET(request: NextRequest) {
 				Location: `/user/${userData.name}`
 			}
 		});
-	} catch (e) {
+	} catch
+			(e) {
 		if (e instanceof OAuth2RequestError && e.message === "bad_verification_code") {
 			return new NextResponse(`Ошибка в коде регистрации ${e}`, {
 				status: 400

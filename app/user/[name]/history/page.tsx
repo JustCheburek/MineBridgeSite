@@ -17,10 +17,6 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 	description: `История рейтинга и всяких покупок игрока ${name}!`,
 })
 
-export async function preload({params: {name}}: { params: { name: string } }) {
-	void await getUser({name})
-}
-
 export default async function History({params: {name}}: { params: { name: string } }) {
 	const {user} = await getUser({name})
 	const {isModer, isAdmin} = await validate()

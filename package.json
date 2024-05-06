@@ -35,7 +35,6 @@
     "arctic": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
-    "hono": "latest",
     "minecraft-server-util": "latest",
     "schema-dts": "latest",
     "typescript": "latest"

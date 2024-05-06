@@ -21,10 +21,6 @@ export const metadata: Metadata = {
 	description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",
 };
 
-export async function preload() {
-	void await getCases()
-}
-
 export default async function Shop() {
 	const cases = await getCases()
 
@@ -44,7 +40,7 @@ export default async function Shop() {
 							Купить
 						</Url>
 						<p>
-							Покупка <Link href="#stickers" className="unic_color"><strong>стикеров</strong></Link> {" "}
+							Покупка <Link href={"#stickers"} className="unic_color"><strong>стикеров</strong></Link> {" "}
 							происходит только:
 						</p>
 						<ul>

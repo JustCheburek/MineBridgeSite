@@ -13,10 +13,6 @@ export const metadata: Metadata = {
 	description: "Братья и сёстры всея Майнбридж!",
 };
 
-export async function preload() {
-	void await getUsers()
-}
-
 export default async function Component() {
 	const users = await getUsers()
 
