@@ -142,6 +142,7 @@ a.unic_color:active, button.unic_color:active {
 
 .user_icon {
   border-radius: 50%;
+  object-fit: cover;
 
   &:hover {
     border-radius: 25%;

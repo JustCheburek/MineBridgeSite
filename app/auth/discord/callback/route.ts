@@ -130,6 +130,7 @@ export async function GET(request: NextRequest) {
 					{
 						$or: [
 							{discordId: dsUser.id},
+							{discordId: Number(dsUser.id)},
 							{email: dsUser.email}
 						]
 					},

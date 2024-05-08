@@ -73,6 +73,7 @@ export async function GET(request: NextRequest) {
 					{
 						$or: [
 							{googleId: userData.googleId},
+							{googleId: Number(userData.googleId)},
 							{email: userData.email}
 						]
 					},
@@ -136,7 +137,7 @@ export async function GET(request: NextRequest) {
 				if (!candidate.from?.userId) {
 					candidate.from.userId = userId
 				}*/
-				await candidate.save()
+				// await candidate.save()
 			} else {
 				candidate = await userModel.create(userData)
 			}
