@@ -147,41 +147,43 @@ export async function GET(request: NextRequest) {
 					userData.mostiki = candidate.mostiki
 					userData.rating = candidate.rating
 
-					const casesPurchases = [] as CasePurchase[]
+					if (candidate.casesPurchases.length > 0) {
+						const casesPurchases = [] as CasePurchase[]
 
-					const Cases = await caseModel.find()
-					const Drops = await dropModel.find()
+						const Cases = await caseModel.find()
+						const Drops = await dropModel.find()
 
-					candidate.casesPurchases.map(async purchase => {
-								// @ts-ignore
-								const Case = Cases.find(({name}) => name === purchase.caseRarity.name)
-								// @ts-ignore
-								const Drop = Drops.find(({name}) => name === purchase.caseType.name)
-								// @ts-ignore
-								const DropItem = Drops.find(({name}) => name === purchase.resultType.name)
-								if (!Case || !Drop || !DropItem) return console.error("No case or drop or dropItem")
-								// @ts-ignore
-								const rarity: RarityType = purchase.resultRarity.name
+						candidate.casesPurchases.map(async purchase => {
+									// @ts-ignore
+									const Case = Cases.find(({name}) => name === purchase.caseRarity.name)
+									// @ts-ignore
+									const Drop = Drops.find(({name}) => name === purchase.caseType.name)
+									// @ts-ignore
+									const DropItem = Drops.find(({name}) => name === purchase.resultType.name)
+									if (!Case || !Drop || !DropItem) return console.error("No case or drop or dropItem")
+									// @ts-ignore
+									const rarity: RarityType = purchase.resultRarity.name
 
-								// Items
-								let {drop: items} = Drop
-								if (items?.length === 0) {
-									items = DropItem[rarity]
+									// Items
+									let {drop: items} = Drop
+									if (items?.length === 0) {
+										items = DropItem[rarity]
+									}
+									if (items?.length === 0 || !items) return console.error("No items")
+
+									// @ts-ignore
+									const Item = items.find(item => item.name === purchase.resultDrop.name)
+									if (!Item) return console.error("Not item")
+
+									casesPurchases.push({Case: Case._id, Drop: Drop._id, DropItem: DropItem._id, Item: Item._id, rarity})
 								}
-								if (items?.length === 0 || !items) return console.error("No items")
+						)
 
-								// @ts-ignore
-								const Item = items.find(item => item.name === purchase.resultDrop.name)
-								if (!Item) return console.error("Not item")
-
-								casesPurchases.push({Case: Case._id, Drop: Drop._id, DropItem: DropItem._id, Item: Item._id, rarity})
-							}
-					)
-
-					userData.casesPurchases = casesPurchases
+						userData.casesPurchases = casesPurchases
+					}
 
 					await userModel.findOneAndDelete({
-						name: userData.name
+						name: candidate.name
 					})
 
 					candidate = await userModel.create(userData)
