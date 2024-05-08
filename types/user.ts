@@ -15,7 +15,7 @@ import type {User as UserLucia} from "lucia"
 
 @modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false}})
 export class User {
-	@prop({required: true, unique: true, index: true})
+	@prop({required: true, index: true})
 	public _id!: string
 
 	@prop({required: true, unique: true, trim: true, maxlength: 22, minlength: 4})
