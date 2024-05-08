@@ -88,10 +88,10 @@ export async function GET(request: NextRequest) {
 
 			if (candidate) {
 				if (candidate._id.length > 15) {
+					console.log(`Старый пользователь: ${userData.name}`)
 					userData.punishments = candidate.punishments
 					userData.mostiki = candidate.mostiki
 					userData.rating = candidate.rating
-					userData.discordId = candidate?.discordId?.toString()
 
 					const casesPurchases = [] as CasePurchase[]
 

@@ -129,23 +129,23 @@ export async function GET(request: NextRequest) {
 			let candidate = await userModel.findOneAndUpdate(
 					{
 						$or: [
-							{discordId: dsUser.id},
-							{discordId: Number(dsUser.id)},
-							{email: dsUser.email}
+							{discordId: userData.discordId},
+							{discordId: Number(userData.discordId)},
+							{email: userData.email}
 						]
 					},
 					{
-						email: dsUser.email,
-						discordId: dsUser.id,
+						email: userData.email,
+						discordId: userData.discordId,
 					}
 			)
 
 			if (candidate) {
 				if (candidate._id.length > 15) {
+					console.log(`Старый пользователь: ${userData.name}`)
 					userData.punishments = candidate.punishments
 					userData.mostiki = candidate.mostiki
 					userData.rating = candidate.rating
-					userData.googleId = candidate?.googleId?.toString()
 
 					const casesPurchases = [] as CasePurchase[]
 
