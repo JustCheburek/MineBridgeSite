@@ -46,7 +46,7 @@ export const Img = (
 			src, alt,
 			className = "",
 			pixel = false,
-			symmetrical=true,
+			symmetrical = true,
 			...props
 		}: { pixel?: boolean, symmetrical?: boolean } & ImageProps
 ) => {
@@ -62,9 +62,21 @@ export const Img = (
 
 	return (
 			<Image
-					className={`${styles.img} ${pixel ? styles.pixel : ""} ${className}`}
+					className={`${styles.img} ${pixel ? "pixel" : ""} ${className}`}
 					src={src} alt={alt}
 					loading="lazy" {...props}
 			/>
+	)
+}
+
+export const Totem = (
+		{
+			src, alt,
+			className = "",
+			...props
+		}: ComponentPropsWithoutRef<"img">
+) => {
+	return (
+			<img src={src} alt={alt} width={160} className={`${styles.img} pixel ${className}`} {...props}/>
 	)
 }

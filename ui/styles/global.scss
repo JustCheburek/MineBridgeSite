@@ -159,6 +159,11 @@ a.unic_color:active, button.unic_color:active {
   @include border();
 }
 
+
+.pixel {
+  image-rendering: pixelated;
+}
+
 @media (width >= 1024px) {
   .for_mobile {
     display: none !important;

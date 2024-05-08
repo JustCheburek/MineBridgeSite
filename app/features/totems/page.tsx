@@ -8,8 +8,8 @@ import styles from "./totems.module.scss"
 import {Url} from "@components/button";
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
-import {Img} from "@components/img";
 import {GBox, GContainer} from "@components/grid";
+import {Totem} from "@components/img";
 
 declare module 'csstype' {
 	interface Properties {
@@ -70,7 +70,11 @@ export default function Totems() {
 
 							return (
 									<GBox key={totem} className={styles.box}>
-										<Img src={`/features/totems/${file}.png`} alt="тотем" className={styles.img} pixel width={180} style={{'--_rotate': `${rotate_deg}deg`}}/>
+										<Totem
+												src={`/features/totems/${file}.png`} alt={totem}
+												className={styles.img}
+												style={{'--_rotate': `${rotate_deg}deg`}}
+										/>
 
 										<p>{totem}</p>
 									</GBox>

@@ -93,37 +93,39 @@ export async function GET(request: NextRequest) {
 					userData.mostiki = candidate.mostiki
 					userData.rating = candidate.rating
 
-					const casesPurchases = [] as CasePurchase[]
+					if (candidate.casesPurchases.length > 0) {
+						const casesPurchases = [] as CasePurchase[]
 
-					candidate.casesPurchases.map(async purchase => {
-						// @ts-ignore
-						const Case = await caseModel.findOne({name: purchase.caseRarity.name})
-						// @ts-ignore
-						const Drop = await dropModel.findOne({name: purchase.caseType.name})
-						// @ts-ignore
-						const DropItem = await dropModel.findOne({name: purchase.resultType.name})
-						if (!Case || !Drop || !DropItem) return console.log("No case or drop or dropItem")
-						// @ts-ignore
-						const rarity: RarityType = purchase.resultRarity.name
+						candidate.casesPurchases.map(async purchase => {
+							// @ts-ignore
+							const Case = await caseModel.findOne({name: purchase.caseRarity.name})
+							// @ts-ignore
+							const Drop = await dropModel.findOne({name: purchase.caseType.name})
+							// @ts-ignore
+							const DropItem = await dropModel.findOne({name: purchase.resultType.name})
+							if (!Case || !Drop || !DropItem) return console.log("No case or drop or dropItem")
+							// @ts-ignore
+							const rarity: RarityType = purchase.resultRarity.name
 
-						// Items
-						let {drop: items} = Drop
-						if (items?.length === 0) {
-							items = DropItem[rarity]
-						}
-						if (items?.length === 0 || !items) return console.log("No items")
+							// Items
+							let {drop: items} = Drop
+							if (items?.length === 0) {
+								items = DropItem[rarity]
+							}
+							if (items?.length === 0 || !items) return console.log("No items")
 
-						// @ts-ignore
-						const Item = items.find(item => item.name === purchase.resultDrop.name)
-						if (!Item) return console.log("Not item")
+							// @ts-ignore
+							const Item = items.find(item => item.name === purchase.resultDrop.name)
+							if (!Item) return console.log("Not item")
 
-						casesPurchases.push({Case: Case._id, Drop: Drop._id, DropItem: DropItem._id, Item: Item._id, rarity})
-					})
+							casesPurchases.push({Case: Case._id, Drop: Drop._id, DropItem: DropItem._id, Item: Item._id, rarity})
+						})
 
-					userData.casesPurchases = casesPurchases
+						userData.casesPurchases = casesPurchases
+					}
 
 					await userModel.findOneAndDelete({
-						name: userData.name
+						name: candidate.name
 					})
 
 					candidate = await userModel.create(userData)

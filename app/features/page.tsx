@@ -9,7 +9,7 @@ import {BatSvg, TwitchSvg, YtSvg} from "@ui/svgs";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GText} from "@components/grid";
 import {Url} from "@components/button";
-import {Img, ImgBox} from "@components/img";
+import {Img, ImgBox, Totem} from "@components/img";
 
 export const metadata: Metadata = {
 	title: "Фичи | Майнбридж",
@@ -103,13 +103,13 @@ export default function Features() {
 
 						<GBox href="/features/totems" imgs="three">
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/features/totems/kawa11fox.png" alt="Тотем" pixel/>
+								<Totem src="/features/totems/kawa11fox.png" alt="Тотем" className="pixel"/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/features/totems/justcheburek.png" alt="Тотем" pixel/>
+								<Totem src="/features/totems/justcheburek.png" alt="Тотем" className="pixel"/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid">
-								<Img src="/features/totems/kaharirn.png" alt="Тотемы" pixel/>
+								<Totem src="/features/totems/kaharirn.png" alt="Тотемы" className="pixel"/>
 							</ImgBox>
 
 							<GText>Тотемы</GText>
