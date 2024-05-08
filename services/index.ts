@@ -15,6 +15,8 @@ export const getUser = unstable_cache(
 
 			if (!user) notFound()
 
+			user._id = user._id.toString()
+
 			return {user, ...await userModel.getRoles(user.discordId)}
 		},
 		["user", "userLike", "all"],
