@@ -7,12 +7,19 @@ import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormInput, FormLabel} from "@components/form";
 import {useFormModalState} from "@hooks/useFormModalState";
 
-export const RatingModal = ({user, access, modal, setModal}: {
+type RatingModal = {
 	user: User,
+	author: User | null
 	access: boolean,
 	modal: boolean,
 	setModal: setModal
-}) => {
+}
+
+export const RatingModal = (
+		{
+			user, author, access,
+			modal, setModal
+		}: RatingModal) => {
 	const [state, formAction, isPending] = useFormModalState(
 			RatingChange,
 			{
@@ -56,7 +63,7 @@ export const RatingModal = ({user, access, modal, setModal}: {
 								autoComplete="author"
 								required
 								disabled={isPending}
-								defaultValue={user.name}
+								defaultValue={author?.name}
 						/>
 					</FormLabel>
 					<FormButton disabled={isPending}>

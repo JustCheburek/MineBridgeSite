@@ -7,12 +7,19 @@ import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormInput, FormLabel} from "@components/form";
 import {useFormModalState} from "@hooks/useFormModalState";
 
-export const CasesPurchasesModal = ({user, access, modal, setModal}: {
+type CasesPurchasesModal = {
 	user: User,
 	access: boolean,
 	modal: boolean,
 	setModal: setModal
-}) => {
+}
+
+export const CasesPurchasesModal = (
+		{
+			user, access,
+			modal, setModal
+		}: CasesPurchasesModal
+) => {
 	const [state, formAction, isPending] = useFormModalState(
 			RatingChange,
 			{

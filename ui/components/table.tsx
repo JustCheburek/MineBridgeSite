@@ -1,7 +1,7 @@
 "use client";
 
-import type {Dispatch, MouseEvent, PropsWithChildren, ReactNode, SetStateAction} from "react";
 // React
+import type {Dispatch, MouseEvent, PropsWithChildren, ReactNode, SetStateAction} from "react";
 import {useEffect, useState} from "react";
 import type {Cell, ColumnDef, ColumnMeta, Row} from "@tanstack/react-table";
 import {flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table";

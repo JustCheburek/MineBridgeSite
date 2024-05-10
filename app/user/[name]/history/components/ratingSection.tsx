@@ -13,7 +13,12 @@ import {Table} from "@components/table";
 import {RatingModal} from "@modals/ratingModal";
 import Link from "next/link";
 
-export function PunishmentSection({user, access, SaveAll}: { user: User, access: boolean, SaveAll: Function }) {
+type PunishmentSection = {
+	user: User, author: User | null
+	access: boolean, SaveAll: Function
+}
+
+export function PunishmentSection({user, author, access, SaveAll}: PunishmentSection) {
 	const [modal, setModal] = useState<boolean>(false)
 
 	return (<>
@@ -29,6 +34,6 @@ export function PunishmentSection({user, access, SaveAll}: { user: User, access:
 				Рейтинг
 			</h2>
 		</Table>
-		<RatingModal modal={modal} setModal={setModal} user={user} access={access}/>
+		<RatingModal modal={modal} setModal={setModal} user={user} author={author} access={access}/>
 	</>)
 }
