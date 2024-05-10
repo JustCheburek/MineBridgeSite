@@ -29,7 +29,12 @@ export default async function History({params: {name}}: { params: { name: string
 
 		await userModel.findByIdAndUpdate(
 				user._id,
-				{punishments: data},
+				{
+					punishments: data,
+					rating: data.reduce(
+							(accum, {rating}) => accum + rating, 0
+					)
+				}
 		)
 
 		revalidateTag("userLike")
