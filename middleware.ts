@@ -3,18 +3,18 @@ import {NextRequest, NextResponse} from 'next/server'
 export function middleware(request: NextRequest) {
 	const url = request.nextUrl
 	const place = url.searchParams.get("place")
-	const from = url.searchParams.get("from")
+	const userId = url.searchParams.get("userId")
 
 	const responce = NextResponse.next()
 
-	if (from && !responce.cookies.get("from")?.value) {
-		console.log(`Новый игрок от ${from}`)
+	const week = 60 * 60 * 24 * 7
 
-		const week = 60 * 60 * 24 * 7
+	if (userId && !responce.cookies.get("userId")?.value) {
+		console.log(`Новый игрок от ${userId}`)
 
 		responce.cookies.set({
-			name: "from",
-			value: from,
+			name: "userId",
+			value: userId,
 			path: "/",
 			secure: process.env.NODE_ENV === "production",
 			httpOnly: true,
@@ -26,8 +26,6 @@ export function middleware(request: NextRequest) {
 	if (place && !responce.cookies.get("place")?.value) {
 		console.log(`Новый игрок из ${place}`)
 
-		const week = 60 * 60 * 24 * 7
-
 		responce.cookies.set({
 			name: "place",
 			value: place,
@@ -38,9 +36,6 @@ export function middleware(request: NextRequest) {
 			maxAge: week
 		})
 	}
-
-	url.searchParams.delete("from")
-	url.searchParams.delete("place")
 
 	return responce
 }

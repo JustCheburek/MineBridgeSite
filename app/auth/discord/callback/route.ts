@@ -9,8 +9,6 @@ import axios from "axios";
 import {OAuth2RequestError} from "arctic";
 import {DS_URL} from "@/const";
 
-// import {AddInvite} from "../../addInvite";
-
 
 export async function GET(request: NextRequest) {
 	const url = request.nextUrl
@@ -97,20 +95,12 @@ export async function GET(request: NextRequest) {
 			).catch(console.error)
 		}
 
-		const id = generateId(15)
-		const name = cookies().get("name")?.value || dsUser.username
-		/*const place = cookies().get("place")?.value
-		const userId = await AddInvite(id, name, cookies().get("from")?.value)*/
 		const userData = {
-			_id: id,
-			name,
+			_id: generateId(15),
+			name: cookies().get("name")?.value || dsUser.username,
 			discordId: dsUser.id,
 			email: dsUser.email,
 			photo: `https://cdn.discordapp.com/avatars/${dsUser.id}/${dsUser.avatar}.png`,
-			/*from: {
-				place,
-				userId
-			},*/
 		} as User
 
 		const {user} = await validate()
@@ -138,31 +128,15 @@ export async function GET(request: NextRequest) {
 					}
 			)
 
-			if (candidate) {
-				if (candidate._id.length > 15) {
-					console.log(`Старый пользователь: ${userData.name}`)
-					userData.punishments = candidate.punishments
-					userData.mostiki = candidate.mostiki
-					userData.rating = candidate.rating
-
-					await userModel.findOneAndDelete({
-						name: candidate.name
-					})
-
-					candidate = await userModel.create(userData)
-				}
-				/*if (!candidate?.from) {
-					candidate.from = userData.from
-				}
-				if (!candidate.from?.place) {
-					candidate.from.place = place
-				}
-				if (!candidate.from?.userId) {
-					candidate.from.userId = userId
-				}*/
-				// await candidate.save()
-			} else {
+			if (candidate && candidate._id.length > 15) {
+				candidate = await userModel.updateUser(candidate, userData)
+			}
+			if (!candidate) {
 				candidate = await userModel.create(userData)
+			}
+			if (!candidate?.from || !candidate.from?.place || !candidate.from?.userId) {
+				candidate.from = await userModel.From(candidate)
+				candidate.save()
 			}
 
 			const session = await lucia.createSession(candidate?._id || userData._id, {});
@@ -170,7 +144,9 @@ export async function GET(request: NextRequest) {
 			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 		}
 
-		return new NextResponse(null, {
+		return new NextResponse(
+				`Всё успешно`,
+				{
 			status: 302,
 			headers: {
 				Location: `/user/${userData.name}`

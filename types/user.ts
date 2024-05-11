@@ -7,6 +7,8 @@ import {From} from "@/types/invite";
 import axios from "axios";
 import type {Role} from "@/types/role";
 import type {User as UserLucia} from "lucia"
+import {userModel} from "@server/models";
+import {cookies} from "next/headers";
 
 
 @pre<User>("save", function () {
@@ -63,6 +65,51 @@ export class User {
 
 	@prop()
 	public updatedAt!: Date
+
+	public static async From(
+			this: ReturnModelType<typeof User>,
+			candidate: User,
+	) {
+		const userId = cookies().get("userId")?.value
+		const place = cookies().get("place")?.value
+
+		if (!userId || candidate._id === userId || !place || !userId) return {}
+
+		const inviter = await userModel.findById(userId)
+
+		if (!inviter) return {}
+
+		if (!inviter.invites.includes(userId)) {
+			inviter.invites.push(userId)
+			inviter.punishments.push({
+				reason: `Позвал ${candidate.name}`,
+				rating: 5,
+				author: "AutoMod",
+				createdAt: new Date(),
+				updatedAt: new Date()
+			})
+			inviter.save()
+		}
+
+		return {place, userId}
+	}
+
+	public static async updateUser(
+			this: ReturnModelType<typeof User>,
+			candidate: User,
+			userData: User
+	) {
+		console.log(`Старый пользователь: ${candidate.name}`)
+		userData.punishments = candidate.punishments
+		userData.mostiki = candidate.mostiki
+		userData.rating = candidate.rating
+
+		await userModel.findOneAndDelete({
+			name: candidate.name
+		})
+
+		return await userModel.create(userData)
+	}
 
 	public static async getRoles(
 			this: ReturnModelType<typeof User>,
