@@ -22,7 +22,6 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 export default async function Profile({params: {name}}: { params: { name: string } }) {
 	const {user, roles} = await getUser({name})
 	const {user: author, isModer, isAdmin} = await validate()
-	const {user: inviter} = await getUser({_id: user.from.userId})
 
 	const isMe = user.name === author?.name
 	const moderAccess = isModer || isMe
@@ -42,7 +41,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 
 				<WhitelistSection user={user} access={moderAccess}/>
 
-				<InviteSection user={user} inviter={inviter} access={isMe}/>
+				<InviteSection user={user} access={isMe}/>
 			</div>
 	)
 }
