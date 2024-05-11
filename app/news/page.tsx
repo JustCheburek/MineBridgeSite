@@ -8,7 +8,7 @@ import styles from "./news.module.scss"
 // Компоненты
 import {NotFound} from "@components/notFound";
 import {Season} from "./components"
-import {SubsectionItem, Subsections, OnThisPage, OnThisPageItem} from "@components/sideNav";
+import {OnThisPage, OnThisPageItem, SubsectionItem, Subsections} from "@components/sideNav";
 import {MaxSize} from "@components/maxSize";
 import {PBox, PText, PTitle} from "@components/post";
 import {Img, ImgBox} from "@components/img";
@@ -39,6 +39,42 @@ export default function News() {
 								startData={new Date(2023, 12 - 1, 10)}
 								endData={new Date(2024, 6 - 1, 1)}
 						/>
+
+						<PBox createdAt={new Date(2024, 0, 21)}>
+							<ImgBox type="post">
+								<Img src="https://i.ytimg.com/vi/pYsVZQHYP8A/maxresdefault.jpg" alt="Судная ночь"/>
+							</ImgBox>
+							<PTitle>
+								<h2>Судная ночь</h2>
+							</PTitle>
+							<PText>
+								<time dateTime="2024-05-11" className={styles.time}>
+									11-12 мая
+								</time>
+								<br/>
+								<p>
+									Это означает, что в это время <strong>можно гриферить и убивать</strong> 🔪
+								</p>
+								<br/>
+								<h4>
+									<strong>
+										Нельзя ломать и ставить блоки 🔐
+									</strong>
+								</h4>
+								<p>
+									Всем будет выдан режим приключений
+								</p>
+								<br/>
+								<h4>
+									<strong>
+										Взрывы и распространение огня будут выключены 📛
+									</strong>
+								</h4>
+								<p>
+									Подготовка может проходить ТОЛЬКО на вашей базе 🧱
+								</p>
+							</PText>
+						</PBox>
 
 						<PBox createdAt={new Date(2024, 0, 21)}>
 							<ImgBox type="post">

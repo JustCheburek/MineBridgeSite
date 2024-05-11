@@ -25,6 +25,10 @@
 	border-radius: var(--border-radius);
 	overflow: hidden;
 	aspect-ratio: 16 / 9;
+
+	.img {
+		object-fit: cover;
+	}
 }
 
 .grid {
