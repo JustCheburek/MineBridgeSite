@@ -7,7 +7,7 @@ import styles from "../features.module.scss"
 // Компоненты
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
-import {GBox, GContainer, GText} from "@components/grid";
+import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Img, ImgBox} from "@components/img";
 
 export const metadata: Metadata = {
@@ -47,6 +47,32 @@ export default function Guides() {
 							</ImgBox>
 
 							<GText>Brewery</GText>
+						</GBox>
+
+						<GBox href="https://modrinth.com/datapack/joshs-more-foods" anotherSite imgs="one">
+							<ImgBox type="grid">
+								<Img
+									src="https://cdn.modrinth.com/data/3BlwZj8w/ed994d6ec6b0aadca5c2942071f353f0224f4366.png"
+									alt="Еда"
+									pixel
+								/>
+							</ImgBox>
+
+							<GHint className="red_color">Новинка</GHint>
+							<GText>Еда</GText>
+						</GBox>
+
+						<GBox href="https://modrinth.com/datapack/tables-and-chairs" anotherSite imgs="one">
+							<ImgBox type="grid">
+								<Img
+									src="https://cdn.modrinth.com/data/ElnjwLgg/cb30b6f5e8c309a9691bb999d6f7546d60d043cb.png"
+									alt="Стул и стол"
+									className="border-radius"
+								/>
+							</ImgBox>
+
+							<GHint className="red_color">Новинка</GHint>
+							<GText>Мебель</GText>
 						</GBox>
 
 						{/*<Link href="/features/guides/litematica" className="box two crafts">

@@ -164,6 +164,10 @@ a.unic_color:active, button.unic_color:active {
   image-rendering: pixelated;
 }
 
+.border-radius {
+  border-radius: var(--border-radius);
+}
+
 @media (width >= 1024px) {
   .for_mobile {
     display: none !important;

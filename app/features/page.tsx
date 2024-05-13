@@ -39,7 +39,6 @@ export default function Features() {
 								<Img src="/features/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
 							</ImgBox>
 
-							<GHint className="green_color">Обновление</GHint>
 							<GText>Крафты</GText>
 						</GBox>
 
@@ -52,6 +51,7 @@ export default function Features() {
 								<Img src="/features/guides/blocks.png" alt="Блоки"/>
 							</ImgBox>
 
+							<GHint className="green_color">Обновление</GHint>
 							<GText>Гайды</GText>
 						</GBox>
 
