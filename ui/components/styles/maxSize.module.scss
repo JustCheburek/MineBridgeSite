@@ -9,7 +9,7 @@
 	display: grid;
 
 	@media (width >= 1024px) {
-		grid-template-columns: 2fr 7fr 2fr;
+		grid-template-columns: 2fr 6fr 2fr;
 		gap: 1.5rem;
 	}
 }

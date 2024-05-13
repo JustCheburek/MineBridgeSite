@@ -33,6 +33,9 @@ export default async function Profile({params: {name}}: { params: { name: string
 
 					<div className={styles.text}>
 						<Name user={user} access={moderAccess}/>
+						{isAdmin &&
+							<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
+						}
 						<Roles roles={roles}/>
 						<Mostiki user={user} access={isAdmin}/>
 						<Rating user={user}/>

@@ -136,3 +136,10 @@
 	translate: 0 25%;
 	z-index: var(--2z);
 }
+
+.hint {
+	position: absolute;
+	rotate: 10deg;
+	top: 12px;
+	right: 10px;
+}

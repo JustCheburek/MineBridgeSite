@@ -19,9 +19,9 @@ export const metadata: Metadata = {
 
 export default function Design() {
 	const data = [
-		{ title: 'Акцент', value: 10, color: '#00A7B1' },
-		{ title: 'Текст', value: 30, color: '#F1F1F1' },
-		{ title: 'Фон', value: 60, color: '#161C1F' },
+		{title: 'Акцент', value: 10, color: '#00A7B1'},
+		{title: 'Текст', value: 30, color: '#F1F1F1'},
+		{title: 'Фон', value: 60, color: '#161C1F'},
 	]
 
 	return (
@@ -36,8 +36,9 @@ export default function Design() {
 								Авторы
 							</h2>
 						</PTitle>
-						<User name="JustCheburek"/>
-						<User name="VeBray"/>
+						<User _id="j8bsrsdgzqa4n0c"/>
+						<User _id="i5mqq2js4nos1yj"/>
+						<User _id="t2dhhl5igw1sp43"/>
 					</section>
 
 					<section className="grid_center">
@@ -61,19 +62,20 @@ export default function Design() {
 								Цвета
 							</h2>
 						</PTitle>
-							<div className={styles.pie_box}>
-								<div className={styles.pie_text_box}>
-									{data.map(color => (
-											<div key={color.title} className={styles.pie_text}>
-												<div style={{background: color.color}} className={`${styles.circle} ${styles[color.title]}`}></div>
-												<p>{color.title}</p>
-												<span className="all_select">{color.color}</span>
-												<small className={styles.percent}>{color.value}{"%"}</small>
-											</div>
-									))}
-								</div>
-								<ColorsPie data={data}/>
+						<div className={styles.pie_box}>
+							<div className={styles.pie_text_box}>
+								{data.map(color => (
+										<div key={color.title} className={styles.pie_text}>
+											<div style={{background: color.color}}
+											     className={`${styles.circle} ${styles[color.title]}`}></div>
+											<p>{color.title}</p>
+											<span className="all_select">{color.color}</span>
+											<small className={styles.percent}>{color.value}{"%"}</small>
+										</div>
+								))}
 							</div>
+							<ColorsPie data={data}/>
+						</div>
 					</section>
 
 					<section className="grid_center">

@@ -1,6 +1,6 @@
 // React
 import Link from "next/link";
-import type {PropsWithChildren} from "react";
+import type {PropsWithChildren, ComponentPropsWithoutRef} from "react";
 
 // Стили
 import styles from "./styles/grid.module.scss";
@@ -103,8 +103,16 @@ export const GBox = (
 	)
 }
 
-export const GText = ({children}: PropsWithChildren) => (
-		<h3 className={`${styles.text} center_text`}>
+export const GText = ({children, className, ...props}: ComponentPropsWithoutRef<"h3">) => (
+		<h3 className={`${styles.text} center_text ${className}`} {...props}>
 			{children}
 		</h3>
+)
+
+export const GHint = ({children, className, ...props}: ComponentPropsWithoutRef<"h4">) => (
+		<h4 className={`${styles.hint} ${className}`} {...props}>
+			<strong>
+				{children}
+			</strong>
+		</h4>
 )

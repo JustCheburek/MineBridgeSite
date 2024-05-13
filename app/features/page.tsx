@@ -5,9 +5,9 @@ import type {Metadata} from "next";
 import styles from "./features.module.scss"
 
 // Компоненты
-import {BatSvg, TwitchSvg, YtSvg} from "@ui/svgs";
+import {BatSvg, MinebridgeSvg, TwitchSvg, YtSvg} from "@ui/svgs";
 import {MaxSize} from "@components/maxSize";
-import {GBox, GContainer, GText} from "@components/grid";
+import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Url} from "@components/button";
 import {Img, ImgBox, Totem} from "@components/img";
 
@@ -39,6 +39,7 @@ export default function Features() {
 								<Img src="/features/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
 							</ImgBox>
 
+							<GHint className="green_color">Обновление</GHint>
 							<GText>Крафты</GText>
 						</GBox>
 
@@ -84,6 +85,7 @@ export default function Features() {
 								<YtSvg className="color"/>
 							</ImgBox>
 
+							<GHint className="light_gray_color">Обновляется</GHint>
 							<GText>Контент мейкеры</GText>
 						</GBox>
 
@@ -115,16 +117,20 @@ export default function Features() {
 							<GText>Тотемы</GText>
 						</GBox>
 
-						{/*<GBox href="/features/design">
+						<GBox href="/features/design" imgs="two">
 							<ImgBox className={styles.img} type="grid">
-
+								<Img src="/index/unic/heart.webp" alt="Календарь" pixel/>
+							</ImgBox>
+							<ImgBox className={styles.img} type="grid">
+								<Img src="/index/unic/calendar.webp" alt="Календарь" pixel/>
 							</ImgBox>
 
+							<GHint className="red_color">Новинка</GHint>
 							<GText>Дизайн</GText>
 						</GBox>
 
 
-						<GBox href="/features/plugins">
+						{/*<GBox href="/features/plugins">
 							<ImgBox className={styles.img} type="grid">
 
 							</ImgBox>

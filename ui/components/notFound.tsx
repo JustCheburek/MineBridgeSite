@@ -11,7 +11,7 @@ import {SearchSvg} from "@ui/svgs";
 export function NotFound({children, buttonText, href}: PropsWithChildren<{ buttonText: string, href: string }>) {
 	return (
 			<section className="not_found for_pc">
-				<SearchSvg width="8rem" className="unic_color"/>
+				<SearchSvg width="8rem" height="8rem" className="unic_color"/>
 				<h3 className="unic_color">
 					Не нашли нужную информацию?
 				</h3>

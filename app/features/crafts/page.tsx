@@ -6,6 +6,7 @@ import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {PBox, PText, PTitle} from "@components/post";
 import {Img, ImgBox} from "@components/img";
+import {NotFound} from "@components/notFound";
 
 export const metadata: Metadata = {
 	title: "Крафты | Майнбридж",
@@ -74,22 +75,6 @@ export default function Crafts() {
 					<h2 className="center_text">Камнерез</h2>
 					<PBox>
 						<ImgBox type="post">
-							<Img alt="Костные блоки" src="/features/crafts/strings.png"/>
-						</ImgBox>
-						<PTitle>
-							<h2>
-								Нитки
-							</h2>
-						</PTitle>
-						<PText>
-							<p>
-								Шерсть в нитки, всё просто
-							</p>
-						</PText>
-					</PBox>
-
-					<PBox>
-						<ImgBox type="post">
 							<Img alt="Лёд" src="/features/crafts/ice.png"/>
 						</ImgBox>
 						<PTitle>
@@ -104,22 +89,9 @@ export default function Crafts() {
 						</PText>
 					</PBox>
 
-					<h2 className="center_text">Другое</h2>
-					<PBox>
-						<ImgBox type="post">
-							<Img alt="Невидимая рамка" src="/features/crafts/invisible_item_frame.png"/>
-						</ImgBox>
-						<PTitle>
-							<h2>
-								Невидимая рамка
-							</h2>
-						</PTitle>
-						<PText>
-							<p>
-								Для создания нужно кликнуть ножницами по рамке
-							</p>
-						</PText>
-					</PBox>
+					<NotFound buttonText="Гайды" href="/features/guides">
+						Также некоторые крафты есть в гайдах
+					</NotFound>
 				</MaxSize>
 			</main>
 	)
