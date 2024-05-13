@@ -44,7 +44,7 @@ export default function Streamers() {
 
 					<div className="grid_center">
 						{streamers.map(({_id, yt, twitch}) => (
-								<div className={styles.social}>
+								<div className={styles.social} key={_id}>
 									<User _id={_id}/>
 
 									<div className={styles.icons}>
