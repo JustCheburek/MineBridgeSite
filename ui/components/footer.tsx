@@ -3,6 +3,7 @@ import "./styles/footer.scss";
 
 // Компоненты
 import {Urls} from "./urls";
+import Link from "next/link";
 
 export function Footer() {
     const YEAR = new Date().getFullYear()
@@ -16,11 +17,11 @@ export function Footer() {
                 <p className="center_text">
                     &#169; MineBridge 2022-{YEAR}
                 </p>
-                <a className="unic_color medium-font center_text"
+                <Link className="unic_color medium-font center_text"
                    href="https://docs.google.com/document/d/1EwOizUalpazLDMlw6yQijd5oVN39IF473J0TD0n47gE/edit?usp=sharing"
-                   target="_blank" rel="noopener noreferrer">
+                   target="_blank">
                     Пользовательское соглашение
-                </a>
+                </Link>
                 <small>
                     <p>
                         Вся размещенная информация на сайте не является публичной офертой

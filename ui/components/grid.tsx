@@ -86,10 +86,10 @@ export const GBox = (
 
 	if (anotherSite) {
 		return (
-				<a href={href} target={target} rel={rel} className={classNameResult}>
+				<Link href={href} target={target} className={classNameResult}>
 					{children}
 					<AnotherSiteSvg className={styles.link}/>
-				</a>
+				</Link>
 		)
 	}
 

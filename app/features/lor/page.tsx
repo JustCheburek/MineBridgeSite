@@ -10,6 +10,7 @@ import styles from "./lor.module.scss"
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {PBox, PText, PTitle} from "@components/post";
+import {Img, ImgBox} from "@components/img";
 
 export const metadata: Metadata = {
 	title: "Лор | Майнбридж",
@@ -43,8 +44,18 @@ export default function Lor() {
 					</h3>
 
 					<PBox>
+						<Link href="https://www.youtube.com/watch?v=IUeRmGEWUKw" target="_blank">
+							<ImgBox type="post">
+								<Img
+										src="https://i.ytimg.com/vi/IUeRmGEWUKw/maxresdefault.jpg"
+										alt="Ссылка на видео о Майнбридже"
+								/>
+							</ImgBox>
+						</Link>
 						<PTitle>
-							<h2>Вампиризм</h2>
+							<Link href="https://www.youtube.com/watch?v=IUeRmGEWUKw" target="_blank">
+								<h2 className="unic_color">Вампиризм</h2>
+							</Link>
 							<h4>4 сезон</h4>
 						</PTitle>
 						<PText>
@@ -150,24 +161,12 @@ export default function Lor() {
 							<p>
 								Вампиризм закончился резко, возможно в будущем вы получите объяснение
 							</p>
-							<a href="https://youtu.be/IUeRmGEWUKw?si=DRULTQ6LRGm-rL3h&t=333" target="_blank"
-							   rel="noreferrer noopener">
-								Видео про конец вампиризма
-							</a>
-							<iframe
-									title="MineBridge видео"
-									src="https://www.youtube.com/embed/IUeRmGEWUKw?si=Eg_gQ8uoLU7-yyWO&amp;start=333"
-									frameBorder="0"
-									loading="lazy"
-									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-									allowFullScreen
-							/>
 						</PText>
 					</PBox>
 
 					<PBox>
 						<PTitle>
-							<h2>И?тория у?ён?го</h2>
+							<h2 className="unic_color">И?тория у?ён?го</h2>
 							<h4>5 сезон</h4>
 						</PTitle>
 						<PText>

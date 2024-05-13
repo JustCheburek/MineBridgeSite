@@ -165,7 +165,7 @@ a.unic_color:active, button.unic_color:active {
 }
 
 .border-radius {
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius) !important;
 }
 
 @media (width >= 1024px) {

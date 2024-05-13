@@ -56,14 +56,14 @@ type Author = {
 
 export const Author = ({description, href, children}: PropsWithChildren<Author>) => (
 		<div className={`${styles.author_heading} center_text`}>
-			<a href={href} target="_blank" rel="noreferrer noopener">
+			<Link href={href} target="_blank">
 				<h3>
 					{children}
 				</h3>
 				<small>
 					{description}
 				</small>
-			</a>
+			</Link>
 		</div>
 )
 

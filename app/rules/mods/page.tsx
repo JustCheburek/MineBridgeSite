@@ -8,6 +8,7 @@ import styles from './mods.module.scss';
 import {NotFound} from "@components/notFound";
 import {OnThisPage, OnThisPageBox, OnThisPageItem} from "@components/sideNav";
 import {ErrorSvg, SuccessSvg} from "@ui/svgs";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Моды | Майнбридж",
@@ -15,11 +16,12 @@ export const metadata: Metadata = {
 };
 
 export default function Mods() {
-	type Item = { name: string, url?: string }
+	type Mod = { name: string, url?: URL }
+	type RP = { name: string, url: URL }
 
-	const mods: Item[] = [{
+	const mods: Mod[] = [{
 		name: "Сборка модов от Kawa11Fox 1.20.2",
-		url: "https://disk.yandex.ru/d/ToOOD2brmUWULA"
+		url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
 	}, {
 		name: "Миникарта"
 	}, {
@@ -27,29 +29,29 @@ export default function Mods() {
 	}, {
 		name: "Отображение информации о мобах, предметах, крафтах, оружии, шалкерах, освещённости"
 	}, {
-		name: "Любые виды zoom"
+		name: "Zoom"
 	}, {
-		name: "EmoteCraft (рекомендуется)", url: "https://modrinth.com/mod/emotecraft"
+		name: "EmoteCraft (рекомендуется)", url: new URL("https://modrinth.com/mod/emotecraft")
 	}, {
 		name: "Simple Voice Chat (рекомендуется)",
-		url: "https://modrinth.com/plugin/simple-voice-chat/versions?l=quilt&l=forge&l=fabric"
+		url: new URL("https://modrinth.com/plugin/simple-voice-chat/versions?l=quilt&l=forge&l=fabric")
 	}, {
-		name: "Litematica (easy place mod)", url: "https://curseforge.com/minecraft/mc-mods/litematica"
+		name: "Litematica (easy place mod)", url: new URL("https://curseforge.com/minecraft/mc-mods/litematica")
 	}, {
-		name: "Replay Mod (только для видео)", url: "https://replaymod.com/download/"
+		name: "Replay Mod (только для видео)", url: new URL("https://replaymod.com/download/")
 	}, {
-		name: "Bobby", url: "https://modrinth.com/mod/bobby"
+		name: "Bobby", url: new URL("https://modrinth.com/mod/bobby")
 	}, {
-		name: "Gamma Utils", url: "https://modrinth.com/mod/gamma-utils"
+		name: "Gamma Utils", url: new URL("https://modrinth.com/mod/gamma-utils")
 	}]
 
-	const rps: Item[] = [{
-		name: "Тотемы Майнбриджа", url: "/download/MineBridge_Totems.zip"
+	const rps: RP[] = [{
+		name: "Тотемы Майнбриджа", url: new URL("https://modrinth.com/resourcepack/minebridge-totems")
 	}, {
-		name: "Default Dark Mode", url: "https://modrinth.com/resourcepack/default-dark-mode"
+		name: "Default Dark Mode", url: new URL("https://modrinth.com/resourcepack/default-dark-mode")
 	}, {
 		name: "3D Redstone Dust",
-		url: "https://modrinth.com/resourcepack/redstonetweaksresourcepack/version/1.3_3dDust"
+		url: new URL("https://modrinth.com/resourcepack/redstonetweaksresourcepack/version/1.3_3dDust")
 	}]
 
 	const blacklist: string[] = [
@@ -80,11 +82,10 @@ export default function Mods() {
 								{mods.map(mod => (
 												<li key={mod.name} className={styles.item}>
 													{mod?.url ?
-															<a href={mod.url} target="_blank" rel="noopener noreferrer">
+															<Link href={mod.url} target="_blank">
 																{mod.name}
-															</a>
-															:
-															<p>{mod.name}</p>
+															</Link>
+															: <p>{mod.name}</p>
 													}
 												</li>
 										)
@@ -97,6 +98,12 @@ export default function Mods() {
 								Ресурспаки
 							</h3>
 							<p>
+								Теперь ресурспаки можно скачивать прямо на сервере через команду:
+							</p>
+							<h4 className="center_text green_color">
+								<span className="all_select medium-font">/rp set</span> [название]
+							</h4>
+							<p>
 								Разрешены все ресурспаки, которых нет в списке {`"`}запрещено{`"`}
 							</p>
 							<p>
@@ -105,9 +112,9 @@ export default function Mods() {
 							<ul className={styles.list}>
 								{rps.map(rp => (
 										<li key={rp.name} className={styles.item}>
-											<a href={rp.url} target="_blank" rel="noopener noreferrer">
+											<Link href={rp.url} target="_blank">
 												{rp.name}
-											</a>
+											</Link>
 										</li>)
 								)}
 							</ul>

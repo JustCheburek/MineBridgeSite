@@ -5,7 +5,7 @@ import type {Metadata} from "next";
 import styles from "./features.module.scss"
 
 // Компоненты
-import {BatSvg, MinebridgeSvg, TwitchSvg, YtSvg} from "@ui/svgs";
+import {BatSvg, TwitchSvg, YtSvg} from "@ui/svgs";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Url} from "@components/button";
@@ -28,6 +28,7 @@ export default function Features() {
 								<BatSvg/>
 							</ImgBox>
 
+							<GHint className="light_gray_color">Обновление</GHint>
 							<GText>Лор</GText>
 						</GBox>
 

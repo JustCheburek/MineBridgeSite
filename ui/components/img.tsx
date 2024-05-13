@@ -11,13 +11,14 @@ type ImgBox = {
 	type?: "post" | "grid" | undefined
 	background?: string
 	width?: string
-	height?: string,
+	height?: string
 	hover?: boolean
+	borderRadius?: boolean
 }
 
 export const ImgBox = (
 		{
-			className = "", type, children, background, width, height, hover = false, style, ...props
+			className = "", type, children, background, width, height, hover = false, borderRadius=false, style, ...props
 		}: ComponentPropsWithoutRef<"figure"> & ImgBox,
 ) => {
 	let backgroundStyle
@@ -32,7 +33,7 @@ export const ImgBox = (
 
 	return (
 			<figure
-					className={`${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${className}`}
+					className={`${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${className}`}
 					style={{...backgroundStyle, width, height, ...style}}
 					{...props}
 			>

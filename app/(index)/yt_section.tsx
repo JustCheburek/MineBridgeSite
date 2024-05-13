@@ -1,5 +1,6 @@
 import styles from "./styles/yt.module.scss"
 import {Img, ImgBox} from "@components/img";
+import Link from "next/link";
 
 export function YtSection() {
 	return (
@@ -10,21 +11,20 @@ export function YtSection() {
 					</h2>
 					<h3>
 						Тогда посмотрите этот {" "}
-						<a href={`https://www.youtube.com/watch?v=tZPDLuddfVs`} target="_blank" rel="noopener noreferrer">
+						<Link href="https://www.youtube.com/watch?v=tZPDLuddfVs" target="_blank">
 							видосик
-						</a>
+						</Link>
 					</h3>
 				</div>
 
-				<a className={`${styles.yt_link} border`} href="https://www.youtube.com/watch?v=tZPDLuddfVs" target="_blank" rel="noopener noreferrer">
-					<ImgBox type="post">
-						{/* https://i.ytimg.com/vi/{id}/maxresdefault.jpg */}
+				<Link className={`${styles.yt_link} border`} href="https://www.youtube.com/watch?v=tZPDLuddfVs" target="_blank">
+					<ImgBox type="post" borderRadius>
 						<Img
-								src="/index/yt/preview.jpg"
+								src="https://i.ytimg.com/vi/tZPDLuddfVs/maxresdefault.jpg"
 								alt="Ссылка на видео о Майнбридже"
 						/>
 					</ImgBox>
-				</a>
+				</Link>
 			</section>
 	)
 }

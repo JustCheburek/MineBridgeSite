@@ -9,6 +9,7 @@ import styles from "./blacklist.module.scss";
 
 // Компоненты
 import {Button} from "@components/button";
+import Link from "next/link";
 
 export function BlacklistContent() {
 	const [show, setShow] = useState<boolean>(false);
@@ -97,22 +98,20 @@ export function BlacklistContent() {
 
 					<ul>
 						<li>
-							<a
+							<Link
 									target="_blank" className="unic_color medium-font"
 									href="https://minjust.gov.ru/ru/extremist-materials"
-									rel="noopener noreferrer"
 							>
 								Министерства юстиции Российской Федерации
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a
+							<Link
 									target="_blank" className="unic_color medium-font"
 									href="http://www.fsb.ru/fsb/npd/terror.htm"
-									rel="noopener noreferrer"
 							>
 								ФСБ России
-							</a>
+							</Link>
 						</li>
 					</ul>
 				</div>

@@ -45,26 +45,24 @@ export default async function Shop() {
 						</p>
 						<ul>
 							<li>
-								В дс канале <a
+								В дс канале <Link
 									href="https://discord.gg/7zx8u4rY"
-									rel="noreferrer noopener"
 									target="_blank"
 							>
 								<strong className="unic_color">
 									#покупка
 								</strong>
-							</a>
+							</Link>
 							</li>
 							<li>
-								У <a
+								У <Link
 									href="https://t.me/Kawa11Fox"
 									target="_blank"
-									rel="noreferrer noopener"
 							>
 								<strong className="unic_color">
 									Kawa11Fox
 								</strong>
-							</a>
+							</Link>
 							</li>
 						</ul>
 					</div>

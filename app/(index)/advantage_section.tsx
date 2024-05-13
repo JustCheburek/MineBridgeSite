@@ -56,7 +56,7 @@ export function AdvantageSection() {
 				<MaxSize className={styles.max_size}>
 					{/* Информация о создании групп */}
 					<Box>
-						<ImgBox className={styles.img_box} type="post">
+						<ImgBox className={styles.img_box} type="post" borderRadius>
 							<Img
 									src="/index/advantage/group.webp"
 									alt="Ивент пандорума"
@@ -64,10 +64,10 @@ export function AdvantageSection() {
 						</ImgBox>
 						<Text>
 							Объединяйся в {" "}
-							<a href="https://discord.com/channels/1012334719230292048/1114389800947036261"
-							   className="unic_color">
+							<Link href="https://discord.com/channels/1012334719230292048/1114389800947036261"
+							      className="unic_color" target="_blank">
 								кланы
-							</a><br/>
+							</Link><br/>
 							и играй вместе<br/>
 							со своими друзьями!
 						</Text>
@@ -75,7 +75,7 @@ export function AdvantageSection() {
 
 					{/* Информация о городах */}
 					<Box>
-						<ImgBox className={styles.img_box} type="post">
+						<ImgBox className={styles.img_box} type="post" borderRadius>
 							<Img
 									src="/index/advantage/project.webp"
 									alt="Пандорум здание"
@@ -89,7 +89,7 @@ export function AdvantageSection() {
 
 					{/* Информация о данжах */}
 					<Box>
-						<ImgBox className={styles.img_box} type="post">
+						<ImgBox className={styles.img_box} type="post" borderRadius>
 							<Img
 									src="/index/advantage/dungeon.webp"
 									alt="Эндский данж"
@@ -103,7 +103,7 @@ export function AdvantageSection() {
 
 					{/* Информация о кастомизации */}
 					<Box>
-						<ImgBox className={styles.img_box} type="post">
+						<ImgBox className={styles.img_box} type="post" borderRadius>
 							<Img
 									src="/index/advantage/pet.webp"
 									alt="Питомец"
@@ -111,8 +111,11 @@ export function AdvantageSection() {
 						</ImgBox>
 						<Text>
 							Кастомизируй свой внешний вид!<br/>
-							<Link href="/shop" className="unic_color small medium-font"><small>Купить уникальные
-								украшения</small></Link>
+							<Link href="/shop" className="unic_color small medium-font">
+								<small>
+									Купить уникальные украшения
+								</small>
+							</Link>
 						</Text>
 					</Box>
 

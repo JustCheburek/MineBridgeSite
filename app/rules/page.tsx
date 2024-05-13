@@ -141,10 +141,12 @@ export default function Rules() {
 						</Rule>
 						<Rule number={1.5} punishment={20}>
 							Запрещено нарушение правил {" "}
-							<a href="https://www.twitch.tv/creatorcamp/ru-ru/urls/rules-policies-and-guidelines/?android-app-redirect=true"
-							   target="_blank" className="twitch_url" rel="noopener noreferrer">
+							<Link
+									href="https://www.twitch.tv/creatorcamp/ru-ru/urls/rules-policies-and-guidelines/?android-app-redirect=true"
+									target="_blank" className="twitch_url"
+							>
 								платформы Twitch
-							</a><br/>
+							</Link><br/>
 							<Link href="/rules/blacklist" className="unic_color">Список банвордов</Link>
 						</Rule>
 						<Rule number={1.6} punishment={20}>
@@ -187,10 +189,12 @@ export default function Rules() {
 									Удостоверьтесь, что пвп арена имеет письменный договор от одного из админов
 									или модеров, иначе вы можете понизить свой рейтинг за участие в неофициальной
 									пвп арене. {" "}
-									<a href="https://discord.gg/f95V9Rezqy" target="_blank"
-									   className="ds_url" rel="noopener noreferrer">
+									<Link
+											href="https://discord.gg/f95V9Rezqy"
+											target="_blank" className="ds_url"
+									>
 										Получить согласие
-									</a>
+									</Link>
 								</li>
 							</ul>
 						</Rule>
@@ -263,12 +267,12 @@ export default function Rules() {
 						<Rule number={3.3}>
 							<p>
 								Если вы хотите как-то дополнить эти правила, то напишите их в {" "}
-								<a target="_blank"
-								   className="ds_url"
-								   href="https://discord.gg/xGv8srKKsz"
-								   rel="noopener noreferrer">
+								<Link
+										target="_blank" className="ds_url"
+										href="https://discord.gg/xGv8srKKsz"
+								>
 									Территории
-								</a>
+								</Link>
 							</p>
 							<p>
 								При этом наказания за нарушения ваших правил, должны быть равноценны содеянному
@@ -406,8 +410,12 @@ export default function Rules() {
 						<Rule number={6.3} punishment={20}>
 							<p>
 								Реклама, не связанная с нашим проектом, без согласия администрации запрещена. {" "}
-								<a href="https://t.me/JustCheburek" target="_blank" className="tg_url"
-								   rel="noopener noreferrer">Купить согласие</a>
+								<Link
+										href="https://t.me/JustCheburek"
+										target="_blank" className="tg_url"
+								>
+									Купить согласие
+								</Link>
 							</p>
 							<br/>
 							<p>
@@ -490,10 +498,9 @@ export default function Rules() {
 							<p>
 								Модерации запрещено абьюзить свои права
 							</p>
-							<a className="ds_url" href="https://discord.gg/swrAFFqvH2" target="_blank"
-							   rel="noopener noreferrer">
+							<Link className="ds_url" href="https://discord.gg/swrAFFqvH2" target="_blank">
 								Стать модером
-							</a>
+							</Link>
 						</Rule>
 						<Rule number={8.3}>
 							<p>
@@ -507,10 +514,9 @@ export default function Rules() {
 							<p>
 								В течение и в конце сезона за ухоженный и красивый спавн получает мостики и социальный рейтинг
 							</p>
-							<a className="ds_url" href="https://discord.gg/AkZHn9q5KV" target="_blank"
-							   rel="noopener noreferrer">
+							<Link className="ds_url" href="https://discord.gg/AkZHn9q5KV" target="_blank">
 								Стать мэром
-							</a>
+							</Link>
 						</Rule>
 						<Rule number={8.5}>
 							<p>
@@ -534,10 +540,9 @@ export default function Rules() {
 							<p>
 								Художник — рисует <Link href="/features/stickers" className="unic_color medium-font">стикеры</Link>
 							</p>
-							<a className="tg_url" href="https://t.me/MineBridgeOfficial/326" target="_blank"
-							   rel="noopener noreferrer">
+							<Link className="tg_url" href="https://t.me/MineBridgeOfficial/326" target="_blank">
 								Заказать
-							</a>
+							</Link>
 						</Rule>
 						<Rule number={8.7}>
 							<p>
@@ -564,18 +569,16 @@ export default function Rules() {
 					</p>
 					<p className="red_line">
 						Заметили нарушение правил? {" "}
-						<a className="ds_url" href="https://discord.gg/VtXNje8xHq" target="_blank"
-						   rel="noopener noreferrer">
+						<Link className="ds_url" href="https://discord.gg/VtXNje8xHq" target="_blank">
 							Напишите репорт!
-						</a>
+						</Link>
 					</p>
 					<p className="red_line">
 						Администрация не обязана уведомлять игроков об небольшом изменении правил. Игрок сам должен
 						следить за изменениями в {" "}
-						<a className="tg_url" href="https://t.me/MineBridgeOfficial" target="_blank"
-						   rel="noopener noreferrer">
+						<Link className="tg_url" href="https://t.me/MineBridgeOfficial" target="_blank">
 							Новостях проекта
-						</a>
+						</Link>
 					</p>
 				</div>
 

@@ -1,4 +1,5 @@
 // Стили
+import Link from "next/link"
 import styles from "./news.module.scss"
 
 type Season = {
@@ -29,9 +30,9 @@ export const Season = (
 			</div>
 			<h2 className={`${styles.season_text} unic_color center_text`}>
 				{link
-						? <a href={link} target="_blank" className="unic_color" rel="noreferrer noopener">
+						? <Link href={link} target="_blank" className="unic_color">
 							{number} сезон
-						</a>
+						</Link>
 						: <>{number} сезон</>
 				}
 			</h2>

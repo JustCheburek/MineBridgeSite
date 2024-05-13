@@ -6,6 +6,7 @@ import {validate} from "@services/validate";
 // Компоненты
 import {MostikiSvg, SBPSvg} from "@ui/svgs";
 import {MaxSize} from "@components/maxSize";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Покупка | MineBridge",
@@ -34,13 +35,12 @@ export default async function Component() {
 						</a>
 						<br/>
 						или напрямую по {" "}
-						<a
+						<Link
 								href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
 								target="_blank"
-								rel="noreferrer noopener"
 						>
 							<strong className="unic_color">СБЕР</strong>
-						</a>
+						</Link>
 					</p>
 					<h3>
 						1 ₽ = 1 <MostikiSvg/>
@@ -54,14 +54,13 @@ export default async function Component() {
 							8 914 344 8578
 						</h4>
 					</div>
-					<a
+					<Link
 							href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
 							target="_blank"
-							rel="noreferrer noopener"
 							style={{marginBlock: "20px"}}
 					>
 						<SBPSvg/>
-					</a>
+					</Link>
 				</MaxSize>
 			</main>
 	)

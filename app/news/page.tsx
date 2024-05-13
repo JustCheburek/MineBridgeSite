@@ -184,14 +184,13 @@ export default function News() {
 								<p>
 									Kawa11Fox устроила ивент, в котором были большие призы, ставки и пвп сражения!
 								</p>
-								<a
+								<Link
 										className="unic_color medium-font"
-										rel="noreferrer noopener"
 										href="https://youtu.be/i70i7TWtUuI"
 										target="_blank"
 								>
 									Видео об этом ивенте
-								</a>
+								</Link>
 							</PText>
 						</PBox>
 
@@ -227,13 +226,12 @@ export default function News() {
 							</ImgBox>
 							<PTitle>
 								<h2>
-									<a
+									<Link
 											href="https://discord.com/channels/1012334719230292048/1132991350833434672"
-											rel="noreferrer noopener"
 											target="_blank"
 									>
 										Ассасинская бойня
-									</a>
+									</Link>
 								</h2>
 							</PTitle>
 							<PText>
@@ -314,9 +312,9 @@ export default function News() {
 								<h2>Конкурс в вк</h2>
 							</PTitle>
 							<PText>
-								<a target="_blank" href="https://vk.com/minebridge" rel="noopener noreferrer">
-									Во <span className="unic_color">ВК</span> проходила крутая раздача на:
-								</a>
+								<Link target="_blank" href="https://vk.com/minebridge">
+									В <span className="unic_color">ВК</span> проходила крутая раздача на:
+								</Link>
 								<ul>
 									<li>
 										3 легендарных кейса - <span className="unic_color medium-font">CattIk0</span>
