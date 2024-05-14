@@ -9,6 +9,7 @@ import type {Role} from "@/types/role";
 import type {User as UserLucia} from "lucia"
 import {userModel} from "@server/models";
 import {cookies} from "next/headers";
+import {Form} from "@/types/form";
 
 
 @pre<User>("save", function () {
@@ -59,6 +60,9 @@ export class User {
 	// Список с айди игроков
 	@prop({type: () => [String]})
 	public invites!: string[]
+
+	@prop({type: () => Form, required: true})
+	public form!: Form
 
 	@prop()
 	public createdAt!: Date

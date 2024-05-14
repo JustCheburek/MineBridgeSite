@@ -13,6 +13,7 @@ import {Mostiki} from "./components/mostiki";
 import {Rating} from "./components/rating";
 import {InviteSection} from "./components/invite";
 import {Roles} from "./components/roles";
+import {FormBox} from "./components/form";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -28,13 +29,15 @@ export default async function Profile({params: {name}}: { params: { name: string
 
 	return (
 			<div className={styles.profile}>
+				<FormBox author={author}/>
+
 				<div className={styles.container}>
 					<Avatar user={user} access={moderAccess}/>
 
 					<div className={styles.text}>
 						<Name user={user} access={moderAccess}/>
 						{isAdmin &&
-							<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
+								<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
 						}
 						<Roles roles={roles}/>
 						<Mostiki user={user} access={isAdmin}/>

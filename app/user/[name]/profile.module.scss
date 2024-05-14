@@ -1,3 +1,11 @@
+@import "@styles/mixins";
+
+// Form
+.form_box {
+	@include border();
+	padding: 1.5rem;
+}
+
 // Информация о пользователе
 .profile {
 	display: grid;

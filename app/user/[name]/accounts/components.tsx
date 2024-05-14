@@ -19,7 +19,7 @@ export function DeleteUser({user, access}: { user: User, access: boolean }) {
 	)
 
 	return (<>
-		<Form className="form" action={() => setModal(true)}>
+		<Form action={() => setModal(true)}>
 			<FormButton danger>
 				Удалить аккаунт
 			</FormButton>

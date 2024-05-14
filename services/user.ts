@@ -95,7 +95,7 @@ export async function MostikiChange(prevState: State, formData: FormData) {
 	await userModel.findByIdAndUpdate(
 			user._id,
 			{
-				$inc: {mostiki: mostiki}
+				$inc: {mostiki}
 			}
 	)
 
