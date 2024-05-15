@@ -30,7 +30,7 @@ export const getAuthor = unstable_cache(
 			return {user, ...await userModel.getRoles(user?.discordId)}
 		},
 		["author", "userLike", "all"],
-		{revalidate: 600, tags: ["user", "userLike", "all"]}
+		{revalidate: 600, tags: ["author", "userLike", "all"]}
 )
 
 export const getUsers = unstable_cache(
