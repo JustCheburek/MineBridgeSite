@@ -6,10 +6,8 @@ import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
 import {From} from "@/types/invite";
 import axios from "axios";
 import type {Role} from "@/types/role";
-import type {User as UserLucia} from "lucia"
 import {userModel} from "@server/models";
 import {cookies} from "next/headers";
-import {Form} from "@/types/form";
 
 
 @pre<User>("save", function () {
@@ -61,8 +59,8 @@ export class User {
 	@prop({type: () => [String]})
 	public invites!: string[]
 
-	@prop({type: () => Form, required: true})
-	public form!: Form
+	@prop()
+	public form!: boolean
 
 	@prop()
 	public createdAt!: Date
@@ -160,10 +158,6 @@ export interface RolesApi {
 	roles: Role[],
 	isModer: boolean,
 	isAdmin: boolean
-}
-
-export interface UserApi extends RolesApi {
-	user?: UserLucia
 }
 
 export interface DSUser {
