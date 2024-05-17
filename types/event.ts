@@ -18,6 +18,12 @@ export class Event {
 	@prop({required: true, type: () => Types.ObjectId})
 	public author!: Types.ObjectId
 
+	@prop({type: [Types.ObjectId]})
+	public likes: Types.ObjectId[]
+
+	@prop({type: [Types.ObjectId]})
+	public dislikes: Types.ObjectId[]
+
 	@prop({required: true, default: new Date()})
 	public startAt!: Date
 

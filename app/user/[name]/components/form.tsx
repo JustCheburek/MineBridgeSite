@@ -3,13 +3,13 @@ import {userModel} from "@server/models";
 import {FormClient} from "./formClient";
 import {revalidateTag} from "next/cache";
 
-const week = 1000 * 60 * 60 * 24 * 7 // мс * с * мин * ч * д
+const threeDays = 1000 * 60 * 60 * 24 * 3 // мс * с * мин * ч * д
 
 export function FormBox({author}: { author: User | null }) {
-	if (!author || author?.form?.clicked) return
+	if (!author || author?.form === true) return
 
 	const time = new Date(author.createdAt).getTime() - new Date().getTime()
-	if (time > week) return
+	if (time > threeDays) return
 
 	async function Func() {
 		"use server"
@@ -17,9 +17,7 @@ export function FormBox({author}: { author: User | null }) {
 		await userModel.findByIdAndUpdate(
 				author!._id,
 				{
-					form: {
-						clicked: true
-					}
+					form: true
 				}
 		)
 

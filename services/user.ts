@@ -4,6 +4,9 @@ import {userModel} from "@server/models";
 import {Rcon} from "@server/console";
 import type {User} from "lucia";
 import {revalidateTag} from "next/cache";
+import {Connect} from "@server/connect";
+
+Connect()
 
 export interface State {
 	user: User

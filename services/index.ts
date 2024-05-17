@@ -2,7 +2,11 @@
 import type {User} from "lucia";
 import {notFound} from "next/navigation";
 import {unstable_cache} from "next/cache";
-import {caseModel, dropModel, userModel} from "@server/models";
+import {caseModel, dropModel, seasonModel, userModel} from "@server/models";
+import {Connect} from "@server/connect";
+import {Season} from "@/types/season";
+
+Connect()
 
 export const getUser = unstable_cache(
 		async (
@@ -49,4 +53,10 @@ export const getDrops = unstable_cache(
 		async () => await dropModel.find().lean(),
 		["drops", "shop", "all"],
 		{tags: ["drops", "shop", "all"]}
+)
+
+export const getSeasons = unstable_cache(
+		async () => await seasonModel.find().lean() as Season[],
+		["seasons", "news", "events", "all"],
+		{revalidate: 1800, tags: ["seasons", "news", "events", "all"]}
 )

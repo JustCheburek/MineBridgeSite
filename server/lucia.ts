@@ -1,8 +1,10 @@
 import {Lucia} from "lucia";
 import {Discord, Google} from "arctic";
 import {adapter} from "./adapter";
-
 import {User} from "@/types/user";
+import {Connect} from "./connect";
+
+Connect()
 
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
