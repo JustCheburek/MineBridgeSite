@@ -17,13 +17,13 @@
     "javascript-time-ago": "latest",
     "mongoose": "latest",
     "next": "latest",
+    "next-mdx-remote": "latest",
     "nuqs": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-minimal-pie-chart": "latest",
     "react-type-animation": "latest",
-    "sass": "latest",
-    "sharp": "latest"
+    "sass": "latest"
   },
   "devDependencies": {
     "@lucia-auth/adapter-mongodb": "latest",

@@ -4,19 +4,17 @@ import type {PropsWithChildren} from "react";
 // Стили
 import styles from "./styles/post.module.scss";
 
-type PContainer = {
+type PTitle = {
 	className?: string
-	createdAt?: Date
-	updatedAt?: Date
+	startAt?: Date
+	endAt?: Date
 }
 
 export const PBox = (
 		{
 			children,
-			className = "",
-			createdAt,
-			updatedAt
-		}: PropsWithChildren<PContainer>
+			className = ""
+		}: PropsWithChildren<{ className?: string }>
 ) => (
 		<div
 				className={`${styles.container} ${className}`}
@@ -27,12 +25,22 @@ export const PBox = (
 
 export const PTitle = (
 		{
-			children, className = ""
-		}: PropsWithChildren<{
-			className?: string
-		}>) => (
+			children, className = "", startAt, endAt
+		}: PropsWithChildren<PTitle>) => (
 		<div className={`${styles.title} ${className}`}>
 			{children}
+			{startAt &&
+					<div className={styles.time}>
+						<small className="medium-font">
+							{new Date(startAt).toLocaleDateString()}
+						</small>
+						{endAt &&
+								<>
+									{"-"} <small className="medium-font">{new Date(endAt).toLocaleDateString()}</small>
+								</>
+						}
+					</div>
+			}
 		</div>
 )
 

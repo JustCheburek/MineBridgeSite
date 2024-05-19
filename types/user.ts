@@ -10,9 +10,12 @@ import {userModel} from "@server/models";
 import {cookies} from "next/headers";
 
 
-@pre<User>("save", function () {
+function RatingCount(this: User) {
 	this.rating = this.punishments?.reduce((accum, {rating}) => accum + rating, 0) || 0
-})
+}
+
+@pre<User>("save", RatingCount)
+@pre<User>("findOneAndUpdate", RatingCount)
 
 @modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false}})
 export class User {

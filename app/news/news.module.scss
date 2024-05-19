@@ -52,6 +52,10 @@
 	}
 }
 
+.text * {
+	line-height: 1.7em;
+}
+
 @media (width > 728px) {
 	// Время
 	.time_box {

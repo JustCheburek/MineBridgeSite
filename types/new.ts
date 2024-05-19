@@ -8,17 +8,17 @@ export class New {
 	@prop()
 	public href?: string
 
-	@prop({required: true})
-	public text!: string
+	@prop()
+	public text?: string
 
 	@prop()
 	public image?: string
 
-	@prop({required: true, default: new Date()})
-	public startAt!: Date
+	@prop()
+	public startAt?: Date
 
-	@prop({required: true, default: new Date()})
-	public endAt!: Date
+	@prop()
+	public endAt?: Date
 
 	@prop()
 	public createdAt?: Date

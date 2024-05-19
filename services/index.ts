@@ -58,5 +58,5 @@ export const getDrops = unstable_cache(
 export const getSeasons = unstable_cache(
 		async () => await seasonModel.find().lean() as Season[],
 		["seasons", "news", "events", "all"],
-		{revalidate: 1800, tags: ["seasons", "news", "events", "all"]}
+		{revalidate: 400, tags: ["seasons", "news", "events", "all"]}
 )
