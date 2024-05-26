@@ -2,7 +2,6 @@
 
 // Сервер
 import type {User} from "lucia";
-import {parseAsBoolean, useQueryState} from "nuqs";
 import {NameChange} from "@services/user"
 
 // Хуки
@@ -11,9 +10,10 @@ import {useFormModalState} from "@hooks/useFormModalState";
 // Компоненты
 import {Edit, Form, FormButton, FormInput, FormLabel} from "@components/form";
 import {Modal} from "@components/modal";
+import {useState} from "react";
 
 export function Name({user, access}: { user: User, access: boolean }) {
-	const [modal, setModal] = useQueryState<boolean>("name", parseAsBoolean.withDefault(false))
+	const [modal, setModal] = useState(false)
 	const [state, formAction, isPending] = useFormModalState(
 			NameChange, {user, access, setModal}
 	)

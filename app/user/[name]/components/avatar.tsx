@@ -2,7 +2,6 @@
 
 // Сервер
 import type {User} from "lucia";
-import {parseAsBoolean, useQueryState} from "nuqs";
 import {PhotoChange} from "@services/user";
 import {useFormModalState} from "@hooks/useFormModalState";
 
@@ -10,9 +9,10 @@ import {useFormModalState} from "@hooks/useFormModalState";
 import {Img, ImgBox} from "@components/img"
 import {Modal} from "@components/modal";
 import {Edit, Form, FormButton, FormLabel, FormTextarea} from "@components/form";
+import {useState} from "react";
 
 export const Avatar = ({user, access}: { user: User, access: boolean }) => {
-	const [modal, setModal] = useQueryState<boolean>("photo", parseAsBoolean.withDefault(false))
+	const [modal, setModal] = useState(false)
 	const [state, formAction, isPending] = useFormModalState(
 			PhotoChange, {user, access, setModal}
 	)

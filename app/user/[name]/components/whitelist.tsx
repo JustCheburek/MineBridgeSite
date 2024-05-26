@@ -2,7 +2,6 @@
 
 // React
 import {User} from "lucia"
-import {parseAsBoolean, useQueryState} from "nuqs";
 import {WhitelistFunc} from "@services/user";
 
 // Стили
@@ -15,6 +14,7 @@ import {useFormModalState} from "@hooks/useFormModalState";
 import {Button} from "@components/button";
 import {Modal} from "@components/modal";
 import {Form, FormButton} from "@components/form";
+import {useState} from "react";
 
 const UserWhitelisted = ({setModal}: { setModal: Function }) => (
 		<section className={`${styles.whitelist} center_text`}>
@@ -36,7 +36,7 @@ const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
 )
 
 export function WhitelistSection({user, access}: { user: User, access: boolean }) {
-	const [modal, setModal] = useQueryState("whitelist", parseAsBoolean.withDefault(false))
+	const [modal, setModal] = useState(false)
 	const [state, formAction, isPending] = useFormModalState(
 			WhitelistFunc, {user, access, setModal}
 	)
