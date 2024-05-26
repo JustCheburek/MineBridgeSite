@@ -1,6 +1,5 @@
 // React
 import type {Metadata} from "next";
-import {revalidateTag} from "next/cache";
 
 // Стили
 import styles from "./news.module.scss"
@@ -21,7 +20,6 @@ export const metadata: Metadata = {
 };
 
 export default async function News() {
-	revalidateTag("seasons")
 	const seasons = await getSeasons()
 
 	return (<>
@@ -35,35 +33,33 @@ export default async function News() {
 						startAt={new Date(season.startAt)}
 						endAt={new Date(season.endAt)}
 				/>
-				{season.news.map(news => {
-					return (
-							<PBox key={news.heading}>
-								{news.image &&
-										<CheckLink
-												href={news.href}
-										>
-											<ImgBox type="post">
-												<Img src={news.image || ""} alt={news.heading}/>
-											</ImgBox>
-										</CheckLink>
-								}
-								<PTitle startAt={news.startAt} endAt={news.endAt}>
-									<h2>
-										<CheckLink
-												href={news.href}
-										>
-											{news.heading}
-										</CheckLink>
-									</h2>
-								</PTitle>
-								{news?.text &&
-										<PText className={styles.text}>
-											<MDXRemote source={news.text}/>
-										</PText>
-								}
-							</PBox>
-					)
-				})
+				{season.news.map(news => (
+						<PBox key={news.heading}>
+							{news.image &&
+									<CheckLink
+											href={news.href}
+									>
+										<ImgBox type="post">
+											<Img src={news.image || ""} alt={news.heading}/>
+										</ImgBox>
+									</CheckLink>
+							}
+							<PTitle startAt={news.startAt} endAt={news.endAt}>
+								<h2>
+									<CheckLink
+											href={news.href}
+									>
+										{news.heading}
+									</CheckLink>
+								</h2>
+							</PTitle>
+							{news?.text &&
+									<PText className={styles.text}>
+										<MDXRemote source={news.text}/>
+									</PText>
+							}
+						</PBox>)
+				)
 				}
 			</>))}
 
