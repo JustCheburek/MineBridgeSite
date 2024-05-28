@@ -3,10 +3,7 @@ import type {User} from "lucia";
 import {notFound} from "next/navigation";
 import {unstable_cache} from "next/cache";
 import {caseModel, dropModel, seasonModel, userModel} from "@server/models";
-import {Connect} from "@server/connect";
 import {Season} from "@/types/season";
-
-Connect()
 
 export const getUser = unstable_cache(
 		async (
