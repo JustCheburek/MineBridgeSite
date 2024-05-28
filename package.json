@@ -23,7 +23,8 @@
     "react-dom": "latest",
     "react-minimal-pie-chart": "latest",
     "react-type-animation": "latest",
-    "sass": "latest"
+    "sass": "latest",
+    "sharp": "latest"
   },
   "devDependencies": {
     "@lucia-auth/adapter-mongodb": "latest",

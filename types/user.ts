@@ -2,7 +2,7 @@
 
 import {Punishment} from "@/types/punishment";
 import {CasePurchase, StickerPurchase} from "@/types/purchase";
-import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
+import {modelOptions, prop, ReturnModelType} from "@typegoose/typegoose";
 import {From} from "@/types/invite";
 import axios from "axios";
 import type {Role} from "@/types/role";
@@ -10,16 +10,9 @@ import {userModel} from "@server/models";
 import {cookies} from "next/headers";
 
 
-function RatingCount(this: User) {
-	this.rating = this.punishments?.reduce((accum, {rating}) => accum + rating, 0) || 0
-}
-
-@pre<User>("save", RatingCount)
-@pre<User>("findOneAndUpdate", RatingCount)
-
 @modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false}})
 export class User {
-	@prop({required: true})
+	@prop({required: true, index: true})
 	public _id!: string
 
 	@prop({required: true, unique: true, trim: true, maxlength: 22, minlength: 4})

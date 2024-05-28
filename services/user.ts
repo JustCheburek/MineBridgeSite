@@ -13,50 +13,6 @@ export interface State {
 	error: boolean
 }
 
-export async function NameChange(prevState: State, formData: FormData) {
-	const {user, access} = prevState
-	const name = formData.get("name")?.toString()
-
-	if (!access || !name || name === user.name) return {
-		...prevState,
-		error: true,
-		message: "Произошла ошибка, проверь ник!"
-	}
-
-	await userModel.findByIdAndUpdate(user._id, {name})
-
-	revalidateTag("userLike")
-
-	return {
-		...prevState,
-		error: false,
-		success: true,
-		message: "Успешно"
-	}
-}
-
-export async function PhotoChange(prevState: State, formData: FormData) {
-	const {user, access} = prevState
-	const photo = formData.get("photo")?.toString()
-
-	if (!access || !photo || photo === user.photo) return {
-		...prevState,
-		error: true,
-		message: "Произошла ошибка, проверь ссылку!"
-	}
-
-	await userModel.findByIdAndUpdate(user._id, {photo})
-
-	revalidateTag("userLike")
-
-	return {
-		...prevState,
-		error: false,
-		success: true,
-		message: "Успешно"
-	}
-}
-
 export async function WhitelistFunc(prevState: State) {
 	const {user, access} = prevState
 

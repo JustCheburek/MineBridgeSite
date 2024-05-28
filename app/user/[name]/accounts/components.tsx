@@ -8,7 +8,7 @@ import {UserDelete} from "@services/user"
 import {useFormModalState} from "@hooks/useFormModalState";
 
 // Компоненты
-import {Form, FormButton, FormInput, FormLabel} from "@components/form";
+import {Form, FormButton, FormInput, FormLabel, FormTextarea} from "@components/form";
 import {Modal} from "@components/modal";
 import {useState} from "react";
 
@@ -53,4 +53,44 @@ export function DeleteUser({user, access}: { user: User, access: boolean }) {
 			</Form>
 		</Modal>
 	</>)
+}
+
+type ChangeParam = {
+	name: string
+	photo: string
+	access: boolean
+	Change?: string | ((formData: FormData) => void)
+}
+
+export function ChangeParam({name, photo, access, Change}: ChangeParam) {
+	if (!access) return
+
+	return (
+			<Form action={Change}>
+				<FormLabel>
+					<FormInput
+							placeholder="Майнкрафт никнейм"
+							name="name"
+							autoComplete="name"
+							required
+							minLength={4}
+							maxLength={20}
+							defaultValue={name}
+					/>
+				</FormLabel>
+				<FormLabel>
+					<FormTextarea
+							name="photo"
+							placeholder="Ссылка на аватарку"
+							autoComplete="photo"
+							required
+							maxLength={200}
+							defaultValue={photo}
+					/>
+				</FormLabel>
+				<FormButton>
+					Сохранить
+				</FormButton>
+			</Form>
+	)
 }

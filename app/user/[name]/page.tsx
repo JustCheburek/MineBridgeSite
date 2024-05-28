@@ -32,10 +32,10 @@ export default async function Profile({params: {name}}: { params: { name: string
 				<FormBox author={author}/>
 
 				<div className={styles.container}>
-					<Avatar user={user} access={moderAccess}/>
+					<Avatar user={user}/>
 
 					<div className={styles.text}>
-						<Name user={user} access={moderAccess}/>
+						<Name user={user}/>
 						{isAdmin &&
 								<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
 						}

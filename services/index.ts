@@ -21,7 +21,7 @@ export const getUser = unstable_cache(
 			return {user, ...await userModel.getRoles(user.discordId)}
 		},
 		["user", "userLike", "all"],
-		{revalidate: 600, tags: ["user", "userLike", "all"]}
+		{revalidate: 300, tags: ["user", "userLike", "all"]}
 )
 
 export const getAuthor = unstable_cache(
@@ -31,13 +31,13 @@ export const getAuthor = unstable_cache(
 			return {user, ...await userModel.getRoles(user?.discordId)}
 		},
 		["author", "userLike", "all"],
-		{revalidate: 600, tags: ["author", "userLike", "all"]}
+		{revalidate: 300, tags: ["author", "userLike", "all"]}
 )
 
 export const getUsers = unstable_cache(
 		async () => await userModel.find().lean() as User[],
 		["users", "userLike", "all"],
-		{revalidate: 600, tags: ["users", "userLike", "all"]}
+		{revalidate: 300, tags: ["users", "userLike", "all"]}
 )
 
 export const getCases = unstable_cache(

@@ -9,7 +9,9 @@ import styles from "./accounts.module.scss"
 
 // Компоненты
 import {DiscordSvg, EmailSvg, GoogleSvg, SuccessSvg} from "@ui/svgs";
-import {DeleteUser} from "./components";
+import {ChangeParam, DeleteUser} from "./components";
+import {userModel} from "@server/models";
+import {revalidateTag} from "next/cache";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Аккаунты | Майнбридж`,
@@ -18,10 +20,23 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
 	const {user} = await getUser({name})
-	const {user: author, isAdmin} = await validate()
+	const {user: author, isAdmin, isModer} = await validate()
 
 	const isMe = user.name === author?.name
-	const access = isAdmin || isMe
+	const adminAccess = isAdmin || isMe
+	const moderAccess = isModer || isMe
+
+	async function Change(formData: FormData) {
+		"use server"
+
+		const name = formData.get("name")
+		const photo = formData.get("photo")
+
+		await userModel.findByIdAndUpdate(user._id, {name, photo})
+
+		revalidateTag("userLike")
+		revalidateTag("users")
+	}
 
 	return (
 			<div className="account_content">
@@ -31,6 +46,8 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 				<h1 className={styles.for_smaller}>
 					Акки
 				</h1>
+
+				<ChangeParam name={user.name} photo={user.photo} access={moderAccess} Change={Change}/>
 
 				<div className={styles.providers_box}>
 					<Provider
@@ -58,8 +75,8 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 						<GoogleSvg width="1.5em" height="1.5em"/>
 					</Provider>
 				</div>
-				{access &&
-						<DeleteUser user={user} access={access}/>
+				{adminAccess &&
+						<DeleteUser user={user} access={adminAccess}/>
 				}
 			</div>
 	)
