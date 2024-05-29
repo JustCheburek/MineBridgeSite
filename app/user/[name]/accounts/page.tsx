@@ -19,10 +19,9 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
-	const {user} = await getUser({name})
 	const {user: author, isAdmin, isModer} = await validate()
+	const {user, isMe} = await getUser({name}, author?._id, isModer)
 
-	const isMe = user.name === author?.name
 	const adminAccess = isAdmin || isMe
 	const moderAccess = isModer || isMe
 
@@ -54,7 +53,6 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 							name="email"
 							id={user.email}
 							isMe={isMe}
-							isAdmin={isAdmin}
 					>
 						<EmailSvg width="1.5em" height="1.5em"/>
 					</Provider>
@@ -62,7 +60,6 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 							name="discord"
 							id={user.discordId}
 							isMe={isMe}
-							isAdmin={isAdmin}
 					>
 						<DiscordSvg className={`color ${styles.ds}`} width="1.5em" height="1.5em"/>
 					</Provider>
@@ -70,7 +67,6 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 							name="google"
 							id={user.googleId}
 							isMe={isMe}
-							isAdmin={isAdmin}
 					>
 						<GoogleSvg width="1.5em" height="1.5em"/>
 					</Provider>
@@ -82,17 +78,14 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 	)
 }
 
-function Provider({id, name, isMe, isAdmin, children}: PropsWithChildren<{
+function Provider({id, name, isMe, children}: PropsWithChildren<{
 	id?: string,
 	name: string,
-	isAdmin: boolean,
 	isMe: boolean
 }>) {
 	if (!id && !isMe) {
 		return null
 	}
-
-	const access = isAdmin || isMe
 
 	return (
 			<div className={styles.box}>
@@ -100,10 +93,7 @@ function Provider({id, name, isMe, isAdmin, children}: PropsWithChildren<{
 				{id
 						? <>
 							<p className={`all_select medium-font center_text ${styles.id}`}>
-								{access
-										? id
-										: `${"×".repeat(id.length - 4)}${id.substring(id.length - 4)}`
-								}
+								{id}
 							</p>
 							<SuccessSvg/>
 						</>

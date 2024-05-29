@@ -10,15 +10,31 @@ export const getUser = unstable_cache(
 				param: {
 					_id?: User["_id"],
 					name?: User["name"]
-				}
+				},
+				_id?: User["_id"],
+				show: boolean = false
 		) => {
 			const user: User | null = await userModel.findOne(param).lean()
 
 			if (!user) notFound()
 
 			user._id = user._id.toString()
+			const isMe = _id === user._id
 
-			return {user, ...await userModel.getRoles(user.discordId)}
+			if (!show || !isMe) {
+				user.email = "×".repeat(user.email.length - 4) + user.email.substring(user.email.length - 4)
+
+				const googleId = user.googleId?.toString()
+				const discordId = user.discordId?.toString()
+				if (googleId) {
+					user.googleId = "×".repeat(googleId.length - 4) + googleId.substring(googleId.length - 4)
+				}
+				if (discordId) {
+					user.discordId = "×".repeat(discordId.length - 4) + discordId.substring(discordId.length - 4)
+				}
+			}
+
+			return {user, isMe, ...await userModel.getRoles(user.discordId)}
 		},
 		["user", "userLike", "all"],
 		{revalidate: 300, tags: ["user", "userLike", "all"]}
