@@ -72,7 +72,7 @@ export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam)
 							autoComplete="name"
 							required
 							minLength={4}
-							maxLength={20}
+							maxLength={30}
 							defaultValue={user.name}
 					/>
 				</FormLabel>

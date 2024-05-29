@@ -9,7 +9,7 @@ import styles from "./auth.module.scss";
 
 export function AuthForm() {
 	const [name, setName] = useLocalStorage<string>("name", "")
-	const access = 4 < name.length && name.length < 20
+	const access = 4 < name.length && name.length < 30
 
 	return (
 			<Form className={styles.form}>
@@ -20,7 +20,7 @@ export function AuthForm() {
 							autoComplete="name"
 							required
 							minLength={4}
-							maxLength={20}
+							maxLength={30}
 							autoFocus
 							value={name}
 							onChange={e => setName(e.target.value)}
