@@ -2,21 +2,20 @@
 
 // Сервер
 import type {User} from "lucia";
-import {UserDelete} from "@services/user"
-
-// Хуки
-import {useFormModalState} from "@hooks/useFormModalState";
 
 // Компоненты
 import {Form, FormButton, FormInput, FormLabel, FormTextarea} from "@components/form";
 import {Modal} from "@components/modal";
 import {useState} from "react";
 
-export function DeleteUser({user, access}: { user: User, access: boolean }) {
+type DeleteUser = {
+	user: User
+	Delete?: ((formData: FormData) => void)
+}
+
+export function DeleteUser({user, Delete}: DeleteUser) {
 	const [modal, setModal] = useState(false)
-	const [state, formAction, isPending] = useFormModalState(
-			UserDelete, {user, access, setModal}
-	)
+	const [name, setName] = useState("")
 
 	return (<>
 		<Form action={() => setModal(true)}>
@@ -33,10 +32,7 @@ export function DeleteUser({user, access}: { user: User, access: boolean }) {
 				удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
 			</p>
 			<h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
-			<p aria-live="polite" className={state.error ? "red_color" : ""}>
-				{state.message}
-			</p>
-			<Form action={formAction}>
+			<Form action={Delete}>
 				<FormLabel>
 					<FormInput
 							name="name"
@@ -44,10 +40,11 @@ export function DeleteUser({user, access}: { user: User, access: boolean }) {
 							placeholder={user.name}
 							autoComplete="off"
 							required
-							disabled={isPending}
+							value={name}
+							onChange={(e) => setName(e.target.value)}
 					/>
 				</FormLabel>
-				<FormButton danger disabled={isPending}>
+				<FormButton danger disabled={name !== user.name}>
 					Жми, жми!
 				</FormButton>
 			</Form>
@@ -56,14 +53,15 @@ export function DeleteUser({user, access}: { user: User, access: boolean }) {
 }
 
 type ChangeParam = {
-	name: string
-	photo: string
-	access: boolean
-	Change?: string | ((formData: FormData) => void)
+	user: User
+	isAdmin: boolean
+	isModer: boolean
+	isMe: boolean
+	Change?: ((formData: FormData) => void)
 }
 
-export function ChangeParam({name, photo, access, Change}: ChangeParam) {
-	if (!access) return
+export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam) {
+	if (!isMe && !isModer) return
 
 	return (
 			<Form action={Change}>
@@ -75,7 +73,7 @@ export function ChangeParam({name, photo, access, Change}: ChangeParam) {
 							required
 							minLength={4}
 							maxLength={20}
-							defaultValue={name}
+							defaultValue={user.name}
 					/>
 				</FormLabel>
 				<FormLabel>
@@ -85,9 +83,21 @@ export function ChangeParam({name, photo, access, Change}: ChangeParam) {
 							autoComplete="photo"
 							required
 							maxLength={200}
-							defaultValue={photo}
+							defaultValue={user.photo}
 					/>
 				</FormLabel>
+				{isAdmin &&
+					<FormLabel>
+						<FormInput
+								name="mostiki"
+								type="number"
+								placeholder="Мостики"
+								autoComplete="mostiki"
+								required
+								defaultValue={user.mostiki}
+						/>
+					</FormLabel>
+				}
 				<FormButton>
 					Сохранить
 				</FormButton>

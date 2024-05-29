@@ -2,13 +2,9 @@
 
 // React
 import {User} from "lucia"
-import {WhitelistFunc} from "@services/user";
 
 // Стили
 import styles from "../profile.module.scss"
-
-// Хуки
-import {useFormModalState} from "@hooks/useFormModalState";
 
 // Компоненты
 import {Button} from "@components/button";
@@ -35,11 +31,14 @@ const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
 		</div>
 )
 
-export function WhitelistSection({user, access}: { user: User, access: boolean }) {
+type WhitelistSection = {
+	user: User
+	access: boolean
+	WhitelistFunc?: ((formData: FormData) => void)
+}
+
+export function WhitelistSection({user, access, WhitelistFunc}: WhitelistSection) {
 	const [modal, setModal] = useState(false)
-	const [state, formAction, isPending] = useFormModalState(
-			WhitelistFunc, {user, access, setModal}
-	)
 
 	if (!access) {
 		return (
@@ -57,8 +56,8 @@ export function WhitelistSection({user, access}: { user: User, access: boolean }
 	return (
 			<>
 				{user.whitelist
-				? <UserWhitelisted setModal={setModal}/>
-				: <UserNotWhitelisted setModal={setModal}/>
+						? <UserWhitelisted setModal={setModal}/>
+						: <UserNotWhitelisted setModal={setModal}/>
 				}
 
 				<Modal setModal={setModal} modal={modal}>
@@ -72,11 +71,8 @@ export function WhitelistSection({user, access}: { user: User, access: boolean }
 						Если <span className="red_color">нет</span>, тогда вы можете изменить<br/>
 						его нажав кнопку справа от своего ника!
 					</p>
-					<p aria-live="polite" className={state.error ? "red_color" : ""}>
-						{state.message}
-					</p>
-					<Form action={formAction}>
-						<FormButton disabled={isPending}>
+					<Form action={WhitelistFunc}>
+						<FormButton>
 							Подать заявку
 						</FormButton>
 					</Form>

@@ -15,10 +15,10 @@ import Link from "next/link";
 
 type PunishmentSection = {
 	user: User, author: User | null
-	access: boolean, SaveAll: Function
+	access: boolean, SaveAll: Function, ratingFunc?: ((formData: FormData) => void)
 }
 
-export function PunishmentSection({user, author, access, SaveAll}: PunishmentSection) {
+export function PunishmentSection({user, author, access, SaveAll, ratingFunc}: PunishmentSection) {
 	const [modal, setModal] = useState<boolean>(false)
 
 	return (<>
@@ -34,6 +34,6 @@ export function PunishmentSection({user, author, access, SaveAll}: PunishmentSec
 				Рейтинг
 			</h2>
 		</Table>
-		<RatingModal modal={modal} setModal={setModal} user={user} author={author} access={access}/>
+		<RatingModal modal={modal} setModal={setModal} author={author} ratingFunc={ratingFunc}/>
 	</>)
 }

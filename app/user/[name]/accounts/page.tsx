@@ -23,7 +23,6 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 	const {user, isMe} = await getUser({name}, author?._id, isModer)
 
 	const adminAccess = isAdmin || isMe
-	const moderAccess = isModer || isMe
 
 	async function Change(formData: FormData) {
 		"use server"
@@ -31,10 +30,26 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 		const name = formData.get("name")
 		const photo = formData.get("photo")
 
-		await userModel.findByIdAndUpdate(user._id, {name, photo})
+		let mostiki = user.mostiki
+		if (isAdmin) {
+			mostiki = Number(formData.get("mostiki"))
+		}
+
+		await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki})
 
 		revalidateTag("userLike")
-		revalidateTag("users")
+	}
+
+	async function Delete(formData: FormData) {
+		"use server"
+
+		const name = formData.get("name")
+
+		if (!isMe && !isAdmin && name !== user.name) return
+
+		await userModel.findByIdAndDelete(user._id)
+
+		revalidateTag("userLike")
 	}
 
 	return (
@@ -46,7 +61,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					Акки
 				</h1>
 
-				<ChangeParam name={user.name} photo={user.photo} access={moderAccess} Change={Change}/>
+				<ChangeParam user={user} isMe={isMe} isModer={isModer} isAdmin={isAdmin} Change={Change}/>
 
 				<div className={styles.providers_box}>
 					<Provider
@@ -72,7 +87,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					</Provider>
 				</div>
 				{adminAccess &&
-						<DeleteUser user={user} access={adminAccess}/>
+						<DeleteUser user={user} Delete={Delete}/>
 				}
 			</div>
 	)

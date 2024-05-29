@@ -40,6 +40,31 @@ export default async function History({params: {name}}: { params: { name: string
 		revalidateTag("userLike")
 	}
 
+	async function ratingFunc(formData: FormData){
+		"use server"
+
+		const rating = Number(formData.get("rating"))
+		const reason = formData.get("reason")
+		const author = formData.get("author")
+
+		if (!reason || !rating || !author || rating === 0) return
+
+		await userModel.findByIdAndUpdate(
+				user._id,
+				{
+					$push: {
+						punishments: {
+							reason,
+							rating,
+							author
+						}
+					}
+				}
+		)
+
+		revalidateTag("userLike")
+	}
+
 	async function CasesPurchasesSave(datas: CaseData[]){
 		"use server"
 
@@ -67,7 +92,7 @@ export default async function History({params: {name}}: { params: { name: string
 			<div className={styles.content}>
 				<h1>История</h1>
 
-				<PunishmentSection user={user} author={author} access={isModer} SaveAll={PunishmentSave}/>
+				<PunishmentSection user={user} author={author} access={isModer} SaveAll={PunishmentSave} ratingFunc={ratingFunc}/>
 
 				<CasesPurchasesSection user={user} access={isAdmin} SaveAll={CasesPurchasesSave} Cases={Cases} Drops={Drops}/>
 			</div>

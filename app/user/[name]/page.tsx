@@ -14,6 +14,9 @@ import {Rating} from "./components/rating";
 import {InviteSection} from "./components/invite";
 import {Roles} from "./components/roles";
 import {FormBox} from "./components/form";
+import {Rcon} from "@server/console";
+import {userModel} from "@server/models";
+import {revalidateTag} from "next/cache";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -21,11 +24,22 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
-	const {user, roles} = await getUser({name})
 	const {user: author, isModer, isAdmin} = await validate()
+	const {user, roles, isMe} = await getUser({name}, author?._id, isModer)
 
-	const isMe = user.name === author?.name
 	const moderAccess = isModer || isMe
+
+	async function WhitelistFunc() {
+		"use server"
+
+		const client = await Rcon()
+		console.log(`Добавляю в Whitelist: ${user.name}`)
+		await client.run(`whitelist add ${user.name}`)
+
+		await userModel.findByIdAndUpdate(user._id, {whitelist: true})
+
+		revalidateTag("userLike")
+	}
 
 	return (
 			<div className={styles.profile}>
@@ -40,12 +54,12 @@ export default async function Profile({params: {name}}: { params: { name: string
 								<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
 						}
 						<Roles roles={roles}/>
-						<Mostiki user={user} access={isAdmin}/>
+						<Mostiki user={user}/>
 						<Rating user={user}/>
 					</div>
 				</div>
 
-				<WhitelistSection user={user} access={moderAccess}/>
+				<WhitelistSection user={user} access={moderAccess} WhitelistFunc={WhitelistFunc}/>
 
 				<InviteSection user={user} access={isMe}/>
 			</div>

@@ -1,48 +1,27 @@
-// React
-import {User} from "lucia";
-import {RatingChange} from "@services/user";
-
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormInput, FormLabel} from "@components/form";
-import {useFormModalState} from "@hooks/useFormModalState";
 
 type CasesPurchasesModal = {
-	user: User,
-	access: boolean,
-	modal: boolean,
+	modal: boolean
 	setModal: setModal
 }
 
 export const CasesPurchasesModal = (
 		{
-			user, access,
 			modal, setModal
 		}: CasesPurchasesModal
 ) => {
-	const [state, formAction, isPending] = useFormModalState(
-			RatingChange,
-			{
-				user, access,
-				setModal,
-				message: "Ручная установка покупок"
-			}
-	)
-
 	return (
 			<Modal setModal={setModal} modal={modal}>
 				<h1>Кейсы</h1>
-				<p aria-live="polite" className={state.error ? "red_color" : ""}>
-					{state.message}
-				</p>
-				<Form action={formAction}>
+				<Form action={() => {}}>
 					<FormLabel>
 						<FormInput
 								name="case"
 								placeholder="Кейс"
 								autoComplete="case"
 								required
-								disabled={isPending}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -52,7 +31,6 @@ export const CasesPurchasesModal = (
 								placeholder="Цена"
 								autoComplete="rating"
 								required
-								disabled={isPending}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -61,10 +39,9 @@ export const CasesPurchasesModal = (
 								placeholder="Дроп"
 								autoComplete="drop"
 								required
-								disabled={isPending}
 						/>
 					</FormLabel>
-					<FormButton disabled={isPending}>
+					<FormButton>
 						Добавить
 					</FormButton>
 				</Form>

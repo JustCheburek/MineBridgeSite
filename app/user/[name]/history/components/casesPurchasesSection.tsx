@@ -69,6 +69,6 @@ export async function CasesPurchasesSection({user, access, Cases, Drops, SaveAll
 				Покупки кейсов
 			</h2>
 		</Table>
-		<CasesPurchasesModal modal={modal} setModal={setModal} user={user} access={access}/>
+		<CasesPurchasesModal modal={modal} setModal={setModal}/>
 	</>)
 }

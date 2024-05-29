@@ -1,41 +1,26 @@
 // React
 import {User} from "lucia";
-import {RatingChange} from "@services/user";
 
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormInput, FormLabel} from "@components/form";
-import {useFormModalState} from "@hooks/useFormModalState";
 
 type RatingModal = {
-	user: User,
 	author: User | null
-	access: boolean,
+	ratingFunc?: ((formData: FormData) => void),
 	modal: boolean,
 	setModal: setModal
 }
 
 export const RatingModal = (
 		{
-			user, author, access,
+			author, ratingFunc,
 			modal, setModal
 		}: RatingModal) => {
-	const [state, formAction, isPending] = useFormModalState(
-			RatingChange,
-			{
-				user, access,
-				setModal,
-				message: "Значение суммируется"
-			}
-	)
-
 	return (
 			<Modal setModal={setModal} modal={modal}>
 				<h1>Рейтинг</h1>
-				<p aria-live="polite" className={state.error ? "red_color" : ""}>
-					{state.message}
-				</p>
-				<Form action={formAction}>
+				<Form action={ratingFunc}>
 					<FormLabel>
 						<FormInput
 								name="reason"
@@ -43,7 +28,6 @@ export const RatingModal = (
 								autoComplete="reason"
 								required
 								maxLength={26}
-								disabled={isPending}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -53,7 +37,6 @@ export const RatingModal = (
 								placeholder="Рейтинг"
 								autoComplete="rating"
 								required
-								disabled={isPending}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -62,11 +45,10 @@ export const RatingModal = (
 								placeholder="Автор"
 								autoComplete="author"
 								required
-								disabled={isPending}
 								defaultValue={author?.name}
 						/>
 					</FormLabel>
-					<FormButton disabled={isPending}>
+					<FormButton>
 						Добавить
 					</FormButton>
 				</Form>

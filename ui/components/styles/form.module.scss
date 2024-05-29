@@ -41,8 +41,10 @@
           border-color var(--long-transition),
           color var(--short-transition);
 
-  &:active,  &:focus-visible, &:hover {
-    border-color: var(--_color);
+  &:not(:disabled):not([aria-disabled="true"]) {
+    &:active, &:focus-visible, &:hover {
+      border-color: var(--_color);
+    }
   }
 
   &:not(.select) {
@@ -69,15 +71,8 @@
 
   color: var(--_color);
 
-  &:not(:disabled):not([aria-disabled="true"]) {
-    &:hover {
-      border-color: var(--_color);
-    }
-  }
-
   &:disabled, &[aria-disabled="true"] {
-    color: var(--gray-color);
-    opacity: 0.5;
+    color: var(--light-gray-color);
   }
 }
 
