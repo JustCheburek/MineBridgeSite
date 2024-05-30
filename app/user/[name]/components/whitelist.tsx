@@ -40,9 +40,19 @@ type WhitelistSection = {
 export function WhitelistSection({user, access, WhitelistFunc}: WhitelistSection) {
 	const [modal, setModal] = useState(false)
 
+	if (user.rating <= -200) {
+		return (
+			<section className="center_text">
+				<h2>
+					Игрок в бане
+				</h2>
+			</section>
+		)
+	}
+
 	if (!access) {
 		return (
-				<section className={`${styles.whitelist} center_text`}>
+				<section className="center_text">
 					<h2>
 						{user.whitelist
 								? "Этот игрок в Whitelist`е!"

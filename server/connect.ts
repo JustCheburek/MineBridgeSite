@@ -25,5 +25,8 @@ export async function Connect() {
 		return cached.conn
 	} catch (e) {
 		console.error(e)
+		cached.promise = await connect(MONGO_URL).then(mongoose => mongoose)
+		cached.conn = await cached.promise
+		return cached.conn
 	}
 }

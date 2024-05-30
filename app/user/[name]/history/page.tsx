@@ -1,9 +1,12 @@
 // Сервер
+import axios from "axios";
 import {getUser} from "@/services";
 import {validate} from "@services/validate";
 import {caseModel, dropModel, userModel} from "@server/models";
 import {Punishment} from "@/types/punishment";
 import type {CaseData} from "@/types/purchase";
+import {revalidateTag} from "next/cache";
+import {Rcon} from "@server/console";
 
 // Компоненты
 import {PunishmentSection} from "./components/ratingSection";
@@ -11,7 +14,7 @@ import {CasesPurchasesSection} from "./components/casesPurchasesSection";
 
 // Стили
 import styles from "./history.module.scss";
-import {revalidateTag} from "next/cache";
+import type {GuildDSUser} from "@/types/user";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
     title: `${name} > Истории действий | Майнбридж`,
@@ -23,6 +26,90 @@ export default async function History({params: {name}}: { params: { name: string
     const {user: author, isModer, isAdmin} = await validate()
     const Cases = await caseModel.find().lean()
     const Drops = await dropModel.find().lean()
+
+    async function checkBan() {
+        "use server"
+
+        if (user.rating > -100) return
+
+        if (user.rating <= -200) {
+            // Бан в майне
+            const client = await Rcon()
+            console.log(`Бан ${user.name}`)
+            await client.run(`whitelist remove ${user.name}`)
+            await client.run(`ban ${user.name}`)
+        } else {
+            // Разбан в майне
+            const client = await Rcon()
+            console.log(`Разбан ${user.name}`)
+            await client.run(`whitelist add ${user.name}`)
+            await client.run(`pardon ${user.name}`)
+        }
+
+        if (!user.discordId) return
+
+        if (user.rating <= -300) {
+            // Бан
+            await axios.put(
+                `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/bans/${user.discordId}`,
+                {delete_message_days: 7},
+                {
+                    headers: {
+                        Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+                    }
+                }
+            ).catch(console.error)
+            return
+        } else {
+            // Разбан
+            await axios.delete(
+                `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/bans/${user.discordId}`,
+                {
+                    headers: {
+                        Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+                    }
+                }
+            ).catch(console.error)
+        }
+
+        const guildMember = await axios.get<GuildDSUser | null>(
+            `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user.discordId}`,
+            {
+                headers: {
+                    Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+                }
+            }
+        ).then(r => r.data).catch(console.error)
+
+        if (user.rating <= -100) {
+            // Мут
+            // Добавление роли mute
+            if (!guildMember?.roles?.includes(process.env.DISCORD_MUTE_ROLE_ID!)) {
+                await axios.put(
+                    `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user.discordId}/roles/${process.env.DISCORD_MUTE_ROLE_ID}`,
+                    {},
+                    {
+                        headers: {
+                            Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+                        }
+                    }
+                ).catch(console.error)
+            }
+        } else {
+            // Размут
+            // Убирание роли mute
+            if (guildMember?.roles?.includes(process.env.DISCORD_MUTE_ROLE_ID!)) {
+                await axios.delete(
+                    `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user.discordId}/roles/${process.env.DISCORD_MUTE_ROLE_ID}`,
+                    {
+                        headers: {
+                            Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+                        }
+                    }
+                ).catch(console.error)
+            }
+        }
+    }
 
     async function PunishmentSave(data: Punishment[]) {
         "use server"
@@ -36,6 +123,8 @@ export default async function History({params: {name}}: { params: { name: string
                 )
             }
         )
+
+        await checkBan()
 
         revalidateTag("userLike")
     }
@@ -58,9 +147,14 @@ export default async function History({params: {name}}: { params: { name: string
                         rating,
                         author
                     }
+                },
+                $inc: {
+                    rating
                 }
             }
         )
+
+        await checkBan()
 
         revalidateTag("userLike")
     }
