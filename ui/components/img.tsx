@@ -7,77 +7,92 @@ import type {ComponentPropsWithoutRef} from "react";
 import styles from "./styles/img.module.scss"
 
 type ImgBox = {
-	className?: string
-	type?: "post" | "grid" | undefined
-	background?: string
-	width?: string
-	height?: string
-	hover?: boolean
-	borderRadius?: boolean
+    className?: string
+    type?: "post" | "grid" | undefined
+    background?: string
+    width?: string
+    height?: string
+    hover?: boolean
+    overflow?: boolean
+    borderRadius?: boolean
 }
 
 export const ImgBox = (
-		{
-			className = "", type, children, background, width, height, hover = false, borderRadius=false, style, ...props
-		}: ComponentPropsWithoutRef<"figure"> & ImgBox,
+    {
+        className = "",
+        type,
+        children,
+        background,
+        width,
+        height,
+        overflow = true,
+        hover = false,
+        borderRadius = false,
+        style,
+        ...props
+    }: ComponentPropsWithoutRef<"figure"> & ImgBox,
 ) => {
-	let backgroundStyle
+    let backgroundStyle, overflowStyle
 
-	if (background) {
-		backgroundStyle = {backgroundImage: `url(${background})`}
-	}
+    if (background) {
+        backgroundStyle = {backgroundImage: `url(${background})`}
+    }
 
-	if (type === "post") {
-		hover = true
-	}
+    if (overflow) {
+        overflowStyle = {overflow: "hidden"}
+    }
 
-	return (
-			<figure
-					className={`${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${className}`}
-					style={{...backgroundStyle, width, height, ...style}}
-					{...props}
-			>
-				{children}
-			</figure>
-	)
+    if (type === "post") {
+        hover = true
+    }
+
+    return (
+        <figure
+            className={`${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${className}`}
+            style={{...backgroundStyle, ...overflowStyle, width, height, ...style}}
+            {...props}
+        >
+            {children}
+        </figure>
+    )
 }
 
 export const Img = (
-		{
-			src, alt,
-			className = "",
-			pixel = false,
-			symmetrical = true,
-			...props
-		}: { pixel?: boolean, symmetrical?: boolean } & ImageProps
+    {
+        src, alt,
+        className = "",
+        pixel = false,
+        symmetrical = true,
+        ...props
+    }: { pixel?: boolean, symmetrical?: boolean } & ImageProps
 ) => {
-	if (!props.width && !props.height) {
-		props.fill = true
-		props.sizes = "50vw"
-	}
+    if (!props.width && !props.height) {
+        props.fill = true
+        props.sizes = "50vw"
+    }
 
-	if (symmetrical) {
-		if (!props.height) props.height = props.width
-		if (!props.width) props.width = props.height
-	}
+    if (symmetrical) {
+        if (!props.height) props.height = props.width
+        if (!props.width) props.width = props.height
+    }
 
-	return (
-			<Image
-					className={`${styles.img} ${pixel ? "pixel" : ""} ${className}`}
-					src={src} alt={alt}
-					loading="lazy" {...props}
-			/>
-	)
+    return (
+        <Image
+            className={`${styles.img} ${pixel ? "pixel" : ""} ${className}`}
+            src={src} alt={alt}
+            loading="lazy" {...props}
+        />
+    )
 }
 
 export const Totem = (
-		{
-			src, alt,
-			className = "",
-			...props
-		}: ComponentPropsWithoutRef<"img">
+    {
+        src, alt,
+        className = "",
+        ...props
+    }: ComponentPropsWithoutRef<"img">
 ) => {
-	return (
-			<img src={src} alt={alt} width={160} className={`${styles.img} pixel ${className}`} {...props}/>
-	)
+    return (
+        <img src={src} alt={alt} width={160} className={`${styles.img} pixel ${className}`} {...props}/>
+    )
 }

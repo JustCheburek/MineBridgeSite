@@ -9,7 +9,7 @@ body:has(.modal.active) {
 
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 
 	// Максимальные размеры
 	width: 100%;
@@ -22,24 +22,8 @@ body:has(.modal.active) {
 	backdrop-filter var(--long-transition),
 	background var(--long-transition);
 
-	.modal_text {
-		position: relative;
-
-		// Размеры
-		min-width: min(70%, 500px);
-		min-height: min(70%, 300px);
-
-		// Расположение
-		padding: 40px 50px 20px;
-
-		// Отображение
-		background: var(--background-color);
-		z-index: var(--4z);
-
-		// Анимация
-		scale: 0.5;
-		transition: scale var(--long-transition);
-	}
+	overflow-y: scroll;
+	padding: 20px;
 
 	&.active {
 		opacity: 1;
@@ -52,16 +36,36 @@ body:has(.modal.active) {
 			scale: 1;
 		}
 	}
+}
 
-	.close_modal {
-		position: absolute;
-		top: 0.3rem;
-		right: 0.8rem;
+.modal_text {
+	position: relative;
+	margin: auto;
 
-		color: var(--unic-color);
+	// Размеры
+	min-width: min(70%, 500px);
+	min-height: min(70%, 300px);
 
-		padding: 0.8rem;
+	// Расположение
+	padding: 40px 50px 20px;
 
-		border-radius: var(--border-radius);
-	}
+	// Отображение
+	background: var(--background-color);
+	z-index: var(--4z);
+
+	// Анимация
+	scale: 0.5;
+	transition: scale var(--long-transition);
+}
+
+.close_modal {
+	position: absolute;
+	top: 0.3rem;
+	right: 0.8rem;
+
+	color: var(--unic-color);
+
+	padding: 0.8rem;
+
+	border-radius: var(--border-radius);
 }

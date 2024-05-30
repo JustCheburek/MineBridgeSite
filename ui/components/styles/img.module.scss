@@ -1,39 +1,37 @@
 .box, .img {
-	translate: 0;
-	scale: 1;
-	rotate: 0;
+  translate: 0;
+  scale: 1;
+  rotate: 0;
 
-	transition:
-			scale var(--long-transition),
-			rotate var(--long-transition),
-			translate var(--long-transition),
-			filter var(--long-transition),
-			border-radius var(--short-transition);
+  transition: scale var(--long-transition),
+  rotate var(--long-transition),
+  translate var(--long-transition),
+  filter var(--long-transition),
+  border-radius var(--short-transition);
 }
 
 .box {
-	position: relative;
-	overflow: hidden;
+  position: relative;
 }
 
 .hover:hover .img {
-	scale: 1.1;
+  scale: 1.1;
 }
 
 .post {
-	position: relative;
-	border-radius: var(--border-radius) var(--border-radius) 0 0;
-	overflow: hidden;
-	aspect-ratio: 16 / 9;
+  position: relative;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
 
-	.img {
-		object-fit: cover;
-	}
+  .img {
+    object-fit: cover;
+  }
 }
 
 .grid {
-	position: absolute;
+  position: absolute;
 
-	width: 50%;
-	aspect-ratio: 1 / 1;
+  width: 50%;
+  aspect-ratio: 1 / 1;
 }
