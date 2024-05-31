@@ -73,7 +73,7 @@ export function WhitelistSection({user, access, WhitelistFunc}: WhitelistSection
 				<Modal setModal={setModal} modal={modal}>
 					<h1>Whitelist</h1>
 					<h2>Сервер выключен</h2>
-					<h2>Вайтлист не работает до открытия сезона</h2>
+					<h4>Вайтлист не работает до открытия сезона</h4>
 					<p>
 						<span className="red_color">Внимание!</span><br/>
 						Ваш майнкрафт никнейм - {" "}
