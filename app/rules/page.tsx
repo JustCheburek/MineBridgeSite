@@ -10,6 +10,7 @@ import styles from './rules.module.scss';
 import {Punishment, Rule, RulesBox} from "./components";
 import {OnThisPage, OnThisPageItem} from "@components/sideNav";
 import {TextUrl} from "@components/textUrl";
+import {User} from "@components/user";
 
 export const metadata: Metadata = {
 	title: "Правила | Майнбридж",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 const timeAgo = new TimeAgo('ru-RU');
 
 export default function Rules() {
-	const lastUpdate = new Date(2024, 2 - 1, 15);
+	const lastUpdate = new Date(2024, 5 - 1, 31);
 
 	return (
 			<>
@@ -48,10 +49,10 @@ export default function Rules() {
 							<span className="red_color medium-font">-100 и меньше</span> — мут
 						</li>
 						<li>
-							<span className="red_color medium-font">-200 и меньше</span> — бан навсегда в майне
+							<span className="red_color medium-font">-200 и меньше</span> — бан в майне
 						</li>
 						<li>
-							<span className="red_color medium-font">-300 и меньше</span> — бан навсегда в дс
+							<span className="red_color medium-font">-300 и меньше</span> — бан в дс
 						</li>
 					</ul>
 					<div className={styles.tldr}>
@@ -71,7 +72,7 @@ export default function Rules() {
 									Оскорблять
 								</li>
 								<li>
-									Матерится (часто)
+									Часто матерится
 								</li>
 								<li>
 									Рекламировать конкурентов
@@ -95,33 +96,6 @@ export default function Rules() {
 							</ul>
 						</div>
 					</div>
-					<p><span className="red_color medium-font">-20 рейтинга</span> каждый день, если Вы:</p>
-					<ul>
-						<li>
-							Пропустили в суд <small>(время договорное)</small>
-						</li>
-						<li>
-							Не начали выполнять просьбу в течение 4-7 дней, в зависимости от сложности просьбы{" "}
-							<small>
-								(починить за собой что-либо, снести свои мешающие блоки и т.д.)
-							</small>
-						</li>
-						<li>
-							Не возвращаете откуп в течение срока, назначенного в суде
-						</li>
-					</ul>
-					<br/>
-					<p>Снижение рейтинга означает его снижение до момента:</p>
-					<ul>
-						<li>
-							Исправления ситуации
-						</li>
-						<li>
-							Вашего бана {" "}
-							<small>(игнор)</small>
-						</li>
-					</ul>
-					<br/>
 					<p>
 						Снижаемый рейтинг является приблизительным, всё
 						зависит от тяжести содеянного
@@ -462,58 +436,97 @@ export default function Rules() {
 						</Rule>
 					</RulesBox>
 
-					<RulesBox name="roles" heading="Роли" number={8}>
+					<RulesBox name="court" heading="Суд" number={8}>
 						<Rule number={8.1}>
+							<p>
+								На нём разбираются только самые тягостные нарушения
+							</p>
+							<p>
+								Удобное время суда обговаривается для всех участвующих лиц суда
+							</p>
+						</Rule>
+						<Rule number={8.2} punishment="-рейт каждый день">
+							<p>
+								Невозможность собрания суда по причине отсутствия обвиняемого
+							</p>
+						</Rule>
+						<Rule number={8.3}>
+							<p>
+								Откуп назначенный в суде обязателен к выплате
+							</p>
+							<p>
+								Время выплаты по умолчанию - 1 неделя
+							</p>
+							<p>
+								Не выплата - бан
+							</p>
+						</Rule>
+					</RulesBox>
+
+					<RulesBox name="roles" heading="Роли" number={9}>
+						<Rule number={9.1}>
+							На сервере действуют следующие роли, они расположены в иерархии:
+						</Rule>
+						<Rule number={9.2}>
 							<p>
 								Админ — главная часть сервера
 							</p>
-							<br/>
 							<p>
 								Разработка сайта, ведение соцсетей и самого сервера осуществляются именно ими
 							</p>
-							<br/>
-							<p>
-								Ники:
-							</p>
-							<ul>
-								<li>
-									<Link href="/user/JustCheburek" className="unic_color medium-font">JustCheburek</Link> <small>—
-									чебурек</small>
-								</li>
-								<li>
-									<Link href="/user/Kawa11Fox" className="unic_color medium-font">Kawa11Fox</Link> <small>—
-									лиса</small>
-								</li>
-							</ul>
+							<User _id="j8bsrsdgzqa4n0c"/>
+							<User _id="i5mqq2js4nos1yj"/>
 						</Rule>
-						<Rule number={8.2}>
+						<Rule number={9.3}>
 							<p>
 								Модер — помощники админов
 							</p>
 							<p>
 								Модерации запрещено абьюзить свои права
 							</p>
+							<User _id="djfp8h9j2ffbdzz"/>
+							<User _id="svp3okvcuo6062d"/>
+							<User _id="biu4vqvuev0m0tp"/>
 							<TextUrl href="https://discord.gg/swrAFFqvH2">
 								Стать модером
 							</TextUrl>
 						</Rule>
-						<Rule number={8.3}>
+						<Rule number={9.4}>
 							<p>
 								Админы и модеры имеют бóльшие права, чем правила, итоговое решение остаётся за ними
 							</p>
 						</Rule>
-						<Rule number={8.4}>
+						<Rule number={9.5}>
 							<p>
 								Мэр спавна — избирается админами или игроками в нашем телеграме на один сезон
 							</p>
 							<p>
 								В течение и в конце сезона за ухоженный и красивый спавн получает мостики и социальный рейтинг
 							</p>
+							<p>
+								Мэр имеет право запретить строительство на спавне / снести постройку без разрешения владельца
+							</p>
 							<TextUrl href="https://discord.gg/AkZHn9q5KV">
 								Стать мэром
 							</TextUrl>
 						</Rule>
-						<Rule number={8.5}>
+						<Rule number={9.6}>
+							<p>
+								Художник — рисует <Link href="/features/stickers" className="unic_color medium-font">стикеры</Link>
+							</p>
+							<TextUrl href="https://t.me/MineBridgeOfficial/326">
+								Заказать
+							</TextUrl>
+						</Rule>
+						<Rule number={9.7}>
+							<p>
+								Тестировщик — проверяет новые фичи сервера и сайта
+							</p>
+							<p>
+								Можно получать от 5 соц рейтинга за каждый продуктивный тест
+							</p>
+						</Rule>
+						<Rule number={9.8}>
 							<p>
 								Контент мейкер — стример / ютубер по MineBridge
 							</p>
@@ -527,25 +540,13 @@ export default function Rules() {
 									<small>(редкость и дроп зависит от суммы покупки)</small>
 								</li>
 								<li>
-									Стример: получает бонус 10% мостиков от суммы покупки
+									Контент мейкер: получает бонус 10% мостиков от суммы покупки
 								</li>
 							</ul>
-						</Rule>
-						<Rule number={8.6}>
-							<p>
-								Художник — рисует <Link href="/features/stickers" className="unic_color medium-font">стикеры</Link>
-							</p>
-							<TextUrl href="https://t.me/MineBridgeOfficial/326">
-								Заказать
-							</TextUrl>
-						</Rule>
-						<Rule number={8.7}>
-							<p>
-								Тестировщик — проверяет новые фичи сервера и сайта
-							</p>
-							<p>
-								Можно получать от 5 соц рейтинга за каждый продуктивный тест
-							</p>
+							<User _id="i5mqq2js4nos1yj"/>
+							<User _id="j8bsrsdgzqa4n0c"/>
+							<User _id="cds85p9u89qfyn1"/>
+							<User _id="t2dhhl5igw1sp43"/>
 						</Rule>
 					</RulesBox>
 
@@ -609,8 +610,13 @@ export default function Rules() {
 						<span className={styles.number_box}>7</span>
 						Лор
 					</OnThisPageItem>
-					<OnThisPageItem href="#roles">
+					<OnThisPageItem href="#court">
 						<span className={styles.number_box}>8</span>
+						Суд
+						<small style={{marginLeft: "0.5em"}} className="green_color">новое</small>
+					</OnThisPageItem>
+					<OnThisPageItem href="#roles">
+						<span className={styles.number_box}>9</span>
 						Роли
 					</OnThisPageItem>
 				</OnThisPage>

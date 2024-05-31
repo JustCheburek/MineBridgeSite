@@ -13,6 +13,8 @@ import {Suspense} from "react";
 export async function User(param: { _id?: User["_id"], name?: User["name"] }) {
 	const {user} = await getUser(param)
 
+	if (!user) return
+
 	return (
 			<Suspense fallback={<p>Загрузка...</p>}>
 				<Link href={`/user/${user.name}`} className={styles.user_box}>

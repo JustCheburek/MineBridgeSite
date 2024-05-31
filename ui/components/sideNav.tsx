@@ -1,7 +1,7 @@
 "use client";
 
-import type {PropsWithChildren} from "react";
 // React
+import type {PropsWithChildren} from "react";
 import {useState} from "react";
 import Link from "next/link";
 
@@ -22,7 +22,7 @@ export function Subsections({children, menu}: PropsWithChildren<{ menu: string }
 	}
 
 	return (
-			<nav className={`${subsectionsStyles.container} ${burger ? subsectionsStyles.burger_active : ""}`}>
+			<nav className={`${styles.container} ${subsectionsStyles.container} ${burger ? subsectionsStyles.burger_active : ""}`}>
 				{/* Бургер иконка */}
 				<label className={`for_mobile ${subsectionsStyles.burger}`}>
 					<Burger burger={burger} setBurger={setBurger} short/>
@@ -52,7 +52,7 @@ export const SubsectionItem = ({children, href, className = ""}: PropsWithChildr
 )
 
 export const OnThisPage = ({children}: PropsWithChildren) => (
-		<nav className="for_pc">
+		<nav className={`for_pc ${styles.container}`}>
 			<ul className={`not_indent remove_marker ${onThisPageStyles.box} ${styles.box}`}>
 				{children}
 			</ul>
