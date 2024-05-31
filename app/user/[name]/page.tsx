@@ -16,7 +16,7 @@ import {Roles} from "./components/roles";
 import {FormBox} from "./components/form";
 import {Rcon} from "@server/console";
 import {userModel} from "@server/models";
-import {revalidateTag} from "next/cache";
+import {revalidatePath} from "next/cache";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -32,13 +32,17 @@ export default async function Profile({params: {name}}: { params: { name: string
 	async function WhitelistFunc() {
 		"use server"
 
-		const client = await Rcon()
-		console.log(`Добавляю в Whitelist: ${user.name}`)
-		await client.run(`whitelist add ${user.name}`)
+		try {
+			const client = await Rcon()
+			console.log(`Добавляю в Whitelist: ${user.name}`)
+			await client.run(`whitelist add ${user.name}`)
 
-		await userModel.findByIdAndUpdate(user._id, {whitelist: true})
+			await userModel.findByIdAndUpdate(user._id, {whitelist: true})
+		} catch(e) {
+			console.error(e)
+		}
 
-		revalidateTag("userLike")
+		revalidatePath(`/user/${user.name}`)
 	}
 
 	return (

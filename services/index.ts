@@ -21,7 +21,7 @@ export const getUser = unstable_cache(
 			user._id = user._id.toString()
 			const isMe = _id === user._id
 
-			if (!show || !isMe) {
+			if (!show && !isMe) {
 				user.email = "×".repeat(user.email.length - 4) + user.email.substring(user.email.length - 4)
 
 				const googleId = user.googleId?.toString()
