@@ -3,9 +3,11 @@ import {validate} from "@services/validate";
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 
-// Svgs
+// Компоненты
 import {MaxSize} from "@components/maxSize";
 import {AuthForm} from "./components";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
 
 export const metadata: Metadata = {
 	title: "Регистрация | Майнбридж",
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Auth() {
-	const {user} = await validate()
+	const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 
 	if (user) {
 		return redirect(`/user/${user.name}`)

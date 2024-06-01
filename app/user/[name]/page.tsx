@@ -16,6 +16,8 @@ import {revalidatePath} from "next/cache";
 import {ColorText} from "@app/utils";
 import {MostikiSvg} from "@ui/svgs";
 import Link from "next/link";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -23,7 +25,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
-	const {user: author, isModer, isAdmin} = await validate()
+	const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 	const {user, roles, isMe} = await getUser({name}, author?._id, isModer)
 
 	async function WhitelistFunc() {

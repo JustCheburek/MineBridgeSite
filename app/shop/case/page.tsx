@@ -5,6 +5,8 @@ import {validate} from "@services/validate";
 import {userModel} from "@server/models";
 import {Info} from "@/types/case";
 import {Types} from "mongoose";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
 
 // Компоненты
 import {CaseClient} from "./caseClient";
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CasePage() {
-    const {user} = await validate()
+    const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
     const cases = await getCases()
     const drops = await getDrops()
 

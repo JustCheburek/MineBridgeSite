@@ -105,7 +105,7 @@ export async function GET(request: NextRequest) {
 					: `https://cdn.discordapp.com/embed/avatars/${(BigInt(dsUser.id) >> 22n) % 6n}.png`,
 		} as User
 
-		const {user} = await validate()
+		const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 
 		if (user) {
 			await userModel.findByIdAndUpdate(

@@ -2,9 +2,11 @@ import {MaxSize} from "@components/maxSize";
 import {Url} from "@components/button";
 import {validate} from "@services/validate";
 import {redirect} from "next/navigation";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
 
 export default async function NotFound() {
-	const {user} = await validate()
+	const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 
 	if (user) redirect(`/user/${user.name}`)
 

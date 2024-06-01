@@ -7,6 +7,9 @@ import {Punishment} from "@/types/punishment";
 import type {CaseData} from "@/types/purchase";
 import {revalidateTag} from "next/cache";
 import {Rcon} from "@server/console";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
+import type {GuildDSUser} from "@/types/user";
 
 // Компоненты
 import {PunishmentSection} from "./components/ratingSection";
@@ -14,7 +17,6 @@ import {CasesPurchasesSection} from "./components/casesPurchasesSection";
 
 // Стили
 import styles from "./history.module.scss";
-import type {GuildDSUser} from "@/types/user";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
     title: `${name} > Истории действий | Майнбридж`,
@@ -23,7 +25,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 export default async function History({params: {name}}: { params: { name: string } }) {
     const {user} = await getUser({name})
-    const {user: author, isModer, isAdmin} = await validate()
+    const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
     const Cases = await caseModel.find().lean()
     const Drops = await dropModel.find().lean()
 

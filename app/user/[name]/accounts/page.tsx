@@ -3,6 +3,8 @@ import type {PropsWithChildren} from "react";
 import {validate} from "@services/validate"
 import Link from "next/link";
 import {getUser} from "@/services";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
 
 // Стили
 import styles from "./accounts.module.scss"
@@ -19,7 +21,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 })
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
-	const {user: author, isAdmin, isModer} = await validate()
+	const {user: author, isAdmin, isModer} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 	const {user, isMe} = await getUser({name}, author?._id, isModer)
 
 	const adminAccess = isAdmin || isMe

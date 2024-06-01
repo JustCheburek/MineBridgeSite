@@ -1,12 +1,10 @@
-import {cache} from "react";
+import {unstable_cache as cache} from "next/cache";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 import {getAuthor} from "@/services";
 
 export const validate = cache(
-		async () => {
-			const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
-
+		async (sessionId?: string) => {
 			if (!sessionId) {
 				return {
 					user: null,
@@ -28,5 +26,7 @@ export const validate = cache(
 			}
 
 			return await getAuthor(user?.id)
-		}
+		},
+		["validate", "userLike", "all"],
+		{revalidate: 300, tags: ["validate", "userLike", "all"]}
 );

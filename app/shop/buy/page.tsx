@@ -2,6 +2,8 @@
 import type {Metadata} from "next";
 import {permanentRedirect} from "next/navigation";
 import {validate} from "@services/validate";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
 
 // Компоненты
 import {MostikiSvg, SBPSvg} from "@ui/svgs";
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Component() {
-	const {user: author} = await validate()
+	const {user: author} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 
 	if (!author) {
 		return permanentRedirect("/auth")
