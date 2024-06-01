@@ -18,7 +18,10 @@ export async function User(param: { _id?: User["_id"], name?: User["name"] }) {
 	return (
 			<Suspense fallback={<p>Загрузка...</p>}>
 				<Link href={`/user/${user.name}`} className={styles.user_box}>
-					<Img src={user.photo} alt="Ава" className="user_icon" width={50}/>
+					<Img
+							src={user.photo} alt="Ава"
+							className="user_icon" width={50}
+					/>
 					<p>{user.name}</p>
 				</Link>
 			</Suspense>

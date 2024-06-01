@@ -9,41 +9,39 @@ import {Img, ImgBox} from "@components/img";
 import {GContainer} from "@components/grid";
 
 export const metadata: Metadata = {
-    title: "Стикеры | Майнбридж",
-    description: "Можно добавить себе в телеграм. Нарисованы руками игроков сервера!",
+	title: "Стикеры | Майнбридж",
+	description: "Можно добавить себе в телеграм. Нарисованы руками игроков сервера!",
 };
 
 export default function Stickers() {
-    return (
-        <main className="stickers">
-            <MaxSize>
-                <RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "stickers", displayname: "Стикеры"}]}/>
-                <h1>ТГ Cтикеры</h1>
-                <p className="center_text">Стикеры в телеграме на заказ</p>
+	return (
+			<main className="stickers">
+				<MaxSize>
+					<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "stickers", displayname: "Стикеры"}]}/>
+					<h1>ТГ Cтикеры</h1>
+					<p className="center_text">Стикеры в телеграме на заказ</p>
 
-                <Url href="https://t.me/addstickers/MineBridge">
-                    Добавить
-                </Url>
+					<Url href="https://t.me/addstickers/MineBridge">
+						Добавить
+					</Url>
 
-                <GContainer width={200} height={200}>
-                    {
-                        Array(14).fill(null).map((_, sticker) => {
-                            let path = `/features/stickers/${sticker}.png`
+					<GContainer width={200} height={200}>
+						{Array(14).fill(null).map((_, sticker) => {
+							let path = `/features/stickers/${sticker}.png`
 
-                            return (
-                                <ImgBox key={sticker} hover>
-                                    <Img src={path} alt="стикер" width={200} height={200}/>
-                                </ImgBox>
-                            )
-                        })
-                    }
-                </GContainer>
+							return (
+									<ImgBox key={sticker} hover>
+										<Img src={path} alt="стикер" width={200} height={200}/>
+									</ImgBox>
+							)
+						})}
+					</GContainer>
 
-                <h3 className="center_text">Тоже хотите попасть в стикер пак?</h3>
-                <Url href="https://t.me/MineBridgeOfficial/326">
-                    Да, и что?
-                </Url>
-            </MaxSize>
-        </main>
-    )
+					<h3 className="center_text">Тоже хотите попасть в стикер пак?</h3>
+					<Url href="https://t.me/MineBridgeOfficial/326">
+						Да, и что?
+					</Url>
+				</MaxSize>
+			</main>
+	)
 }

@@ -4,6 +4,56 @@ import {notFound} from "next/navigation";
 import {unstable_cache as cache} from "next/cache";
 import {caseModel, dropModel, seasonModel, userModel} from "@server/models";
 import {Season} from "@/types/season";
+import type {GuildDSUser} from "@/types/user";
+import axios from "axios";
+import type {Role} from "@/types/role";
+
+export interface RolesApi {
+	roles: Role[],
+	isModer: boolean,
+	isAdmin: boolean
+}
+
+export const getRoles = cache(
+		async (discordId?: string): Promise<RolesApi> => {
+			if (!discordId) {
+				return {
+					roles: [],
+					isModer: false,
+					isAdmin: false
+				}
+			}
+
+			const allRoles = await axios.get<Role[]>(
+					`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/roles`,
+					{
+						headers: {
+							Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+						}
+					}
+			).then(r => r.data);
+
+			const dsUser = await axios.get<GuildDSUser>(
+					`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${discordId}`,
+					{
+						headers: {
+							Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+						}
+					}
+			).then(r => r.data).catch(console.error);
+
+			const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
+			const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
+			const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
+
+			return {
+				roles,
+				isModer, isAdmin
+			}
+		},
+		["roles", "userLike", "all"],
+		{revalidate: 300, tags: ["roles", "userLike", "all"]}
+)
 
 export const getUser = cache(
 		async (
@@ -34,7 +84,7 @@ export const getUser = cache(
 				}
 			}
 
-			return {user, isMe, ...await userModel.getRoles(user.discordId)}
+			return {user, isMe, ...await getRoles(user.discordId)}
 		},
 		["user", "userLike", "all"],
 		{revalidate: 300, tags: ["user", "userLike", "all"]}
@@ -44,7 +94,7 @@ export const getAuthor = cache(
 		async (id?: string) => {
 			const user: User | null = await userModel.findById(id).lean()
 
-			return {user, ...await userModel.getRoles(user?.discordId)}
+			return {user, ...await getRoles(user?.discordId)}
 		},
 		["author", "userLike", "all"],
 		{revalidate: 300, tags: ["author", "userLike", "all"]}

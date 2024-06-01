@@ -100,7 +100,9 @@ export async function GET(request: NextRequest) {
 			name: cookies().get("name")?.value || dsUser.username,
 			discordId: dsUser.id,
 			email: dsUser.email,
-			photo: `https://cdn.discordapp.com/avatars/${dsUser.id}/${dsUser.avatar}.png`,
+			photo: dsUser.avatar
+					? `https://cdn.discordapp.com/avatars/${dsUser.id}/${dsUser.avatar}.png`
+					: `https://cdn.discordapp.com/embed/avatars/${(BigInt(dsUser.id) >> 22n) % 6n}.png`,
 		} as User
 
 		const {user} = await validate()

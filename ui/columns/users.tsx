@@ -4,10 +4,11 @@ import Link from "next/link";
 
 import {ColumnDef} from "@tanstack/react-table";
 import {Img} from "@components/img";
+import {useState} from "react";
 
 
 const Avatar = ({getValue, cell}: { getValue: Function, cell: { row: { original: User } } }) => {
-	const photo = getValue()
+	let [photo, setPhoto] = useState<string>(getValue())
 	const {name} = cell.row.original
 
 	return (
@@ -17,6 +18,7 @@ const Avatar = ({getValue, cell}: { getValue: Function, cell: { row: { original:
 						alt="Ава"
 						className="user_icon"
 						width={55}
+						onError={() => setPhoto("/person.svg")}
 				/>
 			</Link>
 	)

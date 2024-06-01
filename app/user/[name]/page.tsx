@@ -8,15 +8,14 @@ import styles from "./profile.module.scss"
 // Компоненты
 import {Avatar} from "./components/avatar";
 import {WhitelistSection} from "./components/whitelist";
-import {Name} from "./components/name";
-import {Mostiki} from "./components/mostiki";
-import {Rating} from "./components/rating";
 import {InviteSection} from "./components/invite";
-import {Roles} from "./components/roles";
 import {FormBox} from "./components/form";
 import {Rcon} from "@server/console";
 import {userModel} from "@server/models";
 import {revalidatePath} from "next/cache";
+import {ColorText} from "@app/utils";
+import {MostikiSvg} from "@ui/svgs";
+import Link from "next/link";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -26,8 +25,6 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 export default async function Profile({params: {name}}: { params: { name: string } }) {
 	const {user: author, isModer, isAdmin} = await validate()
 	const {user, roles, isMe} = await getUser({name}, author?._id, isModer)
-
-	const moderAccess = isModer || isMe
 
 	async function WhitelistFunc() {
 		"use server"
@@ -50,20 +47,40 @@ export default async function Profile({params: {name}}: { params: { name: string
 				<FormBox author={author}/>
 
 				<div className={styles.container}>
-					<Avatar user={user}/>
+					<Avatar photo={user.photo}/>
 
 					<div className={styles.text}>
-						<Name user={user}/>
+						<h2 className="unic_color">
+							<span className="all_select">{user.name}</span>
+						</h2>
 						{isAdmin &&
 								<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
 						}
-						<Roles roles={roles}/>
-						<Mostiki user={user}/>
-						<Rating user={user}/>
+						<div className={styles.roles}>
+							{roles.map(role => (
+									<small key={role.id}>
+										{role.name}
+									</small>
+							))}
+						</div>
+						<h4>
+							Мостики: {" "}
+							<strong className={ColorText(user.mostiki)}>
+								{user.mostiki}
+							</strong>{" "}
+							<MostikiSvg/>{" "}
+							<Link href="/shop" className="add">+</Link>
+						</h4>
+						<h4>
+							Соц рейтинг: {" "}
+							<strong className={ColorText(user.rating)}>
+								{user.rating}
+							</strong>
+						</h4>
 					</div>
 				</div>
 
-				<WhitelistSection user={user} access={moderAccess} WhitelistFunc={WhitelistFunc}/>
+				<WhitelistSection user={user} access={isModer || isMe} WhitelistFunc={WhitelistFunc}/>
 
 				<InviteSection user={user} access={isMe}/>
 			</div>

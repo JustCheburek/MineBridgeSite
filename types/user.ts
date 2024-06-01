@@ -4,8 +4,6 @@ import {Punishment} from "@/types/punishment";
 import {CasePurchase, StickerPurchase} from "@/types/purchase";
 import {modelOptions, prop, ReturnModelType} from "@typegoose/typegoose";
 import {From} from "@/types/invite";
-import axios from "axios";
-import type {Role} from "@/types/role";
 import {userModel} from "@server/models";
 import {cookies} from "next/headers";
 
@@ -108,52 +106,6 @@ export class User {
 
 		return await userModel.create(userData)
 	}
-
-	public static async getRoles(
-			this: ReturnModelType<typeof User>,
-			discordId?: string
-	): Promise<RolesApi> {
-		if (!discordId) {
-			return {
-				roles: [],
-				isModer: false,
-				isAdmin: false
-			}
-		}
-
-		const allRoles = await axios.get<Role[]>(
-				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/roles`,
-				{
-					headers: {
-						Authorization: `Bot ${process.env.DISCORD_TOKEN}`
-					}
-				}
-		).then(r => r.data);
-
-		const dsUser = await axios.get<GuildDSUser>(
-				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${discordId}`,
-				{
-					headers: {
-						Authorization: `Bot ${process.env.DISCORD_TOKEN}`
-					}
-				}
-		).then(r => r.data).catch(console.error);
-
-		const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
-		const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
-		const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
-
-		return {
-			roles,
-			isModer, isAdmin
-		}
-	}
-}
-
-export interface RolesApi {
-	roles: Role[],
-	isModer: boolean,
-	isAdmin: boolean
 }
 
 export interface DSUser {
@@ -161,7 +113,7 @@ export interface DSUser {
 	username: string
 	discriminator?: string
 	global_name?: string
-	avatar: string
+	avatar?: string
 	bot?: boolean
 	system?: boolean
 	mfa_enabled?: boolean
