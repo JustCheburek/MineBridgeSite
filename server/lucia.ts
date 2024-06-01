@@ -24,5 +24,5 @@ declare module "lucia" {
 	}
 }
 
-export const discord = new Discord(process.env.DISCORD_CLIENT_ID!, process.env.DISCORD_CLIENT_SECRET!, `${process.env.MB_URL}/auth/discord/callback`);
-export const google = new Google(process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!, `${process.env.MB_URL}/auth/google/callback`)
+export const discord = new Discord(process.env.DISCORD_CLIENT_ID!, process.env.DISCORD_CLIENT_SECRET!, `${process.env.NEXT_PUBLIC_URL}/auth/discord/callback`);
+export const google = new Google(process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!, `${process.env.NEXT_PUBLIC_URL}/auth/google/callback`)

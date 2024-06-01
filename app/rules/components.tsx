@@ -18,32 +18,32 @@ type RulesBox = {
 	number: number
 }
 
-export const RulesBox = ({name, heading, number, children}: PropsWithChildren<RulesBox>) => (
-		<section className={styles.container} id={name}>
-			{/* Заголовок */}
-			<div className={styles.heading}>
-				{/* Цифра */}
-				{number &&
-						<a href={"#" + name} className={styles.number_box}
-						   onClick={e => navigator.clipboard.writeText(e.target.toString())}>
-							<LinkSvg/>
-							<p className={`${styles.main_number} center_text medium-font`}>{number}</p>
-						</a>
-				}
+export const RulesBox = ({name, heading, number, children}: PropsWithChildren<RulesBox>) => {
+	return (
+			<section className={styles.container} id={name}>
+				{/* Заголовок */}
+				<div className={styles.heading}>
+					{/* Цифра */}
+					<a href={"#" + name} className={styles.number_box}
+					   onClick={() => navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_URL}/rules#${name}`)}>
+						<LinkSvg/>
+						<p className={`${styles.main_number} center_text medium-font`}>{number}</p>
+					</a>
 
-				{/* Кнопка */}
-				<h3 className={styles.heading_rules_text}>
-					{heading}
-				</h3>
-			</div>
+					{/* Кнопка */}
+					<h3 className={styles.heading_rules_text}>
+						{heading}
+					</h3>
+				</div>
 
-			{/* Содержание */}
-			<ul id={name + "_box"} className={`${styles.box} not_indent remove_marker`}>
-				{/* Rule */}
-				{children}
-			</ul>
-		</section>
-)
+				{/* Содержание */}
+				<ul id={name + "_box"} className={`${styles.box} not_indent remove_marker`}>
+					{/* Rule */}
+					{children}
+				</ul>
+			</section>
+	)
+}
 
 export const Punishment = ({punishment}: { punishment?: string | number }) => {
 	let text = punishment

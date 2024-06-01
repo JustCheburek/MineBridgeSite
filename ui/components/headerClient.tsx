@@ -18,7 +18,7 @@ import {Burger} from "@components/burger";
 export function generateMetadata() {
     return {
         alternates: {
-            canonical: `${process.env.MB_url}/`,
+            canonical: `${process.env.NEXT_PUBLIC_URL}/`,
         },
     };
 }
