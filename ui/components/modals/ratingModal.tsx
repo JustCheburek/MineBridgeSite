@@ -124,18 +124,18 @@ export const RatingModal = (
 							Разбан
 						</FormLabel>
 					</FormGroup>
-					<h3>
+					<h3 className={user.discordId ? "" : "red_color"}>
 						{user.discordId
 								? "Дс"
 								: "Нету дс"
 						}
 					</h3>
-					<FormGroup aria-disabled={!user.discordId}>
+					<FormGroup>
 						<FormLabel>
 							<FormInput
 									type="checkbox"
 									name="dsBan"
-									disabled={punishment.rating > 0 || actions.includes("dsPardon")}
+									disabled={punishment.rating > 0 || actions.includes("dsPardon") || !user.discordId}
 									checked={actions.includes("dsBan")}
 									onChange={actionsChange}
 							/>
@@ -145,7 +145,7 @@ export const RatingModal = (
 							<FormInput
 									type="checkbox"
 									name="dsPardon"
-									disabled={punishment.rating < 0 || actions.includes("dsBan")}
+									disabled={punishment.rating < 0 || actions.includes("dsBan") || !user.discordId}
 									checked={actions.includes("dsPardon")}
 									onChange={actionsChange}
 							/>
