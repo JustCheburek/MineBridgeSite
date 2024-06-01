@@ -6,7 +6,7 @@ import {userModel} from "@server/models";
 import {Action, Punishment} from "@/types/punishment";
 import type {CaseData} from "@/types/purchase";
 import {revalidateTag} from "next/cache";
-import {Rcon} from "@server/console";
+import {RconVC} from "@server/console";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 import type {GuildDSUser} from "@/types/user";
@@ -36,16 +36,18 @@ export default async function History({params: {name}}: { params: { name: string
 
 		try {
 			if (actions.includes("mineBan")) {
-				const client = await Rcon()
+				const client = await RconVC()
 				console.log(`Бан ${user.name}`)
-				await client.run(`whitelist remove ${user.name}`)
-				await client.run(`ban ${user.name}`)
+				await client.run(`vclist remove ${user.name}`)
+				await client.run(`ipban ${user.name} Нарушение правил сервера`)
+				await userModel.findByIdAndUpdate(user._id, {whitelist: false})
 			}
 			if (actions.includes("minePardon")) {
-				const client = await Rcon()
+				const client = await RconVC()
 				console.log(`Разбан ${user.name}`)
-				await client.run(`whitelist add ${user.name}`)
-				await client.run(`pardon ${user.name}`)
+				await client.run(`vclist add ${user.name}`)
+				await client.run(`unbanip ${user.name}`)
+				await userModel.findByIdAndUpdate(user._id, {whitelist: true})
 			}
 		} catch (e) {
 			console.error(e)
@@ -75,6 +77,22 @@ export default async function History({params: {name}}: { params: { name: string
 		}
 
 		if (actions.includes("mute") || actions.includes("unmute")) {
+			try {
+				const client = await RconVC()
+				if (actions.includes("mute")) {
+					console.log(`Мут ${user.name}`)
+					await client.run(`ipmute ${user.name}`)
+				}
+				if (actions.includes("unmute")) {
+					console.log(`Размут ${user.name}`)
+					await client.run(`unmuteip ${user.name}`)
+				}
+			} catch (e) {
+				console.error(e)
+			}
+
+			if (!user.discordId) return
+
 			const guildMember = await axios.get<GuildDSUser | null>(
 					`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user.discordId}`,
 					{

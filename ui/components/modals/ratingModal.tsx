@@ -78,6 +78,29 @@ export const RatingModal = (
 								onChange={ratingChange}
 						/>
 					</FormLabel>
+					<h3>Везде</h3>
+					<FormGroup aria-disabled={!user.discordId}>
+						<FormLabel>
+							<FormInput
+									type="checkbox"
+									name="mute"
+									disabled={punishment.rating > 0 || actions.includes("unmute")}
+									checked={actions.includes("mute")}
+									onChange={actionsChange}
+							/>
+							Мут
+						</FormLabel>
+						<FormLabel>
+							<FormInput
+									type="checkbox"
+									name="unmute"
+									disabled={punishment.rating < 0 || actions.includes("mute")}
+									checked={actions.includes("unmute")}
+									onChange={actionsChange}
+							/>
+							Размут
+						</FormLabel>
+					</FormGroup>
 					<h3>Майн</h3>
 					<FormGroup>
 						<FormLabel>
@@ -107,28 +130,6 @@ export const RatingModal = (
 								: "Нету дс"
 						}
 					</h3>
-					<FormGroup aria-disabled={!user.discordId}>
-						<FormLabel>
-							<FormInput
-									type="checkbox"
-									name="mute"
-									disabled={punishment.rating > 0 || actions.includes("unmute")}
-									checked={actions.includes("mute")}
-									onChange={actionsChange}
-							/>
-							Мут
-						</FormLabel>
-						<FormLabel>
-							<FormInput
-									type="checkbox"
-									name="unmute"
-									disabled={punishment.rating < 0 || actions.includes("mute")}
-									checked={actions.includes("unmute")}
-									onChange={actionsChange}
-							/>
-							Размут
-						</FormLabel>
-					</FormGroup>
 					<FormGroup aria-disabled={!user.discordId}>
 						<FormLabel>
 							<FormInput

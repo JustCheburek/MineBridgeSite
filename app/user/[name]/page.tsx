@@ -10,7 +10,7 @@ import {Avatar} from "./components/avatar";
 import {WhitelistSection} from "./components/whitelist";
 import {InviteSection} from "./components/invite";
 import {FormBox} from "./components/form";
-import {Rcon} from "@server/console";
+import {RconVC} from "@server/console";
 import {userModel} from "@server/models";
 import {revalidatePath} from "next/cache";
 import {ColorText} from "@app/utils";
@@ -32,9 +32,9 @@ export default async function Profile({params: {name}}: { params: { name: string
 		"use server"
 
 		try {
-			const client = await Rcon()
+			const client = await RconVC()
 			console.log(`Добавляю в Whitelist: ${user.name}`)
-			await client.run(`whitelist add ${user.name}`)
+			await client.run(`vclist add ${user.name}`)
 
 			await userModel.findByIdAndUpdate(user._id, {whitelist: true})
 		} catch(e) {
