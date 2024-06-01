@@ -33,24 +33,31 @@ const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
 
 type WhitelistSection = {
 	user: User
-	access: boolean
+	isMe: boolean
+	isModer: boolean
 	WhitelistFunc?: ((formData: FormData) => void)
 }
 
-export function WhitelistSection({user, access, WhitelistFunc}: WhitelistSection) {
+export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: WhitelistSection) {
 	const [modal, setModal] = useState(false)
 
 	if (user.rating <= -200) {
+		let text = "Игрок в бане"
+
+		if (isMe) {
+			text = "Вы в бане"
+		}
+
 		return (
 			<section className="center_text">
 				<h2>
-					Игрок в бане
+					{text}
 				</h2>
 			</section>
 		)
 	}
 
-	if (!access) {
+	if (!isModer && !isMe) {
 		return (
 				<section className="center_text">
 					<h2>

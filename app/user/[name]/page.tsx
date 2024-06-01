@@ -82,7 +82,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 					</div>
 				</div>
 
-				<WhitelistSection user={user} access={isModer || isMe} WhitelistFunc={WhitelistFunc}/>
+				<WhitelistSection user={user} isMe={isMe} isModer={isModer} WhitelistFunc={WhitelistFunc}/>
 
 				<InviteSection user={user} access={isMe}/>
 			</div>

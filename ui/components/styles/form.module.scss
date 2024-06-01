@@ -6,7 +6,7 @@
   align-items: center;
   gap: 10px;
 
-  * {
+  & > * {
     flex: 1;
   }
 }
@@ -54,8 +54,13 @@
   }
 }
 
-.input, .textarea {
+.input:not([type="checkbox"]), .textarea {
   min-width: 100%;
+}
+
+.input[type="checkbox"] {
+  width: 1.2em;
+  height: 1.2em;
 }
 
 .textarea {
@@ -92,11 +97,12 @@
   }
 }
 
-.label:has(.input[type="radio"]) {
+.label:has(.input[type="radio"]), .label:has(.input[type="checkbox"]) {
   display: flex;
-  place-content: center;
+  gap: 0.8em;
+  align-items: center;
 
-  .input {
+  .input[type="radio"] {
     display: none;
   }
 }

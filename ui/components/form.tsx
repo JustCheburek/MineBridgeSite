@@ -45,7 +45,7 @@ export const FormLabel = (
 			...props
 		}: ComponentPropsWithoutRef<"label">
 ) => (
-		<label className={`${styles.label} ${className}`} {...props}>
+		<label className={`${styles.label} ${className} no_select`} {...props}>
 			{children}
 		</label>
 )

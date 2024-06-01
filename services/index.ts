@@ -7,6 +7,7 @@ import {Season} from "@/types/season";
 import type {GuildDSUser} from "@/types/user";
 import axios from "axios";
 import type {Role} from "@/types/role";
+import {Case, Drop} from "@/types/case";
 
 export interface RolesApi {
 	roles: Role[],
@@ -71,6 +72,8 @@ export const getUser = cache(
 			user._id = user._id.toString()
 			const isMe = _id === user._id
 
+			const roles = await getRoles(user?.discordId)
+
 			if (!show && !isMe) {
 				user.email = "×".repeat(user.email.length - 4) + user.email.substring(user.email.length - 4)
 
@@ -84,7 +87,7 @@ export const getUser = cache(
 				}
 			}
 
-			return {user, isMe, ...await getRoles(user.discordId)}
+			return {user, isMe, ...roles}
 		},
 		["user", "userLike", "all"],
 		{revalidate: 300, tags: ["user", "userLike", "all"]}
@@ -107,13 +110,13 @@ export const getUsers = cache(
 )
 
 export const getCases = cache(
-		async () => await caseModel.find().lean(),
+		async () => await caseModel.find().lean() as Case[],
 		["cases", "shop", "all"],
 		{tags: ["cases", "shop", "all"]}
 )
 
 export const getDrops = cache(
-		async () => await dropModel.find().lean(),
+		async () => await dropModel.find().lean() as Drop[],
 		["drops", "shop", "all"],
 		{tags: ["drops", "shop", "all"]}
 )

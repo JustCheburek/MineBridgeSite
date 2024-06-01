@@ -17,3 +17,5 @@ export class Punishment {
 	@prop()
 	public updatedAt!: Date
 }
+
+export type Action = "mineBan" | "minePardon" | "dsBan" | "mute" | "dsPardon" | "unmute"
