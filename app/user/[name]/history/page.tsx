@@ -36,16 +36,24 @@ export default async function History({params: {name}}: { params: { name: string
 
         if (user.rating <= -200) {
             // Бан в майне
-            const client = await Rcon()
-            console.log(`Бан ${user.name}`)
-            await client.run(`whitelist remove ${user.name}`)
-            await client.run(`ban ${user.name}`)
+            try {
+                const client = await Rcon()
+                console.log(`Бан ${user.name}`)
+                await client.run(`whitelist remove ${user.name}`)
+                await client.run(`ban ${user.name}`)
+            } catch (e) {
+                console.error(e)
+            }
         } else {
-            // Разбан в майне
-            const client = await Rcon()
-            console.log(`Разбан ${user.name}`)
-            await client.run(`whitelist add ${user.name}`)
-            await client.run(`pardon ${user.name}`)
+            try {
+                // Разбан в майне
+                const client = await Rcon()
+                console.log(`Разбан ${user.name}`)
+                await client.run(`whitelist add ${user.name}`)
+                await client.run(`pardon ${user.name}`)
+            } catch (e) {
+                console.error(e)
+            }
         }
 
         if (!user.discordId) return
