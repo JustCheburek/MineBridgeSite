@@ -1,16 +1,13 @@
 "use client"
 
 import styles from "../profile.module.scss";
-import {useFormState} from "react-dom";
-
-type State = {}
 
 type FormClient = {
 	Func: () => void
 }
 
 export function FormClient({Func}: FormClient) {
-	function ClientFunc(state: {}) {
+	function ClientFunc() {
 		Func()
 
 		window.open(
@@ -18,18 +15,11 @@ export function FormClient({Func}: FormClient) {
 				"_blank",
 				"popup,width=750,height=600"
 		)
-
-		return state
 	}
 
-	const [_, formAction, isPending] = useFormState<State>(
-			ClientFunc,
-			{}
-	)
-
 	return (
-			<form action={formAction}>
-				<button type="submit" className={styles.form_box} disabled={isPending}>
+			<form action={() => ClientFunc}>
+				<button type="submit" className={styles.form_box}>
 					<h3 className="unic_color center_text">
 						❤️️ Пройдите опрос и оцените сервер ❤️️
 					</h3>

@@ -48,7 +48,10 @@ export const RatingModal = (
 	return (
 			<Modal setModal={setModal} modal={modal}>
 				<h1>Рейтинг</h1>
-				<Form action={() => ratingFunc(punishment, actions)}>
+				<Form action={() => {
+					ratingFunc(punishment, actions)
+					setModal(false)
+				}}>
 					<FormLabel>
 						<FormInput
 								name="reason"

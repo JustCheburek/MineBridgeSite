@@ -5,6 +5,7 @@ import Link from "next/link";
 import {getUser} from "@/services";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
+import {redirect} from "next/navigation";
 
 // Стили
 import styles from "./accounts.module.scss"
@@ -52,6 +53,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 		await userModel.findByIdAndDelete(user._id)
 
 		revalidateTag("userLike")
+		redirect("/auth")
 	}
 
 	return (

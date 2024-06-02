@@ -35,7 +35,7 @@ type WhitelistSection = {
 	user: User
 	isMe: boolean
 	isModer: boolean
-	WhitelistFunc?: ((formData: FormData) => void)
+	WhitelistFunc: ((formData: FormData) => void)
 }
 
 export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: WhitelistSection) {
@@ -89,7 +89,10 @@ export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: Whitelist
 						Если <span className="red_color">нет</span>, тогда вы можете изменить<br/>
 						его нажав кнопку справа от своего ника!
 					</p>
-					<Form action={WhitelistFunc}>
+					<Form action={formData => {
+						WhitelistFunc(formData)
+						setModal(false)
+					}}>
 						<FormButton>
 							Подать заявку
 						</FormButton>

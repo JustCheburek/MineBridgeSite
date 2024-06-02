@@ -65,11 +65,15 @@ export class User {
 	public static async From(
 			this: ReturnModelType<typeof User>,
 			candidate: User,
-	) {
-		const userId = cookies().get("userId")?.value
-		const place = cookies().get("place")?.value
+	): Promise<From> {
+		const from: From | "" = JSON.parse(cookies().get("from")?.value || "")
 
-		if (!userId || candidate._id === userId || !place || !userId) return {}
+		if (!from) return {}
+
+		const place = from.place
+		const userId = from.userId
+
+		if (!userId || !place || JSON.stringify(candidate._id) === JSON.stringify(userId)) return {}
 
 		const inviter = await userModel.findById(userId)
 

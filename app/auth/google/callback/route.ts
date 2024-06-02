@@ -10,9 +10,9 @@ import axios from "axios";
 
 
 export async function GET(request: NextRequest) {
-	const url = request.nextUrl
-	const code = url.searchParams.get("code");
-	const state = url.searchParams.get("state");
+	const {searchParams} = request.nextUrl
+	const code = searchParams.get("code");
+	const state = searchParams.get("state");
 	const codeVerifier = cookies().get("google_oauth_code_verifier")?.value ?? null;
 	const storedState = cookies().get("google_oauth_state")?.value ?? null;
 	const storedCodeVerifier = cookies().get("google_oauth_code_verifier")?.value ?? null;

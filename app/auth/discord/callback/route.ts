@@ -11,9 +11,9 @@ import {DS_URL} from "@/const";
 
 
 export async function GET(request: NextRequest) {
-	const url = request.nextUrl
-	const code = url.searchParams.get("code");
-	const state = url.searchParams.get("state");
+	const {searchParams} = request.nextUrl
+	const code = searchParams.get("code");
+	const state = searchParams.get("state");
 	const storedState = cookies().get("discord_oauth_state")?.value ?? null;
 	if (!code || !state || !storedState || state !== storedState) {
 		return new NextResponse(
