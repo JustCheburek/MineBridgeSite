@@ -1,6 +1,9 @@
 // Сервер
 import {validate} from "@services/validate";
 import {getUser} from "@/services";
+import Link from "next/link";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
 
 // Стили
 import styles from "./profile.module.scss"
@@ -8,16 +11,12 @@ import styles from "./profile.module.scss"
 // Компоненты
 import {Avatar} from "./components/avatar";
 import {WhitelistSection} from "./components/whitelist";
-import {InviteSection} from "./components/invite";
 import {FormBox} from "./components/form";
 import {RconVC} from "@server/console";
 import {userModel} from "@server/models";
 import {revalidatePath} from "next/cache";
 import {ColorText} from "@app/utils";
 import {MostikiSvg} from "@ui/svgs";
-import Link from "next/link";
-import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -90,8 +89,6 @@ export default async function Profile({params: {name}}: { params: { name: string
 				</div>
 
 				<WhitelistSection user={user} isMe={isMe} isModer={isModer} WhitelistFunc={WhitelistFunc}/>
-
-				<InviteSection user={user} isMe={isMe} isModer={isModer}/>
 			</div>
 	)
 }

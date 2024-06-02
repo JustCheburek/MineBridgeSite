@@ -11,12 +11,13 @@ import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 import type {GuildDSUser} from "@/types/user";
 
+// Стили
+import styles from "./history.module.scss";
+
 // Компоненты
 import {PunishmentSection} from "./components/ratingSection";
 import {CasesPurchasesSection} from "./components/casesPurchasesSection";
-
-// Стили
-import styles from "./history.module.scss";
+import {InviteSection} from "../components/invite";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Истории действий | Майнбридж`,
@@ -25,7 +26,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 export default async function History({params: {name}}: { params: { name: string } }) {
 	const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
-	const {user} = await getUser({name}, author?._id, isModer)
+	const {user, isMe} = await getUser({name}, author?._id, isModer)
 	const Cases = await getCases()
 	const Drops = await getDrops()
 
@@ -198,6 +199,8 @@ export default async function History({params: {name}}: { params: { name: string
 	return (
 			<div className={styles.content}>
 				<h1>История</h1>
+
+				<InviteSection user={user} isMe={isMe} isModer={isModer}/>
 
 				<PunishmentSection
 						user={user} name={author?.name} access={isModer} SaveAll={PunishmentSave}

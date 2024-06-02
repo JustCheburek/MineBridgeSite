@@ -2,11 +2,19 @@
 
 import {Punishment} from "@/types/punishment";
 import {CasePurchase, StickerPurchase} from "@/types/purchase";
-import {modelOptions, prop, ReturnModelType} from "@typegoose/typegoose";
+import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
 import {From} from "@/types/invite";
 import {userModel} from "@server/models";
 import {cookies} from "next/headers";
 
+function updateRating(this: User) {
+	this.rating = this.punishments.reduce(
+			(accum, {rating}) => accum + rating, 0
+	)
+}
+
+@pre<User>("save", updateRating)
+@pre<User>("findOneAndUpdate", updateRating)
 
 @modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false}})
 export class User {
@@ -50,7 +58,7 @@ export class User {
 	public from?: From
 
 	// Список с айди игроков
-	@prop({type: () => [String]})
+	@prop({type: () => [String], default: []})
 	public invites!: string[]
 
 	@prop()
@@ -79,8 +87,8 @@ export class User {
 
 			if (!inviter) return {}
 
-			if (!inviter.invites.includes(userId)) {
-				inviter.invites.push(userId)
+			if (!inviter.invites.includes(candidate._id)) {
+				inviter.invites.push(candidate._id)
 				inviter.punishments.push({
 					reason: `Позвал ${candidate.name}`,
 					rating: 5,
@@ -88,6 +96,7 @@ export class User {
 					createdAt: new Date(),
 					updatedAt: new Date()
 				})
+				inviter.rating += 5
 				inviter.save()
 			}
 
