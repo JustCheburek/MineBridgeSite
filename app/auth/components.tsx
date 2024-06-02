@@ -2,13 +2,13 @@
 
 import {Form, FormGroup, FormInput, FormLabel} from "@components/form";
 import {DiscordSvg, GoogleSvg} from "@ui/svgs";
-import {useLocalStorage} from "@uidotdev/usehooks"
 import Link from "next/link";
+import {useState} from "react";
 
 import styles from "./auth.module.scss";
 
 export function AuthForm({savedName}: {savedName?: string}) {
-	const [name, setName] = useLocalStorage<string>("name", savedName)
+	const [name, setName] = useState(savedName || "")
 	const access = 4 < name.length && name.length < 30
 
 	return (
