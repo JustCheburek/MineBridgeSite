@@ -8,7 +8,7 @@ import {userModel} from "@server/models";
 import {cookies} from "next/headers";
 
 function updateRating(this: User) {
-	this.rating = this.punishments.reduce(
+	this.rating = this?.punishments?.reduce(
 			(accum, {rating}) => accum + rating, 0
 	)
 }
