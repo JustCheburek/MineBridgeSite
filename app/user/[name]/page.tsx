@@ -29,11 +29,9 @@ export default async function Profile({params: {name}}: { params: { name: string
 	const {user, roles, isMe} = await getUser({name}, author?._id, isModer)
 
 	if (author && (!author?.from || !author.from?.place || !author.from?.userId)) {
-		const from = await userModel.From(author)
-
 		await userModel.findByIdAndUpdate(
 				author._id,
-				{from}
+				{from: await userModel.From(author)}
 		)
 	}
 

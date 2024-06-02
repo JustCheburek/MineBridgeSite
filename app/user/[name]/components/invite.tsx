@@ -18,7 +18,7 @@ export function InviteSection({user, isMe, isModer}: { user: User, isMe: boolean
 }
 
 function FromBox({user, isMe}: { user: User, isMe: boolean }) {
-	if (!user.from || !user.from?.userId || !user.from?.place) return
+	if (!user?.from || !user.from?.userId || !user.from?.place) return
 
 	const text = isMe
 		? "Вы пришли"
