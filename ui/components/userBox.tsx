@@ -10,7 +10,7 @@ import styles from "./styles/user.module.scss";
 import {Img} from "@components/img";
 import {Suspense} from "react";
 
-export async function User(param: { _id?: User["_id"], name?: User["name"] }) {
+export async function UserBox(param: { _id?: User["_id"], name?: User["name"] }) {
 	const {user} = await getUser(param)
 
 	if (!user) return

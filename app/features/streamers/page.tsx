@@ -8,7 +8,7 @@ import styles from "./streamers.module.scss"
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {TwitchSvg, YtSvg} from "@ui/svgs";
-import {User} from "@components/user";
+import {UserBox} from "@components/userBox";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export default function Streamers() {
 					<div className="grid_center">
 						{streamers.map(({_id, yt, twitch}) => (
 								<div className={styles.social} key={_id}>
-									<User _id={_id}/>
+									<UserBox _id={_id}/>
 
 									<div className={styles.icons}>
 										{yt && <Link href={`https://www.youtube.com/@${yt}`} target="_blank">

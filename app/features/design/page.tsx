@@ -8,7 +8,7 @@ import styles from "./design.module.scss"
 // Компоненты
 import {MaxSize} from "@components/maxSize";
 import {RelativeNav} from "@components/relativeNav";
-import {User} from "@components/user";
+import {UserBox} from "@components/userBox";
 import {PTitle} from "@components/post";
 import {ColorsPie, Download} from "./components";
 
@@ -36,9 +36,9 @@ export default function Design() {
 								Авторы
 							</h2>
 						</PTitle>
-						<User _id="j8bsrsdgzqa4n0c"/>
-						<User _id="i5mqq2js4nos1yj"/>
-						<User _id="t2dhhl5igw1sp43"/>
+						<UserBox _id="j8bsrsdgzqa4n0c"/>
+						<UserBox _id="i5mqq2js4nos1yj"/>
+						<UserBox _id="t2dhhl5igw1sp43"/>
 					</section>
 
 					<section className="grid_center">

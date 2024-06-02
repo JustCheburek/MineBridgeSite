@@ -10,7 +10,7 @@ import styles from './rules.module.scss';
 import {Punishment, Rule, RulesBox} from "./components";
 import {OnThisPage, OnThisPageItem} from "@components/sideNav";
 import {TextUrl} from "@components/textUrl";
-import {User} from "@components/user";
+import {UserBox} from "@components/userBox";
 
 export const metadata: Metadata = {
 	title: "Правила | Майнбридж",
@@ -474,8 +474,8 @@ export default function Rules() {
 							<p>
 								Разработка сайта, ведение соцсетей и самого сервера осуществляются именно ими
 							</p>
-							<User _id="j8bsrsdgzqa4n0c"/>
-							<User _id="i5mqq2js4nos1yj"/>
+							<UserBox _id="j8bsrsdgzqa4n0c"/>
+							<UserBox _id="i5mqq2js4nos1yj"/>
 						</Rule>
 						<Rule number={9.3}>
 							<p>
@@ -484,9 +484,9 @@ export default function Rules() {
 							<p>
 								Модерации запрещено абьюзить свои права
 							</p>
-							<User _id="djfp8h9j2ffbdzz"/>
-							<User _id="svp3okvcuo6062d"/>
-							<User _id="biu4vqvuev0m0tp"/>
+							<UserBox _id="djfp8h9j2ffbdzz"/>
+							<UserBox _id="svp3okvcuo6062d"/>
+							<UserBox _id="biu4vqvuev0m0tp"/>
 							<TextUrl href="https://discord.gg/swrAFFqvH2">
 								Стать модером
 							</TextUrl>
@@ -543,10 +543,10 @@ export default function Rules() {
 									Контент мейкер: получает бонус 10% мостиков от суммы покупки
 								</li>
 							</ul>
-							<User _id="i5mqq2js4nos1yj"/>
-							<User _id="j8bsrsdgzqa4n0c"/>
-							<User _id="cds85p9u89qfyn1"/>
-							<User _id="t2dhhl5igw1sp43"/>
+							<UserBox _id="i5mqq2js4nos1yj"/>
+							<UserBox _id="j8bsrsdgzqa4n0c"/>
+							<UserBox _id="cds85p9u89qfyn1"/>
+							<UserBox _id="t2dhhl5igw1sp43"/>
 						</Rule>
 					</RulesBox>
 

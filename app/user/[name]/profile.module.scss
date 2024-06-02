@@ -35,6 +35,14 @@
 	flex-wrap: wrap;
 }
 
+
+.from {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1em;
+}
+
 // Белый список
 @media (width > 728px) {
 	.container {
