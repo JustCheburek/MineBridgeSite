@@ -7,8 +7,8 @@ import Link from "next/link";
 
 import styles from "./auth.module.scss";
 
-export function AuthForm() {
-	const [name, setName] = useLocalStorage<string>("name", "")
+export function AuthForm({savedName}: {savedName?: string}) {
+	const [name, setName] = useLocalStorage<string>("name", savedName)
 	const access = 4 < name.length && name.length < 30
 
 	return (

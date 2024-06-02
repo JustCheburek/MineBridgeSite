@@ -47,7 +47,7 @@ export class User {
 	public stickersPurchases!: StickerPurchase[]
 
 	@prop({type: () => From})
-	public from!: From
+	public from?: From
 
 	// Список с айди игроков
 	@prop({type: () => [String]})
@@ -67,13 +67,13 @@ export class User {
 			candidate: User,
 	): Promise<From> {
 		try {
-			const from: From = JSON.parse(JSON.stringify(cookies().get("from")?.value) ?? "{}")
+			const from: From = JSON.parse(cookies().get("from")?.value ?? "{}")
 			if (!from) return {}
 
-			const place = from.place
-			const userId = from.userId
-
-			if (!userId || !place || JSON.stringify(candidate._id) === JSON.stringify(userId)) return {}
+			const {place, userId} = from
+			if (!userId || !place ||
+					JSON.stringify(candidate._id) === JSON.stringify(userId)
+			) return {}
 
 			const inviter = await userModel.findById(userId)
 
@@ -93,7 +93,7 @@ export class User {
 
 			return {place, userId}
 		} catch (e) {
-			console.log(e)
+			console.error(e)
 			return {}
 		}
 	}

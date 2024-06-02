@@ -28,12 +28,12 @@ export default async function Profile({params: {name}}: { params: { name: string
 	const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 	const {user, roles, isMe} = await getUser({name}, author?._id, isModer)
 
-	if (user && (!user?.from || !user.from?.place || !user.from?.userId)) {
+	if (author && (!author?.from || !author.from?.place || !author.from?.userId)) {
+		const from = await userModel.From(author)
+
 		await userModel.findByIdAndUpdate(
-				user._id,
-				{
-					from: await userModel.From(user)
-				}
+				author._id,
+				{from}
 		)
 	}
 
@@ -93,7 +93,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 
 				<WhitelistSection user={user} isMe={isMe} isModer={isModer} WhitelistFunc={WhitelistFunc}/>
 
-				<InviteSection user={user} access={isMe}/>
+				<InviteSection user={user} isMe={isMe} isModer={isModer}/>
 			</div>
 	)
 }

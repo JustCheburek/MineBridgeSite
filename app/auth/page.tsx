@@ -21,6 +21,8 @@ export default async function Auth() {
 		return redirect(`/user/${user.name}`)
 	}
 
+	const savedName = cookies().get("name")?.value
+
 	return (
 			<main className="auth">
 				<MaxSize className="center_text grid_center">
@@ -29,7 +31,7 @@ export default async function Auth() {
 						Вы уже близко к цели!
 					</p>
 
-					<AuthForm/>
+					<AuthForm savedName={savedName}/>
 				</MaxSize>
 			</main>
 	)
