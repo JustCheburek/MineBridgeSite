@@ -10,7 +10,7 @@ export function FormBox({author}: { author: User | null }) {
 	if (!author || author?.form === true) return
 
 	const time = new Date(author.createdAt).getTime() - new Date().getTime()
-	if (time > threeDays) return
+	if (time < threeDays) return
 
 	async function Func() {
 		"use server"
