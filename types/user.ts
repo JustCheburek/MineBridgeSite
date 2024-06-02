@@ -66,32 +66,36 @@ export class User {
 			this: ReturnModelType<typeof User>,
 			candidate: User,
 	): Promise<From> {
-		const from: From | "" = JSON.parse(cookies().get("from")?.value || "")
+		try {
+			const from: From = JSON.parse(JSON.stringify(cookies().get("from")?.value) ?? "{}")
+			if (!from) return {}
 
-		if (!from) return {}
+			const place = from.place
+			const userId = from.userId
 
-		const place = from.place
-		const userId = from.userId
+			if (!userId || !place || JSON.stringify(candidate._id) === JSON.stringify(userId)) return {}
 
-		if (!userId || !place || JSON.stringify(candidate._id) === JSON.stringify(userId)) return {}
+			const inviter = await userModel.findById(userId)
 
-		const inviter = await userModel.findById(userId)
+			if (!inviter) return {}
 
-		if (!inviter) return {}
+			if (!inviter.invites.includes(userId)) {
+				inviter.invites.push(userId)
+				inviter.punishments.push({
+					reason: `Позвал ${candidate.name}`,
+					rating: 5,
+					author: "AutoMod",
+					createdAt: new Date(),
+					updatedAt: new Date()
+				})
+				inviter.save()
+			}
 
-		if (!inviter.invites.includes(userId)) {
-			inviter.invites.push(userId)
-			inviter.punishments.push({
-				reason: `Позвал ${candidate.name}`,
-				rating: 5,
-				author: "AutoMod",
-				createdAt: new Date(),
-				updatedAt: new Date()
-			})
-			inviter.save()
+			return {place, userId}
+		} catch (e) {
+			console.log(e)
+			return {}
 		}
-
-		return {place, userId}
 	}
 
 	public static async updateUser(
