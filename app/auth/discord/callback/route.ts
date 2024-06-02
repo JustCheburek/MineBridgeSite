@@ -136,10 +136,6 @@ export async function GET(request: NextRequest) {
 			if (!candidate) {
 				candidate = await userModel.create(userData)
 			}
-			if (!candidate?.from || !candidate.from?.place || !candidate.from?.userId) {
-				candidate.from = await userModel.From(candidate)
-				candidate.save()
-			}
 
 			const session = await lucia.createSession(candidate?._id || userData._id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
