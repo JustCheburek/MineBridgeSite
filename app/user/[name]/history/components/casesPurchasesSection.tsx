@@ -35,7 +35,7 @@ export function CasesPurchasesSection({user, access, Cases, Drops, SaveAll, case
         if (!Case || !Drop || !DropItem) return console.log("No case or drop")
 
         // Items
-        let {drop: items} = Drop
+        let {drop: items} = DropItem
         if (items?.length === 0) {
             items = DropItem[purchase.rarity!]
         }
