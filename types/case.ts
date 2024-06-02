@@ -9,10 +9,12 @@ export const CaseNames = {
 export type CaseType = keyof typeof CaseNames
 
 export const RarityNames = {
-	...CaseNames,
+	common: "Обычный",
 	uncommon: "Необычный",
+	rare: "Редкий",
 	epic: "Эпический",
-	mythic: "Мифический"
+	mythic: "Мифический",
+	legendary: "Легендарный"
 }
 export type RarityType = keyof typeof RarityNames
 

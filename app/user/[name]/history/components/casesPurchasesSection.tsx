@@ -9,7 +9,7 @@ import {columns} from "@columns/casesPurchases";
 // Компоненты
 import {Table} from "@components/table";
 import Link from "next/link";
-// import {CasesPurchasesModal} from "@modals/casesPurchasesModal";
+import {CasesPurchasesModal} from "@modals/casesPurchasesModal";
 import {useState} from "react";
 import {Case, Drop} from "@/types/case";
 import type {CaseData} from "@/types/purchase";
@@ -20,15 +20,15 @@ type CasesPurchasesSection = {
     Cases: Case[]
     Drops: Drop[]
     SaveAll: Function
+    casePurchaseFunc: Function
 }
 
-export async function CasesPurchasesSection({user, access, Cases, Drops, SaveAll}: CasesPurchasesSection) {
-    const [_, setModal] = useState<boolean>(false)
+export function CasesPurchasesSection({user, access, Cases, Drops, SaveAll, casePurchaseFunc}: CasesPurchasesSection) {
+    const [modal, setModal] = useState<boolean>(false)
 
     const data = [] as CaseData[]
 
     user.casesPurchases.forEach(purchase => {
-        console.log(purchase)
         const Case = Cases.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Case))
         const Drop = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Drop))
         const DropItem = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.DropItem))
@@ -69,6 +69,6 @@ export async function CasesPurchasesSection({user, access, Cases, Drops, SaveAll
                 Покупки кейсов
             </h2>
         </Table>
-        {/*<CasesPurchasesModal modal={modal} setModal={setModal} Cases={Cases} Drops={Drops}/>*/}
+        <CasesPurchasesModal modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} casePurchaseFunc={casePurchaseFunc}/>
     </>)
 }

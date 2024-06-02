@@ -23,12 +23,12 @@ const UserWhitelisted = ({setModal}: { setModal: Function }) => (
 )
 
 const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
-		<div className={`${styles.whitelist} center_text`}>
+		<section className={`${styles.whitelist} center_text`}>
 			<h2>Хотите поиграть на сервере?</h2>
 			<Button onClick={() => setModal(true)}>
 				Попасть в Whitelist
 			</Button>
-		</div>
+		</section>
 )
 
 type WhitelistSection = {
@@ -42,18 +42,15 @@ export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: Whitelist
 	const [modal, setModal] = useState(false)
 
 	if (user.rating <= -200) {
-		let text = "Игрок в бане"
-
-		if (isMe) {
-			text = "Вы в бане"
-		}
-
 		return (
-			<section className="center_text">
-				<h2>
-					{text}
-				</h2>
-			</section>
+				<section className="center_text">
+					<h2>
+						{isMe
+								? "Вы в бане"
+								: "Игрок в бане"
+						}
+					</h2>
+				</section>
 		)
 	}
 

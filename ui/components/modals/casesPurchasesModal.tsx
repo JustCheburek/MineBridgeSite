@@ -1,4 +1,3 @@
-/*
 "use client";
 
 import {useState} from "react";
@@ -15,19 +14,27 @@ type CasesPurchasesModal = {
 	Drops: Drop[]
 	modal: boolean
 	setModal: setModal
+	casePurchaseFunc: Function
 }
 
 export const CasesPurchasesModal = (
 		{
 			Cases, Drops,
-			modal, setModal
+			modal, setModal,
+			casePurchaseFunc
 		}: CasesPurchasesModal
 ) => {
-	const [info, setInfo] = useState({} as CaseData)
+	const [caseData, setCaseData] = useState<CaseData>({
+		Case: Cases[0],
+		Drop: Drops[0],
+		DropItem: Drops[1],
+		rarity: "common",
+		Item: Drops[1].common![0]
+	})
 	const rarityNames = Object.keys(RarityNames) as RarityType[]
 
 	const updateData = (key: keyof CaseData, value: any) => {
-		setInfo(prev => ({
+		setCaseData(prev => ({
 			...prev,
 			[key]: value
 		}))
@@ -38,24 +45,39 @@ export const CasesPurchasesModal = (
 				<h1>Кейсы</h1>
 
 				<Form action={() => {
+					setModal(false)
+					casePurchaseFunc(caseData)
 				}}>
 					<h2>Кейс</h2>
 					<h3>Редкость</h3>
 					<FormSelect className="center_text" onChange={e => {
-						const _id = e.target.value
-						const Case = Cases.find(Case => JSON.stringify(Case._id) === JSON.stringify(_id))
-						updateData("Case")
+						const name = e.target.value
+						const Case = Cases.find(Case =>
+								Case.name === name
+						)
+						if (!Case) return
+						updateData("Case", Case)
 					}}>
 						{Cases.map(Case => (
-								<option value={Case._id.toString()}>
+								<option value={Case.name} key={Case.name}>
 									{Case.displayname}
 								</option>
 						))}
 					</FormSelect>
 					<h3>Дроп</h3>
-					<FormSelect className="center_text" onChange={updateData("Drop")}>
+					<FormSelect className="center_text" onChange={e => {
+						const name = e.target.value
+						const Drop = Drops.find(Drop =>
+								Drop.name === name
+						)
+						if (!Drop) return
+						updateData("Drop", Drop)
+						if (Drop?.name !== "all") {
+							updateData("DropItem", Drop)
+						}
+					}}>
 						{Drops.map(Drop => (
-								<option value={Drop._id.toString()}>
+								<option value={Drop.name} key={Drop.name}>
 									{Drop.displayname}
 								</option>
 						))}
@@ -63,26 +85,64 @@ export const CasesPurchasesModal = (
 
 					<h2>Предмет</h2>
 					<h3>Дроп</h3>
-					<FormSelect className="center_text" onChange={updateData("DropItem")}>
-						{Drops.map(Drop => (
-								<option value={Drop._id.toString()}>
-									{Drop.displayname}
+					<FormSelect className="center_text" onChange={e => {
+						const name = e.target.value
+						const DropItem = Drops.find(Drop =>
+								Drop.name === name
+						)
+						if (!DropItem) return
+						updateData("DropItem", DropItem)
+					}}>
+
+						{caseData.Drop?.name !== "all"
+								? <option value={caseData.Drop?.name} key={caseData.Drop?.name}>
+									{caseData.Drop?.displayname}
 								</option>
-						))}
+								: Drops
+										.filter(Drop => Drop.name !== "all")
+										.map(Drop =>
+												<option value={Drop.name} key={Drop.name}>
+													{Drop.displayname}
+												</option>
+										)
+						}
 					</FormSelect>
 					<h3>Редкость</h3>
-					<FormSelect className="center_text" onChange={updateData("rarity")}>
-						{rarityNames.map(Rarity => (
-								<option value={Rarity}>
-									{RarityNames[Rarity]}
+					<FormSelect className="center_text" onChange={e => {
+						updateData("rarity", e.target.value)
+					}}>
+						{caseData.DropItem.defaultRarity
+								? <option value={caseData.DropItem.defaultRarity}>
+									{RarityNames[caseData.DropItem.defaultRarity]}
 								</option>
-						))}
+								: rarityNames.map(rarity => (
+										<option value={rarity} key={rarity}>
+											{RarityNames[rarity]}
+										</option>
+								))
+						}
 					</FormSelect>
 					<h3>Предмет</h3>
-					<FormSelect className="center_text" onChange={updateData("Item")}>
-						{/!*{info.DropItem.map(
-
-						)}*!/}
+					<FormSelect className="center_text" onChange={e => {
+						const name = e.target.value
+						const Item = caseData.DropItem[caseData.rarity]!.find(item =>
+								item.name === name
+						)
+						if (!Item) return
+						updateData("Item", Item)
+					}}>
+						{caseData.DropItem?.drop?.length === 0
+								? caseData.DropItem[caseData.rarity]!.map(item =>
+										<option value={item.name} key={item.name}>
+											{item.displayname}
+										</option>
+								)
+								: caseData.DropItem.drop!.map(item =>
+										<option value={item.name} key={item.name}>
+											{item.displayname}
+										</option>
+								)
+						}
 					</FormSelect>
 
 					<FormButton>
@@ -91,4 +151,4 @@ export const CasesPurchasesModal = (
 				</Form>
 			</Modal>
 	)
-}*/
+}

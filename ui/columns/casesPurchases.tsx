@@ -5,8 +5,8 @@ import type {CaseData} from "@/types/purchase";
 
 export const columns: ColumnDef<CaseData>[] = [
 	{
-		accessorFn: ({Drop, Item}) => Item.img
-				? `/shop/${Drop.name}/${Item.name}.webp`
+		accessorFn: ({DropItem, Item}) => Item.img
+				? `/shop/${DropItem.name}/${Item.name}.webp`
 				: Item.displayname,
 		header: "Дроп",
 		cell: ({row, getValue}) => {

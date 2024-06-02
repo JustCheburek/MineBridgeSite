@@ -4,7 +4,7 @@ import {getCases, getDrops, getUser} from "@/services";
 import {validate} from "@services/validate";
 import {userModel} from "@server/models";
 import {Action, Punishment} from "@/types/punishment";
-import type {CaseData} from "@/types/purchase";
+import {CaseData, CasePurchase} from "@/types/purchase";
 import {revalidateTag} from "next/cache";
 import {RconVC} from "@server/console";
 import {cookies} from "next/headers";
@@ -196,6 +196,29 @@ export default async function History({params: {name}}: { params: { name: string
 		revalidateTag("userLike")
 	}
 
+	async function casePurchaseFunc(casePurchase: CaseData) {
+		"use server"
+
+		const casePurchaseDB: CasePurchase = {
+			...casePurchase,
+			Case: casePurchase.Case._id,
+			Drop: casePurchase.Drop._id,
+			DropItem: casePurchase.DropItem._id,
+			Item: casePurchase.Item._id
+		}
+
+		await userModel.findByIdAndUpdate(
+				user._id,
+				{
+					$push: {
+						casesPurchases: casePurchaseDB
+					},
+				}
+		)
+
+		revalidateTag("userLike")
+	}
+
 	return (
 			<div className={styles.content}>
 				<h1>История</h1>
@@ -209,7 +232,7 @@ export default async function History({params: {name}}: { params: { name: string
 
 				<CasesPurchasesSection
 						user={user} access={isAdmin} SaveAll={CasesPurchasesSave} Cases={Cases}
-						Drops={Drops}
+						Drops={Drops} casePurchaseFunc={casePurchaseFunc}
 				/>
 			</div>
 	)
