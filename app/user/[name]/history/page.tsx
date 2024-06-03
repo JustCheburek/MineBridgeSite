@@ -40,14 +40,14 @@ export default async function History({params: {name}}: { params: { name: string
 				const client = await RconVC()
 				console.log(`Бан ${user.name}`)
 				await client.run(`vclist remove ${user.name}`)
-				await client.run(`ipban ${user.name} Нарушение правил сервера`)
+				await client.run(`ban ${user.name} Нарушение правил сервера`)
 				await userModel.findByIdAndUpdate(user._id, {whitelist: false})
 			}
 			if (actions.includes("minePardon")) {
 				const client = await RconVC()
 				console.log(`Разбан ${user.name}`)
 				await client.run(`vclist add ${user.name}`)
-				await client.run(`unbanip ${user.name}`)
+				await client.run(`unban ${user.name}`)
 				await userModel.findByIdAndUpdate(user._id, {whitelist: true})
 			}
 		} catch (e) {
@@ -82,11 +82,11 @@ export default async function History({params: {name}}: { params: { name: string
 				const client = await RconVC()
 				if (actions.includes("mute")) {
 					console.log(`Мут ${user.name}`)
-					await client.run(`ipmute ${user.name}`)
+					await client.run(`mute ${user.name}`)
 				}
 				if (actions.includes("unmute")) {
 					console.log(`Размут ${user.name}`)
-					await client.run(`unmuteip ${user.name}`)
+					await client.run(`unmute ${user.name}`)
 				}
 			} catch (e) {
 				console.error(e)

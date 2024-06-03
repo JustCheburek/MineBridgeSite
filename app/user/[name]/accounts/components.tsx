@@ -63,30 +63,51 @@ type ChangeParam = {
 export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam) {
 	if (!isMe && !isModer) return
 
-	return (
-			<Form action={Change}>
-				<FormLabel>
-					<FormInput
-							placeholder="Майнкрафт никнейм"
-							name="name"
-							autoComplete="name"
-							required
-							minLength={4}
-							maxLength={30}
-							defaultValue={user.name}
-					/>
-				</FormLabel>
-				<FormLabel>
-					<FormTextarea
-							name="photo"
-							placeholder="Ссылка на аватарку"
-							autoComplete="photo"
-							required
-							maxLength={200}
-							defaultValue={user.photo}
-					/>
-				</FormLabel>
-				{isAdmin &&
+	return (<>
+		{user.rating <= -50 &&
+				<div className="center_text">
+					<h3>
+						{isMe
+								? "У вас рейтинг ниже -50"
+								: "У игрока рейтинг ниже -50"
+						}
+					</h3>
+					<p>
+						Поэтому чтобы поменять ник
+					</p>
+					<p>
+						{isMe
+								? "попросите модера или админа"
+								: "он может попросить Вас"
+						}
+					</p>
+				</div>
+		}
+		<Form action={Change}>
+			<FormLabel>
+				<FormInput
+						placeholder="Майнкрафт никнейм"
+						name="name"
+						autoComplete="name"
+						required
+						minLength={4}
+						maxLength={30}
+						defaultValue={user.name}
+						disabled={user.rating <= -100 && !isModer}
+				/>
+			</FormLabel>
+			<FormLabel>
+				<FormTextarea
+						name="photo"
+						placeholder="Ссылка на аватарку"
+						autoComplete="photo"
+						required
+						maxLength={200}
+						defaultValue={user.photo}
+						disabled={user.rating <= -100 && !isModer}
+				/>
+			</FormLabel>
+			{isAdmin &&
 					<FormLabel>
 						<FormInput
 								name="mostiki"
@@ -97,10 +118,10 @@ export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam)
 								defaultValue={user.mostiki}
 						/>
 					</FormLabel>
-				}
-				<FormButton>
-					Сохранить
-				</FormButton>
-			</Form>
-	)
+			}
+			<FormButton>
+				Сохранить
+			</FormButton>
+		</Form>
+	</>)
 }
