@@ -20,7 +20,10 @@ export default function Mods() {
 	type RP = { name: string, url: URL }
 
 	const mods: Mod[] = [{
-		name: "Сборка модов от Kawa11Fox 1.20.2",
+		name: "Сборка модов от JustCheburek 1.20.4 (для сильных ПК)",
+		url: new URL("https://modrinth.com/modpack/minebridge-pack")
+	}, {
+		name: "Сборка модов от Kawa11Fox 1.20.2 (для ПК послабее)",
 		url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
 	}, {
 		name: "Миникарта"

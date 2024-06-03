@@ -73,7 +73,7 @@ export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam)
 						}
 					</h3>
 					<p>
-						Поэтому чтобы поменять ник
+						Поэтому, чтобы поменять ник
 					</p>
 					<p>
 						{isMe
@@ -119,7 +119,7 @@ export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam)
 						/>
 					</FormLabel>
 			}
-			<FormButton>
+			<FormButton disabled={user.rating <= -100 && !isModer}>
 				Сохранить
 			</FormButton>
 		</Form>
