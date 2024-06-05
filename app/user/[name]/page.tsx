@@ -98,7 +98,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 								url = url || `${URLS_START[social]}${name}`
 
 								return (
-										<SocialBox social={social} isMe={isMe} url={url} clicked={clicked} updateCount={updateCount} key={social}/>
+										<SocialBox social={social} isMe={isMe} isModer={isModer} url={url} clicked={clicked} updateCount={updateCount} key={social}/>
 								)
 							})}
 						</div>
