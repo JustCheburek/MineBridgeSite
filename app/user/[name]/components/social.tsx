@@ -14,7 +14,6 @@ type SocialBox = {
 export function SocialBox({social, url, clicked, updateCount, isMe}: SocialBox) {
 	return (
 			<Link
-					key={social}
 					href={url}
 					target="_blank"
 					onClick={() => updateCount(social)}
