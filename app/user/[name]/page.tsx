@@ -67,7 +67,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 								<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
 						}
 						<div className={styles.social}>
-							{user.socials.map((
+							{user?.socials?.map((
 									{
 										social,
 										url,
