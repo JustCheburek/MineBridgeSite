@@ -99,7 +99,7 @@ export function ChangeParam(
 						disabled={user.rating <= -50 && !isModer}
 				/>
 			</FormLabel>
-			{isContentMaker && <>
+			{(isContentMaker || isModer) && <>
 				<p className="center_text">
 					Добавьте ссылки<br/>
 					на ваши соцсети
