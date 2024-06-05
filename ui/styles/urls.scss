@@ -70,6 +70,10 @@
   &.twitch {
     @include color(var(--twitch-color));
   }
+
+  &.donation_alerts {
+    @include color(var(--donation-alerts-color));
+  }
 }
 
 .sbp {
