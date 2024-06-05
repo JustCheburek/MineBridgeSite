@@ -15,10 +15,11 @@ import {WhitelistSection} from "./components/whitelist";
 import {FormBox} from "./components/form";
 import {RconVC} from "@server/console";
 import {userModel} from "@server/models";
-import {revalidatePath} from "next/cache";
+import {revalidatePath, revalidateTag} from "next/cache";
 import {ColorText} from "@app/utils";
-import {MostikiSvg, SVGS} from "@ui/SVGS";
+import {MostikiSvg, type SVGS_NAME} from "@ui/SVGS";
 import {URLS_START} from "@/const";
+import {SocialBox} from "@app/user/[name]/components/social";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -52,6 +53,23 @@ export default async function Profile({params: {name}}: { params: { name: string
 		revalidatePath(`/user/${user.name}`)
 	}
 
+	async function updateCount(socialName: SVGS_NAME) {
+		"use server"
+
+		const userM = await userModel.findById(user._id)
+		if (!userM) return
+
+		const social = userM.socials.find(
+				({social}) => social === socialName
+		)
+		if (!social) return
+
+		social.clicked = (social?.clicked || 0) + 1
+		await userM.save()
+
+		revalidateTag("userLike")
+	}
+
 	return (
 			<div className={styles.profile}>
 				<FormBox author={author}/>
@@ -71,7 +89,8 @@ export default async function Profile({params: {name}}: { params: { name: string
 									{
 										social,
 										url,
-										name
+										name,
+										clicked
 									}: Social
 							) => {
 								if (!social || (!url && !name)) return
@@ -79,9 +98,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 								url = url || `${URLS_START[social]}${name}`
 
 								return (
-										<Link key={social} href={url} target="_blank">
-											{SVGS[social]}
-										</Link>
+										<SocialBox social={social} isMe={isMe} url={url} clicked={clicked} updateCount={updateCount}/>
 								)
 							})}
 						</div>
