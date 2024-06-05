@@ -6,7 +6,7 @@ export class Social {
 	public social?: SVGS_NAME
 
 	@prop({default: 0})
-	public clicked!: number
+	public clicked?: number
 
 	@prop({trim: true})
 	public name?: string
