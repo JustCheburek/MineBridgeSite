@@ -16,7 +16,7 @@ import type {CaseData} from "@/types/purchase";
 
 type CasesPurchasesSection = {
     user: User
-    access: boolean
+    access?: boolean
     Cases: Case[]
     Drops: Drop[]
     SaveAll: Function

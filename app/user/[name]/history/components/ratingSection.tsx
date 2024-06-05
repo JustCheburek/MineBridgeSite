@@ -15,7 +15,7 @@ import Link from "next/link";
 
 type PunishmentSection = {
 	user: User, name?: User["name"]
-	access: boolean, SaveAll: Function, ratingFunc: Function
+	access?: boolean, SaveAll: Function, ratingFunc: Function
 }
 
 export function PunishmentSection({user, name, access, SaveAll, ratingFunc}: PunishmentSection) {
