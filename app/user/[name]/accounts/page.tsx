@@ -25,9 +25,9 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
 	const {
 		user: author,
-		isAdmin, isModer, isContentMaker
+		isAdmin, isModer
 	} = await validate(cookies().get(lucia.sessionCookieName)?.value)
-	const {user, isMe} = await getUser({name}, author?._id, isModer)
+	const {user, isMe, isContentMaker} = await getUser({name}, author?._id, isModer)
 
 	const adminAccess = isAdmin || isMe
 
@@ -84,8 +84,10 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					Акки
 				</h1>
 
-				<ChangeParam user={user} isMe={isMe} isModer={isModer} isAdmin={isAdmin} isContentMaker={isContentMaker}
-				             Change={Change}/>
+				<ChangeParam
+						user={user} isMe={isMe} isModer={isModer} isAdmin={isAdmin} isContentMaker={isContentMaker}
+						Change={Change}
+				/>
 
 				<div className={styles.providers_box}>
 					<Provider
