@@ -5,7 +5,7 @@ import type {Metadata} from "next";
 import styles from "./features.module.scss"
 
 // Компоненты
-import {BatSvg, TwitchSvg, YtSvg} from "@ui/svgs";
+import {BatSvg, TwitchSvg, YouTubeSvg} from "@ui/SVGS";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Url} from "@components/button";
@@ -83,7 +83,7 @@ export default function Features() {
 								<TwitchSvg className="color"/>
 							</ImgBox>
 							<ImgBox className={styles.img} type="grid" width="43%">
-								<YtSvg className="color"/>
+								<YouTubeSvg className="color"/>
 							</ImgBox>
 
 							<GHint className="light_gray_color">Обновляется</GHint>

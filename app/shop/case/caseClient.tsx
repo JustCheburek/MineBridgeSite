@@ -15,7 +15,7 @@ import styles from "./case.module.scss"
 import {MaxSize} from "@components/maxSize";
 import {Random, RandomValue, SumChances} from "@app/utils";
 import {Img, ImgBox} from "@components/img";
-import {MostikiSvg} from "@ui/svgs";
+import {MostikiSvg} from "@ui/SVGS";
 import {Button, Url} from "@components/button";
 import {Types} from "mongoose";
 

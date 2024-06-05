@@ -6,7 +6,7 @@ import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 
 // Компоненты
-import {MostikiSvg, SBPSvg} from "@ui/svgs";
+import {MostikiSvg, SBPSvg} from "@ui/SVGS";
 import {MaxSize} from "@components/maxSize";
 import Link from "next/link";
 

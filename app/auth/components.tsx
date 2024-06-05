@@ -2,7 +2,7 @@
 
 import {Form, FormGroup} from "@components/form";
 import {InputNameCheck} from "@components/formInputs";
-import {DiscordSvg, GoogleSvg} from "@ui/svgs";
+import {DiscordSvg, GoogleSvg} from "@ui/SVGS";
 import Link from "next/link";
 import {useState} from "react";
 

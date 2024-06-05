@@ -14,7 +14,7 @@ import styles from "./shop.module.scss"
 // Компоненты
 import {Url} from "@components/button";
 import {Modal} from "@components/modal";
-import {MostikiSvg} from "@ui/svgs";
+import {MostikiSvg} from "@ui/SVGS";
 import {Img, ImgBox} from "@components/img";
 import {SumChances} from "@app/utils";
 

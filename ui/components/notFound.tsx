@@ -6,7 +6,7 @@ import "./styles/notFound.scss"
 
 // Компоненты
 import {Url} from "./button";
-import {SearchSvg} from "@ui/svgs";
+import {SearchSvg} from "@ui/SVGS";
 
 export function NotFound({children, buttonText, href}: PropsWithChildren<{ buttonText: string, href: string }>) {
 	return (

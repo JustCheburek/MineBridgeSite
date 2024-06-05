@@ -1,4 +1,4 @@
-import {DiscordUrl, SupportUrl, TelegramUrl, VkUrl} from "@ui/svgs";
+import {DiscordUrl, SupportUrl, TelegramUrl, VkUrl} from "@ui/SVGS";
 
 export function Urls({className}: { className?: string }) {
 	return (

@@ -10,7 +10,7 @@ import "./styles/header.scss";
 
 // Компоненты
 import {Urls} from "./urls";
-import {MinebridgeSvg, MostikiSvg} from "@ui/svgs";
+import {MinebridgeSvg, MostikiSvg} from "@ui/SVGS";
 import {NavLink} from "@components/navlink";
 import {Img} from "@components/img";
 import {Burger} from "@components/burger";

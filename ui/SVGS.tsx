@@ -141,7 +141,7 @@ export const SupportSvg = ({className = "", width = "38px", height = "38px"}: Sv
 		</svg>
 )
 
-export const YtSvg = ({className = "", width, height}: Svg) => (
+export const YouTubeSvg = ({className = "", width, height}: Svg) => (
 		<svg
 				viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
 				className={`url yt ${className}`} fill="currentColor"
@@ -174,6 +174,22 @@ export const TwitchSvg = ({className = "", width, height}: Svg) => (
 					d="M11.5 3.75h-1v3h1v-3zM8.75 3.75h-1v3h1v-3z"
 					className="color"
 			/>
+		</svg>
+)
+
+export const DonationAlertsSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
+		<svg
+				xmlns="http://www.w3.org/2000/svg" style={{width, height}}
+				className={`url donation_alerts ${className}`} fill="currentColor"
+		>
+			<defs>
+				<linearGradient id="a" x1="87.195%" x2="12.805%" y1="0%" y2="100%">
+					<stop offset="0%" stopColor="#F59C07"/>
+					<stop offset="100%" stopColor="#F57507"/>
+				</linearGradient>
+			</defs>
+			<path fill="url(#a)" className="color"
+			      d="M34.859 46.588h-5.42a1.176 1.176 0 0 1-.83-.326.934.934 0 0 1-.284-.77l.479-4.888c.046-.52.531-.92 1.113-.918h5.42c.316-.001.617.118.83.327.212.209.315.49.283.77l-.478 4.888c-.047.52-.532.919-1.113.917Zm.868-9.568h-5.52c-.61 0-1.105-.476-1.105-1.064l1.502-16.51c.067-.537.542-.94 1.104-.936h5.521c.61 0 1.104.476 1.104 1.063l-1.546 16.522c-.07.516-.519.908-1.06.925Zm32.464-19.254c.587.682.874 1.57.796 2.464L66.83 44.76a3.338 3.338 0 0 1-1.008 2.114L48.174 63.908a3.38 3.38 0 0 1-2.35.942H27.038L10.5 80l1.28-15.16H3.37a3.378 3.378 0 0 1-2.484-1.085 3.334 3.334 0 0 1-.873-2.553L5.145 3.006A3.36 3.36 0 0 1 8.503 0H51.33c.986 0 1.922.428 2.562 1.172L68.19 17.766ZM55.11 40.08l1.372-15.14a3.334 3.334 0 0 0-.867-2.445l-8.067-9.259a3.377 3.377 0 0 0-2.541-1.152H19.596a3.36 3.36 0 0 0-3.358 3.006l-3.025 34.068c-.07.932.251 1.852.887 2.54a3.418 3.418 0 0 0 2.47 1.098H41.56a3.38 3.38 0 0 0 2.33-.922l10.214-9.67a3.338 3.338 0 0 0 1.009-2.124Z"/>
 		</svg>
 )
 
@@ -267,3 +283,14 @@ export const AnotherSiteSvg = ({className = "", width = "1em", height = "1em"}: 
 					d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
 		</svg>
 )
+
+export const SVGS = {
+	discord: <DiscordSvg width="38px" height="38px"/>,
+	telegram: <TelegramSvg width="38px" height="38px"/>,
+	vk: <VKSvg width="38px" height="38px"/>,
+	twitch: <TwitchSvg width="38px" height="38px"/>,
+	youtube: <YouTubeSvg width="38px" height="38px"/>,
+	donationAlerts: <></> /*<DonationAlertsSvg width="38px" height="38px"/>*/
+}
+
+export type SVGS_NAME = keyof typeof SVGS

@@ -10,7 +10,7 @@ import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, 
 import styles from "./shop.module.scss"
 
 // Компоненты
-import {MostikiSvg} from "@ui/svgs";
+import {MostikiSvg} from "@ui/SVGS";
 import {Url} from "@components/button";
 import {MaxSize} from "@components/maxSize";
 import {Img, ImgBox} from "@components/img";

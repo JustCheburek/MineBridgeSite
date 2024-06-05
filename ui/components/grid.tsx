@@ -6,7 +6,7 @@ import type {PropsWithChildren, ComponentPropsWithoutRef} from "react";
 import styles from "./styles/grid.module.scss";
 
 // Компоненты
-import {AnotherSiteSvg} from "@ui/svgs";
+import {AnotherSiteSvg} from "@ui/SVGS";
 
 declare module 'csstype' {
 	interface Properties {
@@ -68,7 +68,6 @@ export const GBox = (
 			anotherSite = false,
 			imgs,
 			target = "_blank",
-			rel = "noopener noreferrer",
 			className = ""
 		}: PropsWithChildren<GBox>) => {
 	const classNameResult = `${styles.box} ${imgs ? styles[imgs] : ""} ${className}`

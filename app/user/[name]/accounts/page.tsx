@@ -12,7 +12,7 @@ import {Social} from "@/types/url";
 import styles from "./accounts.module.scss"
 
 // Компоненты
-import {DiscordSvg, EmailSvg, GoogleSvg, SuccessSvg} from "@ui/svgs";
+import {DiscordSvg, EmailSvg, GoogleSvg, SuccessSvg} from "@ui/SVGS";
 import {ChangeParam, DeleteUser} from "./components";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";

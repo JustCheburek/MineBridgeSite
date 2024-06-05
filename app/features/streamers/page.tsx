@@ -7,7 +7,7 @@ import styles from "./streamers.module.scss"
 // Компоненты
 import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
-import {TwitchSvg, YtSvg} from "@ui/svgs";
+import {TwitchSvg, YouTubeSvg} from "@ui/SVGS";
 import {UserBox} from "@components/userBox";
 import Link from "next/link";
 
@@ -49,7 +49,7 @@ export default function Streamers() {
 
 									<div className={styles.icons}>
 										{yt && <Link href={`https://www.youtube.com/@${yt}`} target="_blank">
-											<YtSvg width="3em"/>
+											<YouTubeSvg width="3em"/>
 										</Link>}
 
 										{twitch && <Link href={`https://www.twitch.tv/${twitch}`} target="_blank">

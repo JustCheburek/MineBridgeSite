@@ -4,6 +4,7 @@ import {getUser} from "@/services";
 import Link from "next/link";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
+import {Social} from "@/types/url";
 
 // Стили
 import styles from "./profile.module.scss"
@@ -16,7 +17,8 @@ import {RconVC} from "@server/console";
 import {userModel} from "@server/models";
 import {revalidatePath} from "next/cache";
 import {ColorText} from "@app/utils";
-import {MostikiSvg} from "@ui/svgs";
+import {MostikiSvg, SVGS} from "@ui/SVGS";
+import {URLS_START} from "@/const";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -64,12 +66,33 @@ export default async function Profile({params: {name}}: { params: { name: string
 						{isAdmin &&
 								<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
 						}
+						<div className={styles.social}>
+							{user.socials.map((
+									{
+										social,
+										url,
+										name
+									}: Social
+							) => {
+								if (!social || (!url && !name)) return
+
+								url = url || `${URLS_START[social]}${name}`
+
+								return (
+										<Link key={social} href={url} target="_blank">
+											{SVGS[social]}
+										</Link>
+								)
+							})}
+						</div>
 						<div className={styles.roles}>
 							{roles.map(role => {
 								const color = `#${role.color.toString(16)}`
-								return <small key={role.id} style={{color}}>
-									{role.name}
-								</small>
+								return (
+										<small key={role.id} style={{color}}>
+											{role.name}
+										</small>
+								)
 							})}
 						</div>
 						<h4>

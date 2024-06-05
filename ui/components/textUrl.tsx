@@ -1,7 +1,7 @@
 import type {PropsWithChildren} from "react";
 import Link, {type LinkProps} from "next/link";
 import styles from "./styles/textUrl.module.scss"
-import {DiscordSvg, TelegramSvg, TwitchSvg} from "@ui/svgs";
+import {DiscordSvg, TelegramSvg, TwitchSvg} from "@ui/SVGS";
 
 export function TextUrl({href, children, ...props}: PropsWithChildren<LinkProps>) {
 	const type = href?.toString()

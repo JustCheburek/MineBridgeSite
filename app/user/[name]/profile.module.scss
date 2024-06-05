@@ -29,12 +29,11 @@
 	font-weight: 500;
 }
 
-.roles {
+.roles, .social {
 	display: flex;
 	gap: 0.2rem 1rem;
 	flex-wrap: wrap;
 }
-
 
 .from {
 	display: flex;

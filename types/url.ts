@@ -1,8 +1,9 @@
 import {prop} from "@typegoose/typegoose";
+import type {SVGS_NAME} from "@ui/SVGS";
 
 export class Social {
-	@prop({trim: true})
-	public social?: string
+	@prop({type: String})
+	public social?: SVGS_NAME
 
 	@prop({default: 0})
 	public clicked?: number
