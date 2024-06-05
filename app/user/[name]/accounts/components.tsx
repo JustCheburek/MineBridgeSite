@@ -7,6 +7,8 @@ import type {User} from "lucia";
 import {Form, FormButton, FormInput, FormLabel, FormTextarea} from "@components/form";
 import {Modal} from "@components/modal";
 import {useState} from "react";
+import {isRoles} from "@/services";
+import {InputNameCheck, InputNameCheckWithoutNameInput} from "@components/formInputs";
 
 type DeleteUser = {
 	user: User
@@ -33,17 +35,11 @@ export function DeleteUser({user, Delete}: DeleteUser) {
 			</p>
 			<h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
 			<Form action={Delete}>
-				<FormLabel>
-					<FormInput
-							name="name"
-							danger
-							placeholder={user.name}
-							autoComplete="off"
-							required
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-					/>
-				</FormLabel>
+				<InputNameCheck
+						danger placeholder={user.name}
+						autoComplete="off"
+						nameInput={name} setNameInput={setName}
+				/>
 				<FormButton danger disabled={name !== user.name}>
 					Жми, жми!
 				</FormButton>
@@ -54,13 +50,16 @@ export function DeleteUser({user, Delete}: DeleteUser) {
 
 type ChangeParam = {
 	user: User
-	isAdmin: boolean
-	isModer: boolean
 	isMe: boolean
 	Change?: ((formData: FormData) => void)
-}
+} & isRoles
 
-export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam) {
+export function ChangeParam(
+		{
+			user,
+			isMe, isModer, isAdmin, isContentMaker,
+			Change
+		}: ChangeParam) {
 	if (!isMe && !isModer) return
 
 	return (<>
@@ -84,18 +83,11 @@ export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam)
 				</div>
 		}
 		<Form action={Change}>
-			<FormLabel>
-				<FormInput
-						placeholder="Майнкрафт никнейм"
-						name="name"
-						autoComplete="name"
-						required
-						minLength={4}
-						maxLength={30}
-						defaultValue={user.name}
-						disabled={user.rating <= -100 && !isModer}
-				/>
-			</FormLabel>
+			<InputNameCheckWithoutNameInput
+					defaultName={user.name}
+					disabled={user.rating <= -50 && !isModer}
+			/>
+
 			<FormLabel>
 				<FormTextarea
 						name="photo"
@@ -104,9 +96,74 @@ export function ChangeParam({user, isMe, isModer, isAdmin, Change}: ChangeParam)
 						required
 						maxLength={200}
 						defaultValue={user.photo}
-						disabled={user.rating <= -100 && !isModer}
+						disabled={user.rating <= -50 && !isModer}
 				/>
 			</FormLabel>
+			{isContentMaker && <>
+				<p className="center_text">
+					Добавьте ссылки<br/>
+					на ваши соцсети
+				</p>
+				<div className="center_text">
+					<h3>
+						Ники
+					</h3>
+					<p>
+						Нужны <span className="unic_color">уникальные</span> ники,<br/>
+						не отображаемые
+					</p>
+				</div>
+				<FormLabel>
+					<FormInput
+							placeholder="Youtube"
+							name="youtube"
+							autoComplete="name"
+							defaultValue={user.socials?.find(({social}) => social === "youtube")?.name}
+					/>
+				</FormLabel>
+				<FormLabel>
+					<FormInput
+							placeholder="Twitch"
+							name="twitch"
+							autoComplete="name"
+							defaultValue={user.socials?.find(({social}) => social === "twitch")?.name}
+					/>
+				</FormLabel>
+				<FormLabel>
+					<FormInput
+							placeholder="VK"
+							name="vk"
+							autoComplete="name"
+							defaultValue={user.socials?.find(({social}) => social === "vk")?.name}
+					/>
+				</FormLabel>
+				<FormLabel>
+					<FormInput
+							placeholder="DonationAlerts"
+							name="donationAlerts"
+							defaultValue={user.socials?.find(({social}) => social === "donationAlerts")?.name}
+					/>
+				</FormLabel>
+				<div className="center_text">
+					<h3>
+						Ссылки на каналы
+					</h3>
+				</div>
+				<FormLabel>
+					<FormInput
+							placeholder="Discord"
+							name="discord"
+							defaultValue={user.socials?.find(({social}) => social === "discord")?.url}
+					/>
+				</FormLabel>
+				<FormLabel>
+					<FormInput
+							placeholder="Telegram"
+							name="telegram"
+							defaultValue={user.socials?.find(({social}) => social === "telegram")?.url}
+					/>
+				</FormLabel>
+			</>}
 			{isAdmin &&
 					<FormLabel>
 						<FormInput

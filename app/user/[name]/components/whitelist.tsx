@@ -8,11 +8,11 @@ import styles from "../profile.module.scss"
 
 // Компоненты
 import {Button} from "@components/button";
-import {Modal} from "@components/modal";
+import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton} from "@components/form";
 import {useState} from "react";
 
-const UserWhitelisted = ({setModal}: { setModal: Function }) => (
+const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
 		<section className={`${styles.whitelist} center_text`}>
 			<h2>Вы в Whitelist`е</h2>
 			<p>Айпи сервера - <strong className="unic_color all_select">map.minebridge.site</strong></p>
@@ -22,7 +22,7 @@ const UserWhitelisted = ({setModal}: { setModal: Function }) => (
 		</section>
 )
 
-const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
+const UserNotWhitelisted = ({setModal}: { setModal: setModal }) => (
 		<section className={`${styles.whitelist} center_text`}>
 			<h2>Хотите поиграть на сервере?</h2>
 			<Button onClick={() => setModal(true)}>
@@ -34,7 +34,7 @@ const UserNotWhitelisted = ({setModal}: { setModal: Function }) => (
 type WhitelistSection = {
 	user: User
 	isMe: boolean
-	isModer: boolean
+	isModer?: boolean
 	WhitelistFunc: ((formData: FormData) => void)
 }
 

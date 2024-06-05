@@ -8,7 +8,7 @@ export type setModal = Dispatch<SetStateAction<boolean>>
 
 type Modal = {
 	modal: boolean
-	setModal: (modal: boolean) => void
+	setModal: setModal
 	className?: string
 }
 

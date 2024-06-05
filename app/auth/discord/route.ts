@@ -6,6 +6,10 @@ import {NextRequest, NextResponse} from "next/server";
 export async function GET(request: NextRequest) {
 	const name = request.nextUrl.searchParams.get("name");
 
+	if (!name) {
+		return NextResponse.redirect("/auth")
+	}
+
 	const state = generateState();
 	const url = await discord.createAuthorizationURL(state, {
 		scopes: ["identify", "email", "guilds", "guilds.join", "guilds.members.read"],

@@ -9,7 +9,7 @@ export default function Error(
 			error,
 			reset,
 		}: {
-			error: Error & { digest?: string }
+			error: Error
 			reset: () => void
 		}) {
 
@@ -20,8 +20,8 @@ export default function Error(
 	return (
 			<main>
 				<MaxSize className="center_text">
-					<h1>Как это?</h1>
-					<h2>Кажется, вы что-то сделали не то</h2>
+					<h1>{error.name}</h1>
+					<h3>{error.message}</h3>
 					<Button onClick={() => reset()}>Перезагрузить</Button>
 					<Url href="/">Назад</Url>
 				</MaxSize>

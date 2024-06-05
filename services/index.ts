@@ -9,20 +9,20 @@ import axios from "axios";
 import type {Role} from "@/types/role";
 import {Case, Drop} from "@/types/case";
 
-export interface RolesApi {
-	roles: Role[],
-	isModer: boolean,
-	isAdmin: boolean
+export interface isRoles {
+	isModer?: boolean
+	isAdmin?: boolean
+	isContentMaker?: boolean
+}
+
+export interface RolesApi extends isRoles {
+	roles: Role[]
 }
 
 export const getRoles = cache(
 		async (discordId?: string): Promise<RolesApi> => {
 			if (!discordId) {
-				return {
-					roles: [],
-					isModer: false,
-					isAdmin: false
-				}
+				return {roles: []}
 			}
 
 			const allRoles = await axios.get<Role[]>(
@@ -46,11 +46,9 @@ export const getRoles = cache(
 			const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
 			const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
 			const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
+			const isContentMaker = roles?.some(({name}) => name.toLowerCase().includes("контент"))
 
-			return {
-				roles,
-				isModer, isAdmin
-			}
+			return {roles, isModer, isAdmin, isContentMaker}
 		},
 		["roles", "userLike", "all"],
 		{revalidate: 300, tags: ["roles", "userLike", "all"]}
@@ -94,7 +92,7 @@ export const getUser = cache(
 )
 
 export const getAuthor = cache(
-		async (id?: string) => {
+		async (id?: string): Promise<{user: User | null} & RolesApi> => {
 			const user: User | null = await userModel.findById(id).lean()
 
 			return {user, ...await getRoles(user?.discordId)}

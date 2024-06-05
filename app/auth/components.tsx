@@ -1,6 +1,7 @@
 "use client"
 
-import {Form, FormGroup, FormInput, FormLabel} from "@components/form";
+import {Form, FormGroup} from "@components/form";
+import {InputNameCheck} from "@components/formInputs";
 import {DiscordSvg, GoogleSvg} from "@ui/svgs";
 import Link from "next/link";
 import {useState} from "react";
@@ -13,19 +14,7 @@ export function AuthForm({savedName}: {savedName?: string}) {
 
 	return (
 			<Form className={styles.form}>
-				<FormLabel>
-					<FormInput
-							placeholder="Майнкрафт никнейм"
-							name="name"
-							autoComplete="name"
-							required
-							minLength={4}
-							maxLength={30}
-							autoFocus
-							value={name}
-							onChange={e => setName(e.target.value)}
-					/>
-				</FormLabel>
+				<InputNameCheck nameInput={name} setNameInput={setName} autoFocus/>
 
 				<FormGroup className={styles.providers}>
 					<Link href={`/auth/discord?name=${name}`} aria-disabled={!access} className={styles.provider}>

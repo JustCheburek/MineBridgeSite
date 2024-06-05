@@ -6,11 +6,13 @@ import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
 import {From} from "@/types/invite";
 import {userModel} from "@server/models";
 import {cookies} from "next/headers";
+import {Social} from "@/types/url";
 
 function updateRating(this: User) {
 	this.rating = this?.punishments?.reduce(
 			(accum, {rating}) => accum + rating, 0
 	)
+	this.onlineAt = new Date()
 }
 
 @pre<User>("save", updateRating)
@@ -58,7 +60,7 @@ export class User {
 	public from?: From
 
 	// Список с айди игроков
-	@prop({type: () => [String], default: []})
+	@prop({type: () => [String]})
 	public invites!: string[]
 
 	@prop()
@@ -69,6 +71,12 @@ export class User {
 
 	@prop()
 	public updatedAt!: Date
+
+	@prop({default: new Date()})
+	public onlineAt!: Date
+
+	@prop({type: () => [Social]})
+	public socials: Social[]
 
 	public static async From(
 			this: ReturnModelType<typeof User>,

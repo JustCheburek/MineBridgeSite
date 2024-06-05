@@ -6,6 +6,7 @@ import {getUser} from "@/services";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 import {redirect} from "next/navigation";
+import {Social} from "@/types/url";
 
 // Стили
 import styles from "./accounts.module.scss"
@@ -18,11 +19,14 @@ import {revalidateTag} from "next/cache";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Аккаунты | Майнбридж`,
-	description: `Привязанные интеграции игрока ${name}. Дискорд и гугл!`
+	description: `Привязанные интеграции игрока ${name}.`
 })
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
-	const {user: author, isAdmin, isModer} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+	const {
+		user: author,
+		isAdmin, isModer, isContentMaker
+	} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 	const {user, isMe} = await getUser({name}, author?._id, isModer)
 
 	const adminAccess = isAdmin || isMe
@@ -33,12 +37,27 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 		const name = formData.get("name")
 		const photo = formData.get("photo")
 
+		const socials: Social[] = [
+			{name: formData.get("youtube")?.toString(), social: "youtube"},
+			{name: formData.get("twitch")?.toString(), social: "twitch"},
+			{name: formData.get("vk")?.toString(), social: "vk"},
+			{name: formData.get("donationAlerts")?.toString(), social: "donationAlerts"},
+			{url: formData.get("discord")?.toString(), social: "discord"},
+			{url: formData.get("telegram")?.toString(), social: "telegram"},
+		]
+
+		socials.forEach(({url}) => {
+			if (url && !url.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/)) {
+				throw new Error(`Некорректная ссылка в ${name}`)
+			}
+		})
+
 		let mostiki = user.mostiki
 		if (isAdmin) {
 			mostiki = Number(formData.get("mostiki"))
 		}
 
-		await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki})
+		await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})
 
 		revalidateTag("userLike")
 	}
@@ -65,7 +84,8 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					Акки
 				</h1>
 
-				<ChangeParam user={user} isMe={isMe} isModer={isModer} isAdmin={isAdmin} Change={Change}/>
+				<ChangeParam user={user} isMe={isMe} isModer={isModer} isAdmin={isAdmin} isContentMaker={isContentMaker}
+				             Change={Change}/>
 
 				<div className={styles.providers_box}>
 					<Provider
@@ -116,7 +136,7 @@ function Provider({id, name, isMe, children}: PropsWithChildren<{
 							</p>
 							<SuccessSvg/>
 						</>
-						: <Link href={`/auth/${name}`} className="unic_color medium-font center_text">
+						: <Link href={`/auth/${name}?name=${name}`} className="unic_color medium-font center_text">
 							Привязать
 						</Link>
 				}

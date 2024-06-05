@@ -43,7 +43,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 			await client.run(`vclist add ${user.name}`)
 
 			await userModel.findByIdAndUpdate(user._id, {whitelist: true})
-		} catch(e) {
+		} catch (e) {
 			console.error(e)
 		}
 
@@ -65,11 +65,12 @@ export default async function Profile({params: {name}}: { params: { name: string
 								<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
 						}
 						<div className={styles.roles}>
-							{roles.map(role => (
-									<small key={role.id}>
-										{role.name}
-									</small>
-							))}
+							{roles.map(role => {
+								const color = `#${role.color.toString(16)}`
+								return <small key={role.id} style={{color}}>
+									{role.name}
+								</small>
+							})}
 						</div>
 						<h4>
 							Мостики: {" "}

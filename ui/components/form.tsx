@@ -1,5 +1,10 @@
-import type {ComponentPropsWithoutRef} from "react";
+import {ComponentPropsWithoutRef} from "react";
+import {setModal} from "@components/modal";
 import styles from "./styles/form.module.scss"
+
+interface DangerInputProps {
+	danger?: boolean
+}
 
 export const Form = (
 		{
@@ -16,16 +21,16 @@ export const Form = (
 		</form>
 )
 
-type FormButton = {
-	danger?: boolean
+interface FormButton extends ComponentPropsWithoutRef<"button">, DangerInputProps {
 }
+
 export const FormButton = (
 		{
 			children,
 			className = "",
 			danger = false,
 			...props
-		}: FormButton & ComponentPropsWithoutRef<"button">
+		}: FormButton
 ) => (
 		<button
 				className={`${styles.button} center_text ${danger ? styles.danger : ""} ${className}`}
@@ -50,57 +55,66 @@ export const FormLabel = (
 		</label>
 )
 
+export interface FormGroupProps extends ComponentPropsWithoutRef<"div"> {
+}
+
 export const FormGroup = (
 		{
 			children,
 			className = "",
 			...props
-		}: ComponentPropsWithoutRef<"div">
+		}: FormGroupProps
 ) => (
 		<div className={`${styles.group} ${className}`} {...props}>
 			{children}
 		</div>
 )
 
-type FormInput = {
-	danger?: boolean
+export interface FormInputProps extends ComponentPropsWithoutRef<"input">, DangerInputProps {
 }
+
 export const FormInput = (
 		{
 			children,
 			className = "",
 			danger = false,
 			...props
-		}: FormInput & ComponentPropsWithoutRef<"input">
+		}: FormInputProps
 ) => (
 		<input className={`${styles.input} ${danger ? styles.danger : ""} ${className}`} {...props}/>
 )
+
+export interface FormTextareaProps extends ComponentPropsWithoutRef<"textarea"> {
+}
 
 export const FormTextarea = (
 		{
 			children,
 			className = "",
 			...props
-		}: ComponentPropsWithoutRef<"textarea">
+		}: FormTextareaProps
 ) => (
 		<textarea className={`${styles.textarea} ${className}`} {...props}/>
 )
 
+export interface FormSelectProps extends ComponentPropsWithoutRef<"select"> {
+}
 export const FormSelect = (
 		{
 			children,
 			className = "",
 			...props
-		}: ComponentPropsWithoutRef<"select">
+		}: FormSelectProps
 ) => (
 		<select className={`${styles.select} ${className}`} {...props}>
 			{children}
 		</select>
 )
 
-type modal = { setModal: (value: boolean) => void }
-
-export const Edit = ({className="", setModal, ...props}: ComponentPropsWithoutRef<"button"> & modal) => (
+export interface EditProps extends ComponentPropsWithoutRef<"button"> {
+	setModal: setModal
+}
+export const Edit = ({className = "", setModal, ...props}: EditProps) => (
 		<button className={`${styles.edit} ${className}`} onClick={() => setModal(true)} {...props}>
 			<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="edit" viewBox="0 0 16 16">
 				<path
@@ -111,7 +125,10 @@ export const Edit = ({className="", setModal, ...props}: ComponentPropsWithoutRe
 		</button>
 )
 
-export const Add = ({className="", setModal, ...props}: ComponentPropsWithoutRef<"button"> & modal) => (
+export interface AddProps extends ComponentPropsWithoutRef<"button"> {
+	setModal: setModal
+}
+export const Add = ({className = "", setModal, ...props}: AddProps) => (
 		<button className={`${styles.add} ${className}`} onClick={() => setModal(true)} {...props}>
 			+
 		</button>

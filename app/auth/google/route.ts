@@ -1,10 +1,14 @@
-import {generateState, generateCodeVerifier} from "arctic";
+import {generateCodeVerifier, generateState} from "arctic";
 import {google} from "@server/lucia";
 import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
 	const name = request.nextUrl.searchParams.get("name");
+
+	if (!name) {
+		return NextResponse.redirect("/auth")
+	}
 
 	const state = generateState();
 	const codeVerifier = generateCodeVerifier();
@@ -27,15 +31,13 @@ export async function GET(request: NextRequest) {
 		sameSite: "lax"
 	});
 
-	if (name) {
-		cookies().set("name", name, {
-			path: "/",
-			secure: process.env.NODE_ENV === "production",
-			httpOnly: true,
-			maxAge: 60 * 60,
-			sameSite: "lax"
-		})
-	}
+	cookies().set("name", name, {
+		path: "/",
+		secure: process.env.NODE_ENV === "production",
+		httpOnly: true,
+		maxAge: 60 * 60,
+		sameSite: "lax"
+	})
 
 	return NextResponse.redirect(url)
 }

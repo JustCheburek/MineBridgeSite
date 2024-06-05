@@ -83,6 +83,10 @@ button, input, fieldset, .no_select {
   cursor: not-allowed;
 }
 
+[aria-disabled="true"] {
+  pointer-events: none;
+}
+
 // Картинки
 img {
   object-fit: contain;
