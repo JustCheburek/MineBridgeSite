@@ -20,6 +20,7 @@ import {ColorText} from "@app/utils";
 import {MostikiSvg, type SVGS_NAME} from "@ui/SVGS";
 import {URLS_START} from "@/const";
 import {SocialBox} from "@app/user/[name]/components/social";
+import {User} from "lucia";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} | Майнбридж`,
@@ -131,14 +132,23 @@ export default async function Profile({params: {name}}: { params: { name: string
 
 				<WhitelistSection user={user} isMe={isMe} isModer={isModer} WhitelistFunc={WhitelistFunc}/>
 
-				{isContentMaker &&
-						<iframe
-								src={`https://player.twitch.tv/?channel=${user?.socials?.find(({social}) => social === "twitch")?.name}&parent=${process.env.NEXT_PUBLIC_DOMEN}`}
-								className={styles.iframe}
-								allowFullScreen
-								frameBorder={0}
-						/>
-				}
+				<TwitchFrame user={user} isContentMaker={isContentMaker}/>
 			</div>
+	)
+}
+
+function TwitchFrame({isContentMaker, user}: { isContentMaker?: boolean, user: User }) {
+	if (!isContentMaker) return
+
+	const twitchName = user?.socials?.find(({social}) => social === "twitch")?.name
+	if (!twitchName) return
+
+	return (
+			<iframe
+					src={`https://player.twitch.tv/?channel=${twitchName}&parent=${process.env.NEXT_PUBLIC_DOMEN}`}
+					className={styles.iframe}
+					allowFullScreen
+					frameBorder={0}
+			/>
 	)
 }
