@@ -5,7 +5,7 @@ import type {Metadata} from "next";
 import styles from "./features.module.scss"
 
 // Компоненты
-import {BatSvg, TwitchSvg, YouTubeSvg} from "@ui/SVGS";
+import {BatSvg} from "@ui/SVGS";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Url} from "@components/button";
@@ -78,16 +78,21 @@ export default function Features() {
 							<GText>Карта</GText>
 						</GBox>
 
-						<GBox href="/features/streamers" className={styles.streamers} imgs="two">
-							<ImgBox className={styles.img} type="grid" width="43%">
-								<TwitchSvg className="color"/>
-							</ImgBox>
-							<ImgBox className={styles.img} type="grid" width="43%">
-								<YouTubeSvg className="color"/>
-							</ImgBox>
+						<GBox anotherSite>
+							<ul className={`not_indent remove_marker ${styles.vote_box}`}>
+								<li>
+									<Url href="https://hotmc.ru/minecraft-server-259948" margin="0">
+										HotMC
+									</Url>
+								</li>
+								<li>
+									<Url href="https://minecraftrating.ru/server/minebridge" margin="0">
+										Rating
+									</Url>
+								</li>
+							</ul>
 
-							<GHint className="light_gray_color">Обновляется</GHint>
-							<GText>Контент мейкеры</GText>
+							<GText>Голосование</GText>
 						</GBox>
 
 						<GBox href="/features/stickers" imgs="three">
@@ -138,23 +143,6 @@ export default function Features() {
 
 							<GText>Плагины</GText>
 						</GBox>*/}
-
-						<GBox anotherSite>
-							<ul className={`not_indent remove_marker ${styles.vote_box}`}>
-								<li>
-									<Url href="https://hotmc.ru/minecraft-server-259948" margin="0">
-										HotMC
-									</Url>
-								</li>
-								<li>
-									<Url href="https://minecraftrating.ru/server/minebridge" margin="0">
-										Rating
-									</Url>
-								</li>
-							</ul>
-
-							<GText>Голосование</GText>
-						</GBox>
 					</GContainer>
 				</MaxSize>
 			</main>
