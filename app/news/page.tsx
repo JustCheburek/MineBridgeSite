@@ -34,31 +34,32 @@ export default async function News() {
 						endAt={new Date(season.endAt)}
 				/>
 				{season.news.map(news => (
-						<PBox key={news.heading}>
-							{news.image &&
-									<CheckLink
-											href={news.href}
-									>
-										<ImgBox type="post">
-											<Img src={news.image || ""} alt={news.heading}/>
-										</ImgBox>
-									</CheckLink>
-							}
-							<PTitle startAt={news.startAt} endAt={news.endAt}>
-								<h2>
-									<CheckLink
-											href={news.href}
-									>
-										{news.heading}
-									</CheckLink>
-								</h2>
-							</PTitle>
-							{news?.text &&
-									<PText className={styles.text}>
-										<MDXRemote source={news.text}/>
-									</PText>
-							}
-						</PBox>)
+								<PBox key={news.heading}>
+									{news.image &&
+											<CheckLink
+													href={news.href}
+											>
+												<ImgBox type="post">
+													<Img src={news.image || ""} alt={news.heading}/>
+												</ImgBox>
+											</CheckLink>
+									}
+									<PTitle startAt={news.startAt} endAt={news.endAt}>
+										<h2>
+											<CheckLink
+													href={news.href}
+											>
+												{news.heading}
+											</CheckLink>
+										</h2>
+									</PTitle>
+									{news?.text &&
+											<PText className={styles.text}>
+												<MDXRemote source={news.text}/>
+											</PText>
+									}
+								</PBox>
+						)
 				)
 				}
 			</>))}
@@ -72,21 +73,11 @@ export default async function News() {
 			<OnThisPageItem>
 				Сезоны
 			</OnThisPageItem>
-			<OnThisPageItem href="#5season">
-				5 сезон
-			</OnThisPageItem>
-			<OnThisPageItem href="#4season">
-				4 сезон
-			</OnThisPageItem>
-			<OnThisPageItem href="#3season">
-				3 сезон
-			</OnThisPageItem>
-			<OnThisPageItem href="#2season">
-				2 сезон
-			</OnThisPageItem>
-			<OnThisPageItem href="#1season">
-				1 сезон
-			</OnThisPageItem>
+			{seasons.map(season => (
+					<OnThisPageItem href={`#${season.number}season`}>
+						{season.number} сезон
+					</OnThisPageItem>
+			))}
 		</OnThisPage>
 	</>)
 }

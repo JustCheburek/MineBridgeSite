@@ -28,7 +28,6 @@ export default function Features() {
 								<BatSvg/>
 							</ImgBox>
 
-							<GHint className="light_gray_color">Обновление</GHint>
 							<GText>Лор</GText>
 						</GBox>
 
@@ -52,7 +51,6 @@ export default function Features() {
 								<Img src="/features/guides/blocks.png" alt="Блоки"/>
 							</ImgBox>
 
-							<GHint className="green_color">Обновление</GHint>
 							<GText>Гайды</GText>
 						</GBox>
 
@@ -67,14 +65,12 @@ export default function Features() {
 							<GText>Моды</GText>
 						</GBox>
 
-						<GBox
-								href="http://map.minebridge.site" anotherSite
-								imgs="one"
-						>
+						<GBox href="http://map.minebridge.site" anotherSite imgs="one">
 							<ImgBox className={styles.img} type="grid">
 								<Img src="/features/map.png" alt="Карта"/>
 							</ImgBox>
 
+							<GHint className="green_color">Обновление</GHint>
 							<GText>Карта</GText>
 						</GBox>
 
@@ -131,7 +127,6 @@ export default function Features() {
 								<Img src="/index/unic/calendar.webp" alt="Календарь" pixel/>
 							</ImgBox>
 
-							<GHint className="red_color">Новинка</GHint>
 							<GText>Дизайн</GText>
 						</GBox>
 
