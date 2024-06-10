@@ -74,7 +74,7 @@ export default async function News() {
 				Сезоны
 			</OnThisPageItem>
 			{seasons.map(season => (
-					<OnThisPageItem href={`#${season.number}season`} key={season.key}>
+					<OnThisPageItem href={`#${season.number}season`} key={season.number}>
 						{season.number} сезон
 					</OnThisPageItem>
 			))}
