@@ -279,7 +279,7 @@ export default function Rules() {
 								</li>
 								<li>
 									Cпавн верхнего мира. Любой может строить магазины и другие украшения в пределах
-									разумного. Спавн разделён на 4 зоны, строительство строго по зонам
+									разумного. Стиль спавна указан на табличке на спавне
 								</li>
 								<li>
 									Спавн ада
@@ -291,8 +291,8 @@ export default function Rules() {
 						</Rule>
 						<Rule number={3.6}>
 							<p>
-								Максимальная площадь территории на одного игрока - 300 блоков на 300 блоков{" "}
-								<small>(90 000 метров²)</small>
+								Максимальная расстояние территории на одного игрока - 250 блоков на 250 блоков{" "}
+								<small>(Площадь - 62.500 блоков)</small>
 							</p>
 							<p>
 								Игроки могут объединяться, чтобы захватывать территории побольше
@@ -613,7 +613,6 @@ export default function Rules() {
 					<OnThisPageItem href="#court">
 						<span className={styles.number_box}>8</span>
 						Суд
-						<small style={{marginLeft: "0.5em"}} className="green_color">новое</small>
 					</OnThisPageItem>
 					<OnThisPageItem href="#roles">
 						<span className={styles.number_box}>9</span>
