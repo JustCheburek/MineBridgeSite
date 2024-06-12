@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const timeAgo = new TimeAgo('ru-RU');
 
 export default function Rules() {
-	const lastUpdate = new Date(2024, 5 - 1, 31);
+	const lastUpdate = new Date(2024, 6 - 1, 12);
 
 	return (
 			<>
@@ -286,6 +286,9 @@ export default function Rules() {
 								</li>
 								<li>
 									Главный остров в энде и все его порталы
+								</li>
+								<li>
+									Спавнера блейзов в адских крепостях
 								</li>
 							</ul>
 						</Rule>
