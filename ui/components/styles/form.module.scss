@@ -1,5 +1,15 @@
 @import "@styles/mixins";
 
+.form {
+  // flex-wrap: wrap;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+
+  margin-block: 20px;
+  padding: 5px;
+}
+
 .group {
   display: flex;
   justify-content: space-around;
@@ -10,16 +20,6 @@
   & > * {
     flex: 1;
   }
-}
-
-.form {
-  // flex-wrap: wrap;
-  display: grid;
-  place-content: center;
-  gap: 10px;
-
-  margin-block: 20px;
-  padding: 5px;
 }
 
 .label:has(.input[type="radio"]),
@@ -65,10 +65,10 @@
 }
 
 .textarea {
-  min-height: 100px;
-  max-height: 250px;
-
-  resize: vertical;
+  min-width: 250px;
+  max-width: 500px;
+  min-height: 150px;
+  max-height: 450px;
 }
 
 .button {
@@ -105,5 +105,11 @@
 
   .input[type="radio"] {
     display: none;
+  }
+}
+
+@media (width < 550px) {
+  .textarea {
+    resize: vertical;
   }
 }

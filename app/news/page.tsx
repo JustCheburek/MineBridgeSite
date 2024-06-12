@@ -12,6 +12,11 @@ import {getSeasons} from "@/services";
 import {MDXRemote} from 'next-mdx-remote/rsc'
 import {NotFound} from "@components/notFound";
 import {CheckLink} from "@components/checkLink";
+import {Form, FormInput, FormLabel, FormTextarea} from "@components/form";
+import React from "react";
+import {validate} from "@services/validate";
+import {cookies} from "next/headers";
+import {lucia} from "@server/lucia";
 
 export const metadata: Metadata = {
 	title: "Новости | Майнбридж",
@@ -19,6 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function News() {
+	const {isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 	const seasons = await getSeasons()
 
 	return (
@@ -31,6 +37,25 @@ export default async function News() {
 							startAt={new Date(season.startAt)}
 							endAt={new Date(season.endAt)}
 					/>
+
+					{isAdmin &&
+							<Form>
+								<FormLabel>
+									<FormInput
+											name="title"
+											placeholder="Название"
+									/>
+								</FormLabel>
+
+								<FormLabel>
+									<FormTextarea
+											name="text"
+											placeholder="Текст с markdown"
+									/>
+								</FormLabel>
+							</Form>
+					}
+
 					{season.news.map(news => (
 									<PBox key={news.heading}>
 										{news.image &&
