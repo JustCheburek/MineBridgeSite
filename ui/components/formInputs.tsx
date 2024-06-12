@@ -33,7 +33,7 @@ export const InputNameCheck = ({nameInput, setNameInput, ...props}: {
 		<InputName
 				value={nameInput}
 				onChange={e => {
-					if (e.target.value.match(/[^a-zA-Z0-9-]/)) {
+					if (e.target.value.match(/[^a-zA-Z0-9-_]/)) {
 						setSymbol(JSON.stringify(e.target.value))
 					} else {
 						setNameInput(e.target.value)
