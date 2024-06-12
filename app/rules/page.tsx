@@ -8,7 +8,7 @@ import styles from './rules.module.scss';
 
 // Компоненты
 import {Punishment, Rule, RulesBox} from "./components";
-import {OnThisPage, OnThisPageItem} from "@components/sideNav";
+import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
 import {TextUrl} from "@components/textUrl";
 import {UserBox} from "@components/userBox";
 
@@ -579,45 +579,45 @@ export default function Rules() {
 				</div>
 
 				<OnThisPage>
-					<OnThisPageItem>
+					<OnThisPageHeading>
 						Содержание
-					</OnThisPageItem>
-					<OnThisPageItem href="#general">
+					</OnThisPageHeading>
+					<OnThisPageLink href="#general">
 						<span className={styles.number_box}>1</span>
 						Общение
-					</OnThisPageItem>
-					<OnThisPageItem href="#game_interferences">
+					</OnThisPageLink>
+					<OnThisPageLink href="#game_interferences">
 						<span className={styles.number_box}>2</span>
 						Игра
-					</OnThisPageItem>
-					<OnThisPageItem href="#areas">
+					</OnThisPageLink>
+					<OnThisPageLink href="#areas">
 						<span className={styles.number_box}>3</span>
 						Территории
-					</OnThisPageItem>
-					<OnThisPageItem href="#cheats">
+					</OnThisPageLink>
+					<OnThisPageLink href="#cheats">
 						<span className={styles.number_box}>4</span>
 						Читы
-					</OnThisPageItem>
-					<OnThisPageItem href="#trading">
+					</OnThisPageLink>
+					<OnThisPageLink href="#trading">
 						<span className={styles.number_box}>5</span>
 						Торговля
-					</OnThisPageItem>
-					<OnThisPageItem href="#unknown_url">
+					</OnThisPageLink>
+					<OnThisPageLink href="#unknown_url">
 						<span className={styles.number_box}>6</span>
 						Реклама
-					</OnThisPageItem>
-					<OnThisPageItem href="#lor">
+					</OnThisPageLink>
+					<OnThisPageLink href="#lor">
 						<span className={styles.number_box}>7</span>
 						Лор
-					</OnThisPageItem>
-					<OnThisPageItem href="#court">
+					</OnThisPageLink>
+					<OnThisPageLink href="#court">
 						<span className={styles.number_box}>8</span>
 						Суд
-					</OnThisPageItem>
-					<OnThisPageItem href="#roles">
+					</OnThisPageLink>
+					<OnThisPageLink href="#roles">
 						<span className={styles.number_box}>9</span>
 						Роли
-					</OnThisPageItem>
+					</OnThisPageLink>
 				</OnThisPage>
 			</>
 	)

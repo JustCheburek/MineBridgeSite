@@ -9,7 +9,7 @@ type SocialBox = {
 	clicked?: number
 	updateCount: Function
 	isMe: boolean
-	isModer?: boolean
+	isModer: boolean
 }
 
 export function SocialBox({social, url, clicked, isModer, updateCount, isMe}: SocialBox) {

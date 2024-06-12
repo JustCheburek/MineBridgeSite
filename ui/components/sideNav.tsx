@@ -1,9 +1,9 @@
 "use client";
 
 // React
-import type {PropsWithChildren} from "react";
+import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
 import {useState} from "react";
-import Link from "next/link";
+import Link, {type LinkProps} from "next/link";
 
 // Стиль
 import styles from "./styles/sideNav.module.scss";
@@ -22,7 +22,7 @@ export function Subsections({children, menu}: PropsWithChildren<{ menu: string }
 	}
 
 	return (
-			<nav className={`${styles.container} ${subsectionsStyles.container} ${burger ? subsectionsStyles.burger_active : ""}`}>
+			<nav className={`${subsectionsStyles.container} ${burger ? subsectionsStyles.burger_active : ""}`}>
 				{/* Бургер иконка */}
 				<label className={`for_mobile ${subsectionsStyles.burger}`}>
 					<Burger burger={burger} setBurger={setBurger} short/>
@@ -52,19 +52,28 @@ export const SubsectionItem = ({children, href, className = ""}: PropsWithChildr
 )
 
 export const OnThisPage = ({children}: PropsWithChildren) => (
-		<nav className={`for_pc ${styles.container}`}>
+		<nav className="for_pc">
 			<ul className={`not_indent remove_marker ${onThisPageStyles.box} ${styles.box}`}>
 				{children}
 			</ul>
 		</nav>
 )
 
-export const OnThisPageItem = ({children, href}: PropsWithChildren<{ href?: string }>) => (
+export const OnThisPageHeading = ({children}: PropsWithChildren) => (
 		<li className={styles.item}>
-			{href
-					? <Link href={href} className={styles.link}>{children}</Link>
-					: <h3 className="unic_color">{children}</h3>
-			}
+			<h3 className="unic_color">{children}</h3>
+		</li>
+)
+
+export const OnThisPageLink = ({children, ...props}: PropsWithChildren<LinkProps>) => (
+		<li className={styles.item}>
+			<Link className={styles.link} {...props}>{children}</Link>
+		</li>
+)
+
+export const OnThisPageButton = ({children, ...props}: PropsWithChildren<ComponentPropsWithoutRef<"button">>) => (
+		<li className={styles.item}>
+			<button className={styles.link} {...props}>{children}</button>
 		</li>
 )
 

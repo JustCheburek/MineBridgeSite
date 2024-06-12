@@ -8,7 +8,8 @@ export const validate = cache(
 		async (sessionId?: string): Promise<{user: User | null} & RolesApi> => {
 			if (!sessionId) {
 				return {
-					user: null, roles: []
+					user: null, roles: [],
+					isModer: false, isAdmin: false, isContentMaker: false
 				}
 			}
 

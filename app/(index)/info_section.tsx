@@ -29,6 +29,9 @@ export function InfoSection() {
 						Влететь на сервер
 					</Url>
 
+					<h4 className="unic_color medium-font">
+						22 июня - 6 сезон
+					</h4>
 					<p>
 						1.20+ · Minecraft: Java Edition · Лицензия не обязательна
 					</p>
@@ -51,6 +54,9 @@ export function InfoSection() {
 						Влететь на сервер
 					</Url>
 
+					<h4 className="unic_color medium-font">
+						22 июня - 6 сезон
+					</h4>
 					<p>1.20+</p>
 					<p>Minecraft: Java Edition</p>
 					<p>Лицензия не обязательна</p>

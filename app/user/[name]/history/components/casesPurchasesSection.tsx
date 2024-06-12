@@ -9,7 +9,7 @@ import {columns} from "@columns/casesPurchases";
 // Компоненты
 import {Table} from "@components/table";
 import Link from "next/link";
-import {CasesPurchasesModal} from "@modals/casesPurchasesModal";
+import {CasesPurchasesModal} from "@modals/casesPurchases";
 import {useState} from "react";
 import {Case, Drop} from "@/types/case";
 import type {CaseData} from "@/types/purchase";

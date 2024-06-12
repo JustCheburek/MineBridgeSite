@@ -12,7 +12,6 @@ function updateRating(this: User) {
 	this.rating = this?.punishments?.reduce(
 			(accum, {rating}) => accum + rating, 0
 	)
-	this.onlineAt = new Date()
 }
 
 @pre<User>("save", updateRating)

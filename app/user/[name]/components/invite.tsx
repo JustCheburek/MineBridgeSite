@@ -2,7 +2,7 @@ import type {User} from "lucia";
 import {UserBox} from "@components/userBox";
 import styles from "../profile.module.scss";
 
-export function InviteSection({user, isMe, isModer}: { user: User, isMe: boolean, isModer?: boolean }) {
+export function InviteSection({user, isMe, isModer}: { user: User, isMe: boolean, isModer: boolean }) {
 	return (
 			<section className="center_text grid_center">
 				<h2>Приглашения</h2>
@@ -20,7 +20,7 @@ export function InviteSection({user, isMe, isModer}: { user: User, isMe: boolean
 	)
 }
 
-function FromBox({user, isMe, isModer}: { user: User, isMe: boolean, isModer?: boolean }) {
+function FromBox({user, isMe, isModer}: { user: User, isMe: boolean, isModer: boolean }) {
 	if (!user?.from || !user.from?.userId || !user.from?.place) return
 
 	return (

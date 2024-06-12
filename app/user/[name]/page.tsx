@@ -137,7 +137,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 	)
 }
 
-function TwitchFrame({isContentMaker, user}: { isContentMaker?: boolean, user: User }) {
+function TwitchFrame({isContentMaker, user}: { isContentMaker: boolean, user: User }) {
 	if (!isContentMaker) return
 
 	const twitchName = user?.socials?.find(({social}) => social === "twitch")?.name

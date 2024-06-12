@@ -10,7 +10,7 @@ import {columns} from "@columns/punishments";
 
 // Компоненты
 import {Table} from "@components/table";
-import {RatingModal} from "@modals/ratingModal";
+import {RatingModal} from "@modals/rating";
 import Link from "next/link";
 
 type PunishmentSection = {

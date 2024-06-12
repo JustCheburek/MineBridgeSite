@@ -6,7 +6,7 @@ import styles from './mods.module.scss';
 
 // Компоненты
 import {NotFound} from "@components/notFound";
-import {OnThisPage, OnThisPageBox, OnThisPageItem} from "@components/sideNav";
+import {OnThisPage, OnThisPageBox, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
 import {ErrorSvg, SuccessSvg} from "@ui/SVGS";
 import Link from "next/link";
 
@@ -146,23 +146,23 @@ export default function Mods() {
 					</div>
 
 					<OnThisPage>
-						<OnThisPageItem>
+						<OnThisPageHeading>
 							Содержание
-						</OnThisPageItem>
-						<OnThisPageItem href="#allowed">
+						</OnThisPageHeading>
+						<OnThisPageLink href="#allowed">
 							Разрешено
-						</OnThisPageItem>
+						</OnThisPageLink>
 						<OnThisPageBox>
-							<OnThisPageItem href="#allowed_mods">
+							<OnThisPageLink href="#allowed_mods">
 								Моды
-							</OnThisPageItem>
-							<OnThisPageItem href="#allowed_rps">
+							</OnThisPageLink>
+							<OnThisPageLink href="#allowed_rps">
 								Ресурспаки
-							</OnThisPageItem>
+							</OnThisPageLink>
 						</OnThisPageBox>
-						<OnThisPageItem href="#forbidden">
+						<OnThisPageLink href="#forbidden">
 							Запрещено
-						</OnThisPageItem>
+						</OnThisPageLink>
 					</OnThisPage>
 				</>
 			)

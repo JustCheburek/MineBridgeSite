@@ -34,7 +34,7 @@ const UserNotWhitelisted = ({setModal}: { setModal: setModal }) => (
 type WhitelistSection = {
 	user: User
 	isMe: boolean
-	isModer?: boolean
+	isModer: boolean
 	WhitelistFunc: ((formData: FormData) => void)
 }
 

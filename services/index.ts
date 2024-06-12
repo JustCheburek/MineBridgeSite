@@ -1,4 +1,5 @@
 "use server"
+
 import type {User} from "lucia";
 import {notFound} from "next/navigation";
 import {unstable_cache as cache} from "next/cache";
@@ -10,9 +11,9 @@ import type {Role} from "@/types/role";
 import {Case, Drop} from "@/types/case";
 
 export interface isRoles {
-	isModer?: boolean
-	isAdmin?: boolean
-	isContentMaker?: boolean
+	isModer: boolean
+	isAdmin: boolean
+	isContentMaker: boolean
 }
 
 export interface RolesApi extends isRoles {
@@ -22,7 +23,7 @@ export interface RolesApi extends isRoles {
 export const getRoles = cache(
 		async (discordId?: string): Promise<RolesApi> => {
 			if (!discordId) {
-				return {roles: []}
+				return {roles: [], isAdmin: false, isModer: false, isContentMaker: false}
 			}
 
 			const allRoles = await axios.get<Role[]>(
@@ -93,7 +94,10 @@ export const getUser = cache(
 
 export const getAuthor = cache(
 		async (id?: string): Promise<{user: User | null} & RolesApi> => {
-			const user: User | null = await userModel.findById(id).lean()
+			const user: User | null = await userModel.findByIdAndUpdate(
+					id,
+					{onlineAt: new Date()}
+			).lean()
 
 			return {user, ...await getRoles(user?.discordId)}
 		},
@@ -102,7 +106,18 @@ export const getAuthor = cache(
 )
 
 export const getUsers = cache(
-		async () => await userModel.find().lean() as User[],
+		async () => {
+			const users = await userModel.find().lean() as User[]
+
+			users.sort(({createdAt: createdAt1}, {createdAt: createdAt2}) => {
+				if (!createdAt1) return 1
+				if (!createdAt2) return -1
+
+				return new Date(createdAt2).getTime() - new Date(createdAt1).getTime()
+			})
+
+			return users
+		},
 		["users", "userLike", "all"],
 		{revalidate: 300, tags: ["users", "userLike", "all"]}
 )
@@ -120,7 +135,15 @@ export const getDrops = cache(
 )
 
 export const getSeasons = cache(
-		async () => await seasonModel.find().lean() as Season[],
+		async () => {
+			const seasons = await seasonModel.find().lean() as Season[]
+
+			seasons.sort(({number: number1}, {number: number2}) =>
+					number2 - number1
+			)
+
+			return seasons
+		},
 		["seasons", "news", "events", "all"],
 		{revalidate: 400, tags: ["seasons", "news", "events", "all"]}
 )

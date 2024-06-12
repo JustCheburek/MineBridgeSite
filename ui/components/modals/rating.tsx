@@ -1,11 +1,11 @@
 // React
+import {useChangeDictState, useChangeListState} from "@hooks/useChangeState";
 import {User} from "lucia";
+import {type Action, Punishment} from "@/types/punishment";
 
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormGroup, FormInput, FormLabel} from "@components/form";
-import {ChangeEvent, useState} from "react";
-import {Action, Punishment} from "@/types/punishment";
 
 type RatingModal = {
 	name?: User["name"]
@@ -20,30 +20,11 @@ export const RatingModal = (
 			name, user, ratingFunc,
 			modal, setModal
 		}: RatingModal) => {
-	const [punishment, setPunishment] = useState(
+	const [punishment,, onPunishmentChange] = useChangeDictState(
 			{author: name} as Punishment
 	)
 
-	const [actions, setActions] = useState(
-			[] as Action[]
-	)
-
-	const ratingChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setPunishment({
-			...punishment,
-			[e.target.name]: e.target.value
-		})
-	}
-
-	const actionsChange = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.checked) {
-			setActions([...actions, e.target.name as Action])
-		} else {
-			setActions(actions.filter((action) =>
-					action !== e.target.name
-			))
-		}
-	}
+	const [actions,, onActionsChange] = useChangeListState<Action>()
 
 	return (
 			<Modal setModal={setModal} modal={modal}>
@@ -59,7 +40,7 @@ export const RatingModal = (
 								autoComplete="reason"
 								maxLength={26}
 								value={punishment.reason}
-								onChange={ratingChange}
+								onChange={onPunishmentChange}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -69,7 +50,7 @@ export const RatingModal = (
 								placeholder="Рейтинг"
 								autoComplete="rating"
 								value={punishment.rating}
-								onChange={ratingChange}
+								onChange={onPunishmentChange}
 						/>
 					</FormLabel>
 					<FormLabel>
@@ -78,7 +59,7 @@ export const RatingModal = (
 								placeholder="Автор"
 								autoComplete="author"
 								value={punishment.author}
-								onChange={ratingChange}
+								onChange={onPunishmentChange}
 						/>
 					</FormLabel>
 					<h3>Везде</h3>
@@ -89,7 +70,7 @@ export const RatingModal = (
 									name="mute"
 									disabled={punishment.rating > 0 || actions.includes("unmute")}
 									checked={actions.includes("mute")}
-									onChange={actionsChange}
+									onChange={onActionsChange}
 							/>
 							Мут
 						</FormLabel>
@@ -99,7 +80,7 @@ export const RatingModal = (
 									name="unmute"
 									disabled={punishment.rating < 0 || actions.includes("mute")}
 									checked={actions.includes("unmute")}
-									onChange={actionsChange}
+									onChange={onActionsChange}
 							/>
 							Размут
 						</FormLabel>
@@ -112,7 +93,7 @@ export const RatingModal = (
 									name="mineBan"
 									disabled={punishment.rating > 0 || actions.includes("minePardon")}
 									checked={actions.includes("mineBan")}
-									onChange={actionsChange}
+									onChange={onActionsChange}
 							/>
 							Бан
 						</FormLabel>
@@ -122,7 +103,7 @@ export const RatingModal = (
 									name="minePardon"
 									disabled={punishment.rating < 0 || actions.includes("mineBan")}
 									checked={actions.includes("minePardon")}
-									onChange={actionsChange}
+									onChange={onActionsChange}
 							/>
 							Разбан
 						</FormLabel>
@@ -140,7 +121,7 @@ export const RatingModal = (
 									name="dsBan"
 									disabled={punishment.rating > 0 || actions.includes("dsPardon") || !user.discordId}
 									checked={actions.includes("dsBan")}
-									onChange={actionsChange}
+									onChange={onActionsChange}
 							/>
 							Бан
 						</FormLabel>
@@ -150,7 +131,7 @@ export const RatingModal = (
 									name="dsPardon"
 									disabled={punishment.rating < 0 || actions.includes("dsBan") || !user.discordId}
 									checked={actions.includes("dsPardon")}
-									onChange={actionsChange}
+									onChange={onActionsChange}
 							/>
 							Разбан
 						</FormLabel>
