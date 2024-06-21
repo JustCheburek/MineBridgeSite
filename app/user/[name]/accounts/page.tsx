@@ -27,7 +27,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 		user: author,
 		isAdmin, isModer
 	} = await validate(cookies().get(lucia.sessionCookieName)?.value)
-	const {user, isMe, isContentMaker} = await getUser({name}, author?._id, isModer)
+	const {user, isMe, isContentMakerCheck} = await getUser({name}, author?._id, isModer)
 
 	const adminAccess = isAdmin || isMe
 
@@ -85,7 +85,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 				</h1>
 
 				<ChangeParam
-						user={user} isMe={isMe} isModer={isModer} isAdmin={isAdmin} isContentMaker={isContentMaker}
+						user={user} isMe={isMe} isModer={isModer} isAdmin={isAdmin} isContentMaker={isContentMakerCheck}
 						Change={Change}
 				/>
 

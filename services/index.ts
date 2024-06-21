@@ -86,7 +86,7 @@ export const getUser = cache(
 				}
 			}
 
-			return {user, isMe, ...roles, isContentMaker: (isMe || roles.isModer) && roles.isContentMaker}
+			return {user, isMe, ...roles, isContentMakerCheck: (isMe || roles.isModer) && roles.isContentMaker}
 		},
 		["user", "userLike", "all"],
 		{revalidate: 300, tags: ["user", "userLike", "all"]}
