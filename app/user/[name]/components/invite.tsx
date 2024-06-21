@@ -1,16 +1,19 @@
 import type {User} from "lucia";
 import {UserBox} from "@components/userBox";
 import styles from "../profile.module.scss";
+import {InviteLink} from "./inviteLink";
 
-export function InviteSection({user, isMe, isModer}: { user: User, isMe: boolean, isModer: boolean }) {
+type InviteSection = {
+	user: User, isMe: boolean, isModer: boolean, isContentMaker: boolean
+}
+
+export function InviteSection({user, isMe, isModer, isContentMaker}: InviteSection) {
 	return (
 			<section className="center_text grid_center">
 				<h2>Приглашения</h2>
 				<h3>1 приглашение = 5 рейтинга</h3>
 				{isMe &&
-						<p className="all_select unic_color break">
-							{process.env.NEXT_PUBLIC_URL}?userId={user._id}&place=friend
-						</p>
+						<InviteLink _id={user._id} isContentMaker={isContentMaker}/>
 				}
 				<FromBox user={user} isMe={isMe} isModer={isModer}/>
 				{user.invites.map(userId => (
