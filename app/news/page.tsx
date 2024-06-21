@@ -1,22 +1,26 @@
 // React
 import type {Metadata} from "next";
+import {lucia} from "@server/lucia";
+import {validate} from "@services/validate";
+import {cookies} from "next/headers";
+import {getSeasons} from "@/services";
+import {MDXRemote} from 'next-mdx-remote/rsc'
+import {seasonModel} from "@server/models";
 
 // Стили
 import styles from "./news.module.scss"
+
+// Типы
+import {Season} from "@/types/season";
 
 // Компоненты
 import {SeasonBox} from "./components"
 import {PBox, PText, PTitle} from "@components/post";
 import {Img, ImgBox} from "@components/img";
-import {getSeasons} from "@/services";
-import {MDXRemote} from 'next-mdx-remote/rsc'
 import {NotFound} from "@components/notFound";
 import {CheckLink} from "@components/checkLink";
-import {Form, FormInput, FormLabel, FormTextarea} from "@components/form";
-import React from "react";
-import {validate} from "@services/validate";
-import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
+import {AddNewForm} from "@app/news/components/addNewForm";
+import {revalidateTag} from "next/cache";
 
 export const metadata: Metadata = {
 	title: "Новости | Майнбридж",
@@ -26,6 +30,21 @@ export const metadata: Metadata = {
 export default async function News() {
 	const {isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 	const seasons = await getSeasons()
+
+	async function addNew(formData: FormData, number: Season["number"]) {
+		"use server";
+
+		await seasonModel.findOneAndUpdate(
+				{number},
+				{
+					$push: {
+						news: Object.fromEntries(formData)
+					}
+				}
+		)
+
+		revalidateTag("seasons")
+	}
 
 	return (
 			<div className="news_content">
@@ -39,21 +58,7 @@ export default async function News() {
 					/>
 
 					{isAdmin &&
-							<Form>
-								<FormLabel>
-									<FormInput
-											name="title"
-											placeholder="Название"
-									/>
-								</FormLabel>
-
-								<FormLabel>
-									<FormTextarea
-											name="text"
-											placeholder="Текст с markdown"
-									/>
-								</FormLabel>
-							</Form>
+							<AddNewForm addNew={addNew} number={season.number}/>
 					}
 
 					{season.news.map(news => (
