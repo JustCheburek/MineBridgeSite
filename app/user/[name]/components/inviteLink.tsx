@@ -22,7 +22,7 @@ export function InviteLink({_id, isContentMaker}: InviteLink) {
 				<Form>
 					<FormGroup>
 						{places.map(place =>
-								<FormLabel>
+								<FormLabel key={place}>
 									<FormInput
 											name="place"
 											type="radio"
