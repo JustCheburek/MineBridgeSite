@@ -16,6 +16,7 @@ import {DiscordSvg, EmailSvg, GoogleSvg, SuccessSvg} from "@ui/SVGS";
 import {ChangeParam, DeleteUser} from "./components";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
+import {User} from "lucia";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Аккаунты | Майнбридж`,
@@ -92,6 +93,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 				<div className={styles.providers_box}>
 					<Provider
 							name="email"
+							user={user}
 							id={user.email}
 							isMe={isMe}
 					>
@@ -99,6 +101,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					</Provider>
 					<Provider
 							name="discord"
+							user={user}
 							id={user.discordId}
 							isMe={isMe}
 					>
@@ -106,6 +109,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					</Provider>
 					<Provider
 							name="google"
+							user={user}
 							id={user.googleId}
 							isMe={isMe}
 					>
@@ -119,17 +123,20 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 	)
 }
 
-function Provider({id, name, isMe, children}: PropsWithChildren<{
-	id?: string,
-	name: string,
+type Provider = {
+	name: string
 	isMe: boolean
-}>) {
+	user: User
+	id?: string
+}
+
+function Provider({id, user, name, isMe, children}: PropsWithChildren<Provider>) {
 	if (!id && !isMe) {
 		return null
 	}
 
 	return (
-			<div className={styles.box}>
+			<Link href={`/auth/${name}?name=${user.name}`} className={styles.box}>
 				{children}
 				{id
 						? <>
@@ -138,10 +145,10 @@ function Provider({id, name, isMe, children}: PropsWithChildren<{
 							</p>
 							<SuccessSvg/>
 						</>
-						: <Link href={`/auth/${name}?name=${name}`} className="unic_color medium-font center_text">
+						: <span className="unic_color medium-font">
 							Привязать
-						</Link>
+						</span>
 				}
-			</div>
+			</Link>
 	)
 }

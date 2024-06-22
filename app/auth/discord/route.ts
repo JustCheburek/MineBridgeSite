@@ -23,15 +23,13 @@ export async function GET(request: NextRequest) {
 		sameSite: "lax"
 	});
 
-	if (name) {
-		cookies().set("name", name, {
-			path: "/",
-			secure: process.env.NODE_ENV === "production",
-			httpOnly: true,
-			maxAge: 60 * 60,
-			sameSite: "lax"
-		})
-	}
+	cookies().set("name", name, {
+		path: "/",
+		secure: process.env.NODE_ENV === "production",
+		httpOnly: true,
+		maxAge: 60 * 60,
+		sameSite: "lax"
+	})
 
 	return NextResponse.redirect(url)
 }
