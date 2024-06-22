@@ -26,7 +26,7 @@ export default function Totems() {
 	const totems = [
 		"JustCheburek",
 		"Kawa11Fox",
-		"kyaVrorrEtsuJ",
+		"JustVayk",
 		"Melissa21",
 		"IIIU3A45",
 		"TOXSER",
@@ -42,7 +42,9 @@ export default function Totems() {
 		"fantomvip23",
 		"_lakrkarBroYT",
 		"Rub_Kub",
-		"MarioBoi"
+		"MarioBoi",
+		"DobiFedor",
+		"_Fredimine_"
 	]
 
 	const max_deg = 180  // Максимальный уровень наклона (от -80 до 80)

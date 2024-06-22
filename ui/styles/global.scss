@@ -139,6 +139,12 @@ a.unic_color:active, button.unic_color:active {
   user-select: all;
 }
 
+iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
 // Убирание маркера
 .remove_marker {
   list-style-type: none;

@@ -146,7 +146,6 @@ function TwitchFrame({isContentMaker, user}: { isContentMaker: boolean, user: Us
 	return (
 			<iframe
 					src={`https://player.twitch.tv/?channel=${twitchName}&parent=${process.env.NEXT_PUBLIC_DOMEN}`}
-					className={styles.iframe}
 					allowFullScreen
 					frameBorder={0}
 			/>
