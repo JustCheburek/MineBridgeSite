@@ -75,6 +75,11 @@ export default function Guides() {
 							<GText>Мебель</GText>
 						</GBox>
 
+						<GBox href="https://minecraft.wiki/w/Villager_Trade_Rebalance" anotherSite>
+							<GHint className="red_color">Новинка</GHint>
+							<GText>Жители</GText>
+						</GBox>
+
 						{/*<Link href="/features/guides/litematica" className="box two crafts">
 							<img src="/features/guides/litematica/house.jpg" alt="Дом из мема: ОЙ МАМА ПРИШЛА" className="img"/>
 							<img src="/features/guides/blocks.png" alt="Блоки" className="img"/>
