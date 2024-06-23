@@ -19,7 +19,7 @@ import {revalidateTag} from "next/cache";
 import {ColorText} from "@app/utils";
 import {MostikiSvg, type SVGS_NAME} from "@ui/SVGS";
 import {URLS_START} from "@/const";
-import {SocialBox} from "@app/user/[name]/components/social";
+import {SocialBox} from "./components/social";
 import {User} from "lucia";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
