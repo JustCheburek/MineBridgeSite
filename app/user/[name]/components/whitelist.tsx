@@ -84,7 +84,7 @@ export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: Whitelist
 					</p>
 					<p>
 						Если <span className="red_color">нет</span>, тогда вы можете изменить<br/>
-						его нажав кнопку справа от своего ника!
+						его во вкладке в аккаунтах!
 					</p>
 					<Form action={formData => {
 						WhitelistFunc(formData)

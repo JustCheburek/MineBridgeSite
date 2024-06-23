@@ -15,7 +15,7 @@ import {WhitelistSection} from "./components/whitelist";
 import {FormBox} from "./components/form";
 import {RconVC} from "@server/console";
 import {userModel} from "@server/models";
-import {revalidatePath, revalidateTag} from "next/cache";
+import {revalidateTag} from "next/cache";
 import {ColorText} from "@app/utils";
 import {MostikiSvg, type SVGS_NAME} from "@ui/SVGS";
 import {URLS_START} from "@/const";
@@ -51,7 +51,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 			console.error(e)
 		}
 
-		revalidatePath(`/user/${user.name}`)
+		revalidateTag(`user`)
 	}
 
 	async function updateCount(socialName: SVGS_NAME) {
