@@ -41,6 +41,9 @@ export default async function History({params: {name}}: { params: { name: string
 				console.log(`Бан ${user.name}`)
 				await client.run(`vclist remove ${user.name}`)
 				await client.run(`ban ${user.name} Нарушение правил сервера`)
+				if (actions.includes("rollback")) {
+					await client.run(`co rollback action:block`)
+				}
 				await userModel.findByIdAndUpdate(user._id, {whitelist: false})
 			}
 			if (actions.includes("minePardon")) {

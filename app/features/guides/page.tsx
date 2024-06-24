@@ -23,6 +23,18 @@ export default function Guides() {
 					<h1>Гайды</h1>
 
 					<GContainer border>
+						<GBox href="/features/guides/crafts" imgs="two">
+							<ImgBox type="grid">
+								<Img src="/features/crafts/light.png" alt="Свет" pixel/>
+							</ImgBox>
+							<ImgBox type="grid">
+								<Img src="/features/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
+							</ImgBox>
+
+							<GHint className="green_color">Перенос</GHint>
+							<GText>Крафты</GText>
+						</GBox>
+
 						<GBox href="/features/guides/brewery" imgs="three">
 							<ImgBox className={styles.img} type="grid">
 								<Img
@@ -75,7 +87,14 @@ export default function Guides() {
 							<GText>Мебель</GText>
 						</GBox>
 
-						<GBox href="https://minecraft.wiki/w/Villager_Trade_Rebalance" anotherSite>
+						<GBox href="https://minecraft.wiki/w/Villager_Trade_Rebalance" anotherSite imgs="one">
+							<ImgBox type="grid">
+								<Img
+										src="/features/guides/villager.png"
+										alt="Житель"
+								/>
+							</ImgBox>
+
 							<GHint className="red_color">Новинка</GHint>
 							<GText>Жители</GText>
 						</GBox>

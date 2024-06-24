@@ -20,11 +20,11 @@ export const RatingModal = (
 			name, user, ratingFunc,
 			modal, setModal
 		}: RatingModal) => {
-	const [punishment,, onPunishmentChange] = useChangeDictState(
+	const [punishment, , onPunishmentChange] = useChangeDictState(
 			{author: name} as Punishment
 	)
 
-	const [actions,, onActionsChange] = useChangeListState<Action>()
+	const [actions, , onActionsChange] = useChangeListState<Action>()
 
 	return (
 			<Modal setModal={setModal} modal={modal}>
@@ -63,7 +63,7 @@ export const RatingModal = (
 						/>
 					</FormLabel>
 					<h3>Везде</h3>
-					<FormGroup aria-disabled={!user.discordId}>
+					<FormGroup>
 						<FormLabel>
 							<FormInput
 									type="checkbox"
@@ -108,6 +108,16 @@ export const RatingModal = (
 							Разбан
 						</FormLabel>
 					</FormGroup>
+					<FormLabel>
+						<FormInput
+								type="checkbox"
+								name="rollback"
+								disabled={!actions.includes("mineBan")}
+								checked={actions.includes("rollback")}
+								onChange={onActionsChange}
+						/>
+						Откат действий
+					</FormLabel>
 					<h3 className={user.discordId ? "" : "red_color"}>
 						{user.discordId
 								? "Дс"

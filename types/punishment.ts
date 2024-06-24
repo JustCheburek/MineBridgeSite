@@ -18,4 +18,4 @@ export class Punishment {
 	public updatedAt!: Date
 }
 
-export type Action = "mineBan" | "minePardon" | "dsBan" | "mute" | "dsPardon" | "unmute"
+export type Action = "mineBan" | "minePardon" | "dsBan" | "mute" | "dsPardon" | "unmute" | "rollback"

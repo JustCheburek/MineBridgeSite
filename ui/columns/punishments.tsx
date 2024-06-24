@@ -21,12 +21,5 @@ export const columns: ColumnDef<Punishment>[] = [
 		meta: {
 			className: "center_text"
 		}
-	},
-	{
-		accessorKey: "createdAt",
-		header: "Создание",
-		meta: {
-			type: "date"
-		}
 	}
 ]

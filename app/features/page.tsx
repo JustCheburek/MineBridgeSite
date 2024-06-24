@@ -31,18 +31,6 @@ export default function Features() {
 							<GText>Лор</GText>
 						</GBox>
 
-						<GBox href="/features/crafts" imgs="two">
-							<ImgBox type="grid">
-								<Img src="/features/crafts/light.png" alt="Свет" pixel/>
-							</ImgBox>
-							<ImgBox type="grid">
-								<Img src="/features/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
-							</ImgBox>
-
-							<GText>Крафты</GText>
-						</GBox>
-
-
 						<GBox href="/features/guides" imgs="two">
 							<ImgBox className={styles.img} type="grid">
 								<Img src="/features/guides/thinking.png" alt="Думающий чел"/>

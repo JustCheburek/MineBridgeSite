@@ -40,12 +40,5 @@ export const columns: ColumnDef<CaseData>[] = [
 		meta: {
 			type: "number"
 		}
-	},
-	{
-		accessorKey: "createdAt",
-		header: "Дата",
-		meta: {
-			type: "date"
-		}
 	}
 ]

@@ -102,6 +102,9 @@ export default function Brewery() {
 							<p>
 								Для различных рецептов нужны разные виды дерева
 							</p>
+							<p>
+								Один майнкрафт день = 1 год
+							</p>
 						</PText>
 
 						<ImgBox type="post">

@@ -51,7 +51,7 @@ export function DeleteUser({user, Delete}: DeleteUser) {
 type ChangeParam = {
 	user: User
 	isMe: boolean
-	Change?: ((formData: FormData) => void)
+	Change: ((formData: FormData) => void)
 } & isRoles
 
 export function ChangeParam(
@@ -61,6 +61,8 @@ export function ChangeParam(
 			Change
 		}: ChangeParam) {
 	if (!isMe && !isModer) return
+
+	const [save, setSave] = useState("Сохранить")
 
 	return (<>
 		{user.rating <= -50 &&
@@ -82,7 +84,10 @@ export function ChangeParam(
 					</p>
 				</div>
 		}
-		<Form action={Change}>
+		<Form action={formData => {
+			Change(formData)
+			setSave("Сохранено")
+		}}>
 			<InputNameCheckWithoutNameInput
 					defaultName={user.name}
 					disabled={user.rating <= -50 && !isModer}
@@ -177,7 +182,7 @@ export function ChangeParam(
 					</FormLabel>
 			}
 			<FormButton disabled={user.rating <= -100 && !isModer}>
-				Сохранить
+				{save}
 			</FormButton>
 		</Form>
 	</>)
