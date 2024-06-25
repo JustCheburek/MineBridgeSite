@@ -33,11 +33,14 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 
 	const adminAccess = isAdmin || isMe
 
-	async function Change(formData: FormData) {
+	async function Change(formData: FormData): Promise<string> {
 		"use server"
 
 		const name = formData.get("name")
 		const photo = formData.get("photo")
+
+		const candidate = await userModel.findOne({name})
+		if (candidate) return "Никнейм занят" as string
 
 		const socials: Social[] = [
 			{name: formData.get("youtube")?.toString(), social: "youtube"},
@@ -76,6 +79,8 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 		await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})
 
 		revalidateTag("userLike")
+
+		return "Успешно" as string
 	}
 
 	async function Delete(formData: FormData) {
