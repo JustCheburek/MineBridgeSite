@@ -60,9 +60,9 @@ export function ChangeParam(
 			isMe, isModer, isAdmin, isContentMaker,
 			Change
 		}: ChangeParam) {
-	if (!isMe && !isModer) return
-
 	const [save, setSave] = useState("Сохранить")
+
+	if (!isMe && !isModer) return
 
 	return (<>
 		{user.rating <= -50 &&

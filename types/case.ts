@@ -40,6 +40,9 @@ export type DropChance = Chance<DropType>
 
 @modelOptions({schemaOptions: {collection: "cases"}})
 export class Case extends UniqueName<CaseType> {
+	@prop()
+	public oldPrice?: number
+
 	@prop({required: true})
 	public price!: number
 
