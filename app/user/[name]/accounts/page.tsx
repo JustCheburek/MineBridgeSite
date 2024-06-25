@@ -17,6 +17,7 @@ import {ChangeParam, DeleteUser} from "./components";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {User} from "lucia";
+import {RconVC} from "@server/console";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Аккаунты | Майнбридж`,
@@ -56,6 +57,20 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 		let mostiki = user.mostiki
 		if (isAdmin) {
 			mostiki = Number(formData.get("mostiki"))
+		}
+
+		if (user.name !== name) {
+			// Убирание из whitelist
+			const client = await RconVC()
+			await client.run(`vclist remove ${user.name}`)
+
+			await userModel.findByIdAndUpdate(
+					user._id,
+					{whitelist: false}
+			)
+
+			// Смена акка
+			await client.run(`librelogin user migrate ${user.name} ${name}`)
 		}
 
 		await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})

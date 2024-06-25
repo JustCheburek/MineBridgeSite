@@ -49,8 +49,9 @@ export default async function History({params: {name}}: { params: { name: string
 			if (actions.includes("minePardon")) {
 				const client = await RconVC()
 				console.log(`Разбан ${user.name}`)
-				await client.run(`vclist add ${user.name}`)
 				await client.run(`unban ${user.name}`)
+				await client.run(`vclist add ${user.name}`)
+
 				await userModel.findByIdAndUpdate(user._id, {whitelist: true})
 			}
 		} catch (e) {
