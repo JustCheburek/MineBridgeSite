@@ -125,8 +125,8 @@ export default async function Shop() {
 								<CaseInfo description="Обычный стикер">
 									Стандарт
 								</CaseInfo>
-								<Price>
-									40
+								<Price oldPrice={40}>
+									30
 								</Price>
 								<StickerButton/>
 							</Text>
@@ -137,8 +137,8 @@ export default async function Shop() {
 								<CaseInfo description="Невероятно быстро">
 									Экспресс
 								</CaseInfo>
-								<Price>
-									75
+								<Price oldPrice={75}>
+									50
 								</Price>
 								<StickerButton/>
 							</Text>
@@ -166,8 +166,8 @@ export default async function Shop() {
 								<CaseInfo description="Стикеры, но качественнее">
 									Премиум
 								</CaseInfo>
-								<Price>
-									200
+								<Price oldPrice={200}>
+									150
 								</Price>
 								<StickerButton/>
 							</Text>
@@ -178,8 +178,8 @@ export default async function Shop() {
 								<CaseInfo description="Лучшие стикеры вне очереди">
 									Делюкс
 								</CaseInfo>
-								<Price>
-									300
+								<Price oldPrice={300}>
+									200
 								</Price>
 								<StickerButton/>
 							</Text>
