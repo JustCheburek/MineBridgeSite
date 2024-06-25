@@ -125,13 +125,13 @@ export const getUsers = cache(
 export const getCases = cache(
 		async () => await caseModel.find().lean() as Case[],
 		["cases", "shop", "all"],
-		{tags: ["cases", "shop", "all"]}
+		{revalidate: 600, tags: ["cases", "shop", "all"]}
 )
 
 export const getDrops = cache(
 		async () => await dropModel.find().lean() as Drop[],
 		["drops", "shop", "all"],
-		{tags: ["drops", "shop", "all"]}
+		{revalidate: 600, tags: ["drops", "shop", "all"]}
 )
 
 export const getSeasons = cache(
