@@ -25,10 +25,10 @@ export default function Guides() {
 					<GContainer border>
 						<GBox href="/features/guides/crafts" imgs="two">
 							<ImgBox type="grid">
-								<Img src="/features/crafts/light.png" alt="Свет" pixel/>
+								<Img src="/features/guides/crafts/light.png" alt="Свет" pixel/>
 							</ImgBox>
 							<ImgBox type="grid">
-								<Img src="/features/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
+								<Img src="/features/guides/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
 							</ImgBox>
 
 							<GHint className="green_color">Перенос</GHint>
