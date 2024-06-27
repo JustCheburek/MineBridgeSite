@@ -33,14 +33,16 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 
 	const adminAccess = isAdmin || isMe
 
-	async function Change(formData: FormData): Promise<string> {
+	async function Change(formData: FormData) {
 		"use server"
 
-		const name = formData.get("name")
-		const photo = formData.get("photo")
+		const name = formData.get("name") as string
+		const photo = formData.get("photo") as string
 
 		const candidate = await userModel.findOne({name})
-		if (candidate) return "Никнейм занят" as string
+		if (candidate) {
+			throw new Error(`Ник занят`)
+		}
 
 		const socials: Social[] = [
 			{name: formData.get("youtube")?.toString(), social: "youtube"},
@@ -80,7 +82,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 
 		revalidateTag("userLike")
 
-		return "Успешно" as string
+		return
 	}
 
 	async function Delete(formData: FormData) {
