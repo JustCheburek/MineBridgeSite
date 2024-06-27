@@ -25,7 +25,7 @@ export default async function Shop() {
 	const cases = await getCases()
 
 	return (
-			<main className={styles.shop}>
+			<div className={styles.shop}>
 				<MaxSize width={1050}>
 					<h1>Магазин</h1>
 
@@ -186,6 +186,6 @@ export default async function Shop() {
 						</Box>
 					</Section>
 				</MaxSize>
-			</main>
+			</div>
 	);
 }

@@ -24,15 +24,13 @@ export default async function Auth() {
 	const savedName = cookies().get("name")?.value
 
 	return (
-			<main className="auth">
-				<MaxSize className="center_text grid_center">
-					<h1>Вход</h1>
-					<p>
-						Вы уже близко к цели!
-					</p>
+			<MaxSize className="center_text grid_center">
+				<h1>Вход</h1>
+				<p>
+					Вы уже близко к цели!
+				</p>
 
-					<AuthForm savedName={savedName}/>
-				</MaxSize>
-			</main>
+				<AuthForm savedName={savedName}/>
+			</MaxSize>
 	)
 }

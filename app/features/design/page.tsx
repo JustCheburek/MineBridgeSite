@@ -25,68 +25,66 @@ export default function Design() {
 	]
 
 	return (
-			<main style={{overflow: "hidden"}}>
-				<MaxSize width={900}>
-					<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "design", displayname: "Дизайн"}]}/>
-					<h1>Дизайн</h1>
+			<MaxSize width={900}>
+				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "design", displayname: "Дизайн"}]}/>
+				<h1>Дизайн</h1>
 
-					<section className="grid_center">
-						<PTitle>
-							<h2>
-								Авторы
-							</h2>
-						</PTitle>
-						<UserBox _id="j8bsrsdgzqa4n0c"/>
-						<UserBox _id="i5mqq2js4nos1yj"/>
-						<UserBox _id="t2dhhl5igw1sp43"/>
-					</section>
+				<section className="grid_center">
+					<PTitle>
+						<h2>
+							Авторы
+						</h2>
+					</PTitle>
+					<UserBox _id="j8bsrsdgzqa4n0c"/>
+					<UserBox _id="i5mqq2js4nos1yj"/>
+					<UserBox _id="t2dhhl5igw1sp43"/>
+				</section>
 
-					<section className="grid_center">
-						<PTitle>
-							<h2>
-								Шрифт
-							</h2>
-						</PTitle>
-						<p>
-							<Link target="_blank" href="https://fonts.google.com/specimen/Montserrat" className="unic_color">
-								<strong>
-									Montserrat
-								</strong>
-							</Link> — популярный модерн шрифт
-						</p>
-					</section>
+				<section className="grid_center">
+					<PTitle>
+						<h2>
+							Шрифт
+						</h2>
+					</PTitle>
+					<p>
+						<Link target="_blank" href="https://fonts.google.com/specimen/Montserrat" className="unic_color">
+							<strong>
+								Montserrat
+							</strong>
+						</Link> — популярный модерн шрифт
+					</p>
+				</section>
 
-					<section className="grid_center">
-						<PTitle>
-							<h2>
-								Цвета
-							</h2>
-						</PTitle>
-						<div className={styles.pie_box}>
-							<div className={styles.pie_text_box}>
-								{data.map(color => (
-										<div key={color.title} className={styles.pie_text}>
-											<div style={{background: color.color}}
-											     className={`${styles.circle} ${styles[color.title]}`}></div>
-											<p>{color.title}</p>
-											<span className="all_select">{color.color}</span>
-											<small className={styles.percent}>{color.value}{"%"}</small>
-										</div>
-								))}
-							</div>
-							<ColorsPie data={data}/>
+				<section className="grid_center">
+					<PTitle>
+						<h2>
+							Цвета
+						</h2>
+					</PTitle>
+					<div className={styles.pie_box}>
+						<div className={styles.pie_text_box}>
+							{data.map(color => (
+									<div key={color.title} className={styles.pie_text}>
+										<div style={{background: color.color}}
+										     className={`${styles.circle} ${styles[color.title]}`}></div>
+										<p>{color.title}</p>
+										<span className="all_select">{color.color}</span>
+										<small className={styles.percent}>{color.value}{"%"}</small>
+									</div>
+							))}
 						</div>
-					</section>
+						<ColorsPie data={data}/>
+					</div>
+				</section>
 
-					<section className="grid_center">
-						<PTitle>
-							<h2>
-								Лого
-							</h2>
-						</PTitle>
-						<Download/>
-					</section>
-				</MaxSize>
-			</main>
+				<section className="grid_center">
+					<PTitle>
+						<h2>
+							Лого
+						</h2>
+					</PTitle>
+					<Download/>
+				</section>
+			</MaxSize>
 	)
 }

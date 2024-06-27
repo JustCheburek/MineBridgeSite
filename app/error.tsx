@@ -18,13 +18,11 @@ export default function Error(
 	}, [error])
 
 	return (
-			<main>
-				<MaxSize className="center_text">
-					<h1>{error.name}</h1>
-					<h3>{error.message}</h3>
-					<Button onClick={() => reset()}>Перезагрузить</Button>
-					<Url href="/">Назад</Url>
-				</MaxSize>
-			</main>
+			<MaxSize className="center_text">
+				<h1>{error.name}</h1>
+				<h3>{error.message}</h3>
+				<Button onClick={() => reset()}>Перезагрузить</Button>
+				<Url href="/">Назад</Url>
+			</MaxSize>
 	)
 }

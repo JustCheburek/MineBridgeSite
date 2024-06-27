@@ -1,5 +1,5 @@
-import {Suspense} from "react";
 import type {PropsWithChildren} from "react";
+import {Suspense} from "react";
 import {ProfilePage} from "schema-dts";
 import {getUser} from "@/services";
 
@@ -30,28 +30,26 @@ export default async function UserLayout(
 	}
 
 	return (
-			<main>
-				<MaxSize sideNav>
-					<Subsections menu="Меню профиля">
-						<SubsectionItem href={`/user/${name}`}>
-							Профиль
-						</SubsectionItem>
-						<SubsectionItem href={`/user/${name}/history`}>
-							История
-						</SubsectionItem>
-						<SubsectionItem href={`/user/${name}/accounts`}>
-							Аккаунты
-						</SubsectionItem>
-					</Subsections>
+			<MaxSize sideNav>
+				<Subsections menu="Меню профиля">
+					<SubsectionItem href={`/user/${name}`}>
+						Профиль
+					</SubsectionItem>
+					<SubsectionItem href={`/user/${name}/history`}>
+						История
+					</SubsectionItem>
+					<SubsectionItem href={`/user/${name}/accounts`}>
+						Аккаунты
+					</SubsectionItem>
+				</Subsections>
 
-					<script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(person)}}/>
+				<script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(person)}}/>
 
-					<Suspense fallback={
-						<p className="center_text">Загрузка...</p>
-					}>
-						{children}
-					</Suspense>
-				</MaxSize>
-			</main>
+				<Suspense fallback={
+					<p className="center_text">Загрузка...</p>
+				}>
+					{children}
+				</Suspense>
+			</MaxSize>
 	)
 }

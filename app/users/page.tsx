@@ -17,17 +17,15 @@ export default async function Component() {
 	const users = await getUsers()
 
 	return (
-			<main className="users">
-				<MaxSize>
-					<Table<User>
-							columns={columns}
-							data={users}
-					>
-						<h1>
-							Игроки
-						</h1>
-					</Table>
-				</MaxSize>
-			</main>
+			<MaxSize>
+				<Table<User>
+						columns={columns}
+						data={users}
+				>
+					<h1>
+						Игроки
+					</h1>
+				</Table>
+			</MaxSize>
 	)
 }

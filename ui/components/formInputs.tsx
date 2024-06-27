@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from "react";
+import {type Dispatch, type SetStateAction, useState} from "react";
 import {FormInput, type FormInputProps, FormLabel} from "@components/form";
 
 export const InputName = ({autoComplete = "name", ...props}: FormInputProps) => (
@@ -17,13 +17,31 @@ export const InputName = ({autoComplete = "name", ...props}: FormInputProps) => 
 		</FormLabel>
 )
 
-export const InputNameCheck = ({nameInput, setNameInput, ...props}: {
-	nameInput: string,
-	setNameInput: (name: string) => void
-} & FormInputProps) => {
+type InputNameCheck = {
+	name: string
+	setName: Dispatch<SetStateAction<string>>
+	setAccess?: Dispatch<SetStateAction<boolean>>
+	defaultName?: string
+}
+
+export const InputNameCheck = (
+		{name, setName, setAccess, defaultName, ...props}: InputNameCheck & FormInputProps
+) => {
 	const [symbol, setSymbol] = useState("")
 
 	return <>
+		{4 > name.length &&
+				<p>
+					Ник <span className="red_color">короткий</span><br/>
+					мин: <strong className="red_color">4</strong>
+				</p>
+		}
+		{name.length > 30 &&
+				<p>
+					Ник <span className="red_color">длинный</span><br/>
+					макс: <strong className="red_color">30</strong>
+				</p>
+		}
 		{symbol &&
 				<p>
 					недопустимый символ:<br/>
@@ -31,12 +49,14 @@ export const InputNameCheck = ({nameInput, setNameInput, ...props}: {
 				</p>
 		}
 		<InputName
-				value={nameInput}
+				value={name}
 				onChange={e => {
+					setAccess && setAccess(4 < name.length && name.length < 30)
+
 					if (e.target.value.match(/[^a-zA-Z0-9-_]/)) {
 						setSymbol(JSON.stringify(e.target.value))
 					} else {
-						setNameInput(e.target.value)
+						setName(e.target.value)
 						setSymbol("")
 					}
 				}}
@@ -45,9 +65,9 @@ export const InputNameCheck = ({nameInput, setNameInput, ...props}: {
 	</>
 }
 
-export const InputNameCheckWithoutNameInput = ({defaultName = "", ...props}: {
-	defaultName?: string
+export const InputNameCheckWithoutState = ({defaultName = "", ...props}: {
+	defaultName?: string, setAccess?: Dispatch<SetStateAction<boolean>>
 } & FormInputProps) => {
-	const [nameInput, setNameInput] = useState(defaultName)
-	return <InputNameCheck nameInput={nameInput} setNameInput={setNameInput} {...props}/>
+	const [name, setName] = useState(defaultName)
+	return <InputNameCheck name={name} setName={setName} {...props}/>
 }

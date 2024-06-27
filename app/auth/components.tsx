@@ -9,14 +9,14 @@ import {useState} from "react";
 import styles from "./auth.module.scss";
 
 export function AuthForm({savedName}: {savedName?: string}) {
+	const [access, setAccess] = useState(false)
 	const [name, setName] = useState(savedName || "")
-	const access = 4 < name.length && name.length < 30
 
 	return (
 			<Form className={styles.form}>
-				<InputNameCheck nameInput={name} setNameInput={setName} autoFocus/>
+				<InputNameCheck name={name} setName={setName} setAccess={setAccess} defaultName={savedName} autoFocus/>
 
-				<FormGroup className={styles.providers}>
+				<FormGroup>
 					<Link href={`/auth/discord?name=${name}`} aria-disabled={!access} className={styles.provider}>
 						<DiscordSvg className={`color ${styles.ds}`} width="1em" height="1em"/>
 					</Link>

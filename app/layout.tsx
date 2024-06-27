@@ -25,34 +25,36 @@ import {Metrika} from "./script";
 const montserrat = Montserrat({subsets: ["latin"], preload: true, style: "normal"});
 
 export const metadata: Metadata = {
-    title: "MineBridge",
-    description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
+	title: "MineBridge",
+	description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
 }
 
 TimeAgo.addDefaultLocale(ru)
 
 declare module '@tanstack/react-table' {
-    // @ts-ignore
-    interface ColumnMeta {
-        className?: string,
-        type?: HTMLInputTypeAttribute
-        notEditable?: boolean
-    }
+	// @ts-ignore
+	interface ColumnMeta {
+		className?: string,
+		type?: HTMLInputTypeAttribute
+		notEditable?: boolean
+	}
 }
 
 export default function RootLayout(
-    {
-        children
-    }: PropsWithChildren) {
-    return (
-        <html lang="ru">
-        <body className={montserrat.className}>
-        <Header/>
-        {children}
-        <Footer/>
-        <SpeedInsights/>
-        <Metrika/>
-        </body>
-        </html>
-    );
+		{
+			children
+		}: PropsWithChildren) {
+	return (
+			<html lang="ru">
+			<body className={montserrat.className}>
+			<Header/>
+			<main>
+				{children}
+			</main>
+			<Footer/>
+			<SpeedInsights/>
+			<Metrika/>
+			</body>
+			</html>
+	);
 }

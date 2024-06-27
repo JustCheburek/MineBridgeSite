@@ -1,8 +1,7 @@
 @import "@styles/mixins";
 
 .case {
-	--_block-gap: 15px;
-	--_inline-gap: 10%;
+
 }
 
 .max_size {
@@ -11,6 +10,9 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+
+	--_block-gap: 15px;
+	--_inline-gap: 10%;
 }
 
 .main_container {
@@ -250,8 +252,8 @@
 }
 
 // Адаптивность
-@media (width < 1024px) {
-	.case {
+@media (width < 1385px) {
+	.max_size {
 		--_block-gap: 40px;
 		--_inline-gap: 20%;
 	}

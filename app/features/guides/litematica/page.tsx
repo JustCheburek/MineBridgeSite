@@ -12,11 +12,34 @@ export const metadata: Metadata = {
 
 export default function Litematica() {
 	return (
-			<main className="litematica">
-				<MaxSize>
-					<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "guides", displayname: "Гайды"}, {name: "Litematica", displayname: "Litematica"}]}/>
-					<h1>Litematica</h1>
-				</MaxSize>
-			</main>
+			<MaxSize>
+				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {
+					name: "guides",
+					displayname: "Гайды"
+				}, {name: "Litematica", displayname: "Litematica"}]}/>
+				<h1>Litematica</h1>
+				{/*
+                <div className="container" id="litematica">
+                    <h2 className="heading">Лайтматика</h2>
+
+                    <div className="description">
+                        <h3>
+                            Установка
+                        </h3>
+                        <a href="https://www.curseforge.com/minecraft/mc-mods/litematica">
+                            Скачиваем Litematica, закидываем в папку .minecraft/mods, запускаем майн
+                        </a>
+                        <h3>
+                            Создание схемы
+                        </h3>
+                        <p>
+
+                        </p>
+                        <h3>
+                            Размещение
+                        </h3>
+                    </div>
+                </div>*/}
+			</MaxSize>
 	)
 }

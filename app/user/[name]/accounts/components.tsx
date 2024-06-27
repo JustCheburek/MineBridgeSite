@@ -8,7 +8,7 @@ import {Form, FormButton, FormInput, FormLabel, FormTextarea} from "@components/
 import {Modal} from "@components/modal";
 import {useState} from "react";
 import {isRoles} from "@/services";
-import {InputNameCheck, InputNameCheckWithoutNameInput} from "@components/formInputs";
+import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
 
 type DeleteUser = {
 	user: User
@@ -38,7 +38,7 @@ export function DeleteUser({user, Delete}: DeleteUser) {
 				<InputNameCheck
 						danger placeholder={user.name}
 						autoComplete="off"
-						nameInput={name} setNameInput={setName}
+						name={name} setName={setName}
 				/>
 				<FormButton danger disabled={name !== user.name}>
 					Жми, жми!
@@ -51,7 +51,7 @@ export function DeleteUser({user, Delete}: DeleteUser) {
 type ChangeParam = {
 	user: User
 	isMe: boolean
-	Change: ((formData: FormData) => Promise<string>)
+	Change: ((formData: FormData) => Promise<void>)
 } & isRoles
 
 export function ChangeParam(
@@ -61,6 +61,7 @@ export function ChangeParam(
 			Change
 		}: ChangeParam) {
 	const [result, setResult] = useState("")
+	const [access, setAccess] = useState(false)
 
 	if (!isMe && !isModer) return
 
@@ -85,11 +86,20 @@ export function ChangeParam(
 				</div>
 		}
 		<Form action={async formData => {
-			setResult(await Change(formData))
+			try {
+				await Change(formData)
+			} catch (e) {
+				setResult((e as Error).message)
+			}
 		}}>
-			{result && <h2>{result}</h2>}
+			{result &&
+				<h2 className="red_color">
+					{result}
+				</h2>
+			}
 
-			<InputNameCheckWithoutNameInput
+			<InputNameCheckWithoutState
+					setAccess={setAccess}
 					defaultName={user.name}
 					disabled={user.rating <= -50 && !isModer}
 			/>
@@ -182,7 +192,7 @@ export function ChangeParam(
 						/>
 					</FormLabel>
 			}
-			<FormButton disabled={user.rating <= -100 && !isModer}>
+			<FormButton disabled={user.rating <= -100 && !isModer || !access}>
 				Сохранить
 			</FormButton>
 		</Form>

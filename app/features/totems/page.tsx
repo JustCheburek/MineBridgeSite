@@ -50,45 +50,43 @@ export default function Totems() {
 	const max_deg = 180  // Максимальный уровень наклона (от -80 до 80)
 
 	return (
-			<main>
-				<MaxSize>
-					<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "totems", displayname: "Тотемы"}]}/>
-					<h1>Тотемы</h1>
-					<h3 className="center_text">Версия: 2.4</h3>
+			<MaxSize>
+				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "totems", displayname: "Тотемы"}]}/>
+				<h1>Тотемы</h1>
+				<h3 className="center_text">Версия: 2.4</h3>
 
-					<Url href="https://modrinth.com/resourcepack/minebridge-totems/versions">
-						Скачать
-					</Url>
+				<Url href="https://modrinth.com/resourcepack/minebridge-totems/versions">
+					Скачать
+				</Url>
 
-					<GContainer width={180} height={240}>
-						{totems.map(totem => {
-							let file = totem.toLowerCase()
+				<GContainer width={180} height={240}>
+					{totems.map(totem => {
+						let file = totem.toLowerCase()
 
-							if (file.startsWith("_")) {
-								file = file.substring(1)
-							}
+						if (file.startsWith("_")) {
+							file = file.substring(1)
+						}
 
-							const rotate_deg = Math.round(Math.random() * max_deg - max_deg / 2)
+						const rotate_deg = Math.round(Math.random() * max_deg - max_deg / 2)
 
-							return (
-									<GBox key={totem} className={styles.box}>
-										<Totem
-												src={`/features/totems/${file}.png`} alt={totem}
-												className={styles.img}
-												style={{'--_rotate': `${rotate_deg}deg`}}
-										/>
+						return (
+								<GBox key={totem} className={styles.box}>
+									<Totem
+											src={`/features/totems/${file}.png`} alt={totem}
+											className={styles.img}
+											style={{'--_rotate': `${rotate_deg}deg`}}
+									/>
 
-										<p>{totem}</p>
-									</GBox>
-							)
-						})}
-					</GContainer>
+									<p>{totem}</p>
+								</GBox>
+						)
+					})}
+				</GContainer>
 
-					<h3 className="center_text">Тоже хотите попасть в ресурс пак?</h3>
-					<Url href="https://discord.com/channels/1012334719230292048/1093724052797018133">
-						Да, и что?
-					</Url>
-				</MaxSize>
-			</main>
+				<h3 className="center_text">Тоже хотите попасть в ресурс пак?</h3>
+				<Url href="https://discord.com/channels/1012334719230292048/1093724052797018133">
+					Да, и что?
+				</Url>
+			</MaxSize>
 	)
 }

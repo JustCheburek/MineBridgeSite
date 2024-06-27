@@ -31,21 +31,19 @@ export default async function News(
 	}
 
 	return (
-			<main>
-				<MaxSize sideNav>
-					<Subsections menu="Меню новостей">
-						<SubsectionItem href="/news">
-							Новости
-						</SubsectionItem>
-						<SubsectionItem href="/news/events">
-							Ивенты
-						</SubsectionItem>
-					</Subsections>
+			<MaxSize sideNav>
+				<Subsections menu="Меню новостей">
+					<SubsectionItem href="/news">
+						Новости
+					</SubsectionItem>
+					<SubsectionItem href="/news/events">
+						Ивенты
+					</SubsectionItem>
+				</Subsections>
 
-					{children}
+				{children}
 
-					<OnThisPageSeasons seasons={seasons} isAdmin={isAdmin} seasonFunc={seasonFunc}/>
-				</MaxSize>
-			</main>
+				<OnThisPageSeasons seasons={seasons} isAdmin={isAdmin} seasonFunc={seasonFunc}/>
+			</MaxSize>
 	);
 }
