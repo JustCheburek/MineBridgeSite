@@ -1,10 +1,8 @@
 @import "@styles/mixins";
 
 .provider {
-	padding: 1rem;
-	border-radius: 50%;
-
-	@include border($background: var(--gray-color), $hover: true);
+	display: grid;
+	place-content: center;
 }
 
 .ds {

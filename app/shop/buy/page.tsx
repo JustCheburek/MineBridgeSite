@@ -1,13 +1,14 @@
 // Сервер
-import axios from "axios";
 import type {Metadata} from "next";
-import {permanentRedirect, redirect} from "next/navigation";
+import {permanentRedirect} from "next/navigation";
 import {validate} from "@services/validate";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 
 // Компоненты
-import {BuyForm} from "./components";
+import {MostikiSvg, SBPSvg} from "@ui/SVGS";
+import {MaxSize} from "@components/maxSize";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Покупка | MineBridge",
@@ -21,49 +22,49 @@ export default async function Component() {
 		return permanentRedirect("/auth")
 	}
 
-	async function Buy(formData: FormData) {
-		"use server"
-
-		const mostiki = formData.get("mostiki")?.toString()
-		const coupon = formData.get("coupon")?.toString()
-
-		if (!mostiki || !user?.name) {
-			throw new Error(`Не достаточно аргументов`)
-		}
-
-		const url = new URL(`https://api.trademc.org/shop.buyItems`)
-		url.searchParams.set("buyer", user.name)
-		url.searchParams.set("items", `1:${mostiki}`)
-		coupon && url.searchParams.set("coupon", coupon)
-		url.searchParams.set("v", "3")
-
-		console.log(url.href)
-
-		type ResponceBuy = {
-			response: {
-				total: number
-				cart_id: number
-			}
-		}
-
-		const responce = await axios.get<ResponceBuy>(
-				url.href
-		).then(r => r.data)
-
-		if (!responce) {
-			throw new Error(`Нет ответа`)
-		}
-
-		const buyUrl = new URL(`https://pay.trademc.org`)
-
-		const {cart_id} = responce.response
-		buyUrl.searchParams.set("cart_id", cart_id.toString())
-		buyUrl.searchParams.set("success_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
-		buyUrl.searchParams.set("pending_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
-		buyUrl.searchParams.set("fail_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
-
-		redirect(buyUrl.href)
-	}
-
-	return <BuyForm Buy={Buy}/>
+	return (
+			<MaxSize width={550}>
+				<h1>
+					Покупка
+				</h1>
+				<h2>
+					Пожалуйста, для покупки позовите админа
+				</h2>
+				<p>
+					Покупка происходит с помощью {" "}
+					<a
+							href={"#sbp"}
+					>
+						<strong className="unic_color">СБП</strong>
+					</a>
+					<br/>
+					или напрямую по {" "}
+					<Link
+							href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
+							target="_blank"
+					>
+						<strong className="unic_color">СБЕР</strong>
+					</Link>
+				</p>
+				<h3>
+					1 ₽ = 1 <MostikiSvg/>
+				</h3>
+				<br/>
+				<div id="sbp" className="green_color">
+					<h4 className="all_select">
+						СберБанк
+					</h4>
+					<h4 className="all_select">
+						8 914 344 8578
+					</h4>
+				</div>
+				<Link
+						href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
+						target="_blank"
+						style={{marginBlock: "20px"}}
+				>
+					<SBPSvg/>
+				</Link>
+			</MaxSize>
+	)
 }

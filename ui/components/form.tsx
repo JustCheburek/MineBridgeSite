@@ -1,6 +1,7 @@
-import {ComponentPropsWithoutRef} from "react";
+import {ComponentPropsWithoutRef, PropsWithChildren} from "react";
 import {setModal} from "@components/modal";
 import styles from "./styles/form.module.scss"
+import Link, {LinkProps} from "next/link";
 
 interface DangerInputProps {
 	danger?: boolean
@@ -41,6 +42,31 @@ export const FormButton = (
 				{children}
 			</strong>
 		</button>
+)
+
+interface FormLink extends DangerInputProps, PropsWithChildren, LinkProps {
+	className?: string
+}
+
+export const FormLink = (
+		{
+			href,
+			children,
+			className = "",
+			danger = false,
+			...props
+		}: FormLink
+) => (
+		<Link
+				href={href}
+				className={`${styles.button} center_text ${danger ? styles.danger : ""} ${className}`}
+				type="submit"
+				{...props}
+		>
+			<strong>
+				{children}
+			</strong>
+		</Link>
 )
 
 export const FormLabel = (
@@ -99,6 +125,7 @@ export const FormTextarea = (
 
 export interface FormSelectProps extends ComponentPropsWithoutRef<"select"> {
 }
+
 export const FormSelect = (
 		{
 			children,
@@ -114,6 +141,7 @@ export const FormSelect = (
 export interface EditProps extends ComponentPropsWithoutRef<"button"> {
 	setModal: setModal
 }
+
 export const Edit = ({className = "", setModal, ...props}: EditProps) => (
 		<button className={`${styles.edit} ${className}`} onClick={() => setModal(true)} {...props}>
 			<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="edit" viewBox="0 0 16 16">
@@ -128,6 +156,7 @@ export const Edit = ({className = "", setModal, ...props}: EditProps) => (
 export interface AddProps extends ComponentPropsWithoutRef<"button"> {
 	setModal: setModal
 }
+
 export const Add = ({className = "", setModal, ...props}: AddProps) => (
 		<button className={`${styles.add} ${className}`} onClick={() => setModal(true)} {...props}>
 			+

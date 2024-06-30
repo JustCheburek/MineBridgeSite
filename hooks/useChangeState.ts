@@ -34,3 +34,19 @@ export function useChangeListState<T, List extends T[] = T[]>():
 
 	return [state, setState, onChange];
 }
+
+export function useChangeRadioState<T extends string>(
+		initialState: T
+): [T, Dispatch<SetStateAction<T>>, (e: ChangeEvent<HTMLInputElement>) => void, (what: T) => boolean] {
+	const [state, setState] = useState(initialState)
+
+	function onChange(e: ChangeEvent<HTMLInputElement>) {
+		setState(e.target.value as T)
+	}
+
+	function Check(what: T) {
+		return state === what
+	}
+
+	return [state, setState, onChange, Check] as const
+}

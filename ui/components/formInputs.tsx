@@ -35,16 +35,14 @@ export const InputNameCheck = (
 
 	return <>
 		{4 > name.length &&
-				<p>
-					Ник <span className="red_color">короткий</span><br/>
-					мин: <strong className="red_color">4</strong>
-				</p>
+				<small>
+					Ник <span className="red_color">короткий</span> (мин: <strong className="red_color">4</strong>)
+				</small>
 		}
 		{name.length > 30 &&
-				<p>
-					Ник <span className="red_color">длинный</span><br/>
-					макс: <strong className="red_color">30</strong>
-				</p>
+				<small>
+					Ник <span className="red_color">длинный</span> (макс: <strong className="red_color">30</strong>)
+				</small>
 		}
 		{symbol &&
 				<p>

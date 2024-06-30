@@ -25,7 +25,7 @@ export default async function Auth() {
 
 	return (
 			<MaxSize className="center_text grid_center">
-				<h1>Вход</h1>
+				<h1>Введи ник</h1>
 				<p>
 					Вы уже близко к цели!
 				</p>
