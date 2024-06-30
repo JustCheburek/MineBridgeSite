@@ -158,6 +158,12 @@ export const getSeasons = cache(
 				season.events.sort(({startAt: startAt1}, {startAt: startAt2}) =>
 						new Date(startAt2 || "").getTime() - new Date(startAt1 || "").getTime()
 				)
+				season.news.map(news => {
+					if (news.heading === "Выборы мэра спавна") {
+						return
+					}
+					return news
+				})
 				return season
 			})
 
