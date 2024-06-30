@@ -32,7 +32,7 @@ export default async function Component() {
 		}
 
 		const url = new URL(`https://api.trademc.org/shop.buyItems`)
-		url.searchParams.set("buyer", user?.name)
+		url.searchParams.set("buyer", user.name)
 		url.searchParams.set("items", `1:${mostiki}`)
 		coupon && url.searchParams.set("coupon", coupon)
 		url.searchParams.set("v", "3")

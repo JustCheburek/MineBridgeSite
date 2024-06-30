@@ -4,13 +4,15 @@ import {getCases, getDrops} from "@/services";
 import {validate} from "@services/validate";
 import {userModel} from "@server/models";
 import {Info} from "@/types/case";
-import {Types} from "mongoose";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
+import {revalidateTag} from "next/cache";
+import {Case} from "@/types/case";
+import {Drop} from "@/types/case";
 
 // Компоненты
 import {CaseClient} from "./caseClient";
-import {revalidateTag} from "next/cache";
+import {RconVC} from "@server/console";
 
 export const metadata: Metadata = {
     title: "Кейсы | MineBridge",
@@ -23,12 +25,23 @@ export default async function CasePage() {
     const drops = await getDrops()
 
     async function Add(
-        caseId: Types.ObjectId, dropId: Types.ObjectId,
-        price: number, {rarity, item, drop}: Info
+        Case: Case, Drop: Drop,
+        price: number, {rarity, Item, DropItem}: Info
     ) {
         "use server"
 
-        if (!rarity || !item || !drop) return console.log("Как")
+        if (!rarity || !Item || !DropItem || !user) {
+            throw new Error("Произошла ошибка при выдаче")
+        }
+
+        try {
+            if (DropItem.name !== "suffix") {
+                const client = await RconVC()
+                await client.run(`lpv user ${user.name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
+            }
+        } catch (e) {
+            console.log(e)
+        }
 
         await userModel.findOneAndUpdate(
             {name: user?.name},
@@ -38,11 +51,11 @@ export default async function CasePage() {
                 },
                 $push: {
                     casesPurchases: {
-                        Item: item._id,
+                        Item: Item._id,
                         rarity,
-                        Case: caseId,
-                        Drop: dropId,
-                        DropItem: drop._id
+                        Case: Case._id,
+                        Drop: Drop._id,
+                        DropItem: DropItem._id
                     }
                 }
             }

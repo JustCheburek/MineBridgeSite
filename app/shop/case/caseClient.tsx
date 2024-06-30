@@ -1,7 +1,7 @@
 "use client"
 
 // Next и сервер
-import type {MouseEventHandler} from "react"
+import type {MouseEventHandler} from "react";
 import {useEffect, useRef, useState} from "react";
 import type {CaseType, DropType, Info} from "@/types/case";
 import {Case, Drop, RarityNames} from "@/types/case";
@@ -17,7 +17,6 @@ import {Random, RandomValue, SumChances} from "@app/utils";
 import {Img, ImgBox} from "@components/img";
 import {MostikiSvg} from "@ui/SVGS";
 import {Button, Url} from "@components/button";
-import {Types} from "mongoose";
 
 declare module 'csstype' {
 	interface Properties {
@@ -35,7 +34,7 @@ type CaseClient = {
 	cases: Case[]
 	drops: Drop[]
 	user: User | null
-	Add: (caseId: Types.ObjectId, dropId: Types.ObjectId, price: number, item: Info) => Promise<void>
+	Add: (Case: Case, Drop: Drop, price: number, item: Info) => Promise<void>
 }
 
 export function CaseClient({cases, drops, user, Add}: CaseClient) {
@@ -47,14 +46,22 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 	const [selectedItem, setSelectedItem] = useState(0)
 
 	const rollSettings = useRef<rollSettings>({
-		timeRoll: 25000,
+		timeRoll: 20000,
 		rollWidth: 16050 + Random(200)
 	})
 
 	const [rarity, setRarity] = useState<CaseType>(cases[0].name)
 	const [drop, setDrop] = useState<DropType>(drops[0].name)
 
-	const getInfo = (caseName?: CaseType, dropName?: DropType) => {
+	const getInfo = (
+			{
+				caseName,
+				dropName
+			}: {
+				caseName?: CaseType,
+				dropName?: DropType
+			} = {}
+	) => {
 		if (!caseName) caseName = rarity
 		if (!dropName) dropName = drop
 
@@ -62,17 +69,15 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 		const dropType = drops.find(({name}) => name === dropName)
 
 		if (!caseType || !dropType) throw new Error("Case или Drop не найден")
-
-		return {
-			caseType,
-			dropType
-		}
+		return {caseType, dropType}
 	}
 
 	const [items, setItems] = useState<Info[]>([])
 
 	const {caseType, dropType} = getInfo()
-	const [price, setPrice] = useState(caseType.price + dropType.price)
+	const [price, setPrice] = useState(
+			caseType.price + dropType.price
+	)
 	const sumChances = useRef({
 		case: SumChances(caseType.rarity),
 		drop: SumChances(caseType.drop)
@@ -81,7 +86,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 	const setSettingCase = (value: CaseType) => {
 		setRarity(value)
 
-		const {caseType, dropType} = getInfo(value)
+		const {caseType, dropType} = getInfo({caseName: value})
 		sumChances.current["case"] = SumChances(caseType.rarity)
 
 		setPrice(caseType.price + dropType.price)
@@ -90,7 +95,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 	const setSettingDrop = (value: DropType) => {
 		setDrop(value)
 
-		const {caseType, dropType} = getInfo(rarity, value)
+		const {caseType, dropType} = getInfo({dropName: value})
 		sumChances.current["drop"] = SumChances(caseType.drop)
 
 		setPrice(caseType.price + dropType.price)
@@ -99,43 +104,42 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 	function Update() {
 		const {caseType} = getInfo()
 
+		const infos: Info[] = []
 		let dropDefault
 
 		if (drop !== "all") {
 			dropDefault = drops.find(({name}) => name === drop)
 		}
 
-		const infos: Info[] = []
-
 		for (let itemIndex = 0; itemIndex < AMOUNT; itemIndex++) {
 			const info: Info = {
-				drop: dropDefault
+				DropItem: dropDefault
 			}
 
 			// Drop
 			if (!dropDefault) {
 				const randomDrop = RandomValue(caseType.drop, sumChances.current.drop).name
-				info.drop = drops.find(({name}) => name === randomDrop)
+				info.DropItem = drops.find(({name}) => name === randomDrop)
 			}
 
-			if (!info.drop) return console.error("Drop не найден")
+			if (!info.DropItem) return console.error("Drop не найден")
 
 			// Rarity
-			info.rarity = info.drop?.defaultRarity ||
+			info.rarity = info.DropItem?.defaultRarity ||
 					RandomValue(caseType.rarity, sumChances.current.drop).name
 
-			// Item
-			let {drop: items} = info.drop
+			// Items
+			let {drop: items} = info.DropItem
 			if (items?.length === 0) {
-				items = info.drop[info.rarity]
+				items = info.DropItem[info.rarity]
 			}
 
 			if (!items) return console.error("Items не найден")
-			info.item = items[Random(items.length)]
+			info.Item = items[Random(items.length)]
 
 			// Картинка
-			info.img = info.item?.img
-					? `/shop/${info.drop.name}/${info.item.name}.webp`
+			info.img = info.Item?.img
+					? `/shop/${info.DropItem.name}/${info.Item.name}.webp`
 					: undefined
 
 			infos.push(info)
@@ -146,23 +150,22 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 		setSelectedItem(0)
 	}
 
+	function Win() {
+		rollSettings.current.rollWidth = 16050 + Random(200)
+
+		setIsRolling(false)
+		setIsWin(false)
+		Update()
+	}
+
 	function Roll() {
-		if (isWin) {
-			rollSettings.current.rollWidth = 16050 + Random(200)
-
-			setIsRolling(false)
-			setIsWin(false)
-			Update()
-			return
-		}
-
 		setTimeout(() => {
 			setIsWin(true)
 			setSelectedItem(RESULT)
 		}, rollSettings.current.timeRoll)
 
 		const {caseType, dropType} = getInfo()
-		Add(caseType._id, dropType._id, price, items[RESULT])
+		Add(caseType, dropType, price, items[RESULT])
 
 		setIsRolling(true)
 	}
@@ -191,10 +194,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 					</div>
 
 					<div className={`${styles.visual_container} ${styles.box} center_text ${isWin ? styles.win : ""}`}>
-						{/* Реальный контейнер */}
-						<div
-								className={`${styles.natural_container} ${isRolling ? styles.roll : ""}`}
-						>
+						<div className={`${styles.natural_container} ${isRolling ? styles.roll : ""}`}>
 							{/* Предметы которые можно выбить */}
 							{items?.map((info, index) => (
 									<ImgBox
@@ -204,10 +204,10 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 											hover
 									>
 										{info.img
-												? <Img src={info.img} alt={info?.drop?.displayname || "Картинка"}
+												? <Img src={info.img} alt={info?.DropItem?.displayname || "Картинка"}
 												       className={styles.img}/>
 												: <h4>
-													{info?.drop?.displayname}
+													{info?.DropItem?.displayname}
 												</h4>
 										}
 									</ImgBox>
@@ -266,7 +266,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 						user={user} price={price}
 						isRolling={isRolling}
 						isWin={isWin}
-						Roll={Roll}
+						Roll={Roll} Win={Win}
 				/>
 			</MaxSize>
 	)
@@ -277,7 +277,7 @@ function SelectedItem(
 			items: Info[],
 			selectedItem: number
 		}) {
-	if (!items[selectedItem]?.item) {
+	if (!items[selectedItem]?.Item) {
 		return (
 				<div className={styles.box}>
 					<p className={styles.text}>
@@ -288,9 +288,9 @@ function SelectedItem(
 	}
 
 	return (
-			<div className={styles.box} key={items[selectedItem]?.item?.name}>
+			<div className={styles.box} key={items[selectedItem]?.Item?.name}>
 				<h3 className={`${styles.text} ${styles.heading} unic_color`}>
-					{items[selectedItem]?.item?.displayname}
+					{items[selectedItem]?.Item?.displayname}
 				</h3>
 				<p className={styles.text}>
 					Редкость:<br/>
@@ -299,7 +299,7 @@ function SelectedItem(
           </span>
 				</p>
 				<p className={`${styles.text} ${styles.description} ${items[selectedItem]?.rarity || ""}`}>
-					{items[selectedItem]?.drop?.description}
+					{items[selectedItem]?.DropItem?.description}
 				</p>
 			</div>
 	)
@@ -338,6 +338,7 @@ type RollButton = {
 	price: number
 	user: User | null
 	Roll: MouseEventHandler<HTMLButtonElement>
+	Win: MouseEventHandler<HTMLButtonElement>
 }
 
 function RollButton(
@@ -346,9 +347,11 @@ function RollButton(
 			isWin,
 			price,
 			user,
-			Roll
+			Roll,
+			Win
 		}: RollButton) {
-	// Не вошёл
+	// Кнопка прокрутки
+
 	if (!user) {
 		return (
 				<Url href="/auth">
@@ -360,7 +363,7 @@ function RollButton(
 	// Проверка прокрутки
 	if (isRolling) {
 		return (
-				<Button disabled={!isWin} onClick={Roll}>
+				<Button disabled={!isWin} onClick={Win}>
 					Заново
 				</Button>
 		)
