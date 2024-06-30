@@ -92,12 +92,6 @@ export function ChangeParam(
 				setResult((e as Error).message)
 			}
 		}}>
-			{result &&
-				<h2 className="red_color">
-					{result}
-				</h2>
-			}
-
 			<InputNameCheckWithoutState
 					setAccess={setAccess}
 					defaultName={user.name}
@@ -191,6 +185,11 @@ export function ChangeParam(
 								defaultValue={user.mostiki}
 						/>
 					</FormLabel>
+			}
+			{result &&
+					<p className="red_color center_text">
+						{result}
+					</p>
 			}
 			<FormButton disabled={user.rating <= -100 && !isModer || !access}>
 				Сохранить

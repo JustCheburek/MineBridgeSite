@@ -1,6 +1,6 @@
 "use client"
 
-import {type Dispatch, type SetStateAction, useState} from "react";
+import {type Dispatch, type SetStateAction, useEffect, useState} from "react";
 import {FormInput, type FormInputProps, FormLabel} from "@components/form";
 
 export const InputName = ({autoComplete = "name", ...props}: FormInputProps) => (
@@ -28,6 +28,10 @@ export const InputNameCheck = (
 		{name, setName, setAccess, defaultName, ...props}: InputNameCheck & FormInputProps
 ) => {
 	const [symbol, setSymbol] = useState("")
+
+	useEffect(() => {
+		setAccess && setAccess(4 < name.length && name.length < 30)
+	})
 
 	return <>
 		{4 > name.length &&

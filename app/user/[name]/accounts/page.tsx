@@ -39,9 +39,11 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 		const name = formData.get("name") as string
 		const photo = formData.get("photo") as string
 
-		const candidate = await userModel.findOne({name})
-		if (candidate) {
-			throw new Error(`Ник занят`)
+		if (name !== user.name) {
+			const candidate = await userModel.findOne({name})
+			if (candidate) {
+				throw new Error(`Ник занят`)
+			}
 		}
 
 		const socials: Social[] = [
@@ -53,9 +55,9 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 			{url: formData.get("telegram")?.toString(), social: "telegram"},
 		]
 
-		socials.forEach(({url}) => {
+		socials.forEach(({url, social}) => {
 			if (url && !url.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/)) {
-				throw new Error(`Некорректная ссылка в ${name}`)
+				throw new Error(`Некорректная ссылка в ${social}`)
 			}
 		})
 
