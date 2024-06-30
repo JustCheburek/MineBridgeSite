@@ -1,7 +1,6 @@
 "use client"
 
 // Сервер
-import type {User} from "lucia";
 
 // Колонны
 import {columns} from "@columns/casesPurchases";
@@ -13,53 +12,37 @@ import {CasesPurchasesModal} from "@modals/casesPurchases";
 import {useState} from "react";
 import {Case, Drop} from "@/types/case";
 import type {CaseData} from "@/types/purchase";
+import {Form, FormButton} from "@components/form";
 
 type CasesPurchasesSection = {
-	user: User
+	caseDatas: CaseData[]
 	access?: boolean
+	isMe: boolean
 	Cases: Case[]
 	Drops: Drop[]
 	SaveAll: Function
 	casePurchaseFunc: Function
+	GetAll: () => Promise<void>
 }
 
-export function CasesPurchasesSection({user, access, Cases, Drops, SaveAll, casePurchaseFunc}: CasesPurchasesSection) {
+export function CasesPurchasesSection(
+		{
+			caseDatas,
+			access,
+			isMe,
+			Cases,
+			Drops,
+			SaveAll,
+			casePurchaseFunc,
+			GetAll
+		}: CasesPurchasesSection) {
+	const [click, setClick] = useState<boolean>(false)
 	const [modal, setModal] = useState<boolean>(false)
-
-	const data = [] as CaseData[]
-
-	user.casesPurchases.forEach(purchase => {
-		const Case = Cases.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Case))
-		const Drop = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Drop))
-		const DropItem = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.DropItem))
-		if (!Case || !Drop || !DropItem) return console.log("No case or drop")
-
-		// Items
-		let {drop: items} = DropItem
-		if (items?.length === 0) {
-			items = DropItem[purchase.rarity!]
-		}
-		if (items?.length === 0 || !items) return console.log("No items")
-
-		const Item = items.find(({_id}) =>
-				JSON.stringify(_id) === JSON.stringify(purchase.Item)
-		)
-
-		if (!Item) return console.log("No item")
-
-		data.push({
-			...purchase,
-			Case,
-			Drop,
-			DropItem,
-			Item
-		})
-	})
 
 	return (<>
 		<Table
 				columns={columns}
-				data={data}
+				data={caseDatas}
 				editable={access}
 				SaveAll={SaveAll}
 				setModal={setModal}
@@ -68,6 +51,16 @@ export function CasesPurchasesSection({user, access, Cases, Drops, SaveAll, case
 			<h2>
 				Покупки кейсов
 			</h2>
+			{isMe &&
+					<Form action={() => {
+						GetAll()
+						setClick(true)
+					}}>
+						<FormButton disabled={click}>
+							Получить всё
+						</FormButton>
+					</Form>
+			}
 		</Table>
 		<CasesPurchasesModal
 				modal={modal} setModal={setModal} Cases={Cases} Drops={Drops}

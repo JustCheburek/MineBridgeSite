@@ -228,6 +228,57 @@ export default async function History({params: {name}}: { params: { name: string
 		revalidateTag("userLike")
 	}
 
+	const caseDatas = [] as CaseData[]
+
+	user.casesPurchases.forEach(purchase => {
+		const Case = Cases.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Case))
+		const Drop = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Drop))
+		const DropItem = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.DropItem))
+		if (!Case || !Drop || !DropItem) return console.log("No case or drop")
+
+		// Items
+		let {drop: items} = DropItem
+		if (items?.length === 0) {
+			items = DropItem[purchase.rarity!]
+		}
+		if (items?.length === 0 || !items) return console.log("No items")
+
+		const Item = items.find(({_id}) =>
+				JSON.stringify(_id) === JSON.stringify(purchase.Item)
+		)
+
+		if (!Item) return console.log("No item")
+
+		caseDatas.push({
+			...purchase,
+			Case,
+			Drop,
+			DropItem,
+			Item
+		})
+	})
+
+	async function GetAll() {
+		"use server"
+
+		function wait(ms: number) {
+			return new Promise((resolve) => {
+				setTimeout(() => {
+					resolve("Готово");
+				}, ms);
+			});
+		}
+
+		const client = await RconVC()
+
+		for (const {DropItem, Item} of caseDatas) {
+			if (DropItem.name !== "suffix") {
+				await client.run(`lpv user ${user.name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
+				await wait(1000)
+			}
+		}
+	}
+
 	return (
 			<div className={styles.content}>
 				<h1>История</h1>
@@ -240,8 +291,8 @@ export default async function History({params: {name}}: { params: { name: string
 				/>
 
 				<CasesPurchasesSection
-						user={user} access={isAdmin} SaveAll={CasesPurchasesSave} Cases={Cases}
-						Drops={Drops} casePurchaseFunc={casePurchaseFunc}
+						access={isAdmin} SaveAll={CasesPurchasesSave} Cases={Cases} GetAll={GetAll}
+						Drops={Drops} casePurchaseFunc={casePurchaseFunc} isMe={isMe} caseDatas={caseDatas}
 				/>
 			</div>
 	)
