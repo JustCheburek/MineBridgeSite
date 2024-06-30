@@ -1,14 +1,13 @@
 // Сервер
+import axios from "axios";
 import type {Metadata} from "next";
-import {permanentRedirect} from "next/navigation";
+import {permanentRedirect, redirect} from "next/navigation";
 import {validate} from "@services/validate";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 
 // Компоненты
-import {MostikiSvg, SBPSvg} from "@ui/SVGS";
-import {MaxSize} from "@components/maxSize";
-import Link from "next/link";
+import {BuyForm} from "./components";
 
 export const metadata: Metadata = {
 	title: "Покупка | MineBridge",
@@ -16,52 +15,55 @@ export const metadata: Metadata = {
 };
 
 export default async function Component() {
-	const {user: author} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+	const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 
-	if (!author) {
+	if (!user) {
 		return permanentRedirect("/auth")
 	}
 
-	return (
-			<MaxSize width={550} className="center_text">
-				<h1>
-					Покупка
-				</h1>
-				<p>
-					Покупка происходит с помощью {" "}
-					<a
-							href={"#sbp"}
-					>
-						<strong className="unic_color">СБП</strong>
-					</a>
-					<br/>
-					или напрямую по {" "}
-					<Link
-							href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
-							target="_blank"
-					>
-						<strong className="unic_color">СБЕР</strong>
-					</Link>
-				</p>
-				<h3>
-					1 ₽ = 1 <MostikiSvg/>
-				</h3>
-				<br/>
-				<div id="sbp" className="green_color">
-					<h4 className="all_select">
-						СберБанк
-					</h4>
-					<h4 className="all_select">
-						8 914 344 8578
-					</h4>
-				</div>
-				<Link
-						href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
-						target="_blank"
-						style={{marginBlock: "20px"}}
-				>
-					<SBPSvg/>
-				</Link>
-			</MaxSize>
-	)
+	async function Buy(formData: FormData) {
+		"use server"
+
+		const total = formData.get("total")?.toString()
+		const coupon = formData.get("coupon")?.toString()
+
+		if (!total || !user?.name) {
+			throw new Error(`Не достаточно аргументов`)
+		}
+
+		const url = new URL(`https://api.trademc.org/shop.buyItems`)
+		url.searchParams.set("buyer", user?.name)
+		url.searchParams.set("items", `1:${total}`)
+		coupon && url.searchParams.set("coupon", coupon)
+		url.searchParams.set("v", "3")
+
+		type ResponceBuy = {
+			response: {
+				total: number
+				cart_id: number
+			}
+		}
+
+		const responce = await axios.get<ResponceBuy>(
+				url.href
+		).then(r => r.data)
+
+		if (!responce) {
+			throw new Error(`Нет ответа`)
+		}
+
+		console.log(responce)
+
+		const buyUrl = new URL(`https://pay.trademc.org`)
+
+		const {cart_id} = responce.response
+		buyUrl.searchParams.set("card_id", cart_id.toString())
+		buyUrl.searchParams.set("success_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
+		buyUrl.searchParams.set("pending_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
+		buyUrl.searchParams.set("fail_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
+
+		redirect(buyUrl.href)
+	}
+
+	return <BuyForm Buy={Buy}/>
 }
