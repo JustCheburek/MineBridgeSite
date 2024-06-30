@@ -1,6 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {getSHA256Hash} from "boring-webcrypto-sha256";
 import type {TradeMC} from "@/types/trademc";
+import {userModel} from "@server/models";
 
 export async function POST(request: NextRequest) {
 	const res: TradeMC = await request.json();
@@ -19,7 +20,14 @@ export async function POST(request: NextRequest) {
 		});
 	}
 
-	console.log(`Всё ок ${res.buyer} получает мостики`)
+	await userModel.findOneAndUpdate(
+			{name: res.buyer},
+			{
+				$inc: {
+					mostiki: Number(res.items[0].game_currency)
+				}
+			}
+	)
 
 	return new NextResponse(`ok`, {
 		status: 200
