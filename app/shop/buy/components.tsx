@@ -13,8 +13,8 @@ export function BuyForm({Buy}: {Buy: (formData: FormData) => Promise<void>}) {
 				<Form action={Buy}>
 					<FormLabel>
 						<FormInput
+								name="mostiki"
 								type="number"
-								name="total"
 								autoComplete="mostiki"
 								placeholder="Количество"
 								required

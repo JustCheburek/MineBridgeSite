@@ -24,18 +24,20 @@ export default async function Component() {
 	async function Buy(formData: FormData) {
 		"use server"
 
-		const total = formData.get("total")?.toString()
+		const mostiki = formData.get("mostiki")?.toString()
 		const coupon = formData.get("coupon")?.toString()
 
-		if (!total || !user?.name) {
+		if (!mostiki || !user?.name) {
 			throw new Error(`Не достаточно аргументов`)
 		}
 
 		const url = new URL(`https://api.trademc.org/shop.buyItems`)
 		url.searchParams.set("buyer", user?.name)
-		url.searchParams.set("items", `1:${total}`)
+		url.searchParams.set("items", `1:${mostiki}`)
 		coupon && url.searchParams.set("coupon", coupon)
 		url.searchParams.set("v", "3")
+
+		console.log(url.href)
 
 		type ResponceBuy = {
 			response: {
