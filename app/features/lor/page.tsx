@@ -164,7 +164,7 @@ export default function Lor() {
 
 				<PBox>
 					<PTitle>
-						<h2 className="unic_color">И?тория у?ён?го</h2>
+						<h2 className="unic_color">История учёного</h2>
 						<h4>5 сезон</h4>
 					</PTitle>
 					<PText>
@@ -231,6 +231,36 @@ export default function Lor() {
 								Надо вернутся и <strong className="red_color">отомстить</strong> ему!
 							</Page>
 						</Book>
+					</PText>
+				</PBox>
+
+				<PBox>
+					<Link href="https://www.youtube.com/watch?v=XavIL238_FA" target="_blank">
+						<ImgBox type="post">
+							<Img
+									src="https://i.ytimg.com/vi/XavIL238_FA/maxresdefault.jpg"
+									alt="Ссылка на видео о Майнбридже"
+							/>
+						</ImgBox>
+					</Link>
+
+					<PTitle>
+						<Link href="https://www.youtube.com/watch?v=XavIL238_FA" target="_blank">
+							<h2 className="unic_color">Битва</h2>
+						</Link>
+						<h4>6 сезон</h4>
+					</PTitle>
+
+					<PText>
+						<p>
+							Игроки нашли лабораторию из 5 сезона в адском стиле в аду
+						</p>
+						<p>
+							В ней была загадка, нужно было перейти по ссылке:
+						</p>
+						<h4 className="unic_color all_select medium-font">
+							{process.env.NEXT_PUBLIC_DOMEN}/video
+						</h4>
 					</PText>
 				</PBox>
 			</MaxSize>
