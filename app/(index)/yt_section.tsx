@@ -7,10 +7,10 @@ export function YtSection() {
 			<section className={`${styles.section} center_text`}>
 				<div className={styles.text}>
 					<h2 className="unic_color">
-						Всё ещё не уверены?
+						Всё ещё не уверен?
 					</h2>
 					<h3>
-						Тогда посмотрите этот {" "}
+						Тогда посмотри этот {" "}
 						<Link href="https://www.youtube.com/watch?v=tZPDLuddfVs" target="_blank">
 							видосик
 						</Link>

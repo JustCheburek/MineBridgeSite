@@ -49,7 +49,7 @@ export default function Mods() {
 	}]
 
 	const rps: RP[] = [{
-		name: "Тотемы Майнбриджа", url: new URL("https://modrinth.com/resourcepack/minebridge-totems")
+		name: "Тотемы Майнбриджа (самоустановка)", url: new URL("https://modrinth.com/resourcepack/minebridge-totems")
 	}, {
 		name: "Default Dark Mode", url: new URL("https://modrinth.com/resourcepack/default-dark-mode")
 	}, {
@@ -101,11 +101,8 @@ export default function Mods() {
 								Ресурспаки
 							</h3>
 							<p>
-								Теперь ресурспаки можно скачивать прямо на сервере через команду:
+								При входе на сервер ресурспаки устанавливаются сами
 							</p>
-							<h4 className="center_text green_color">
-								<span className="all_select medium-font">/rp set</span> [название]
-							</h4>
 							<p>
 								Разрешены все ресурспаки, которых нет в списке {`"`}запрещено{`"`}
 							</p>

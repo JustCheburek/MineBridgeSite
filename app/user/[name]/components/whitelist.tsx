@@ -91,7 +91,7 @@ export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: Whitelist
 						setModal(false)
 					}}>
 						<FormButton>
-							Подать заявку
+							Попасть в whitelist
 						</FormButton>
 					</Form>
 				</Modal>

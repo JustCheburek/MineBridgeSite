@@ -16,7 +16,7 @@ export function RegistrationSection() {
                 </div>
 
                 <Url href="/auth">
-                    Подать заявку
+                    Влететь на сервер
                 </Url>
             </article>
         </section>
