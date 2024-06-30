@@ -52,12 +52,10 @@ export default async function Component() {
 			throw new Error(`Нет ответа`)
 		}
 
-		console.log(responce)
-
 		const buyUrl = new URL(`https://pay.trademc.org`)
 
 		const {cart_id} = responce.response
-		buyUrl.searchParams.set("card_id", cart_id.toString())
+		buyUrl.searchParams.set("cart_id", cart_id.toString())
 		buyUrl.searchParams.set("success_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
 		buyUrl.searchParams.set("pending_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
 		buyUrl.searchParams.set("fail_url", `${process.env.NEXT_PUBLIC_URL}/shop`)
