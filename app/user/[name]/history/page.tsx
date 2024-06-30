@@ -26,7 +26,11 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 export default async function History({params: {name}}: { params: { name: string } }) {
 	const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
-	const {user, isMe, isContentMakerCheck} = await getUser({name}, author?._id, isModer)
+	const {
+		user, isMe, isContentMakerCheck
+	} = await getUser(
+			{name}, true, author?._id, isModer
+	)
 	const Cases = await getCases()
 	const Drops = await getDrops()
 
@@ -42,7 +46,8 @@ export default async function History({params: {name}}: { params: { name: string
 				await client.run(`vclist remove ${user.name}`)
 				await client.run(`ban ${user.name} Нарушение правил сервера`)
 				if (actions.includes("rollback")) {
-					await client.run(`co rollback action:block`)
+					await client.run(`co rollback action: block user: ${user.name} time: 5d`)
+					await client.run(`co rollback action: container user: ${user.name} time: 5d`)
 				}
 				await userModel.findByIdAndUpdate(user._id, {whitelist: false})
 			}

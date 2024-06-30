@@ -117,7 +117,6 @@ export default function Features() {
 						<GText>Дизайн</GText>
 					</GBox>
 
-
 					{/*<GBox href="/features/plugins">
 							<ImgBox className={styles.img} type="grid">
 

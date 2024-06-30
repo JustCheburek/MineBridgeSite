@@ -29,7 +29,11 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
 	const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
-	const {user, roles, isMe, isContentMaker} = await getUser({name}, author?._id, isModer)
+	const {
+		user, roles, isMe, isContentMaker
+	} = await getUser(
+			{name}, true, author?._id, isModer
+	)
 
 	if (author && (!author?.from || !author.from?.place || !author.from?.userId)) {
 		await userModel.findByIdAndUpdate(

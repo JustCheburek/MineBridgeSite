@@ -11,9 +11,11 @@ import {Img} from "@components/img";
 import {Suspense} from "react";
 
 export async function UserBox(param: { _id?: User["_id"], name?: User["name"] }) {
-	const {user} = await getUser(param)
+	const info = await getUser(param, false).catch(console.error)
 
-	if (!user) return
+	if (!info) return
+
+	const {user} = info
 
 	return (
 			<Suspense fallback={<p>Загрузка...</p>}>

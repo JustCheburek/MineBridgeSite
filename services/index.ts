@@ -61,12 +61,21 @@ export const getUser = cache(
 					_id?: User["_id"],
 					name?: User["name"]
 				},
+				throwNotFound: boolean = true,
 				_id?: User["_id"],
 				show: boolean = false
 		) => {
 			const user: User | null = await userModel.findOne(param).lean()
 
-			if (!user) notFound()
+			if (!user) {
+				console.log(JSON.stringify(param), "не найден")
+
+				if (throwNotFound) {
+					notFound()
+				}
+
+				throw new Error("User not found")
+			}
 
 			user._id = user._id.toString()
 			const isMe = _id === user._id
@@ -89,7 +98,7 @@ export const getUser = cache(
 			return {user, isMe, ...roles, isContentMakerCheck: (isMe || roles.isModer) && roles.isContentMaker}
 		},
 		["user", "userLike", "all"],
-		{revalidate: 300, tags: ["user", "userLike", "all"]}
+		{revalidate: 600, tags: ["user", "userLike", "all"]}
 )
 
 export const getAuthor = cache(
@@ -119,19 +128,19 @@ export const getUsers = cache(
 			return users
 		},
 		["users", "userLike", "all"],
-		{revalidate: 300, tags: ["users", "userLike", "all"]}
+		{revalidate: 1200, tags: ["users", "userLike", "all"]}
 )
 
 export const getCases = cache(
 		async () => await caseModel.find().lean() as Case[],
 		["cases", "shop", "all"],
-		{revalidate: 600, tags: ["cases", "shop", "all"]}
+		{revalidate: 3600, tags: ["cases", "shop", "all"]}
 )
 
 export const getDrops = cache(
 		async () => await dropModel.find().lean() as Drop[],
 		["drops", "shop", "all"],
-		{revalidate: 600, tags: ["drops", "shop", "all"]}
+		{revalidate: 3600, tags: ["drops", "shop", "all"]}
 )
 
 export const getSeasons = cache(
@@ -145,5 +154,5 @@ export const getSeasons = cache(
 			return seasons
 		},
 		["seasons", "news", "events", "all"],
-		{revalidate: 400, tags: ["seasons", "news", "events", "all"]}
+		{revalidate: 1800, tags: ["seasons", "news", "events", "all"]}
 )

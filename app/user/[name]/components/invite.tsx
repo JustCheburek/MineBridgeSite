@@ -17,7 +17,7 @@ export function InviteSection({user, isMe, isModer, isContentMaker}: InviteSecti
 				}
 				<FromBox user={user} isMe={isMe} isModer={isModer}/>
 				{user.invites.map(userId => (
-						<UserBox key={userId} _id={userId}/> || `${userId}`
+						<UserBox key={userId} _id={userId}/>
 				))}
 			</section>
 	)
