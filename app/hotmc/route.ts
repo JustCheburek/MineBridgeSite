@@ -1,10 +1,10 @@
 import {NextRequest, NextResponse} from "next/server";
-import {sha1} from "js-sha1";
+// import {sha1} from "js-sha1";
 
 export async function POST(request: NextRequest) {
-	const res = await request.json();
+	const res: {nick: string; time: string; sign: string} = await request.json();
 
-	if (!res.nick || !res.time || !res.sign) {
+	/*if (!res.nick || !res.time || !res.sign) {
 		return new NextResponse(`Не переданы необходимые данные`, {
 			status: 422
 		});
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 		return new NextResponse(`Переданные данные не прошли проверку`, {
 			status: 409
 		});
-	}
+	}*/
 
 	console.log(`Всё ок ${res.nick} получает мостики`)
 
