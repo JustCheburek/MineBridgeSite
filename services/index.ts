@@ -151,6 +151,16 @@ export const getSeasons = cache(
 					number2 - number1
 			)
 
+			seasons.map(season => {
+				season.news.sort(({createdAt: createdAt1}, {createdAt: createdAt2}) =>
+						new Date(createdAt2 || "").getTime() - new Date(createdAt1 || "").getTime()
+				)
+				season.events.sort(({startAt: startAt1}, {startAt: startAt2}) =>
+						new Date(startAt2 || "").getTime() - new Date(startAt1 || "").getTime()
+				)
+				return season
+			})
+
 			return seasons
 		},
 		["seasons", "news", "events", "all"],
