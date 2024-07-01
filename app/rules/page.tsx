@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const timeAgo = new TimeAgo('ru-RU');
 
 export default function Rules() {
-	const lastUpdate = new Date(2024, 6 - 1, 12);
+	const lastUpdate = new Date(2024, 7 - 1, 1, 15, 30);
 
 	return (
 			<>
@@ -285,17 +285,11 @@ export default function Rules() {
 									Места лора
 								</li>
 								<li>
-									Cпавн верхнего мира. Любой может строить магазины и другие украшения в пределах
+									Cпавн во всех измерениях и все виды порталов к ним. На спавне верхнего мира любой может строить магазины и другие украшения в пределах
 									разумного. Стиль спавна указан на табличке на спавне
 								</li>
 								<li>
-									Спавн ада
-								</li>
-								<li>
-									Главный остров в энде и все его порталы
-								</li>
-								<li>
-									Спавнера блейзов в адских крепостях
+									Любые средние и большие виды данжей
 								</li>
 							</ul>
 						</Rule>
@@ -390,9 +384,7 @@ export default function Rules() {
 						<Rule number={6.3} punishment={20}>
 							<p>
 								Реклама, не связанная с нашим проектом, без согласия администрации запрещена. {" "}
-								<TextUrl
-										href="https://t.me/JustCheburek"
-								>
+								<TextUrl href="https://t.me/JustCheburek">
 									Купить согласие
 								</TextUrl>
 							</p>
@@ -441,6 +433,9 @@ export default function Rules() {
 								</li>
 								<li>
 									Близко к спавну
+								</li>
+								<li>
+									Находится в привате
 								</li>
 							</ul>
 						</Rule>
