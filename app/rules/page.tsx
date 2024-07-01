@@ -36,9 +36,12 @@ export default function Rules() {
 							</strong>
 							{" "}
 							<small>
-								({lastUpdate.toLocaleDateString("ru-RU", {
-									timeZone: "Asia/Vladivostok"
-								})})
+								(
+								{lastUpdate.toLocaleDateString("ru-RU", {
+									timeZone: "Asia/Vladivostok",
+									dateStyle: "long"
+								})}
+								)
 							</small>
 						</time>
 					</p>
