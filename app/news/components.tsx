@@ -24,7 +24,9 @@ export const SeasonBox = (
 				</div>
 				<time className={styles.time_text} dateTime={startAt.toISOString()}>
 					<strong>
-						{startAt.toLocaleDateString("ru-RU")}
+						{startAt.toLocaleDateString("ru-RU", {
+							timeZone: "Asia/Vladivostok"
+						})}
 					</strong>
 				</time>
 			</div>
@@ -44,7 +46,9 @@ export const SeasonBox = (
 				</svg>
 				<time className={styles.time_text} dateTime={endAt.toISOString()}>
 					<strong>
-						{endAt.toLocaleDateString("ru-RU")}
+						{endAt.toLocaleDateString("ru-RU", {
+							timeZone: "Asia/Vladivostok"
+						})}
 					</strong>
 				</time>
 			</div>

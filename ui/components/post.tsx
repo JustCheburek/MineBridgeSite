@@ -32,11 +32,17 @@ export const PTitle = (
 			{startAt &&
 					<div className={styles.time}>
 						<small className="medium-font">
-							{new Date(startAt).toLocaleDateString()}
+							{new Date(startAt).toLocaleDateString("ru-RU", {
+								timeZone: "Asia/Vladivostok"
+							})}
 						</small>
 						{endAt &&
 								<>
-									{"-"} <small className="medium-font">{new Date(endAt).toLocaleDateString()}</small>
+									{"-"} <small className="medium-font">
+									{new Date(endAt).toLocaleDateString("ru-RU", {
+										timeZone: "Asia/Vladivostok"
+									})}
+								</small>
 								</>
 						}
 					</div>

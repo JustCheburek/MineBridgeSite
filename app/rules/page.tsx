@@ -35,7 +35,11 @@ export default function Rules() {
 								{timeAgo.format(lastUpdate)}
 							</strong>
 							{" "}
-							<small>({lastUpdate.toLocaleDateString()})</small>
+							<small>
+								({lastUpdate.toLocaleDateString("ru-RU", {
+									timeZone: "Asia/Vladivostok"
+								})})
+							</small>
 						</time>
 					</p>
 					<p>
