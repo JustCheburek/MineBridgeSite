@@ -22,6 +22,11 @@ export default function Guides() {
 				<h1>Гайды</h1>
 
 				<GContainer border>
+					<GBox href="https://stardustlabs.miraheze.org/wiki/Incendium#" anotherSite>
+						<GHint className="red_color">НОВИНКА</GHint>
+						<GText>Обновление АДА</GText>
+					</GBox>
+
 					<GBox href="/features/guides/crafts" imgs="two">
 						<ImgBox type="grid">
 							<Img src="/features/guides/crafts/light.png" alt="Свет" pixel/>
