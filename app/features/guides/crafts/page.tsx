@@ -24,7 +24,7 @@ export default function Crafts() {
 
 				<PBox>
 					<ImgBox type="post">
-						<Img alt="Меч отладки" src="/features/guides/crafts/sword.jpg"/>
+						<Img alt="Меч отладки" src="/features/guides/crafts/sword.png"/>
 					</ImgBox>
 					<PTitle>
 						<h2>
