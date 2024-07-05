@@ -16,9 +16,7 @@ export const PBox = (
 			className = ""
 		}: PropsWithChildren<{ className?: string }>
 ) => (
-		<div
-				className={`${styles.container} ${className}`}
-		>
+		<div className={`${styles.container} ${className}`}>
 			{children}
 		</div>
 )

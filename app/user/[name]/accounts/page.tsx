@@ -113,10 +113,12 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					Акки
 				</h1>
 
-				<ChangeParam
+				{(isMe || isModer) &&
+					<ChangeParam
 						user={user} isMe={isMe} isModer={isModer} isAdmin={isAdmin} isContentMaker={isContentMakerCheck}
 						Change={Change}
-				/>
+					/>
+				}
 
 				<div className={styles.providers_box}>
 					<Provider
@@ -145,7 +147,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 					</Provider>
 				</div>
 				{adminAccess &&
-						<DeleteUser user={user} Delete={Delete}/>
+						<DeleteUser user={user} Delete={Delete} isAdmin={isAdmin}/>
 				}
 			</div>
 	)

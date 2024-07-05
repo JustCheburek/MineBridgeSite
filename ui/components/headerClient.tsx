@@ -90,12 +90,12 @@ function User({user, Logout}: { user: User | null, Logout: Function }) {
 					onClick={e => e.stopPropagation()}
 			>
 				<div className="user_info">
-					<p className="for_pc user_mostiki">
+					<Link href="/shop/buy" className="for_pc user_mostiki">
 						Баланс: {" "}
 						<strong className="unic_color user_mostiki" style={{display: "flex"}}>
 							{user?.mostiki} <MostikiSvg/>
 						</strong>
-					</p>
+					</Link>
 
 					<button
 							className="unic_color user_icon_box"

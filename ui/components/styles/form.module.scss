@@ -28,6 +28,7 @@
 .select,
 .button {
   --_color: var(--unic-color);
+
   &.danger {
     --_color: var(--red-color);
   }
@@ -41,6 +42,10 @@
   transition:
           border-color var(--long-transition),
           color var(--short-transition);
+
+  &:disabled, &[aria-disabled="true"] {
+    color: var(--light-gray-color);
+  }
 
   &:not(:disabled):not([aria-disabled="true"]) {
     &:active, &:focus-visible, &:hover {

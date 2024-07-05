@@ -15,12 +15,7 @@ export function FormBox({author}: { author: User | null }) {
 	async function Func() {
 		"use server"
 
-		await userModel.findByIdAndUpdate(
-				author!._id,
-				{
-					form: true
-				}
-		)
+		await userModel.findByIdAndUpdate(author!._id, {form: true})
 
 		revalidateTag("userLike")
 	}

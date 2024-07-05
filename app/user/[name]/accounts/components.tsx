@@ -5,19 +5,66 @@ import type {User} from "lucia";
 
 // Компоненты
 import {Form, FormButton, FormInput, FormLabel, FormTextarea} from "@components/form";
-import {Modal} from "@components/modal";
+import {Modal, type ModalAction} from "@components/modal";
 import {useState} from "react";
-import {isRoles} from "@/services";
+import type {isRoles} from "@/services";
 import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
+import Link from "next/link";
+import {RatingUp} from "@components/ratingUp";
 
 type DeleteUser = {
 	user: User
 	Delete?: ((formData: FormData) => void)
 }
 
-export function DeleteUser({user, Delete}: DeleteUser) {
-	const [modal, setModal] = useState(false)
+function SuccessModal({modal, setModal, Delete, user}: ModalAction & DeleteUser) {
 	const [name, setName] = useState("")
+
+	return (
+			<Modal modal={modal} setModal={setModal}>
+				<h1>Удаление</h1>
+				<p>
+					Ты уверен, что хочешь
+				</p>
+				<p>
+					удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
+				</p>
+				<h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
+				<Form action={Delete}>
+					<InputNameCheck
+							danger placeholder={user.name}
+							autoComplete="off"
+							name={name} setName={setName}
+					/>
+					<FormButton danger disabled={name !== user.name}>
+						Жми, жми!
+					</FormButton>
+				</Form>
+			</Modal>
+	)
+}
+
+function NoPermModal({modal, setModal}: ModalAction) {
+	return (
+			<Modal modal={modal} setModal={setModal} centerText={false}>
+				<h1>Нет прав</h1>
+				<p>
+					Твой рейтинг меньше 0,
+				</p>
+				<p>
+					поэтому не можешь удалять аккаунт
+				</p>
+				<p>
+					Но ты можешь:
+				</p>
+				<RatingUp/>
+			</Modal>
+	)
+}
+
+export function DeleteUser({user, Delete, isAdmin}: { isAdmin: boolean } & DeleteUser) {
+	const [modal, setModal] = useState(false)
+	const access = isAdmin || user.rating >= 0
 
 	return (<>
 		<Form action={() => setModal(true)}>
@@ -25,26 +72,18 @@ export function DeleteUser({user, Delete}: DeleteUser) {
 				Удалить аккаунт
 			</FormButton>
 		</Form>
-		<Modal modal={modal} setModal={setModal}>
-			<h1>Удаление</h1>
-			<p>
-				Ты уверен, что хочешь
-			</p>
-			<p>
-				удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
-			</p>
-			<h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
-			<Form action={Delete}>
-				<InputNameCheck
-						danger placeholder={user.name}
-						autoComplete="off"
-						name={name} setName={setName}
+		{access
+				? <SuccessModal
+						modal={modal}
+						setModal={setModal}
+						Delete={Delete}
+						user={user}
 				/>
-				<FormButton danger disabled={name !== user.name}>
-					Жми, жми!
-				</FormButton>
-			</Form>
-		</Modal>
+				: <NoPermModal
+						modal={modal}
+						setModal={setModal}
+				/>
+		}
 	</>)
 }
 
@@ -62,27 +101,18 @@ export function ChangeParam(
 		}: ChangeParam) {
 	const [result, setResult] = useState("")
 	const [access, setAccess] = useState(false)
-
-	if (!isMe && !isModer) return
+	const ratingAccess = -50
 
 	return (<>
-		{user.rating <= -50 &&
-				<div className="center_text">
+		{user.rating <= ratingAccess &&
+				<div className="grid_center">
 					<h3>
-						{isMe
-								? "У вас рейтинг ниже -50"
-								: "У игрока рейтинг ниже -50"
-						}
+						У вас рейтинг ниже {ratingAccess}
 					</h3>
 					<p>
-						Поэтому, чтобы поменять ник
+						Поэтому, чтобы поменять данные вы можете:
 					</p>
-					<p>
-						{isMe
-								? "попросите модера или админа"
-								: "он может попросить Вас"
-						}
-					</p>
+					<RatingUp/>
 				</div>
 		}
 		<Form action={async formData => {
@@ -95,7 +125,7 @@ export function ChangeParam(
 			<InputNameCheckWithoutState
 					setAccess={setAccess}
 					defaultName={user.name}
-					disabled={user.rating <= -50 && !isModer}
+					disabled={user.rating <= ratingAccess && !isModer}
 			/>
 
 			<FormLabel>
@@ -106,9 +136,21 @@ export function ChangeParam(
 						required
 						maxLength={200}
 						defaultValue={user.photo}
-						disabled={user.rating <= -50 && !isModer}
+						disabled={user.rating <= ratingAccess && !isModer}
 				/>
 			</FormLabel>
+			{isAdmin &&
+					<FormLabel>
+						<FormInput
+								name="mostiki"
+								type="number"
+								placeholder="Мостики"
+								autoComplete="mostiki"
+								required
+								defaultValue={user.mostiki}
+						/>
+					</FormLabel>
+			}
 			{isContentMaker && <>
 				<p className="center_text">
 					Добавьте ссылки<br/>
@@ -174,24 +216,12 @@ export function ChangeParam(
 					/>
 				</FormLabel>
 			</>}
-			{isAdmin &&
-					<FormLabel>
-						<FormInput
-								name="mostiki"
-								type="number"
-								placeholder="Мостики"
-								autoComplete="mostiki"
-								required
-								defaultValue={user.mostiki}
-						/>
-					</FormLabel>
-			}
 			{result &&
-					<p className="red_color center_text">
+					<strong className="red_color center_text">
 						{result}
-					</p>
+					</strong>
 			}
-			<FormButton disabled={user.rating <= -100 && !isModer || !access}>
+			<FormButton disabled={user.rating <= ratingAccess && !isModer || !access}>
 				Сохранить
 			</FormButton>
 		</Form>

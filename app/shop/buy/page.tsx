@@ -9,6 +9,7 @@ import {lucia} from "@server/lucia";
 import {MostikiSvg, SBPSvg} from "@ui/SVGS";
 import {MaxSize} from "@components/maxSize";
 import Link from "next/link";
+import {PBox, PText, PTitle} from "@components/post";
 
 export const metadata: Metadata = {
 	title: "Покупка | MineBridge",
@@ -23,48 +24,56 @@ export default async function Component() {
 	}
 
 	return (
-			<MaxSize width={550}>
+			<MaxSize width={550} className="grid_center center_text">
 				<h1>
 					Покупка
 				</h1>
-				<h2>
-					Пожалуйста, для покупки позовите админа
-				</h2>
-				<p>
-					Покупка происходит с помощью {" "}
-					<a
-							href={"#sbp"}
-					>
-						<strong className="unic_color">СБП</strong>
-					</a>
-					<br/>
-					или напрямую по {" "}
-					<Link
-							href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
-							target="_blank"
-					>
-						<strong className="unic_color">СБЕР</strong>
-					</Link>
-				</p>
 				<h3>
 					1 ₽ = 1 <MostikiSvg/>
 				</h3>
-				<br/>
-				<div id="sbp" className="green_color">
-					<h4 className="all_select">
-						СберБанк
-					</h4>
-					<h4 className="all_select">
-						8 914 344 8578
-					</h4>
-				</div>
-				<Link
-						href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
-						target="_blank"
-						style={{marginBlock: "20px"}}
-				>
-					<SBPSvg/>
-				</Link>
+
+				<h4>
+					Для покупки позовите {" "}
+					<Link
+							href="https://discord.gg/f95V9Rezqy"
+							className="unic_color medium-font" target="_blank"
+					>
+						админа
+					</Link>
+				</h4>
+
+				<PBox>
+					<PTitle>
+						<h2 className="unic_color">СБП</h2>
+					</PTitle>
+					<PText className="center_text">
+						<h4 className="all_select green_color">
+							СберБанк
+						</h4>
+						<h4 className="all_select">
+							8 914 344 8578
+						</h4>
+					</PText>
+				</PBox>
+
+				<PBox>
+					<PTitle>
+						<Link
+								href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
+								target="_blank" className="unic_color"
+						>
+							<h2>СБЕР</h2>
+						</Link>
+					</PTitle>
+					<PText>
+						<Link
+								href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
+								target="_blank"
+						>
+							<SBPSvg/>
+						</Link>
+					</PText>
+				</PBox>
 			</MaxSize>
 	)
 }

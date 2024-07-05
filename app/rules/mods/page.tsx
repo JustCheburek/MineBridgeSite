@@ -36,8 +36,11 @@ export default function Mods() {
 	}, {
 		name: "EmoteCraft (рекомендуется)", url: new URL("https://modrinth.com/mod/emotecraft")
 	}, {
+		name: "InvMove",
+		url: new URL("https://modrinth.com/mod/invmove")
+	}, {
 		name: "Simple Voice Chat (рекомендуется)",
-		url: new URL("https://modrinth.com/plugin/simple-voice-chat/versions?l=quilt&l=forge&l=fabric")
+		url: new URL("https://modrinth.com/plugin/simple-voice-chat/")
 	}, {
 		name: "Litematica (easy place mod)", url: new URL("https://curseforge.com/minecraft/mc-mods/litematica")
 	}, {
