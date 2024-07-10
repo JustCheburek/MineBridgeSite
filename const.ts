@@ -3,8 +3,6 @@ export const TG_URL = "https://t.me/MineBridgeOfficial"
 export const VK_URL = "https://vk.com/minebridge"
 export const SUPPORT_URL = "https://discord.gg/f95V9Rezqy"
 
-export const TG_URL_START = "https://t.me/"
-export const VK_URL_START = "https://vk.com/"
 export const URLS_START = {
 	discord: `https://discord.gg/`,
 	telegram: `https://t.me/`,

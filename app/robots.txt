@@ -6,5 +6,5 @@ Allow: /
 
 Crawl-delay: 1
 
-Host: minebridge.site
-Sitemap: https://minebridge.site/sitemap.xml
+Host: майнбридж.рф
+Sitemap: https://майнбридж.рф/sitemap.xml

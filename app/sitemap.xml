@@ -3,117 +3,117 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <!-- Главная -->
     <url>
-        <loc>https://minebridge.site/</loc>
+        <loc>https://майнбридж.рф</loc>
         <priority>1</priority>
         <changefreq>daily</changefreq>
     </url>
 
     <!-- Магазин -->
     <url>
-        <loc>https://minebridge.site/shop</loc>
+        <loc>https://майнбридж.рф/shop</loc>
         <priority>0.9</priority>
         <changefreq>daily</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/shop/case</loc>
+        <loc>https://майнбридж.рф/shop/case</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/shop/buy</loc>
+        <loc>https://майнбридж.рф/shop/buy</loc>
         <priority>0.5</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <!-- Правила -->
     <url>
-        <loc>https://minebridge.site/rules</loc>
+        <loc>https://майнбридж.рф/rules</loc>
         <priority>0.9</priority>
         <changefreq>daily</changefreq>
         <lastmod>2023-12-26</lastmod>
     </url>
 
     <url>
-        <loc>https://minebridge.site/mods</loc>
+        <loc>https://майнбридж.рф/mods</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
         <lastmod>2023-12-26</lastmod>
     </url>
 
     <url>
-        <loc>https://minebridge.site/blacklist</loc>
+        <loc>https://майнбридж.рф/blacklist</loc>
         <priority>0.8</priority>
         <changefreq>yearly</changefreq>
     </url>
 
     <!-- Новости -->
     <url>
-        <loc>https://minebridge.site/news</loc>
+        <loc>https://майнбридж.рф/news</loc>
         <priority>0.9</priority>
         <changefreq>daily</changefreq>
         <lastmod>2023-12-10</lastmod>
     </url>
 
     <url>
-        <loc>https://minebridge.site/news/events</loc>
+        <loc>https://майнбридж.рф/news/events</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <!-- Фичи -->
     <url>
-        <loc>https://minebridge.site/features</loc>
+        <loc>https://майнбридж.рф/features</loc>
         <priority>0.9</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/features/lor</loc>
+        <loc>https://майнбридж.рф/features/lor</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/features/crafts</loc>
+        <loc>https://майнбридж.рф/features/crafts</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/features/mods</loc>
+        <loc>https://майнбридж.рф/features/mods</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/features/streamers</loc>
+        <loc>https://майнбридж.рф/features/streamers</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/features/stickers</loc>
+        <loc>https://майнбридж.рф/features/stickers</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/features/totems</loc>
+        <loc>https://майнбридж.рф/features/totems</loc>
         <priority>0.8</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <!-- Профиль -->
     <url>
-        <loc>https://minebridge.site/auth</loc>
+        <loc>https://майнбридж.рф/auth</loc>
         <priority>0.9</priority>
         <changefreq>monthly</changefreq>
     </url>
 
     <url>
-        <loc>https://minebridge.site/users</loc>
+        <loc>https://майнбридж.рф/users</loc>
         <priority>0.9</priority>
         <changefreq>weekly</changefreq>
     </url>

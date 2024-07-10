@@ -53,7 +53,7 @@ export default function Features() {
 						<GText>Моды</GText>
 					</GBox>
 
-					<GBox href="http://map.minebridge.site" anotherSite imgs="one">
+					<GBox href={`http://карта.${process.env.NEXT_PUBLIC_DOMEN}`} anotherSite imgs="one">
 						<ImgBox className={styles.img} type="grid">
 							<Img src="/features/map.png" alt="Карта"/>
 						</ImgBox>

@@ -15,7 +15,7 @@ import {useState} from "react";
 const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
 		<section className={`${styles.whitelist} center_text`}>
 			<h2>Вы в Whitelist`е</h2>
-			<p>Айпи сервера - <strong className="unic_color all_select">map.minebridge.site</strong></p>
+			<p>Айпи сервера - <strong className="unic_color all_select">игра.{process.env.NEXT_PUBLIC_DOMEN}</strong></p>
 			<Button onClick={() => setModal(true)}>
 				Заново
 			</Button>
