@@ -17,10 +17,10 @@ export function YtSection() {
 					</h3>
 				</div>
 
-				<Link className={`${styles.yt_link} border`} href="https://www.youtube.com/watch?v=tZPDLuddfVs" target="_blank">
+				<Link className={`${styles.yt_link} border`} href="https://youtu.be/0bPrnHmNWM0" target="_blank">
 					<ImgBox type="post" borderRadius>
 						<Img
-								src="https://i.ytimg.com/vi/tZPDLuddfVs/maxresdefault.jpg"
+								src="https://i.ytimg.com/vi/0bPrnHmNWM0/maxresdefault.jpg"
 								alt="Ссылка на видео о Майнбридже"
 						/>
 					</ImgBox>
