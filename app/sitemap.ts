@@ -117,7 +117,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		...users.map(user => ({
 			url: `${process.env.NEXT_PUBLIC_URL}/users/${user.name}`,
 			priority: 0.6,
-			lastModified: new Date(user.updatedAt)
+			lastModified: user.updatedAt && new Date(user.updatedAt)
 		}))
 	]
 }
