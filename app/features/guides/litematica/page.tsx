@@ -12,12 +12,21 @@ export const metadata: Metadata = {
 
 export default function Litematica() {
 	return (
-			<MaxSize>
-				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {
-					name: "guides",
-					displayname: "Гайды"
-				}, {name: "Litematica", displayname: "Litematica"}]}/>
+			<MaxSize className="center_text">
+				<RelativeNav
+						paths={[
+							{name: "features", displayname: "Фичи"},
+							{name: "guides",displayname: "Гайды"},
+							{name: "Litematica", displayname: "Litematica"}
+						]}
+				/>
 				<h1>Litematica</h1>
+				<p>
+					Гайда нет, но вы держитесь
+				</p>
+				<p>
+					Пожалуйста, напишите здесь гайд и скиньте в лс
+				</p>
 				{/*
                 <div className="container" id="litematica">
                     <h2 className="heading">Лайтматика</h2>

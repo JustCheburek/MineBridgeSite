@@ -11,6 +11,7 @@ import {Punishment, Rule, RulesBox} from "./components";
 import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
 import {TextUrl} from "@components/textUrl";
 import {UserBox} from "@components/userBox";
+import {LASTRULESUPDATE} from "@/const";
 
 export const metadata: Metadata = {
 	title: "Правила | Майнбридж",
@@ -20,7 +21,6 @@ export const metadata: Metadata = {
 const timeAgo = new TimeAgo('ru-RU');
 
 export default function Rules() {
-	const lastUpdate = new Date(2024, 7 - 1, 1, 15, 30);
 
 	return (
 			<>
@@ -30,14 +30,14 @@ export default function Rules() {
 					</h1>
 					<p>
 						Последнее изменение правил: {" "}
-						<time dateTime={lastUpdate.toISOString()}>
+						<time dateTime={LASTRULESUPDATE.toISOString()}>
 							<strong className="unic_color">
-								{timeAgo.format(lastUpdate)}
+								{timeAgo.format(LASTRULESUPDATE)}
 							</strong>
 							{" "}
 							<small>
 								(
-								{lastUpdate.toLocaleDateString("ru-RU", {
+								{LASTRULESUPDATE.toLocaleDateString("ru-RU", {
 									timeZone: "Asia/Vladivostok",
 									dateStyle: "long"
 								})}

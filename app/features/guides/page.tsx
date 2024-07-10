@@ -22,8 +22,11 @@ export default function Guides() {
 				<h1>Гайды</h1>
 
 				<GContainer border>
-					<GBox href="https://stardustlabs.miraheze.org/wiki/Incendium#" anotherSite>
-						<GHint className="red_color">НОВИНКА</GHint>
+					<GBox href="https://stardustlabs.miraheze.org/wiki/Incendium#" imgs="one" anotherSite>
+						<ImgBox type="grid">
+							<Img src="/features/guides/nether.png" alt="Портал в ад"/>
+						</ImgBox>
+
 						<GText>Обновление АДА</GText>
 					</GBox>
 
@@ -35,7 +38,6 @@ export default function Guides() {
 							<Img src="/features/guides/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
 						</ImgBox>
 
-						<GHint className="green_color">Перенос</GHint>
 						<GText>Крафты</GText>
 					</GBox>
 
@@ -74,7 +76,6 @@ export default function Guides() {
 							/>
 						</ImgBox>
 
-						<GHint className="red_color">Новинка</GHint>
 						<GText>Еда</GText>
 					</GBox>
 
@@ -87,7 +88,6 @@ export default function Guides() {
 							/>
 						</ImgBox>
 
-						<GHint className="red_color">Новинка</GHint>
 						<GText>Мебель</GText>
 					</GBox>
 
@@ -99,7 +99,6 @@ export default function Guides() {
 							/>
 						</ImgBox>
 
-						<GHint className="red_color">Новинка</GHint>
 						<GText>Жители</GText>
 					</GBox>
 
@@ -111,16 +110,26 @@ export default function Guides() {
 							/>
 						</ImgBox>
 
-						<GHint className="red_color">Новинка</GHint>
 						<GText>Перенос жителей</GText>
 					</GBox>
 
-					{/*<Link href="/features/guides/litematica" className="box two crafts">
-							<img src="/features/guides/litematica/house.jpg" alt="Дом из мема: ОЙ МАМА ПРИШЛА" className="img"/>
-							<img src="/features/guides/blocks.png" alt="Блоки" className="img"/>
+					<GBox href="/features/guides/litematica" imgs="two">
+						<ImgBox type="grid">
+							<Img
+									src="/features/guides/litematica/house.jpg"
+									alt="Дом из мема: ОЙ МАМА ПРИШЛА"
+							/>
+						</ImgBox>
+						<ImgBox type="grid">
+							<Img
+									src="/features/guides/blocks.png"
+									alt="Блоки"
+							/>
+						</ImgBox>
 
-							<h3 className="text">Litematica</h3>
-						</Link>*/}
+						<GHint>Нужен гайд</GHint>
+						<GText>Litematica</GText>
+					</GBox>
 				</GContainer>
 			</MaxSize>
 	)
