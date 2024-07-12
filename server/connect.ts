@@ -1,4 +1,4 @@
-import {connect} from "mongoose";
+import {connect, connections} from "mongoose";
 
 const MONGO_URL = process.env.MONGODB_URI!
 if (!MONGO_URL) {
@@ -7,23 +7,18 @@ if (!MONGO_URL) {
 	);
 }
 
-let cached = (global as any).mongoose || { conn: null, promise: null };
-
 export async function Connect() {
+	if (connections[0].readyState) {
+		return
+	}
+
 	while (true) {
 		try {
-			if (cached.conn) {
-				return cached.conn
-			}
+			console.log("Подключение к DB")
+			await connect(MONGO_URL)
+			console.log("Подключено к DB")
 
-			if (!cached.promise) {
-				console.log("Подключение к DB")
-				cached.promise = await connect(MONGO_URL).then(mongoose => mongoose)
-				console.log("Подключено к DB")
-			}
-
-			cached.conn = await cached.promise
-			return cached.conn
+			break
 		} catch (e) {
 			console.error(e)
 		}
