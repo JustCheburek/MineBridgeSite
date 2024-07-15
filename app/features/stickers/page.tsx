@@ -25,7 +25,7 @@ export default function Stickers() {
 				</Url>
 
 				<GContainer width={200} height={200}>
-					{Array(14).fill(null).map((_, sticker) => {
+					{Array(15).fill(null).map((_, sticker) => {
 						let path = `/features/stickers/${sticker}.png`
 
 						return (

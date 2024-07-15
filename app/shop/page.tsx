@@ -95,7 +95,7 @@ export default async function Shop() {
 						))}
 					</Section>
 
-					<Heading heading="Стикеры" id="stickers" href="/features/stickers">
+					<Heading heading="Стикеры в телеграм" id="stickers" href="/features/stickers">
 						<p>
 							При покупке можно указать свой скин, пожелания, идеи,
 						</p>
@@ -103,6 +103,47 @@ export default async function Shop() {
 							чтобы стикер больше подходил под Вас
 						</p>
 					</Heading>
+
+					<Author description="Абстрактный художник" href="@Dezelink">
+						@Dezelink
+					</Author>
+
+					<Section name="stickers">
+						<Box className={styles.preview_sticker}>
+							<Link href="/features/stickers">
+								<ImgBox hover className={styles.helper} overflow={false}>
+									<Img
+											src="/features/stickers/14.png" alt="Стикер"
+											width={225}
+									/>
+								</ImgBox>
+							</Link>
+						</Box>
+
+						<Box>
+							<Text>
+								<CaseInfo description="Абстрактные стикеры">
+									Необычные
+								</CaseInfo>
+								<Price>
+									30
+								</Price>
+								<StickerButton/>
+							</Text>
+						</Box>
+
+						<Box>
+							<Text>
+								<CaseInfo description="А где очередь?">
+									Speed UP
+								</CaseInfo>
+								<Price>
+									55
+								</Price>
+								<StickerButton/>
+							</Text>
+						</Box>
+					</Section>
 
 					<Author description="Художник-приколист" href="https://t.me/coolpilot2O1O">
 						@coolpilot2O1O
@@ -126,7 +167,7 @@ export default async function Shop() {
 									Стандарт
 								</CaseInfo>
 								<Price>
-									40
+									60
 								</Price>
 								<StickerButton/>
 							</Text>
@@ -138,7 +179,7 @@ export default async function Shop() {
 									Экспресс
 								</CaseInfo>
 								<Price>
-									75
+									100
 								</Price>
 								<StickerButton/>
 							</Text>
