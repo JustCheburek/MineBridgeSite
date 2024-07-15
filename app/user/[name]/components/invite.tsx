@@ -13,7 +13,7 @@ export function InviteSection({user, isMe, isModer, isContentMaker}: InviteSecti
 				<h2>Приглашения</h2>
 				<h3>1 приглашение = 5 рейтинга</h3>
 				{isMe &&
-						<InviteLink _id={user._id} isContentMaker={isContentMaker}/>
+						<InviteLink name={user.name} isContentMaker={isContentMaker}/>
 				}
 				<FromBox user={user} isMe={isMe} isModer={isModer}/>
 				{user.invites.map(userId => (

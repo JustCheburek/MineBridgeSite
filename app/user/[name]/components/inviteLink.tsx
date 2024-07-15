@@ -4,11 +4,11 @@ import {Form, FormGroup, FormInput, FormLabel} from "@/ui/components/form";
 import {type ChangeEvent, useState} from "react";
 
 type InviteLink = {
-	_id: string
+	name: string
 	isContentMaker: boolean
 }
 
-export function InviteLink({_id, isContentMaker}: InviteLink) {
+export function InviteLink({name, isContentMaker}: InviteLink) {
 	const [from, setFrom] = useState("friend")
 
 	const places = ["friend", "youtube", "twitch", "discord", "telegram"]
@@ -37,7 +37,7 @@ export function InviteLink({_id, isContentMaker}: InviteLink) {
 				</Form>
 		}
 		<p className="all_select unic_color break">
-			{process.env.NEXT_PUBLIC_URL}?userId={_id}&place={from}
+			{process.env.NEXT_PUBLIC_URL}/invite/{name}/{from}
 		</p>
 	</>)
 }
