@@ -122,6 +122,11 @@ function User({user, Logout}: { user: User | null, Logout: Function }) {
 							</NavLink>
 						</li>
 						<li>
+							<NavLink href="https://discord.gg/UBB92NjedW" className="mini_button">
+								Кланы
+							</NavLink>
+						</li>
+						<li>
 							<button className="mini_button medium-font red_color logout" onClick={() => Logout()}>
 								Выход
 							</button>
