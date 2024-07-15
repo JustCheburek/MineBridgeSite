@@ -8,13 +8,13 @@ type FormClient = {
 
 export function FormClient({Func}: FormClient) {
 	function ClientFunc() {
-		Func()
-
 		window.open(
 				"https://forms.yandex.ru/u/6638c564f47e731e00d9e6e1/",
 				"_blank",
 				"popup,width=750,height=600"
 		)
+
+		Func()
 	}
 
 	return (
