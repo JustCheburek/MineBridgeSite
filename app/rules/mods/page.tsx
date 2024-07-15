@@ -65,8 +65,8 @@ export default function Mods() {
 		"Чит-модификации", "Модификации, позволяющие летать сквозь блоки не выходя с сервера",
 		"Aristois", "Baritone", "Better PVP",
 		"BetterClicker (используйте обычный автокликер, не использующий окружающую среду)",
-		"ClientCommands", "CMDCam", "FindMe", "FreeCam", "Impact", "Inertia", "InvMove", "Jello", "LavaClearView",
-		"MultiConnect (используйте только ViaFabric / Forge)", "NoFog (используйте Sodium Extra или OptiFine)",
+		"ClientCommands", "CMDCam", "FreeCam", "Impact", "Inertia", "Jello", "LavaClearView",
+		"MultiConnect (используйте только ViaFabric / Forge)",
 		"SeedCracker (а также другие моды и программы, выполняющие функции этого мода)", "Sigma", "Tweakeroo",
 		"Wall-Jump", "Wurst", "Xray"
 	]
