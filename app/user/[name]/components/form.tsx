@@ -9,7 +9,7 @@ const threeDays = 1000 * 60 * 60 * 24 * 3
 export function FormBox({author}: { author: User | null }) {
 	if (!author || author?.form === true) return
 
-	const time = new Date(author.createdAt).getTime() - new Date().getTime()
+	const time = new Date().getTime() - new Date(author.createdAt).getTime()
 	if (time < threeDays) return
 
 	async function Func() {
