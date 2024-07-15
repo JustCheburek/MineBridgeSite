@@ -4,16 +4,16 @@ import styles from "../profile.module.scss";
 import {InviteLink} from "./inviteLink";
 
 type InviteSection = {
-	user: User, isMe: boolean, isModer: boolean, isContentMaker: boolean
+	user: User, isMe: boolean, isModer: boolean
 }
 
-export function InviteSection({user, isMe, isModer, isContentMaker}: InviteSection) {
+export function InviteSection({user, isMe, isModer}: InviteSection) {
 	return (
 			<section className="center_text grid_center">
 				<h2>Приглашения</h2>
 				<h3>1 приглашение = 5 рейтинга</h3>
 				{isMe &&
-						<InviteLink name={user.name} isContentMaker={isContentMaker}/>
+						<InviteLink name={user.name}/>
 				}
 				<FromBox user={user} isMe={isMe} isModer={isModer}/>
 				{user.invites.map(userId => (

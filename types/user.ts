@@ -82,17 +82,19 @@ export class User {
 			candidate: User,
 	): Promise<From> {
 		try {
-			const from: From = JSON.parse(cookies().get("from")?.value ?? "{}")
+			const from: { place: string, name: string } = JSON.parse(cookies().get("from")?.value ?? "{}")
 			if (!from) return {}
 
-			const {place, userId} = from
-			if (!userId || !place ||
-					JSON.stringify(candidate._id) === JSON.stringify(userId)
-			) return {}
+			const {place, name} = from
+			if (!name || !place || candidate.name === name) {
+				return {place: undefined, userId: undefined}
+			}
 
-			const inviter = await userModel.findById(userId)
+			const inviter = await userModel.findOne({name})
 
-			if (!inviter) return {}
+			if (!inviter || JSON.stringify(candidate._id) === JSON.stringify(inviter._id)) {
+				return {place: undefined, userId: undefined}
+			}
 
 			if (!inviter.invites.includes(candidate._id)) {
 				inviter.invites.push(candidate._id)
@@ -107,10 +109,10 @@ export class User {
 				inviter.save()
 			}
 
-			return {place, userId}
+			return {place, userId: inviter._id}
 		} catch (e) {
 			console.error(e)
-			return {}
+			return {place: undefined, userId: undefined}
 		}
 	}
 

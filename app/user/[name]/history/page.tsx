@@ -27,7 +27,7 @@ export const generateMetadata = async ({params: {name}}: { params: { name: strin
 export default async function History({params: {name}}: { params: { name: string } }) {
 	const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 	const {
-		user, isMe, isContentMakerCheck
+		user, isMe
 	} = await getUser(
 			{name}, true, author?._id, isModer
 	)
@@ -283,7 +283,7 @@ export default async function History({params: {name}}: { params: { name: string
 			<div className={styles.content}>
 				<h1>История</h1>
 
-				<InviteSection user={user} isMe={isMe} isModer={isModer} isContentMaker={isContentMakerCheck}/>
+				<InviteSection user={user} isMe={isMe} isModer={isModer}/>
 
 				<PunishmentSection
 						user={user} name={author?.name} access={isModer} SaveAll={PunishmentSave}
