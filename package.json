@@ -15,7 +15,7 @@
     "axios": "latest",
     "boring-webcrypto-sha256": "latest",
     "javascript-time-ago": "latest",
-    "js-sha1": "^0.7.0",
+    "js-sha1": "latest",
     "mongoose": "latest",
     "next": "latest",
     "next-mdx-remote": "latest",
