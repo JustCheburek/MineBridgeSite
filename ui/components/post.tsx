@@ -1,5 +1,5 @@
 // React
-import type {PropsWithChildren} from "react";
+import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
 
 // Стили
 import styles from "./styles/post.module.scss";
@@ -13,10 +13,11 @@ type PTitle = {
 export const PBox = (
 		{
 			children,
-			className = ""
-		}: PropsWithChildren<{ className?: string }>
+			className = "",
+			...props
+		}: PropsWithChildren<{ className?: string } & ComponentPropsWithoutRef<"div">>
 ) => (
-		<div className={`${styles.container} ${className}`}>
+		<div className={`${styles.container} ${className}`} {...props}>
 			{children}
 		</div>
 )
