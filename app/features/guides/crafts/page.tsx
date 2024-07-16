@@ -16,11 +16,23 @@ export const metadata: Metadata = {
 export default function Crafts() {
 	return (
 			<MaxSize>
-				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "guides", displayname: "Гайды"}, {
-					name: "crafts",
-					displayname: "Крафты"
-				}]}/>
+				<RelativeNav paths={[
+					{name: "features", displayname: "Фичи"},
+					{name: "guides", displayname: "Гайды"},
+					{name: "crafts", displayname: "Крафты"}
+				]}/>
 				<h1>Крафты</h1>
+
+				<PBox>
+					<ImgBox type="post">
+						<Img alt="Трава" src="/features/guides/crafts/grass.png"/>
+					</ImgBox>
+					<PTitle>
+						<h2>
+							Трава
+						</h2>
+					</PTitle>
+				</PBox>
 
 				<PBox>
 					<ImgBox type="post">
@@ -70,22 +82,6 @@ export default function Crafts() {
 					<PText>
 						<p>
 							8 бутылок + драконья бошка = 8 бутылок драконьего дыхания
-						</p>
-					</PText>
-				</PBox>
-
-				<PBox>
-					<ImgBox type="post">
-						<Img alt="Костные блоки" src="/features/guides/crafts/bone_block.png"/>
-					</ImgBox>
-					<PTitle>
-						<h2>
-							Костные блоки
-						</h2>
-					</PTitle>
-					<PText>
-						<p>
-							Более быстрый перекрафт в костные блоки
 						</p>
 					</PText>
 				</PBox>

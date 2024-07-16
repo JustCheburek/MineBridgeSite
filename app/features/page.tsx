@@ -7,7 +7,7 @@ import styles from "./features.module.scss"
 // Компоненты
 import {BatSvg} from "@ui/SVGS";
 import {MaxSize} from "@components/maxSize";
-import {GBox, GContainer, GText} from "@components/grid";
+import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Url} from "@components/button";
 import {Img, ImgBox, Totem} from "@components/img";
 
@@ -38,6 +38,7 @@ export default function Features() {
 							<Img src="/features/guides/blocks.png" alt="Блоки"/>
 						</ImgBox>
 
+						<GHint className="green_color">Обнова</GHint>
 						<GText>Гайды</GText>
 					</GBox>
 

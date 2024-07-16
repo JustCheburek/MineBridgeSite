@@ -38,6 +38,7 @@ export default function Guides() {
 							<Img src="/features/guides/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
 						</ImgBox>
 
+						<GHint className="green_color">Обнова</GHint>
 						<GText>Крафты</GText>
 					</GBox>
 
