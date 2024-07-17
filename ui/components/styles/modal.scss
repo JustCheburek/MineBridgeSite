@@ -28,8 +28,6 @@ body:has(.modal.active) {
 	&.active {
 		opacity: 1;
 		pointer-events: all;
-		background: var(--background-color-transparent);
-		backdrop-filter: blur(8px);
 		z-index: var(--3z);
 
 		.modal_text {

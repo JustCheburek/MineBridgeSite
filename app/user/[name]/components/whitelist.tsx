@@ -19,6 +19,7 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
 			<Button onClick={() => setModal(true)}>
 				Заново
 			</Button>
+			{/* todo: гайд */}
 		</section>
 )
 

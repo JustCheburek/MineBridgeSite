@@ -34,11 +34,11 @@ export const FormButton = (
 		}: FormButton
 ) => (
 		<button
-				className={`${styles.button} center_text ${danger ? styles.danger : ""} ${className}`}
+				className={`${styles.button} center_text ${danger ? styles.danger : ""}`}
 				type="submit"
 				{...props}
 		>
-			<strong>
+			<strong className={className}>
 				{children}
 			</strong>
 		</button>

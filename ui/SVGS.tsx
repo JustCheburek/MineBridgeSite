@@ -1,8 +1,9 @@
+import type {SVGProps} from "react";
 import {DS_URL, SUPPORT_URL, TG_URL, VK_URL} from "@/const";
 import "./styles/state.scss";
 import Link from "next/link";
 
-type Svg = {
+interface Svg extends SVGProps<SVGSVGElement> {
 	className?: string
 	width?: string
 	height?: string
@@ -10,8 +11,8 @@ type Svg = {
 
 export const SBPSvg = ({className = "", width, height}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" version="1.1" fill="currentcolor" viewBox="0 0 500 500"
-				className={`sbp ${className}`} style={{"width": width, "height": height}}
+				fill="currentcolor" viewBox="0 0 500 500"
+				className={`sbp ${className}`} style={{width, height}}
 		>
 			<g transform="scale(15.152)">
 				<path
@@ -24,7 +25,7 @@ export const SBPSvg = ({className = "", width, height}: Svg) => (
 
 export const MostikiSvg = ({className = "", width = "1.1em", height = "0.85em"}: Svg) => (
 		<svg
-				style={{width, height}} viewBox="0 0 95 67" xmlns="http://www.w3.org/2000/svg"
+				style={{width, height}} viewBox="0 0 95 67"
 				className={`unic_color ${className}`}
 		>
 			<path d="M95 62.7398V66.9999H74.1854V62.7398H95Z" fill="currentColor"/>
@@ -39,7 +40,7 @@ export const MostikiSvg = ({className = "", width = "1.1em", height = "0.85em"}:
 
 export const MinebridgeSvg = ({className = "", width, height}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" viewBox="0 0 192 192"
+				xmlSpace="preserve" viewBox="0 0 192 192"
 				className={className} style={{width, height}}
 		>
 			<path
@@ -57,7 +58,7 @@ export const TelegramUrl = () => (
 
 export const TelegramSvg = ({className = "", width = "38px", height = "38px"}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+				viewBox="0 0 48 48"
 				className={`url tg ${className}`} fill="currentColor" style={{width, height}}
 		>
 			<path
@@ -75,7 +76,7 @@ export const DiscordUrl = () => (
 
 export const DiscordSvg = ({className = "", width = "38px", height = "38px"}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+				viewBox="0 0 256 256"
 				className={`url ds ${className}`} fill="currentColor" style={{width, height}}
 		>
 			<path
@@ -94,7 +95,7 @@ export const VkUrl = () => (
 
 export const VKSvg = ({className = "", width = "38px", height = "38px"}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg"
+
 				className={`url vk ${className}`} fill="currentColor"
 				style={{width, height}}
 		>
@@ -105,26 +106,6 @@ export const VKSvg = ({className = "", width = "38px", height = "38px"}: Svg) =>
 		</svg>
 )
 
-/*export const BoostyUrl = () => (
-		<Link target="_blank" href={BOOSTY_URL} title="Бусти">
-			<BoostySvg/>
-		</Link>
-)
-
-export const BoostySvg = ({className = ""}) => (
-		<svg
-				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 235.6 292.2"
-				className={`href boosty ${className}`} fill="currentColor"
-		>
-			<path
-					className="color"
-					d="M44.3,164.5L76.9,51.6H127l-10.1,35c-0.1,0.2-0.2,0.4-0.3,0.6L90,179.6h24.8c-10.4,25.9-18.5,46.2-24.3,60.9
-		c-45.8-0.5-58.6-33.3-47.4-72.1 M90.7,240.6l60.4-86.9h-25.6l22.3-55.7c38.2,4,56.2,34.1,45.6,70.5
-		c-11.3,39.1-57.1,72.1-101.7,72.1C91.3,240.6,91,240.6,90.7,240.6z"
-			/>
-		</svg>
-)*/
-
 export const SupportUrl = () => (
 		<Link target="_blank" href={SUPPORT_URL} title="Поддержка">
 			<SupportSvg/>
@@ -132,7 +113,7 @@ export const SupportUrl = () => (
 )
 
 export const SupportSvg = ({className = "", width = "38px", height = "38px"}: Svg) => (
-		<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"
+		<svg fill="currentColor" viewBox="0 0 16 16"
 		     className={`url support ${className}`} style={{width, height}}>
 			<path
 					className="color"
@@ -143,7 +124,7 @@ export const SupportSvg = ({className = "", width = "38px", height = "38px"}: Sv
 
 export const YouTubeSvg = ({className = "", width, height}: Svg) => (
 		<svg
-				viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 16 16"
 				className={`url yt ${className}`} fill="currentColor"
 				style={{width, height}}
 		>
@@ -159,7 +140,7 @@ export const YouTubeSvg = ({className = "", width, height}: Svg) => (
 
 export const TwitchSvg = ({className = "", width, height}: Svg) => (
 		<svg
-				viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 16 16"
 				className={`url twitch ${className}`} fill="currentColor" style={{width, height}}
 		>
 			<path
@@ -179,7 +160,7 @@ export const TwitchSvg = ({className = "", width, height}: Svg) => (
 
 export const DonationAlertsSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" style={{width, height}}
+				style={{width, height}}
 				className={`url donation_alerts ${className}`} fill="currentColor"
 		>
 			<path className="color" transform="scale(0.5)"
@@ -189,7 +170,7 @@ export const DonationAlertsSvg = ({className = "", width = "1em", height = "1em"
 
 export const GoogleSvg = ({className = "", width, height}: Svg) => (
 		<svg
-				version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor"
+				version="1.1" viewBox="0 0 48 48" fill="currentColor"
 				xmlnsXlink="http://www.w3.org/1999/xlink" className={`url google ${className}`}
 				style={{width, height}}
 		>
@@ -217,7 +198,7 @@ export const GoogleSvg = ({className = "", width, height}: Svg) => (
 
 export const BatSvg = ({className = "", width, height}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 585"
+				viewBox="0 0 1280 585"
 				fill="currentColor" className={`red_color ${className}`}
 				style={{width, height}}
 		>
@@ -227,7 +208,7 @@ export const BatSvg = ({className = "", width, height}: Svg) => (
 )
 
 export const SuccessSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
-		<svg xmlns="http://www.w3.org/2000/svg" className={`successSvg green_color ${className}`} fill="currentColor"
+		<svg className={`successSvg green_color ${className}`} fill="currentColor"
 		     viewBox="0 0 16 16" style={{width, height}}>
 			<path
 					d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
@@ -237,7 +218,7 @@ export const SuccessSvg = ({className = "", width = "1em", height = "1em"}: Svg)
 )
 
 export const ErrorSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
-		<svg xmlns="http://www.w3.org/2000/svg" className={`errorSvg red_color ${className}`} fill="currentColor"
+		<svg className={`errorSvg red_color ${className}`} fill="currentColor"
 		     viewBox="0 0 16 16" style={{width, height}}>
 			<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
 			<path
@@ -247,7 +228,7 @@ export const ErrorSvg = ({className = "", width = "1em", height = "1em"}: Svg) =
 
 export const EmailSvg = ({className = "", width, height}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"
+				fill="currentColor" viewBox="0 0 16 16"
 				className={`unic_color ${className}`} style={{width, height}}
 		>
 			<path
@@ -255,26 +236,47 @@ export const EmailSvg = ({className = "", width, height}: Svg) => (
 		</svg>
 )
 
-export const SearchSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
+export const SearchSvg = ({width = "1em", height = "1em", ...props}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" fill="currentColor" className={className}
-				viewBox="0 0 16 16" style={{width, height}}
+				fill="currentColor"
+				viewBox="0 0 16 16" style={{width, height}} {...props}
 		>
 			<path
 					d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
 		</svg>
 )
 
-export const AnotherSiteSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
+export const AnotherSiteSvg = ({width = "1em", height = "1em", ...props}: Svg) => (
 		<svg
-				xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-				className={className} viewBox="0 0 16 16"
+				fill="currentColor"
+				viewBox="0 0 16 16" {...props}
 				style={{width, height}}
 		>
 			<path
 					d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
 			<path
 					d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+		</svg>
+)
+
+export const ReloadSvg = ({className = "", width = "1em", height = "1em", ...props}: Svg) => (
+		<svg
+				fill="currentColor"
+				className={`unic_color ${className}`}
+				viewBox="0 0 16 16" style={{width, height}} {...props}
+		>
+			<path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+			<path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+		</svg>
+)
+
+export const UpSvg = ({width = "1em", height = "1em", ...props}: Svg) => (
+		<svg
+				fill="currentColor"
+				viewBox="0 0 16 16" style={{width, height}} {...props}
+		>
+			<path
+					d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
 		</svg>
 )
 

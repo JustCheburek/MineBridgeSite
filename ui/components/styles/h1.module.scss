@@ -1,0 +1,22 @@
+@import "@styles/mixins";
+
+.h1_box {
+	position: sticky;
+	top: 0;
+
+	display: grid;
+	place-content: center;
+	grid-template-columns: auto 1fr auto;
+	gap: 5rem;
+
+	padding: 1rem 1.5rem;
+	margin-bottom: 1.5rem;
+
+	z-index: var(--1z);
+
+	@include background();
+}
+
+.h1 {
+	margin: 0;
+}

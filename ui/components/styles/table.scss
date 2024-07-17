@@ -10,9 +10,7 @@ caption:not(:has(h1)) {
 }
 
 thead {
-	background: var(--background-color-transparent);
-	backdrop-filter: blur(8px);
-	z-index: var(--1z);
+	@include background();
 }
 
 th {

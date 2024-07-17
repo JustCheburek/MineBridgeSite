@@ -30,7 +30,7 @@ export function InfoSection() {
 					</Url>
 
 					<p>
-						1.20+ · Minecraft: Java Edition · Лицензия не обязательна
+						1.20+ · Minecraft: Java + Bedrock Editions · Лицензия не обязательна
 					</p>
 				</article>
 				<article className="for_mobile">
@@ -52,7 +52,7 @@ export function InfoSection() {
 					</Url>
 
 					<p>1.20+</p>
-					<p>Minecraft: Java Edition</p>
+					<p>Minecraft: Java + Bedrock Editions</p>
 					<p>Лицензия не обязательна</p>
 				</article>
 			</section>

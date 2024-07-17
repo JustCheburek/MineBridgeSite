@@ -1,3 +1,5 @@
+@import "@styles/mixins";
+
 @keyframes appearance {
 	0% {
 		translate: 0 -50%;
@@ -27,9 +29,7 @@
 
 		padding-block: 1.5rem;
 
-		background: var(--background-color-transparent);
-		backdrop-filter: blur(8px);
-		z-index: var(--2z);
+		@include background();
 	}
 
 	.box {

@@ -21,6 +21,7 @@ import {NotFound} from "@components/notFound";
 import {CheckLink} from "@components/checkLink";
 import {AddNewForm} from "@app/news/components/addNewForm";
 import {revalidateTag} from "next/cache";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Новости | Майнбридж",
@@ -48,7 +49,9 @@ export default async function News() {
 
 	return (
 			<div className="news_content">
-				<h1>Новости</h1>
+				<H1>
+					Новости
+				</H1>
 
 				{seasons.map(season => <div key={season.number}>
 					<SeasonBox

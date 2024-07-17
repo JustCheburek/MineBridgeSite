@@ -169,6 +169,9 @@ iframe {
   @include border();
 }
 
+.background {
+  @include background();
+}
 
 .pixel {
   image-rendering: pixelated;

@@ -27,3 +27,10 @@
 	// Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
 	user-select: none;
 }
+
+@mixin background() {
+	// Бекграунд
+	backdrop-filter: blur(8px);
+	background: var(--background-color-transparent);
+	z-index: var(--1z);
+}

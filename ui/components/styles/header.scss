@@ -6,6 +6,7 @@ header {
   position: sticky;
   top: 0;
 
+  @include background();
   z-index: var(--3z);
 
   display: flex;
@@ -14,10 +15,6 @@ header {
 
   // Размеры
   min-height: var(--header-size);
-
-  // Бекграунд
-  backdrop-filter: blur(8px);
-  background: var(--background-color-transparent);
 
   .header {
     --_gap: 35px;

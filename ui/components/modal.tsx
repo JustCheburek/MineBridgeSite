@@ -14,7 +14,7 @@ type Modal = ModalAction & {
 
 export function Modal({modal, setModal, children, className = "", centerText = true}: PropsWithChildren<Modal>) {
 	return (
-			<section className={`modal medium-font ${centerText ? 'center_text' : ''} ${modal ? 'active' : ''} ${className}`}
+			<section className={`modal medium-font ${centerText ? 'center_text' : ''} ${modal ? 'active background' : ''} ${className}`}
 			         onClick={() => setModal(false)}>
 				<div className="modal_text border" onClick={e => e.stopPropagation()}>
 					<button className="close_modal bold-font" onClick={() => setModal(false)}>
