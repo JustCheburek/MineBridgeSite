@@ -37,7 +37,7 @@ interface H1Props extends ComponentPropsWithoutRef<"h1"> {
 	paths?: RelativePath[]
 }
 
-export const H1 = ({children, paths, reload, up = false, className, ...props}: PropsWithChildren<H1Props>) => (
+export const H1 = ({children, paths, reload, up = false, className = "", ...props}: PropsWithChildren<H1Props>) => (
 		<div className={styles.container}>
 			{paths && <RelativeNav paths={paths}/>}
 

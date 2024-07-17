@@ -17,7 +17,7 @@
 	justify-content: center;
 	align-items: center;
 
-	@media (width > 728px) {
+	@media (width > 700px) {
 		grid-template-columns: 1fr 450px 1fr;
 	}
 }
@@ -30,8 +30,8 @@
 	color: var(--light-gray-color);
 }
 
-@media (width <= 728px) {
+@media (width <= 700px) {
 	.top, .reload {
-		display: none;
+		display: none !important;
 	}
 }
