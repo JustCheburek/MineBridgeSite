@@ -16,11 +16,11 @@ import {H1} from "@components/h1";
 const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
 		<section className={`${styles.whitelist} center_text`}>
 			<h2>Вы в Whitelist`е</h2>
+			{/* todo: гайд */}
 			<p>Айпи сервера - <strong className="unic_color all_select">игра.{process.env.NEXT_PUBLIC_DOMEN}</strong></p>
 			<Button onClick={() => setModal(true)}>
 				Заново
 			</Button>
-			{/* todo: гайд */}
 		</section>
 )
 

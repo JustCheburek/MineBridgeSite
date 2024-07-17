@@ -1,6 +1,6 @@
 import {ReloadButton} from "@components/reload";
 import styles from "./styles/h1.module.scss"
-import type {PropsWithChildren} from "react";
+import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
 import {UpSvg} from "@ui/SVGS";
 import Link from "next/link";
 
@@ -31,13 +31,13 @@ const RelativeNav = ({paths}: { paths: RelativePath[] }) => (
 		</nav>
 )
 
-type H1Box = {
+interface H1Props extends ComponentPropsWithoutRef<"h1"> {
 	reload?: () => void
 	up?: boolean
 	paths?: RelativePath[]
 }
 
-export const H1 = ({children, paths, reload, up = false}: PropsWithChildren<H1Box>) => (
+export const H1 = ({children, paths, reload, up = false, className, ...props}: PropsWithChildren<H1Props>) => (
 		<div className={styles.container}>
 			{paths && <RelativeNav paths={paths}/>}
 
@@ -52,7 +52,7 @@ export const H1 = ({children, paths, reload, up = false}: PropsWithChildren<H1Bo
 						: <div/>
 				}
 
-				<h1 className={styles.h1}>
+				<h1 className={`${styles.h1} ${className}`} {...props}>
 					{children}
 				</h1>
 

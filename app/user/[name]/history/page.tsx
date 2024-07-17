@@ -282,7 +282,7 @@ export default async function History({params: {name}}: { params: { name: string
 
 	return (
 			<div className={styles.content}>
-				<H1 reload={async () => {
+				<H1 up reload={async () => {
 					"use server";
 					revalidateTag("author")
 					revalidateTag("userLike")

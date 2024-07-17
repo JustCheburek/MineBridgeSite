@@ -18,6 +18,7 @@ import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {User} from "lucia";
 import {RconVC} from "@server/console";
+import {H1} from "@components/h1";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Аккаунты | Майнбридж`,
@@ -106,12 +107,12 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 
 	return (
 			<div className="account_content">
-				<h1 className={styles.for_bigger}>
+				<H1 up className={styles.for_bigger}>
 					Аккаунты
-				</h1>
-				<h1 className={styles.for_smaller}>
+				</H1>
+				<H1 className={styles.for_smaller}>
 					Акки
-				</h1>
+				</H1>
 
 				{(isMe || isModer) &&
 					<ChangeParam

@@ -17,6 +17,7 @@ import {Random, RandomValue, SumChances} from "@app/utils";
 import {Img, ImgBox} from "@components/img";
 import {MostikiSvg} from "@ui/SVGS";
 import {Button, Url} from "@components/button";
+import {H1} from "@components/h1";
 
 declare module 'csstype' {
 	interface Properties {
@@ -184,6 +185,13 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
 						'--_roll-width': `-${rollSettings.current.rollWidth}px`
 					}}
 			>
+				<H1 paths={[
+					{displayname: "Магазин", name: "shop"},
+					{displayname: "Кейсы", name: "case"},
+				]}>
+					Кейсы
+				</H1>
+
 				<div className={styles.main_container}>
 					<div className={`${styles.left_container} ${styles.container} center_text`}>
 						<SelectedItem items={items} selectedItem={selectedItem}/>
