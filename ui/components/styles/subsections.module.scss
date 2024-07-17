@@ -30,6 +30,8 @@
 		padding-block: 1.5rem;
 
 		@include background();
+
+		z-index: var(--2z);
 	}
 
 	.box {
