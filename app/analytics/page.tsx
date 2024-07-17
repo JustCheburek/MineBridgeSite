@@ -2,6 +2,8 @@ import {MaxSize} from "@components/maxSize";
 import {getUsers} from "@/services";
 import {PBox, PText, PTitle} from "@components/post";
 import type {Metadata} from "next";
+import {revalidateTag} from "next/cache";
+import {H1} from "@components/h1";
 
 // мс * с * мин * ч * д
 const day = 1000 * 60 * 60 * 24
@@ -35,7 +37,12 @@ export default async function Analytics() {
 
 	return (
 			<MaxSize className="grid_center">
-				<h1>Аналитика</h1>
+				<H1 reload={async () => {
+					"use server";
+					revalidateTag("seasons")
+				}}>
+					Аналитика
+				</H1>
 
 				<PBox>
 					<PTitle>

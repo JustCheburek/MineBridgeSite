@@ -9,6 +9,7 @@ import {NotFound} from "@components/notFound";
 import {OnThisPage, OnThisPageBox, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
 import {ErrorSvg, SuccessSvg} from "@ui/SVGS";
 import Link from "next/link";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Моды | Майнбридж",
@@ -74,7 +75,7 @@ export default function Mods() {
 	return (
 				<>
 					<div className="mods_content">
-						<h1>Моды</h1>
+						<H1 up>Моды</H1>
 
 						<section id="allowed_mods" className={styles.list_container}>
 							<div className={`${styles.list_text} center_text`}>

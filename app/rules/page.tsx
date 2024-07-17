@@ -12,6 +12,7 @@ import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav
 import {TextUrl} from "@components/textUrl";
 import {UserBox} from "@components/userBox";
 import {LASTRULESUPDATE} from "@/const";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Правила | Майнбридж",
@@ -25,9 +26,7 @@ export default function Rules() {
 	return (
 			<>
 				<div className="rules_content">
-					<h1>
-						Правила
-					</h1>
+					<H1 up>Правила</H1>
 					<p>
 						Последнее изменение правил: {" "}
 						<time dateTime={LASTRULESUPDATE.toISOString()}>

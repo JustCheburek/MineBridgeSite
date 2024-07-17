@@ -18,6 +18,7 @@ import styles from "./history.module.scss";
 import {PunishmentSection} from "./components/ratingSection";
 import {CasesPurchasesSection} from "./components/casesPurchasesSection";
 import {InviteSection} from "../components/invite";
+import {H1} from "@components/h1";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Истории действий | Майнбридж`,
@@ -281,7 +282,13 @@ export default async function History({params: {name}}: { params: { name: string
 
 	return (
 			<div className={styles.content}>
-				<h1>История</h1>
+				<H1 reload={async () => {
+					"use server";
+					revalidateTag("author")
+					revalidateTag("userLike")
+				}}>
+					История
+				</H1>
 
 				<InviteSection user={user} isMe={isMe} isModer={isModer}/>
 

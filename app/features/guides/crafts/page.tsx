@@ -2,11 +2,11 @@
 import type {Metadata} from "next";
 
 // Стили
-import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {PBox, PText, PTitle} from "@components/post";
 import {Img, ImgBox} from "@components/img";
 import {NotFound} from "@components/notFound";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Крафты | Майнбридж",
@@ -16,12 +16,13 @@ export const metadata: Metadata = {
 export default function Crafts() {
 	return (
 			<MaxSize>
-				<RelativeNav paths={[
+				<H1 up paths={[
 					{name: "features", displayname: "Фичи"},
 					{name: "guides", displayname: "Гайды"},
 					{name: "crafts", displayname: "Крафты"}
-				]}/>
-				<h1>Крафты</h1>
+				]}>
+					Крафты
+				</H1>
 
 				<PBox>
 					<ImgBox type="post">

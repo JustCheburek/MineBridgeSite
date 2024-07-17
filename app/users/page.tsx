@@ -7,6 +7,8 @@ import {getUsers} from "@/services";
 import {Table} from "@components/table"
 import {MaxSize} from "@components/maxSize";
 import {columns} from "@columns/users"
+import {revalidateTag} from "next/cache";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Игроки | Майнбридж",
@@ -22,9 +24,12 @@ export default async function Component() {
 						columns={columns}
 						data={users}
 				>
-					<h1>
+					<H1 reload={async () => {
+						"use server";
+						revalidateTag("users")
+					}}>
 						Игроки
-					</h1>
+					</H1>
 				</Table>
 			</MaxSize>
 	)

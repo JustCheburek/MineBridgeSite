@@ -1,5 +1,6 @@
 // Стили
 import type {Metadata} from "next";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Ивенты | Майнбридж",
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 export default function Events() {
 	return (<>
 		<div className="events_content">
-			<h1>Ивенты</h1>
+			<H1 up>Ивенты</H1>
 
 			<div>
 				<p>

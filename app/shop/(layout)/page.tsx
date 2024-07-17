@@ -14,6 +14,7 @@ import {MostikiSvg} from "@ui/SVGS";
 import {Url} from "@components/button";
 import {Img, ImgBox} from "@components/img";
 import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
+import {H1} from "@components/h1";
 
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default async function Shop() {
 
 	return (<>
 		<div>
-			<h1>Магазин</h1>
+			<H1 up>Магазин</H1>
 
 			<div className="grid_center">
 				<p id="mostiki">

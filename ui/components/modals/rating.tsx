@@ -6,6 +6,7 @@ import {type Action, Punishment} from "@/types/punishment";
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormGroup, FormInput, FormLabel} from "@components/form";
+import {H1} from "@components/h1";
 
 type RatingModal = {
 	name?: User["name"]
@@ -28,7 +29,7 @@ export const RatingModal = (
 
 	return (
 			<Modal setModal={setModal} modal={modal}>
-				<h1>Рейтинг</h1>
+				<H1>Рейтинг</H1>
 				<Form action={() => {
 					ratingFunc(punishment, actions)
 					setModal(false)

@@ -7,10 +7,10 @@ import Link from "next/link";
 import styles from "./lor.module.scss"
 
 // Компоненты
-import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {PBox, PText, PTitle} from "@components/post";
 import {Img, ImgBox} from "@components/img";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Лор | Майнбридж",
@@ -35,8 +35,12 @@ const Page = ({children, day}: PropsWithChildren<{ day?: number | string }>) => 
 export default function Lor() {
 	return (
 			<MaxSize>
-				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "lor", displayname: "Лор"}]}/>
-				<h1 className="center_text">Лор</h1>
+				<H1 up paths={[
+						{name: "features", displayname: "Фичи"},
+					{name: "lor", displayname: "Лор"}
+				]}>
+					Лор
+				</H1>
 
 				<h3 className="center_text">
 					<Link href="/rules#lor">Правила лора</Link>

@@ -7,11 +7,11 @@ import {RecipeProps} from "@/types/recipe";
 import {columns} from "@columns/brewery"
 
 // Компоненты
-import {RelativeNav} from "@components/relativeNav";
 import {Table} from "@components/table";
 import {MaxSize} from "@components/maxSize";
 import {PBox, PText, PTitle} from "@components/post";
 import {Img, ImgBox} from "@components/img";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Brewery | Майнбридж",
@@ -21,14 +21,13 @@ export const metadata: Metadata = {
 export default function Brewery() {
 	return (
 			<MaxSize>
-				<RelativeNav
-						paths={[
-							{name: "features", displayname: "Фичи"},
-							{name: "guides", displayname: "Гайды"},
-							{name: "brewery", displayname: "Brewery"}
-						]}
-				/>
-				<h1>Brewery</h1>
+				<H1 up paths={[
+					{name: "features", displayname: "Фичи"},
+					{name: "guides", displayname: "Гайды"},
+					{name: "brewery", displayname: "Brewery"}
+				]}>
+					Brewery
+				</H1>
 
 				<p className="center_text">
 					Плагин на дополнительные алкогольные напитки

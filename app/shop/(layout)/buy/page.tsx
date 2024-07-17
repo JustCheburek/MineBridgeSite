@@ -10,6 +10,7 @@ import {MostikiSvg, SBPSvg} from "@ui/SVGS";
 import Link from "next/link";
 import {PBox, PText, PTitle} from "@components/post";
 import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Покупка | MineBridge",
@@ -25,9 +26,9 @@ export default async function Component() {
 
 	return (<>
 		<div className="center_text">
-			<h1>
+			<H1>
 				Покупка
-			</h1>
+			</H1>
 			<h3 id="mostiki">
 				1 ₽ = 1 <MostikiSvg/>
 			</h3>
@@ -74,6 +75,25 @@ export default async function Component() {
 					</Link>
 				</PText>
 			</PBox>
+
+			<PBox id="donationAlerts">
+				<PTitle>
+					<Link
+							href="https://www.donationalerts.com/r/kawa11fox"
+							target="_blank" className="unic_color"
+					>
+						<h2>Donation Alerts</h2>
+					</Link>
+				</PTitle>
+				<PText>
+					<Link
+							href="https://www.donationalerts.com/r/kawa11fox"
+							target="_blank"
+					>
+						Комиссию оплачиваете Вы
+					</Link>
+				</PText>
+			</PBox>
 		</div>
 
 		<OnThisPage>
@@ -88,6 +108,9 @@ export default async function Component() {
 			</OnThisPageLink>
 			<OnThisPageLink href="#sber">
 				Сбер
+			</OnThisPageLink>
+			<OnThisPageLink href="#donationAlerts">
+				Donation Alerts
 			</OnThisPageLink>
 		</OnThisPage>
 	</>)

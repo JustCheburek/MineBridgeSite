@@ -28,7 +28,7 @@ body:has(.modal.active) {
 	&.active {
 		opacity: 1;
 		pointer-events: all;
-		z-index: var(--3z);
+		z-index: var(--5z);
 
 		.modal_text {
 			scale: 1;
@@ -49,7 +49,7 @@ body:has(.modal.active) {
 
 	// Отображение
 	background: var(--background-color);
-	z-index: var(--4z);
+	z-index: var(--5z);
 
 	// Анимация
 	scale: 0.5;

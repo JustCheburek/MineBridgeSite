@@ -10,6 +10,7 @@ import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Url} from "@components/button";
 import {Img, ImgBox, Totem} from "@components/img";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Фичи | Майнбридж",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 export default function Features() {
 	return (
 			<MaxSize>
-				<h1>Фичи</h1>
+				<H1>Фичи</H1>
 
 				<GContainer border>
 					<GBox href="/features/lor" imgs="one">

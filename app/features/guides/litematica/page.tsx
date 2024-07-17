@@ -2,8 +2,8 @@
 import type {Metadata} from "next";
 
 // Компоненты
-import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Litematica | Майнбридж",
@@ -13,14 +13,13 @@ export const metadata: Metadata = {
 export default function Litematica() {
 	return (
 			<MaxSize className="center_text">
-				<RelativeNav
-						paths={[
-							{name: "features", displayname: "Фичи"},
-							{name: "guides",displayname: "Гайды"},
-							{name: "Litematica", displayname: "Litematica"}
-						]}
-				/>
-				<h1>Litematica</h1>
+				<H1 paths={[
+					{name: "features", displayname: "Фичи"},
+					{name: "guides", displayname: "Гайды"},
+					{name: "Litematica", displayname: "Litematica"}
+				]}>
+					Litematica
+				</H1>
 				<p>
 					Гайда нет, но вы держитесь
 				</p>

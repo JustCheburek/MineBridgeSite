@@ -8,6 +8,7 @@ import type {CaseData} from "@/types/purchase";
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormSelect} from "@components/form";
+import {H1} from "@components/h1";
 
 type CasesPurchasesModal = {
 	Cases: Case[]
@@ -42,7 +43,7 @@ export const CasesPurchasesModal = (
 
 	return (
 			<Modal setModal={setModal} modal={modal}>
-				<h1>Кейсы</h1>
+				<H1>Кейсы</H1>
 
 				<Form action={() => {
 					setModal(false)

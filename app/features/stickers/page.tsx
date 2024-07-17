@@ -3,10 +3,10 @@ import type {Metadata} from "next";
 
 // Компоненты
 import {Url} from "@components/button";
-import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {Img, ImgBox} from "@components/img";
 import {GContainer} from "@components/grid";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Стикеры | Майнбридж",
@@ -16,8 +16,12 @@ export const metadata: Metadata = {
 export default function Stickers() {
 	return (
 			<MaxSize>
-				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "stickers", displayname: "Стикеры"}]}/>
-				<h1>ТГ Cтикеры</h1>
+				<H1 up paths={[
+					{name: "features", displayname: "Фичи"},
+					{name: "stickers", displayname: "Стикеры"}
+				]}>
+					ТГ Стикеры
+				</H1>
 				<p className="center_text">Стикеры в телеграме на заказ</p>
 
 				<Url href="https://t.me/addstickers/MineBridge">

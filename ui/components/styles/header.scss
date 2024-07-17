@@ -7,7 +7,7 @@ header {
   top: 0;
 
   @include background();
-  z-index: var(--3z);
+  z-index: var(--4z);
 
   display: flex;
   align-items: center;
@@ -32,7 +32,7 @@ header {
     font-weight: 500;
 
     & > *:not(.nav_container) {
-      z-index: var(--3z) !important;
+      z-index: var(--4z) !important;
     }
   }
 

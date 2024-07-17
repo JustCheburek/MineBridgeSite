@@ -49,7 +49,10 @@ export default async function News() {
 
 	return (
 			<div className="news_content">
-				<H1>
+				<H1 up reload={async () => {
+					"use server";
+					revalidateTag("seasons")
+				}}>
 					Новости
 				</H1>
 

@@ -1,22 +1,37 @@
 @import "@styles/mixins";
 
-.h1_box {
+.container {
 	position: sticky;
 	top: 0;
 
-	display: grid;
-	place-content: center;
-	grid-template-columns: auto 1fr auto;
-	gap: 5rem;
-
-	padding: 1rem 1.5rem;
+	padding: 0.8rem;
 	margin-bottom: 1.5rem;
 
-	z-index: var(--1z);
-
 	@include background();
+
+	z-index: var(--3z);
+}
+
+.box {
+	display: grid;
+	justify-content: center;
+	align-items: center;
+
+	@media (width > 700px) {
+		grid-template-columns: 1fr 450px 1fr;
+	}
 }
 
 .h1 {
 	margin: 0;
+}
+
+.nav_arrow {
+	color: var(--light-gray-color);
+}
+
+@media (width <= 700px) {
+	.top, .reload {
+		display: none;
+	}
 }

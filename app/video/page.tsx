@@ -1,9 +1,10 @@
 import {MaxSize} from "@components/maxSize";
+import {H1} from "@components/h1";
 
 export default function Scientist() {
 	return (
 			<MaxSize>
-				<h1>Запись в аду</h1>
+				<H1>Запись в аду</H1>
 
 				<iframe
 						src="https://www.youtube.com/embed/XavIL238_FA?si=MfqXr_2tr3vKi3gK"

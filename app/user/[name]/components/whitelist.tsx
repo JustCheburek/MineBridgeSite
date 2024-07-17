@@ -11,6 +11,7 @@ import {Button} from "@components/button";
 import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton} from "@components/form";
 import {useState} from "react";
+import {H1} from "@components/h1";
 
 const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
 		<section className={`${styles.whitelist} center_text`}>
@@ -76,7 +77,7 @@ export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: Whitelist
 				}
 
 				<Modal setModal={setModal} modal={modal}>
-					<h1>Whitelist</h1>
+					<H1>Whitelist</H1>
 					<h4>Вход на сам сервер будет работать, только после открытия</h4>
 					<p>
 						<span className="red_color">Внимание!</span><br/>

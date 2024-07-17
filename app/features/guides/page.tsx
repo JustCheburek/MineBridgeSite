@@ -5,10 +5,10 @@ import type {Metadata} from "next";
 import styles from "../features.module.scss"
 
 // Компоненты
-import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Img, ImgBox} from "@components/img";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Гайды | Майнбридж",
@@ -18,8 +18,12 @@ export const metadata: Metadata = {
 export default function Guides() {
 	return (
 			<MaxSize>
-				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "guides", displayname: "Гайды"}]}/>
-				<h1>Гайды</h1>
+				<H1 paths={[
+						{name: "features", displayname: "Фичи"},
+					{name: "guides", displayname: "Гайды"}
+				]}>
+					Гайды
+				</H1>
 
 				<GContainer border>
 					<GBox href="https://stardustlabs.miraheze.org/wiki/Incendium#" imgs="one" anotherSite>

@@ -7,10 +7,10 @@ import styles from "./design.module.scss"
 
 // Компоненты
 import {MaxSize} from "@components/maxSize";
-import {RelativeNav} from "@components/relativeNav";
 import {UserBox} from "@components/userBox";
 import {PTitle} from "@components/post";
 import {ColorsPie, Download} from "./components";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Дизайн | Майнбридж",
@@ -26,8 +26,12 @@ export default function Design() {
 
 	return (
 			<MaxSize width={900}>
-				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "design", displayname: "Дизайн"}]}/>
-				<h1>Дизайн</h1>
+				<H1 up paths={[
+					{name: "features", displayname: "Фичи"},
+					{name: "design", displayname: "Дизайн"}
+				]}>
+					Дизайн
+				</H1>
 
 				<section className="grid_center">
 					<PTitle>

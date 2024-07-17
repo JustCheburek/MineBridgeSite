@@ -9,6 +9,11 @@ interface Svg extends SVGProps<SVGSVGElement> {
 	height?: string
 }
 
+interface NewSvg extends SVGProps<SVGSVGElement> {
+	className?: string
+	size?: string
+}
+
 export const SBPSvg = ({className = "", width, height}: Svg) => (
 		<svg
 				fill="currentcolor" viewBox="0 0 500 500"
@@ -259,21 +264,21 @@ export const AnotherSiteSvg = ({width = "1em", height = "1em", ...props}: Svg) =
 		</svg>
 )
 
-export const ReloadSvg = ({className = "", width = "1em", height = "1em", ...props}: Svg) => (
+export const ReloadSvg = ({className = "", size = "1em", ...props}: NewSvg) => (
 		<svg
-				fill="currentColor"
+				fill="currentColor" viewBox="0 0 16 16"
 				className={`unic_color ${className}`}
-				viewBox="0 0 16 16" style={{width, height}} {...props}
+				style={{width: size, height: size}} {...props}
 		>
 			<path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
 			<path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
 		</svg>
 )
 
-export const UpSvg = ({width = "1em", height = "1em", ...props}: Svg) => (
+export const UpSvg = ({size = "1em", ...props}: NewSvg) => (
 		<svg
-				fill="currentColor"
-				viewBox="0 0 16 16" style={{width, height}} {...props}
+				fill="currentColor" viewBox="0 0 16 16"
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>

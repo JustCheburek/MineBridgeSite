@@ -9,8 +9,8 @@ import {Modal, type ModalAction} from "@components/modal";
 import {useState} from "react";
 import type {isRoles} from "@/services";
 import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
-import Link from "next/link";
 import {RatingUp} from "@components/ratingUp";
+import {H1} from "@components/h1";
 
 type DeleteUser = {
 	user: User
@@ -22,7 +22,7 @@ function SuccessModal({modal, setModal, Delete, user}: ModalAction & DeleteUser)
 
 	return (
 			<Modal modal={modal} setModal={setModal}>
-				<h1>Удаление</h1>
+				<H1>Удаление</H1>
 				<p>
 					Ты уверен, что хочешь
 				</p>
@@ -47,7 +47,7 @@ function SuccessModal({modal, setModal, Delete, user}: ModalAction & DeleteUser)
 function NoPermModal({modal, setModal}: ModalAction) {
 	return (
 			<Modal modal={modal} setModal={setModal} centerText={false}>
-				<h1>Нет прав</h1>
+				<H1>Нет прав</H1>
 				<p>
 					Твой рейтинг меньше 0,
 				</p>
@@ -96,7 +96,7 @@ type ChangeParam = {
 export function ChangeParam(
 		{
 			user,
-			isMe, isModer, isAdmin, isContentMaker,
+			isModer, isAdmin, isContentMaker,
 			Change
 		}: ChangeParam) {
 	const [result, setResult] = useState("")

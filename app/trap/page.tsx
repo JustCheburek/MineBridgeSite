@@ -3,6 +3,7 @@ import type {Metadata} from "next";
 
 // Компоненты
 import {MaxSize} from "@components/maxSize";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Ловушка | Майнбридж",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 export default function Trap() {
 	return (
 			<MaxSize width={900}>
-				<h1>Горячая картошка</h1>
+				<H1>Горячая картошка</H1>
 				<p>
 					Если ты это читаешь, значит скорей всего тебе дали эту {" "}
 					<strong className="unic_color">

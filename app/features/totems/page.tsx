@@ -6,10 +6,10 @@ import styles from "./totems.module.scss"
 
 // Компоненты
 import {Url} from "@components/button";
-import {RelativeNav} from "@components/relativeNav";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer} from "@components/grid";
 import {Totem} from "@components/img";
+import {H1} from "@components/h1";
 
 declare module 'csstype' {
 	interface Properties {
@@ -55,8 +55,12 @@ export default function Totems() {
 
 	return (
 			<MaxSize>
-				<RelativeNav paths={[{name: "features", displayname: "Фичи"}, {name: "totems", displayname: "Тотемы"}]}/>
-				<h1>Тотемы</h1>
+				<H1 up paths={[
+					{name: "features", displayname: "Фичи"},
+					{name: "totems", displayname: "Тотемы"}
+				]}>
+					Тотемы
+				</H1>
 				<h3 className="center_text">Версия: 2.4</h3>
 
 				<Url href="https://modrinth.com/resourcepack/minebridge-totems/versions">

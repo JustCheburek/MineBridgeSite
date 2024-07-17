@@ -3,6 +3,7 @@
 import {useEffect} from "react";
 import {MaxSize} from "@components/maxSize";
 import {Button, Url} from "@components/button";
+import {H1} from "@components/h1";
 
 export default function Error(
 		{
@@ -19,7 +20,7 @@ export default function Error(
 
 	return (
 			<MaxSize className="center_text">
-				<h1>{error.name}</h1>
+				<H1>{error.name}</H1>
 				<h3>{error.message}</h3>
 				<Button onClick={() => reset()}>Перезагрузить</Button>
 				<Url href="/">Назад</Url>

@@ -10,15 +10,14 @@ import styles from "./blacklist.module.scss";
 // Компоненты
 import {Button} from "@components/button";
 import Link from "next/link";
+import {H1} from "@components/h1";
 
 export function BlacklistContent() {
 	const [show, setShow] = useState<boolean>(false);
 
 	return (
 			<div className="blacklist_content">
-				<h1>
-					Запретка
-				</h1>
+				<H1>Запретка</H1>
 
 				<p className="red_line">
 					Запрещены все вариации этих слов и выражений,

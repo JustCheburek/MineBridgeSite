@@ -5,6 +5,7 @@ import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormInput, FormLabel} from "@components/form";
 import {useChangeDictState} from "@hooks/useChangeState";
 import {Season} from "@/types/season";
+import {H1} from "@components/h1";
 
 type SeasonModal = {
 	seasonFunc: Function
@@ -21,7 +22,7 @@ export const SeasonModal = (
 
 	return (
 			<Modal setModal={setModal} modal={modal}>
-				<h1>Новый сезон</h1>
+				<H1>Новый сезон</H1>
 				<Form action={() => {
 					seasonFunc(season)
 					setModal(false)

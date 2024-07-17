@@ -17,6 +17,7 @@ import {Modal} from "@components/modal";
 import {MostikiSvg} from "@ui/SVGS";
 import {Img, ImgBox} from "@components/img";
 import {SumChances} from "@app/utils";
+import {H1} from "@components/h1";
 
 export const Section = ({children, name}: PropsWithChildren<{ name: string }>) => (
 		<div className={`${styles.container} center_text ${styles[name]}`}>
@@ -123,7 +124,7 @@ export function CaseBox({caseType}: { caseType: Case }) {
 			/>
 		</ImgBox>
 		<Modal modal={modal} setModal={setModal}>
-			<h1>{caseType.displayname}</h1>
+			<H1>{caseType.displayname}</H1>
 			<div className={styles.case_info}>
 				<div className={styles.rarity}>
 					<h2 className="unic_color">

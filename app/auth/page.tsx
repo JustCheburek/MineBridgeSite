@@ -8,6 +8,7 @@ import {MaxSize} from "@components/maxSize";
 import {AuthForm} from "./components";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Регистрация | Майнбридж",
@@ -25,7 +26,7 @@ export default async function Auth() {
 
 	return (
 			<MaxSize className="center_text grid_center">
-				<h1>Введи ник</h1>
+				<H1>Введи ник</H1>
 				<p>
 					Вы уже близко к цели!
 				</p>
