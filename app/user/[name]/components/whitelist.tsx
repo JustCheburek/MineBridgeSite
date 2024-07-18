@@ -13,6 +13,7 @@ import {Form, FormButton} from "@components/form";
 import {useState} from "react";
 import {H1} from "@components/h1";
 import {BEDROCK_IP, JAVA_IP} from "@/const";
+import {AddWhitelist} from "@services/user";
 
 const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
 		<section className={`${styles.whitelist} grid_center`}>
@@ -49,10 +50,9 @@ type WhitelistSection = {
 	user: User
 	isMe: boolean
 	isModer: boolean
-	WhitelistFunc: ((formData: FormData) => void)
 }
 
-export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: WhitelistSection) {
+export function WhitelistSection({user, isMe, isModer}: WhitelistSection) {
 	const [modal, setModal] = useState(false)
 
 	if (user.rating <= -200) {
@@ -100,8 +100,8 @@ export function WhitelistSection({user, isMe, isModer, WhitelistFunc}: Whitelist
 						Если <span className="red_color">нет</span>, тогда вы можете изменить<br/>
 						его во вкладке в аккаунтах!
 					</p>
-					<Form action={formData => {
-						WhitelistFunc(formData)
+					<Form action={() => {
+						AddWhitelist(user._id, user.name)
 						setModal(false)
 					}}>
 						<FormButton>

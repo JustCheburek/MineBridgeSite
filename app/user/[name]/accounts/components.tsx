@@ -11,13 +11,13 @@ import type {isRoles} from "@/services";
 import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
 import {RatingUp} from "@components/ratingUp";
 import {H1} from "@components/h1";
+import {DeleteUser, UpdateProfile} from "@services/user";
 
-type DeleteUser = {
+type SuccessModal = {
 	user: User
-	Delete?: ((formData: FormData) => void)
 }
 
-function SuccessModal({modal, setModal, Delete, user}: ModalAction & DeleteUser) {
+function SuccessModal({modal, setModal, user}: ModalAction & SuccessModal) {
 	const [name, setName] = useState("")
 
 	return (
@@ -30,7 +30,7 @@ function SuccessModal({modal, setModal, Delete, user}: ModalAction & DeleteUser)
 					удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
 				</p>
 				<h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
-				<Form action={Delete}>
+				<Form action={() => DeleteUser(user._id)}>
 					<InputNameCheck
 							danger placeholder={user.name}
 							autoComplete="off"
@@ -62,7 +62,12 @@ function NoPermModal({modal, setModal}: ModalAction) {
 	)
 }
 
-export function DeleteUser({user, Delete, isAdmin}: { isAdmin: boolean } & DeleteUser) {
+type DeleteUser = {
+	user: User
+	isAdmin: boolean
+}
+
+export function DeleteUserBox({user, isAdmin}: DeleteUser) {
 	const [modal, setModal] = useState(false)
 	const access = isAdmin || user.rating >= 0
 
@@ -76,7 +81,6 @@ export function DeleteUser({user, Delete, isAdmin}: { isAdmin: boolean } & Delet
 				? <SuccessModal
 						modal={modal}
 						setModal={setModal}
-						Delete={Delete}
 						user={user}
 				/>
 				: <NoPermModal
@@ -90,14 +94,12 @@ export function DeleteUser({user, Delete, isAdmin}: { isAdmin: boolean } & Delet
 type ChangeParam = {
 	user: User
 	isMe: boolean
-	Change: ((formData: FormData) => Promise<void>)
 } & isRoles
 
 export function ChangeParam(
 		{
-			user,
-			isModer, isAdmin, isContentMaker,
-			Change
+			user, isModer, isAdmin,
+			isContentMaker,
 		}: ChangeParam) {
 	const [result, setResult] = useState("")
 	const [access, setAccess] = useState(false)
@@ -117,7 +119,7 @@ export function ChangeParam(
 		}
 		<Form action={async formData => {
 			try {
-				await Change(formData)
+				await UpdateProfile(user, formData, isAdmin)
 			} catch (e) {
 				setResult((e as Error).message)
 			}

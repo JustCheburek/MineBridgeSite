@@ -26,7 +26,8 @@ type Table<T> = {
 	className?: string
 	setModal?: (value: boolean) => void
 	notFound?: ReactNode
-	SaveAll?: Function
+	_id?: string
+	SaveAll?: (_id: string, data: T[]) => void
 }
 
 export function Table<T>(
@@ -38,6 +39,7 @@ export function Table<T>(
 			setModal,
 			notFound,
 			SaveAll,
+			_id,
 			children
 		}: PropsWithChildren<Table<T>>
 ) {
@@ -83,7 +85,8 @@ export function Table<T>(
 						)
 				)
 
-				SaveAll && SaveAll(data)
+				console.log(data)
+				SaveAll && _id && SaveAll(_id, data)
 			}
 	)
 
@@ -113,7 +116,7 @@ export function Table<T>(
 		setData(setFilterFunc)
 		setOriginalData(setFilterFunc)
 
-		SaveAll && SaveAll(data.filter((_row, index) => !selectedRows.includes(index)))
+		SaveAll && _id && SaveAll(_id, data.filter((_row, index) => !selectedRows.includes(index)))
 
 		table.resetRowSelection()
 	}

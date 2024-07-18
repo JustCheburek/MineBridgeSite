@@ -4,6 +4,7 @@ import {useState} from "react";
 import {Case, Drop, RarityNames} from "@/types/case";
 import type {RarityType} from "@/types/case";
 import type {CaseData} from "@/types/purchase";
+import {AddCasePurchase} from "@services/user";
 
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
@@ -13,16 +14,15 @@ import {H1} from "@components/h1";
 type CasesPurchasesModal = {
 	Cases: Case[]
 	Drops: Drop[]
+	_id: string
 	modal: boolean
 	setModal: setModal
-	casePurchaseFunc: Function
 }
 
 export const CasesPurchasesModal = (
 		{
-			Cases, Drops,
-			modal, setModal,
-			casePurchaseFunc
+			Cases, Drops, _id,
+			modal, setModal
 		}: CasesPurchasesModal
 ) => {
 	const [caseData, setCaseData] = useState<CaseData>({
@@ -47,7 +47,7 @@ export const CasesPurchasesModal = (
 
 				<Form action={() => {
 					setModal(false)
-					casePurchaseFunc(caseData)
+					AddCasePurchase(_id, caseData)
 				}}>
 					<h2>Кейс</h2>
 					<h3>Редкость</h3>

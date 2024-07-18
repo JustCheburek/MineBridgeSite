@@ -7,18 +7,18 @@ import {type Action, Punishment} from "@/types/punishment";
 import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton, FormGroup, FormInput, FormLabel} from "@components/form";
 import {H1} from "@components/h1";
+import {AddPunishment} from "@services/user";
 
 type RatingModal = {
 	name?: User["name"]
 	user: User
-	ratingFunc: Function
 	modal: boolean
 	setModal: setModal
 }
 
 export const RatingModal = (
 		{
-			name, user, ratingFunc,
+			name, user,
 			modal, setModal
 		}: RatingModal) => {
 	const [punishment, , onPunishmentChange] = useChangeDictState(
@@ -31,7 +31,7 @@ export const RatingModal = (
 			<Modal setModal={setModal} modal={modal}>
 				<H1>Рейтинг</H1>
 				<Form action={() => {
-					ratingFunc(punishment, actions)
+					AddPunishment(user, punishment, actions)
 					setModal(false)
 				}}>
 					<FormLabel>

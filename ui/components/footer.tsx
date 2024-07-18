@@ -24,9 +24,6 @@ export function Footer() {
                 </Link>
                 <small>
                     <p>
-                        Вся размещенная информация на сайте не является публичной офертой
-                    </p>
-                    <p>
                         Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang Synergies AB, Microsoft Corporation or other rightsholders.
                     </p>
                 </small>

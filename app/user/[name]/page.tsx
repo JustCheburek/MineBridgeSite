@@ -13,12 +13,10 @@ import styles from "./profile.module.scss"
 import {Avatar} from "./components/avatar";
 import {WhitelistSection} from "./components/whitelist";
 import {FormBox} from "./components/form";
-import {RconVC} from "@server/console";
 import {userModel} from "@server/models";
-import {revalidateTag} from "next/cache";
 import {ColorText} from "@app/utils";
 import {MostikiSvg} from "@ui/SVGS";
-import {SocialName, URLS_START} from "@/const";
+import {URLS_START} from "@/const";
 import {SocialBox} from "./components/social";
 import {User} from "lucia";
 
@@ -40,39 +38,6 @@ export default async function Profile({params: {name}}: { params: { name: string
 				author._id,
 				{from: await userModel.From(author)}
 		)
-	}
-
-	async function WhitelistFunc() {
-		"use server"
-
-		try {
-			const client = await RconVC()
-			console.log(`Добавляю в Whitelist: ${user.name}`)
-			await client.run(`vclist add ${user.name}`)
-
-			await userModel.findByIdAndUpdate(user._id, {whitelist: true})
-		} catch (e) {
-			console.error(e)
-		}
-
-		revalidateTag(`user`)
-	}
-
-	async function updateCount(socialName: SocialName) {
-		"use server"
-
-		const userM = await userModel.findById(user._id)
-		if (!userM) return
-
-		const social = userM.socials.find(
-				({social}) => social === socialName
-		)
-		if (!social) return
-
-		social.clicked = (social?.clicked || 0) + 1
-		await userM.save()
-
-		revalidateTag("userLike")
 	}
 
 	return (
@@ -103,7 +68,11 @@ export default async function Profile({params: {name}}: { params: { name: string
 								url = url || `${URLS_START[social]}${name}`
 
 								return (
-										<SocialBox social={social} isMe={isMe} isModer={isModer} url={url} clicked={clicked} updateCount={updateCount} key={social}/>
+										<SocialBox
+												social={social} key={social}
+												isMe={isMe} isModer={isModer} _id={user._id}
+												url={url} clicked={clicked}
+										/>
 								)
 							})}
 						</div>
@@ -134,7 +103,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 					</div>
 				</div>
 
-				<WhitelistSection user={user} isMe={isMe} isModer={isModer} WhitelistFunc={WhitelistFunc}/>
+				<WhitelistSection user={user} isMe={isMe} isModer={isModer}/>
 
 				<TwitchFrame user={user} isContentMaker={isContentMaker}/>
 			</div>
