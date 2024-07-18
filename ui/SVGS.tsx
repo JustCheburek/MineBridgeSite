@@ -5,19 +5,17 @@ import Link from "next/link";
 
 interface Svg extends SVGProps<SVGSVGElement> {
 	className?: string
-	width?: string
-	height?: string
 }
 
-interface NewSvg extends SVGProps<SVGSVGElement> {
-	className?: string
+interface SizeSvg extends Svg {
 	size?: string
 }
 
-export const SBPSvg = ({className = "", width, height}: Svg) => (
+export const SBPSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
 		<svg
 				fill="currentcolor" viewBox="0 0 500 500"
-				className={`sbp ${className}`} style={{width, height}}
+				className={`sbp ${className}`}
+				style={{width: size, height: size}} {...props}
 		>
 			<g transform="scale(15.152)">
 				<path
@@ -28,10 +26,11 @@ export const SBPSvg = ({className = "", width, height}: Svg) => (
 		</svg>
 )
 
-export const MostikiSvg = ({className = "", width = "1.1em", height = "0.85em"}: Svg) => (
+export const MostikiSvg = ({className = "", width = "1.1em", height = "0.85em", ...props}: Svg) => (
 		<svg
-				style={{width, height}} viewBox="0 0 95 67"
+				viewBox="0 0 95 67"
 				className={`unic_color ${className}`}
+				style={{width, height}} {...props}
 		>
 			<path d="M95 62.7398V66.9999H74.1854V62.7398H95Z" fill="currentColor"/>
 			<path d="M95 43.0371V51.0247L0 51.0247L3.49937e-07 43.0371L95 43.0371Z" fill="currentColor"/>
@@ -43,10 +42,11 @@ export const MostikiSvg = ({className = "", width = "1.1em", height = "0.85em"}:
 		</svg>
 )
 
-export const MinebridgeSvg = ({className = "", width, height}: Svg) => (
+export const MinebridgeSvg = ({className = "", size = "100%", ...props}: SizeSvg) => (
 		<svg
 				xmlSpace="preserve" viewBox="0 0 192 192"
-				className={className} style={{width, height}}
+				className={className}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					fill="#33adb4"
@@ -61,10 +61,11 @@ export const TelegramUrl = () => (
 		</Link>
 )
 
-export const TelegramSvg = ({className = "", width = "38px", height = "38px"}: Svg) => (
+export const TelegramSvg = ({className = "", size = "38px", ...props}: SizeSvg) => (
 		<svg
-				viewBox="0 0 48 48"
-				className={`url tg ${className}`} fill="currentColor" style={{width, height}}
+				fill="currentColor" viewBox="0 0 48 48"
+				className={`url tg ${className}`}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					className="color"
@@ -79,10 +80,11 @@ export const DiscordUrl = () => (
 		</Link>
 )
 
-export const DiscordSvg = ({className = "", width = "38px", height = "38px"}: Svg) => (
+export const DiscordSvg = ({className = "", size = "38px", ...props}: SizeSvg) => (
 		<svg
-				viewBox="0 0 256 256"
-				className={`url ds ${className}`} fill="currentColor" style={{width, height}}
+				fill="currentColor" viewBox="0 0 256 256"
+				className={`url ds ${className}`}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					transform="scale(3.55556, 3.55556)"
@@ -98,11 +100,10 @@ export const VkUrl = () => (
 		</Link>
 )
 
-export const VKSvg = ({className = "", width = "38px", height = "38px"}: Svg) => (
+export const VKSvg = ({className = "", size = "38px", ...props}: SizeSvg) => (
 		<svg
-
 				className={`url vk ${className}`} fill="currentColor"
-				style={{width, height}}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					className="color"
@@ -117,9 +118,12 @@ export const SupportUrl = () => (
 		</Link>
 )
 
-export const SupportSvg = ({className = "", width = "38px", height = "38px"}: Svg) => (
-		<svg fill="currentColor" viewBox="0 0 16 16"
-		     className={`url support ${className}`} style={{width, height}}>
+export const SupportSvg = ({className = "", size = "38px", ...props}: SizeSvg) => (
+		<svg
+				fill="currentColor" viewBox="0 0 16 16"
+				className={`url support ${className}`}
+				style={{width: size, height: size}} {...props}
+		>
 			<path
 					className="color"
 					d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"
@@ -127,11 +131,11 @@ export const SupportSvg = ({className = "", width = "38px", height = "38px"}: Sv
 		</svg>
 )
 
-export const YouTubeSvg = ({className = "", width, height}: Svg) => (
+export const YouTubeSvg = ({className = "", size = "100%", ...props}: SizeSvg) => (
 		<svg
-				viewBox="0 0 16 16"
-				className={`url yt ${className}`} fill="currentColor"
-				style={{width, height}}
+				fill="currentColor" viewBox="0 0 16 16"
+				className={`url yt ${className}`}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					d="M14.712 4.633a1.754 1.754 0 00-1.234-1.234C12.382 3.11 8 3.11 8 3.11s-4.382 0-5.478.289c-.6.161-1.072.634-1.234 1.234C1 5.728 1 8 1 8s0 2.283.288 3.367c.162.6.635 1.073 1.234 1.234C3.618 12.89 8 12.89 8 12.89s4.382 0 5.478-.289a1.754 1.754 0 001.234-1.234C15 10.272 15 8 15 8s0-2.272-.288-3.367z"
@@ -143,10 +147,11 @@ export const YouTubeSvg = ({className = "", width, height}: Svg) => (
 			/>
 		</svg>)
 
-export const TwitchSvg = ({className = "", width, height}: Svg) => (
+export const TwitchSvg = ({className = "", size = "100%", ...props}: SizeSvg) => (
 		<svg
-				viewBox="0 0 16 16"
-				className={`url twitch ${className}`} fill="currentColor" style={{width, height}}
+				fill="currentColor" viewBox="0 0 16 16"
+				className={`url twitch ${className}`}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					d="M13 7.5l-2 2H9l-1.75 1.75V9.5H5V2h8v5.5z"
@@ -163,21 +168,21 @@ export const TwitchSvg = ({className = "", width, height}: Svg) => (
 		</svg>
 )
 
-export const DonationAlertsSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
+export const DonationAlertsSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
 		<svg
-				style={{width, height}}
 				className={`url donation_alerts ${className}`} fill="currentColor"
+				style={{width: size, height: size}} {...props}
 		>
 			<path className="color" transform="scale(0.5)"
 			      d="M34.859 46.588h-5.42a1.176 1.176 0 0 1-.83-.326.934.934 0 0 1-.284-.77l.479-4.888c.046-.52.531-.92 1.113-.918h5.42c.316-.001.617.118.83.327.212.209.315.49.283.77l-.478 4.888c-.047.52-.532.919-1.113.917Zm.868-9.568h-5.52c-.61 0-1.105-.476-1.105-1.064l1.502-16.51c.067-.537.542-.94 1.104-.936h5.521c.61 0 1.104.476 1.104 1.063l-1.546 16.522c-.07.516-.519.908-1.06.925Zm32.464-19.254c.587.682.874 1.57.796 2.464L66.83 44.76a3.338 3.338 0 0 1-1.008 2.114L48.174 63.908a3.38 3.38 0 0 1-2.35.942H27.038L10.5 80l1.28-15.16H3.37a3.378 3.378 0 0 1-2.484-1.085 3.334 3.334 0 0 1-.873-2.553L5.145 3.006A3.36 3.36 0 0 1 8.503 0H51.33c.986 0 1.922.428 2.562 1.172L68.19 17.766ZM55.11 40.08l1.372-15.14a3.334 3.334 0 0 0-.867-2.445l-8.067-9.259a3.377 3.377 0 0 0-2.541-1.152H19.596a3.36 3.36 0 0 0-3.358 3.006l-3.025 34.068c-.07.932.251 1.852.887 2.54a3.418 3.418 0 0 0 2.47 1.098H41.56a3.38 3.38 0 0 0 2.33-.922l10.214-9.67a3.338 3.338 0 0 0 1.009-2.124Z"/>
 		</svg>
 )
 
-export const GoogleSvg = ({className = "", width, height}: Svg) => (
+export const GoogleSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
 		<svg
-				version="1.1" viewBox="0 0 48 48" fill="currentColor"
-				xmlnsXlink="http://www.w3.org/1999/xlink" className={`url google ${className}`}
-				style={{width, height}}
+				viewBox="0 0 48 48" fill="currentColor"
+				className={`url google ${className}`}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					fill="#EA4335"
@@ -201,20 +206,23 @@ export const GoogleSvg = ({className = "", width, height}: Svg) => (
 		</svg>
 )
 
-export const BatSvg = ({className = "", width, height}: Svg) => (
+export const BatSvg = ({className = "", size = "100%", ...props}: SizeSvg) => (
 		<svg
-				viewBox="0 0 1280 585"
-				fill="currentColor" className={`red_color ${className}`}
-				style={{width, height}}
+				viewBox="0 0 1280 585" fill="currentColor"
+				className={`red_color ${className}`}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					d="M978.5 12.2c-.2.7-2.2 6.8-4.5 13.5-31.3 94.8-94 164.9-182.2 203.7-20.9 9.2-59.8 21.1-61.8 18.9-.4-.4-4.7-20.9-9.6-45.6-4.9-24.6-9.2-44.6-9.6-44.5-.4.2-9.3 8.5-19.7 18.6l-19 18.2-4.8-3c-8.6-5.5-16.7-7.3-30.1-6.7-7.5.3-13.5 1.1-16.6 2.2l-4.9 1.8-17.7-18.4-17.7-18.4-2.6 8.5c-1.4 4.7-8.3 27.6-15.2 51-6.9 23.4-13.1 44-13.6 45.8-1.3 4-1.1 4-21.4-2.5-83.4-27-146.6-78.1-189.4-153.3-11.9-21-27.8-59.9-30.6-75.3-.4-2-1.1-3.7-1.5-3.7-.4 0-2.5 2.1-4.6 4.7-5.9 7.3-19.9 21.9-29.4 30.7-46.3 43.1-105 71.2-170 81.5-15.1 2.4-34.5 4.1-48.3 4.2H43.5l11 2.3c69.4 14.5 114.1 50.1 127 101 1.3 5 2.6 12.6 3 16.9.6 6.3 1 7.7 2.2 7.3 3.7-1.5 18.3-4.8 29-6.7 14.9-2.6 42.7-3.6 54.4-2 41.4 5.9 70.7 27.1 89 64.6 6.7 13.7 11 26.3 13.9 40.3 2.2 11.2 4 24.8 4 30.8v4.2l9.2-5.5c10.6-6.4 19-10.1 31.4-14 8.3-2.5 10.2-2.7 26.4-2.7 16.1 0 18.2.2 26.5 2.7 11.9 3.6 28.8 12 40 19.9 11.1 7.8 34.4 30.8 45.4 44.6 9.7 12.3 24.5 34.4 33.6 50.2 7.7 13.3 23.7 45.7 28.6 57.9l3.4 8.4 1.3-4.9c12.6-47.3 37.4-81.5 79.2-109.3 39.2-26.2 93-44.3 149.9-50.6 8-.8 14.5-1.7 14.6-1.8.1-.1 1.2-5.6 2.4-12.2 13.8-72.4 48.8-121 99.1-137.4 26.7-8.8 59.6-9.2 88.6-1.1 6.4 1.7 6.4 1.7 6.8-.4 3-15.4 9.2-30.1 17.8-42.3 16-22.7 43.4-47.1 79.3-70.5 20-13.1 35.7-22 63.5-36.1 14-7.1 24.7-12.7 23.8-12.3-1 .3-7.1 1.3-13.5 2.3-18.3 2.7-59.9 2.4-79.3-.6-38.3-5.8-70.3-15.9-105.7-33.1-25.2-12.2-47.4-25.5-64.6-38.7-3.9-3-5.9-4-6.2-3.1z"/>
 		</svg>
 )
 
-export const SuccessSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
-		<svg className={`successSvg green_color ${className}`} fill="currentColor"
-		     viewBox="0 0 16 16" style={{width, height}}>
+export const SuccessSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
+		<svg
+				fill="currentColor" viewBox="0 0 16 16"
+				className={`successSvg green_color ${className}`}
+				style={{width: size, height: size}} {...props}
+		>
 			<path
 					d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
 			<path
@@ -222,40 +230,43 @@ export const SuccessSvg = ({className = "", width = "1em", height = "1em"}: Svg)
 		</svg>
 )
 
-export const ErrorSvg = ({className = "", width = "1em", height = "1em"}: Svg) => (
-		<svg className={`errorSvg red_color ${className}`} fill="currentColor"
-		     viewBox="0 0 16 16" style={{width, height}}>
+export const ErrorSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
+		<svg
+				fill="currentColor" viewBox="0 0 16 16"
+				className={`errorSvg red_color ${className}`}
+				style={{width: size, height: size}} {...props}
+		>
 			<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
 			<path
 					d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
 		</svg>
 )
 
-export const EmailSvg = ({className = "", width, height}: Svg) => (
+export const EmailSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
 		<svg
 				fill="currentColor" viewBox="0 0 16 16"
-				className={`unic_color ${className}`} style={{width, height}}
+				className={`unic_color ${className}`}
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
 		</svg>
 )
 
-export const SearchSvg = ({width = "1em", height = "1em", ...props}: Svg) => (
+export const SearchSvg = ({size = "1em", ...props}: SizeSvg) => (
 		<svg
-				fill="currentColor"
-				viewBox="0 0 16 16" style={{width, height}} {...props}
+				fill="currentColor" viewBox="0 0 16 16"
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
 		</svg>
 )
 
-export const AnotherSiteSvg = ({width = "1em", height = "1em", ...props}: Svg) => (
+export const AnotherSiteSvg = ({size = "1em", ...props}: SizeSvg) => (
 		<svg
-				fill="currentColor"
-				viewBox="0 0 16 16" {...props}
-				style={{width, height}}
+				fill="currentColor" viewBox="0 0 16 16"
+				style={{width: size, height: size}} {...props}
 		>
 			<path
 					d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
@@ -264,7 +275,7 @@ export const AnotherSiteSvg = ({width = "1em", height = "1em", ...props}: Svg) =
 		</svg>
 )
 
-export const ReloadSvg = ({className = "", size = "1em", ...props}: NewSvg) => (
+export const ReloadSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
 		<svg
 				fill="currentColor" viewBox="0 0 16 16"
 				className={`unic_color ${className}`}
@@ -275,7 +286,7 @@ export const ReloadSvg = ({className = "", size = "1em", ...props}: NewSvg) => (
 		</svg>
 )
 
-export const UpSvg = ({size = "1em", ...props}: NewSvg) => (
+export const UpSvg = ({size = "1em", ...props}: SizeSvg) => (
 		<svg
 				fill="currentColor" viewBox="0 0 16 16"
 				style={{width: size, height: size}} {...props}
@@ -285,13 +296,23 @@ export const UpSvg = ({size = "1em", ...props}: NewSvg) => (
 		</svg>
 )
 
-export const SVGS = {
-	discord: <DiscordSvg width="38px" height="38px"/>,
-	telegram: <TelegramSvg width="38px" height="38px"/>,
-	vk: <VKSvg width="38px" height="38px"/>,
-	twitch: <TwitchSvg width="38px" height="38px"/>,
-	youtube: <YouTubeSvg width="38px" height="38px"/>,
-	donationAlerts: <DonationAlertsSvg width="38px" height="38px"/>
+export const AutoSvg = ({type, ...props}: {type: string} & SizeSvg) => {
+	switch (type) {
+		case "discord":
+			return <DiscordSvg {...props}/>
+		case "telegram" && "t":
+			return <TelegramSvg {...props}/>
+		case "vk":
+			return <VKSvg {...props}/>
+		case "twitch":
+			return <TwitchSvg {...props}/>
+		case "youtube":
+			return <YouTubeSvg {...props}/>
+		case "donationAlerts":
+			return <DonationAlertsSvg {...props}/>
+		case "google":
+			return <GoogleSvg {...props}/>
+		case "email":
+			return <EmailSvg {...props}/>
+	}
 }
-
-export type SVGS_NAME = keyof typeof SVGS

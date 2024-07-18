@@ -1,9 +1,7 @@
 import {PropsWithChildren} from "react";
 import Link from "next/link";
-import type {UrlObject} from "url";
 
-type Url = string | UrlObject;
-export function CheckLink({href, children}: PropsWithChildren<{href?: Url}>) {
+export function CheckLink({href, children}: PropsWithChildren<{ href?: string }>) {
 	if (!href) return children
 
 	let target = "_self"

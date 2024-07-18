@@ -17,8 +17,8 @@ import {RconVC} from "@server/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {ColorText} from "@app/utils";
-import {MostikiSvg, type SVGS_NAME} from "@ui/SVGS";
-import {URLS_START} from "@/const";
+import {MostikiSvg} from "@ui/SVGS";
+import {SocialName, URLS_START} from "@/const";
 import {SocialBox} from "./components/social";
 import {User} from "lucia";
 
@@ -58,7 +58,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 		revalidateTag(`user`)
 	}
 
-	async function updateCount(socialName: SVGS_NAME) {
+	async function updateCount(socialName: SocialName) {
 		"use server"
 
 		const userM = await userModel.findById(user._id)

@@ -1,10 +1,10 @@
 "use client"
 
-import {SVGS, SVGS_NAME} from "@ui/SVGS";
 import Link from "next/link";
+import {AutoSvg} from "@ui/SVGS";
 
 type SocialBox = {
-	social: SVGS_NAME
+	social: string
 	url: string
 	clicked?: number
 	updateCount: Function
@@ -20,7 +20,7 @@ export function SocialBox({social, url, clicked, isModer, updateCount, isMe}: So
 					onClick={() => updateCount(social)}
 					title={(isMe || isModer) ? `Кликнули ${clicked || 0}р` : social}
 			>
-				{SVGS[social]}
+				<AutoSvg size="38px" type={social}/>
 			</Link>
 	)
 }

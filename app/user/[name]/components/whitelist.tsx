@@ -12,17 +12,17 @@ import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton} from "@components/form";
 import {useState} from "react";
 import {H1} from "@components/h1";
-import {BEDROCK_IP} from "@/const";
+import {BEDROCK_IP, JAVA_IP} from "@/const";
 
 const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
 		<section className={`${styles.whitelist} grid_center`}>
-			<h2>Вы в Whitelist`е</h2>
+			<h2 className="center_text">Вы в Whitelist`е</h2>
 
 			{/* todo: гайд */}
 			<ul>
 				<li>
 					<h4>Java Edition:</h4>
-					<strong className="unic_color all_select">игра.{process.env.NEXT_PUBLIC_DOMEN}:25565</strong>
+					<strong className="unic_color all_select">{JAVA_IP}:25565</strong>
 				</li>
 				<li>
 					<h4>Bedrock Edition:</h4>

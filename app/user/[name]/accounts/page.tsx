@@ -1,7 +1,6 @@
 // Сервер
 import type {PropsWithChildren} from "react";
 import {validate} from "@services/validate"
-import Link from "next/link";
 import {getUser} from "@/services";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
@@ -12,18 +11,27 @@ import {Social} from "@/types/url";
 import styles from "./accounts.module.scss"
 
 // Компоненты
-import {DiscordSvg, EmailSvg, GoogleSvg, SuccessSvg} from "@ui/SVGS";
+import {AutoSvg, SuccessSvg} from "@ui/SVGS";
 import {ChangeParam, DeleteUser} from "./components";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {User} from "lucia";
 import {RconVC} from "@server/console";
 import {H1} from "@components/h1";
+import {CheckLink} from "@components/checkLink";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
 	title: `${name} > Аккаунты | Майнбридж`,
 	description: `Привязанные интеграции игрока ${name}.`
 })
+
+const providers = {
+	email: "email",
+	discord: "discordId",
+	google: "googleId"
+}
+type providerName = keyof typeof providers
+const providersNames = Object.keys(providers) as providerName[]
 
 export default async function Accounts({params: {name}}: { params: { name: string } }) {
 	const {
@@ -122,30 +130,22 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 				}
 
 				<div className={styles.providers_box}>
-					<Provider
-							name="email"
-							user={user}
-							id={user.email}
-							isMe={isMe}
-					>
-						<EmailSvg width="1.5em" height="1.5em"/>
-					</Provider>
-					<Provider
-							name="discord"
-							user={user}
-							id={user.discordId}
-							isMe={isMe}
-					>
-						<DiscordSvg className={`color ${styles.ds}`} width="1.5em" height="1.5em"/>
-					</Provider>
-					<Provider
-							name="google"
-							user={user}
-							id={user.googleId}
-							isMe={isMe}
-					>
-						<GoogleSvg width="1.5em" height="1.5em"/>
-					</Provider>
+					{providersNames.map(id => (
+							<Provider
+									// @ts-ignore
+									id={user[providers[id]]}
+									name={id}
+									key={id}
+									user={user}
+									isMe={isMe}
+							>
+								<AutoSvg
+										type={id}
+										size="1.5em"
+										className={`color ${id === "discord" ? styles.ds : ""}`}
+								/>
+							</Provider>
+					))}
 				</div>
 				{adminAccess &&
 						<DeleteUser user={user} Delete={Delete} isAdmin={isAdmin}/>
@@ -155,7 +155,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 }
 
 type Provider = {
-	name: string
+	name: providerName
 	isMe: boolean
 	user: User
 	id?: string
@@ -167,19 +167,21 @@ function Provider({id, user, name, isMe, children}: PropsWithChildren<Provider>)
 	}
 
 	return (
-			<Link href={`/auth/${name}?name=${user.name}`} className={styles.box}>
-				{children}
-				{id
-						? <>
-							<p className={`all_select medium-font center_text ${styles.id}`}>
-								{id}
-							</p>
-							<SuccessSvg/>
-						</>
-						: <span className="unic_color medium-font">
+			<CheckLink href={name === "email" ? undefined : `/auth/${name}?name=${user.name}`}>
+				<div className={styles.box}>
+					{children}
+					{id
+							? <>
+								<p className={`all_select medium-font center_text ${styles.id}`}>
+									{id}
+								</p>
+								<SuccessSvg size="1.5em"/>
+							</>
+							: <span className="unic_color medium-font">
 							Привязать
 						</span>
-				}
-			</Link>
+					}
+				</div>
+			</CheckLink>
 	)
 }

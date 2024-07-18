@@ -6,8 +6,8 @@ export const VK_URL = "https://vk.com/minebridge"
 export const SUPPORT_URL = "https://discord.gg/f95V9Rezqy"
 export const LASTRULESUPDATE = new Date(2024, 7 - 1, 1, 15, 30);
 export const URL_PUNYCODE = toASCII(process.env.NEXT_PUBLIC_URL!)
-export const DOMEN_PUNYCODE = toASCII(process.env.NEXT_PUBLIC_DOMEN!)
-export const BEDROCK_IP = toASCII(`игра.${process.env.NEXT_PUBLIC_DOMEN!}`)
+export const JAVA_IP = `игра.${process.env.NEXT_PUBLIC_DOMEN!}`
+export const BEDROCK_IP = toASCII(JAVA_IP)
 
 export const URLS_START = {
 	discord: `https://discord.gg/`,
@@ -17,3 +17,5 @@ export const URLS_START = {
 	youtube: `https://youtube.com/@`,
 	donationAlerts: `https://donationalerts.com/r/`,
 }
+
+export type SocialName = keyof typeof URLS_START

@@ -1,7 +1,7 @@
 import type {PropsWithChildren} from "react";
 import Link, {type LinkProps} from "next/link";
 import styles from "./styles/textUrl.module.scss"
-import {DiscordSvg, TelegramSvg, TwitchSvg} from "@ui/SVGS";
+import {AutoSvg} from "@ui/SVGS";
 
 export function TextUrl({href, children, ...props}: PropsWithChildren<LinkProps>) {
 	const type = href?.toString()
@@ -10,18 +10,8 @@ export function TextUrl({href, children, ...props}: PropsWithChildren<LinkProps>
 
 	return (
 			<Link href={href} target="_blank" {...props} className={`${styles.url} ${styles[type]}`}>
-				<AutoSvg type={type}/>
+				<AutoSvg type={type} size="1.2em" className="color"/>
 				{children}
 			</Link>
 	)
-}
-
-function AutoSvg({type}: {type: string}) {
-	if (type === "discord") {
-		return <DiscordSvg width="1.1em" height="1.1em" className="color"/>
-	} else if (type === "t") {
-		return <TelegramSvg width="1.1em" height="1.1em" className="color"/>
-	} else if (type === "twitch") {
-		return <TwitchSvg width="1.1em" height="1.1em" className="color"/>
-	}
 }
