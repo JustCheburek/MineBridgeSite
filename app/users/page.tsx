@@ -20,17 +20,16 @@ export default async function Component() {
 
 	return (
 			<MaxSize>
+				<H1 up reload={async () => {
+					"use server";
+					revalidateTag("users")
+				}}>
+					Игроки
+				</H1>
 				<Table<User>
 						columns={columns}
 						data={users}
-				>
-					<H1 reload={async () => {
-						"use server";
-						revalidateTag("users")
-					}}>
-						Игроки
-					</H1>
-				</Table>
+				/>
 			</MaxSize>
 	)
 }

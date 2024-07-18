@@ -4,8 +4,12 @@
 	position: sticky;
 	top: 0;
 
-	padding: 0.8rem;
+	display: grid;
+	place-content: center;
+
+	padding-inline: 1rem;
 	margin-bottom: 1.5rem;
+	min-height: var(--header-size);
 
 	@include background();
 
@@ -17,8 +21,8 @@
 	justify-content: center;
 	align-items: center;
 
-	@media (width > 700px) {
-		grid-template-columns: 1fr 450px 1fr;
+	@media (width > 530px) {
+		grid-template-columns: 1fr 5fr 1fr;
 	}
 }
 
@@ -30,7 +34,7 @@
 	color: var(--light-gray-color);
 }
 
-@media (width <= 700px) {
+@media (width <= 530px) {
 	.top, .reload {
 		display: none !important;
 	}

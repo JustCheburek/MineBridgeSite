@@ -42,8 +42,8 @@ export const H1 = ({children, paths, reload, up = false, className = "", ...prop
 			{paths && <RelativeNav paths={paths}/>}
 
 			<div className={styles.box} id="top">
-				{up ?
-						<Link href={"#top"} className={`unic_button ${styles.top}`} title="Наверх">
+				{up
+						? <Link href={"#top"} className={`unic_button ${styles.top}`} title="Наверх">
 							<UpSvg
 									size="4.5rem"
 									className="unic_color"
