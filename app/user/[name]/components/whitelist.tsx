@@ -22,11 +22,11 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
 			<ul>
 				<li>
 					<h4>Java Edition:</h4>
-					<strong className="unic_color all_select">игра.{process.env.NEXT_PUBLIC_DOMEN}</strong>
+					<strong className="unic_color all_select">игра.{process.env.NEXT_PUBLIC_DOMEN}:25565</strong>
 				</li>
 				<li>
 					<h4>Bedrock Edition:</h4>
-					<strong className="unic_color all_select">{BEDROCK_IP}</strong>
+					<strong className="unic_color all_select">{BEDROCK_IP}:19132</strong>
 				</li>
 			</ul>
 			<p>Скоро здесь появится гайд по заходу на bedrock</p>
