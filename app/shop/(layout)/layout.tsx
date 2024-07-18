@@ -7,7 +7,7 @@ export default function Shop({children}: PropsWithChildren) {
 	return (
 			<div className={styles.shop}>
 				<MaxSize sideNav>
-					<Subsections menu="Меню правил">
+					<Subsections menu="Меню магазина">
 						<SubsectionItem href="/shop">
 							Магазин
 						</SubsectionItem>
