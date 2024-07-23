@@ -1,5 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {sha1} from "js-sha1";
+import {userModel} from "@server/models";
 
 export async function POST(request: NextRequest) {
 	const res = await request.formData()
@@ -20,7 +21,14 @@ export async function POST(request: NextRequest) {
 		});
 	}
 
-	console.log(nick, time, sign)
+	await userModel.findOneAndUpdate(
+			{nick},
+			{
+				$inc: {
+					mostiki: 2
+				}
+			}
+	)
 
 	return new NextResponse("ok", {
 		status: 200
