@@ -2,7 +2,8 @@ import {NextRequest, NextResponse} from "next/server";
 // import {sha1} from "js-sha1";
 
 export async function POST(request: NextRequest) {
-	const res: {nick: string; time: string; sign: string} = await request.json();
+	const res = request.body
+	console.log(res)
 
 	/*if (!res.nick || !res.time || !res.sign) {
 		return new NextResponse(`Не переданы необходимые данные`, {
@@ -16,7 +17,6 @@ export async function POST(request: NextRequest) {
 		});
 	}*/
 
-	console.log(`Всё ок ${res.nick} получает мостики`)
 
 	return new NextResponse(`ok`, {
 		status: 200
