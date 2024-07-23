@@ -2,7 +2,7 @@ import {NextRequest, NextResponse} from "next/server";
 // import {sha1} from "js-sha1";
 
 export async function POST(request: NextRequest) {
-	const res = await request.json()
+	const res = await request.text()
 	console.log(res)
 
 	/*if (!res.nick || !res.time || !res.sign) {
