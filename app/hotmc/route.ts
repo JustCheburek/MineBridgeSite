@@ -20,6 +20,8 @@ export async function POST(request: NextRequest) {
 		});
 	}
 
+	console.log(nick, time, sign)
+
 	return new NextResponse("ok", {
 		status: 200
 	});
