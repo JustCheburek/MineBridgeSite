@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 	}
 
 	await userModel.findOneAndUpdate(
-			{nick},
+			{name: nick},
 			{
 				$inc: {
 					mostiki: 2
