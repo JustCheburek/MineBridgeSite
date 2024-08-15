@@ -4,40 +4,41 @@ import styles from "../profile.module.scss";
 import {InviteLink} from "./inviteLink";
 
 type InviteSection = {
-	user: User, isMe: boolean, isModer: boolean
+    user: User, isMe: boolean, isModer: boolean
 }
 
 export function InviteSection({user, isMe, isModer}: InviteSection) {
-	return (
-			<section className="center_text grid_center">
-				<h2>Приглашения</h2>
-				<h3>1 приглашение = 5 рейтинга</h3>
-				{isMe &&
-						<InviteLink name={user.name}/>
-				}
-				<FromBox user={user} isMe={isMe} isModer={isModer}/>
-				{user.invites.map(userId => (
-						<UserBox key={userId} _id={userId}/>
-				))}
-			</section>
-	)
+    return (
+        <section className="center_text grid_center">
+            <h2>Приглашения</h2>
+            <h3>1 приглашение = 5 рейтинга</h3>
+            {isMe &&
+              <InviteLink name={user.name}/>
+            }
+            <FromBox user={user} isMe={isMe} isModer={isModer}/>
+            <h4>Приглашений: <strong className="unic_color">{user.invites.length}</strong></h4>
+            {user.invites.map(userId => (
+                <UserBox key={userId} _id={userId}/>
+            ))}
+        </section>
+    )
 }
 
 function FromBox({user, isMe, isModer}: { user: User, isMe: boolean, isModer: boolean }) {
-	if (!user?.from || !user.from?.userId || !user.from?.place) return
+    if (!user?.from || !user.from?.userId || !user.from?.place) return
 
-	return (
-			<div className={styles.from}>
-				<p>
-					{isMe
-							? "Вы пришли"
-							: "Пришёл"
-					} от
-				</p>
-				<UserBox _id={user.from.userId}/>
-				{isModer &&
-						<p className="unic_color">{user.from.place}</p>
-				}
-			</div>
-	)
+    return (
+        <div className={styles.from}>
+            <p>
+                {isMe
+                    ? "Вы пришли"
+                    : "Пришёл"
+                } от
+            </p>
+            <UserBox _id={user.from.userId}/>
+            {isModer &&
+              <p className="unic_color">{user.from.place}</p>
+            }
+        </div>
+    )
 }

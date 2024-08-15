@@ -2,16 +2,20 @@
 import type {User} from "lucia"
 import {getUser} from "@/services";
 import Link from "next/link";
+import {type PropsWithChildren, Suspense} from "react";
 
 // Стили
 import styles from "./styles/user.module.scss";
 
 // Компоненты
 import {Img} from "@components/img";
-import {Suspense} from "react";
 
-export async function UserBox(param: { _id?: User["_id"], name?: User["name"] }) {
-	const info = await getUser(param, false).catch(console.error)
+type withId = { _id: User["_id"], name?: undefined }
+type withName = { _id?: undefined, name: User["name"] }
+type full = withId & withName
+
+export async function UserBox({ _id, name, children }: PropsWithChildren<withId | withName | full>) {
+	const info = await getUser({_id, name}, false).catch(console.error)
 
 	if (!info) return
 
@@ -25,6 +29,7 @@ export async function UserBox(param: { _id?: User["_id"], name?: User["name"] })
 							className="user_icon" width={50}
 					/>
 					<p>{user.name}</p>
+					{children}
 				</Link>
 			</Suspense>
 	)

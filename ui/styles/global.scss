@@ -46,6 +46,7 @@ body {
   color: var(--text-color);
 
   accent-color: var(--unic-color);
+  caret-color: var(--unic-color);
 
   & *::selection {
     background: rgba(var(--unic-color-rgb), 0.2);

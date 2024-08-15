@@ -29,7 +29,7 @@ export function AuthForm({savedName}: { savedName?: string }) {
 								onChange={onChange}
 								value="discord"
 						/>
-						<DiscordSvg className={`color ${styles.ds}`} width="1em" height="1em"/>
+						<DiscordSvg className={`color ${styles.ds}`} size="1em"/>
 					</FormLabel>
 
 					<FormLabel className={styles.provider}>
@@ -41,7 +41,7 @@ export function AuthForm({savedName}: { savedName?: string }) {
 								onChange={onChange}
 								value="google"
 						/>
-						<GoogleSvg className={styles.google} width="1em" height="1em"/>
+						<GoogleSvg className={styles.google} size="1em"/>
 					</FormLabel>
 				</FormGroup>
 

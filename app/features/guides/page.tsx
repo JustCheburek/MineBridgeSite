@@ -42,7 +42,6 @@ export default function Guides() {
 							<Img src="/features/guides/crafts/dragon_breath.webp" alt="Драконье дыхание" pixel/>
 						</ImgBox>
 
-						<GHint className="green_color">Обнова</GHint>
 						<GText>Крафты</GText>
 					</GBox>
 
@@ -82,18 +81,6 @@ export default function Guides() {
 						</ImgBox>
 
 						<GText>Еда</GText>
-					</GBox>
-
-					<GBox href="https://modrinth.com/datapack/tables-and-chairs" anotherSite imgs="one">
-						<ImgBox type="grid">
-							<Img
-									src="https://cdn.modrinth.com/data/ElnjwLgg/cb30b6f5e8c309a9691bb999d6f7546d60d043cb.png"
-									alt="Стул и стол"
-									className="border-radius"
-							/>
-						</ImgBox>
-
-						<GText>Мебель</GText>
 					</GBox>
 
 					<GBox href="https://minecraft.wiki/w/Villager_Trade_Rebalance" anotherSite imgs="one">
