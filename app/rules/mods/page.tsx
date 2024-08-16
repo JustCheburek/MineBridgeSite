@@ -21,11 +21,11 @@ export default function Mods() {
     type RP = { name: string, url: URL }
 
     const mods: Mod[] = [{
-        name: "Сборка модов от JustCheburek 1.20.4 (для сильных ПК)",
-        url: new URL("https://modrinth.com/modpack/minebridge-pack")
-    }, {
-        name: "Сборка модов от Kawa11Fox 1.20.4 (для ПК послабее)",
+        name: "Сборка модов от Kawa11Fox 1.20.4",
         url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
+    }, {
+        name: "Сборка модов от JustCheburek 1.20.4",
+        url: new URL("https://modrinth.com/modpack/minebridge-pack")
     }, {
         name: "Миникарта"
     }, {
@@ -39,6 +39,9 @@ export default function Mods() {
     }, {
         name: "InvMove",
         url: new URL("https://modrinth.com/mod/invmove")
+    }, {
+        name: "No Chat Reports (рекомендуется)",
+        url: new URL("https://modrinth.com/mod/no-chat-reports")
     }, {
         name: "Simple Voice Chat (рекомендуется)",
         url: new URL("https://modrinth.com/plugin/simple-voice-chat/")

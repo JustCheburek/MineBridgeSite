@@ -1,9 +1,5 @@
 @import "@styles/mixins";
 
-.case {
-
-}
-
 .max_size {
 	// Расположение
 	display: flex;
@@ -36,10 +32,6 @@
 
 	// Отображение
 	@include border();
-
-	.heading {
-		padding-bottom: var(--_block-gap);
-	}
 }
 
 // Визуальный контейнер
@@ -105,11 +97,7 @@
 	animation: change 800ms;
 }
 
-.heading {
-	min-height: 70px;
-}
-
-.description {
+.min_height {
 	min-height: 70px;
 }
 
@@ -128,11 +116,15 @@
 .container {
 	// Расположение
 	display: grid;
-	grid-template-rows: 1fr auto;
+	grid-template-rows: auto auto;
 	gap: var(--_block-gap);
 
 	// Размеры
 	height: 100%;
+}
+
+.heading {
+	padding-bottom: var(--_block-gap);
 }
 
 .select_item {

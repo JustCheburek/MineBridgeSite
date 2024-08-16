@@ -17,52 +17,52 @@ import {Form, FormButton} from "@components/form";
 import {User} from "lucia";
 
 type CasesPurchasesSection = {
-	caseDatas: CaseData[]
-	access?: boolean
-	isMe: boolean
-	user: User
-	Cases: Case[]
-	Drops: Drop[]
+    caseDatas: CaseData[]
+    access?: boolean
+    isMe: boolean
+    user: User
+    Cases: Case[]
+    Drops: Drop[]
 }
 
 export function CasesPurchasesSection(
-		{
-			caseDatas,
-			access,
-			isMe,
-			Cases,
-			Drops,
-			user
-		}: CasesPurchasesSection) {
-	const [click, setClick] = useState<boolean>(false)
-	const [modal, setModal] = useState<boolean>(false)
+    {
+        caseDatas,
+        access,
+        isMe,
+        Cases,
+        Drops,
+        user
+    }: CasesPurchasesSection) {
+    const [click, setClick] = useState<boolean>(false)
+    const [modal, setModal] = useState<boolean>(false)
 
-	return (<>
-		<Table
-				columns={columns}
-				data={caseDatas}
-				editable={access}
-				_id={user._id}
-				SaveAll={SaveCasesPurchases}
-				setModal={setModal}
-				notFound={<Link href="/shop" className="unic_color medium-font">Как покупать?</Link>}
-		>
-			<h2>
-				Покупки кейсов
-			</h2>
-			{isMe && caseDatas.length > 0 &&
-					<Form action={() => {
-						GetAll(user.name, caseDatas)
-						setClick(true)
-					}}>
-						<FormButton disabled={click}>
-							Получить покупки
-						</FormButton>
-					</Form>
-			}
-		</Table>
-		<CasesPurchasesModal
-				modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} _id={user._id}
-		/>
-	</>)
+    return (<>
+        <Table
+            columns={columns}
+            data={caseDatas}
+            editable={access}
+            _id={user._id}
+            SaveAll={SaveCasesPurchases}
+            setModal={setModal}
+            notFound={<Link href="/shop" className="unic_color medium-font">Как покупать?</Link>}
+        >
+            <h2>
+                Покупки кейсов
+            </h2>
+            {isMe && caseDatas.length > 0 &&
+              <Form action={() => {
+                  GetAll(user.name, caseDatas)
+                  setClick(true)
+              }}>
+                <FormButton disabled={click}>
+                  Получить покупки
+                </FormButton>
+              </Form>
+            }
+        </Table>
+        <CasesPurchasesModal
+            modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} _id={user._id}
+        />
+    </>)
 }

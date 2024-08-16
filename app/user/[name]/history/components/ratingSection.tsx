@@ -15,27 +15,27 @@ import {RatingModal} from "@modals/rating";
 import Link from "next/link";
 
 type PunishmentSection = {
-	user: User, name?: User["name"]
-	access?: boolean
+    user: User, name?: User["name"]
+    access?: boolean
 }
 
 export function PunishmentSection({user, name, access}: PunishmentSection) {
-	const [modal, setModal] = useState<boolean>(false)
+    const [modal, setModal] = useState<boolean>(false)
 
-	return (<>
-		<Table<Punishment>
-				columns={columns}
-				data={user.punishments}
-				editable={access}
-				setModal={setModal}
-				SaveAll={SavePunishments}
-				_id={user._id}
-				notFound={<Link href="/rules" className="unic_color medium-font">Как повышать рейтинг?</Link>}
-		>
-			<h2>
-				Рейтинг
-			</h2>
-		</Table>
-		<RatingModal modal={modal} setModal={setModal} user={user} name={name}/>
-	</>)
+    return (<>
+        <Table<Punishment>
+            columns={columns}
+            data={user.punishments}
+            editable={access}
+            setModal={setModal}
+            SaveAll={SavePunishments}
+            _id={user._id}
+            notFound={<Link href="/rules" className="unic_color medium-font">Как повышать рейтинг?</Link>}
+        >
+            <h2>
+                Рейтинг
+            </h2>
+        </Table>
+        <RatingModal modal={modal} setModal={setModal} user={user} name={name}/>
+    </>)
 }
