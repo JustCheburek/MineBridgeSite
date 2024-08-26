@@ -92,9 +92,12 @@ export default function Totems() {
 				</GContainer>
 
 				<h3 className="center_text">Тоже хотите попасть в ресурс пак?</h3>
-				<Url href="https://discord.com/channels/1012334719230292048/1093724052797018133">
+				<Url href="https://discord.gg/UEEsPXrtmV">
 					Да, и что?
 				</Url>
+				<small className="flex_center">
+					(полный список по ссылке)
+				</small>
 			</MaxSize>
 	)
 }
