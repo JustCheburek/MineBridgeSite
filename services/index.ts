@@ -63,11 +63,11 @@ export const getUser = cache(
         _id?: User["_id"],
         show: boolean = false
     ) => {
-        let user: User | null
+        let user
         if (param?.name) {
-            user = await userModel.findOne(param).lean()
+            user = await userModel.findOne(param).lean() as User | null
         } else {
-            user = await userModel.findById(param._id).lean()
+            user = await userModel.findById(param._id).lean() as User | null
         }
 
         if (!user) {
@@ -105,10 +105,10 @@ export const getUser = cache(
 
 export const getAuthor = cache(
     async (id?: string): Promise<{ user: User | null } & RolesApi> => {
-        const user: User | null = await userModel.findByIdAndUpdate(
+        const user = await userModel.findByIdAndUpdate(
             id,
             {onlineAt: new Date()}
-        ).lean()
+        ).lean() as User | null
 
         return {user, ...await getRoles(user?.discordId)}
     },
@@ -118,7 +118,7 @@ export const getAuthor = cache(
 
 export const getUsers = cache(
     async () => {
-        const users: User[] = await userModel.find().lean()
+        const users = await userModel.find().lean() as User[]
 
         users.sort(({createdAt: createdAt1}, {createdAt: createdAt2}) => {
             if (!createdAt1) return 1

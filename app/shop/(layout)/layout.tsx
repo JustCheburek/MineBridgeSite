@@ -17,6 +17,9 @@ export default function Shop({children}: PropsWithChildren) {
 						<SubsectionItem href="/shop/case">
 							Кейсы
 						</SubsectionItem>
+						<SubsectionItem href="/shop/drop" exact={false}>
+							Дроп
+						</SubsectionItem>
 					</Subsections>
 
 					{children}

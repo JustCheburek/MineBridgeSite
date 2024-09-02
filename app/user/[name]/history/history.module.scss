@@ -3,6 +3,9 @@
 	gap: 40px;
 }
 
-.item {
-	border-radius: var(--border-radius);
+.purchases {
+	display: flex;
+	gap: 3rem;
+	flex-wrap: wrap;
+	justify-content: center;
 }

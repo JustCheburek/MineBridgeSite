@@ -492,9 +492,10 @@ export default function Rules() {
 							<p>
 								Модерации запрещено абьюзить свои права
 							</p>
-							<UserBox _id="djfp8h9j2ffbdzz"/>
-							<UserBox _id="svp3okvcuo6062d"/>
 							<UserBox _id="biu4vqvuev0m0tp"/>
+							<UserBox _id="ruef6d47y245c0x"/>
+							<UserBox _id="svp3okvcuo6062d"/>
+							<UserBox _id="djfp8h9j2ffbdzz"/>
 							<TextUrl href="https://discord.gg/swrAFFqvH2">
 								Стать модером
 							</TextUrl>
@@ -551,10 +552,6 @@ export default function Rules() {
 									Контент мейкер: получает бонус 10% мостиков от суммы покупки
 								</li>
 							</ul>
-							<UserBox _id="i5mqq2js4nos1yj"/>
-							<UserBox _id="j8bsrsdgzqa4n0c"/>
-							<UserBox _id="cds85p9u89qfyn1"/>
-							<UserBox _id="t2dhhl5igw1sp43"/>
 						</Rule>
 					</RulesBox>
 

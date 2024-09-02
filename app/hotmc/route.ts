@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
 			{name: nick},
 			{
 				$inc: {
-					mostiki: 2
+					mostiki: 1
 				}
 			}
 	)

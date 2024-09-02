@@ -1,5 +1,5 @@
 // Сервер
-import {getCases, getDrops, getUser} from "@/services";
+import {getCase, getCases, getDrop, getDrops, getUser} from "@/services";
 import {validate} from "@services/validate";
 import {CaseData} from "@/types/purchase";
 import {revalidateTag} from "next/cache";
@@ -32,10 +32,10 @@ export default async function History({params: {name}}: { params: { name: string
 
     const caseDatas = [] as CaseData[]
 
-    user.casesPurchases.forEach(purchase => {
-        const Case = Cases.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Case))
-        const Drop = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.Drop))
-        const DropItem = Drops.find(({_id}) => JSON.stringify(_id) === JSON.stringify(purchase.DropItem))
+    user.casesPurchases.map(async (purchase) => {
+        const Case = await getCase({_id: purchase.Case})
+        const Drop = await getDrop({_id: purchase.Drop})
+        const DropItem = await getDrop({_id: purchase.DropItem})
         if (!Case || !Drop || !DropItem) return console.log("No case or drop")
 
         // Items

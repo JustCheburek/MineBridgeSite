@@ -188,30 +188,9 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
 	revalidateTag("userLike")
 }
 
-export async function SaveCasesPurchases(_id: string, datas: CaseData[]) {
-	"use server"
+export async function AddCasePurchase(_id: string, casePurchase: CaseData, access: boolean) {
+	if (!access) return
 
-	const userUpdate = await userModel.findById(_id)
-	if (!userUpdate) return
-
-	userUpdate.casesPurchases = []
-
-	datas.forEach(data => {
-		userUpdate.casesPurchases.push({
-			...data,
-			Case: data.Case._id,
-			Drop: data.Drop._id,
-			DropItem: data.DropItem._id,
-			Item: data.Item._id
-		})
-	})
-
-	await userUpdate.save()
-
-	revalidateTag("userLike")
-}
-
-export async function AddCasePurchase(_id: string, casePurchase: CaseData) {
 	const casePurchaseDB: CasePurchase = {
 		...casePurchase,
 		Case: casePurchase.Case._id,
