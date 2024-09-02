@@ -60,6 +60,7 @@ export function CasesPurchasesSection(
                             href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
                             className={`flex_center border-radius ${rarity}_box`}
                             style={{width: "280px", height: "160px"}}
+                            key={Item.name}
                         >
                             <p>
                                 Выберите суффикс<br/>
@@ -75,6 +76,7 @@ export function CasesPurchasesSection(
                     <Link
                         href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
                         className={`flex_center border-radius ${rarity}_box ${styles.suffix}`}
+                        key={Item.name}
                     >
                         <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">
                             <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>

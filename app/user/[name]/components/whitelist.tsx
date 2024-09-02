@@ -30,7 +30,7 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
                 <strong className="unic_color all_select">{BEDROCK_IP}:19132</strong>
             </li>
         </ul>
-        <p>Скоро здесь появится гайд по заходу на bedrock</p>
+        <p>Когда-нибудь здесь появится гайд по заходу на bedrock :)</p>
         <Button onClick={() => setModal(true)}>
             Заново
         </Button>
