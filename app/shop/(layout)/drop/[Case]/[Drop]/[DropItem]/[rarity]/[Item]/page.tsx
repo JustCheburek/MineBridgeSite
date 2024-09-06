@@ -1,4 +1,4 @@
-import {getCase, getDrop} from "@/services";
+import {getCase, getCases, getDrop, getDrops} from "@/services";
 import {H1} from "@components/h1";
 import {Img, ImgBox} from "@components/img";
 import {Case, Drop, Item, RarityNames, type RarityType} from "@/types/case";
@@ -28,9 +28,11 @@ export default async function ShowCase(
     }) {
     const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 
-    const Case = await getCase({name: CaseName})
-    const Drop = await getDrop({name: DropName})
-    const DropItem = await getDrop({name: DropItemName})
+    const Cases = await getCases()
+    const Drops = await getDrops()
+    const Case = await getCase({name: CaseName}, Cases)
+    const Drop = await getDrop({name: DropName}, Drops)
+    const DropItem = await getDrop({name: DropItemName}, Drops)
 
     // Items
     let {drop: items} = DropItem
