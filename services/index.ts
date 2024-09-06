@@ -8,7 +8,7 @@ import {Season} from "@/types/season";
 import type {GuildDSUser} from "@/types/user";
 import axios from "axios";
 import type {Role} from "@/types/role";
-import {Case, Drop} from "@/types/case";
+import {Case, Drop, RarityType} from "@/types/case";
 import {idOrName} from "@/types/idOrName";
 
 export interface isRoles {
@@ -60,6 +60,7 @@ export const getUser = cache(
     async (
         param: idOrName,
         throwNotFound: boolean = true,
+        roles: boolean = false,
         _id?: User["_id"],
         show: boolean = false
     ) => {
@@ -82,8 +83,6 @@ export const getUser = cache(
         user._id = user._id.toString()
         const isMe = _id === user._id
 
-        const roles = await getRoles(user?.discordId)
-
         if (!show && !isMe) {
             user.email = "×".repeat(user.email.length - 4) + user.email.substring(user.email.length - 4)
 
@@ -97,7 +96,20 @@ export const getUser = cache(
             }
         }
 
-        return {user, isMe, ...roles, isContentMakerCheck: (isMe || roles.isModer) && roles.isContentMaker}
+        if (roles && user?.discordId) {
+            const rolesApi = await getRoles(user.discordId)
+            return {user, isMe, ...rolesApi, isContentMakerCheck: (isMe || rolesApi.isModer) && rolesApi.isContentMaker}
+        }
+
+        return {
+            user,
+            isMe,
+            isAdmin: false,
+            isModer: false,
+            isContentMaker: false,
+            isContentMakerCheck: false,
+            roles: []
+        }
     },
     ["user", "userLike", "all"],
     {revalidate: 600, tags: ["user", "userLike", "all"]}
@@ -135,9 +147,12 @@ export const getUsers = cache(
 
 export const getCase = cache(
     async (
-        param: idOrName
+        param: idOrName,
+        Cases: Case[]
     ) => {
-        const Case: Case | null = await caseModel.findOne(param).lean()
+        const Case = Cases.find(({name, _id}) =>
+            name === param.name || _id === param._id
+        )
 
         if (!Case) {
             throw new Error(`Case не найден: ${JSON.stringify(param)}`)
@@ -157,9 +172,12 @@ export const getCases = cache(
 
 export const getDrop = cache(
     async (
-        param: idOrName
+        param: idOrName,
+        Drops: Drop[]
     ) => {
-        const Drop: Drop | null = await dropModel.findOne(param).lean()
+        const Drop = Drops.find(({name, _id}) =>
+            name === param.name || _id === param._id
+        )
 
         if (!Drop) {
             throw new Error(`Drop не найден: ${JSON.stringify(param)}`)
@@ -175,6 +193,27 @@ export const getDrops = cache(
     async () => await dropModel.find().lean() as Drop[],
     ["drops", "shop", "all"],
     {revalidate: 3600, tags: ["drops", "shop", "all"]}
+)
+
+export const getItems = cache(
+    async (
+        DropItem: Drop,
+        rarity: RarityType
+    ) => {
+        // Items
+        let {drop: items} = DropItem
+        if (items?.length === 0) {
+            items = DropItem[rarity]
+        }
+
+        if (items?.length === 0 || !items) {
+            throw new Error(`Items не найден`)
+        }
+
+        return items
+    },
+    ["items", "shop", "all"],
+    {revalidate: 3600, tags: ["items", "shop", "all"]}
 )
 
 export const getSeasons = cache(

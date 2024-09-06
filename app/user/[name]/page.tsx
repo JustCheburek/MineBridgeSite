@@ -30,7 +30,7 @@ export default async function Profile({params: {name}}: { params: { name: string
 	const {
 		user, roles, isMe, isContentMaker
 	} = await getUser(
-			{name}, true, author?._id, isModer
+			{name}, true, true, author?._id, isModer
 	)
 
 	if (author && (!author?.from || !author.from?.place || !author.from?.userId)) {

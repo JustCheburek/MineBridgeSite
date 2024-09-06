@@ -36,7 +36,7 @@ export default async function Accounts({params: {name}}: { params: { name: strin
 	const {
 		user, isMe, isContentMakerCheck
 	} = await getUser(
-			{name}, true, author?._id, isModer
+			{name}, true, true, author?._id, isModer
 	)
 
 	const adminAccess = isAdmin || isMe

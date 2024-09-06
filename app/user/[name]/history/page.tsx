@@ -1,5 +1,5 @@
 // Сервер
-import {getCase, getCases, getDrop, getDrops, getUser} from "@/services";
+import {getCase, getCases, getDrop, getDrops, getItems, getUser} from "@/services";
 import {validate} from "@services/validate";
 import {CaseData} from "@/types/purchase";
 import {revalidateTag} from "next/cache";
@@ -25,31 +25,30 @@ export default async function History({params: {name}}: { params: { name: string
     const {
         user, isMe
     } = await getUser(
-        {name}, true, author?._id, isModer
+        {name}, true, false, author?._id, isModer
     )
     const Cases = await getCases()
     const Drops = await getDrops()
 
     const caseDatas = [] as CaseData[]
 
-    user.casesPurchases.map(async (purchase) => {
-        const Case = await getCase({_id: purchase.Case})
-        const Drop = await getDrop({_id: purchase.Drop})
-        const DropItem = await getDrop({_id: purchase.DropItem})
-        if (!Case || !Drop || !DropItem) return console.log("No case or drop")
+    for (const purchase of user.casesPurchases) {
+        const Case = await getCase({_id: purchase.Case}, Cases).catch(console.error)
+        if (!Case) return console.error("No case")
+        const Drop = await getDrop({_id: purchase.Drop}, Drops).catch(console.error)
+        if (!Drop) return console.error("No drop")
+        const DropItem = await getDrop({_id: purchase.DropItem}, Drops).catch(console.error)
+        if (!DropItem) return console.error("No drop item")
 
         // Items
-        let {drop: items} = DropItem
-        if (items?.length === 0) {
-            items = DropItem[purchase.rarity!]
-        }
-        if (items?.length === 0 || !items) return console.log("No items")
+        const items = await getItems(DropItem, purchase.rarity).catch(console.error)
+        if (!items) return console.error("No items")
 
         const Item = items.find(({_id}) =>
             JSON.stringify(_id) === JSON.stringify(purchase.Item)
         )
 
-        if (!Item) return console.log("No item")
+        if (!Item) return console.error("No item")
 
         caseDatas.push({
             ...purchase,
@@ -58,7 +57,7 @@ export default async function History({params: {name}}: { params: { name: string
             DropItem,
             Item
         })
-    })
+    }
 
     return (
         <div className={styles.content}>
