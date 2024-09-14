@@ -310,8 +310,10 @@ export const AutoSvg = ({type, ...props}: { type: string } & SizeSvg) => {
 	switch (type) {
 		case "discord":
 			return <DiscordSvg {...props}/>
-		case "telegram" && "t":
+		case "telegram":
 			return <TelegramSvg {...props}/>
+        case "t":
+            return <TelegramSvg {...props}/>
 		case "vk":
 			return <VKSvg {...props}/>
 		case "twitch":
