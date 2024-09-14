@@ -12,7 +12,7 @@
     "@tanstack/react-table": "^8.20.5",
     "@vercel/speed-insights": "^1.0.12",
     "aws4": "^1.13.2",
-    "axios": "^1.7.7",
+    "axios": "^1.7.4",
     "boring-webcrypto-sha256": "^1.0.0",
     "javascript-time-ago": "^2.5.11",
     "js-sha1": "^0.7.0",
