@@ -16,7 +16,6 @@ function updateRating(this: User) {
 
 @pre<User>("save", updateRating)
 @pre<User>("findOneAndUpdate", updateRating)
-
 @modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false}})
 export class User {
 	@prop({required: true, index: true})
