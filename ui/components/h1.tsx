@@ -38,7 +38,7 @@ interface H1Props extends ComponentPropsWithoutRef<"h1"> {
 }
 
 export const H1 = ({children, paths, reload, up = false, className = "", ...props}: PropsWithChildren<H1Props>) => (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${className}`}>
 			{paths && <RelativeNav paths={paths}/>}
 
 			<div className={styles.box} id="top">
@@ -52,7 +52,7 @@ export const H1 = ({children, paths, reload, up = false, className = "", ...prop
 						: <div/>
 				}
 
-				<h1 className={`${styles.h1} ${className}`} {...props}>
+				<h1 className={styles.h1} {...props}>
 					{children}
 				</h1>
 
