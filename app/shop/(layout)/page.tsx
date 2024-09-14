@@ -4,10 +4,7 @@ import Link from "next/link";
 import {getCases} from "@/services";
 
 // Компоненты
-import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, Text} from "./components";
-
-// Стили
-import styles from "./shop.module.scss"
+import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, Text} from "@components/shop";
 
 // Компоненты
 import {MostikiSvg} from "@ui/SVGS";
@@ -67,7 +64,7 @@ export default async function Shop() {
                 </ul>
             </div>
 
-            <Heading heading="Кейсы" href="/case" id="cases">
+            <Heading heading="Кейсы" href="/shop/case" id="cases">
                 <p>
                     С помощью кейсов можно кастомизировать свой внешний вид
                 </p>
@@ -77,15 +74,15 @@ export default async function Shop() {
             </Heading>
 
             <Section name="cases">
-                {cases.map(caseType => (
-                    <Box key={caseType.name}>
-                        <CaseBox caseType={caseType}/>
+                {cases.map(Case => (
+                    <Box key={Case.name}>
+                        <CaseBox Case={Case}/>
                         <Text>
                             <CaseInfo>
-                                {caseType.displayname}
+                                {Case.displayname}
                             </CaseInfo>
-                            <Price oldPrice={caseType.oldPrice}>
-                                {caseType.price}
+                            <Price oldPrice={Case.oldPrice}>
+                                {Case.price}
                             </Price>
                             <Url href="/shop/case" margin="10px">
                                 Купить
@@ -109,9 +106,9 @@ export default async function Shop() {
             </Author>
 
             <Section name="stickers">
-                <Box className={styles.preview_sticker}>
+                <Box preview>
                     <Link href="/features/stickers">
-                        <ImgBox hover className={styles.helper} overflow={false}>
+                        <ImgBox hover helper overflow={false}>
                             <Img
                                 src="/features/stickers/14.png" alt="Стикер"
                                 width={225}
@@ -150,9 +147,9 @@ export default async function Shop() {
             </Author>
 
             <Section name="stickers">
-                <Box className={styles.preview_sticker}>
+                <Box preview>
                     <Link href="/features/stickers">
-                        <ImgBox hover className={styles.helper} overflow={false}>
+                        <ImgBox hover helper overflow={false}>
                             <Img
                                 src="/features/stickers/4.png" alt="Стикер"
                                 width={225}
@@ -191,9 +188,9 @@ export default async function Shop() {
             </Author>
 
             <Section name="stickers">
-                <Box className={styles.preview_sticker}>
+                <Box preview>
                     <Link href="/features/stickers">
-                        <ImgBox hover className={styles.helper} overflow={false}>
+                        <ImgBox hover helper overflow={false}>
                             <Img
                                 src="/features/stickers/13.png" alt="Стикер"
                                 width={225}

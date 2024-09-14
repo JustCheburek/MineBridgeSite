@@ -9,7 +9,7 @@ import Link from "next/link";
 import {Case, DropNames, RarityNames} from "@/types/case";
 
 // Стили
-import styles from "./shop.module.scss"
+import styles from "./styles/shop.module.scss"
 
 // Компоненты
 import {Url} from "@components/button";
@@ -68,8 +68,8 @@ export const Author = ({description, href, children}: PropsWithChildren<Author>)
     </div>
 )
 
-export const Box = ({children, className = "", ...props}: PropsWithChildren<{ className?: string; }>) => (
-    <div className={`${styles.box} ${className}`} {...props}>
+export const Box = ({children, preview=false, ...props}: PropsWithChildren<{ preview?: boolean }>) => (
+    <div className={`${styles.box} ${preview ? styles.preview : ""}`} {...props}>
         {children}
     </div>
 )
@@ -111,26 +111,26 @@ export const StickerButton = () => (
     </Url>
 )
 
-export function CaseBox({caseType}: { caseType: Case }) {
-    const chancesRarity = SumChances(caseType.rarity)
-    const chancesDrop = SumChances(caseType.drop)
+export function CaseBox({Case}: { Case: Case }) {
+    const chancesRarity = SumChances(Case.rarity)
+    const chancesDrop = SumChances(Case.drop)
     const [modal, setModal] = useState(false)
 
     return (<>
-        <ImgBox className={`${styles.pointer} ${styles.helper}`} onClick={() => setModal(true)} hover overflow={false}>
+        <ImgBox className={`pointer ${styles.helper}`} onClick={() => setModal(true)} hover overflow={false}>
             <Img
-                src={`/shop/${caseType.name}.png`} alt={`${caseType.displayname} кейс`}
+                src={`/shop/${Case.name}.png`} alt={`${Case.displayname} кейс`}
                 width={185}
             />
         </ImgBox>
         <Modal modal={modal} setModal={setModal}>
-            <H1>{caseType.displayname}</H1>
+            <H1>{Case.displayname}</H1>
             <div className={styles.case_info}>
                 <div className={styles.rarity}>
                     <h2 className="unic_color">
                         Редкости
                     </h2>
-                    {caseType.rarity.map(rarity => {
+                    {Case.rarity.map(rarity => {
                         const translate = RarityNames[rarity.name]
 
                         return (
@@ -144,7 +144,7 @@ export function CaseBox({caseType}: { caseType: Case }) {
                     <h2 className="unic_color">
                         Дроп
                     </h2>
-                    {caseType.drop.map(drop => {
+                    {Case.drop.map(drop => {
                         const translate = DropNames[drop.name]
 
                         return (

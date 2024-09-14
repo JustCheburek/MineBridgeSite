@@ -16,6 +16,7 @@ export const RarityNames = {
 	mythic: "Мифический",
 	legendary: "Легендарный"
 }
+export const rarityNames = Object.keys(RarityNames) as RarityType[]
 export type RarityType = keyof typeof RarityNames
 
 export const DropNames = {

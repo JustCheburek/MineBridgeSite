@@ -1,4 +1,4 @@
-import styles from "@app/shop/(layout)/shop.module.scss";
+import styles from "./shop.module.scss";
 import {SubsectionItem, Subsections} from "@components/sideNav";
 import {MaxSize} from "@components/maxSize";
 import {PropsWithChildren} from "react";

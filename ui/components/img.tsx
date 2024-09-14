@@ -15,6 +15,7 @@ type ImgBox = {
     hover?: boolean
     overflow?: boolean
     borderRadius?: boolean
+    helper?: boolean
 }
 
 export const ImgBox = (
@@ -28,6 +29,7 @@ export const ImgBox = (
         overflow = true,
         hover = false,
         borderRadius = false,
+        helper = false,
         style,
         ...props
     }: ComponentPropsWithoutRef<"figure"> & ImgBox,
@@ -48,7 +50,7 @@ export const ImgBox = (
 
     return (
         <figure
-            className={`${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${className}`}
+            className={`${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${helper ? "helper" : ""} ${className}`}
             style={{...backgroundStyle, ...overflowStyle, width, height, ...style}}
             {...props}
         >

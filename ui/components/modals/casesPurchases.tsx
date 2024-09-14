@@ -1,8 +1,7 @@
 "use client";
 
 import {useState} from "react";
-import type {RarityType} from "@/types/case";
-import {Case, Drop, RarityNames} from "@/types/case";
+import {Case, Drop, RarityNames, rarityNames} from "@/types/case";
 import type {CaseData} from "@/types/purchase";
 import {AddCasePurchase} from "@services/user";
 
@@ -33,7 +32,6 @@ export const CasesPurchasesModal = (
         rarity: "common",
         Item: Drops[1].common![0]
     })
-    const rarityNames = Object.keys(RarityNames) as RarityType[]
 
     const updateData = (key: keyof CaseData, value: any) => {
         setCaseData(prev => ({
