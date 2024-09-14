@@ -45,14 +45,14 @@
 }
 
 .for_smaller {
-	display: none;
+	display: none !important;
 }
 
 @media (width < 400px) {
 	.for_smaller {
-		display: block;
+		display: block !important;
 	}
 	.for_bigger {
-		display: none;
+		display: none !important;
 	}
 }
