@@ -47,7 +47,10 @@ export function CasesPurchasesSection(
               setClick(true)
           }}>
             <FormButton disabled={click}>
-              Получить покупки
+                {click ?
+                    "Получить покупки" :
+                    "Проверьте покупки в игре /uc menu"
+                }
             </FormButton>
           </Form>
         }
@@ -87,12 +90,12 @@ export function CasesPurchasesSection(
         </div>
 
         {access &&
-            <FormButton onClick={e => {
-                e.preventDefault()
-                setModal(true)
-            }}>
-                Добавить
-            </FormButton>
+          <FormButton onClick={e => {
+              e.preventDefault()
+              setModal(true)
+          }}>
+            Добавить
+          </FormButton>
         }
 
         <CasesPurchasesModal
