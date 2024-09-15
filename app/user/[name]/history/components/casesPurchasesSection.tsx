@@ -47,9 +47,9 @@ export function CasesPurchasesSection(
               setClick(true)
           }}>
             <FormButton disabled={click}>
-                {click ?
-                    "Получить покупки" :
-                    "Проверьте покупки в игре /uc menu"
+                {click
+                    ? "Проверьте покупки в игре /uc menu"
+                    : "Получить покупки"
                 }
             </FormButton>
           </Form>
