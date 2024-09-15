@@ -8,16 +8,19 @@ type InviteSection = {
 }
 
 export function InviteSection({user, isMe, isModer}: InviteSection) {
+    const invites = user.invites.slice(user.invites.length - 10)
+
     return (
-        <section className="center_text grid_center">
-            <h2>Приглашения</h2>
-            <h3>1 приглашение = 5 рейтинга</h3>
+        <section className="grid_center">
+            <h2 className="center_text">Приглашения</h2>
+            <h3 className="center_text">1 приглашение = 5 рейтинга</h3>
             {isMe &&
               <InviteLink name={user.name}/>
             }
             <FromBox user={user} isMe={isMe} isModer={isModer}/>
             <h4>Приглашений: <strong className="unic_color">{user.invites.length}</strong></h4>
-            {user.invites.map(userId => (
+            <p>Последние 10:</p>
+            {invites.map(userId => (
                 <UserBox key={userId} _id={userId}/>
             ))}
         </section>
