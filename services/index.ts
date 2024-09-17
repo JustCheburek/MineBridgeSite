@@ -145,7 +145,7 @@ export const getUsers = cache(
     {revalidate: 1200, tags: ["users", "userLike", "all"]}
 )
 
-export const getCase = cache(
+export const getCaseLocal = cache(
     async (
         param: idOrName,
         Cases: Case[]
@@ -164,13 +164,29 @@ export const getCase = cache(
     {revalidate: 3600, tags: ["case", "shop", "all"]}
 )
 
+export const getCase = cache(
+    async (
+        param: idOrName
+    ) => {
+        const Case = await caseModel.findOne(param).lean() as Case | null
+
+        if (!Case) {
+            throw new Error(`Case не найден: ${JSON.stringify(param)}`)
+        }
+
+        return Case
+    },
+    ["case", "shop", "all"],
+    {revalidate: 3600, tags: ["case", "shop", "all"]}
+)
+
 export const getCases = cache(
     async () => await caseModel.find().lean() as Case[],
     ["cases", "shop", "all"],
     {revalidate: 3600, tags: ["cases", "shop", "all"]}
 )
 
-export const getDrop = cache(
+export const getDropLocal = cache(
     async (
         param: idOrName,
         Drops: Drop[]
@@ -178,6 +194,22 @@ export const getDrop = cache(
         const Drop = Drops.find(({name, _id}) =>
             name === param.name || _id === param._id
         )
+
+        if (!Drop) {
+            throw new Error(`Drop не найден: ${JSON.stringify(param)}`)
+        }
+
+        return Drop
+    },
+    ["drop", "shop", "all"],
+    {revalidate: 3600, tags: ["drop", "shop", "all"]}
+)
+
+export const getDrop = cache(
+    async (
+        param: idOrName
+    ) => {
+        const Drop = await dropModel.findOne(param).lean() as Drop | null
 
         if (!Drop) {
             throw new Error(`Drop не найден: ${JSON.stringify(param)}`)

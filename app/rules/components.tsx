@@ -25,7 +25,7 @@ export const RulesBox = ({name, heading, number, children}: PropsWithChildren<Ru
 				<div className={styles.heading}>
 					{/* Цифра */}
 					<a href={"#" + name} className={styles.number_box}
-					   onClick={() => navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_URL}/rules#${name}`)}>
+					   onClick={() => navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_EN_URL}/rules#${name}`)}>
 						<LinkSvg/>
 						<p className={`${styles.main_number} center_text medium-font`}>{number}</p>
 					</a>

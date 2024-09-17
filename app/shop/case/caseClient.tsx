@@ -32,13 +32,13 @@ type rollSettings = {
 }
 
 type CaseClient = {
-    cases: Case[]
-    drops: Drop[]
+    Cases: Case[]
+    Drops: Drop[]
     user: User | null
     Add: (Case: Case, Drop: Drop, price: number, item: Info) => Promise<void>
 }
 
-export function CaseClient({cases, drops, user, Add}: CaseClient) {
+export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
     const AMOUNT = 50
     const RESULT = AMOUNT - 2
 
@@ -51,8 +51,8 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
         rollWidth: 16050 + Random(200)
     })
 
-    const [rarity, setRarity] = useState<CaseType>(cases[0].name)
-    const [drop, setDrop] = useState<DropType>(drops[0].name)
+    const [rarity, setRarity] = useState<CaseType>(Cases[0].name)
+    const [drop, setDrop] = useState<DropType>(Drops[0].name)
 
     const getInfo = (
         {
@@ -66,8 +66,8 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
         if (!caseName) caseName = rarity
         if (!dropName) dropName = drop
 
-        const caseType = cases.find(({name}) => name === caseName)
-        const dropType = drops.find(({name}) => name === dropName)
+        const caseType = Cases.find(({name}) => name === caseName)
+        const dropType = Drops.find(({name}) => name === dropName)
 
         if (!caseType || !dropType) throw new Error("Case или Drop не найден")
         return {caseType, dropType}
@@ -109,7 +109,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
         let dropDefault
 
         if (drop !== "all") {
-            dropDefault = drops.find(({name}) => name === drop)
+            dropDefault = Drops.find(({name}) => name === drop)
         }
 
         for (let itemIndex = 0; itemIndex < AMOUNT; itemIndex++) {
@@ -120,7 +120,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
             // Drop
             if (!dropDefault) {
                 const randomDrop = RandomValue(caseType.drop, sumChances.current.drop).name
-                info.DropItem = drops.find(({name}) => name === randomDrop)
+                info.DropItem = Drops.find(({name}) => name === randomDrop)
             }
 
             if (!info.DropItem) return console.error("Drop не найден")
@@ -228,7 +228,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
                         <h3 className={`${styles.heading} unic_color center_text`}>
                             Тип кейса
                         </h3>
-                        {cases.map((type) => (
+                        {Cases.map((type) => (
                             <label key={type.name} className={`${styles.select_item} no_select`}>
                                 <input
                                     type="radio" value={type.name} name="select_case"
@@ -250,7 +250,7 @@ export function CaseClient({cases, drops, user, Add}: CaseClient) {
                         <h3 className={`${styles.heading} unic_color center_text`}>
                             Тип дропа
                         </h3>
-                        {drops.map((type) => (
+                        {Drops.map((type) => (
                             <label key={type.name} className={`${styles.select_item} no_select`}>
                                 <input
                                     type="radio" value={type.name} name="select_drop"

@@ -21,106 +21,106 @@ import {SocialBox} from "./components/social";
 import {User} from "lucia";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
-	title: `${name} | Майнбридж`,
-	description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
+    title: `${name} | Майнбридж`,
+    description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
 })
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {
-	const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
-	const {
-		user, roles, isMe, isContentMaker
-	} = await getUser(
-			{name}, true, true, author?._id, isModer
-	)
+    const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+    const {
+        user, roles, isMe, isContentMaker
+    } = await getUser(
+        {name}, true, true, author?._id, isModer
+    )
 
-	if (author && (!author?.from || !author.from?.place || !author.from?.userId)) {
-		await userModel.findByIdAndUpdate(
-				author._id,
-				{from: await userModel.From(author)}
-		)
-	}
+    if (author && (!author?.from || !author.from?.place || !author.from?.userId)) {
+        await userModel.findByIdAndUpdate(
+            author._id,
+            {from: await userModel.From(author)}
+        )
+    }
 
-	return (
-			<div className={styles.profile}>
-				<FormBox author={author}/>
+    return (
+        <div className={styles.profile}>
+            <FormBox author={author}/>
 
-				<div className={styles.container}>
-					<Avatar photo={user.photo}/>
+            <div className={styles.container}>
+                <Avatar photo={user.photo}/>
 
-					<div className={styles.text}>
-						<h2 className="unic_color">
-							<span className="all_select">{user.name}</span>
-						</h2>
-						{isAdmin &&
-								<small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
-						}
-						<div className={styles.social}>
-							{user?.socials?.map((
-									{
-										social,
-										url,
-										name,
-										clicked
-									}: Social
-							) => {
-								if (!social || (!url && !name)) return
+                <div className={styles.text}>
+                    <h2 className="unic_color">
+                        <span className="all_select">{user.name}</span>
+                    </h2>
+                    {isAdmin &&
+                      <small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
+                    }
+                    <div className={styles.social}>
+                        {user?.socials?.map((
+                            {
+                                social,
+                                url,
+                                name,
+                                clicked
+                            }: Social
+                        ) => {
+                            if (!social || (!url && !name)) return
 
-								url = url || `${URLS_START[social]}${name}`
+                            url = url || `${URLS_START[social]}${name}`
 
-								return (
-										<SocialBox
-												social={social} key={social}
-												isMe={isMe} isModer={isModer} _id={user._id}
-												url={url} clicked={clicked}
-										/>
-								)
-							})}
-						</div>
-						<div className={styles.roles}>
-							{roles.map(role => {
-								const color = `#${role.color.toString(16)}`
-								return (
-										<small key={role.id} style={{color}}>
-											{role.name}
-										</small>
-								)
-							})}
-						</div>
-						<h4>
-							Мостики: {" "}
-							<strong className={ColorText(user.mostiki)}>
-								{user.mostiki}
-							</strong>{" "}
-							<MostikiSvg/>{" "}
-							<Link href="/shop" className="add">+</Link>
-						</h4>
-						<h4>
-							Соц рейтинг: {" "}
-							<strong className={ColorText(user.rating)}>
-								{user.rating}
-							</strong>
-						</h4>
-					</div>
-				</div>
+                            return (
+                                <SocialBox
+                                    social={social} key={social}
+                                    isMe={isMe} isModer={isModer} _id={user._id}
+                                    url={url} clicked={clicked}
+                                />
+                            )
+                        })}
+                    </div>
+                    <div className={styles.roles}>
+                        {roles.map(role => {
+                            const color = `#${role.color.toString(16)}`
+                            return (
+                                <small key={role.id} style={{color}}>
+                                    {role.name}
+                                </small>
+                            )
+                        })}
+                    </div>
+                    <h4>
+                        Мостики: {" "}
+                        <strong className={ColorText(user.mostiki)}>
+                            {user.mostiki}
+                        </strong>{" "}
+                        <MostikiSvg/>{" "}
+                        <Link href="/shop" className="add">+</Link>
+                    </h4>
+                    <h4>
+                        Соц рейтинг: {" "}
+                        <strong className={ColorText(user.rating)}>
+                            {user.rating}
+                        </strong>
+                    </h4>
+                </div>
+            </div>
 
-				<WhitelistSection user={user} isMe={isMe} isModer={isModer}/>
+            <WhitelistSection user={user} isMe={isMe} isModer={isModer}/>
 
-				<TwitchFrame user={user} isContentMaker={isContentMaker}/>
-			</div>
-	)
+            <TwitchFrame user={user} isContentMaker={isContentMaker}/>
+        </div>
+    )
 }
 
 function TwitchFrame({isContentMaker, user}: { isContentMaker: boolean, user: User }) {
-	if (!isContentMaker) return
+    if (!isContentMaker) return
 
-	const twitchName = user?.socials?.find(({social}) => social === "twitch")?.name
-	if (!twitchName) return
+    const twitchName = user?.socials?.find(({social}) => social === "twitch")?.name
+    if (!twitchName) return
 
-	return (
-			<iframe
-					src={`https://player.twitch.tv/?channel=${twitchName}&parent=${process.env.NEXT_PUBLIC_DOMEN}`}
-					allowFullScreen
-					frameBorder={0}
-			/>
-	)
+    return (
+        <iframe
+            src={`https://player.twitch.tv/?channel=${twitchName}&parent=${process.env.NEXT_PUBLIC_RU_DOMAIN}`}
+            allowFullScreen
+            frameBorder={0}
+        />
+    )
 }

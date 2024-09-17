@@ -42,7 +42,7 @@ export function InviteLink({name}: InviteLink) {
 			</FormGroup>
 		</Form>
 		<p className="all_select unic_color break">
-			{process.env.NEXT_PUBLIC_URL}/invite/{name}/{from}
+			{process.env.NEXT_PUBLIC_EN_URL}/invite/{name}/{from}
 		</p>
 	</>)
 }

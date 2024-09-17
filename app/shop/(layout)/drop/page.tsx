@@ -3,12 +3,12 @@ import {Url} from "@components/button";
 import {getCases} from "@/services";
 
 export default async function Cases() {
-    const cases = await getCases()
+    const Cases = await getCases()
 
     return (
         <div>
             <Section name="cases">
-                {cases.map(Case => (
+                {Cases.map(Case => (
                     <Box key={Case.name}>
                         <CaseBox Case={Case}/>
                         <Text>

@@ -18,8 +18,7 @@ export default async function Rarities(
             DropItem: Drop["name"]
         }
     }) {
-    const Drops = await getDrops()
-    const DropItem = await getDrop({name: DropItemName}, Drops)
+    const DropItem = await getDrop({name: DropItemName})
 
     if (DropItem.defaultRarity) {
         return redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${DropItem.defaultRarity}`)

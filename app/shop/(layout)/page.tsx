@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Shop() {
-    const cases = await getCases()
+    const Cases = await getCases()
 
     return (<>
         <div>
@@ -74,7 +74,7 @@ export default async function Shop() {
             </Heading>
 
             <Section name="cases">
-                {cases.map(Case => (
+                {Cases.map(Case => (
                     <Box key={Case.name}>
                         <CaseBox Case={Case}/>
                         <Text>

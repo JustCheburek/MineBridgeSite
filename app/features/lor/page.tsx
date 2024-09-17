@@ -264,7 +264,7 @@ export default function Lor() {
                     </p>
                     <h4>
                         <Link href="/video" className="unic_color medium-font">
-                            {process.env.NEXT_PUBLIC_DOMEN}/video
+                            {process.env.NEXT_PUBLIC_RU_DOMAIN}/video
                         </Link>
                     </h4>
                     <br/>
@@ -276,7 +276,7 @@ export default function Lor() {
                     </p>
                     <h4>
                         <Link href="/scientist" className="unic_color medium-font">
-                            {process.env.NEXT_PUBLIC_DOMEN}/scientist
+                            {process.env.NEXT_PUBLIC_RU_DOMAIN}/scientist
                         </Link>
                     </h4>
                 </PText>

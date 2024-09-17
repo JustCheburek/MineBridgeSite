@@ -1,7 +1,7 @@
 import {Box, CaseInfo, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {Case, Drop, RarityType} from "@/types/case";
-import {getDrop, getDrops} from "@/services";
+import {getDrop} from "@/services";
 import {H1} from "@components/h1";
 import {Img, ImgBox} from "@components/img";
 
@@ -21,8 +21,7 @@ export default async function Items(
             rarity: RarityType
         }
     }) {
-    const Drops = await getDrops()
-    const DropItem = await getDrop({name: DropItemName}, Drops)
+    const DropItem = await getDrop({name: DropItemName})
 
     // Items
     let {drop: items} = DropItem

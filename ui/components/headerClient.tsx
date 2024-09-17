@@ -15,14 +15,6 @@ import {NavLink} from "@components/navlink";
 import {Img} from "@components/img";
 import {Burger} from "@components/burger";
 
-export function generateMetadata() {
-	return {
-		alternates: {
-			canonical: `${process.env.NEXT_PUBLIC_URL}/`,
-		},
-	};
-}
-
 type Burger = {
 	burger: boolean,
 	setBurger: any

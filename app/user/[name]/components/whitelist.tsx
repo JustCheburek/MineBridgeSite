@@ -12,7 +12,6 @@ import {Modal, type setModal} from "@components/modal";
 import {Form, FormButton} from "@components/form";
 import {useState} from "react";
 import {H1} from "@components/h1";
-import {BEDROCK_IP, JAVA_IP} from "@/const";
 import {AddWhitelist} from "@services/user";
 
 const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
@@ -20,16 +19,8 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
         <h2 className="center_text">Вы в Whitelist`е</h2>
 
         {/* todo: гайд */}
-        <ul>
-            <li>
-                <h4>Java Edition:</h4>
-                <strong className="unic_color all_select">{JAVA_IP}:25565</strong>
-            </li>
-            <li>
-                <h4>Bedrock Edition:</h4>
-                <strong className="unic_color all_select">{BEDROCK_IP}:19132</strong>
-            </li>
-        </ul>
+        <h4>Java + Bedrock Edition:</h4>
+        <strong className="unic_color all_select">secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}</strong>
         <p>Когда-нибудь здесь появится гайд по заходу на bedrock :)</p>
         <Button onClick={() => setModal(true)}>
             Заново

@@ -1,5 +1,5 @@
 // Сервер
-import {getCase, getCases, getDrop, getDrops, getItems, getUser} from "@/services";
+import {getCaseLocal, getCases, getDropLocal, getDrops, getItems, getUser} from "@/services";
 import {validate} from "@services/validate";
 import {CaseData} from "@/types/purchase";
 import {revalidateTag} from "next/cache";
@@ -27,17 +27,16 @@ export default async function History({params: {name}}: { params: { name: string
     } = await getUser(
         {name}, true, false, author?._id, isModer
     )
-    const Cases = await getCases()
-    const Drops = await getDrops()
+    const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
     const caseDatas = [] as CaseData[]
 
     for (const purchase of user.casesPurchases) {
-        const Case = await getCase({_id: purchase.Case}, Cases).catch(console.error)
+        const Case = await getCaseLocal({_id: purchase.Case}, Cases).catch(console.error)
         if (!Case) return console.error("No case")
-        const Drop = await getDrop({_id: purchase.Drop}, Drops).catch(console.error)
+        const Drop = await getDropLocal({_id: purchase.Drop}, Drops).catch(console.error)
         if (!Drop) return console.error("No drop")
-        const DropItem = await getDrop({_id: purchase.DropItem}, Drops).catch(console.error)
+        const DropItem = await getDropLocal({_id: purchase.DropItem}, Drops).catch(console.error)
         if (!DropItem) return console.error("No drop item")
 
         // Items
