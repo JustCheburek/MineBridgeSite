@@ -1,6 +1,6 @@
 import {MetadataRoute} from 'next'
 import {LASTRULESUPDATE} from "@/const";
-import {getCases, getDrops, getUsers} from "@/services";
+import {getCases, getUsers} from "@/services";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const [users, Cases] = await Promise.all([getUsers(), getCases()])
@@ -35,7 +35,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         ...Cases.map(({name}) => ({
             url: `${process.env.NEXT_PUBLIC_RU_URL}/shop/drop/${name}`,
-            changeFrequency: 'monthly',
             priority: 0.3
         })),
         // Правила
