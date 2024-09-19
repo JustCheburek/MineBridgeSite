@@ -16,8 +16,16 @@ import {H1} from "@components/h1";
 import {CheckLink} from "@components/checkLink";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
-	title: `${name} > Аккаунты | Майнбридж`,
-	description: `Привязанные интеграции игрока ${name}.`
+	title: `${name} > Аккаунты`,
+	description: `Привязанные интеграции игрока ${name}! (супер секретно)`,
+	openGraph: {
+		title: `${name} > Аккаунты`,
+		description: `Привязанные интеграции игрока ${name}! (супер секретно)`,
+	},
+	twitter: {
+		title: `${name} > Аккаунты`,
+		description: `Привязанные интеграции игрока ${name}! (супер секретно)`,
+	}
 })
 
 const providers = {

@@ -6,8 +6,17 @@ import {MaxSize} from "@components/maxSize";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-	title: "Ловушка | Майнбридж",
+	title: "Ловушка",
 	description: "Ты попал в ловушку, поздравляю!",
+	openGraph: {
+		title: "Ловушка",
+		description: "Ты попал в ловушку, поздравляю!",
+		videos: ["https://youtu.be/2Xwc-WBO5yU&t=3s"]
+	},
+	twitter: {
+		title: "Ловушка",
+		description: "Ты попал в ловушку, поздравляю!",
+	}
 };
 
 export default function Trap() {

@@ -1,4 +1,5 @@
 // Сервер
+import type {Metadata} from "next";
 import {validate} from "@services/validate";
 import {getUser} from "@/services";
 import Link from "next/link";
@@ -20,9 +21,17 @@ import {URLS_START} from "@/const";
 import {SocialBox} from "./components/social";
 import {User} from "lucia";
 
-export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
-    title: `${name} | Майнбридж`,
+export const generateMetadata = async ({params: {name}}: { params: { name: string } }): Promise<Metadata> => ({
+    title: `${name}`,
     description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
+    openGraph: {
+        title: `${name}`,
+        description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
+    },
+    twitter: {
+        title: `${name}`,
+        description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
+    }
 })
 
 export default async function Profile({params: {name}}: { params: { name: string } }) {

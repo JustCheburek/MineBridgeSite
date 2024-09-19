@@ -1,8 +1,22 @@
 import {Box, CaseInfo, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {Case, Drop, RarityNames, rarityNames} from "@/types/case";
-import {getDrop, getDrops} from "@/services";
+import {getDrop} from "@/services";
 import {redirect} from "next/navigation";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Выбрать редкость",
+    description: "Выберите редкость для продолжения просмотра дропа с этой редкостью!",
+    openGraph: {
+        title: "Выбрать редкость",
+        description: "Выберите редкость для продолжения просмотра дропа с этой редкостью!",
+    },
+    twitter: {
+        title: "Выбрать редкость",
+        description: "Выберите редкость для продолжения просмотра дропа с этой редкостью!",
+    }
+};
 
 export default async function Rarities(
     {

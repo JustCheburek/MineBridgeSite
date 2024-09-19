@@ -6,8 +6,16 @@ import {H1} from "@components/h1";
 import {Invites, Online} from "./components";
 
 export const metadata: Metadata = {
-	title: "Аналитика | Майнбридж",
+	title: "Аналитика",
 	description: "Сколько человек на сервере и откуда пришли, капец!",
+	openGraph: {
+		title: "Аналитика",
+		description: "Сколько человек на сервере и откуда пришли, капец!",
+	},
+	twitter: {
+		title: "Аналитика",
+		description: "Сколько человек на сервере и откуда пришли, капец!",
+	}
 };
 
 export default async function Analytics() {

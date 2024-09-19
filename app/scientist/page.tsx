@@ -1,5 +1,20 @@
 import {MaxSize} from "@components/maxSize";
 import {H1} from "@components/h1";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+	title: "Запись учёного",
+	description: "Лоооор! 6 сезон!",
+	openGraph: {
+		title: "Запись учёного",
+		description: "Лоооор! 6 сезон!",
+		videos: ["https://youtu.be/5dg0SFRSDh4"]
+	},
+	twitter: {
+		title: "Запись учёного",
+		description: "Лоооор! 6 сезон!",
+	},
+};
 
 export default function Scientist() {
 	return (

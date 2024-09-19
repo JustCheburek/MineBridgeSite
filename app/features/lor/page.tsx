@@ -13,8 +13,16 @@ import {Img, ImgBox} from "@components/img";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-    title: "Лор | Майнбридж",
+    title: "Лор",
     description: "Общая история, объединяющая сезоны!",
+    openGraph: {
+        title: "Лор",
+        description: "Общая история, объединяющая сезоны!",
+    },
+    twitter: {
+        title: "Лор",
+        description: "Общая история, объединяющая сезоны!",
+    }
 };
 
 const Book = ({children}: PropsWithChildren) => (

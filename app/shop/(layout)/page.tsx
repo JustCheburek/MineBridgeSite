@@ -15,8 +15,16 @@ import {H1} from "@components/h1";
 
 
 export const metadata: Metadata = {
-    title: "Магазин | Майнбридж",
+    title: "Магазин",
     description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",
+    openGraph: {
+        title: "Магазин",
+        description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",
+    },
+    twitter: {
+        title: "Магазин",
+        description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",
+    }
 };
 
 export default async function Shop() {

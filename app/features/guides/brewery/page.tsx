@@ -14,8 +14,16 @@ import {Img, ImgBox} from "@components/img";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-	title: "Brewery | Майнбридж",
+	title: "Brewery",
 	description: "Гайд на плагин Brewery! Ферментация (горячий котёл), дистилляция (зельеварка), выдержка (маленькая и большая бочки). Рецепты алкоголя на сервере MineBridge!",
+	openGraph: {
+		title: "Brewery",
+		description: "Гайд на плагин Brewery! Ферментация (горячий котёл), дистилляция (зельеварка), выдержка (маленькая и большая бочки). Рецепты алкоголя на сервере MineBridge!",
+	},
+	twitter: {
+		title: "Brewery",
+		description: "Гайд на плагин Brewery! Ферментация (горячий котёл), дистилляция (зельеварка), выдержка (маленькая и большая бочки). Рецепты алкоголя на сервере MineBridge!",
+	}
 };
 
 export default function Brewery() {

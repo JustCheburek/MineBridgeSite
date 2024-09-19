@@ -13,9 +13,17 @@ import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-    title: "Покупка | MineBridge",
+    title: "Покупка",
     description: "Покупка мостиков с помощью СБП. 1₽ = 1 мостик. Подержите нас донатиком, пж!",
-};
+    openGraph: {
+        title: "Покупка",
+        description: "Покупка мостиков с помощью СБП. 1₽ = 1 мостик. Подержите нас донатиком, пж!",
+    },
+    twitter: {
+        title: "Покупка",
+        description: "Покупка мостиков с помощью СБП. 1₽ = 1 мостик. Подержите нас донатиком, пж!",
+    }
+}
 
 export default async function Component() {
     const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)

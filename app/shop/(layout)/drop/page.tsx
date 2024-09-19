@@ -1,6 +1,20 @@
 import {Box, CaseBox, CaseInfo, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {getCases} from "@/services";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Выбрать кейс",
+    description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
+    openGraph: {
+        title: "Выбрать кейс",
+        description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
+    },
+    twitter: {
+        title: "Выбрать кейс",
+        description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
+    }
+};
 
 export default async function Cases() {
     const Cases = await getCases()

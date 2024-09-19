@@ -4,6 +4,20 @@ import {Case, Drop, RarityType} from "@/types/case";
 import {getDrop} from "@/services";
 import {H1} from "@components/h1";
 import {Img, ImgBox} from "@components/img";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Выбрать предмет",
+    description: "Выберите предмет для более подробной информации о дропе!",
+    openGraph: {
+        title: "Выбрать дроп",
+        description: "Выберите предмет для более подробной информации о дропе!",
+    },
+    twitter: {
+        title: "Выбрать дроп",
+        description: "Выберите предмет для более подробной информации о дропе!",
+    }
+};
 
 export default async function Items(
     {

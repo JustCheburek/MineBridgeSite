@@ -9,8 +9,16 @@ import {PBox, PText, PTitle} from "@components/post";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Бедрок | Майнбридж",
-    description: "Вход на сервер с помощью Bedrock Edition. Телефонная версия майнкрафта. Как войти с телефона?",
+    title: "Вход на сервер",
+    description: "Вход на сервер с помощью Java + Bedrock Edition. Как войти с компьютера и телефона?",
+    openGraph: {
+        title: "Вход на сервер",
+        description: "Вход на сервер с помощью Java + Bedrock Edition. Как войти с компьютера и телефона?",
+    },
+    twitter: {
+        title: "Вход на сервер",
+        description: "Вход на сервер с помощью Java + Bedrock Edition. Как войти с компьютера и телефона?",
+    }
 };
 
 export default function Bedrock() {

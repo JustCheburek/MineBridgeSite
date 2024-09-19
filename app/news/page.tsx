@@ -24,8 +24,16 @@ import {revalidateTag} from "next/cache";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-	title: "Новости | Майнбридж",
+	title: "Новости",
 	description: "Важнейшие новости, избираемые из телеграма майнбриджа. Здесь интересно!",
+	openGraph: {
+		title: "Новости",
+		description: "Важнейшие новости, избираемые из телеграма майнбриджа. Здесь интересно!",
+	},
+	twitter: {
+		title: "Новости",
+		description: "Важнейшие новости, избираемые из телеграма майнбриджа. Здесь интересно!",
+	}
 };
 
 export default async function News() {

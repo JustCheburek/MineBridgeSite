@@ -12,8 +12,16 @@ import {H1} from "@components/h1";
 import {AuthSvg} from "@ui/SVGS";
 
 export const metadata: Metadata = {
-    title: "Гайды | Майнбридж",
+    title: "Гайды",
     description: "Гайды всегда полезные, особенно от MineBridge!",
+    openGraph: {
+        title: "Гайды",
+        description: "Гайды всегда полезные, особенно от MineBridge!",
+    },
+    twitter: {
+        title: "Гайды",
+        description: "Гайды всегда полезные, особенно от MineBridge!",
+    }
 };
 
 export default function Guides() {

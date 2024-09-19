@@ -12,8 +12,16 @@ import Link from "next/link";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-    title: "Моды | Майнбридж",
+    title: "Моды",
     description: "Списки разрешённых и запрещённых дополнений. Здесь также есть сборки!",
+    openGraph: {
+        title: "Моды",
+        description: "Списки разрешённых и запрещённых дополнений. Здесь также есть сборки!",
+    },
+    twitter: {
+        title: "Моды",
+        description: "Списки разрешённых и запрещённых дополнений. Здесь также есть сборки!",
+    }
 };
 
 export default function Mods() {

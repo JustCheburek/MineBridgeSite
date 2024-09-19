@@ -7,6 +7,20 @@ import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Дроп",
+    description: "Какой-то дроп с кейса!",
+    openGraph: {
+        title: "Дроп",
+        description: "Какой-то дроп с кейса!",
+    },
+    twitter: {
+        title: "Дроп",
+        description: "Какой-то дроп с кейса!",
+    }
+};
 
 export default async function ShowCase(
     {

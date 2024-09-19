@@ -16,8 +16,16 @@ import {InviteSection} from "../components/invite";
 import {H1} from "@components/h1";
 
 export const generateMetadata = async ({params: {name}}: { params: { name: string } }) => ({
-    title: `${name} > Истории действий | Майнбридж`,
+    title: `${name} > Истории действий`,
     description: `История рейтинга и всяких покупок игрока ${name}!`,
+    openGraph: {
+        title: `${name} > Истории действий`,
+        description: `История рейтинга и всяких покупок игрока ${name}!`,
+    },
+    twitter: {
+        title: `${name} > Истории действий`,
+        description: `История рейтинга и всяких покупок игрока ${name}!`,
+    }
 })
 
 export default async function History({params: {name}}: { params: { name: string } }) {

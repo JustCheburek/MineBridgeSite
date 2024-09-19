@@ -9,8 +9,16 @@ import {NotFound} from "@components/notFound";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-	title: "Крафты | Майнбридж",
+	title: "Крафты",
 	description: "Самые уникальные, актуальные и нужные крафты сервера!",
+	openGraph: {
+		title: "Крафты",
+		description: "Самые уникальные, актуальные и нужные крафты сервера!",
+	},
+	twitter: {
+		title: "Крафты",
+		description: "Самые уникальные, актуальные и нужные крафты сервера!",
+	}
 };
 
 export default function Crafts() {

@@ -15,8 +15,16 @@ import {CaseClient} from "./caseClient";
 import {RconVC} from "@server/console";
 
 export const metadata: Metadata = {
-    title: "Кейсы | MineBridge",
+    title: "Кейсы",
     description: "Здесь можно расслабится и покрутить кейсы. Интересно, что же выпадет?",
+    openGraph: {
+        title: "Кейсы",
+        description: "Здесь можно расслабится и покрутить кейсы. Интересно, что же выпадет?",
+    },
+    twitter: {
+        title: "Кейсы",
+        description: "Здесь можно расслабится и покрутить кейсы. Интересно, что же выпадет?",
+    }
 };
 
 export default async function CasePage() {

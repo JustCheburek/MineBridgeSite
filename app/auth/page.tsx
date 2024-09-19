@@ -12,8 +12,16 @@ import {H1} from "@components/h1";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-	title: "Регистрация | Майнбридж",
+	title: "Регистрация",
 	description: "Нужен лишь гугл или дискорд и вы уже на сервере!",
+	openGraph: {
+		title: "Регистрация",
+		description: "Нужен лишь гугл или дискорд и вы уже на сервере!",
+	},
+	twitter: {
+		title: "Регистрация",
+		description: "Нужен лишь гугл или дискорд и вы уже на сервере!",
+	}
 };
 
 export default async function Auth() {

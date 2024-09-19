@@ -6,8 +6,16 @@ import {MaxSize} from "@components/maxSize";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-	title: "Litematica | Майнбридж",
+	title: "Litematica",
 	description: "Здесь можно быстро и понятно влится в лайтматику!",
+	openGraph: {
+		title: "Litematica",
+		description: "Здесь можно быстро и понятно влится в лайтматику!",
+	},
+	twitter: {
+		title: "Litematica",
+		description: "Здесь можно быстро и понятно влится в лайтматику!",
+	}
 };
 
 export default function Litematica() {

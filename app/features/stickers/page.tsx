@@ -9,8 +9,16 @@ import {GContainer} from "@components/grid";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-	title: "Стикеры | Майнбридж",
+	title: "Стикеры",
 	description: "Можно добавить себе в телеграм. Нарисованы руками игроков сервера!",
+	openGraph: {
+		title: "Стикеры",
+		description: "Можно добавить себе в телеграм. Нарисованы руками игроков сервера!",
+	},
+	twitter: {
+		title: "Стикеры",
+		description: "Можно добавить себе в телеграм. Нарисованы руками игроков сервера!",
+	}
 };
 
 export default function Stickers() {

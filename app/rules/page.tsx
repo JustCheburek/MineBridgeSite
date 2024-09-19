@@ -15,8 +15,16 @@ import {LASTRULESUPDATE} from "@/const";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-	title: "Правила | Майнбридж",
+	title: "Правила",
 	description: "Социальный рейтинг — внутриигровая награда или наказание. Суды, баны, муты, всё это про нас!",
+	openGraph: {
+		title: "Правила",
+		description: "Социальный рейтинг — внутриигровая награда или наказание. Суды, баны, муты, всё это про нас!",
+	},
+	twitter: {
+		title: "Правила",
+		description: "Социальный рейтинг — внутриигровая награда или наказание. Суды, баны, муты, всё это про нас!",
+	}
 };
 
 const timeAgo = new TimeAgo('ru-RU');

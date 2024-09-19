@@ -13,8 +13,16 @@ import {Img, ImgBox, Totem} from "@components/img";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-    title: "Фичи | Майнбридж",
+    title: "Фичи",
     description: "Список всяких полезностей для более комфортной игры. Слишком полезно!",
+    openGraph: {
+        title: "Фичи",
+        description: "Список всяких полезностей для более комфортной игры. Слишком полезно!",
+    },
+    twitter: {
+        title: "Фичи",
+        description: "Список всяких полезностей для более комфортной игры. Слишком полезно!",
+    }
 };
 
 export default function Features() {

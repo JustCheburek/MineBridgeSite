@@ -3,6 +3,20 @@ import {Url} from "@components/button";
 import {getDrops} from "@/services";
 import {Case, Drop} from "@/types/case";
 import {redirect} from "next/navigation";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Выбрать дроп",
+    description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
+    openGraph: {
+        title: "Выбрать дроп",
+        description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
+    },
+    twitter: {
+        title: "Выбрать дроп",
+        description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
+    }
+};
 
 export default async function DropsItems(
     {

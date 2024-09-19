@@ -2,6 +2,20 @@ import {Box, CaseInfo, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {getDrops} from "@/services";
 import {Case} from "@/types/case";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Выбрать дроп",
+    description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
+    openGraph: {
+        title: "Выбрать дроп",
+        description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
+    },
+    twitter: {
+        title: "Выбрать дроп",
+        description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
+    }
+};
 
 export default async function Drops(
     {

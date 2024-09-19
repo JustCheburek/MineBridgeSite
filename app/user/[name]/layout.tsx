@@ -6,9 +6,28 @@ import {getUser} from "@/services";
 // Компоненты
 import {SubsectionItem, Subsections} from "@components/sideNav";
 import {MaxSize} from "@components/maxSize";
+import type {Metadata} from "next";
 
 type UserLayout = {
 	params: { name: string }
+}
+
+export const generateMetadata = async ({params: {name}}: { params: { name: string } }): Promise<Metadata> => {
+	const {
+		user
+	} = await getUser(
+		{name}, true, false
+	)
+
+	return {
+		openGraph: {
+			type: "profile",
+			username: name,
+			images: [
+				user.photo
+			]
+		}
+	}
 }
 
 export default async function UserLayout(

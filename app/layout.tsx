@@ -25,36 +25,124 @@ import {Metrika} from "./script";
 const montserrat = Montserrat({subsets: ["latin"], preload: true, style: "normal"});
 
 export const metadata: Metadata = {
-	title: "MineBridge",
-	description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
+    title: {
+        template: "%s • МайнБридж - майнкрафт сервер",
+        default: "Майнбридж - майнкрафт сервер",
+    },
+    description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
+    metadataBase: new URL(process.env.NEXT_PUBLIC_RU_URL!),
+    creator: "JustCheburek",
+    applicationName: "MineBridge",
+    icons: [{
+        url: "/logos/256x256/logo.png",
+        sizes: "256x256",
+        type: "image/png"
+    }, {
+        url: "/logos/192x192/logo.png",
+        sizes: "192x192",
+        type: "image/png"
+    }, {
+        url: "/logos/180x180/logo.png",
+        sizes: "180x180",
+        type: "image/png",
+        rel: "apple-touch-icon"
+    }, {
+        url: "/logos/180x180/logo.png",
+        sizes: "150x150",
+        type: "image/png"
+    }, {
+        url: "/logos/120x120/logo.png",
+        sizes: "128x128",
+        type: "image/png"
+    }, {
+        url: "/logos/64x64/logo.png",
+        sizes: "64x64",
+        type: "image/png"
+    }, {
+        url: "/logos/32x32/logo.png",
+        sizes: "32x32",
+        type: "image/png"
+    }, {
+        url: "/logos/16x16/logo.png",
+        sizes: "16x16",
+        type: "image/png"
+    }, {
+        url: "/logos/svg/logo.svg",
+        fetchPriority: "high",
+        type: "image/svg+xml"
+    }],
+    authors: [{
+        name: "JustCheburek",
+        url: "https://t.me/JustCheburek"
+    }, {
+        name: "Kawa11Fox",
+        url: "https://t.me/AleksandraKanivec"
+    }, {
+        name: "VeBray",
+        url: "https://t.me/VeBrau"
+    }],
+    openGraph: {
+        title: {
+            template: "%s • МайнБридж - майнкрафт сервер",
+            default: "Майнбридж - майнкрафт сервер",
+        },
+        description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
+        url: process.env.NEXT_PUBLIC_RU_URL!,
+        siteName: "MineBridge",
+        images: [{
+            url: "/logos/256x256/logo.png",
+            alt: "Лого майнбриджа",
+            width: 256,
+            height: 256
+        }],
+        videos: [{
+            url: new URL("https://youtu.be/0bPrnHmNWM0")
+        }],
+        locale: "ru_RU",
+        type: "website"
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: {
+            template: "%s • МайнБридж - майнкрафт сервер",
+            default: "Майнбридж - майнкрафт сервер",
+        },
+        description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
+        images: [{
+            url: "/logos/256x256/logo.png",
+            alt: "Лого майнбриджа",
+            width: 256,
+            height: 256
+        }]
+    }
 }
 
 TimeAgo.addDefaultLocale(ru)
 
 declare module '@tanstack/react-table' {
-	// @ts-ignore
-	interface ColumnMeta {
-		className?: string,
-		type?: HTMLInputTypeAttribute
-		notEditable?: boolean
-	}
+    // @ts-ignore
+    interface ColumnMeta {
+        className?: string,
+        type?: HTMLInputTypeAttribute
+        notEditable?: boolean
+    }
 }
 
 export default function RootLayout(
-		{
-			children
-		}: PropsWithChildren) {
-	return (
-			<html lang="ru">
-			<body className={montserrat.className}>
-			<Header/>
-			<main>
-				{children}
-			</main>
-			<Footer/>
-			<SpeedInsights/>
-			<Metrika/>
-			</body>
-			</html>
-	);
+    {
+        children
+    }: PropsWithChildren) {
+    return (
+        <html lang="ru">
+        <body className={montserrat.className}>
+        <Header/>
+        <main>
+            {children}
+        </main>
+        <Footer/>
+        <SpeedInsights/>
+        <Metrika/>
+        </body>
+        </html>
+    );
 }
