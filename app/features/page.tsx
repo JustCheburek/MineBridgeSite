@@ -7,7 +7,7 @@ import styles from "./features.module.scss"
 // Компоненты
 import {BatSvg} from "@ui/SVGS";
 import {MaxSize} from "@components/maxSize";
-import {GBox, GContainer, GHint, GText} from "@components/grid";
+import {GBox, GContainer, GText} from "@components/grid";
 import {Url} from "@components/button";
 import {Img, ImgBox, Totem} from "@components/img";
 import {H1} from "@components/h1";
@@ -28,7 +28,6 @@ export default function Features() {
                         <BatSvg/>
                     </ImgBox>
 
-                    <GHint className="green_color">Обновление</GHint>
                     <GText>Лор</GText>
                 </GBox>
 

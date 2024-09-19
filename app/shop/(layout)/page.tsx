@@ -22,6 +22,10 @@ export const metadata: Metadata = {
 export default async function Shop() {
     const Cases = await getCases()
 
+    // todo: рынок за мостики
+    // todo: скрытие с миникарты 10 мостиков в месяц
+    // todo: чанки в месяц
+    // todo: киты в дуэлях
     return (<>
         <div>
             <H1 up>Магазин</H1>

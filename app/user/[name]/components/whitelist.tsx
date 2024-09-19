@@ -13,15 +13,19 @@ import {Form, FormButton} from "@components/form";
 import {useState} from "react";
 import {H1} from "@components/h1";
 import {AddWhitelist} from "@services/user";
+import Link from "next/link";
 
 const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
-    <section className={`${styles.whitelist} grid_center`}>
-        <h2 className="center_text">Вы в Whitelist`е</h2>
+    <section className={`${styles.whitelist} grid_center center_text`}>
+        <h2>Вы в Whitelist`е</h2>
 
         {/* todo: гайд */}
-        <h4>Java + Bedrock Edition:</h4>
+        <Link href="/features/guides/auth">
+            <h4 className="unic_color medium-font">
+                Java + Bedrock Edition
+            </h4>
+        </Link>
         <strong className="unic_color all_select">secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}</strong>
-        <p>Когда-нибудь здесь появится гайд по заходу на bedrock :)</p>
         <Button onClick={() => setModal(true)}>
             Заново
         </Button>

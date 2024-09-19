@@ -50,7 +50,7 @@ export const ImgBox = (
 
     return (
         <figure
-            className={`${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${helper ? "helper" : ""} ${className}`}
+            className={`flex_center ${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${helper ? "helper" : ""} ${className}`}
             style={{...backgroundStyle, ...overflowStyle, width, height, ...style}}
             {...props}
         >

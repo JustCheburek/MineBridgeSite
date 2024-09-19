@@ -40,6 +40,7 @@ export default async function Profile({params: {name}}: { params: { name: string
         )
     }
 
+    // todo: скины-аватарки?
     return (
         <div className={styles.profile}>
             <FormBox author={author}/>

@@ -297,33 +297,46 @@ export const UpSvg = ({size = "1em", ...props}: SizeSvg) => (
 )
 
 export const ShareSvg = ({size = "1em", ...props}: SizeSvg) => (
-	<svg
-		fill="currentColor" viewBox="0 0 16 16"
-		style={{width: size, height: size}} {...props}
-	>
-		<path
-			  d="M9.78 2.05a.5.5 0 0 1 .527.055l4.5 3.5a.5.5 0 0 1 .025.769l-4.5 4A.5.5 0 0 1 9.5 10V8.056c-.236.04-.544.11-.904.23c-.873.292-2.054.879-3.242 2.068a.5.5 0 0 1-.852-.4c.143-1.571.601-2.717 1.224-3.543a4.7 4.7 0 0 1 2.095-1.574A5.4 5.4 0 0 1 9.5 4.493V2.5a.5.5 0 0 1 .28-.45M2 5.5A2.5 2.5 0 0 1 4.5 3h2a.5.5 0 0 1 0 1h-2A1.5 1.5 0 0 0 3 5.5v6A1.5 1.5 0 0 0 4.5 13h6a1.5 1.5 0 0 0 1.5-1.5v-1a.5.5 0 0 1 1 0v1a2.5 2.5 0 0 1-2.5 2.5h-6A2.5 2.5 0 0 1 2 11.5z"/>
-	</svg>
+    <svg
+        fill="currentColor" viewBox="0 0 16 16"
+        style={{width: size, height: size}} {...props}
+    >
+        <path
+            d="M9.78 2.05a.5.5 0 0 1 .527.055l4.5 3.5a.5.5 0 0 1 .025.769l-4.5 4A.5.5 0 0 1 9.5 10V8.056c-.236.04-.544.11-.904.23c-.873.292-2.054.879-3.242 2.068a.5.5 0 0 1-.852-.4c.143-1.571.601-2.717 1.224-3.543a4.7 4.7 0 0 1 2.095-1.574A5.4 5.4 0 0 1 9.5 4.493V2.5a.5.5 0 0 1 .28-.45M2 5.5A2.5 2.5 0 0 1 4.5 3h2a.5.5 0 0 1 0 1h-2A1.5 1.5 0 0 0 3 5.5v6A1.5 1.5 0 0 0 4.5 13h6a1.5 1.5 0 0 0 1.5-1.5v-1a.5.5 0 0 1 1 0v1a2.5 2.5 0 0 1-2.5 2.5h-6A2.5 2.5 0 0 1 2 11.5z"/>
+    </svg>
+)
+
+export const AuthSvg = ({size = "1em", className = "", ...props}: SizeSvg) => (
+    <svg
+        fill="currentColor" viewBox="0 0 16 16"
+        className={`unic_color ${className}`}
+        style={{width: size, height: size}} {...props}
+    >
+        <path
+            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+        <path
+            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+    </svg>
 )
 
 export const AutoSvg = ({type, ...props}: { type: string } & SizeSvg) => {
-	switch (type) {
-		case "discord":
-			return <DiscordSvg {...props}/>
-		case "telegram":
-			return <TelegramSvg {...props}/>
+    switch (type) {
+        case "discord":
+            return <DiscordSvg {...props}/>
+        case "telegram":
+            return <TelegramSvg {...props}/>
         case "t":
             return <TelegramSvg {...props}/>
-		case "vk":
-			return <VKSvg {...props}/>
-		case "twitch":
-			return <TwitchSvg {...props}/>
-		case "youtube":
-			return <YouTubeSvg {...props}/>
-		case "donationAlerts":
-			return <DonationAlertsSvg {...props}/>
-		case "google":
-			return <GoogleSvg {...props}/>
+        case "vk":
+            return <VKSvg {...props}/>
+        case "twitch":
+            return <TwitchSvg {...props}/>
+        case "youtube":
+            return <YouTubeSvg {...props}/>
+        case "donationAlerts":
+            return <DonationAlertsSvg {...props}/>
+        case "google":
+            return <GoogleSvg {...props}/>
         case "email":
             return <EmailSvg {...props}/>
     }
