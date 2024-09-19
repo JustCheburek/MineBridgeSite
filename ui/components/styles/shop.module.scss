@@ -86,7 +86,7 @@
 }
 
 // Планшет
-@media (1024px > width > 728px) {
+@media (1300px > width > 728px) {
 	.container {
 		grid-template-columns: repeat(2, 1fr);
 	}
@@ -104,13 +104,13 @@
 
 	.stickers {
 		grid-template-areas:
-              "preview_sticker preview_sticker"
+              "preview preview"
               "sticker1 sticker2";
 
-		.preview_sticker {
+		.preview {
 			margin-inline: auto;
 			width: 50%;
-			grid-area: preview_sticker;
+			grid-area: preview;
 		}
 	}
 }
@@ -131,12 +131,12 @@
 }
 
 // ПК
-@media (width > 1024px) {
+@media (width > 1300px) {
 	.container {
 		grid-template-columns: repeat(3, 1fr);
 	}
 
-	.preview_sticker {
+	.preview {
 		grid-row: 1 / 1;
 		grid-column: 2 / 2;
 	}

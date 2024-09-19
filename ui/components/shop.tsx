@@ -68,7 +68,7 @@ export const Author = ({description, href, children}: PropsWithChildren<Author>)
     </div>
 )
 
-export const Box = ({children, preview=false, ...props}: PropsWithChildren<{ preview?: boolean }>) => (
+export const Box = ({children, preview = false, ...props}: PropsWithChildren<{ preview?: boolean }>) => (
     <div className={`${styles.box} ${preview ? styles.preview : ""}`} {...props}>
         {children}
     </div>
@@ -117,7 +117,7 @@ export function CaseBox({Case}: { Case: Case }) {
     const [modal, setModal] = useState(false)
 
     return (<>
-        <ImgBox className={`pointer ${styles.helper}`} onClick={() => setModal(true)} hover overflow={false}>
+        <ImgBox className="pointer helper" onClick={() => setModal(true)} hover overflow={false}>
             <Img
                 src={`/shop/${Case.name}.png`} alt={`${Case.displayname} кейс`}
                 width={185}
