@@ -137,7 +137,7 @@ export function Table<T>(
                         console.log("globalFilter:", globalFilter)
                         table.setGlobalFilter(String(e.target.value))
                     }}
-                    placeholder="Поисковик..."
+                    placeholder="Начнём искать вместе!.."
                 />
             </FormLabel>
             <table className={className}>
