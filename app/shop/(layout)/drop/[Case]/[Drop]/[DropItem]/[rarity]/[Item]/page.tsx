@@ -91,11 +91,11 @@ export default async function ShowCase(
 
     return (
         <div>
+            <h1>
+                {Item?.displayname}
+            </h1>
             <div className={styles.item}>
                 <div>
-                    <h3 className="unic_color">
-                        {Item?.displayname}
-                    </h3>
                     <p className={rarity}>
                         {RarityNames[rarity]}
                     </p>
