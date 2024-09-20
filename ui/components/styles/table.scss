@@ -7,7 +7,7 @@ table {
 	width: 100%;
 }
 
-caption:not(:has(h1)) {
+.caption:not(:has(h1)) {
 	margin-block: 0.67em;
 }
 

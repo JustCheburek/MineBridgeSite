@@ -4,7 +4,7 @@
   // flex-wrap: wrap;
   display: grid;
   place-content: center;
-  gap: 10px;
+  gap: 8px;
 
   margin-block: 20px;
   padding: 5px;
@@ -34,10 +34,10 @@
   }
 
   // Отступы
-  padding: 1rem;
+  padding: 0.6rem 1.2rem;
 
   // Отображение
-  @include border($background: var(--gray-color));
+  @include border($background: var(--gray-color), $radius: 12px);
 
   transition:
           border-color var(--long-transition),
