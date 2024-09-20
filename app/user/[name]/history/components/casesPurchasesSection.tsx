@@ -1,20 +1,23 @@
 "use client"
 
-// Сервер
-import {GetAll} from "@services/user";
-
 // Стили
 import styles from "../history.module.scss"
 
-// Компоненты
-import {CasesPurchasesModal} from "@modals/casesPurchases";
+// Сервер
+import {GetAll} from "@services/user";
 import {useState} from "react";
+import {User} from "lucia";
+
+// Типы
 import {Case, Drop} from "@/types/case";
 import type {CaseData} from "@/types/purchase";
+
+// Компоненты
+import {CasesPurchasesModal} from "@modals/casesPurchases";
 import {Form, FormButton} from "@components/form";
-import {User} from "lucia";
 import {Img, ImgBox} from "@components/img";
 import Link from "next/link";
+
 
 type CasesPurchasesSection = {
     caseDatas: CaseData[]
@@ -61,11 +64,11 @@ export function CasesPurchasesSection(
                     return (
                         <Link
                             href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
-                            className={`flex_center border-radius ${rarity}_box`}
+                            className="flex_center"
                             style={{width: "280px", height: "160px"}}
                             key={Item.name}
                         >
-                            <p>
+                            <p className={`border-radius helper ${rarity}_box`}>
                                 Выберите суффикс<br/>
                                 <small>
                                     (в разработке)
@@ -78,10 +81,10 @@ export function CasesPurchasesSection(
                 return (
                     <Link
                         href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
-                        className={`flex_center border-radius ${rarity}_box ${styles.suffix}`}
+                        className="flex_center"
                         key={Item.name}
                     >
-                        <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">
+                        <ImgBox className={`border-radius ${rarity}_box helper`} hover width="280px" height="160px">
                             <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
                         </ImgBox>
                     </Link>
