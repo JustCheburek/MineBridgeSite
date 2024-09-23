@@ -41,8 +41,6 @@ export default function Mods() {
     }, {
         name: "Отображение информации о мобах, предметах, крафтах, оружии, шалкерах, освещённости"
     }, {
-        name: "Zoom"
-    }, {
         name: "EmoteCraft (рекомендуется)", url: new URL("https://modrinth.com/mod/emotecraft")
     }, {
         name: "InvMove",
@@ -54,13 +52,18 @@ export default function Mods() {
         name: "Simple Voice Chat (рекомендуется)",
         url: new URL("https://modrinth.com/plugin/simple-voice-chat/")
     }, {
+        name: "Cit Resewn (рекомендуется)",
+        url: new URL("https://modrinth.com/mod/cit-resewn")
+    }, {
         name: "Litematica (easy place mod)", url: new URL("https://curseforge.com/minecraft/mc-mods/litematica")
     }, {
-        name: "Replay Mod (только для видео)", url: new URL("https://replaymod.com/download/")
+        name: "FlashBack (только для видео)", url: new URL("https://modrinth.com/mod/flashback")
     }, {
         name: "Bobby", url: new URL("https://modrinth.com/mod/bobby")
     }, {
         name: "Gamma Utils", url: new URL("https://modrinth.com/mod/gamma-utils")
+    }, {
+        name: "Freecam (Modrinth Edition)", url: new URL("https://modrinth.com/mod/freecam")
     }]
 
     const rps: RP[] = [{
@@ -77,7 +80,7 @@ export default function Mods() {
         "Чит-модификации", "Модификации, позволяющие летать сквозь блоки не выходя с сервера",
         "Aristois", "Baritone", "Better PVP",
         "BetterClicker (используйте обычный автокликер, не использующий окружающую среду)",
-        "ClientCommands", "CMDCam", "FreeCam", "Impact", "Inertia", "Jello", "LavaClearView",
+        "ClientCommands", "CMDCam", "FreeCam (позволяющий пролетать сквозь стенки)", "Impact", "Inertia", "Jello", "LavaClearView",
         "MultiConnect (используйте только ViaFabric / Forge)",
         "SeedCracker (а также другие моды и программы, выполняющие функции этого мода)", "Sigma", "StepUp", "Tweakeroo",
         "Wall-Jump", "Wurst", "Xray"
