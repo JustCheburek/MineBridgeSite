@@ -25,26 +25,20 @@ export const metadata: Metadata = {
 };
 
 export default function Mods() {
-    type Mod = { name: string, url?: URL }
-    type RP = { name: string, url: URL }
+    type Name = { name: string, url?: URL }
+    type NameUrl = Required<Name>
 
-    const mods: Mod[] = [{
+    const packs: NameUrl[] = [{
         name: "Сборка модов от Kawa11Fox 1.20.4",
         url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
     }, {
         name: "Сборка модов от JustCheburek 1.20.4",
         url: new URL("https://modrinth.com/modpack/minebridge-pack")
-    }, {
-        name: "Миникарта"
-    }, {
-        name: "Моды на оптимизацию"
-    }, {
-        name: "Отображение информации о мобах, предметах, крафтах, оружии, шалкерах, освещённости"
-    }, {
-        name: "EmoteCraft (рекомендуется)", url: new URL("https://modrinth.com/mod/emotecraft")
-    }, {
-        name: "InvMove",
-        url: new URL("https://modrinth.com/mod/invmove")
+    }]
+
+    const recommendMods: NameUrl[] = [{
+        name: "EmoteCraft (рекомендуется)",
+        url: new URL("https://modrinth.com/mod/emotecraft")
     }, {
         name: "No Chat Reports (рекомендуется)",
         url: new URL("https://modrinth.com/mod/no-chat-reports")
@@ -54,6 +48,14 @@ export default function Mods() {
     }, {
         name: "Cit Resewn (рекомендуется)",
         url: new URL("https://modrinth.com/mod/cit-resewn")
+    }]
+
+    const mods: Name[] = [{
+        name: "Миникарта"
+    }, {
+        name: "Моды на оптимизацию"
+    }, {
+        name: "Отображение информации о мобах, предметах, крафтах, оружии, шалкерах, освещённости"
     }, {
         name: "Litematica (easy place mod)", url: new URL("https://curseforge.com/minecraft/mc-mods/litematica")
     }, {
@@ -61,12 +63,14 @@ export default function Mods() {
     }, {
         name: "Bobby", url: new URL("https://modrinth.com/mod/bobby")
     }, {
+        name: "InvMove", url: new URL("https://modrinth.com/mod/invmove")
+    }, {
         name: "Gamma Utils", url: new URL("https://modrinth.com/mod/gamma-utils")
     }, {
         name: "Freecam (Modrinth Edition)", url: new URL("https://modrinth.com/mod/freecam")
     }]
 
-    const rps: RP[] = [{
+    const rps: NameUrl[] = [{
         name: "Тотемы Майнбриджа (самоустановка)", url: new URL("https://modrinth.com/resourcepack/minebridge-totems")
     }, {
         name: "Default Dark Mode", url: new URL("https://modrinth.com/resourcepack/default-dark-mode")
@@ -98,6 +102,36 @@ export default function Mods() {
                     </h2>
                     <h3>Моды</h3>
                 </div>
+                <h4>
+                    Сборки:
+                </h4>
+                <ul className={styles.list}>
+                    {packs.map(pack => (
+                        <li key={pack.name} className={styles.item}>
+                            <Link href={pack.url} target="_blank">
+                                {pack.name}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+                <br/>
+                <h4>
+                    Рекомендуемые моды:
+                </h4>
+                <ul className={styles.list}>
+                    {recommendMods.map(mod => (
+                            <li key={mod.name} className={styles.item}>
+                                <Link href={mod.url} target="_blank">
+                                    {mod.name}
+                                </Link>
+                            </li>
+                        )
+                    )}
+                </ul>
+                <br/>
+                <h4>
+                    Сомнительные, но разрешённые моды:
+                </h4>
                 <ul className={styles.list}>
                     {mods.map(mod => (
                             <li key={mod.name} className={styles.item}>
@@ -123,9 +157,9 @@ export default function Mods() {
                 <p>
                     Разрешены все ресурспаки, которых нет в списке {`"`}запрещено{`"`}
                 </p>
-                <p>
+                <h4>
                     Рекомендуемые:
-                </p>
+                </h4>
                 <ul className={styles.list}>
                     {rps.map(rp => (
                         <li key={rp.name} className={styles.item}>
