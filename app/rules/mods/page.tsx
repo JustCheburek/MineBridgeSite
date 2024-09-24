@@ -37,17 +37,20 @@ export default function Mods() {
     }]
 
     const recommendMods: NameUrl[] = [{
-        name: "EmoteCraft (рекомендуется)",
-        url: new URL("https://modrinth.com/mod/emotecraft")
-    }, {
-        name: "No Chat Reports (рекомендуется)",
-        url: new URL("https://modrinth.com/mod/no-chat-reports")
-    }, {
-        name: "Simple Voice Chat (рекомендуется)",
+        name: "Simple Voice Chat",
         url: new URL("https://modrinth.com/plugin/simple-voice-chat/")
     }, {
-        name: "Cit Resewn (рекомендуется)",
+        name: "EmoteCraft",
+        url: new URL("https://modrinth.com/mod/emotecraft")
+    }, {
+        name: "Cit Resewn",
         url: new URL("https://modrinth.com/mod/cit-resewn")
+    }, {
+        name: "RP Renames",
+        url: new URL("https://modrinth.com/mod/rp-renames")
+    }, {
+        name: "No Chat Reports",
+        url: new URL("https://modrinth.com/mod/no-chat-reports")
     }]
 
     const mods: Name[] = [{
