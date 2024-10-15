@@ -21,10 +21,7 @@
   .right_text {
     text-align: right;
   }
-}
-
-@media (width <= 500px) {
   .left_text {
-    order: 2;
+    order: -1;
   }
 }

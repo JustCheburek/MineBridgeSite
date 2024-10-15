@@ -95,17 +95,6 @@ export default async function ShowCase(
                 {Item?.displayname}
             </h1>
             <div className={styles.item}>
-                <div className={styles.left_text}>
-                    <p className={rarity}>
-                        {RarityNames[rarity]}
-                    </p>
-                    <p>
-                        {DropItem?.displayname}
-                    </p>
-                    <p>
-                        У вас есть: {amount} {/*{amount > 0 && <ShareSvg/>}*/}
-                    </p>
-                </div>
                 {DropItem.name !== "suffix"
                     ? <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">
                         <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
@@ -122,6 +111,17 @@ export default async function ShowCase(
                         </p>
                     </div>
                 }
+                <div className={styles.left_text}>
+                    <p className={rarity}>
+                        {RarityNames[rarity]}
+                    </p>
+                    <p>
+                        {DropItem?.displayname}
+                    </p>
+                    <p>
+                        У вас есть: {amount} {/*{amount > 0 && <ShareSvg/>}*/}
+                    </p>
+                </div>
             </div>
             <div className={styles.case}>
                 <ImgBox hover overflow={false}>
