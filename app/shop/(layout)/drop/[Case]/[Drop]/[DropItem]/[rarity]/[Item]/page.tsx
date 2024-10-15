@@ -95,7 +95,7 @@ export default async function ShowCase(
                 {Item?.displayname}
             </h1>
             <div className={styles.item}>
-                <div>
+                <div className={styles.left_text}>
                     <p className={rarity}>
                         {RarityNames[rarity]}
                     </p>
@@ -130,7 +130,7 @@ export default async function ShowCase(
                         width={185}
                     />
                 </ImgBox>
-                <div className="right-text">
+                <div className={styles.right_text}>
                     <p>
                         {Case?.displayname}
                     </p>

@@ -2,6 +2,29 @@
   display: grid;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 
-  grid-template-columns: 1fr 1fr;
+  & > * {
+    width: fit-content;
+    margin: auto;
+  }
+}
+
+.case {
+  margin-top: 1rem;
+}
+
+@media (width > 500px) {
+  .item, .case {
+    grid-template-columns: 1fr 1fr;
+  }
+  .right_text {
+    text-align: right;
+  }
+}
+
+@media (width <= 500px) {
+  .left_text {
+    order: 2;
+  }
 }

@@ -1,22 +1,30 @@
 import {Box, CaseInfo, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
-import {getDrops} from "@/services";
+import {getCase, getDrop, getDrops} from "@/services";
 import {Case, Drop} from "@/types/case";
 import {redirect} from "next/navigation";
 import type {Metadata} from "next";
 
-export const metadata: Metadata = {
-    title: "Выбрать дроп",
-    description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
-    openGraph: {
-        title: "Выбрать дроп",
-        description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
-    },
-    twitter: {
-        title: "Выбрать дроп",
-        description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
+type ParamsProp = {
+    params: {
+        Case: Case["name"],
+        Drop: Drop["name"]
     }
-};
+}
+
+export const generateMetadata = async ({params: {Case: CaseName, Drop: DropName}}: ParamsProp): Promise<Metadata> => {
+    const Case = await getCase({name: CaseName})
+    const Drop = await getDrop({name: DropName})
+
+    const title = `${Case.displayname} кейс • Дроп: ${Drop.displayname}`
+    const description = `Выберите дроп с кейса ${Case.displayname} (${Drop.displayname})!`
+
+    return {
+        title, description,
+        openGraph: {title, description},
+        twitter: {title, description}
+    }
+}
 
 export default async function DropsItems(
     {
@@ -24,12 +32,7 @@ export default async function DropsItems(
             Case: CaseName,
             Drop: DropName
         }
-    }: {
-        params: {
-            Case: Case["name"],
-            Drop: Drop["name"]
-        }
-    }) {
+    }: ParamsProp) {
     if (DropName !== "all") {
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropName}`)
     }

@@ -4,14 +4,14 @@ import {getCases} from "@/services";
 import type {Metadata} from "next";
 
 export const metadata: Metadata = {
-    title: "Выбрать кейс",
+    title: "Выберите кейс",
     description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
     openGraph: {
-        title: "Выбрать кейс",
+        title: "Выберите кейс",
         description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
     },
     twitter: {
-        title: "Выбрать кейс",
+        title: "Выберите кейс",
         description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
     }
 };

@@ -1,32 +1,34 @@
 import {Box, CaseInfo, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
-import {getDrops} from "@/services";
+import {getCase, getDrops} from "@/services";
 import {Case} from "@/types/case";
 import type {Metadata} from "next";
 
-export const metadata: Metadata = {
-    title: "Выбрать дроп",
-    description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
-    openGraph: {
-        title: "Выбрать дроп",
-        description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
-    },
-    twitter: {
-        title: "Выбрать дроп",
-        description: "Выберите дроп для продолжения просмотра дропа с этого дропа!",
+type ParamsProp = {
+    params: {
+        Case: Case["name"]
     }
-};
+}
+
+export const generateMetadata = async ({params: {Case: CaseName}}: ParamsProp): Promise<Metadata> => {
+    const Case = await getCase({name: CaseName})
+
+    const title = `${Case.displayname} кейс`
+    const description = `Выберите дроп c кейса ${Case.displayname}!`
+
+    return {
+        title, description,
+        openGraph: {title, description},
+        twitter: {title, description}
+    }
+}
 
 export default async function Drops(
     {
         params: {
             Case: CaseName,
         }
-    }: {
-        params: {
-            Case: Case["name"]
-        }
-    }) {
+    }: ParamsProp) {
     const drops = await getDrops()
 
     return (
