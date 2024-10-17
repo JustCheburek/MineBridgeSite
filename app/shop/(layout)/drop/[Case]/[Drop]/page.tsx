@@ -7,17 +7,23 @@ import type {Metadata} from "next";
 
 type ParamsProp = {
     params: {
-        Case: Case["name"],
+        Case: Case["name"]
         Drop: Drop["name"]
     }
 }
 
-export const generateMetadata = async ({params: {Case: CaseName, Drop: DropName}}: ParamsProp): Promise<Metadata> => {
-    const Case = await getCase({name: CaseName})
-    const Drop = await getDrop({name: DropName})
+export const generateMetadata = async (
+    {
+        params: {Case: CaseName, Drop: DropName}
+    }: ParamsProp
+): Promise<Metadata> => {
+    const [Case, Drop] = await Promise.all([
+        getCase({name: CaseName}),
+        getDrop({name: DropName})
+    ])
 
-    const title = `${Case.displayname} кейс • Дроп: ${Drop.displayname}`
-    const description = `Выберите дроп с кейса ${Case.displayname} (${Drop.displayname})!`
+    const title = `${Case.displayname} кейс • ${Drop.displayname}`
+    const description = `Выберите дроп! ${Case.displayname} кейс (${Drop.displayname})!` // весь дроп
 
     return {
         title, description,
@@ -45,20 +51,20 @@ export default async function DropsItems(
                 {drops
                     .filter(Drop => Drop.name !== "all")
                     .map(Drop => (
-                    <Box key={Drop.name}>
-                        <Text>
-                            <CaseInfo>
-                                {Drop.displayname}
-                            </CaseInfo>
-                            <Price>
-                                {Drop.price}
-                            </Price>
-                            <Url href={`/shop/drop/${CaseName}/${DropName}/${Drop.name}`} margin="10px">
-                                Выбрать
-                            </Url>
-                        </Text>
-                    </Box>
-                ))}
+                        <Box key={Drop.name}>
+                            <Text>
+                                <CaseInfo>
+                                    {Drop.displayname}
+                                </CaseInfo>
+                                <Price>
+                                    {Drop.price}
+                                </Price>
+                                <Url href={`/shop/drop/${CaseName}/${DropName}/${Drop.name}`} margin="10px">
+                                    Выбрать
+                                </Url>
+                            </Text>
+                        </Box>
+                    ))}
             </Section>
         </div>
     )

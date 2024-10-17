@@ -8,19 +8,55 @@ import {lucia} from "@server/lucia";
 import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";
+import {redirect} from "next/navigation";
 
-export const metadata: Metadata = {
-    title: "Дроп",
-    description: "Какой-то дроп с кейса!",
-    openGraph: {
-        title: "Дроп",
-        description: "Какой-то дроп с кейса!",
-    },
-    twitter: {
-        title: "Дроп",
-        description: "Какой-то дроп с кейса!",
+type ParamsProp = {
+    params: {
+        Case: Case["name"]
+        Drop: Drop["name"]
+        DropItem: Drop["name"]
+        rarity: RarityType
+        Item: Item["name"]
     }
-};
+}
+
+export const generateMetadata = async (
+    {
+        params: {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity, Item: ItemName}
+    }: ParamsProp
+): Promise<Metadata> => {
+    const Case = await getCase({name: CaseName})
+    const Drop = await getDrop({name: DropName})
+    const DropItem = await getDrop({name: DropItemName})
+
+    let DropTitle = DropItem.displayname
+    if (Drop.displayname !== DropItem.displayname) {
+        DropTitle += ` (${Drop.displayname})`
+    }
+
+    // Items
+    let {drop: items} = DropItem
+    if (items?.length === 0) {
+        items = DropItem[rarity]
+    }
+    if (items?.length === 0 || !items) {
+        redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}`)
+    }
+
+    const Item = items.find(({name}) => name === ItemName)
+    if (!Item) {
+        redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`)
+    }
+
+    const title = `${Item.displayname} • ${Case.displayname} кейс • ${RarityNames[rarity]} дроп: ${DropTitle}`
+    const description = `${Item.displayname}! ${RarityNames[rarity]} дроп: ${DropTitle}. ${Case.displayname} кейс.`
+
+    return {
+        title, description,
+        openGraph: {title, description},
+        twitter: {title, description}
+    }
+}
 
 export default async function ShowCase(
     {
@@ -31,15 +67,7 @@ export default async function ShowCase(
             rarity,
             Item: ItemName
         }
-    }: {
-        params: {
-            Case: Case["name"],
-            Drop: Drop["name"],
-            DropItem: Drop["name"],
-            rarity: RarityType,
-            Item: Item["name"]
-        }
-    }) {
+    }: ParamsProp) {
     const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
 
     const [Case, Drop, DropItem] = await Promise.all([
@@ -54,29 +82,13 @@ export default async function ShowCase(
         items = DropItem[rarity]
     }
     if (items?.length === 0 || !items) {
-        return (
-            <div>
-                <H1>
-                    Нет Items!
-                </H1>
-                <p>
-                    {JSON.stringify(DropItem)}
-                </p>
-            </div>
-        )
+        redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}`)
     }
 
     const Item = items.find(({name}) => name === ItemName)
-    if (!Item) return (
-        <div>
-            <H1>
-                Нет Item!
-            </H1>
-            <p>
-                {JSON.stringify(items)}
-            </p>
-        </div>
-    )
+    if (!Item) {
+        redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`)
+    }
 
     let amount = 0
 

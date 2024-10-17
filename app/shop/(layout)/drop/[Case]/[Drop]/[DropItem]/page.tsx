@@ -1,22 +1,43 @@
 import {Box, CaseInfo, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {Case, Drop, RarityNames, rarityNames} from "@/types/case";
-import {getDrop} from "@/services";
+import {getCase, getDrop} from "@/services";
 import {redirect} from "next/navigation";
 import type {Metadata} from "next";
 
-export const metadata: Metadata = {
-    title: "Выбрать редкость",
-    description: "Выберите редкость для продолжения просмотра дропа с этой редкостью!",
-    openGraph: {
-        title: "Выбрать редкость",
-        description: "Выберите редкость для продолжения просмотра дропа с этой редкостью!",
-    },
-    twitter: {
-        title: "Выбрать редкость",
-        description: "Выберите редкость для продолжения просмотра дропа с этой редкостью!",
+type ParamsProp = {
+    params: {
+        Case: Case["name"]
+        Drop: Drop["name"]
+        DropItem: Drop["name"]
     }
-};
+}
+
+export const generateMetadata = async (
+    {
+        params: {Case: CaseName, Drop: DropName, DropItem: DropItemName}
+    }: ParamsProp
+): Promise<Metadata> => {
+    const [Case, Drop, DropItem] = await Promise.all([
+        getCase({name: CaseName}),
+        getDrop({name: DropName}),
+        getDrop({name: DropItemName})
+    ])
+
+    let DropTitle = DropItem.displayname
+    if (Drop.displayname !== DropItem.displayname) {
+        DropTitle += ` (${Drop.displayname})`
+    }
+
+    const title = `${Case.displayname} кейс • ${DropTitle}`
+    const description = `Выберите редкость дропа: ${DropTitle}! ${Case.displayname} кейс.`
+
+    return {
+        title, description,
+        openGraph: {title, description},
+        twitter: {title, description}
+    }
+}
 
 export default async function Rarities(
     {
@@ -25,13 +46,7 @@ export default async function Rarities(
             Drop: DropName,
             DropItem: DropItemName
         }
-    }: {
-        params: {
-            Case: Case["name"],
-            Drop: Drop["name"],
-            DropItem: Drop["name"]
-        }
-    }) {
+    }: ParamsProp) {
     const DropItem = await getDrop({name: DropItemName})
 
     if (DropItem.defaultRarity) {

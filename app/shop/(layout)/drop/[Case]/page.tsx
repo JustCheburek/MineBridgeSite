@@ -3,6 +3,7 @@ import {Url} from "@components/button";
 import {getCase, getDrops} from "@/services";
 import {Case} from "@/types/case";
 import type {Metadata} from "next";
+import {redirect} from "next/navigation";
 
 type ParamsProp = {
     params: {
@@ -10,11 +11,15 @@ type ParamsProp = {
     }
 }
 
-export const generateMetadata = async ({params: {Case: CaseName}}: ParamsProp): Promise<Metadata> => {
+export const generateMetadata = async (
+    {
+        params: {Case: CaseName}
+    }: ParamsProp
+): Promise<Metadata> => {
     const Case = await getCase({name: CaseName})
 
     const title = `${Case.displayname} кейс`
-    const description = `Выберите дроп c кейса ${Case.displayname}!`
+    const description = `Выберите дроп! ${Case.displayname} кейс.`
 
     return {
         title, description,
