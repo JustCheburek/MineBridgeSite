@@ -119,7 +119,7 @@ export default function Mods() {
                 </ul>
                 <br/>
                 <h4>
-                    Рекомендуемые моды:
+                    Очень рекомендуемые моды:
                 </h4>
                 <ul className={styles.list}>
                     {recommendMods.map(mod => (
@@ -133,7 +133,7 @@ export default function Mods() {
                 </ul>
                 <br/>
                 <h4>
-                    Сомнительные, но разрешённые моды:
+                    Разрешённые моды, которые могут попасть под сомнение:
                 </h4>
                 <ul className={styles.list}>
                     {mods.map(mod => (
