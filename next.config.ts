@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
       }
     ]
   },
+  serverExternalPackages: ["oslo"],
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
   },
