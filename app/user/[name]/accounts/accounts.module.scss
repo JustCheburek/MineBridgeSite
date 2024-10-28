@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .providers_box {
 	display: grid;
@@ -9,7 +9,7 @@
 .box {
 	padding-block: 1rem;
 	padding-inline: clamp(0.2rem, 3vw, 3rem);
-	@include border($radius: 20px);
+	@include mixins.border($radius: 20px);
 }
 
 .ds {

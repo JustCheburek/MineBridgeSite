@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .registration_section {
   // Регистрация
@@ -21,6 +21,6 @@
 @media (width > 1024px) {
   .registration {
     padding: 50px var(--indent-page) 10px;
-    @include border();
+    @include mixins.border();
   }
 }

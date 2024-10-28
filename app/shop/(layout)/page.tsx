@@ -113,7 +113,7 @@ export default async function Shop() {
                 </p>
             </Heading>
 
-            <Author description="Абстрактный художник" href="@Dezelink">
+            <Author description="Абстрактный художник" href="https://t.me/Dezelink">
                 @Dezelink
             </Author>
 

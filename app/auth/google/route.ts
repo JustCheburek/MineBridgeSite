@@ -4,10 +4,12 @@ import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
-	const name = request.nextUrl.searchParams.get("name");
+	const searchParams = request.nextUrl.searchParams
+	const name = searchParams.get("name");
+	const cookiesStore = await cookies()
 
 	if (!name) {
-		return NextResponse.redirect("/auth")
+		return NextResponse.redirect(`${request.nextUrl.origin}/auth`)
 	}
 
 	const state = generateState();
@@ -16,14 +18,14 @@ export async function GET(request: NextRequest) {
 		scopes: ["profile", "email"],
 	});
 
-	cookies().set("google_oauth_state", state, {
+	cookiesStore.set("google_oauth_state", state, {
 		path: "/",
 		secure: process.env.NODE_ENV === "production",
 		httpOnly: true,
 		maxAge: 60 * 60,
 		sameSite: "lax"
 	});
-	cookies().set("google_oauth_code_verifier", codeVerifier, {
+	cookiesStore.set("google_oauth_code_verifier", codeVerifier, {
 		path: "/",
 		secure: process.env.NODE_ENV === "production",
 		httpOnly: true,
@@ -31,7 +33,7 @@ export async function GET(request: NextRequest) {
 		sameSite: "lax"
 	});
 
-	cookies().set("name", name, {
+	cookiesStore.set("name", name, {
 		path: "/",
 		secure: process.env.NODE_ENV === "production",
 		httpOnly: true,

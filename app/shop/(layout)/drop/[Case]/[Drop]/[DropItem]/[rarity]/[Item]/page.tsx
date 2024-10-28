@@ -1,5 +1,4 @@
 import {getCase, getDrop} from "@/services";
-import {H1} from "@components/h1";
 import {Img, ImgBox} from "@components/img";
 import {Case, Drop, Item, RarityNames, type RarityType} from "@/types/case";
 import {validate} from "@services/validate";
@@ -11,23 +10,26 @@ import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 
 type ParamsProp = {
-    params: {
+    params: Promise<{
         Case: Case["name"]
         Drop: Drop["name"]
         DropItem: Drop["name"]
         rarity: RarityType
         Item: Item["name"]
-    }
+    }>
 }
 
 export const generateMetadata = async (
     {
-        params: {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity, Item: ItemName}
+        params
     }: ParamsProp
 ): Promise<Metadata> => {
-    const Case = await getCase({name: CaseName})
-    const Drop = await getDrop({name: DropName})
-    const DropItem = await getDrop({name: DropItemName})
+    const {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity, Item: ItemName} = await params
+    const [Case, Drop, DropItem] = await Promise.all([
+        getCase({name: CaseName}),
+        getDrop({name: DropName}),
+        getDrop({name: DropItemName})
+    ])
 
     let DropTitle = DropItem.displayname
     if (Drop.displayname !== DropItem.displayname) {
@@ -59,16 +61,11 @@ export const generateMetadata = async (
 }
 
 export default async function ShowCase(
-    {
-        params: {
-            Case: CaseName,
-            Drop: DropName,
-            DropItem: DropItemName,
-            rarity,
-            Item: ItemName
-        }
-    }: ParamsProp) {
-    const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+    {params}: ParamsProp
+) {
+    const cookiesStore = await cookies()
+    const {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity, Item: ItemName} = await params
+    const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
 
     const [Case, Drop, DropItem] = await Promise.all([
         getCase({name: CaseName}),

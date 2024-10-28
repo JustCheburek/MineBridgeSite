@@ -4,12 +4,13 @@ import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 
 export async function Header() {
-	const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+	const cookiesStore = await cookies()
+	const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
 
 	async function Logout() {
 		"use server"
 
-		cookies().delete("minebridge-session")
+		cookiesStore.delete("minebridge-session")
 	}
 
 	return <HeaderClient user={user} Logout={Logout}/>

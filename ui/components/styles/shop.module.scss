@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 // Кейсы
 .author_heading, .section_heading {
@@ -35,7 +35,7 @@
 	margin: 0;
 
 	// Отображение
-	@include border($background: var(--gray-color));
+	@include mixins.border($background: var(--gray-color));
 }
 
 .price {

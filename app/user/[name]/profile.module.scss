@@ -1,8 +1,8 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 // Form
 .form_box {
-	@include border();
+	@include mixins.border();
 	padding: 1.5rem;
 }
 

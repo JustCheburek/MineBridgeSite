@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 // Шапка сайта
 header {
@@ -6,7 +6,7 @@ header {
   position: sticky;
   top: 0;
 
-  @include background();
+  @include mixins.background();
   z-index: var(--4z);
 
   display: flex;
@@ -89,7 +89,7 @@ header {
 
     padding: 15px;
 
-    @include border($background: var(--background-color-transparent));
+    @include mixins.border($background: var(--background-color-transparent));
     border-top-right-radius: calc(var(--border-radius) / 4);
 
     &.menu_active {
@@ -171,7 +171,7 @@ header {
       font-size: var(--h2-size);
       line-height: var(--h2-line-height);
 
-      @include border();
+      @include mixins.border();
 
       row-gap: clamp(0.1rem, 1vh, 1.5rem);
 

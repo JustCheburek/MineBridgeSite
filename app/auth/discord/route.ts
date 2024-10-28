@@ -4,32 +4,34 @@ import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
-	const name = request.nextUrl.searchParams.get("name");
+    const searchParams = request.nextUrl.searchParams
+    const name = searchParams.get("name");
+    const cookiesStore = await cookies()
 
-	if (!name) {
-		return NextResponse.redirect("/auth")
-	}
+    if (!name) {
+        return NextResponse.redirect(`${request.nextUrl.origin}/auth`)
+    }
 
-	const state = generateState();
-	const url = await discord.createAuthorizationURL(state, {
-		scopes: ["identify", "email", "guilds", "guilds.join", "guilds.members.read"],
-	});
+    const state = generateState();
+    const url = await discord.createAuthorizationURL(state, {
+        scopes: ["identify", "email", "guilds", "guilds.join", "guilds.members.read"],
+    });
 
-	cookies().set("discord_oauth_state", state, {
-		path: "/",
-		secure: process.env.NODE_ENV === "production",
-		httpOnly: true,
-		maxAge: 60 * 60,
-		sameSite: "lax"
-	});
+    cookiesStore.set("discord_oauth_state", state, {
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        maxAge: 60 * 60,
+        sameSite: "lax"
+    });
 
-	cookies().set("name", name, {
-		path: "/",
-		secure: process.env.NODE_ENV === "production",
-		httpOnly: true,
-		maxAge: 60 * 60,
-		sameSite: "lax"
-	})
+    cookiesStore.set("name", name, {
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        maxAge: 60 * 60,
+        sameSite: "lax"
+    })
 
-	return NextResponse.redirect(url)
+    return NextResponse.redirect(url)
 }

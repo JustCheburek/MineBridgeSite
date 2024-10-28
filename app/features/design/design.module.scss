@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .pie_box {
 	display: grid;
@@ -6,7 +6,7 @@
 
 	gap: 3rem;
 
-	@include border($background: var(--gray-color));
+	@include mixins.border($background: var(--gray-color));
 	padding: 2rem;
 
 	@media (width > 728px) {

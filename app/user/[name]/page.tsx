@@ -1,4 +1,3 @@
-// Сервер
 import type {Metadata} from "next";
 import {validate} from "@services/validate";
 import {getUser} from "@/services";
@@ -6,11 +5,7 @@ import Link from "next/link";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 import {Social} from "@/types/url";
-
-// Стили
 import styles from "./profile.module.scss"
-
-// Компоненты
 import {Avatar} from "./components/avatar";
 import {WhitelistSection} from "./components/whitelist";
 import {FormBox} from "./components/form";
@@ -20,22 +15,29 @@ import {MostikiSvg} from "@ui/SVGS";
 import {URLS_START} from "@/const";
 import {SocialBox} from "./components/social";
 import {User} from "lucia";
+import {NameParams} from "@/types/params";
 
-export const generateMetadata = async ({params: {name}}: { params: { name: string } }): Promise<Metadata> => ({
-    title: `${name}`,
-    description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
-    openGraph: {
+export const generateMetadata = async ({params}: NameParams): Promise<Metadata> => {
+    const {name} = await params
+
+    return {
         title: `${name}`,
         description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
-    },
-    twitter: {
-        title: `${name}`,
-        description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
+        openGraph: {
+            title: `${name}`,
+            description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
+        },
+        twitter: {
+            title: `${name}`,
+            description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
+        }
     }
-})
+}
 
-export default async function Profile({params: {name}}: { params: { name: string } }) {
-    const {user: author, isModer, isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+export default async function Profile({params}: NameParams) {
+    const {name} = await params
+    const cookiesStore = await cookies()
+    const {user: author, isModer, isAdmin} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
     const {
         user, roles, isMe, isContentMaker
     } = await getUser(

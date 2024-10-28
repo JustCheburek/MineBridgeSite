@@ -37,7 +37,8 @@ export const metadata: Metadata = {
 };
 
 export default async function News() {
-    const {isAdmin} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+    const cookiesStore = await cookies()
+    const {isAdmin} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
     const seasons = await getSeasons()
 
     async function addNew(formData: FormData, number: Season["number"]) {

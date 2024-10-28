@@ -3,19 +3,18 @@ import {Url} from "@components/button";
 import {getCase, getDrops} from "@/services";
 import {Case} from "@/types/case";
 import type {Metadata} from "next";
-import {redirect} from "next/navigation";
+import {H1} from "@components/h1";
 
 type ParamsProp = {
-    params: {
+    params: Promise<{
         Case: Case["name"]
-    }
+    }>
 }
 
 export const generateMetadata = async (
-    {
-        params: {Case: CaseName}
-    }: ParamsProp
+    {params}: ParamsProp
 ): Promise<Metadata> => {
+    const {Case: CaseName} = await params
     const Case = await getCase({name: CaseName})
 
     const title = `${Case.displayname} кейс`
@@ -29,15 +28,14 @@ export const generateMetadata = async (
 }
 
 export default async function Drops(
-    {
-        params: {
-            Case: CaseName,
-        }
-    }: ParamsProp) {
+    {params}: ParamsProp
+) {
+    const {Case: CaseName} = await params
     const drops = await getDrops()
 
     return (
         <div>
+            <H1>Дроп кейса</H1>
             <Section name="cases">
                 {drops.map(Drop => (
                     <Box key={Drop.name}>

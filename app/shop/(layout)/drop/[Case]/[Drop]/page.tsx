@@ -4,19 +4,19 @@ import {getCase, getDrop, getDrops} from "@/services";
 import {Case, Drop} from "@/types/case";
 import {redirect} from "next/navigation";
 import type {Metadata} from "next";
+import {H1} from "@components/h1";
 
 type ParamsProp = {
-    params: {
+    params: Promise<{
         Case: Case["name"]
         Drop: Drop["name"]
-    }
+    }>
 }
 
 export const generateMetadata = async (
-    {
-        params: {Case: CaseName, Drop: DropName}
-    }: ParamsProp
+    {params}: ParamsProp
 ): Promise<Metadata> => {
+    const {Case: CaseName, Drop: DropName} = await params
     const [Case, Drop] = await Promise.all([
         getCase({name: CaseName}),
         getDrop({name: DropName})
@@ -33,12 +33,9 @@ export const generateMetadata = async (
 }
 
 export default async function DropsItems(
-    {
-        params: {
-            Case: CaseName,
-            Drop: DropName
-        }
-    }: ParamsProp) {
+    {params}: ParamsProp
+) {
+    const {Case: CaseName, Drop: DropName} = await params
     if (DropName !== "all") {
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropName}`)
     }
@@ -47,6 +44,7 @@ export default async function DropsItems(
 
     return (
         <div>
+            <H1>Дроп предмета</H1>
             <Section name="cases">
                 {drops
                     .filter(Drop => Drop.name !== "all")

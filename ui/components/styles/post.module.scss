@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .container {
 	// Расположение
@@ -16,7 +16,7 @@
 	overflow: hidden;
 
 	// Отображение
-	@include border();
+	@include mixins.border();
 }
 
 .text {

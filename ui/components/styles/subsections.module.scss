@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 @keyframes appearance {
 	0% {
@@ -29,7 +29,7 @@
 
 		padding-block: 1.5rem;
 
-		@include background();
+		@include mixins.background();
 
 		z-index: var(--2z);
 	}

@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .form {
   // flex-wrap: wrap;
@@ -37,7 +37,7 @@
   padding: 0.6rem 1.2rem;
 
   // Отображение
-  @include border($background: var(--gray-color), $radius: 12px);
+  @include mixins.border($background: var(--gray-color), $radius: 12px);
 
   transition:
           border-color var(--long-transition),

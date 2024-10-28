@@ -9,12 +9,14 @@ import axios from "axios";
 import {OAuth2RequestError} from "arctic";
 import {DS_URL} from "@/const";
 
-
 export async function GET(request: NextRequest) {
 	const {searchParams} = request.nextUrl
 	const code = searchParams.get("code");
 	const state = searchParams.get("state");
-	const storedState = cookies().get("discord_oauth_state")?.value ?? null;
+	const cookiesStore = await cookies()
+
+	const storedState = cookiesStore.get("discord_oauth_state")?.value ?? null;
+
 	if (!code || !state || !storedState || state !== storedState) {
 		return new NextResponse(
 				"Неправильный код",
@@ -34,7 +36,7 @@ export async function GET(request: NextRequest) {
 		}).then(r => r.data).catch(console.error);
 
 		if (!dsUser || !dsUser.email || !dsUser.verified) {
-			return new NextResponse("Нету почты", {status: 400})
+			return new NextResponse("Что-то пошло не так", {status: 400})
 		}
 
 		// Добавление в гильдию
@@ -42,7 +44,7 @@ export async function GET(request: NextRequest) {
 				`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
 				{
 					access_token: accessToken,
-					nick: cookies().get("name")?.value
+					nick: cookiesStore.get("name")?.value
 				},
 				{
 					headers: {
@@ -72,7 +74,7 @@ export async function GET(request: NextRequest) {
 			await axios.patch(
 					`https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${dsUser.id}`,
 					{
-						nick: cookies().get("name")?.value
+						nick: cookiesStore.get("name")?.value
 					},
 					{
 						headers: {
@@ -97,7 +99,7 @@ export async function GET(request: NextRequest) {
 
 		const userData = {
 			_id: generateId(15),
-			name: cookies().get("name")?.value || dsUser.username,
+			name: cookiesStore.get("name")?.value || dsUser.username,
 			discordId: dsUser.id,
 			email: dsUser.email,
 			photo: dsUser.avatar
@@ -105,7 +107,7 @@ export async function GET(request: NextRequest) {
 					: `https://cdn.discordapp.com/embed/avatars/${(BigInt(dsUser.id) >> 22n) % 6n}.png`,
 		} as User
 
-		const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+		const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
 
 		if (user) {
 			await userModel.findByIdAndUpdate(
@@ -139,7 +141,7 @@ export async function GET(request: NextRequest) {
 
 			const session = await lucia.createSession(candidate?._id || userData._id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
-			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+			cookiesStore.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 		}
 
 		return new NextResponse(

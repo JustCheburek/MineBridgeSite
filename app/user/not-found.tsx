@@ -7,7 +7,7 @@ import {lucia} from "@server/lucia";
 import {H1} from "@components/h1";
 
 export default async function NotFound() {
-	const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+	const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
 
 	if (user) redirect(`/user/${user.name}`)
 

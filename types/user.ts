@@ -1,5 +1,4 @@
 // noinspection JSPotentiallyInvalidUsageOfClassThis
-
 import {Punishment} from "@/types/punishment";
 import {CasePurchase, StickerPurchase} from "@/types/purchase";
 import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
@@ -81,7 +80,8 @@ export class User {
 			candidate: User,
 	): Promise<From> {
 		try {
-			const from: { place: string, name: string } = JSON.parse(cookies().get("from")?.value ?? "{}")
+			const cookiesStore = await cookies()
+			const from: { place: string, name: string } = JSON.parse(cookiesStore.get("from")?.value ?? "{}")
 			if (!from) return {}
 
 			const {place, name} = from

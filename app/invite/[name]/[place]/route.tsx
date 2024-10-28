@@ -1,10 +1,9 @@
 import {NextRequest, NextResponse} from "next/server";
 import {cookies} from "next/headers";
 
-export function GET(request: NextRequest, {params}: {params: {name: string, place: string}}) {
-	const {name, place} = params
-
-	if (cookies().get("from")?.value) {
+export async function GET(_: NextRequest, {params: {name, place}}: {params: {name: string, place: string}}) {
+	const cookiesStore = await cookies()
+	if (cookiesStore.get("from")?.value) {
 		return new NextResponse(null, {
 			status: 302,
 			headers: {
@@ -17,7 +16,7 @@ export function GET(request: NextRequest, {params}: {params: {name: string, plac
 
 	console.log(`Новый игрок из ${place} от ${name}`)
 
-	cookies().set({
+	cookiesStore.set({
 		name: "from",
 		value: JSON.stringify({name, place}),
 		path: "/",

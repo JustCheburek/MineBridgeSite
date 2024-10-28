@@ -4,20 +4,20 @@ import {Case, Drop, RarityNames, rarityNames} from "@/types/case";
 import {getCase, getDrop} from "@/services";
 import {redirect} from "next/navigation";
 import type {Metadata} from "next";
+import {H1} from "@components/h1";
 
 type ParamsProp = {
-    params: {
+    params: Promise<{
         Case: Case["name"]
         Drop: Drop["name"]
         DropItem: Drop["name"]
-    }
+    }>
 }
 
 export const generateMetadata = async (
-    {
-        params: {Case: CaseName, Drop: DropName, DropItem: DropItemName}
-    }: ParamsProp
+    {params}: ParamsProp
 ): Promise<Metadata> => {
+    const {Case: CaseName, Drop: DropName, DropItem: DropItemName} = await params
     const [Case, Drop, DropItem] = await Promise.all([
         getCase({name: CaseName}),
         getDrop({name: DropName}),
@@ -40,13 +40,9 @@ export const generateMetadata = async (
 }
 
 export default async function Rarities(
-    {
-        params: {
-            Case: CaseName,
-            Drop: DropName,
-            DropItem: DropItemName
-        }
-    }: ParamsProp) {
+    {params}: ParamsProp
+) {
+    const {Case: CaseName, Drop: DropName, DropItem: DropItemName} = await params
     const DropItem = await getDrop({name: DropItemName})
 
     if (DropItem.defaultRarity) {
@@ -55,6 +51,7 @@ export default async function Rarities(
 
     return (
         <div>
+            <H1>Редкость</H1>
             <Section name="cases">
                 {rarityNames.map(rarity => (
                     <Box key={rarity}>

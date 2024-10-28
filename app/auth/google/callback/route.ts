@@ -13,9 +13,11 @@ export async function GET(request: NextRequest) {
 	const {searchParams} = request.nextUrl
 	const code = searchParams.get("code");
 	const state = searchParams.get("state");
-	const codeVerifier = cookies().get("google_oauth_code_verifier")?.value ?? null;
-	const storedState = cookies().get("google_oauth_state")?.value ?? null;
-	const storedCodeVerifier = cookies().get("google_oauth_code_verifier")?.value ?? null;
+	const cookiesStore = await cookies()
+
+	const codeVerifier = cookiesStore.get("google_oauth_code_verifier")?.value ?? null;
+	const storedState = cookiesStore.get("google_oauth_state")?.value ?? null;
+	const storedCodeVerifier = cookiesStore.get("google_oauth_code_verifier")?.value ?? null;
 
 	if (!code || !state || !storedState || state !== storedState || codeVerifier !== storedCodeVerifier) {
 		return new NextResponse(
@@ -32,21 +34,21 @@ export async function GET(request: NextRequest) {
 			headers: {
 				Authorization: `Bearer ${tokens.accessToken}`
 			}
-		}).then(r => r.data);
+		}).then(r => r.data).catch(console.error);
 
-		if (!gUser.email || !gUser.email_verified) {
-			return new NextResponse("Нету почты", {status: 400})
+		if (!gUser || !gUser.email || !gUser.email_verified) {
+			return new NextResponse("Что-то пошло не так", {status: 400})
 		}
 
 		const userData = {
 			_id: generateId(15),
-			name: cookies().get("name")?.value || gUser.given_name || gUser.name,
+			name: cookiesStore.get("name")?.value || gUser.given_name || gUser.name,
 			googleId: gUser.sub,
 			email: gUser.email,
 			photo: gUser.picture
 		} as User
 
-		const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+		const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
 
 		if (user) {
 			await userModel.findByIdAndUpdate(
@@ -83,7 +85,7 @@ export async function GET(request: NextRequest) {
 
 			const session = await lucia.createSession(candidate?._id || userData._id, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
-			cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+			cookiesStore.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 		}
 
 		return new NextResponse(

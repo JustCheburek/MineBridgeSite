@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 table {
 	position: relative;
@@ -12,7 +12,7 @@ table {
 }
 
 thead {
-	@include background();
+	@include mixins.background();
 }
 
 th {

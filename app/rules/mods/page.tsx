@@ -32,7 +32,7 @@ export default function Mods() {
         name: "Сборка модов от Kawa11Fox 1.20.4",
         url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
     }, {
-        name: "Сборка модов от JustCheburek 1.20.4",
+        name: "Сборка модов от JustCheburek 1.21?",
         url: new URL("https://modrinth.com/modpack/minebridge-pack")
     }]
 
@@ -111,7 +111,7 @@ export default function Mods() {
                 <ul className={styles.list}>
                     {packs.map(pack => (
                         <li key={pack.name} className={styles.item}>
-                            <Link href={pack.url} target="_blank">
+                            <Link href={pack.url.toString()} target="_blank">
                                 {pack.name}
                             </Link>
                         </li>
@@ -124,7 +124,7 @@ export default function Mods() {
                 <ul className={styles.list}>
                     {recommendMods.map(mod => (
                             <li key={mod.name} className={styles.item}>
-                                <Link href={mod.url} target="_blank">
+                                <Link href={mod.url.toString()} target="_blank">
                                     {mod.name}
                                 </Link>
                             </li>
@@ -139,7 +139,7 @@ export default function Mods() {
                     {mods.map(mod => (
                             <li key={mod.name} className={styles.item}>
                                 {mod?.url ?
-                                    <Link href={mod.url} target="_blank">
+                                    <Link href={mod.url.toString()} target="_blank">
                                         {mod.name}
                                     </Link>
                                     : <p>{mod.name}</p>
@@ -166,7 +166,7 @@ export default function Mods() {
                 <ul className={styles.list}>
                     {rps.map(rp => (
                         <li key={rp.name} className={styles.item}>
-                            <Link href={rp.url} target="_blank">
+                            <Link href={rp.url.toString()} target="_blank">
                                 {rp.name}
                             </Link>
                         </li>)

@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .season {
 	--_line-width: 2px;
@@ -31,7 +31,7 @@
 	padding: 1rem 3rem;
 
 	// Отображение
-	@include border($width: var(--_line-width), $background: var(--background-color));
+	@include mixins.border($width: var(--_line-width), $background: var(--background-color));
 }
 
 // Время

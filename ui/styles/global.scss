@@ -1,4 +1,4 @@
-@import "mixins";
+@use "mixins";
 
 * {
   box-sizing: border-box;
@@ -77,7 +77,7 @@ body {
 
 // Убрать возможность выделения текста
 button, input, fieldset, .no_select {
-  @include no_select();
+  @include mixins.no_select();
 }
 
 :disabled, [aria-disabled="true"] {
@@ -171,11 +171,11 @@ iframe {
 }
 
 .border {
-  @include border();
+  @include mixins.border();
 }
 
 .background {
-  @include background();
+  @include mixins.background();
 }
 
 .right-text {
@@ -210,7 +210,7 @@ iframe {
   width: 1.5em;
   height: 1.5em;
 
-  @include border($background: var(--info-bg-color), $color: var(--info-border-color));
+  @include mixins.border($background: var(--info-bg-color), $color: var(--info-border-color));
 
   transition: var(--short-transition) color;
 }

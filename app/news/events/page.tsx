@@ -1,6 +1,7 @@
 // Стили
 import type {Metadata} from "next";
 import {H1} from "@components/h1";
+import {Url} from "@components/button";
 
 export const metadata: Metadata = {
     title: "Ивенты",
@@ -58,8 +59,14 @@ export default function Events() {
                         Затрата ресурсов
                     </li>
                 </ol>
+
                 <br/>
-                <h4>
+
+                <Url href="https://discord.gg/ZrdQ2kGuXG">
+                    Ивенты
+                </Url>
+
+                {/*<h4>
                     Накопления:
                 </h4>
                 <ul className="remove_marker">
@@ -75,7 +82,7 @@ export default function Events() {
                     <li>
                         <strong className="unic_color">sodplayy</strong>: 2 ПИ
                     </li>
-                </ul>
+                </ul>*/}
             </div>
         </div>
     </>)

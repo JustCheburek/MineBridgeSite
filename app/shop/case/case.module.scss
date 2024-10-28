@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .max_size {
 	// Расположение
@@ -31,7 +31,7 @@
 	width: 100%;
 
 	// Отображение
-	@include border();
+	@include mixins.border();
 }
 
 // Визуальный контейнер

@@ -83,7 +83,7 @@ export default function Guides() {
                 <GBox href="https://modrinth.com/datapack/joshs-more-foods" anotherSite imgs="one">
                     <ImgBox type="grid">
                         <Img
-                            src="https://cdn.modrinth.com/data/3BlwZj8w/ed994d6ec6b0aadca5c2942071f353f0224f4366.png"
+                            src="/features/guides/food.webp"
                             alt="Еда"
                             pixel
                         />

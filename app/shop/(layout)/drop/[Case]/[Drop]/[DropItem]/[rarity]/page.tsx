@@ -8,19 +8,18 @@ import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 
 type ParamsProp = {
-    params: {
+    params: Promise<{
         Case: Case["name"]
         Drop: Drop["name"]
         DropItem: Drop["name"]
         rarity: RarityType
-    }
+    }>
 }
 
 export const generateMetadata = async (
-    {
-        params: {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity}
-    }: ParamsProp
+    {params}: ParamsProp
 ): Promise<Metadata> => {
+    const {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity} = await params
     const [Case, Drop, DropItem] = await Promise.all([
         getCase({name: CaseName}),
         getDrop({name: DropName}),
@@ -43,14 +42,9 @@ export const generateMetadata = async (
 }
 
 export default async function Items(
-    {
-        params: {
-            Case: CaseName,
-            Drop: DropName,
-            DropItem: DropItemName,
-            rarity
-        }
-    }: ParamsProp) {
+    {params}: ParamsProp
+) {
+    const {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity} = await params
     const DropItem = await getDrop({name: DropItemName})
 
     // Items
@@ -64,6 +58,7 @@ export default async function Items(
 
     return (
         <div>
+            <H1>Предмет</H1>
             <Section name="cases">
                 {items.map(Item => (
                     <Box key={Item.name}>

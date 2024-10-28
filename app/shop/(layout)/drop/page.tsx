@@ -2,6 +2,7 @@ import {Box, CaseBox, CaseInfo, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {getCases} from "@/services";
 import type {Metadata} from "next";
+import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
     title: "Выберите кейс",
@@ -21,6 +22,7 @@ export default async function Cases() {
 
     return (
         <div>
+            <H1>Кейсы</H1>
             <Section name="cases">
                 {Cases.map(Case => (
                     <Box key={Case.name}>

@@ -18,10 +18,10 @@ export const validate = cache(
 			try {
 				if (session && session.fresh) {
 					const sessionCookie = lucia.createSessionCookie(session.id);
-					cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+					cookiesStore.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 				} else {
 					const sessionCookie = lucia.createBlankSessionCookie();
-					cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+					cookiesStore.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
 				}
 			} catch {
 			}

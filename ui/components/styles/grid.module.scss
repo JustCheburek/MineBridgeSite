@@ -1,4 +1,4 @@
-@import "@styles/mixins";
+@use "@styles/mixins";
 
 .container {
 	$width: var(--_width);
@@ -11,8 +11,8 @@
 	grid-template-columns: repeat(auto-fit, minmax(min($width, 100%), 1fr));
 
 	&.box_border .box {
-		@include border($background: var(--background-color));
-		@include no_select();
+		@include mixins.border($background: var(--background-color));
+		@include mixins.no_select();
 	}
 }
 

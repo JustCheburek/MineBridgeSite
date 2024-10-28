@@ -25,13 +25,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Auth() {
-	const {user} = await validate(cookies().get(lucia.sessionCookieName)?.value)
+	const cookiesStore = await cookies()
+	const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
 
 	if (user) {
 		return redirect(`/user/${user.name}`)
 	}
 
-	const savedName = cookies().get("name")?.value
+	const savedName = cookiesStore.get("name")?.value
 
 	return (
 			<MaxSize className="center_text grid_center">
