@@ -21,8 +21,6 @@ type Burger = {
     setBurger: any
 }
 
-export const experimental_ppr = true
-
 const MainNav = ({burger, setBurger}: Burger) => (
     <nav
         className={`nav_container ${burger ? "burger_active" : ""}`}

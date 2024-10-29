@@ -15,8 +15,6 @@ import {H1} from "@components/h1";
 import {Suspense} from "react";
 import {Skeleton} from "@components/skeleton";
 
-export const experimental_ppr = true
-
 export const metadata: Metadata = {
     title: "Магазин",
     description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",

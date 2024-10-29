@@ -22,6 +22,8 @@ import {Header} from "@components/header";
 import {Footer} from "@components/footer";
 import {Metrika} from "./script";
 
+export const experimental_ppr = true
+
 const montserrat = Montserrat({subsets: ["latin"], preload: true, style: "normal"});
 
 export const metadata: Metadata = {

@@ -6,8 +6,6 @@ import {MaxSize} from "@components/maxSize";
 import type {Metadata} from "next";
 import {NameParams} from "@/types/params";
 
-export const experimental_ppr = true
-
 export const generateMetadata = async ({params}: NameParams): Promise<Metadata> => {
     const {name} = await params
     const {
@@ -26,6 +24,8 @@ export const generateMetadata = async ({params}: NameParams): Promise<Metadata> 
         }
     }
 }
+
+
 
 export default async function UserLayout(
     {
