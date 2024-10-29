@@ -2,8 +2,6 @@
 import type {PropsWithChildren} from "react";
 import {validate} from "@services/validate"
 import {getUser} from "@/services";
-import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
 
 // Стили
 import styles from "./accounts.module.scss"
@@ -43,7 +41,6 @@ const providersNames = Object.keys(providers) as providerName[]
 
 export default async function Accounts({params}: NameParams) {
     const {name} = await params
-    const cookiesStore = await cookies()
     const {
         user: author,
         isAdmin, isModer
@@ -56,6 +53,7 @@ export default async function Accounts({params}: NameParams) {
 
     const adminAccess = isAdmin || isMe
 
+    // todo: смена ника в дискорде
     return (
         <div className="account_content">
             <H1 up className={styles.for_bigger}>
