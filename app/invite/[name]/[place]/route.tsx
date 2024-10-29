@@ -1,8 +1,14 @@
 import {NextRequest, NextResponse} from "next/server";
 import {cookies} from "next/headers";
 
-export async function GET(_: NextRequest, {params: {name, place}}: {params: {name: string, place: string}}) {
+export async function GET(
+	_: NextRequest,
+	{params}: {
+		params: Promise<{name: string, place: string}>
+	}
+) {
 	const cookiesStore = await cookies()
+	const {place, name} = await params
 	if (cookiesStore.get("from")?.value) {
 		return new NextResponse(null, {
 			status: 302,
