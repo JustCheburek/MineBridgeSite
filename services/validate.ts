@@ -6,6 +6,7 @@ import type {User} from "lucia";
 
 export const validate = cache(
 		async (sessionId?: string): Promise<{user: User | null} & RolesApi> => {
+			const cookiesStore = await cookies();
 			if (!sessionId) {
 				return {
 					user: null, roles: [],
