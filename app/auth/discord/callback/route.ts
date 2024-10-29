@@ -81,7 +81,7 @@ export async function GET(request: NextRequest) {
                         Authorization: `Bot ${process.env.DISCORD_TOKEN}`
                     }
                 }
-            ).then(r => r.data).catch(console.error)
+            ).catch(console.error)
         }
 
         // Добавление роли

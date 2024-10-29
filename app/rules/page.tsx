@@ -30,7 +30,6 @@ export const metadata: Metadata = {
 const timeAgo = new TimeAgo('ru-RU');
 
 export default function Rules() {
-
     return (
         <>
             <div className="rules_content">

@@ -244,6 +244,19 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
         if (candidate) {
             throw new Error(`Ник занят`)
         }
+        if (user.discordId) {
+            await axios.patch(
+                `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user.discordId}`,
+                {
+                    nick: name
+                },
+                {
+                    headers: {
+                        Authorization: `Bot ${process.env.DISCORD_TOKEN}`
+                    }
+                }
+            ).catch(console.error)
+        }
     }
 
     const socials: Social[] = [
