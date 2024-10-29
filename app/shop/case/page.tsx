@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 export default async function CasePage() {
     const cookiesStore = await cookies()
-    const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+    const {user} = await validate()
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
     async function Add(

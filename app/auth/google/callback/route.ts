@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
 			photo: gUser.picture
 		} as User
 
-		const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+		const {user} = await validate()
 
 		if (user) {
 			await userModel.findByIdAndUpdate(

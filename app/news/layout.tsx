@@ -16,7 +16,7 @@ export default async function News(
 		}: PropsWithChildren
 ) {
 	const cookiesStore = await cookies()
-	const {isAdmin} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+	const {isAdmin} = await validate()
 	const seasons = await getSeasons()
 
 	async function seasonFunc(season: Season) {

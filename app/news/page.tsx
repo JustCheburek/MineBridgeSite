@@ -1,6 +1,5 @@
 // React
 import type {Metadata} from "next";
-import {lucia} from "@server/lucia";
 import {validate} from "@services/validate";
 import {cookies} from "next/headers";
 import {getSeasons} from "@/services";
@@ -38,7 +37,7 @@ export const metadata: Metadata = {
 
 export default async function News() {
     const cookiesStore = await cookies()
-    const {isAdmin} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+    const {isAdmin} = await validate()
     const seasons = await getSeasons()
 
     async function addNew(formData: FormData, number: Season["number"]) {

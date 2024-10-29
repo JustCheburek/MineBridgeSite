@@ -65,7 +65,7 @@ export default async function ShowCase(
 ) {
     const cookiesStore = await cookies()
     const {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity, Item: ItemName} = await params
-    const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+    const {user} = await validate()
 
     const [Case, Drop, DropItem] = await Promise.all([
         getCase({name: CaseName}),

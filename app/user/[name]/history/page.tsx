@@ -31,7 +31,7 @@ export const generateMetadata = async ({params}: NameParams) => {
 export default async function History({params}: NameParams) {
     const {name} = await params
     const cookiesStore = await cookies()
-    const {user: author, isModer, isAdmin} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+    const {user: author, isModer, isAdmin} = await validate()
     const {
         user, isMe
     } = await getUser(

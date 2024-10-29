@@ -47,7 +47,7 @@ export default async function Accounts({params}: NameParams) {
     const {
         user: author,
         isAdmin, isModer
-    } = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+    } = await validate()
     const {
         user, isMe, isContentMakerCheck
     } = await getUser(

@@ -5,7 +5,7 @@ import {lucia} from "@server/lucia";
 
 export async function Header() {
 	const cookiesStore = await cookies()
-	const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+	const {user} = await validate()
 
 	async function Logout() {
 		"use server"

@@ -19,8 +19,6 @@ import {NameParams} from "@/types/params";
 import {Skeleton} from "@components/skeleton";
 import {Suspense} from "react";
 
-export const experimental_ppr = true
-
 export const generateMetadata = async ({params}: NameParams): Promise<Metadata> => {
     const {name} = await params
 
@@ -41,7 +39,7 @@ export const generateMetadata = async ({params}: NameParams): Promise<Metadata> 
 export default async function Profile({params}: NameParams) {
     const {name} = await params
     const cookiesStore = await cookies()
-    const {user: author, isModer, isAdmin} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+    const {user: author, isModer, isAdmin} = await validate()
     const {
         user, roles, isMe, isContentMaker
     } = await getUser(

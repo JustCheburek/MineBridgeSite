@@ -7,7 +7,6 @@ import {redirect} from "next/navigation";
 import {MaxSize} from "@components/maxSize";
 import {AuthForm} from "./components";
 import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
 import {H1} from "@components/h1";
 import Link from "next/link";
 
@@ -26,7 +25,7 @@ export const metadata: Metadata = {
 
 export default async function Auth() {
 	const cookiesStore = await cookies()
-	const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+	const {user} = await validate()
 
 	if (user) {
 		return redirect(`/user/${user.name}`)

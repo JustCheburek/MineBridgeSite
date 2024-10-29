@@ -1,11 +1,10 @@
 import {MaxSize} from "@components/maxSize";
+import {LoadingSvg} from "@ui/SVGS";
 
 export default function Loading() {
-	return (
-			<MaxSize className="grid_center">
-				<h1 className="center_text">
-					Загрузка
-				</h1>
-			</MaxSize>
-	)
+    return (
+        <MaxSize className="grid_center">
+            <LoadingSvg size="40vh"/>
+        </MaxSize>
+    )
 }

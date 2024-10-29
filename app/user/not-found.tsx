@@ -8,7 +8,7 @@ import {cookies} from "next/headers";
 
 export default async function NotFound() {
 	const cookiesStore = await cookies()
-    const {user} = await validate(cookiesStore.get(lucia.sessionCookieName)?.value)
+    const {user} = await validate()
 
     if (user) redirect(`/user/${user.name}`)
 

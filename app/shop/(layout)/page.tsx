@@ -12,7 +12,10 @@ import {Url} from "@components/button";
 import {Img, ImgBox} from "@components/img";
 import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
 import {H1} from "@components/h1";
+import {Suspense} from "react";
+import {Skeleton} from "@components/skeleton";
 
+export const experimental_ppr = true
 
 export const metadata: Metadata = {
     title: "Магазин",
@@ -86,22 +89,24 @@ export default async function Shop() {
             </Heading>
 
             <Section name="cases">
-                {Cases.map(Case => (
-                    <Box key={Case.name}>
-                        <CaseBox Case={Case}/>
-                        <Text>
-                            <CaseInfo>
-                                {Case.displayname}
-                            </CaseInfo>
-                            <Price oldPrice={Case.oldPrice}>
-                                {Case.price}
-                            </Price>
-                            <Url href="/shop/case" margin="10px">
-                                Купить
-                            </Url>
-                        </Text>
-                    </Box>
-                ))}
+                <Suspense fallback={<Skeleton width="100%" height={440}/>}>
+                    {Cases.map(Case => (
+                        <Box key={Case.name}>
+                            <CaseBox Case={Case}/>
+                            <Text>
+                                <CaseInfo>
+                                    {Case.displayname}
+                                </CaseInfo>
+                                <Price oldPrice={Case.oldPrice}>
+                                    {Case.price}
+                                </Price>
+                                <Url href="/shop/case" margin="10px">
+                                    Купить
+                                </Url>
+                            </Text>
+                        </Box>
+                    ))}
+                </Suspense>
             </Section>
 
             <Heading heading="Стикеры в телеграм" id="stickers" href="/features/stickers">
