@@ -16,6 +16,10 @@ import {URLS_START} from "@/const";
 import {SocialBox} from "./components/social";
 import {User} from "lucia";
 import {NameParams} from "@/types/params";
+import {Skeleton} from "@components/skeleton";
+import {Suspense} from "react";
+
+export const experimental_ppr = true
 
 export const generateMetadata = async ({params}: NameParams): Promise<Metadata> => {
     const {name} = await params
@@ -57,67 +61,84 @@ export default async function Profile({params}: NameParams) {
             <FormBox author={author}/>
 
             <div className={styles.container}>
-                <Avatar photo={user.photo}/>
+                <Suspense fallback={<Skeleton width={180}/>}>
+                    <Avatar photo={user.photo}/>
+                </Suspense>
 
                 <div className={styles.text}>
-                    <h2 className="unic_color">
-                        <span className="all_select">{user.name}</span>
-                    </h2>
-                    {isAdmin &&
-                      <small className="light_gray_color">Айди: <span className="all_select">{user._id}</span></small>
-                    }
-                    <div className={styles.social}>
-                        {user?.socials?.map((
-                            {
-                                social,
-                                url,
-                                name,
-                                clicked
-                            }: Social
-                        ) => {
-                            if (!social || (!url && !name)) return
+                    <Suspense fallback={<Skeleton width={400} height={60}/>}>
+                        <h2 className="unic_color all_select">
+                            {user.name}
+                        </h2>
+                        {isAdmin &&
+                          <small className="light_gray_color">Айди: <span
+                            className="all_select">{user._id}</span></small>
+                        }
+                    </Suspense>
+                    <Suspense fallback={<Skeleton width={200} height={46}/>}>
+                        <div className={styles.social}>
+                            {user?.socials?.map((
+                                {
+                                    social,
+                                    url,
+                                    name,
+                                    clicked
+                                }: Social
+                            ) => {
+                                if (!social || (!url && !name)) return
 
-                            url = url || `${URLS_START[social]}${name}`
+                                url = url || `${URLS_START[social]}${name}`
 
-                            return (
-                                <SocialBox
-                                    social={social} key={social}
-                                    isMe={isMe} isModer={isModer} _id={user._id}
-                                    url={url} clicked={clicked}
-                                />
-                            )
-                        })}
-                    </div>
-                    <div className={styles.roles}>
-                        {roles.map(role => {
-                            const color = `#${role.color.toString(16)}`
-                            return (
-                                <small key={role.id} style={{color}}>
-                                    {role.name}
-                                </small>
-                            )
-                        })}
-                    </div>
+                                return (
+                                    <SocialBox
+                                        social={social} key={social}
+                                        isMe={isMe} isModer={isModer} _id={user._id}
+                                        url={url} clicked={clicked}
+                                    />
+                                )
+                            })}
+                        </div>
+                    </Suspense>
+                    <Suspense fallback={<Skeleton width={500} height={90}/>}>
+                        <div className={styles.roles}>
+                            {roles.map(role => {
+                                const color = `#${role.color.toString(16)}`
+                                return (
+                                    <small key={role.id} style={{color}}>
+                                        {role.name}
+                                    </small>
+                                )
+                            })}
+                        </div>
+                    </Suspense>
                     <h4>
                         Мостики: {" "}
-                        <strong className={ColorText(user.mostiki)}>
-                            {user.mostiki}
-                        </strong>{" "}
-                        <MostikiSvg/>{" "}
+                        <Suspense fallback={<Skeleton width={10} height={29.6}/>}>
+                            <strong className={ColorText(user.mostiki)}>
+                                {user.mostiki}
+                            </strong>
+                        </Suspense>
+                        {" "}<MostikiSvg/>{" "}
                         <Link href="/shop" className="add">+</Link>
                     </h4>
                     <h4>
                         Соц рейтинг: {" "}
-                        <strong className={ColorText(user.rating)}>
-                            {user.rating}
-                        </strong>
+                        <Suspense fallback={<Skeleton width={10} height={29.6}/>}>
+                            <strong className={ColorText(user.rating)}>
+                                {user.rating}
+                            </strong>
+                        </Suspense>
                     </h4>
                 </div>
             </div>
 
-            <WhitelistSection user={user} isMe={isMe} isModer={isModer}/>
+            <Suspense fallback={<Skeleton width={655} height={244}/>}>
+                <WhitelistSection user={user} isMe={isMe} isModer={isModer}/>
+            </Suspense>
 
-            <TwitchFrame user={user} isContentMaker={isContentMaker}/>
+            <Suspense fallback={<Skeleton width={655} height={360}/>}>
+                <TwitchFrame user={user} isContentMaker={isContentMaker}/>
+            </Suspense>
         </div>
     )
 }

@@ -14,11 +14,14 @@ import {AuthSvg, MinebridgeSvg, MostikiSvg} from "@ui/SVGS";
 import {NavLink} from "@components/navlink";
 import {Img} from "@components/img";
 import {Burger} from "@components/burger";
+import {Skeleton} from "@components/skeleton";
 
 type Burger = {
     burger: boolean,
     setBurger: any
 }
+
+export const experimental_ppr = true
 
 const MainNav = ({burger, setBurger}: Burger) => (
     <nav
@@ -140,7 +143,7 @@ export function HeaderClient({user, Logout}: { user: User | null, Logout: Functi
                 {/* Навигация */}
                 <MainNav burger={burger} setBurger={setBurger}/>
 
-                <Suspense fallback={<p>...</p>}>
+                <Suspense fallback={<Skeleton width={180} height={40}/>}>
                     <User user={user} Logout={Logout}/>
                 </Suspense>
             </div>

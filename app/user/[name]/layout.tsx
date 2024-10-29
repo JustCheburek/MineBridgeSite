@@ -1,5 +1,4 @@
 import type {PropsWithChildren} from "react";
-import {Suspense} from "react";
 import {ProfilePage} from "schema-dts";
 import {getUser} from "@/services";
 import {SubsectionItem, Subsections} from "@components/sideNav";
@@ -7,8 +6,10 @@ import {MaxSize} from "@components/maxSize";
 import type {Metadata} from "next";
 import {NameParams} from "@/types/params";
 
+export const experimental_ppr = true
+
 export const generateMetadata = async ({params}: NameParams): Promise<Metadata> => {
-	const {name} = await params
+    const {name} = await params
     const {
         user
     } = await getUser(
@@ -31,7 +32,7 @@ export default async function UserLayout(
         children,
         params
     }: PropsWithChildren<NameParams>) {
-	const {name} = await params
+    const {name} = await params
     const {user} = await getUser({name})
 
     const person: ProfilePage = {
@@ -61,11 +62,7 @@ export default async function UserLayout(
 
             <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(person)}}/>
 
-            <Suspense fallback={
-                <p className="center_text">Загрузка...</p>
-            }>
-                {children}
-            </Suspense>
+            {children}
         </MaxSize>
     )
 }

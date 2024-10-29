@@ -14,9 +14,11 @@ const nextConfig: NextConfig = {
       }
     ]
   },
-  serverExternalPackages: ["oslo"],
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
+  },
+  experimental: {
+    ppr: 'incremental',
   },
   webpack: (config) => {
     config.externals.push("@node-rs/argon2", "@node-rs/bcrypt");
