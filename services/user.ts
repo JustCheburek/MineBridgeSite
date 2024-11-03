@@ -1,28 +1,25 @@
 "use server";
 
-// React, Next
 import axios from "axios";
 import {User} from "lucia";
 import {revalidateTag} from "next/cache";
-import {SocialName} from "@/const";
-
-// Сервер
-import {RconVC} from "@server/console";
+import {MBSESSION, SocialName} from "@/const";
+import {AddWLConsole, RconVC, RemoveWLConsole} from "@server/console";
 import {userModel} from "@server/models";
-
-// Типы
 import {Action, Punishment} from "@/types/punishment";
 import type {GuildDSUser} from "@/types/user";
 import {CaseData, CasePurchase} from "@/types/purchase";
 import {Social} from "@/types/url";
 import {redirect} from "next/navigation";
+import {cookies} from "next/headers";
+
+export async function Logout() {
+    (await cookies()).delete(MBSESSION)
+}
 
 export async function AddWhitelist(_id: string, name: string) {
     try {
-        const client = await RconVC()
-        console.log(`Добавляю в Whitelist: ${name}`)
-        await client.run(`vclist add ${name}`)
-        await client.run(`vclist add .${name}`)
+        await AddWLConsole(name)
 
         await userModel.findByIdAndUpdate(_id, {whitelist: true})
     } catch (e) {
@@ -32,21 +29,6 @@ export async function AddWhitelist(_id: string, name: string) {
     revalidateTag(`userLike`)
 }
 
-export async function ClickSocial(_id: string, socialName: SocialName) {
-    const userM = await userModel.findById(_id)
-    if (!userM) return
-
-    const social = userM.socials.find(
-        ({social}) => social === socialName
-    )
-    if (!social) return
-
-    social.clicked = (social?.clicked || 0) + 1
-    await userM.save()
-
-    revalidateTag("userLike")
-}
-
 export async function CheckActions(user: User, actions: Action[]) {
     if (actions.length === 0) return
 
@@ -54,21 +36,19 @@ export async function CheckActions(user: User, actions: Action[]) {
         if (actions.includes("mineBan")) {
             const client = await RconVC()
             console.log(`Бан ${user.name}`)
-            await client.run(`vclist remove ${user.name}`)
-            await client.run(`vclist remove .${user.name}`)
+            await RemoveWLConsole(user.name)
             await client.run(`ban ${user.name} Нарушение правил сервера`)
             if (actions.includes("rollback")) {
-                await client.run(`co rollback action: block user: ${user.name} time: 5d`)
-                await client.run(`co rollback action: container user: ${user.name} time: 5d`)
+                await client.run(`co rollback action:block user:${user.name} time:14d`)
+                await client.run(`co rollback action:container user:${user.name} time:14d`)
             }
             await userModel.findByIdAndUpdate(user._id, {whitelist: false})
         }
         if (actions.includes("minePardon")) {
             const client = await RconVC()
             console.log(`Разбан ${user.name}`)
+            await AddWLConsole(user.name)
             await client.run(`unban ${user.name}`)
-            await client.run(`vclist add ${user.name}`)
-            await client.run(`vclist add .${user.name}`)
 
             await userModel.findByIdAndUpdate(user._id, {whitelist: true})
         }
@@ -280,18 +260,13 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
     }
 
     if (user.name !== name) {
-        // Убирание из whitelist
+        await RemoveWLConsole(user.name)
+
+        // Смена аккаунта
         const client = await RconVC()
-        await client.run(`vclist remove ${user.name}`)
-        await client.run(`vclist remove .${user.name}`)
-
-        await userModel.findByIdAndUpdate(
-            user._id,
-            {whitelist: false}
-        )
-
-        // Смена акка
         await client.run(`librelogin user migrate ${user.name} ${name}`)
+
+        await AddWLConsole(name)
     }
 
     await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})

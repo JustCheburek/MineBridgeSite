@@ -1,11 +1,11 @@
 "use client";
 
-import {Form, FormButton, FormInput, FormLabel, FormTextarea} from "@components/form";
+import {FormBox, FormButton, FormInput, FormLabel, FormTextarea} from "@components/formBox";
 import {Season} from "@/types/season";
 
 export function AddNewForm({addNew, number}: { addNew: Function, number: Season["number"] }) {
     return (
-        <Form action={formData => addNew(formData, number)}>
+        <FormBox action={formData => addNew(formData, number)}>
             <FormLabel>
                 <FormInput
                     name="heading"
@@ -55,6 +55,6 @@ export function AddNewForm({addNew, number}: { addNew: Function, number: Season[
             <FormButton>
                 Добавить
             </FormButton>
-        </Form>
+        </FormBox>
     )
 }

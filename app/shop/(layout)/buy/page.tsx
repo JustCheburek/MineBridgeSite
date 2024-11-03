@@ -106,9 +106,6 @@ export default async function Component() {
         </div>
 
         <OnThisPage>
-            <OnThisPageHeading>
-                Содержание
-            </OnThisPageHeading>
             <OnThisPageLink href="#mostiki">
                 Цена
             </OnThisPageLink>

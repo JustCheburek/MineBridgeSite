@@ -241,9 +241,6 @@ export default async function Shop() {
         </div>
 
         <OnThisPage>
-            <OnThisPageHeading>
-                Содержание
-            </OnThisPageHeading>
             <OnThisPageLink href="#mostiki">
                 Мостики
             </OnThisPageLink>

@@ -1,7 +1,7 @@
 "use client"
 
 import {type Dispatch, type SetStateAction, useEffect, useState} from "react";
-import {FormInput, type FormInputProps, FormLabel} from "@components/form";
+import {FormInput, type FormInputProps, FormLabel} from "@components/formBox";
 
 export const InputName = ({autoComplete = "name", ...props}: FormInputProps) => (
     <FormLabel>
@@ -47,7 +47,7 @@ export const InputNameCheck = (
         {symbol &&
           <p>
             недопустимый символ:<br/>
-              {symbol}
+            {symbol}
           </p>
         }
         <InputName

@@ -1,6 +1,6 @@
 @use "@styles/mixins";
 
-// Form
+// FormBox
 .form_box {
 	@include mixins.border();
 	padding: 1.5rem;

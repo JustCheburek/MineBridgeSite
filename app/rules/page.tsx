@@ -596,9 +596,6 @@ export default function Rules() {
             </div>
 
             <OnThisPage>
-                <OnThisPageHeading>
-                    Содержание
-                </OnThisPageHeading>
                 <OnThisPageLink href="#general">
                     <span className={styles.number_box}>1</span>
                     Общение

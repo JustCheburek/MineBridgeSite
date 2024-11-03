@@ -14,7 +14,7 @@ import type {CaseData} from "@/types/purchase";
 
 // Компоненты
 import {CasesPurchasesModal} from "@modals/casesPurchases";
-import {Form, FormButton} from "@components/form";
+import {FormBox, FormButton} from "@components/formBox";
 import {Img, ImgBox} from "@components/img";
 import Link from "next/link";
 
@@ -45,7 +45,7 @@ export function CasesPurchasesSection(
             Покупки кейсов
         </h2>
         {(isMe || access) && caseDatas.length > 0 &&
-          <Form action={() => {
+          <FormBox action={() => {
               GetAll(user.name, caseDatas)
               setClick(true)
           }}>
@@ -55,7 +55,7 @@ export function CasesPurchasesSection(
                     : "Получить покупки"
                 }
             </FormButton>
-          </Form>
+          </FormBox>
         }
 
         <div className={styles.purchases}>

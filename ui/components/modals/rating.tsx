@@ -5,7 +5,7 @@ import {type Action, Punishment} from "@/types/punishment";
 
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
-import {Form, FormButton, FormGroup, FormInput, FormLabel} from "@components/form";
+import {FormBox, FormButton, FormGroup, FormInput, FormLabel} from "@components/formBox";
 import {H1} from "@components/h1";
 import {AddPunishment} from "@services/user";
 
@@ -30,7 +30,7 @@ export const RatingModal = (
 	return (
 			<Modal setModal={setModal} modal={modal}>
 				<H1>Рейтинг</H1>
-				<Form action={() => {
+				<FormBox action={() => {
 					AddPunishment(user, punishment, actions)
 					setModal(false)
 				}}>
@@ -150,7 +150,7 @@ export const RatingModal = (
 					<FormButton>
 						Добавить
 					</FormButton>
-				</Form>
+				</FormBox>
 			</Modal>
 	)
 }

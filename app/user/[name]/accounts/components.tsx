@@ -4,7 +4,7 @@
 import type {User} from "lucia";
 
 // Компоненты
-import {Form, FormButton, FormInput, FormLabel, FormTextarea} from "@components/form";
+import {FormBox, FormButton, FormInput, FormLabel, FormTextarea} from "@components/formBox";
 import {Modal, type ModalAction} from "@components/modal";
 import {useState} from "react";
 import type {isRoles} from "@/services";
@@ -30,7 +30,7 @@ function SuccessModal({modal, setModal, user}: ModalAction & SuccessModal) {
                 удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
             </p>
             <h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
-            <Form action={() => DeleteUser(user._id)}>
+            <FormBox action={() => DeleteUser(user._id)}>
                 <InputNameCheck
                     danger placeholder={user.name}
                     autoComplete="off"
@@ -39,7 +39,7 @@ function SuccessModal({modal, setModal, user}: ModalAction & SuccessModal) {
                 <FormButton danger disabled={name !== user.name}>
                     Жми, жми!
                 </FormButton>
-            </Form>
+            </FormBox>
         </Modal>
     )
 }
@@ -72,11 +72,11 @@ export function DeleteUserBox({user, isAdmin}: DeleteUser) {
     const access = isAdmin || user.rating >= 0
 
     return (<>
-        <Form action={() => setModal(true)}>
+        <FormBox action={() => setModal(true)}>
             <FormButton danger>
                 Удалить аккаунт
             </FormButton>
-        </Form>
+        </FormBox>
         {access
             ? <SuccessModal
                 modal={modal}
@@ -118,7 +118,7 @@ export function ChangeParam(
             <RatingUp/>
           </div>
         }
-        <Form action={async formData => {
+        <FormBox action={async formData => {
             try {
                 await UpdateProfile(user, formData, isAdmin)
             } catch (e) {
@@ -223,6 +223,6 @@ export function ChangeParam(
             <FormButton disabled={user.rating <= ratingAccess && !isModer || !access}>
                 Сохранить
             </FormButton>
-        </Form>
+        </FormBox>
     </>)
 }

@@ -2,7 +2,7 @@
 
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
-import {Form, FormButton, FormInput, FormLabel} from "@components/form";
+import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
 import {useChangeDictState} from "@hooks/useChangeState";
 import {Season} from "@/types/season";
 import {H1} from "@components/h1";
@@ -23,7 +23,7 @@ export const SeasonModal = (
 	return (
 			<Modal setModal={setModal} modal={modal}>
 				<H1>Новый сезон</H1>
-				<Form action={() => {
+				<FormBox action={() => {
 					seasonFunc(season)
 					setModal(false)
 				}}>
@@ -58,7 +58,7 @@ export const SeasonModal = (
 					<FormButton>
 						Добавить
 					</FormButton>
-				</Form>
+				</FormBox>
 			</Modal>
 	)
 }

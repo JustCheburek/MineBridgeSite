@@ -2,27 +2,28 @@ import {ComponentPropsWithoutRef, PropsWithChildren} from "react";
 import {setModal} from "@components/modal";
 import styles from "./styles/form.module.scss"
 import Link, {LinkProps} from "next/link";
+import Form, {FormProps} from "next/form";
 
-interface DangerInputProps {
+interface DangerProps {
     danger?: boolean
 }
 
-export const Form = (
+export const FormBox = (
     {
         children,
         className = "",
         ...props
-    }: ComponentPropsWithoutRef<"form">
+    }: FormProps
 ) => (
-    <form
+    <Form
         className={`${styles.form} ${className}`}
         {...props}
     >
         {children}
-    </form>
+    </Form>
 )
 
-interface FormButton extends ComponentPropsWithoutRef<"button">, DangerInputProps {
+interface FormButton extends ComponentPropsWithoutRef<"button">, DangerProps {
 }
 
 export const FormButton = (
@@ -44,30 +45,45 @@ export const FormButton = (
     </button>
 )
 
-interface FormLink extends DangerInputProps, PropsWithChildren, LinkProps {
+interface FormLink extends DangerProps, PropsWithChildren, LinkProps {
     className?: string
+    download?: boolean
+    target?: string
 }
 
 export const FormLink = (
     {
         href,
         children,
+        target,
         className = "",
+        download = false,
         danger = false,
         ...props
     }: FormLink
-) => (
-    <Link
-        href={href}
-        className={`${styles.button} center_text ${danger ? styles.danger : ""} ${className}`}
-        type="submit"
-        {...props}
-    >
-        <strong>
-            {children}
-        </strong>
-    </Link>
-)
+) => {
+    if (!target) {
+        if (download || href.toString().startsWith("http")) {
+            target = "_blank"
+        } else {
+            target = "_self"
+        }
+    }
+
+    return (
+        <Link
+            href={href}
+            target={target}
+            className={`${styles.button} center_text ${danger ? styles.danger : ""} ${className}`}
+            download={download}
+            {...props}
+        >
+            <strong>
+                {children}
+            </strong>
+        </Link>
+    )
+}
 
 export const FormLabel = (
     {
@@ -96,7 +112,7 @@ export const FormGroup = (
     </div>
 )
 
-export interface FormInputProps extends ComponentPropsWithoutRef<"input">, DangerInputProps {
+export interface FormInputProps extends ComponentPropsWithoutRef<"input">, DangerProps {
 }
 
 export const FormInput = (

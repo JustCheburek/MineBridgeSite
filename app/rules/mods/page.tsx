@@ -197,9 +197,6 @@ export default function Mods() {
         </div>
 
         <OnThisPage>
-            <OnThisPageHeading>
-                Содержание
-            </OnThisPageHeading>
             <OnThisPageLink href="#allowed">
                 Разрешено
             </OnThisPageLink>

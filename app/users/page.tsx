@@ -2,12 +2,12 @@
 import type {Metadata} from "next";
 import type {User} from "lucia";
 import {getUsers} from "@/services";
+import {revalidateTag} from "next/cache";
 
 // Компоненты
 import {Table} from "@components/table"
 import {MaxSize} from "@components/maxSize";
 import {columns} from "@columns/users"
-import {revalidateTag} from "next/cache";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {

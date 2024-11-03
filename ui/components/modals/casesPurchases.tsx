@@ -7,7 +7,7 @@ import {AddCasePurchase} from "@services/user";
 
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
-import {Form, FormButton, FormSelect} from "@components/form";
+import {FormBox, FormButton, FormSelect} from "@components/formBox";
 import {H1} from "@components/h1";
 
 type CasesPurchasesModal = {
@@ -44,7 +44,7 @@ export const CasesPurchasesModal = (
         <Modal setModal={setModal} modal={modal}>
             <H1>Кейсы</H1>
 
-            <Form action={() => {
+            <FormBox action={() => {
                 setModal(false)
                 AddCasePurchase(_id, caseData, access)
             }}>
@@ -148,7 +148,7 @@ export const CasesPurchasesModal = (
                 <FormButton>
                     Добавить
                 </FormButton>
-            </Form>
+            </FormBox>
         </Modal>
     )
 }

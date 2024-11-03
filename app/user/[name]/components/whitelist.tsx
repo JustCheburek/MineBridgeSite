@@ -9,7 +9,7 @@ import styles from "../profile.module.scss"
 // Компоненты
 import {Button} from "@components/button";
 import {Modal, type setModal} from "@components/modal";
-import {Form, FormButton} from "@components/form";
+import {FormBox, FormButton} from "@components/formBox";
 import {useState} from "react";
 import {H1} from "@components/h1";
 import {AddWhitelist} from "@services/user";
@@ -25,7 +25,10 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
                 Java + Bedrock Edition
             </h4>
         </Link>
-        <strong className="unic_color all_select">secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}</strong>
+        <p>
+            IP:{" "}
+            <strong className="unic_color all_select">secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}</strong>
+        </p>
         <Button onClick={() => setModal(true)}>
             Заново
         </Button>
@@ -36,7 +39,7 @@ const UserNotWhitelisted = ({setModal}: { setModal: setModal }) => (
     <section className={`${styles.whitelist} center_text`}>
         <h2>Хотите поиграть на сервере?</h2>
         <Button onClick={() => setModal(true)}>
-            Попасть в Whitelist
+            Попасть в WhiteList
         </Button>
     </section>
 )
@@ -68,8 +71,8 @@ export function WhitelistSection({user, isMe, isModer}: WhitelistSection) {
             <section className="center_text">
                 <h2>
                     {user.whitelist
-                        ? "Этот игрок в Whitelist`е!"
-                        : "Этот игрок не в Whitelist`е!"
+                        ? "Этот игрок в WhiteList`е!"
+                        : "Этот игрок не в WhiteList`е!"
                     }
                 </h2>
             </section>
@@ -93,14 +96,14 @@ export function WhitelistSection({user, isMe, isModer}: WhitelistSection) {
                 Если <span className="red_color">нет</span>, тогда вы можете изменить<br/>
                 его во вкладке в аккаунтах!
             </p>
-            <Form action={() => {
+            <FormBox action={() => {
                 AddWhitelist(user._id, user.name)
                 setModal(false)
             }}>
                 <FormButton>
-                    Попасть в whitelist
+                    Попасть в WhiteList
                 </FormButton>
-            </Form>
+            </FormBox>
         </Modal>
     </>)
 }

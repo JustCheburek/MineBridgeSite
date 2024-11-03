@@ -13,7 +13,7 @@ import "./styles/table.scss"
 
 // Utils
 import {ColorText} from "@app/utils";
-import {FormButton, FormInput, FormLabel} from "@components/form";
+import {FormButton, FormInput, FormLabel} from "@components/formBox";
 import {Button} from "@components/button";
 
 TimeAgo.addDefaultLocale(ru);

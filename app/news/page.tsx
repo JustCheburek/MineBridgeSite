@@ -64,46 +64,47 @@ export default async function News() {
                 Новости
             </H1>
 
-            {seasons.map(season => <div key={season.number}>
-                <SeasonBox
-                    number={season.number}
-                    startAt={new Date(season.startAt)}
-                    endAt={new Date(season.endAt)}
-                />
+            {seasons.map(season =>
+                <div key={season.number}>
+                    <SeasonBox
+                        number={season.number}
+                        startAt={new Date(season.startAt)}
+                        endAt={new Date(season.endAt)}
+                    />
 
-                {isAdmin &&
-                  <AddNewForm addNew={addNew} number={season.number}/>
-                }
+                    {isAdmin &&
+                      <AddNewForm addNew={addNew} number={season.number}/>
+                    }
 
-                {season.news.map(news => (
-                        <PBox key={news.heading}>
-                            {news.image &&
-                              <CheckLink
-                                href={news.href}
-                              >
-                                <ImgBox type="post">
-                                  <Img src={news.image || ""} alt={news.heading}/>
-                                </ImgBox>
-                              </CheckLink>
-                            }
-                            <PTitle startAt={news.startAt} endAt={news.endAt}>
-                                <h2>
-                                    <CheckLink
-                                        href={news.href}
-                                    >
-                                        {news.heading}
-                                    </CheckLink>
-                                </h2>
-                            </PTitle>
-                            {news?.text &&
-                              <PText className={styles.text}>
-                                <MDXRemote source={news.text}/>
-                              </PText>
-                            }
-                        </PBox>
-                    )
-                )}
-            </div>)}
+                    {season.news.map(news => (
+                            <PBox key={news.heading}>
+                                {news.image &&
+                                  <CheckLink
+                                    href={news.href}
+                                  >
+                                    <ImgBox type="post">
+                                      <Img src={news.image || ""} alt={news.heading}/>
+                                    </ImgBox>
+                                  </CheckLink>
+                                }
+                                <PTitle startAt={news.startAt} endAt={news.endAt}>
+                                    <h2>
+                                        <CheckLink
+                                            href={news.href}
+                                        >
+                                            {news.heading}
+                                        </CheckLink>
+                                    </h2>
+                                </PTitle>
+                                {news?.text &&
+                                  <PText className={styles.text}>
+                                    <MDXRemote source={news.text}/>
+                                  </PText>
+                                }
+                            </PBox>
+                        )
+                    )}
+                </div>)}
 
             <NotFound buttonText="Телеграм" href="https://t.me/MineBridgeOfficial">
                 Если вы всё равно не нашли новость, можете перейти в телеграм канал и поискать там!

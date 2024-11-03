@@ -7,7 +7,7 @@ import {parseAsStringEnum, useQueryState} from "nuqs";
 import styles from "./design.module.scss"
 
 import {Url} from "@components/button";
-import {Form, FormSelect} from "@components/form";
+import {FormBox, FormLink, FormSelect} from "@components/formBox";
 
 import {Img} from "@components/img";
 
@@ -71,7 +71,7 @@ export function Download() {
     return (
         <div className={styles.download}>
             <div>
-                <Form>
+                <FormBox action="">
                     <FormSelect name="logos" id="logos" onChange={selectLogo} value={logoName}>
                         {logos.map(logo => (
                             <option key={logo.name} value={logo.name}>
@@ -79,11 +79,11 @@ export function Download() {
                             </option>
                         ))}
                     </FormSelect>
-                </Form>
 
-                <Url href={path} download>
-                    Скачать
-                </Url>
+                    <FormLink href={path} download>
+                        Скачать
+                    </FormLink>
+                </FormBox>
             </div>
 
             <Img

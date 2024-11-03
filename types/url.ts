@@ -5,9 +5,6 @@ export class Social {
 	@prop({type: String})
 	public social?: SocialName
 
-	@prop({default: 0})
-	public clicked?: number
-
 	@prop({trim: true})
 	public name?: string
 

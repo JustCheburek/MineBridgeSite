@@ -2,10 +2,11 @@ import {Lucia} from "lucia";
 import {Discord, Google} from "arctic";
 import {adapter} from "./adapter";
 import {User} from "@/types/user";
+import {MBSESSION} from "@/const";
 
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
-		name: "minebridge-session",
+		name: MBSESSION,
 		expires: false,
 		attributes: {
 			secure: process.env.NODE_ENV === "production"

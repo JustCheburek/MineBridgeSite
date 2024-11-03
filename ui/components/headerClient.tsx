@@ -15,6 +15,7 @@ import {NavLink} from "@components/navlink";
 import {Img} from "@components/img";
 import {Burger} from "@components/burger";
 import {Skeleton} from "@components/skeleton";
+import {Logout} from "@services/user";
 
 type Burger = {
     burger: boolean,
@@ -49,7 +50,7 @@ const MainNav = ({burger, setBurger}: Burger) => (
     </nav>
 )
 
-function User({user, Logout}: { user: User | null, Logout: Function }) {
+function User({user}: { user: User | null }) {
     const [isMenu, setIsMenu] = useState(false)
 
     useEffect(() => {
@@ -124,7 +125,7 @@ function User({user, Logout}: { user: User | null, Logout: Function }) {
     )
 }
 
-export function HeaderClient({user, Logout}: { user: User | null, Logout: Function }) {
+export function HeaderClient({user}: { user: User | null }) {
     const [burger, setBurger] = useState<boolean>(false)
 
     return (
@@ -142,7 +143,7 @@ export function HeaderClient({user, Logout}: { user: User | null, Logout: Functi
                 <MainNav burger={burger} setBurger={setBurger}/>
 
                 <Suspense fallback={<Skeleton width={180} height={40}/>}>
-                    <User user={user} Logout={Logout}/>
+                    <User user={user}/>
                 </Suspense>
             </div>
         </header>

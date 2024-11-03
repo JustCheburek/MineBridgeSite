@@ -5,58 +5,60 @@ import {UpSvg} from "@ui/SVGS";
 import Link from "next/link";
 
 interface RelativePath {
-	name: string
-	displayname: string
+    name: string
+    displayname: string
 }
 
 const RelativeNav = ({paths}: { paths: RelativePath[] }) => (
-		<nav className="center_text">
-			{paths.map((path, index) => {
-				const current = index + 1
-				const last = current === paths.length
+    <nav className="center_text">
+        {paths.map((path, index) => {
+            const current = index + 1
+            const last = current === paths.length
 
-				if (last) {
-					return <span key={path.name}>{path.displayname}</span>
-				}
+            if (last) {
+                return <span key={path.name}>{path.displayname}</span>
+            }
 
-				const absolutePath = `/${paths.slice(0, current).map(p => p.name).join("/")}`
+            const absolutePath = `/${paths.slice(0, current).map(p => p.name).join("/")}`
 
-				return (
-						<span key={path.name}>
-							<Link href={absolutePath} key={path.name}>{path.displayname}</Link>
-							<span className={styles.nav_arrow}> {">"} </span>
-						</span>
-				)
-			})}
-		</nav>
+            return (
+                <span key={path.name}>
+                    <Link href={absolutePath} key={path.name}>{path.displayname}</Link>
+                    <span className={styles.nav_arrow}> {">"} </span>
+                </span>
+            )
+        })}
+    </nav>
 )
 
 interface H1Props extends ComponentPropsWithoutRef<"h1"> {
-	reload?: () => void
-	up?: boolean
-	paths?: RelativePath[]
+    reload?: () => void
+    up?: boolean
+    paths?: RelativePath[]
 }
 
 export const H1 = ({children, paths, reload, up = false, className = "", ...props}: PropsWithChildren<H1Props>) => (
-		<div className={`${styles.container} ${className}`}>
-			{paths && <RelativeNav paths={paths}/>}
+    <div className={`${styles.container} ${className}`}>
+        {paths && <RelativeNav paths={paths}/>}
 
-			<div className={styles.box} id="top">
-				{up
-						? <Link href={"#top"} className={`unic_button ${styles.top}`} title="Наверх">
-							<UpSvg
-									size="4.5rem"
-									className="unic_color"
-							/>
-						</Link>
-						: <div/>
-				}
+        <div className={styles.box} id="top">
+            {up
+                ? <Link href={"#top"} className={`unic_button ${styles.top}`} title="Наверх">
+                    <UpSvg
+                        size="4.5rem"
+                        className="unic_color"
+                    />
+                </Link>
+                : <div/>
+            }
 
-				<h1 className={styles.h1} {...props}>
-					{children}
-				</h1>
+            <h1 className={styles.h1} {...props}>
+                {children}
+            </h1>
 
-				{reload && <ReloadButton reload={reload} className={styles.reload}/>}
-			</div>
-		</div>
+            {reload &&
+              <ReloadButton reload={reload} className={styles.reload}/>
+            }
+        </div>
+    </div>
 )

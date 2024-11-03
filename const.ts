@@ -14,4 +14,5 @@ export const URLS_START = {
 	donationAlerts: `https://donationalerts.com/r/`,
 }
 
+export const MBSESSION = "minebridge-session"
 export type SocialName = keyof typeof URLS_START

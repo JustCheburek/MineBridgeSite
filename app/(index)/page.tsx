@@ -1,12 +1,13 @@
 import type {Metadata} from "next";
+import dynamic from "next/dynamic";
 
 import styles from "./styles/page.module.scss";
 
-import {InfoSection} from "./info_section";
-import {UnicSection} from "./unic_section";
-import {AdvantageSection} from "./advantage_section";
-import {RegistrationSection} from "./registration_section";
-import {YtSection} from "./yt_section";
+const InfoSection = dynamic(() => import("./info_section"));
+const UnicSection = dynamic(() => import("./unic_section"));
+const AdvantageSection = dynamic(() => import("./advantage_section"));
+const RegistrationSection = dynamic(() => import("./registration_section"));
+const YtSection = dynamic(() => import("./yt_section"));
 
 export const metadata: Metadata = {
     title: "Главная",

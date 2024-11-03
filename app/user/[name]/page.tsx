@@ -9,9 +9,8 @@ import {WhitelistSection} from "./components/whitelist";
 import {FormBox} from "./components/form";
 import {userModel} from "@server/models";
 import {ColorText} from "@app/utils";
-import {MostikiSvg} from "@ui/SVGS";
+import {AutoSvg, MostikiSvg} from "@ui/SVGS";
 import {URLS_START} from "@/const";
-import {SocialBox} from "./components/social";
 import {User} from "lucia";
 import {NameParams} from "@/types/params";
 import TimeAgo from "javascript-time-ago";
@@ -64,16 +63,17 @@ export default async function Profile({params}: NameParams) {
                         {user.name}
                     </h2>
                     {isAdmin &&
-                      <small className="light_gray_color">Айди: <span
-                        className="all_select">{user._id}</span></small>
+                      <small className="light_gray_color">
+                        Айди: {" "}
+                        <span className="all_select">{user._id}</span>
+                      </small>
                     }
                     <div className={styles.social}>
                         {user?.socials?.map((
                             {
                                 social,
                                 url,
-                                name,
-                                clicked
+                                name
                             }: Social
                         ) => {
                             if (!social || (!url && !name)) return
@@ -81,11 +81,14 @@ export default async function Profile({params}: NameParams) {
                             url = url || `${URLS_START[social]}${name}`
 
                             return (
-                                <SocialBox
-                                    social={social} key={social}
-                                    isMe={isMe} isModer={isModer} _id={user._id}
-                                    url={url} clicked={clicked}
-                                />
+                                <Link
+                                    href={url}
+                                    target="_blank"
+                                    title={social}
+                                    key={social}
+                                >
+                                    <AutoSvg size="38px" type={social}/>
+                                </Link>
                             )
                         })}
                     </div>
