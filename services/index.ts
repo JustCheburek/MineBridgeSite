@@ -130,7 +130,7 @@ export const getAuthor = cache(
 
 export const getUsers = cache(
     async () => {
-        const users = await userModel.find().lean() as User[]
+        const users = await userModel.find().lean() as unknown as User[]
 
         users.sort(({createdAt: createdAt1}, {createdAt: createdAt2}) => {
             if (!createdAt1) return 1
