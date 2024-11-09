@@ -5,7 +5,7 @@ import type {Metadata} from "next";
 import styles from "./features.module.scss"
 
 // Компоненты
-import {BatSvg} from "@ui/SVGS";
+import {AnalyticsSvg, BatSvg} from "@ui/SVGS";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GText} from "@components/grid";
 import {Url} from "@components/button";
@@ -33,7 +33,7 @@ export default function Features() {
             <GContainer border>
                 <GBox href="/features/lor" imgs="one">
                     <ImgBox type="grid">
-                        <BatSvg/>
+                        <BatSvg size="100%"/>
                     </ImgBox>
 
                     <GText>Лор</GText>
@@ -61,7 +61,7 @@ export default function Features() {
                     <GText>Моды</GText>
                 </GBox>
 
-                <GBox href={`http://карта.${process.env.NEXT_PUBLIC_RU_DOMAIN}`} anotherSite imgs="one">
+                <GBox href={`http://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`} anotherSite imgs="one">
                     <ImgBox className={styles.img} type="grid">
                         <Img src="/features/map.png" alt="Карта"/>
                     </ImgBox>
@@ -102,13 +102,13 @@ export default function Features() {
 
                 <GBox href="/features/totems" imgs="three">
                     <ImgBox className={styles.img} type="grid">
-                        <Totem src="/features/totems/kawa11fox.png" alt="Тотем" className="pixel"/>
+                        <Totem src="/features/totems/kawa11fox.png" alt="Лиса" className="pixel"/>
                     </ImgBox>
                     <ImgBox className={styles.img} type="grid">
-                        <Totem src="/features/totems/justcheburek.png" alt="Тотем" className="pixel"/>
+                        <Totem src="/features/totems/justcheburek.png" alt="Чебурек" className="pixel"/>
                     </ImgBox>
                     <ImgBox className={styles.img} type="grid">
-                        <Totem src="/features/totems/kaharirn.png" alt="Тотемы" className="pixel"/>
+                        <Totem src="/features/totems/kaharirn.png" alt="Кахарин" className="pixel"/>
                     </ImgBox>
 
                     <GText>Тотемы</GText>
@@ -116,7 +116,7 @@ export default function Features() {
 
                 <GBox href="/features/design" imgs="two">
                     <ImgBox className={styles.img} type="grid">
-                        <Img src="/index/unic/heart.webp" alt="Календарь" pixel/>
+                        <Img src="/index/unic/heart.webp" alt="Сердце" pixel/>
                     </ImgBox>
                     <ImgBox className={styles.img} type="grid">
                         <Img src="/index/unic/calendar.webp" alt="Календарь" pixel/>
@@ -125,13 +125,22 @@ export default function Features() {
                     <GText>Дизайн</GText>
                 </GBox>
 
+                <GBox href="/features/analytics" imgs="one">
+                    <ImgBox className={styles.img} type="grid">
+                        <AnalyticsSvg size="90%"/>
+                    </ImgBox>
+
+                    <GText>Аналитика</GText>
+                </GBox>
+
                 {/*<GBox href="/features/plugins">
-							<ImgBox className={styles.img} type="grid">
+                    <ImgBox className={styles.img} type="grid">
 
-							</ImgBox>
+                    </ImgBox>
 
-							<GText>Плагины</GText>
-						</GBox>*/}
+                    // todo: плагины
+                    <GText>Плагины</GText>
+                </GBox>*/}
             </GContainer>
         </MaxSize>
     )

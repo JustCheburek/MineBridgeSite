@@ -206,7 +206,7 @@ export const GoogleSvg = ({className = "", size = "1em", ...props}: SizeSvg) => 
     </svg>
 )
 
-export const BatSvg = ({className = "", size = "100%", ...props}: SizeSvg) => (
+export const BatSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
     <svg
         viewBox="0 0 1280 585" fill="currentColor"
         className={`red_color ${className}`}
@@ -345,6 +345,21 @@ export const AuthSvg = ({size = "1em", className = "", ...props}: SizeSvg) => (
             d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
         <path
             d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+    </svg>
+)
+
+export const AnalyticsSvg = ({size = "1em", className = "", ...props}: SizeSvg) => (
+    <svg
+        fill="currentColor" viewBox="0 0 36 36"
+        className={`unic_color ${className}`}
+        style={{width: size, height: size}} {...props}
+    >
+        <path fill="currentColor" d="M32 5H4a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2h28a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2M4 29V7h28v22Z"
+              className="clr-i-outline clr-i-outline-path-1"/>
+        <path fill="currentColor"
+              d="m15.62 15.222l-6.018 8.746l-4.052-3.584l1.06-1.198l2.698 2.386l6.326-9.192l6.75 10.015l6.754-8.925l1.276.966l-8.106 10.709z"
+              className="clr-i-outline clr-i-outline-path-2"/>
+        <path fill="none" d="M0 0h36v36H0z"/>
     </svg>
 )
 
