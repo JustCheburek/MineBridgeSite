@@ -23,10 +23,14 @@ export default async function Analytics() {
 
 	return (
 			<MaxSize className="grid_center">
+
 				<H1 reload={async () => {
 					"use server";
 					revalidateTag("seasons")
-				}}>
+				}} paths={[
+					{name: "features", displayname: "Фичи"},
+					{name: "analytics", displayname: "Аналитика"}
+				]}>
 					Аналитика
 				</H1>
 
