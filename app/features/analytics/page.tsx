@@ -3,7 +3,7 @@ import {getUsers} from "@/services";
 import type {Metadata} from "next";
 import {revalidateTag} from "next/cache";
 import {H1} from "@components/h1";
-import {Invites, Online} from "./components";
+import {Invites, New, Online} from "./components";
 
 export const metadata: Metadata = {
 	title: "Аналитика",
@@ -35,6 +35,8 @@ export default async function Analytics() {
 				</H1>
 
 				<Online users={users}/>
+
+				<New users={users}/>
 
 				<Invites users={users}/>
 			</MaxSize>

@@ -42,6 +42,37 @@ export function Online({users}: { users: User[] }) {
     )
 }
 
+export function New({users}: { users: User[] }) {
+    const atDay = users.filter(user => {
+        if (!user.createdAt) return false
+        const time = new Date().getTime() - new Date(user.createdAt).getTime()
+        return time < day
+    }).length
+    const atWeek = users.filter(user => {
+        if (!user.createdAt) return false
+        const time = new Date().getTime() - new Date(user.createdAt).getTime()
+        return time < week
+    }).length
+    const atMonth = users.filter(user => {
+        if (!user.createdAt) return false
+        const time = new Date().getTime() - new Date(user.createdAt).getTime()
+        return time < month
+    }).length
+
+    return (
+        <PBox>
+            <PTitle>
+                <h2>Новички</h2>
+            </PTitle>
+            <PText>
+                <h4><span className="unic_color medium-font">{atDay}</span> за сегодня</h4>
+                <h4><span className="unic_color medium-font">{atWeek}</span> за неделю</h4>
+                <h4><span className="unic_color medium-font">{atMonth}</span> за месяц</h4>
+            </PText>
+        </PBox>
+    )
+}
+
 export function Invites({users}: { users: User[] }) {
     const total = users.reduce((all, {invites}) => all + (invites?.length || 0), 0)
 
