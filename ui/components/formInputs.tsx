@@ -21,11 +21,10 @@ type InputNameCheck = {
     name: string
     setName: Dispatch<SetStateAction<string>>
     setAccess?: Dispatch<SetStateAction<boolean>>
-    defaultName?: string
 }
 
 export const InputNameCheck = (
-    {name, setName, setAccess, defaultName, ...props}: InputNameCheck & FormInputProps
+    {name, setName, setAccess, ...props}: InputNameCheck & FormInputProps
 ) => {
     const [symbol, setSymbol] = useState("")
 
