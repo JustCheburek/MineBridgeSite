@@ -104,8 +104,8 @@ export default async function Profile({params}: NameParams) {
                     </div>
                     <h4>
                         Онлайн: {" "}
-                        <time dateTime={new Date(user.onlineAt).toISOString()}>
-                            {timeAgo.format(new Date(user.onlineAt))}
+                        <time dateTime={new Date(user.onlineAt || 0).toISOString()}>
+                            {timeAgo.format(new Date(user.onlineAt || 0))}
                         </time>
                     </h4>
                     <h4>
