@@ -23,6 +23,21 @@ export const FormBox = (
     </Form>
 )
 
+export const DefaultFormBox = (
+    {
+        children,
+        className = "",
+        ...props
+    }: ComponentPropsWithoutRef<"form">
+) => (
+    <form
+        className={`${styles.form} ${className}`}
+        {...props}
+    >
+        {children}
+    </form>
+)
+
 interface FormButton extends ComponentPropsWithoutRef<"button">, DangerProps {
 }
 

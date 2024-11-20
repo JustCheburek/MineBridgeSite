@@ -1,6 +1,6 @@
 "use client"
 
-import {FormBox, FormGroup, FormInput, FormLabel, FormLink} from "@components/formBox";
+import {DefaultFormBox, FormGroup, FormInput, FormLabel, FormLink} from "@components/formBox";
 import {InputNameCheck} from "@components/formInputs";
 import {DiscordSvg, GoogleSvg} from "@ui/SVGS";
 import {useState} from "react";
@@ -16,7 +16,7 @@ export function AuthForm({savedName}: { savedName?: string }) {
     ] = useChangeRadioState<"google" | "discord">("discord")
 
     return (
-        <FormBox action="" className={styles.form}>
+        <DefaultFormBox className={styles.form}>
             <InputNameCheck name={name} setName={setName} setAccess={setAccess} autoFocus/>
 
             <FormGroup>
@@ -48,6 +48,6 @@ export function AuthForm({savedName}: { savedName?: string }) {
             <FormLink href={`/auth/${provider}?name=${name}`} aria-disabled={!access}>
                 Дальше
             </FormLink>
-        </FormBox>
+        </DefaultFormBox>
     )
 }
