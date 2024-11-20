@@ -3,7 +3,6 @@ import {Img, ImgBox} from "@components/img";
 import {Case, Drop, Item, RarityNames, type RarityType} from "@/types/case";
 import {validate} from "@services/validate";
 import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
 import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";

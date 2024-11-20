@@ -91,15 +91,6 @@ export const metadata: Metadata = {
         description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
         url: process.env.NEXT_PUBLIC_RU_URL!,
         siteName: "MineBridge",
-        images: [{
-            url: "/logos/256x256/logo.png",
-            alt: "Лого майнбриджа",
-            width: 256,
-            height: 256
-        }],
-        videos: [{
-            url: new URL("https://youtu.be/0bPrnHmNWM0")
-        }],
         locale: "ru_RU",
         type: "website"
     },

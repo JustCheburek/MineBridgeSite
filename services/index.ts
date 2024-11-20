@@ -151,7 +151,7 @@ export const getCaseLocal = cache(
         Cases: Case[]
     ) => {
         const Case = Cases.find(({name, _id}) =>
-            name === param.name || _id === param._id
+            name === param.name || JSON.stringify(_id) === JSON.stringify(param._id)
         )
 
         if (!Case) {
@@ -192,7 +192,7 @@ export const getDropLocal = cache(
         Drops: Drop[]
     ) => {
         const Drop = Drops.find(({name, _id}) =>
-            name === param.name || _id === param._id
+            name === param.name || JSON.stringify(_id) === JSON.stringify(param._id)
         )
 
         if (!Drop) {

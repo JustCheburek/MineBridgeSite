@@ -1,32 +1,66 @@
 "use server";
-
-import axios from "axios";
-import {User} from "lucia";
-import {revalidateTag} from "next/cache";
-import {MBSESSION, SocialName} from "@/const";
+import {cookies} from "next/headers";
+import {MBSESSION} from "@/const";
 import {AddWLConsole, RconVC, RemoveWLConsole} from "@server/console";
 import {userModel} from "@server/models";
+import {revalidateTag} from "next/cache";
+import {User} from "lucia";
 import {Action, Punishment} from "@/types/punishment";
-import type {GuildDSUser} from "@/types/user";
 import {CaseData, CasePurchase} from "@/types/purchase";
+import axios from "axios";
 import {Social} from "@/types/url";
-import {redirect} from "next/navigation";
-import {cookies} from "next/headers";
+import type {GuildDSUser} from "@/types/user";
+import {EmailTemplate} from "@app/admin/email/emailTemplate";
+import {Resend} from "resend";
+import {getUser, getUsers} from "@/services";
+import {Who} from "@app/admin/email/components";
 
-export async function Logout() {
-    (await cookies()).delete(MBSESSION)
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+function chunk<T>(arr: T[], size: number) {
+    return Array.from({
+        // длина списка в сотках
+        length: Math.ceil(arr.length / size)
+    }, (_, i) =>
+        // каждая сотка, начиная с 0
+        arr.slice(i * size, (i + 1) * size)
+    );
 }
 
-export async function AddWhitelist(_id: string, name: string) {
-    try {
-        await AddWLConsole(name)
+export async function SendEmail(formData: FormData) {
+    const who = formData.get("who") as Who
 
-        await userModel.findByIdAndUpdate(_id, {whitelist: true})
-    } catch (e) {
-        console.error(e)
+    if (who === "person") {
+        const name = formData.get("name") as string
+
+        const {user} = await getUser({name})
+
+        if (!user) {
+            throw new Error("Игрок не найден")
+        }
+
+        await resend.emails.send({
+            from: 'Майнбридж <no-reply@m-br.ru>',
+            to: user.email, // user.email,
+            subject: 'MineBridge 7 сезон',
+            react: EmailTemplate({name: user.name})
+        })
+
+        return
     }
 
-    revalidateTag(`userLike`)
+    const batchSize = 100;
+    const users = await getUsers();
+
+    for (const batch of chunk(users, batchSize)) {
+        const emails = batch.map((user) => ({
+            from: 'Майнбридж <no-reply@m-br.ru>',
+            to: user.email,
+            subject: 'MineBridge 7 сезон',
+            react: EmailTemplate({name: user.name})
+        }));
+        await resend.batch.send(emails);
+    }
 }
 
 export async function CheckActions(user: User, actions: Action[]) {
@@ -137,18 +171,20 @@ export async function CheckActions(user: User, actions: Action[]) {
     }
 }
 
-export async function SavePunishments(_id: string, data: Punishment[]) {
-    await userModel.findByIdAndUpdate(
-        _id,
-        {
-            punishments: data,
-            rating: data.reduce(
-                (accum, {rating}) => accum + rating, 0
-            )
-        }
-    )
+export async function Logout() {
+    (await cookies()).delete(MBSESSION)
+}
 
-    revalidateTag("userLike")
+export async function AddWhitelist(_id: string, name: string) {
+    try {
+        await AddWLConsole(name)
+
+        await userModel.findByIdAndUpdate(_id, {whitelist: true})
+    } catch (e) {
+        console.error(e)
+    }
+
+    revalidateTag(`userLike`)
 }
 
 export async function AddPunishment(user: User, punishment: Punishment, actions: Action[]) {
@@ -192,25 +228,6 @@ export async function AddCasePurchase(_id: string, casePurchase: CaseData, acces
     )
 
     revalidateTag("userLike")
-}
-
-export async function GetAll(name: string, caseDatas: CaseData[]) {
-    function wait(ms: number) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve("Готово");
-            }, ms);
-        });
-    }
-
-    const client = await RconVC()
-
-    for (const {DropItem, Item} of caseDatas) {
-        if (DropItem.name !== "suffix") {
-            await client.run(`lpv user ${name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
-            await wait(1000)
-        }
-    }
 }
 
 export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
@@ -272,15 +289,4 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
     await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})
 
     revalidateTag("userLike")
-
-    return
-}
-
-export async function DeleteUser(_id: string) {
-    "use server"
-
-    await userModel.findByIdAndDelete(_id)
-
-    revalidateTag("userLike")
-    redirect("/auth")
 }

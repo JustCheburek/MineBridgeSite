@@ -1,9 +1,7 @@
 // Сервер
 import type {Metadata} from "next";
-import {permanentRedirect} from "next/navigation";
+import {redirect} from "next/navigation";
 import {validate} from "@services/validate";
-import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
 
 // Компоненты
 import {MostikiSvg, SBPSvg} from "@ui/SVGS";
@@ -26,11 +24,10 @@ export const metadata: Metadata = {
 }
 
 export default async function Component() {
-    const cookiesStore = await cookies()
     const {user} = await validate()
 
     if (!user) {
-        return permanentRedirect("/auth")
+        return redirect("/auth")
     }
 
     return (<>
