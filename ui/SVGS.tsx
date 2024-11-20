@@ -42,11 +42,11 @@ export const MostikiSvg = ({className = "", width = "1.1em", height = "0.85em", 
     </svg>
 )
 
-export const MinebridgeSvg = ({className = "", size = "100%", ...props}: SizeSvg) => (
+export const MinebridgeSvg = ({className = "", size = "100%", style = {}, ...props}: SizeSvg) => (
     <svg
         xmlSpace="preserve" viewBox="0 0 192 192"
         className={className}
-        style={{width: size, height: size}} {...props}
+        style={{width: size, height: size, ...style}} {...props}
     >
         <path
             fill="#33adb4"

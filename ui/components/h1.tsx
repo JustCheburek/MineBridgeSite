@@ -23,7 +23,7 @@ const RelativeNav = ({paths}: { paths: RelativePath[] }) => (
 
             return (
                 <span key={path.name}>
-                    <Link href={absolutePath} key={path.name}>{path.displayname}</Link>
+                    <Link href={absolutePath}>{path.displayname}</Link>
                     <span className={styles.nav_arrow}> {">"} </span>
                 </span>
             )

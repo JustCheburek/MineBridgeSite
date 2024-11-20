@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
     ]
   },
   sassOptions: {
-    silenceDeprecations: ["legacy-js-api"],
+    silenceDeprecations: ["legacy-js-api"]
   },
   experimental: {
     ppr: 'incremental',
