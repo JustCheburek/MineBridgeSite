@@ -51,12 +51,16 @@ export function CasesPurchasesSection(
           }}>
             <FormButton disabled={click}>
                 {click
-                    ? "Проверьте покупки в игре /uc menu"
+                    ? "Проверьте покупки"
                     : "Получить покупки"
                 }
             </FormButton>
           </FormBox>
         }
+
+        <p className="center_text">
+            <code>/uc menu</code> для использования косметики
+        </p>
 
         <div className={styles.purchases}>
             {caseDatas.map(({rarity, Item, DropItem, Case, Drop}) => {
