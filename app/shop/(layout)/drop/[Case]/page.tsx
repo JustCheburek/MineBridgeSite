@@ -17,13 +17,9 @@ export const generateMetadata = async (
     const {Case: CaseName} = await params
     const Case = await getCase({name: CaseName})
 
-    const title = `${Case.displayname} кейс`
-    const description = `Выберите дроп! ${Case.displayname} кейс.`
-
     return {
-        title, description,
-        openGraph: {title, description},
-        twitter: {title, description}
+        title: `${Case.displayname} кейс`,
+        description: `Выберите дроп! ${Case.displayname} кейс.`
     }
 }
 

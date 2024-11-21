@@ -49,13 +49,9 @@ export const generateMetadata = async (
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`)
     }
 
-    const title = `${Item.displayname} • ${Case.displayname} кейс • ${RarityNames[rarity]} дроп: ${DropTitle}`
-    const description = `${Item.displayname}! ${RarityNames[rarity]} дроп: ${DropTitle}. ${Case.displayname} кейс.`
-
     return {
-        title, description,
-        openGraph: {title, description},
-        twitter: {title, description}
+        title: `${Item.displayname} • ${Case.displayname} кейс • ${RarityNames[rarity]} дроп: ${DropTitle}`,
+        description: `${Item.displayname}! ${RarityNames[rarity]} дроп: ${DropTitle}. ${Case.displayname} кейс.`
     }
 }
 

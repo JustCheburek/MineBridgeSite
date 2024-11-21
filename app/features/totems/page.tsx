@@ -19,15 +19,7 @@ declare module 'csstype' {
 
 export const metadata: Metadata = {
     title: "Тотемы",
-    description: "Оставьте свой след в истории!",
-    openGraph: {
-        title: "Тотемы",
-        description: "Оставьте свой след в истории!",
-    },
-    twitter: {
-        title: "Тотемы",
-        description: "Оставьте свой след в истории!",
-    }
+    description: "Оставьте свой след в истории!"
 };
 
 export default function Totems() {

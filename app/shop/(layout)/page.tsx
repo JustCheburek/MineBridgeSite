@@ -10,22 +10,14 @@ import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, 
 import {MostikiSvg} from "@ui/SVGS";
 import {Url} from "@components/button";
 import {Img, ImgBox} from "@components/img";
-import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
+import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {H1} from "@components/h1";
 import {Suspense} from "react";
 import {Skeleton} from "@components/skeleton";
 
 export const metadata: Metadata = {
     title: "Магазин",
-    description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",
-    openGraph: {
-        title: "Магазин",
-        description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",
-    },
-    twitter: {
-        title: "Магазин",
-        description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!",
-    }
+    description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!"
 };
 
 export default async function Shop() {

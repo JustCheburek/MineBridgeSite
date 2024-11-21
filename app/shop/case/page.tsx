@@ -4,8 +4,6 @@ import {getCases, getDrops} from "@/services";
 import {validate} from "@services/validate";
 import {userModel} from "@server/models";
 import {Info} from "@/types/case";
-import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
 import {revalidateTag} from "next/cache";
 import {Case} from "@/types/case";
 import {Drop} from "@/types/case";
@@ -16,19 +14,10 @@ import {RconVC} from "@server/console";
 
 export const metadata: Metadata = {
     title: "Кейсы",
-    description: "Здесь можно расслабится и покрутить кейсы. Интересно, что же выпадет?",
-    openGraph: {
-        title: "Кейсы",
-        description: "Здесь можно расслабится и покрутить кейсы. Интересно, что же выпадет?",
-    },
-    twitter: {
-        title: "Кейсы",
-        description: "Здесь можно расслабится и покрутить кейсы. Интересно, что же выпадет?",
-    }
+    description: "Здесь можно расслабится и покрутить кейсы. Интересно, что же выпадет?"
 };
 
 export default async function CasePage() {
-    const cookiesStore = await cookies()
     const {user} = await validate()
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 

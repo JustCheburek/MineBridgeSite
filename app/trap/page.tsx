@@ -9,13 +9,7 @@ export const metadata: Metadata = {
     title: "Ловушка",
     description: "Ты попал в ловушку, поздравляю!",
     openGraph: {
-        title: "Ловушка",
-        description: "Ты попал в ловушку, поздравляю!",
         videos: ["https://youtu.be/2Xwc-WBO5yU&t=3s"]
-    },
-    twitter: {
-        title: "Ловушка",
-        description: "Ты попал в ловушку, поздравляю!",
     }
 };
 

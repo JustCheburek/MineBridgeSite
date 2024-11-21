@@ -6,15 +6,7 @@ import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
     title: "Выберите кейс",
-    description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
-    openGraph: {
-        title: "Выберите кейс",
-        description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
-    },
-    twitter: {
-        title: "Выберите кейс",
-        description: "Выберите кейс для продолжения просмотра дропа с этого кейса!",
-    }
+    description: "Выберите кейс для продолжения просмотра дропа с этого кейса!"
 };
 
 export default async function Cases() {

@@ -12,15 +12,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Регистрация",
-	description: "Нужен лишь гугл или дискорд и вы уже на сервере!",
-	openGraph: {
-		title: "Регистрация",
-		description: "Нужен лишь гугл или дискорд и вы уже на сервере!",
-	},
-	twitter: {
-		title: "Регистрация",
-		description: "Нужен лишь гугл или дискорд и вы уже на сервере!",
-	}
+	description: "Нужен лишь гугл или дискорд и вы уже на сервере!"
 };
 
 export default async function Auth() {

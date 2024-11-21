@@ -12,15 +12,7 @@ import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
     title: "Покупка",
-    description: "Покупка мостиков с помощью СБП. 1₽ = 1 мостик. Подержите нас донатиком, пж!",
-    openGraph: {
-        title: "Покупка",
-        description: "Покупка мостиков с помощью СБП. 1₽ = 1 мостик. Подержите нас донатиком, пж!",
-    },
-    twitter: {
-        title: "Покупка",
-        description: "Покупка мостиков с помощью СБП. 1₽ = 1 мостик. Подержите нас донатиком, пж!",
-    }
+    description: "Покупка мостиков: 1₽ = 1 мостик. Подержите нас донатиком, пж!"
 }
 
 export default async function Component() {

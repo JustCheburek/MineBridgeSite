@@ -84,23 +84,12 @@ export const metadata: Metadata = {
         url: "https://t.me/VeBrau"
     }],
     openGraph: {
-        title: {
-            template: "%s • МайнБридж - майнкрафт сервер",
-            default: "Майнбридж - майнкрафт сервер",
-        },
-        description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
-        url: process.env.NEXT_PUBLIC_RU_URL!,
         siteName: "MineBridge",
         locale: "ru_RU",
         type: "website"
     },
     twitter: {
         card: "summary_large_image",
-        title: {
-            template: "%s • МайнБридж - майнкрафт сервер",
-            default: "Майнбридж - майнкрафт сервер",
-        },
-        description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
         images: [{
             url: "/logos/256x256/logo.png",
             alt: "Лого майнбриджа",

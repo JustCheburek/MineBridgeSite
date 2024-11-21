@@ -6,13 +6,7 @@ export const metadata: Metadata = {
 	title: "Запись учёного",
 	description: "Лоооор! 6 сезон!",
 	openGraph: {
-		title: "Запись учёного",
-		description: "Лоооор! 6 сезон!",
 		videos: ["https://youtu.be/5dg0SFRSDh4"]
-	},
-	twitter: {
-		title: "Запись учёного",
-		description: "Лоооор! 6 сезон!",
 	},
 };
 

@@ -15,20 +15,16 @@ import {User} from "lucia";
 import {NameParams} from "@/types/params";
 import TimeAgo from "javascript-time-ago";
 
-export const generateMetadata = async ({params}: NameParams): Promise<Metadata> => {
+export const generateMetadata = async (
+    {
+        params
+    }: NameParams
+): Promise<Metadata> => {
     const {name} = await params
 
     return {
-        title: `${name}`,
-        description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
-        openGraph: {
-            title: `${name}`,
-            description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
-        },
-        twitter: {
-            title: `${name}`,
-            description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
-        }
+        title: name,
+        description: `${name} играет на Майнбридж, а ты?)`
     }
 }
 

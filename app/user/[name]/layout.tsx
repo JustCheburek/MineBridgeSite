@@ -39,7 +39,7 @@ export default async function UserLayout(
         "@type": "ProfilePage",
         name: name,
         image: user.photo,
-        description: `Игрок ${name} играет на Майнбридж, а ты так не можешь что ли?`,
+        description: `${name} играет на Майнбридж, а ты?)`,
         url: `${process.env.NEXT_PUBLIC_RU_URL}/user/${name}`,
         // @ts-ignore
         dateCreated: user?.createdAt?.toString() || user?.date?.toString() || new Date().toString(),

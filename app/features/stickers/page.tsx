@@ -10,15 +10,7 @@ import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Стикеры",
-	description: "Можно добавить себе в телеграм. Нарисованы руками игроков сервера!",
-	openGraph: {
-		title: "Стикеры",
-		description: "Можно добавить себе в телеграм. Нарисованы руками игроков сервера!",
-	},
-	twitter: {
-		title: "Стикеры",
-		description: "Можно добавить себе в телеграм. Нарисованы руками игроков сервера!",
-	}
+	description: "Можно добавить себе в телеграм. Нарисованы руками художников сервера!"
 };
 
 export default function Stickers() {

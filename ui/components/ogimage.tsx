@@ -29,10 +29,10 @@ export function OGImageBox({children, paths}: PropsWithChildren<{ paths: string[
                     </span>
                 ))}
             </p>
-            <p style={{fontSize: 110, color: "#00A7B1", fontWeight: 700, lineHeight: 0.85}}>
+            <p style={{fontSize: 110, color: "#00A7B1", fontWeight: 700, lineHeight: 0.85, marginBottom: 20}}>
                 MineBridge
             </p>
-            <p style={{fontSize: 42, color: "#9C9C9C", textAlign: "center", maxWidth: "60%", fontWeight: 500}}>
+            <p style={{fontSize: 42, color: "#9C9C9C", textAlign: "center", maxWidth: "65%", fontWeight: 500}}>
                 {children}
             </p>
         </div>

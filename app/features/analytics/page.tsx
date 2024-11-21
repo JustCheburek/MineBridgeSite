@@ -7,15 +7,7 @@ import {Invites, New, Online} from "./components";
 
 export const metadata: Metadata = {
 	title: "Аналитика",
-	description: "Сколько человек на сервере и откуда пришли, капец!",
-	openGraph: {
-		title: "Аналитика",
-		description: "Сколько человек на сервере и откуда пришли, капец!",
-	},
-	twitter: {
-		title: "Аналитика",
-		description: "Сколько человек на сервере и откуда пришли, капец!",
-	}
+	description: "Количество онлайна и новичков на сервере, капец!"
 };
 
 export default async function Analytics() {

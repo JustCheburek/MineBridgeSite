@@ -14,16 +14,8 @@ import {Img, ImgBox} from "@components/img";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-	title: "Brewery",
-	description: "Гайд на плагин Brewery! Ферментация (горячий котёл), дистилляция (зельеварка), выдержка (маленькая и большая бочки). Рецепты алкоголя на сервере MineBridge!",
-	openGraph: {
-		title: "Brewery",
-		description: "Гайд на плагин Brewery! Ферментация (горячий котёл), дистилляция (зельеварка), выдержка (маленькая и большая бочки). Рецепты алкоголя на сервере MineBridge!",
-	},
-	twitter: {
-		title: "Brewery",
-		description: "Гайд на плагин Brewery! Ферментация (горячий котёл), дистилляция (зельеварка), выдержка (маленькая и большая бочки). Рецепты алкоголя на сервере MineBridge!",
-	}
+	title: "BreweryX",
+	description: "Гайд на плагин BreweryX! Ферментация (горячий котёл), дистилляция (зельеварка), выдержка (маленькая и большая бочки). Рецепты разных напитков на сервере MineBridge!"
 };
 
 export default function Brewery() {
@@ -38,7 +30,7 @@ export default function Brewery() {
 				</H1>
 
 				<p className="center_text">
-					Плагин на дополнительные алкогольные напитки
+					Плагин на дополнительные дополнительные напитки
 				</p>
 
 				<PBox>

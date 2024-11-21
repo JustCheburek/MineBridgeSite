@@ -2,8 +2,6 @@ import {getCaseLocal, getCases, getDropLocal, getDrops, getItems, getUser} from 
 import {validate} from "@services/validate";
 import {CaseData} from "@/types/purchase";
 import {revalidateTag} from "next/cache";
-import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
 import styles from "./history.module.scss";
 import {PunishmentSection} from "./components/ratingSection";
 import {CasesPurchasesSection} from "./components/casesPurchasesSection";
@@ -16,21 +14,12 @@ export const generateMetadata = async ({params}: NameParams) => {
 
     return {
         title: `${name} > Истории действий`,
-        description: `История рейтинга и всяких покупок игрока ${name}!`,
-        openGraph: {
-            title: `${name} > Истории действий`,
-            description: `История рейтинга и всяких покупок игрока ${name}!`,
-        },
-        twitter: {
-            title: `${name} > Истории действий`,
-            description: `История рейтинга и всяких покупок игрока ${name}!`,
-        }
+        description: `История рейтинга и всяких покупок игрока ${name}!`
     }
 }
 
 export default async function History({params}: NameParams) {
     const {name} = await params
-    const cookiesStore = await cookies()
     const {user: author, isModer, isAdmin} = await validate()
     const {
         user, isMe

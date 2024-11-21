@@ -13,15 +13,7 @@ import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
     title: "Моды",
-    description: "Списки разрешённых и запрещённых дополнений. Здесь также есть сборки!",
-    openGraph: {
-        title: "Моды",
-        description: "Списки разрешённых и запрещённых дополнений. Здесь также есть сборки!",
-    },
-    twitter: {
-        title: "Моды",
-        description: "Списки разрешённых и запрещённых дополнений. Здесь также есть сборки!",
-    }
+    description: "Списки разрешённых и запрещённых дополнений. Здесь также есть сборки!"
 };
 
 export default function Mods() {
@@ -32,7 +24,7 @@ export default function Mods() {
         name: "Сборка модов от Kawa11Fox 1.20.4",
         url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
     }, {
-        name: "Сборка модов от JustCheburek 1.21?",
+        name: "Сборка модов от JustCheburek 1.20.4",
         url: new URL("https://modrinth.com/modpack/minebridge-pack")
     }]
 

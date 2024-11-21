@@ -29,13 +29,9 @@ export const generateMetadata = async (
         DropTitle += ` (${Drop.displayname})`
     }
 
-    const title = `${Case.displayname} кейс • ${DropTitle}`
-    const description = `Выберите редкость дропа: ${DropTitle}! ${Case.displayname} кейс.`
-
     return {
-        title, description,
-        openGraph: {title, description},
-        twitter: {title, description}
+        title: `${Case.displayname} кейс • ${DropTitle}`,
+        description: `Выберите редкость дропа: ${DropTitle}! ${Case.displayname} кейс.`
     }
 }
 

@@ -9,16 +9,8 @@ import {PBox, PText, PTitle} from "@components/post";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Вход на сервер",
-    description: "Вход на сервер с помощью Java + Bedrock Edition. Как войти с компьютера и телефона?",
-    openGraph: {
-        title: "Вход на сервер",
-        description: "Вход на сервер с помощью Java + Bedrock Edition. Как войти с компьютера и телефона?",
-    },
-    twitter: {
-        title: "Вход на сервер",
-        description: "Вход на сервер с помощью Java + Bedrock Edition. Как войти с компьютера и телефона?",
-    }
+    title: "Регистрация",
+    description: "Регистрация на сервере с помощью Java + Bedrock Edition. Как войти с компьютера и телефона?"
 };
 
 export default function Bedrock() {
@@ -27,9 +19,9 @@ export default function Bedrock() {
             <H1 paths={[
                 {name: "features", displayname: "Фичи"},
                 {name: "guides", displayname: "Гайды"},
-                {name: "auth", displayname: "Вход"}
+                {name: "auth", displayname: "Регистрация"}
             ]}>
-                Вход
+                Регистрация
             </H1>
 
             <PBox>
