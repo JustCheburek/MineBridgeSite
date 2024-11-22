@@ -24,9 +24,9 @@ export default function Brewery() {
 				<H1 up paths={[
 					{name: "features", displayname: "Фичи"},
 					{name: "guides", displayname: "Гайды"},
-					{name: "brewery", displayname: "Brewery"}
+					{name: "brewery", displayname: "BreweryX"}
 				]}>
-					Brewery
+					BreweryX
 				</H1>
 
 				<p className="center_text">
