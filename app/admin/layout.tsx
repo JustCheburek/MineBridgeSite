@@ -1,6 +1,13 @@
 import {PropsWithChildren} from "react";
 import {validate} from "@services/validate";
 import {redirect} from "next/navigation";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    robots: {
+        index: false
+    },
+}
 
 export default async function Layout({children}: PropsWithChildren) {
     const {isAdmin} = await validate()

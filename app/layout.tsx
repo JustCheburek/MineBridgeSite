@@ -35,6 +35,10 @@ export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_RU_URL!),
     creator: "JustCheburek",
     applicationName: "MineBridge",
+    category: "game",
+    alternates: {
+        canonical: './',
+    },
     icons: [{
         url: "/logos/256x256/logo.png",
         sizes: "256x256",
@@ -49,7 +53,7 @@ export const metadata: Metadata = {
         type: "image/png",
         rel: "apple-touch-icon"
     }, {
-        url: "/logos/180x180/logo.png",
+        url: "/logos/150x150/logo.png",
         sizes: "150x150",
         type: "image/png"
     }, {
@@ -86,18 +90,90 @@ export const metadata: Metadata = {
     openGraph: {
         siteName: "MineBridge",
         locale: "ru_RU",
-        type: "website"
-    },
-    alternates: {
-        canonical: './',
-    },
-    twitter: {
-        card: "summary_large_image",
+        countryName: "Russia",
+        emails: "russkielul@gmail.com",
+        url: "./",
+        type: "website",
         images: [{
             url: "/logos/256x256/logo.png",
             alt: "Лого майнбриджа",
             width: 256,
             height: 256
+        }, {
+            url: "/logos/192x192/logo.png",
+            alt: "Лого майнбриджа",
+            width: 192,
+            height: 192,
+            type: "image/png"
+        }, {
+            url: "/logos/180x180/logo.png",
+            alt: "Лого майнбриджа",
+            width: 180,
+            height: 180,
+            type: "image/png"
+        }, {
+            url: "/logos/150x150/logo.png",
+            alt: "Лого майнбриджа",
+            width: 150,
+            height: 150,
+            type: "image/png"
+        }, {
+            url: "/logos/120x120/logo.png",
+            alt: "Лого майнбриджа",
+            width: 128,
+            height: 128,
+            type: "image/png"
+        }, {
+            url: "/logos/64x64/logo.png",
+            alt: "Лого майнбриджа",
+            width: 64,
+            height: 64,
+            type: "image/png"
+        }, {
+            url: "/logos/svg/logo.svg",
+            type: "image/svg+xml"
+        }]
+    },
+    twitter: {
+        card: "summary",
+        images: [{
+            url: "/logos/256x256/logo.png",
+            alt: "Лого майнбриджа",
+            width: 256,
+            height: 256
+        }, {
+            url: "/logos/192x192/logo.png",
+            alt: "Лого майнбриджа",
+            width: 192,
+            height: 192,
+            type: "image/png"
+        }, {
+            url: "/logos/180x180/logo.png",
+            alt: "Лого майнбриджа",
+            width: 180,
+            height: 180,
+            type: "image/png"
+        }, {
+            url: "/logos/150x150/logo.png",
+            alt: "Лого майнбриджа",
+            width: 150,
+            height: 150,
+            type: "image/png"
+        }, {
+            url: "/logos/120x120/logo.png",
+            alt: "Лого майнбриджа",
+            width: 128,
+            height: 128,
+            type: "image/png"
+        }, {
+            url: "/logos/64x64/logo.png",
+            alt: "Лого майнбриджа",
+            width: 64,
+            height: 64,
+            type: "image/png"
+        }, {
+            url: "/logos/svg/logo.svg",
+            type: "image/svg+xml"
         }]
     }
 }

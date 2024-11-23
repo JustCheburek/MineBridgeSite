@@ -1,39 +1,39 @@
 {
-    "name": "Майнбридж",
-    "short_name": "MB",
-    "start_url": "/",
-    "icons": [
-        {
-            "src": "logos/120x120/logo.png",
-            "sizes": "120x120",
-            "type": "image/png"
-        },
-        {
-            "src": "logos/150x150/logo.png",
-            "sizes": "150x150",
-            "type": "image/png"
-        },
-        {
-            "src": "logos/180x180/logo.png",
-            "sizes": "180x180",
-            "type": "image/png"
-        },
-        {
-            "src": "logos/192x192/logo.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "logos/256x256/logo.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        },
-        {
-            "src": "logos/svg/logo.svg",
-            "type": "image/svg+xml"
-        }
-    ],
-    "theme_color": "#33ADB4",
-    "background_color": "#161C20",
-    "display": "standalone"
+  "name": "Майнбридж",
+  "short_name": "MB",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "logos/120x120/logo.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "logos/150x150/logo.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    },
+    {
+      "src": "logos/180x180/logo.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "logos/192x192/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logos/256x256/logo.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "logos/svg/logo.svg",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#33ADB4",
+  "background_color": "#161C20",
+  "display": "standalone"
 }

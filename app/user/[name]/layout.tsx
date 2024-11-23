@@ -18,9 +18,10 @@ export const generateMetadata = async ({params}: NameParams): Promise<Metadata> 
         openGraph: {
             type: "profile",
             username: name,
-            images: [
-                user.photo
-            ]
+            images: {
+                url: user.photo,
+                alt: `Ава ${name}`
+            }
         }
     }
 }
