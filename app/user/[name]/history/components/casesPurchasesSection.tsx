@@ -69,13 +69,15 @@ export function CasesPurchasesSection(
                         <Link
                             href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
                             className="flex_center"
-                            style={{width: "280px", height: "160px"}}
                             key={Item.name}
                         >
-                            <p className={`border-radius helper ${rarity}_box`}>
-                                Выберите суффикс<br/>
+                            <p
+                                className={`border-radius grid_center center_text ${rarity}_box`}
+                                style={{width: "280px", height: "160px"}}
+                            >
+                                Выберите суффикс
                                 <small>
-                                    (в разработке)
+                                    в разработке
                                 </small>
                             </p>
                         </Link>

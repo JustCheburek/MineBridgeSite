@@ -324,12 +324,12 @@ function Account({user, price}: { user: User | null, price: number }) {
 
     return (
         <>
-            <h3><Link href={`/user/${user.name}`} className="unic_color">{user.name}</Link></h3>
+            <h3><Link href={`/user/${user.name}/history`} className="unic_color">{user.name}</Link></h3>
             <p>
-                Баланс: <span
-                className={`${styles.mostiki_text} ${user.mostiki >= price ? "green_color" : "red_color"}`}>
-						{user.mostiki} <MostikiSvg/>
-					</span>
+                Баланс: {" "}
+                <span className={`${styles.mostiki_text} ${user.mostiki >= price ? "green_color" : "red_color"}`}>
+                    {user.mostiki} <MostikiSvg/>
+                </span>
             </p>
             <p>Стоимость: <span
                 className={`${styles.mostiki_text} ${user.mostiki >= price ? "green_color" : "red_color"}`}>

@@ -2,7 +2,6 @@ import {getCase, getDrop} from "@/services";
 import {Img, ImgBox} from "@components/img";
 import {Case, Drop, Item, RarityNames, type RarityType} from "@/types/case";
 import {validate} from "@services/validate";
-import {cookies} from "next/headers";
 import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";
@@ -58,7 +57,6 @@ export const generateMetadata = async (
 export default async function ShowCase(
     {params}: ParamsProp
 ) {
-    const cookiesStore = await cookies()
     const {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity, Item: ItemName} = await params
     const {user} = await validate()
 
@@ -103,17 +101,15 @@ export default async function ShowCase(
                     ? <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">
                         <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
                     </ImgBox>
-                    : <div
-                        className={`flex_center border-radius ${rarity}_box`}
+                    : <p
+                        className={`border-radius grid_center center_text ${rarity}_box`}
                         style={{width: "280px", height: "160px"}}
                     >
-                        <p>
-                            Выберите суффикс<br/>
-                            <small>
-                                (в разработке)
-                            </small>
-                        </p>
-                    </div>
+                        Выберите суффикс
+                        <small>
+                            в разработке
+                        </small>
+                    </p>
                 }
                 <div className={styles.left_text}>
                     <p className={rarity}>
