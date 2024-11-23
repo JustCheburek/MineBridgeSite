@@ -8,7 +8,7 @@ import styles from './rules.module.scss';
 
 // Компоненты
 import {Punishment, Rule, RulesBox} from "./components";
-import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
+import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {TextUrl} from "@components/textUrl";
 import {UserBox} from "@components/userBox";
 import {LASTRULESUPDATE} from "@/const";
@@ -34,8 +34,8 @@ export default function Rules() {
                         </strong>{" "}
                         <small>
                             ({LASTRULESUPDATE.toLocaleDateString("ru-RU", {
-                                dateStyle: "long"
-                            })})
+                            dateStyle: "long"
+                        })})
                         </small>
                     </time>
                 </p>
@@ -473,10 +473,10 @@ export default function Rules() {
                 </RulesBox>
 
                 <RulesBox name="roles" heading="Роли" number={9}>
-                    <Rule number={9.1}>
+                    <Rule number={9.0}>
                         На сервере действуют следующие роли, они расположены в иерархии:
                     </Rule>
-                    <Rule number={9.2}>
+                    <Rule number={9.1}>
                         <p>
                             Админ — главная часть сервера
                         </p>
@@ -486,27 +486,23 @@ export default function Rules() {
                         <UserBox _id="j8bsrsdgzqa4n0c"/>
                         <UserBox _id="i5mqq2js4nos1yj"/>
                     </Rule>
-                    <Rule number={9.3}>
+                    <Rule number={9.2}>
                         <p>
                             Модер — помощники админов
                         </p>
                         <p>
                             Модерации запрещено абьюзить свои права
                         </p>
-                        <UserBox _id="biu4vqvuev0m0tp"/>
-                        <UserBox _id="ruef6d47y245c0x"/>
-                        <UserBox _id="svp3okvcuo6062d"/>
-                        <UserBox _id="djfp8h9j2ffbdzz"/>
                         <TextUrl href="https://discord.gg/swrAFFqvH2">
                             Стать модером
                         </TextUrl>
                     </Rule>
-                    <Rule number={9.4}>
+                    <Rule number={9.3}>
                         <p>
                             Админы и модеры имеют бóльшие права, чем правила, итоговое решение остаётся за ними
                         </p>
                     </Rule>
-                    <Rule number={9.5}>
+                    <Rule number={9.4}>
                         <p>
                             Мэр мира — избирается игроками на один сезон
                         </p>
@@ -522,7 +518,7 @@ export default function Rules() {
                             Стать мэром
                         </TextUrl>
                     </Rule>
-                    <Rule number={9.6}>
+                    <Rule number={9.5}>
                         <p>
                             Художник — рисует <Link href="/features/stickers"
                                                     className="unic_color medium-font">стикеры</Link>
@@ -531,31 +527,28 @@ export default function Rules() {
                             Заказать
                         </TextUrl>
                     </Rule>
-                    <Rule number={9.7}>
+                    <Rule number={9.6}>
                         <p>
                             Тестировщик — проверяет новые фичи сервера и сайта
                         </p>
                         <p>
-                            Можно получать от 5 соц рейтинга за каждый продуктивный тест
+                            Может получать от 5 соц рейтинга за каждый продуктивный тест
                         </p>
                     </Rule>
-                    <Rule number={9.8}>
+                    <Rule number={9.7}>
                         <p>
                             Контент мейкер — стример / ютубер по MineBridge
                         </p>
                         <br/>
                         <p>
-                            Получает специальный промокод:
+                            Получает специальный промокод
                         </p>
-                        <ul>
-                            <li>
-                                Покупатель: использует при покупке мостиков и получает бесплатный кейс {" "}
-                                <small>(редкость и дроп зависит от суммы покупки)</small>
-                            </li>
-                            <li>
-                                Контент мейкер: получает бонус 10% мостиков от суммы покупки
-                            </li>
-                        </ul>
+                        <p>
+                            Покупатель: +10% мостиков к оплаченному
+                        </p>
+                        <p>
+                            Контент мейкер: +20% мостиков от суммы покупки
+                        </p>
                     </Rule>
                 </RulesBox>
 
