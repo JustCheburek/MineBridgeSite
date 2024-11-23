@@ -88,6 +88,9 @@ export const metadata: Metadata = {
         locale: "ru_RU",
         type: "website"
     },
+    alternates: {
+        canonical: './',
+    },
     twitter: {
         card: "summary_large_image",
         images: [{
