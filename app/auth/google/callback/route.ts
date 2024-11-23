@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 
         const userData = {
             _id: generateId(15),
-            name: cookiesStore.get("name")?.value || gUser.given_name || gUser.name,
+            name: cookiesStore.get("name")?.value,
             googleId: gUser.sub,
             email: gUser.email,
             photo: gUser.picture
@@ -72,10 +72,13 @@ export async function GET(request: NextRequest) {
                     googleId: userData.googleId,
                 },
                 {
-                    new: true,
-					upsert: true
+                    new: true
                 }
             )
+
+            if (!candidate) {
+                candidate = await userModel.create(userData)
+            }
 
             const session = await lucia.createSession(candidate?._id || userData._id, {});
             const sessionCookie = lucia.createSessionCookie(session.id);

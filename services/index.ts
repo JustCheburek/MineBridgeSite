@@ -132,6 +132,8 @@ export const getUsers = cache(
     async () => {
         const users = await userModel.find().lean() as unknown as User[]
 
+        console.log(users.filter(user => !user.name))
+
         users.sort(({createdAt: createdAt1}, {createdAt: createdAt2}) => {
             if (!createdAt1) return 1
             if (!createdAt2) return -1

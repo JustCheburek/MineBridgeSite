@@ -131,10 +131,13 @@ export async function GET(request: NextRequest) {
                     discordId: userData.discordId,
                 },
                 {
-                    new: true,
-                    upsert: true
+                    new: true
                 }
             )
+
+            if (!candidate) {
+                candidate = await userModel.create(userData)
+            }
 
             const session = await lucia.createSession(candidate?._id || userData._id, {});
             const sessionCookie = lucia.createSessionCookie(session.id);
