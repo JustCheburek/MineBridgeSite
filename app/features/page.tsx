@@ -9,7 +9,7 @@ import {AnalyticsSvg, BatSvg} from "@ui/SVGS";
 import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GText} from "@components/grid";
 import {Url} from "@components/button";
-import {Img, ImgBox, Totem} from "@components/img";
+import {Img, ImgBox} from "@components/img";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
@@ -90,20 +90,6 @@ export default function Features() {
                     </ImgBox>
 
                     <GText>Стикеры</GText>
-                </GBox>
-
-                <GBox href="/features/totems" imgs="three">
-                    <ImgBox className={styles.img} type="grid">
-                        <Totem src="/features/totems/kawa11fox.png" alt="Лиса" className="pixel"/>
-                    </ImgBox>
-                    <ImgBox className={styles.img} type="grid">
-                        <Totem src="/features/totems/justcheburek.png" alt="Чебурек" className="pixel"/>
-                    </ImgBox>
-                    <ImgBox className={styles.img} type="grid">
-                        <Totem src="/features/totems/kaharirn.png" alt="Кахарин" className="pixel"/>
-                    </ImgBox>
-
-                    <GText>Тотемы</GText>
                 </GBox>
 
                 <GBox href="/features/design" imgs="two">

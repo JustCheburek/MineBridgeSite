@@ -6,7 +6,7 @@ import styles from './mods.module.scss';
 
 // Компоненты
 import {NotFound} from "@components/notFound";
-import {OnThisPage, OnThisPageBox, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
+import {OnThisPage, OnThisPageBox, OnThisPageLink} from "@components/sideNav";
 import {ErrorSvg, SuccessSvg} from "@ui/SVGS";
 import Link from "next/link";
 import {H1} from "@components/h1";
@@ -66,12 +66,8 @@ export default function Mods() {
     }]
 
     const rps: NameUrl[] = [{
-        name: "Тотемы Майнбриджа (самоустановка)", url: new URL("https://modrinth.com/resourcepack/minebridge-totems")
-    }, {
-        name: "Default Dark Mode", url: new URL("https://modrinth.com/resourcepack/default-dark-mode")
-    }, {
-        name: "3D Redstone Dust",
-        url: new URL("https://modrinth.com/resourcepack/redstonetweaksresourcepack/version/1.3_3dDust")
+        name: "Звуки",
+        url: new URL("https://cdn.modrinth.com/data/nchEXr1j/versions/ab25TmXr/Sound%20Pack.zip")
     }]
 
     const blacklist: string[] = [
@@ -79,9 +75,9 @@ export default function Mods() {
         "Чит-модификации", "Модификации, позволяющие летать сквозь блоки не выходя с сервера",
         "Aristois", "Baritone", "Better PVP",
         "BetterClicker (используйте обычный автокликер, не использующий окружающую среду)",
-        "ClientCommands", "CMDCam", "FreeCam (позволяющий пролетать сквозь стенки)", "Impact", "Inertia", "Jello", "LavaClearView",
+        "ClientCommands", "CMDCam", "Impact", "Inertia", "Jello", "LavaClearView",
         "MultiConnect (используйте только ViaFabric / Forge)",
-        "SeedCracker (а также другие моды и программы, выполняющие функции этого мода)", "Sigma", "StepUp", "Tweakeroo",
+        "SeedCracker (или другие моды и программы, выполняющие функции этого мода)", "Sigma", "StepUp", "Tweakeroo",
         "Wall-Jump", "Wurst", "Xray"
     ]
 
