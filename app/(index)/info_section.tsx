@@ -29,7 +29,7 @@ const InfoSection = () => (
             </Url>
 
             <p>
-                1.20+ · Minecraft: Java + Bedrock Editions · Лицензия не обязательна
+                1.20+ · Minecraft: Java Edition · Лицензия не обязательна
             </p>
         </article>
         <article className="for_mobile">
@@ -51,7 +51,7 @@ const InfoSection = () => (
             </Url>
 
             <p>1.20+</p>
-            <p>Minecraft: Java + Bedrock Editions</p>
+            <p>Minecraft: Java Edition</p>
             <p>Лицензия не обязательна</p>
         </article>
     </section>

@@ -9,7 +9,6 @@ import {MaxSize} from "@components/maxSize";
 import {GBox, GContainer, GHint, GText} from "@components/grid";
 import {Img, ImgBox} from "@components/img";
 import {H1} from "@components/h1";
-import {AuthSvg} from "@ui/SVGS";
 
 export const metadata: Metadata = {
     title: "Гайды",
@@ -27,14 +26,6 @@ export default function Guides() {
             </H1>
 
             <GContainer border>
-                <GBox href="/features/guides/auth" imgs="one">
-                    <ImgBox type="grid">
-                        <AuthSvg size="70%"/>
-                    </ImgBox>
-
-                    <GText>Вход</GText>
-                </GBox>
-
                 <GBox href="/features/guides/crafts" imgs="two">
                     <ImgBox type="grid">
                         <Img src="/features/guides/crafts/light.png" alt="Свет" pixel/>

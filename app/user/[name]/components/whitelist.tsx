@@ -22,7 +22,7 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
         {/* todo: гайд */}
         <Link href="/features/guides/auth">
             <h4 className="unic_color medium-font">
-                Java + Bedrock Edition
+                Java Edition
             </h4>
         </Link>
         <p>

@@ -8,7 +8,6 @@ import {MaxSize} from "@components/maxSize";
 import {AuthForm} from "./components";
 import {cookies} from "next/headers";
 import {H1} from "@components/h1";
-import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: "Регистрация",
@@ -31,9 +30,6 @@ export default async function Auth() {
 				<p>
 					Вы уже близко к цели!
 				</p>
-				<Link href="/features/guides/auth" className="unic_color">
-					Подробный гайд по входу
-				</Link>
 
 				<AuthForm savedName={savedName}/>
 			</MaxSize>
