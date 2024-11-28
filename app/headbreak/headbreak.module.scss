@@ -1,0 +1,19 @@
+@use "@styles/mixins";
+
+.path {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
+}
+
+.main_path {
+  margin-bottom: 1rem;
+}
+
+.element {
+  @include mixins.border($radius: 10px);
+  width: 100%;
+  height: 5.5rem;
+  font-weight: 600;
+  font-size: var(--h3-size);
+}

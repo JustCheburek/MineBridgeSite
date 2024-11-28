@@ -7,6 +7,7 @@ import {useState} from "react";
 
 import styles from "./auth.module.scss";
 import {useChangeRadioState} from "@hooks/useChangeState";
+import Link from "next/link";
 
 export function AuthForm({savedName}: { savedName?: string }) {
     const [access, setAccess] = useState(false)
@@ -48,6 +49,20 @@ export function AuthForm({savedName}: { savedName?: string }) {
             <FormLink href={`/auth/${provider}?name=${name}`} aria-disabled={!access}>
                 Дальше
             </FormLink>
+
+            <small>
+                <Link
+                    href="https://t.me/MineBridgeOfficial/624"
+                    target="_blank"
+                    className="unic_color"
+                >
+                    Скачать обход Discord
+                </Link>
+            </small>
+            <small>
+                *Discord - запрещённая<br/>
+                в РФ платформа
+            </small>
         </DefaultFormBox>
     )
 }
