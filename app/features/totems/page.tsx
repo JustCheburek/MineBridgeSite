@@ -2,7 +2,7 @@
 import type {Metadata} from "next";
 
 // Стили
-import styles from "./totems.module.scss"
+import styles from "../features.module.scss"
 
 // Компоненты
 import {Url} from "@components/button";
@@ -19,7 +19,10 @@ declare module 'csstype' {
 
 export const metadata: Metadata = {
     title: "Тотемы",
-    description: "Оставьте свой след в истории!"
+    description: "Оставьте свой след в истории!",
+    robots: {
+        index: false
+    }
 };
 
 export default function Totems() {

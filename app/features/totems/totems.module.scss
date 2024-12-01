@@ -1,9 +1,0 @@
-@use "@styles/mixins";
-
-.img {
-	transition: 1000ms rotate !important;
-}
-
-.box:hover .img {
-	rotate: var(--_rotate);
-}

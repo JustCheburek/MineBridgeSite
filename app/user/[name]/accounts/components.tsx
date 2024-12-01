@@ -105,7 +105,6 @@ export function ChangeParam(
     const [access, setAccess] = useState(false)
     const ratingAccess = -50
 
-    // todo: более красивая форма
     return (<>
         {user.rating <= ratingAccess &&
           <div className="grid_center">

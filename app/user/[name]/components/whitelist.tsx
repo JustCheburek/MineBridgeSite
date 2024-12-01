@@ -19,7 +19,6 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
     <section className={`${styles.whitelist} grid_center center_text`}>
         <h2>Вы в Whitelist`е</h2>
 
-        {/* todo: гайд */}
         <Link href="/features/guides/auth">
             <h4 className="unic_color medium-font">
                 Java Edition
@@ -29,6 +28,7 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
             IP:{" "}
             <strong className="unic_color all_select">secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}</strong>
         </p>
+
         <Button onClick={() => setModal(true)}>
             Заново
         </Button>

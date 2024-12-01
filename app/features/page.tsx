@@ -32,10 +32,10 @@ export default function Features() {
                 </GBox>
 
                 <GBox href="/features/guides" imgs="two">
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/features/guides/thinking.png" alt="Думающий чел"/>
                     </ImgBox>
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/features/guides/blocks.png" alt="Блоки"/>
                     </ImgBox>
 
@@ -43,10 +43,10 @@ export default function Features() {
                 </GBox>
 
                 <GBox href="/rules/mods" imgs="two">
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/features/mods/replay_mod.png" alt="Реплей мод"/>
                     </ImgBox>
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/features/mods/voice_chat.png" alt="Войс чат"/>
                     </ImgBox>
 
@@ -54,7 +54,7 @@ export default function Features() {
                 </GBox>
 
                 <GBox href={`http://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`} anotherSite imgs="one">
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/features/map.png" alt="Карта"/>
                     </ImgBox>
 
@@ -79,13 +79,13 @@ export default function Features() {
                 </GBox>
 
                 <GBox href="/features/stickers" imgs="three">
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/features/stickers/10.png" alt="Стикер"/>
                     </ImgBox>
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/features/stickers/0.png" alt="Стикер"/>
                     </ImgBox>
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/features/stickers/8.png" alt="Стикер"/>
                     </ImgBox>
 
@@ -93,10 +93,10 @@ export default function Features() {
                 </GBox>
 
                 <GBox href="/features/design" imgs="two">
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/index/unic/heart.webp" alt="Сердце" pixel/>
                     </ImgBox>
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <Img src="/index/unic/calendar.webp" alt="Календарь" pixel/>
                     </ImgBox>
 
@@ -104,7 +104,7 @@ export default function Features() {
                 </GBox>
 
                 <GBox href="/features/analytics" imgs="one">
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
                         <AnalyticsSvg size="90%"/>
                     </ImgBox>
 
@@ -112,7 +112,7 @@ export default function Features() {
                 </GBox>
 
                 {/*<GBox href="/features/plugins">
-                    <ImgBox className={styles.img} type="grid">
+                    <ImgBox type="grid">
 
                     </ImgBox>
 

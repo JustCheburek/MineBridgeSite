@@ -29,7 +29,7 @@ const InfoSection = () => (
             </Url>
 
             <p>
-                1.20+ · Minecraft: Java Edition · Лицензия не обязательна
+                1.21+ · Minecraft: Java Edition · Лицензия не обязательна
             </p>
         </article>
         <article className="for_mobile">
@@ -50,7 +50,7 @@ const InfoSection = () => (
                 Влететь на сервер
             </Url>
 
-            <p>1.20+</p>
+            <p>1.21+</p>
             <p>Minecraft: Java Edition</p>
             <p>Лицензия не обязательна</p>
         </article>
