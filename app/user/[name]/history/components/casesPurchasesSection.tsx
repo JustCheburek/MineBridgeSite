@@ -4,7 +4,7 @@
 import styles from "../history.module.scss"
 
 // Сервер
-import {GetAll} from "@services/user";
+import {GetCosmetics} from "@services/user";
 import {useState} from "react";
 import {User} from "lucia";
 
@@ -46,7 +46,7 @@ export function CasesPurchasesSection(
         </h2>
         {(isMe || access) && caseDatas.length > 0 &&
           <FormBox action={() => {
-              GetAll(user.name, caseDatas)
+              GetCosmetics(user.name, caseDatas)
               setClick(true)
           }}>
             <FormButton disabled={click}>

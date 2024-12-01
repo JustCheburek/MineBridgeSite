@@ -1,6 +1,8 @@
 import {RCON} from 'minecraft-server-util'
 import {unstable_cache as cache} from "next/cache";
 
+// todo: починить консоль
+
 export const RconMB = cache(
     async () => {
         const client = new RCON()
@@ -32,7 +34,6 @@ export const AddWLConsole = cache(
         const client = await RconMB()
 
         await client.run(`whitelist add ${name}`)
-        await client.run(`whitelist add .${name}`)
     },
     ["console", "whitelist"]
 )
@@ -42,7 +43,6 @@ export const RemoveWLConsole = cache(
         const client = await RconMB()
 
         await client.run(`whitelist remove ${name}`)
-        await client.run(`whitelist remove .${name}`)
     },
     ["console", "whitelist"]
 )

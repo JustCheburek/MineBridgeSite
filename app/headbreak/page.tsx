@@ -2,6 +2,8 @@ import {Metadata} from "next";
 import {MaxSize} from "@components/maxSize";
 import {H1} from "@components/h1";
 import {HeadBreakBox} from "./components";
+import {validate} from "@services/validate";
+import {FormLink} from "@components/formBox";
 
 export const metadata: Metadata = {
     title: "Головоломка",
@@ -11,14 +13,21 @@ export const metadata: Metadata = {
     },
 }
 
-export default function HeadBreak() {
+export default async function HeadBreak() {
+    const {user} = await validate()
+
     return (
-        <MaxSize>
+        <MaxSize className="grid_center">
             <H1>
                 Головоломка
             </H1>
 
-            <HeadBreakBox/>
+            {user
+                ? <HeadBreakBox name={user.name}/>
+                : <FormLink href="/auth">
+                    Сначала зарегистрируйся
+                </FormLink>
+            }
         </MaxSize>
     )
 }

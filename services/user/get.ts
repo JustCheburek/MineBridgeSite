@@ -1,8 +1,8 @@
 "use server";
 import {CaseData} from "@/types/purchase";
-import {RconVC} from "@server/console";
+import {RconMB, RconVC} from "@server/console";
 
-export async function GetAll(name: string, caseDatas: CaseData[]) {
+export async function GetCosmetics(name: string, caseDatas: CaseData[]) {
     function wait(ms: number) {
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -19,4 +19,10 @@ export async function GetAll(name: string, caseDatas: CaseData[]) {
             await wait(1000)
         }
     }
+}
+
+export async function GetPrize(name: string) {
+    const client = await RconMB()
+
+    await client.run(`tw trigger health_prize ${name}`)
 }

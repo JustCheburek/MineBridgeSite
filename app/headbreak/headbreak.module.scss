@@ -1,9 +1,11 @@
 @use "@styles/mixins";
 
 .path {
+  @include mixins.border($radius: 25px);
+  overflow: hidden;
   display: grid;
   place-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(min(100px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(40px, 100%), 1fr));
 }
 
 .main_path {
@@ -11,9 +13,17 @@
 }
 
 .element {
-  @include mixins.border($radius: 10px);
+  @include mixins.border($radius: 0px);
   width: 100%;
   height: 5.5rem;
   font-weight: 600;
   font-size: var(--h3-size);
+}
+
+.mobile {
+  margin-block: 1.5rem;
+
+  @media (width > 580px) {
+    display: none;
+  }
 }
