@@ -15,75 +15,58 @@ import type {CaseData} from "@/types/purchase";
 // Компоненты
 import {CasesPurchasesModal} from "@modals/casesPurchases";
 import {FormBox, FormButton, FormInput, FormLabel, FormLink} from "@components/formBox";
-import {Img, ImgBox} from "@components/img";
 import Form from "next/form";
+import {Img, ImgBox} from "@components/img";
+import Link from "next/link";
+import {EditSvg} from "@ui/SVGS";
 
-interface ItemBox {
+interface Suffix {
     _id: string
     isMe: boolean
-    caseData: CaseData
+    suffix: CaseData["suffix"]
     index: number
     selected: boolean
 }
 
-function ItemBox({_id, isMe, caseData, index, selected}: ItemBox) {
-    const {DropItem, rarity, Item, suffix} = caseData
+function Suffix({_id, isMe, suffix, index, selected}: Suffix) {
+    if (suffix) {
+        return (<>
+            <p>
+                {suffix}
+            </p>
 
-    if (DropItem.name === "suffix") {
-        if (suffix) {
-            return (
-                <div
-                    className={`border-radius grid_center ${rarity}_box ${styles.item}`}
-                    style={{width: "280px", height: "160px"}}
-                >
-                    <p>
-                        {suffix}
-                    </p>
+            {selected
+                ? <small className={`unic_color ${styles.selected}`}>
+                    выбран
+                </small>
 
-                    {selected
-                        ? <small className={`unic_color ${styles.selected}`}>
-                            выбран
+                : <Form action={() => SelectSuffix(suffix, _id)} className={styles.selected}>
+                    <button>
+                        <small>
+                            выбрать
                         </small>
-
-                        : <Form action={() => SelectSuffix(suffix, _id)} className={styles.selected}>
-                            <button>
-                                <small>
-                                    выбрать
-                                </small>
-                            </button>
-                        </Form>
-                    }
-                </div>
-            )
-        }
-
-        if (!isMe) return
-
-        return (
-            <Form
-                action={(formData: FormData) => AddSuffix(formData, _id, index)}
-                className={`border-radius grid_center ${styles.item} ${rarity}_box ${styles.suffix}`}
-                style={{width: "280px", height: "160px"}}
-            >
-                <FormLabel>
-                    <FormInput
-                        name="name"
-                        placeholder="Введите суффикс"
-                        maxLength={12}
-                        required
-                    />
-                </FormLabel>
-                <FormButton>
-                    Сохранить
-                </FormButton>
-            </Form>
-        )
+                    </button>
+                </Form>
+            }
+        </>)
     }
 
+    if (!isMe) return
+
     return (
-        <ImgBox className={`border-radius ${rarity}_box helper`} hover width="280px" height="160px">
-            <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
-        </ImgBox>
+        <FormBox action={(formData: FormData) => AddSuffix(formData, _id, index)}>
+            <FormLabel>
+                <FormInput
+                    name="name"
+                    placeholder="Суффикс (не меняется)"
+                    maxLength={15}
+                    required
+                />
+            </FormLabel>
+            <FormButton>
+                Сохранить
+            </FormButton>
+        </FormBox>
     )
 }
 
@@ -91,6 +74,7 @@ type CasesPurchasesSection = {
     caseDatas: CaseData[]
     access: boolean
     isMe: boolean
+    isAdmin: boolean
     user: User
     Cases: Case[]
     Drops: Drop[]
@@ -133,18 +117,38 @@ export function CasesPurchasesSection(
         </p>
 
         <div className={styles.purchases}>
-            {caseDatas.map((caseData, index) => (
+            {caseDatas.map(({Case, Drop, DropItem, rarity, Item, suffix}, index) => (
                     <div
-                        className="flex_center"
+                        style={{width: "280px", height: "160px"}}
+                        className={`border-radius grid_center ${styles.item} ${rarity}_box`}
                         key={index}
                     >
-                        <ItemBox
-                            _id={_id}
-                            isMe={isMe}
-                            caseData={caseData}
-                            index={index}
-                            selected={user.suffix === caseData.suffix}
-                        />
+                        {DropItem.name === "suffix"
+                            ? <Suffix
+                                _id={_id}
+                                isMe={isMe}
+                                suffix={suffix}
+                                index={index}
+                                selected={user.suffix === suffix}
+                            />
+                            :
+                            <ImgBox hover width="280px" height="160px">
+                                <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
+                            </ImgBox>
+                        }
+
+                        <Link
+                            href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
+                            className="helper"
+                        >
+                            ?
+                        </Link>
+
+                        {/*{access &&
+                          <div className={styles.actions}>
+                            <EditSvg size="1.3rem" className="helper_button"/>
+                          </div>
+                        }*/}
                     </div>
                 )
             )}

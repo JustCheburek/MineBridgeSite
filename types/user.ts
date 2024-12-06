@@ -51,7 +51,7 @@ export class User {
     @prop({type: () => [CasePurchase]})
     public casesPurchases!: CasePurchase[]
 
-    @prop({trim: true, maxlength: 12})
+    @prop({trim: true, maxlength: 15})
     public suffix?: string
 
     @prop({type: () => [StickerPurchase]})

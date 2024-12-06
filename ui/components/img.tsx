@@ -48,15 +48,20 @@ export const ImgBox = (
         hover = true
     }
 
-    return (
+    return (<>
         <figure
-            className={`flex_center ${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${helper ? "helper" : ""} ${className}`}
+            className={`flex_center ${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${helper ? "pointer" : ""} ${className}`}
             style={{...backgroundStyle, ...overflowStyle, width, height, ...style}}
             {...props}
         >
             {children}
+            {helper &&
+              <p className="helper">
+                ?
+              </p>
+            }
         </figure>
-    )
+    </>)
 }
 
 export const Img = (

@@ -191,21 +191,8 @@ iframe {
 }
 
 // Помогатор
-.helper:hover::after {
-  color: var(--unic-color);
-}
-
-.helper::after {
-  content: "i";
-
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  display: grid;
-  place-items: center;
-
-  font-weight: 500;
+.helper_button, .helper {
+  color: white;
 
   width: 1.5em;
   height: 1.5em;
@@ -213,6 +200,21 @@ iframe {
   @include mixins.border($background: var(--info-bg-color), $color: var(--info-border-color));
 
   transition: var(--short-transition) color;
+}
+
+.helper_button:hover, .helper:hover {
+  color: var(--unic-color);
+}
+
+.helper {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  display: grid;
+  place-items: center;
+
+  font-weight: 500;
 }
 
 @media (width >= 1024px) {

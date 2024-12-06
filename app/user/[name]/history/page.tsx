@@ -47,7 +47,9 @@ export default async function History({params}: NameParams) {
                 JSON.stringify(_id) === JSON.stringify(purchase.Item)
             )
 
-            if (!Item) return console.error("No item")
+            if (!Item) {
+                return console.error("No item")
+            }
 
             caseDatas.push({
                 ...purchase,

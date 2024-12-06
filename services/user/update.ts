@@ -219,7 +219,7 @@ export async function SelectSuffix(suffix: string, _id: string) {
 export async function AddSuffix(formData: FormData, _id: string, index: number) {
     const suffix = formData.get("name") as string
 
-    const user = await userModel.findById(_id)
+    const user = await userModel.findByIdAndUpdate(_id)
 
     if (!user) {
         throw new Error(`Пользователь не найден`)

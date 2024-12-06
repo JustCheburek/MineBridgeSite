@@ -117,7 +117,7 @@ export function CaseBox({Case}: { Case: Case }) {
     const [modal, setModal] = useState(false)
 
     return (<>
-        <ImgBox className="pointer helper" onClick={() => setModal(true)} hover overflow={false}>
+        <ImgBox helper onClick={() => setModal(true)} hover overflow={false}>
             <Img
                 src={`/shop/${Case.name}.png`} alt={`${Case.displayname} кейс`}
                 width={185}
