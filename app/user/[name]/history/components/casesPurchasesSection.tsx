@@ -18,7 +18,6 @@ import {FormBox, FormButton, FormInput, FormLabel, FormLink} from "@components/f
 import Form from "next/form";
 import {Img, ImgBox} from "@components/img";
 import Link from "next/link";
-import {EditSvg} from "@ui/SVGS";
 
 interface Suffix {
     _id: string
@@ -74,7 +73,6 @@ type CasesPurchasesSection = {
     caseDatas: CaseData[]
     access: boolean
     isMe: boolean
-    isAdmin: boolean
     user: User
     Cases: Case[]
     Drops: Drop[]
