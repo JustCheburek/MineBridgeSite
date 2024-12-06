@@ -1,6 +1,6 @@
 "use server";
 import {userModel} from "@server/models";
-import {revalidateTag} from "next/cache";
+import {unstable_expireTag as expireTag} from "next/cache";
 import {redirect} from "next/navigation";
 
 export async function DeleteUser(_id: string) {
@@ -8,6 +8,6 @@ export async function DeleteUser(_id: string) {
 
     await userModel.findByIdAndDelete(_id)
 
-    revalidateTag("userLike")
+    expireTag("userLike")
     redirect("/auth")
 }

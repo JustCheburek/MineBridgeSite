@@ -8,7 +8,7 @@ import {Season} from "@/types/season";
 import {cookies} from "next/headers";
 import {lucia} from "@server/lucia";
 import {seasonModel} from "@server/models";
-import {revalidateTag} from "next/cache";
+import {unstable_expireTag as expireTag} from "next/cache";
 
 export default async function News(
 		{
@@ -28,7 +28,7 @@ export default async function News(
 			endAt: new Date(season.endAt)
 		})
 
-		revalidateTag("seasons")
+		expireTag("seasons")
 	}
 
 	return (

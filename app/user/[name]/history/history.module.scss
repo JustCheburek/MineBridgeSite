@@ -9,3 +9,18 @@
 	flex-wrap: wrap;
 	justify-content: center;
 }
+
+.item {
+	position: relative;
+	background: var(--gray-color);
+}
+
+.selected {
+	position: absolute;
+	bottom: 0.6rem;
+	right: 1.4rem;
+}
+
+.suffix {
+	padding-block: 0.7rem;
+}

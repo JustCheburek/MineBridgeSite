@@ -4,7 +4,7 @@
 import styles from "../history.module.scss"
 
 // Сервер
-import {GetCosmetics} from "@services/user";
+import {AddSuffix, GetCosmetics, SelectSuffix} from "@services/user";
 import {useState} from "react";
 import {User} from "lucia";
 
@@ -14,10 +14,78 @@ import type {CaseData} from "@/types/purchase";
 
 // Компоненты
 import {CasesPurchasesModal} from "@modals/casesPurchases";
-import {FormBox, FormButton} from "@components/formBox";
+import {FormBox, FormButton, FormInput, FormLabel, FormLink} from "@components/formBox";
 import {Img, ImgBox} from "@components/img";
-import Link from "next/link";
+import Form from "next/form";
 
+interface ItemBox {
+    _id: string
+    isMe: boolean
+    caseData: CaseData
+    index: number
+    selected: boolean
+}
+
+function ItemBox({_id, isMe, caseData, index, selected}: ItemBox) {
+    const {DropItem, rarity, Item, suffix} = caseData
+
+    if (DropItem.name === "suffix") {
+        if (suffix) {
+            return (
+                <div
+                    className={`border-radius grid_center ${rarity}_box ${styles.item}`}
+                    style={{width: "280px", height: "160px"}}
+                >
+                    <p>
+                        {suffix}
+                    </p>
+
+                    {selected
+                        ? <small className={`unic_color ${styles.selected}`}>
+                            выбран
+                        </small>
+
+                        : <Form action={() => SelectSuffix(suffix, _id)} className={styles.selected}>
+                            <button>
+                                <small>
+                                    выбрать
+                                </small>
+                            </button>
+                        </Form>
+                    }
+                </div>
+            )
+        }
+
+        if (!isMe) return
+
+        return (
+            <Form
+                action={(formData: FormData) => AddSuffix(formData, _id, index)}
+                className={`border-radius grid_center ${styles.item} ${rarity}_box ${styles.suffix}`}
+                style={{width: "280px", height: "160px"}}
+            >
+                <FormLabel>
+                    <FormInput
+                        name="name"
+                        placeholder="Введите суффикс"
+                        maxLength={12}
+                        required
+                    />
+                </FormLabel>
+                <FormButton>
+                    Сохранить
+                </FormButton>
+            </Form>
+        )
+    }
+
+    return (
+        <ImgBox className={`border-radius ${rarity}_box helper`} hover width="280px" height="160px">
+            <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
+        </ImgBox>
+    )
+}
 
 type CasesPurchasesSection = {
     caseDatas: CaseData[]
@@ -26,6 +94,7 @@ type CasesPurchasesSection = {
     user: User
     Cases: Case[]
     Drops: Drop[]
+    _id: string
 }
 
 export function CasesPurchasesSection(
@@ -35,7 +104,8 @@ export function CasesPurchasesSection(
         isMe,
         Cases,
         Drops,
-        user
+        user,
+        _id
     }: CasesPurchasesSection) {
     const [click, setClick] = useState<boolean>(false)
     const [modal, setModal] = useState<boolean>(false)
@@ -63,39 +133,21 @@ export function CasesPurchasesSection(
         </p>
 
         <div className={styles.purchases}>
-            {caseDatas.map(({rarity, Item, DropItem, Case, Drop}) => {
-                if (DropItem.name === "suffix") {
-                    return (
-                        <Link
-                            href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
-                            className="flex_center"
-                            key={Item.name}
-                        >
-                            <p
-                                className={`border-radius grid_center center_text ${rarity}_box`}
-                                style={{width: "280px", height: "160px"}}
-                            >
-                                Выберите суффикс
-                                <small>
-                                    в разработке
-                                </small>
-                            </p>
-                        </Link>
-                    )
-                }
-
-                return (
-                    <Link
-                        href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
+            {caseDatas.map((caseData, index) => (
+                    <div
                         className="flex_center"
-                        key={Item.name}
+                        key={index}
                     >
-                        <ImgBox className={`border-radius ${rarity}_box helper`} hover width="280px" height="160px">
-                            <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
-                        </ImgBox>
-                    </Link>
+                        <ItemBox
+                            _id={_id}
+                            isMe={isMe}
+                            caseData={caseData}
+                            index={index}
+                            selected={user.suffix === caseData.suffix}
+                        />
+                    </div>
                 )
-            })}
+            )}
         </div>
 
         {access &&
@@ -106,6 +158,10 @@ export function CasesPurchasesSection(
             Добавить
           </FormButton>
         }
+
+        <FormLink href="/shop/case">
+            Купить
+        </FormLink>
 
         <CasesPurchasesModal
             modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} _id={user._id} access={access}

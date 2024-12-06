@@ -10,14 +10,15 @@ export type CaseData = {
 	DropItem: Drop
 	Item: Item
 	rarity: RarityType
+	suffix?: string
 	createdAt?: Date
 	updatedAt?: Date
 }
 
 @modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})
 export class CasePurchase {
-	@prop({type: () => Types.ObjectId})
-	public Item!: Types.ObjectId
+	@prop({type: () => (Types.ObjectId || String)})
+	public Item!: (Types.ObjectId | string)
 
 	@prop({type: () => String})
 	public rarity!: RarityType
@@ -30,6 +31,9 @@ export class CasePurchase {
 
 	@prop({type: () => Types.ObjectId})
 	public Case!: Types.ObjectId
+
+	@prop()
+	public suffix?: string
 
 	@prop()
 	public createdAt?: Date

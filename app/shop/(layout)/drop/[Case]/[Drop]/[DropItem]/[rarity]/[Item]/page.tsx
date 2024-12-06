@@ -6,6 +6,7 @@ import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
+import {FormBox, FormInput, FormLabel} from "@/ui/components/formBox";
 
 type ParamsProp = {
     params: Promise<{
@@ -105,10 +106,7 @@ export default async function ShowCase(
                         className={`border-radius grid_center center_text ${rarity}_box`}
                         style={{width: "280px", height: "160px"}}
                     >
-                        Выберите суффикс
-                        <small>
-                            в разработке
-                        </small>
+                        Суффикс
                     </p>
                 }
                 <div className={styles.left_text}>
@@ -119,7 +117,7 @@ export default async function ShowCase(
                         {DropItem?.displayname}
                     </p>
                     <p>
-                        У вас есть: {amount} {/*{amount > 0 && <ShareSvg/>}*/}
+                        У вас есть: {amount}
                     </p>
                 </div>
             </div>

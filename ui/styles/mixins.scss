@@ -1,36 +1,36 @@
 @mixin border($color: var(--border-color), $radius: var(--border-radius), $width: 1px, $background: var(--black-color-transparent), $hover: false) {
-	border: $color $width solid;
-	border-radius: $radius;
-	background: $background;
-	transition: border-color var(--long-transition);
+  border: $color $width solid;
+  border-radius: $radius;
+  transition: border-color var(--long-transition);
+  background: $background;
 
-	@if $hover {
-		&:hover {
-			border-color: var(--unic-color);
-		}
-	}
+  @if $hover {
+    &:hover {
+      border-color: var(--unic-color);
+    }
+  }
 }
 
 @mixin no_select() {
-	// iOS Safari
-	-webkit-touch-callout: none;
+  // iOS Safari
+  -webkit-touch-callout: none;
 
-	// Safari
-	-webkit-user-select: none;
+  // Safari
+  -webkit-user-select: none;
 
-	// Old versions of Firefox
-	-moz-user-select: none;
+  // Old versions of Firefox
+  -moz-user-select: none;
 
-	// Internet Explorer/Edge
-	-ms-user-select: none;
+  // Internet Explorer/Edge
+  -ms-user-select: none;
 
-	// Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
-	user-select: none;
+  // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
+  user-select: none;
 }
 
 @mixin background() {
-	// Бекграунд
-	backdrop-filter: blur(8px);
-	background: var(--background-color-transparent);
-	z-index: var(--1z);
+  // Бекграунд
+  backdrop-filter: blur(8px);
+  background: var(--background-color-transparent);
+  z-index: var(--1z);
 }

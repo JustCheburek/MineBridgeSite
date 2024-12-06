@@ -19,7 +19,7 @@ import {Img, ImgBox} from "@components/img";
 import {NotFound} from "@components/notFound";
 import {CheckLink} from "@components/checkLink";
 import {AddNewForm} from "@app/news/components/addNewForm";
-import {revalidateTag} from "next/cache";
+import {unstable_expireTag as expireTag} from "next/cache";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
@@ -44,14 +44,14 @@ export default async function News() {
             }
         )
 
-        revalidateTag("seasons")
+        expireTag("seasons")
     }
 
     return (
         <div className="news_content">
             <H1 up reload={async () => {
                 "use server";
-                revalidateTag("seasons")
+                expireTag("seasons")
             }}>
                 Новости
             </H1>

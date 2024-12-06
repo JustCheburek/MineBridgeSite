@@ -51,6 +51,9 @@ export class User {
     @prop({type: () => [CasePurchase]})
     public casesPurchases!: CasePurchase[]
 
+    @prop({trim: true, maxlength: 12})
+    public suffix?: string
+
     @prop({type: () => [StickerPurchase]})
     public stickersPurchases!: StickerPurchase[]
 
@@ -60,9 +63,6 @@ export class User {
     // Список с айди игроков
     @prop({type: () => [String]})
     public invites!: string[]
-
-    @prop()
-    public form!: boolean
 
     @prop()
     public createdAt!: Date

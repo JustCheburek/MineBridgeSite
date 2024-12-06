@@ -1,7 +1,7 @@
 import {getCaseLocal, getCases, getDropLocal, getDrops, getItems, getUser} from "@/services";
 import {validate} from "@services/validate";
 import {CaseData} from "@/types/purchase";
-import {revalidateTag} from "next/cache";
+import {unstable_expireTag as expireTag} from "next/cache";
 import styles from "./history.module.scss";
 import {PunishmentSection} from "./components/ratingSection";
 import {CasesPurchasesSection} from "./components/casesPurchasesSection";
@@ -30,39 +30,41 @@ export default async function History({params}: NameParams) {
 
     const caseDatas = [] as CaseData[]
 
-    for (const purchase of user.casesPurchases) {
-        const Case = await getCaseLocal({_id: purchase.Case}, Cases).catch(console.error)
-        if (!Case) return console.error("No case")
-        const Drop = await getDropLocal({_id: purchase.Drop}, Drops).catch(console.error)
-        if (!Drop) return console.error("No drop")
-        const DropItem = await getDropLocal({_id: purchase.DropItem}, Drops).catch(console.error)
-        if (!DropItem) return console.error("No drop item")
+    if (user.casesPurchases) {
+        for (const purchase of user.casesPurchases) {
+            const Case = await getCaseLocal({_id: purchase.Case}, Cases).catch(console.error)
+            if (!Case) return console.error("No case")
+            const Drop = await getDropLocal({_id: purchase.Drop}, Drops).catch(console.error)
+            if (!Drop) return console.error("No drop")
+            const DropItem = await getDropLocal({_id: purchase.DropItem}, Drops).catch(console.error)
+            if (!DropItem) return console.error("No drop item")
 
-        // Items
-        const items = await getItems(DropItem, purchase.rarity).catch(console.error)
-        if (!items) return console.error("No items")
+            // Items
+            const items = await getItems(DropItem, purchase.rarity).catch(console.error)
+            if (!items) return console.error("No items")
 
-        const Item = items.find(({_id}) =>
-            JSON.stringify(_id) === JSON.stringify(purchase.Item)
-        )
+            const Item = items.find(({_id}) =>
+                JSON.stringify(_id) === JSON.stringify(purchase.Item)
+            )
 
-        if (!Item) return console.error("No item")
+            if (!Item) return console.error("No item")
 
-        caseDatas.push({
-            ...purchase,
-            Case,
-            Drop,
-            DropItem,
-            Item
-        })
+            caseDatas.push({
+                ...purchase,
+                Case,
+                Drop,
+                DropItem,
+                Item
+            })
+        }
     }
 
     return (
         <div className={styles.content}>
             <H1 up reload={async () => {
                 "use server";
-                revalidateTag("author")
-                revalidateTag("userLike")
+                expireTag("author")
+                expireTag("userLike")
             }}>
                 История
             </H1>
@@ -76,6 +78,7 @@ export default async function History({params}: NameParams) {
             <CasesPurchasesSection
                 access={isAdmin} Cases={Cases} user={user}
                 Drops={Drops} isMe={isMe} caseDatas={caseDatas}
+                _id={user._id}
             />
         </div>
     )

@@ -6,7 +6,6 @@ import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
 import {Avatar} from "./components/avatar";
 import {WhitelistSection} from "./components/whitelist";
-import {FormBox} from "./components/form";
 import {userModel} from "@server/models";
 import {ColorText} from "@app/utils";
 import {AutoSvg, MostikiSvg} from "@ui/SVGS";
@@ -49,8 +48,6 @@ export default async function Profile({params}: NameParams) {
     // todo: скины-аватарки?
     return (
         <div className={styles.profile}>
-            <FormBox author={author}/>
-
             <div className={styles.container}>
                 <Avatar photo={user.photo}/>
 

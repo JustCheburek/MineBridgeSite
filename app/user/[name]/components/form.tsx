@@ -1,7 +1,7 @@
 import type {User} from "lucia";
 import {userModel} from "@server/models";
 import {FormClient} from "./formClient";
-import {revalidateTag} from "next/cache";
+import {unstable_expireTag as expireTag} from "next/cache";
 
 // мс * с * мин * ч * д
 const threeDays = 1000 * 60 * 60 * 24 * 3
@@ -16,7 +16,7 @@ export function FormBox({author}: { author: User | null }) {
 		"use server"
 
 		await userModel.findByIdAndUpdate(author!._id, {form: true})
-		revalidateTag("userLike")
+		expireTag("userLike")
 	}
 
 	return <FormClient Func={Func}/>

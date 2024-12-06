@@ -3,10 +3,10 @@ import {cookies} from "next/headers";
 import {MBSESSION} from "@/const";
 import {AddWLConsole, RconVC, RemoveWLConsole} from "@server/console";
 import {userModel} from "@server/models";
-import {revalidateTag} from "next/cache";
+import {unstable_expireTag as expireTag} from "next/cache";
 import {User} from "lucia";
 import {Action, Punishment} from "@/types/punishment";
-import {CaseData, CasePurchase} from "@/types/purchase";
+import {CaseData} from "@/types/purchase";
 import axios from "axios";
 import {Social} from "@/types/url";
 import type {GuildDSUser} from "@/types/user";
@@ -14,16 +14,17 @@ import {EmailTemplate} from "@app/admin/email/emailTemplate";
 import {Resend} from "resend";
 import {getUser, getUsers} from "@/services";
 import {Who} from "@app/admin/email/components";
+import {redirect} from "next/navigation";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 function chunk<T>(arr: T[], size: number) {
     return Array.from({
-        // длина списка в сотках
-        length: Math.ceil(arr.length / size)
-    }, (_, i) =>
-        // каждая сотка, начиная с 0
-        arr.slice(i * size, (i + 1) * size)
+            // длина списка в сотках
+            length: Math.ceil(arr.length / size)
+        }, (_, i) =>
+            // каждая сотка, начиная с 0
+            arr.slice(i * size, (i + 1) * size)
     );
 }
 
@@ -184,7 +185,7 @@ export async function AddWhitelist(_id: string, name: string) {
         console.error(e)
     }
 
-    revalidateTag(`userLike`)
+    expireTag(`userLike`)
 }
 
 export async function AddPunishment(user: User, punishment: Punishment, actions: Action[]) {
@@ -204,35 +205,56 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
 
     await CheckActions(user, actions)
 
-    revalidateTag("userLike")
+    expireTag("userLike")
 }
 
-export async function AddCasePurchase(_id: string, casePurchase: CaseData, access: boolean) {
-    if (!access) return
+export async function SelectSuffix(suffix: string, _id: string) {
+    await userModel.findByIdAndUpdate(_id, {
+        suffix
+    })
 
-    const casePurchaseDB: CasePurchase = {
-        ...casePurchase,
-        Case: casePurchase.Case._id,
-        Drop: casePurchase.Drop._id,
-        DropItem: casePurchase.DropItem._id,
-        Item: casePurchase.Item._id
+    expireTag("userLike")
+}
+
+export async function AddSuffix(formData: FormData, _id: string, index: number) {
+    const suffix = formData.get("name") as string
+
+    const user = await userModel.findById(_id)
+
+    if (!user) {
+        throw new Error(`Пользователь не найден`)
     }
+
+    user.casesPurchases[index].suffix = suffix
+    user.suffix = suffix
+
+    await user.save()
+
+    expireTag("userLike")
+}
+
+export async function AddCasePurchase(_id: string, CaseData: CaseData, access: boolean) {
+    if (!access) return
 
     await userModel.findByIdAndUpdate(
         _id,
         {
             $push: {
-                casesPurchases: casePurchaseDB
+                casesPurchases: {
+                    ...CaseData,
+                    Case: CaseData.Case._id,
+                    Drop: CaseData.Drop._id,
+                    DropItem: CaseData.DropItem._id,
+                    Item: CaseData.Item._id
+                }
             },
         }
     )
 
-    revalidateTag("userLike")
+    expireTag("userLike")
 }
 
 export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
-    "use server"
-
     const name = formData.get("name") as string
     const photo = formData.get("photo") as string
 
@@ -288,5 +310,7 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
 
     await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})
 
-    revalidateTag("userLike")
+    expireTag("userLike")
+
+    redirect(`/user/${name}`)
 }

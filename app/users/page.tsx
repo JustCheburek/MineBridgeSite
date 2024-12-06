@@ -2,7 +2,7 @@
 import type {Metadata} from "next";
 import type {User} from "lucia";
 import {getUsers} from "@/services";
-import {revalidateTag} from "next/cache";
+import {unstable_expireTag as expireTag} from "next/cache";
 
 // Компоненты
 import {Table} from "@components/table"
@@ -26,7 +26,7 @@ export default async function Component() {
         <MaxSize>
             <H1 up reload={async () => {
                 "use server";
-                revalidateTag("users")
+                expireTag("users")
             }}>
                 Игроки
             </H1>
