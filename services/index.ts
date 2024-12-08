@@ -12,7 +12,7 @@ import {Case, Drop, RarityType} from "@/types/case";
 import {idOrName} from "@/types/idOrName";
 
 export interface isRoles {
-    isModer: boolean
+    isHelper: boolean
     isAdmin: boolean
     isContentMaker: boolean
 }
@@ -24,7 +24,7 @@ export interface RolesApi extends isRoles {
 export const getRoles = cache(
     async (discordId?: string): Promise<RolesApi> => {
         if (!discordId) {
-            return {roles: [], isAdmin: false, isModer: false, isContentMaker: false}
+            return {roles: [], isAdmin: false, isHelper: false, isContentMaker: false}
         }
 
         const allRoles = await axios.get<Role[]>(
@@ -47,10 +47,10 @@ export const getRoles = cache(
 
         const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
         const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
-        const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
+        const isHelper = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("хелпер"))
         const isContentMaker = roles?.some(({name}) => name.toLowerCase().includes("контент"))
 
-        return {roles, isModer, isAdmin, isContentMaker}
+        return {roles, isHelper, isAdmin, isContentMaker}
     },
     ["roles", "userLike", "all"],
     {revalidate: 300, tags: ["roles", "userLike", "all"]}
@@ -98,14 +98,14 @@ export const getUser = cache(
 
         if (roles && user?.discordId) {
             const rolesApi = await getRoles(user.discordId)
-            return {user, isMe, ...rolesApi, isContentMakerCheck: (isMe || rolesApi.isModer) && rolesApi.isContentMaker}
+            return {user, isMe, ...rolesApi, isContentMakerCheck: (isMe || rolesApi.isHelper) && rolesApi.isContentMaker}
         }
 
         return {
             user,
             isMe,
             isAdmin: false,
-            isModer: false,
+            isHelper: false,
             isContentMaker: false,
             isContentMakerCheck: false,
             roles: []

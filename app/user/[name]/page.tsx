@@ -31,11 +31,11 @@ const timeAgo = new TimeAgo('ru-RU');
 
 export default async function Profile({params}: NameParams) {
     const {name} = await params
-    const {user: author, isModer, isAdmin} = await validate()
+    const {user: author, isHelper, isAdmin} = await validate()
     const {
         user, roles, isMe, isContentMaker
     } = await getUser(
-        {name}, true, true, author?._id, isModer
+        {name}, true, true, author?._id, isHelper
     )
 
     if (author && (!author?.from || !author.from?.place || !author.from?.userId)) {
@@ -45,7 +45,6 @@ export default async function Profile({params}: NameParams) {
         )
     }
 
-    // todo: скины-аватарки?
     return (
         <div className={styles.profile}>
             <div className={styles.container}>
@@ -118,7 +117,7 @@ export default async function Profile({params}: NameParams) {
                 </div>
             </div>
 
-            <WhitelistSection user={user} isMe={isMe} isModer={isModer}/>
+            <WhitelistSection user={user} isMe={isMe} isHelper={isHelper}/>
 
             <TwitchFrame user={user} isContentMaker={isContentMaker}/>
         </div>

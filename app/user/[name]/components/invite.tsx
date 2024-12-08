@@ -4,10 +4,10 @@ import styles from "../profile.module.scss";
 import {InviteLink} from "./inviteLink";
 
 type InviteSection = {
-    user: User, isMe: boolean, isModer: boolean
+    user: User, isMe: boolean, isHelper: boolean
 }
 
-export function InviteSection({user, isMe, isModer}: InviteSection) {
+export function InviteSection({user, isMe, isHelper}: InviteSection) {
     const invites = user.invites.slice(user.invites.length - 5)
 
     return (
@@ -17,7 +17,7 @@ export function InviteSection({user, isMe, isModer}: InviteSection) {
             {isMe &&
               <InviteLink name={user.name}/>
             }
-            <FromBox user={user} isMe={isMe} isModer={isModer}/>
+            <FromBox user={user} isMe={isMe} isHelper={isHelper}/>
             <h4>Приглашений: <strong className="unic_color">{user.invites.length}</strong></h4>
             {invites.length > 0 && <>
               <p>Последние 5:</p>
@@ -29,7 +29,7 @@ export function InviteSection({user, isMe, isModer}: InviteSection) {
     )
 }
 
-function FromBox({user, isMe, isModer}: { user: User, isMe: boolean, isModer: boolean }) {
+function FromBox({user, isMe, isHelper}: { user: User, isMe: boolean, isHelper: boolean }) {
     if (!user?.from || !user.from?.userId || !user.from?.place) return
 
     return (
@@ -41,7 +41,7 @@ function FromBox({user, isMe, isModer}: { user: User, isMe: boolean, isModer: bo
                 } от
             </p>
             <UserBox _id={user.from.userId}/>
-            {isModer &&
+            {isHelper &&
               <p className="unic_color">{user.from.place}</p>
             }
         </div>

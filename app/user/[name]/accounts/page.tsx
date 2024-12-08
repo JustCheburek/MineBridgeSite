@@ -35,17 +35,16 @@ export default async function Accounts({params}: NameParams) {
     const {name} = await params
     const {
         user: author,
-        isAdmin, isModer
+        isAdmin, isHelper
     } = await validate()
     const {
         user, isMe, isContentMakerCheck
     } = await getUser(
-        {name}, true, true, author?._id, isModer
+        {name}, true, true, author?._id, isHelper
     )
 
     const adminAccess = isAdmin || isMe
 
-    // todo: смена ника в дискорде
     return (
         <div className="account_content">
             <H1 up className={styles.for_bigger}>
@@ -55,10 +54,10 @@ export default async function Accounts({params}: NameParams) {
                 Акки
             </H1>
 
-            {(isMe || isModer) &&
+            {(isMe || isHelper) &&
               <ChangeParam
                 user={user} isMe={isMe}
-                isModer={isModer} isAdmin={isAdmin}
+                isHelper={isHelper} isAdmin={isAdmin}
                 isContentMaker={isContentMakerCheck}
               />
             }

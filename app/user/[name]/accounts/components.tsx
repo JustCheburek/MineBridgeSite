@@ -98,7 +98,7 @@ type ChangeParam = {
 
 export function ChangeParam(
     {
-        user, isModer, isAdmin,
+        user, isHelper, isAdmin,
         isContentMaker,
     }: ChangeParam) {
     const [result, setResult] = useState("")
@@ -127,7 +127,7 @@ export function ChangeParam(
             <InputNameCheckWithoutState
                 setAccess={setAccess}
                 defaultName={user.name}
-                disabled={user.rating <= ratingAccess && !isModer}
+                disabled={user.rating <= ratingAccess && !isHelper}
             />
 
             <FormLabel>
@@ -138,7 +138,7 @@ export function ChangeParam(
                     required
                     maxLength={200}
                     defaultValue={user.photo}
-                    disabled={user.rating <= ratingAccess && !isModer}
+                    disabled={user.rating <= ratingAccess && !isHelper}
                 />
             </FormLabel>
             {isAdmin &&
@@ -219,7 +219,7 @@ export function ChangeParam(
                   {result}
               </strong>
             }
-            <FormButton disabled={user.rating <= ratingAccess && !isModer || !access}>
+            <FormButton disabled={user.rating <= ratingAccess && !isHelper || !access}>
                 Сохранить
             </FormButton>
         </FormBox>

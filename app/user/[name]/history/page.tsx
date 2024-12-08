@@ -20,11 +20,11 @@ export const generateMetadata = async ({params}: NameParams) => {
 
 export default async function History({params}: NameParams) {
     const {name} = await params
-    const {user: author, isModer, isAdmin} = await validate()
+    const {user: author, isHelper, isAdmin} = await validate()
     const {
         user, isMe
     } = await getUser(
-        {name}, true, false, author?._id, isModer
+        {name}, true, false, author?._id, isHelper
     )
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
@@ -71,10 +71,10 @@ export default async function History({params}: NameParams) {
                 История
             </H1>
 
-            <InviteSection user={user} isMe={isMe} isModer={isModer}/>
+            <InviteSection user={user} isMe={isMe} isHelper={isHelper}/>
 
             <PunishmentSection
-                user={user} name={author?.name} access={isModer}
+                user={user} name={author?.name} access={isHelper}
             />
 
             <CasesPurchasesSection

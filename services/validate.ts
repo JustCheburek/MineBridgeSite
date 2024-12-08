@@ -11,7 +11,7 @@ export const validate = cache(
         if (!sessionId) {
             return {
                 user: null, roles: [],
-                isModer: false, isAdmin: false, isContentMaker: false
+                isHelper: false, isAdmin: false, isContentMaker: false
             }
         }
 

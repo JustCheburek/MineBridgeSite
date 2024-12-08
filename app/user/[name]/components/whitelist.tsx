@@ -47,10 +47,10 @@ const UserNotWhitelisted = ({setModal}: { setModal: setModal }) => (
 type WhitelistSection = {
     user: User
     isMe: boolean
-    isModer: boolean
+    isHelper: boolean
 }
 
-export function WhitelistSection({user, isMe, isModer}: WhitelistSection) {
+export function WhitelistSection({user, isMe, isHelper}: WhitelistSection) {
     const [modal, setModal] = useState(false)
 
     if (user.rating <= -200) {
@@ -66,7 +66,7 @@ export function WhitelistSection({user, isMe, isModer}: WhitelistSection) {
         )
     }
 
-    if (!isModer && !isMe) {
+    if (!isHelper && !isMe) {
         return (
             <section className="center_text">
                 <h2>
