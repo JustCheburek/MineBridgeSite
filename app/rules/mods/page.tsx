@@ -21,10 +21,10 @@ export default function Mods() {
     type NameUrl = Required<Name>
 
     const packs: NameUrl[] = [{
-        name: "Сборка модов от Kawa11Fox 1.20.4",
+        name: "Сборка модов от Kawa11Fox 1.21 (оптимизированная)",
         url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
     }, {
-        name: "Сборка модов от JustCheburek 1.20.4",
+        name: "Сборка модов от JustCheburek 1.20.4 (более функциональная)",
         url: new URL("https://modrinth.com/modpack/minebridge-pack")
     }]
 
@@ -54,20 +54,26 @@ export default function Mods() {
     }, {
         name: "Litematica (easy place mod)", url: new URL("https://curseforge.com/minecraft/mc-mods/litematica")
     }, {
-        name: "FlashBack (только для видео)", url: new URL("https://modrinth.com/mod/flashback")
+        name: "FlashBack (только для видео)", url: new URL("https://modrinth.com/mod/flashback/version/latest")
     }, {
-        name: "Bobby", url: new URL("https://modrinth.com/mod/bobby")
+        name: "Bobby", url: new URL("https://modrinth.com/mod/bobby/version/latest")
     }, {
-        name: "InvMove", url: new URL("https://modrinth.com/mod/invmove")
+        name: "InvMove", url: new URL("https://modrinth.com/mod/invmove/version/latest")
     }, {
-        name: "Gamma Utils", url: new URL("https://modrinth.com/mod/gamma-utils")
+        name: "Gamma Utils", url: new URL("https://modrinth.com/mod/gamma-utils/version/latest")
     }, {
-        name: "Freecam (Modrinth Edition)", url: new URL("https://modrinth.com/mod/freecam")
+        name: "Freecam (Modrinth Edition)", url: new URL("https://modrinth.com/mod/freecam/version/latest")
     }]
 
     const rps: NameUrl[] = [{
-        name: "Звуки",
-        url: new URL("https://cdn.modrinth.com/data/nchEXr1j/versions/ab25TmXr/Sound%20Pack.zip")
+        name: "MB (полный)",
+        url: new URL("http://map.m-br.ru/MBfull.zip")
+    }, {
+        name: "Еда (Josh's More Foods)",
+        url: new URL("https://modrinth.com/datapack/joshs-more-foods/version/latest")
+    }, {
+        name: "Перевод достижений",
+        url: new URL("https://modrinth.com/resourcepack/ru-blaze-and-caves-advancements-pack/version/latest")
     }]
 
     const blacklist: string[] = [
@@ -106,8 +112,11 @@ export default function Mods() {
                     ))}
                 </ul>
                 <br/>
+                <p>
+                    Если вы собираете свою сборку, то
+                </p>
                 <h4>
-                    Очень рекомендуемые моды:
+                    Необходимо скачать:
                 </h4>
                 <ul className={styles.list}>
                     {recommendMods.map(mod => (
@@ -121,7 +130,7 @@ export default function Mods() {
                 </ul>
                 <br/>
                 <h4>
-                    Разрешённые моды, которые могут попасть под сомнение:
+                    Разрешённые моды:
                 </h4>
                 <ul className={styles.list}>
                     {mods.map(mod => (
@@ -142,14 +151,8 @@ export default function Mods() {
                 <h3 className={`${styles.list_text} center_text`}>
                     Ресурспаки
                 </h3>
-                <p>
-                    При входе на сервер ресурспаки устанавливаются сами
-                </p>
-                <p>
-                    Разрешены все ресурспаки, которых нет в списке {`"`}запрещено{`"`}
-                </p>
                 <h4>
-                    Рекомендуемые:
+                    Очень рекомендуемые:
                 </h4>
                 <ul className={styles.list}>
                     {rps.map(rp => (
@@ -160,6 +163,30 @@ export default function Mods() {
                         </li>)
                     )}
                 </ul>
+                <br/>
+                <p>
+                    Как скачать второй ресурс пак:
+                </p>
+                <ul>
+                    <li>
+                        Прокрутите вниз до {" "}
+                        <code>joshs-more-foods_[версия]_resource_pack.zip</code>
+                    </li>
+                    <li>
+                        Нажмите <code>Download</code>
+                    </li>
+                </ul>
+                <br/>
+                <p>
+                    Эти ресурспаки устанавливаются сами, кроме <span className="unic_color">MB (полный)</span>
+                </p>
+                <p>
+                    Вы можете скачайте их и отключить авто скачивание
+                </p>
+                <br/>
+                <p>
+                    Разрешены все ресурспаки, которых нет в списке {`"`}запрещено{`"`}
+                </p>
             </section>
 
             <section id="forbidden" className={styles.list_container}>
