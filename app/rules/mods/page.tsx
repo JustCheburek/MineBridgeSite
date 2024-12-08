@@ -21,10 +21,10 @@ export default function Mods() {
     type NameUrl = Required<Name>
 
     const packs: NameUrl[] = [{
-        name: "Сборка модов от Kawa11Fox 1.21 (оптимизированная)",
+        name: "Kawa11Fox 1.21 (оптимизированная)",
         url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
     }, {
-        name: "Сборка модов от JustCheburek 1.20.4 (более функциональная)",
+        name: "JustCheburek 1.20.4 (более функциональная)",
         url: new URL("https://modrinth.com/modpack/minebridge-pack")
     }]
 
@@ -100,7 +100,7 @@ export default function Mods() {
                     <h3>Моды</h3>
                 </div>
                 <h4>
-                    Сборки:
+                    Сборки модов:
                 </h4>
                 <ul className={styles.list}>
                     {packs.map(pack => (
@@ -181,7 +181,7 @@ export default function Mods() {
                     Эти ресурспаки устанавливаются сами, кроме <span className="unic_color">MB (полный)</span>
                 </p>
                 <p>
-                    Вы можете скачайте их и отключить авто скачивание
+                    Вы можете скачать их и отключить авто скачивание
                 </p>
                 <br/>
                 <p>
