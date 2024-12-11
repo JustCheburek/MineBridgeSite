@@ -31,6 +31,7 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
+    "@0x0c/rcon": "^1.0.0",
     "@lucia-auth/adapter-mongodb": "^1.0.3",
     "@typegoose/typegoose": "^12.9.1",
     "@types/bun": "^1.1.14",
@@ -40,7 +41,6 @@
     "arctic": "^1.9.2",
     "eslint": "^9.16.0",
     "eslint-config-next": "^15.0.4",
-    "minecraft-server-util": "^5.4.4",
     "schema-dts": "^1.1.2",
     "typescript": "^5.7.2"
   },

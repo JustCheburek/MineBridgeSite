@@ -1,48 +1,40 @@
-import {RCON} from 'minecraft-server-util'
-import {unstable_cache as cache} from "next/cache";
-
-// todo: починить консоль
+import {RconClient} from '@0x0c/rcon';
+import {cache} from "react"
 
 export const RconMB = cache(
     async () => {
-        const client = new RCON()
-
-        console.log("Подключение к RCON выживание")
-        await client.connect(process.env.SERVER_IP!, Number(process.env.SERVER_PORT_MB!));
-        await client.login(process.env.SECRET!);
-
-        return client
-    },
-    ["console", "minecraft"]
+        console.log("Подключение к RCON MB")
+        return new RconClient({
+            host: process.env.SERVER_IP!,
+            port: Number(process.env.SERVER_PORT_MB!),
+            password: process.env.SECRET!
+        });
+    }
 )
 
 export const RconVC = cache(
     async () => {
-        const client = new RCON()
-
         console.log("Подключение к RCON Velocity")
-        await client.connect(process.env.SERVER_IP!, Number(process.env.SERVER_PORT_VC!));
-        await client.login(process.env.SECRET!);
-
-        return client
-    },
-    ["console", "velocity"]
+        return new RconClient({
+            host: process.env.SERVER_IP!,
+            port: Number(process.env.SERVER_PORT_VC!),
+            password: process.env.SECRET!
+        });
+    }
 )
 
 export const AddWLConsole = cache(
     async (name: string) => {
         const client = await RconMB()
 
-        await client.run(`whitelist add ${name}`)
-    },
-    ["console", "whitelist"]
+        await client.send(`whitelist add ${name}`)
+    }
 )
 
 export const RemoveWLConsole = cache(
     async (name: string) => {
         const client = await RconMB()
 
-        await client.run(`whitelist remove ${name}`)
-    },
-    ["console", "whitelist"]
+        await client.send(`whitelist remove ${name}`)
+    }
 )

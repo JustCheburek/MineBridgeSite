@@ -15,7 +15,7 @@ export async function GetCosmetics(name: string, caseDatas: CaseData[]) {
 
     for (const {DropItem, Item} of caseDatas) {
         if (DropItem.name !== "suffix") {
-            await client.run(`lpv user ${name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
+            await client.send(`lpv user ${name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
             await wait(1000)
         }
     }
@@ -24,5 +24,5 @@ export async function GetCosmetics(name: string, caseDatas: CaseData[]) {
 export async function GetPrize(name: string) {
     const client = await RconMB()
 
-    await client.run(`tw trigger health_prize ${name}`)
+    await client.send(`tw trigger health_prize ${name}`)
 }

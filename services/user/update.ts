@@ -71,21 +71,20 @@ export async function CheckActions(user: User, actions: Action[]) {
         if (actions.includes("mineBan")) {
             const client = await RconVC()
             console.log(`Бан ${user.name}`)
-            await RemoveWLConsole(user.name)
-            await client.run(`ban ${user.name} Нарушение правил сервера`)
+            await client.send(`ban ${user.name} Нарушение правил сервера`)
             if (actions.includes("rollback")) {
-                await client.run(`co rollback action:block user:${user.name} time:14d`)
-                await client.run(`co rollback action:container user:${user.name} time:14d`)
+                await client.send(`co rollback action:block user:${user.name} time:14d radius:#global`)
+                await client.send(`co rollback action:container user:${user.name} time:14d radius:#global`)
             }
-            await userModel.findByIdAndUpdate(user._id, {whitelist: false})
         }
         if (actions.includes("minePardon")) {
             const client = await RconVC()
             console.log(`Разбан ${user.name}`)
-            await AddWLConsole(user.name)
-            await client.run(`unban ${user.name}`)
-
-            await userModel.findByIdAndUpdate(user._id, {whitelist: true})
+            await client.send(`unban ${user.name}`)
+        }
+        if (actions.includes("mineBan") || actions.includes("minePardon")) {
+            await RemoveWLConsole(user.name)
+            await userModel.findByIdAndUpdate(user._id, {whitelist: false})
         }
     } catch (e) {
         console.error(e)
@@ -119,11 +118,11 @@ export async function CheckActions(user: User, actions: Action[]) {
             const client = await RconVC()
             if (actions.includes("mute")) {
                 console.log(`Мут ${user.name}`)
-                await client.run(`mute ${user.name}`)
+                await client.send(`mute ${user.name}`)
             }
             if (actions.includes("unmute")) {
                 console.log(`Размут ${user.name}`)
-                await client.run(`unmute ${user.name}`)
+                await client.send(`unmute ${user.name}`)
             }
         } catch (e) {
             console.error(e)
@@ -303,7 +302,7 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
 
         // Смена аккаунта
         const client = await RconVC()
-        await client.run(`librelogin user migrate ${user.name} ${name}`)
+        await client.send(`librelogin user migrate ${user.name} ${name}`)
 
         await AddWLConsole(name)
     }
