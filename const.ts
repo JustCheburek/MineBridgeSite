@@ -2,7 +2,7 @@ export const DS_URL = "https://discord.gg/rmWAuKGb69"
 export const TG_URL = "https://t.me/MineBridgeOfficial"
 export const VK_URL = "https://vk.com/minebridge"
 export const SUPPORT_URL = "https://discord.gg/f95V9Rezqy"
-const utcDate = new Date(2024, 12 - 1, 8, 2).toUTCString()
+const utcDate = new Date(2024, 12 - 1, 11, 14 - 10, 37).toUTCString()
 export const LASTRULESUPDATE = new Date(utcDate)
 
 export const URLS_START = {
