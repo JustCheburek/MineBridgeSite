@@ -65,17 +65,6 @@ export default function Mods() {
         name: "Freecam (Modrinth Edition)", url: new URL("https://modrinth.com/mod/freecam/version/latest")
     }]
 
-    const rps: NameUrl[] = [{
-        name: "MB (полный)",
-        url: new URL("http://map.m-br.ru/MBfull.zip")
-    }, {
-        name: "Еда (Josh's More Foods)",
-        url: new URL("https://modrinth.com/datapack/joshs-more-foods/version/latest")
-    }, {
-        name: "Перевод достижений",
-        url: new URL("https://modrinth.com/resourcepack/ru-blaze-and-caves-advancements-pack/version/latest")
-    }]
-
     const blacklist: string[] = [
         "Модификации, выполняющие действия за игрока (ИИ, принтер и так далее, но автокликер разрешён)",
         "Чит-модификации", "Модификации, позволяющие летать сквозь блоки не выходя с сервера",
@@ -119,13 +108,12 @@ export default function Mods() {
                     Необходимо скачать:
                 </h4>
                 <ul className={styles.list}>
-                    {recommendMods.map(mod => (
-                            <li key={mod.name} className={styles.item}>
-                                <Link href={mod.url.toString()} target="_blank">
-                                    {mod.name}
-                                </Link>
-                            </li>
-                        )
+                    {recommendMods.map(mod =>
+                        <li key={mod.name} className={styles.item}>
+                            <Link href={mod.url.toString()} target="_blank" className="unic_color">
+                                {mod.name}
+                            </Link>
+                        </li>
                     )}
                 </ul>
                 <br/>
@@ -133,16 +121,15 @@ export default function Mods() {
                     Разрешённые моды:
                 </h4>
                 <ul className={styles.list}>
-                    {mods.map(mod => (
-                            <li key={mod.name} className={styles.item}>
-                                {mod?.url ?
-                                    <Link href={mod.url.toString()} target="_blank">
-                                        {mod.name}
-                                    </Link>
-                                    : <p>{mod.name}</p>
-                                }
-                            </li>
-                        )
+                    {mods.map(mod =>
+                        <li key={mod.name} className={styles.item}>
+                            {mod?.url ?
+                                <Link href={mod.url.toString()} target="_blank" className="unic_color">
+                                    {mod.name}
+                                </Link>
+                                : <p>{mod.name}</p>
+                            }
+                        </li>
                     )}
                 </ul>
             </section>
@@ -152,36 +139,16 @@ export default function Mods() {
                     Ресурспаки
                 </h3>
                 <h4>
-                    Очень рекомендуемые:
+                    Обязательный: {" "}
+                    <Link href="http://map.m-br.ru/MBfull.zip" className="unic_color">
+                        MB (полный)
+                    </Link>
                 </h4>
-                <ul className={styles.list}>
-                    {rps.map(rp => (
-                        <li key={rp.name} className={styles.item}>
-                            <Link href={rp.url.toString()} target="_blank">
-                                {rp.name}
-                            </Link>
-                        </li>)
-                    )}
-                </ul>
-                <br/>
                 <p>
-                    Как скачать второй ресурс пак:
-                </p>
-                <ul>
-                    <li>
-                        Прокрутите вниз до {" "}
-                        <code>joshs-more-foods_[версия]_resource_pack.zip</code>
-                    </li>
-                    <li>
-                        Нажмите <code>Download</code>
-                    </li>
-                </ul>
-                <br/>
-                <p>
-                    Эти ресурспаки устанавливаются сами, кроме <span className="unic_color">MB (полный)</span>
-                </p>
-                <p>
-                    Вы можете скачать их и отключить авто скачивание
+                    По желанию: {" "}
+                    <Link href="https://modrinth.com/resourcepack/aseprite-fonts" className="unic_color">
+                        Шрифт
+                    </Link>
                 </p>
                 <br/>
                 <p>
@@ -196,13 +163,11 @@ export default function Mods() {
                 </h2>
 
                 <ul className={`${styles.list} no_select`}>
-                    {blacklist.map(mod => {
-                        return (
-                            <li key={mod} className={styles.item}>
-                                {mod}
-                            </li>
-                        )
-                    })}
+                    {blacklist.map(mod =>
+                        <li key={mod} className={styles.item}>
+                            {mod}
+                        </li>
+                    )}
                 </ul>
             </section>
 

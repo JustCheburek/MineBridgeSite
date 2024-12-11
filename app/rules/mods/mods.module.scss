@@ -1,18 +1,12 @@
 // Модификации
 .list_container {
-	margin-top: 25px;
+  margin-top: 25px;
 }
 
 .list_text {
-	padding-block: 30px;
+  padding-block: 30px;
 }
 
-.list {
-	a {
-		color: var(--unic-color);
-	}
-
-	.item::marker {
-		color: var(--light-gray-color);
-	}
+.item::marker {
+  color: var(--light-gray-color);
 }
