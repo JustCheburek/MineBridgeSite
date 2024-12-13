@@ -115,7 +115,7 @@ export function HeadBreakBox({name}: {name: string}) {
                 </>
                 : <>
                     <h2 className="center_text">
-                        Головоломка завершена
+                        Завершено
                     </h2>
 
                     <p>

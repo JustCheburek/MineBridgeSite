@@ -14,7 +14,7 @@ export const generateMetadata = async ({params}: NameParams) => {
 
     return {
         title: `${name} > Истории действий`,
-        description: `История рейтинга и всяких покупок игрока ${name}!`
+        description: `История звёзд и всяких покупок игрока ${name}!`
     }
 }
 

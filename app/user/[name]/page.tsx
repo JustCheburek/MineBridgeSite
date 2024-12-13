@@ -7,12 +7,14 @@ import styles from "./profile.module.scss"
 import {Avatar} from "./components/avatar";
 import {WhitelistSection} from "./components/whitelist";
 import {userModel} from "@server/models";
-import {ColorText} from "@app/utils";
-import {AutoSvg, MostikiSvg} from "@ui/SVGS";
+import {AutoSvg, MostikiSvg, StarsSvg} from "@ui/SVGS";
 import {URLS_START} from "@/const";
 import {User} from "lucia";
 import {NameParams} from "@/types/params";
 import TimeAgo from "javascript-time-ago";
+// import {HourStarSection} from "./components/hourstar";
+import {Suspense} from "react";
+import {Skeleton} from "@components/skeleton";
 
 export const generateMetadata = async (
     {
@@ -101,32 +103,42 @@ export default async function Profile({params}: NameParams) {
                         </time>
                     </h4>
                     <h4>
+                        Звёзды: {" "}
+                        <strong className="yellow_color">
+                            {user.rating}
+                        </strong> {" "}
+                        <StarsSvg/>{" "}
+                        <Link href="/rules" className="add">+</Link>
+                    </h4>
+                    <h4>
                         Мостики: {" "}
-                        <strong className={ColorText(user.mostiki)}>
+                        <strong className="unic_color">
                             {user.mostiki}
                         </strong> {" "}
                         <MostikiSvg/>{" "}
                         <Link href="/shop" className="add">+</Link>
                     </h4>
-                    <h4>
-                        Соц рейтинг: {" "}
-                        <strong className={ColorText(user.rating)}>
-                            {user.rating}
-                        </strong>
-                    </h4>
                 </div>
             </div>
 
+            {/*{user.whitelist
+                && <Suspense fallback={<Skeleton width="100%" height={100}/>}>
+                <HourStarSection user={user}/>
+              </Suspense>
+            }*/}
+
             <WhitelistSection user={user} isMe={isMe} isHelper={isHelper}/>
 
-            <TwitchFrame user={user} isContentMaker={isContentMaker}/>
+            {isContentMaker &&
+              <Suspense fallback={<Skeleton width="100%" height={307}/>}>
+                <TwitchFrame user={user}/>
+              </Suspense>
+            }
         </div>
     )
 }
 
-function TwitchFrame({isContentMaker, user}: { isContentMaker: boolean, user: User }) {
-    if (!isContentMaker) return
-
+function TwitchFrame({user}: { user: User }) {
     const twitchName = user?.socials?.find(({social}) => social === "twitch")?.name
     if (!twitchName) return
 

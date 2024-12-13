@@ -18,7 +18,7 @@ export default async function Image() {
     return new ImageResponse(
         (
             <OGImageBox paths={["Правила"]}>
-                Социальный рейтинг — внутриигровая награда или наказание
+                Звёзды — внутриигровая награда или наказание
             </OGImageBox>
         ),
         {

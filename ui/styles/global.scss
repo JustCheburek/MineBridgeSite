@@ -186,6 +186,10 @@ iframe {
   image-rendering: pixelated;
 }
 
+.marginAuto {
+  margin: auto;
+}
+
 .border-radius {
   border-radius: var(--border-radius) !important;
 }
@@ -217,13 +221,19 @@ iframe {
   font-weight: 500;
 }
 
+// Адаптивность
 @media (width >= 1024px) {
   .for_mobile {
     display: none !important;
   }
 }
 
-// Адаптивность
+@media (width < 1200px) {
+  .for_tablet {
+    display: none !important;
+  }
+}
+
 @media (width < 1024px) {
   .for_pc {
     display: none !important;

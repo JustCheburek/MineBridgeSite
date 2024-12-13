@@ -24,7 +24,7 @@ export default function Mods() {
         name: "Kawa11Fox 1.21 (оптимизированная)",
         url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
     }, {
-        name: "JustCheburek 1.20.4 (более функциональная)",
+        name: "JustCheburek 1.21 (более функциональная)",
         url: new URL("https://modrinth.com/modpack/minebridge-pack")
     }]
 

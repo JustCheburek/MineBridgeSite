@@ -1,6 +1,6 @@
 "use server";
 import {CaseData} from "@/types/purchase";
-import {RconMB, RconVC} from "@server/console";
+import {RconMB, RconVC} from "@services/console";
 
 export async function GetCosmetics(name: string, caseDatas: CaseData[]) {
     function wait(ms: number) {

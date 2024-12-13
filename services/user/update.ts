@@ -1,7 +1,7 @@
 "use server";
 import {cookies} from "next/headers";
 import {MBSESSION} from "@/const";
-import {AddWLConsole, RconVC, RemoveWLConsole} from "@server/console";
+import {AddWLConsole, RconVC, RemoveWLConsole} from "@services/console";
 import {userModel} from "@server/models";
 import {unstable_expireTag as expireTag} from "next/cache";
 import {User} from "lucia";

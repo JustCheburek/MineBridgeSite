@@ -5,7 +5,7 @@ import {Url} from "@components/button";
 
 export const metadata: Metadata = {
     title: "Ивенты",
-    description: "Поинты ивентов (ПИ) — внутриигровые награды за создания ивентов. 1 ивент = до 5 ПИ, 1 ПИ = 25 рейтинга!"
+    description: "Поинты ивентов (ПИ) — внутриигровые награды за создания ивентов. 1 ивент = до 5 ПИ, 1 ПИ = 25 звёзд!"
 };
 
 export default function Events() {

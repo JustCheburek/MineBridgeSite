@@ -87,7 +87,6 @@ export function WhitelistSection({user, isMe, isHelper}: WhitelistSection) {
 
         <Modal setModal={setModal} modal={modal}>
             <H1>Whitelist</H1>
-            <h4 className="red_color">СЕРВЕР ЗАКРЫТ</h4>
             <p>
                 <span className="red_color">Внимание!</span><br/>
                 Ваш майнкрафт никнейм - {" "}

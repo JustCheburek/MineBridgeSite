@@ -23,6 +23,17 @@ export const RconVC = cache(
     }
 )
 
+export const GetHours = cache(
+    async (name: string) => {
+        const client = await RconMB()
+        try {
+            return await client.send(`scoreboard players get ${name} hours`)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+
 export const AddWLConsole = cache(
     async (name: string) => {
         const client = await RconMB()

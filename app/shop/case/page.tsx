@@ -10,7 +10,7 @@ import {Drop} from "@/types/case";
 
 // Компоненты
 import {CaseClient} from "./caseClient";
-import {RconVC} from "@server/console";
+import {RconVC} from "@services/console";
 
 export const metadata: Metadata = {
     title: "Кейсы",

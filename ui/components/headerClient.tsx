@@ -10,7 +10,7 @@ import "./styles/header.scss";
 
 // Компоненты
 import {Urls} from "./urls";
-import {AuthSvg, MinebridgeSvg, MostikiSvg} from "@ui/SVGS";
+import {AuthSvg, MinebridgeSvg, MostikiSvg, StarsSvg} from "@ui/SVGS";
 import {NavLink} from "@components/navlink";
 import {Img} from "@components/img";
 import {Burger} from "@components/burger";
@@ -78,10 +78,15 @@ function User({user}: { user: User | null }) {
             onClick={e => e.stopPropagation()}
         >
             <div className="user_info">
-                <Link href="/shop/buy" className="for_pc user_mostiki">
-                    Баланс: {" "}
-                    <strong className="unic_color user_mostiki" style={{display: "flex"}}>
-                        {user?.mostiki} <MostikiSvg/>
+                <Link href="/shop/buy" className="for_tablet">
+                    <strong className="yellow_color user_mostiki">
+                        {user?.rating || 0} <StarsSvg/>
+                    </strong>
+                </Link>
+
+                <Link href="/shop/buy" className="for_tablet">
+                    <strong className="unic_color user_mostiki">
+                        {user?.mostiki || 0} <MostikiSvg/>
                     </strong>
                 </Link>
 

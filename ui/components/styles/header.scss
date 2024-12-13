@@ -114,12 +114,6 @@ header {
     text-align: left;
   }
 
-  @media (width < 1200px) {
-    .user_mostiki {
-      display: none;
-    }
-  }
-
   @media (width > 1024px) {
     .auth_icon {
       width: 1.5em;
