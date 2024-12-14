@@ -94,7 +94,7 @@ export default function Mods() {
                 <ul className={styles.list}>
                     {packs.map(pack => (
                         <li key={pack.name} className={styles.item}>
-                            <Link href={pack.url.toString()} target="_blank">
+                            <Link href={pack.url.toString()} target="_blank" className="unic_color medium-font">
                                 {pack.name}
                             </Link>
                         </li>
@@ -110,7 +110,7 @@ export default function Mods() {
                 <ul className={styles.list}>
                     {recommendMods.map(mod =>
                         <li key={mod.name} className={styles.item}>
-                            <Link href={mod.url.toString()} target="_blank" className="unic_color">
+                            <Link href={mod.url.toString()} target="_blank" className="unic_color medium-font">
                                 {mod.name}
                             </Link>
                         </li>
@@ -140,13 +140,19 @@ export default function Mods() {
                 </h3>
                 <h4>
                     Обязательный: {" "}
-                    <Link href={new URL('./MBfull.zip', process.env.NEXT_PUBLIC_RU_URL!)} className="unic_color">
+                    <Link
+                        href={new URL('./MBfull.zip', process.env.NEXT_PUBLIC_RU_URL!).toString()}
+                        className="unic_color medium-font"
+                    >
                         MB (полный)
                     </Link>
                 </h4>
                 <p>
                     По желанию: {" "}
-                    <Link href="https://modrinth.com/resourcepack/aseprite-fonts" className="unic_color">
+                    <Link
+                        href="https://modrinth.com/resourcepack/aseprite-fonts"
+                        className="unic_color"
+                    >
                         Шрифт
                     </Link>
                 </p>
