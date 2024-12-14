@@ -25,7 +25,6 @@ export function AuthForm({savedName}: { savedName?: string }) {
                     <FormInput
                         name="provider"
                         type="radio"
-                        disabled={!access}
                         checked={Check("discord")}
                         onChange={onChange}
                         value="discord"
@@ -37,7 +36,6 @@ export function AuthForm({savedName}: { savedName?: string }) {
                     <FormInput
                         name="provider"
                         type="radio"
-                        disabled={!access}
                         checked={Check("google")}
                         onChange={onChange}
                         value="google"
