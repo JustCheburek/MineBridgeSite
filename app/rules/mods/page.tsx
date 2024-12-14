@@ -140,7 +140,7 @@ export default function Mods() {
                 </h3>
                 <h4>
                     Обязательный: {" "}
-                    <Link href="http://map.m-br.ru/MBfull.zip" className="unic_color">
+                    <Link href={new URL('./MBfull.zip', process.env.NEXT_PUBLIC_RU_URL!)} className="unic_color">
                         MB (полный)
                     </Link>
                 </h4>

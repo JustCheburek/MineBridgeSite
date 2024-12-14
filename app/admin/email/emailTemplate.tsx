@@ -12,7 +12,7 @@ export const EmailTemplate = async (
             Это администрация майнкрафт сервера MineBridge
         </p>
         <p>
-            <strong>Открытие нашего сервера</strong> уже в <strong>декабре 2024 года</strong>
+            <strong>Открытие нашего сервера</strong> уже в <strong>СЕГОДНЯ, 14 декабря, в 9:00 по мск</strong>
         </p>
         <p>
             Посмотрите бомбезный <strong><a href="https://youtu.be/m7ipkVv_FPE">трейлер</a></strong>, если до сих пор его не видели

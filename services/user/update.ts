@@ -50,7 +50,7 @@ export async function SendEmail(formData: FormData) {
         return
     }
 
-    const batchSize = 100;
+    const batchSize = 99;
     const users = await getUsers();
 
     for (const batch of chunk(users, batchSize)) {
