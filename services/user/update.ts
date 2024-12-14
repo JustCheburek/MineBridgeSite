@@ -1,7 +1,7 @@
 "use server";
 import {cookies} from "next/headers";
 import {MBSESSION} from "@/const";
-import {AddWLConsole, RconVC, RemoveWLConsole} from "@services/console";
+import {AddWLConsole, RconVC, RemoveWLConsole, SuffixConsole} from "@services/console";
 import {userModel} from "@server/models";
 import {unstable_expireTag as expireTag} from "next/cache";
 import {User} from "lucia";
@@ -208,9 +208,15 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
 }
 
 export async function SelectSuffix(suffix: string, _id: string) {
-    await userModel.findByIdAndUpdate(_id, {
-        suffix
-    })
+    try {
+        const {user} = await getUser({_id}, false)
+
+        await SuffixConsole(user.name, suffix)
+
+        await userModel.findByIdAndUpdate(_id, {suffix})
+    } catch (e) {
+        console.error(e)
+    }
 
     expireTag("userLike")
 }

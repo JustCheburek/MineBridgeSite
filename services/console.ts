@@ -34,6 +34,13 @@ export const GetHours = cache(
     }
 )
 
+export const SuffixConsole = cache(
+    async (name: string, suffix: string) => {
+        const client = await RconVC()
+        return await client.send(`lpv user ${name} meta setsuffix 5 ${suffix}`)
+    }
+)
+
 export const AddWLConsole = cache(
     async (name: string) => {
         const client = await RconMB()
