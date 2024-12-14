@@ -21,10 +21,10 @@ export default function Mods() {
     type NameUrl = Required<Name>
 
     const packs: NameUrl[] = [{
-        name: "Kawa11Fox 1.21 (оптимизированная)",
+        name: "Kawa11Fox 1.21",
         url: new URL("https://disk.yandex.ru/d/ToOOD2brmUWULA")
     }, {
-        name: "JustCheburek 1.21 (более функциональная)",
+        name: "JustCheburek 1.21",
         url: new URL("https://modrinth.com/modpack/minebridge-pack")
     }]
 
