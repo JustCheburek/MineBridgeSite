@@ -1,6 +1,6 @@
 "use server";
 import {CaseData} from "@/types/purchase";
-import {RconMB, RconVC} from "@services/console";
+import {GetHours, RconMB, RconVC} from "@services/console";
 import {userModel} from "@server/models";
 import {unstable_expireTag as expireTag} from "next/dist/server/web/spec-extension/revalidate";
 
@@ -29,7 +29,9 @@ export async function GetPrize(name: string) {
     await client.send(`tw trigger health_prize ${name}`)
 }
 
-export async function GetStars(_id: string, name: string, hours: number) {
+export async function GetStars(_id: string, name: string) {
+    const hours = await GetHours(name)
+
     try {
         const client = await RconMB()
 

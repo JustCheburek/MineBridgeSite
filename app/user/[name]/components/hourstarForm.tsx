@@ -3,13 +3,17 @@
 import {Button} from "@components/button";
 import {FormBox} from "@components/formBox";
 import {GetStars} from "@services/user";
+import {useState} from "react";
 
-export function HourStarForm({_id, name, hours}: { _id: string, name: string, hours: number }) {
+export function HourStarForm({_id, name}: { _id: string, name: string }) {
+    const [click, setClick] = useState(false)
+
     return (
         <FormBox action={() => {
-            GetStars(_id, name, hours)
+            setClick(true)
+            GetStars(_id, name)
         }}>
-            <Button>
+            <Button disabled={click}>
                 Получить звёзды
             </Button>
         </FormBox>

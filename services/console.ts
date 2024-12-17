@@ -36,7 +36,7 @@ export const GetHours = cache(
             console.error(e)
         }
 
-        return 0
+        return -1
     }
 )
 
