@@ -10,10 +10,9 @@ export function HourStarForm({_id, name}: { _id: string, name: string }) {
 
     return (
         <FormBox action={() => {
-            setClick(true)
             GetStars(_id, name)
         }}>
-            <Button disabled={click}>
+            <Button disabled={click} onClick={() => setClick(true)}>
                 Получить звёзды
             </Button>
         </FormBox>

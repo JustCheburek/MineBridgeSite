@@ -29,9 +29,11 @@ const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
             <strong className="unic_color all_select">secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}</strong>
         </p>
 
-        <Button onClick={() => setModal(true)}>
-            Заново
-        </Button>
+        <FormBox action="">
+            <FormButton onClick={() => setModal(true)}>
+                Заново
+            </FormButton>
+        </FormBox>
     </section>
 )
 
@@ -97,10 +99,9 @@ export function WhitelistSection({user, isMe, isHelper}: WhitelistSection) {
                 его во вкладке в аккаунтах!
             </p>
             <FormBox action={() => {
-                setModal(false)
                 AddWhitelist(user._id, user.name)
             }}>
-                <FormButton>
+                <FormButton onClick={() => setModal(false)}>
                     Попасть в WhiteList
                 </FormButton>
             </FormBox>

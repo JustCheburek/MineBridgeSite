@@ -9,9 +9,9 @@ import {Modal, type ModalAction} from "@components/modal";
 import {useState} from "react";
 import type {isRoles} from "@/services";
 import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
-import {RatingUp} from "@components/ratingUp";
 import {H1} from "@components/h1";
 import {DeleteUser, UpdateProfile} from "@services/user";
+import Link from "next/link";
 
 type SuccessModal = {
     user: User
@@ -54,10 +54,9 @@ function NoPermModal({modal, setModal}: ModalAction) {
             <p>
                 поэтому не можешь удалять аккаунт
             </p>
-            <p>
-                Но ты можешь:
-            </p>
-            <RatingUp/>
+            <Link href="/rules" className="medium-font">
+                Как повысить рейтинг?
+            </Link>
         </Modal>
     )
 }
@@ -111,10 +110,9 @@ export function ChangeParam(
             <h3>
               У вас рейтинг ниже {ratingAccess}
             </h3>
-            <p>
-              Поэтому, чтобы поменять данные вы можете:
-            </p>
-            <RatingUp/>
+            <Link href="/rules" className="medium-font">
+              Как повысить рейтинг?
+            </Link>
           </div>
         }
         <FormBox action={async formData => {

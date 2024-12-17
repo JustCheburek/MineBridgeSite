@@ -99,9 +99,8 @@ export function CasesPurchasesSection(
         {(isMe || access) && caseDatas.length > 0 &&
           <FormBox action={() => {
               GetCosmetics(user.name, caseDatas)
-              setClick(true)
           }}>
-            <FormButton disabled={click}>
+            <FormButton disabled={click} onClick={() => setClick(true)}>
                 {click
                     ? "Проверьте покупки"
                     : "Получить покупки"

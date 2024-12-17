@@ -52,6 +52,10 @@ export const AddWLConsole = cache(
         const client = await RconMB()
 
         await client.send(`whitelist add ${name}`)
+
+        const clientVC = await RconVC()
+
+        await clientVC.send(`lpv user ${name} group add whitelist`)
     }
 )
 
@@ -60,5 +64,9 @@ export const RemoveWLConsole = cache(
         const client = await RconMB()
 
         await client.send(`whitelist remove ${name}`)
+
+        const clientVC = await RconVC()
+
+        await clientVC.send(`lpv user ${name} group remove whitelist`)
     }
 )
