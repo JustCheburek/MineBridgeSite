@@ -108,47 +108,6 @@ export default async function Shop() {
                 </p>
             </Heading>
 
-            <Author description="Абстрактный художник" href="https://t.me/Dezelink">
-                @Dezelink
-            </Author>
-
-            <Section name="stickers">
-                <Box preview>
-                    <Link href="/features/stickers">
-                        <ImgBox hover helper overflow={false}>
-                            <Img
-                                src="/features/stickers/14.png" alt="Стикер"
-                                width={225}
-                            />
-                        </ImgBox>
-                    </Link>
-                </Box>
-
-                <Box>
-                    <Text>
-                        <CaseInfo description="Абстрактные стикеры">
-                            Необычные
-                        </CaseInfo>
-                        <Price>
-                            200
-                        </Price>
-                        <StickerButton/>
-                    </Text>
-                </Box>
-
-                <Box>
-                    <Text>
-                        <CaseInfo description="А где очередь?">
-                            Speed UP
-                        </CaseInfo>
-                        <Price>
-                            300
-                        </Price>
-                        <StickerButton/>
-                    </Text>
-                </Box>
-            </Section>
-
             <Author description="Художник-приколист" href="https://t.me/coolpilot2O1O">
                 @coolpilot2O1O
             </Author>
@@ -171,7 +130,7 @@ export default async function Shop() {
                             Стандарт
                         </CaseInfo>
                         <Price>
-                            400
+                            200
                         </Price>
                         <StickerButton/>
                     </Text>
@@ -181,6 +140,47 @@ export default async function Shop() {
                     <Text>
                         <CaseInfo description="Невероятно быстро">
                             Экспресс
+                        </CaseInfo>
+                        <Price>
+                            300
+                        </Price>
+                        <StickerButton/>
+                    </Text>
+                </Box>
+            </Section>
+
+            <Author description="Абстрактный художник" href="https://t.me/Dezelink">
+                @Dezelink
+            </Author>
+
+            <Section name="stickers">
+                <Box preview>
+                    <Link href="/features/stickers">
+                        <ImgBox hover helper overflow={false}>
+                            <Img
+                                src="/features/stickers/14.png" alt="Стикер"
+                                width={225}
+                            />
+                        </ImgBox>
+                    </Link>
+                </Box>
+
+                <Box>
+                    <Text>
+                        <CaseInfo description="Абстрактные стикеры">
+                            Необычные
+                        </CaseInfo>
+                        <Price>
+                            400
+                        </Price>
+                        <StickerButton/>
+                    </Text>
+                </Box>
+
+                <Box>
+                    <Text>
+                        <CaseInfo description="А где очередь?">
+                            Speed UP
                         </CaseInfo>
                         <Price>
                             500
@@ -220,7 +220,7 @@ export default async function Shop() {
 
                 <Box>
                     <Text>
-                        <CaseInfo description="Лучшие стикеры вне очереди">
+                        <CaseInfo description="Лучшие стикеры, но ещё и быстрее">
                             Делюкс
                         </CaseInfo>
                         <Price>
