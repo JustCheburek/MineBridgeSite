@@ -121,8 +121,8 @@ export default async function Profile({params}: NameParams) {
                 </div>
             </div>
 
-            {user.whitelist
-                && <Suspense fallback={<Skeleton width="100%" height={100}/>}>
+            {isMe && user.whitelist &&
+              <Suspense fallback={<Skeleton width="100%" height={100}/>}>
                 <HourStarSection user={user}/>
               </Suspense>
             }
