@@ -3,7 +3,7 @@ import {GetHours} from "@services/console";
 import {HourStarForm} from "./hourstarForm";
 
 export async function HourStarSection({user}: { user: User }) {
-    const hours = await GetHours(user.name) || 0
+    const hours = await GetHours(user.name)
 
     console.log(`hours: ${hours}`)
 
