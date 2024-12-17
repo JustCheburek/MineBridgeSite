@@ -31,7 +31,7 @@ export const GetHours = cache(
 
             if (!text) return
 
-            return text.split(" ")[2]
+            return Number(text.split(" ")[2])
         } catch (e) {
             console.error(e)
         }

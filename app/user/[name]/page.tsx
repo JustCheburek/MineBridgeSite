@@ -12,9 +12,9 @@ import {URLS_START} from "@/const";
 import {User} from "lucia";
 import {NameParams} from "@/types/params";
 import TimeAgo from "javascript-time-ago";
-// import {HourStarSection} from "./components/hourstar";
 import {Suspense} from "react";
 import {Skeleton} from "@components/skeleton";
+import {HourStarSection} from "./components/hourstar";
 
 export const generateMetadata = async (
     {
@@ -121,11 +121,11 @@ export default async function Profile({params}: NameParams) {
                 </div>
             </div>
 
-            {/*{user.whitelist
+            {user.whitelist
                 && <Suspense fallback={<Skeleton width="100%" height={100}/>}>
                 <HourStarSection user={user}/>
               </Suspense>
-            }*/}
+            }
 
             <WhitelistSection user={user} isMe={isMe} isHelper={isHelper}/>
 
