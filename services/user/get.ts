@@ -2,6 +2,7 @@
 import {CaseData} from "@/types/purchase";
 import {RconMB, RconVC} from "@services/console";
 import {userModel} from "@server/models";
+import {unstable_expireTag as expireTag} from "next/dist/server/web/spec-extension/revalidate";
 
 export async function GetCosmetics(name: string, caseDatas: CaseData[]) {
     function wait(ms: number) {
@@ -51,4 +52,6 @@ export async function GetStars(_id: string, name: string, hours: number) {
     } catch (e) {
         console.error(e)
     }
+
+    expireTag(`userLike`)
 }
