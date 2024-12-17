@@ -1,7 +1,8 @@
 "use server";
 import {CaseData} from "@/types/purchase";
-import {GetHours, RconMB, RconVC} from "@services/console";
+import {RconMB, RconVC} from "@services/console";
 import {unstable_expireTag as expireTag} from "next/dist/server/web/spec-extension/revalidate";
+import {userModel} from "@server/models";
 
 export async function GetCosmetics(name: string, caseDatas: CaseData[]) {
     function wait(ms: number) {
@@ -28,17 +29,13 @@ export async function GetPrize(name: string) {
     await client.send(`tw trigger health_prize ${name}`)
 }
 
-export async function GetStars(_id: string, name: string) {
-    const hours = await GetHours(name)
-
-    if (!hours) return
-
+export async function GetStars(_id: string, name: string, hours: number) {
     try {
         const client = await RconMB()
 
         await client.send(`scoreboard players set ${name} hours 0`)
 
-        /*await userModel.findByIdAndUpdate(_id, {
+        await userModel.findByIdAndUpdate(_id, {
             $push: {
                 punishments: {
                     reason: `Часы: ${hours}`,
@@ -51,7 +48,7 @@ export async function GetStars(_id: string, name: string) {
             $inc: {
                 rating: hours
             }
-        })*/
+        })
     } catch (e) {
         console.error(e)
     }
