@@ -29,24 +29,26 @@ export async function GetPrize(name: string) {
 }
 
 export async function GetStars(_id: string, name: string, hours: number) {
-    const client = await RconMB()
+    try {
+        const client = await RconMB()
 
-    const answer = await client.send(`scoreboard players set ${name} hours 0`)
+        await client.send(`scoreboard players set ${name} hours 0`)
 
-    if (!answer) return
-
-    await userModel.findByIdAndUpdate(_id, {
-        $push: {
-            punishments: {
-                reason: `Часы: ${hours}`,
-                rating: hours,
-                author: "AutoHours",
-                createdAt: new Date(),
-                updatedAt: new Date()
+        await userModel.findByIdAndUpdate(_id, {
+            $push: {
+                punishments: {
+                    reason: `Часы: ${hours}`,
+                    rating: hours,
+                    author: "AutoHours",
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                }
+            },
+            $inc: {
+                rating: hours
             }
-        },
-        $inc: {
-            rating: hours
-        }
-    })
+        })
+    } catch (e) {
+        console.error(e)
+    }
 }

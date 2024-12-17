@@ -29,7 +29,7 @@ export const GetHours = cache(
         try {
             const text = await client.send(`scoreboard players get ${name} hours`)
 
-            if (!text) return
+            if (typeof text === "undefined") return
 
             return Number(text.split(" ")[2])
         } catch (e) {
