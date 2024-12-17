@@ -212,7 +212,7 @@ export default async function Shop() {
                             Премиум
                         </CaseInfo>
                         <Price>
-                            1000
+                            3000
                         </Price>
                         <StickerButton/>
                     </Text>
@@ -224,7 +224,7 @@ export default async function Shop() {
                             Делюкс
                         </CaseInfo>
                         <Price>
-                            1300
+                            4000
                         </Price>
                         <StickerButton/>
                     </Text>
