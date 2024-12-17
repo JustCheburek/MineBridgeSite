@@ -49,10 +49,6 @@ export const SuffixConsole = cache(
 
 export const AddWLConsole = cache(
     async (name: string) => {
-        const client = await RconMB()
-
-        await client.send(`whitelist add ${name}`)
-
         const clientVC = await RconVC()
 
         await clientVC.send(`lpv user ${name} group add whitelist`)
@@ -61,10 +57,6 @@ export const AddWLConsole = cache(
 
 export const RemoveWLConsole = cache(
     async (name: string) => {
-        const client = await RconMB()
-
-        await client.send(`whitelist remove ${name}`)
-
         const clientVC = await RconVC()
 
         await clientVC.send(`lpv user ${name} group remove whitelist`)
