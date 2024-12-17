@@ -130,7 +130,7 @@ export default async function Shop() {
                             Необычные
                         </CaseInfo>
                         <Price>
-                            30
+                            200
                         </Price>
                         <StickerButton/>
                     </Text>
@@ -142,7 +142,7 @@ export default async function Shop() {
                             Speed UP
                         </CaseInfo>
                         <Price>
-                            55
+                            300
                         </Price>
                         <StickerButton/>
                     </Text>
@@ -171,7 +171,7 @@ export default async function Shop() {
                             Стандарт
                         </CaseInfo>
                         <Price>
-                            60
+                            400
                         </Price>
                         <StickerButton/>
                     </Text>
@@ -183,7 +183,7 @@ export default async function Shop() {
                             Экспресс
                         </CaseInfo>
                         <Price>
-                            100
+                            500
                         </Price>
                         <StickerButton/>
                     </Text>
@@ -212,7 +212,7 @@ export default async function Shop() {
                             Премиум
                         </CaseInfo>
                         <Price>
-                            200
+                            1000
                         </Price>
                         <StickerButton/>
                     </Text>
@@ -224,7 +224,7 @@ export default async function Shop() {
                             Делюкс
                         </CaseInfo>
                         <Price>
-                            300
+                            1300
                         </Price>
                         <StickerButton/>
                     </Text>

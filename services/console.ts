@@ -27,9 +27,13 @@ export const GetHours = cache(
     async (name: string) => {
         const client = await RconMB()
         try {
-            return await client.send(`scoreboard players get ${name} hours`)
+            const text = await client.send(`scoreboard players get ${name} hours`)
+
+            if (!text) return
+
+            return text.split(" ")[2]
         } catch (e) {
-            console.log(e)
+            console.error(e)
         }
     }
 )
