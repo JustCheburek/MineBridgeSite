@@ -29,7 +29,11 @@ export const GetHours = cache(
         let hours = -1
 
         try {
-            hours = Number(await client.send(`papi bcparse --null %objective_scorep_hours_${name}%`))
+            hours = Number(
+                (
+                    await client.send(`scoreboard players get ${name} hours`)
+                ).split(" ")[2]
+            )
         } catch (e) {
             console.error(e)
         }
