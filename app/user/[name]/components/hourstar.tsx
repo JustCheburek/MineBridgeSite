@@ -15,9 +15,6 @@ export async function HourStarSection({user}: { user: User }) {
                 Сервер не доступен
               </p>
             }
-            <p className="red_color medium-font">
-                В бета тесте
-            </p>
 
             {hours > 0 &&
               <HourStarForm _id={user._id} name={user.name}/>
