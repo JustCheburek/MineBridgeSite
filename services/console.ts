@@ -26,17 +26,17 @@ export const RconVC = cache(
 export const GetHours = cache(
     async (name: string) => {
         const client = await RconMB()
+        let hours = -1
+
         try {
-            const text = await client.send(`scoreboard players get ${name} hours`)
-
-            if (!text) return 0
-
-            return Number(text.split(" ")[2])
+            hours = Number(await client.send(`papi bcparse --null %objective_scorep_hours_${name}%`))
         } catch (e) {
             console.error(e)
         }
 
-        return -1
+        client.disconnect()
+
+        return hours
     }
 )
 
