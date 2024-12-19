@@ -20,7 +20,7 @@ export async function HourStarSection({user}: { user: User }) {
             </p>
 
             {hours > 0 &&
-              <HourStarForm _id={user._id} name={user.name} hours={hours}/>
+              <HourStarForm _id={user._id} name={user.name}/>
             }
         </section>
     )
