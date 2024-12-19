@@ -102,42 +102,42 @@ export default function Rules() {
                     зависит от тяжести содеянного
                 </p>
                 <RulesBox name="general" heading="Общение" number={1}>
-                    <Rule number={1.1} punishment={50}>
+                    <Rule number={1.1} stars={50}>
                         Любые формы оскорблений запрещены
                     </Rule>
-                    <Rule number={1.2} punishment={15}>
-                        Для определённых сообщений существуют свои каналы {" "}
+                    <Rule number={1.2} stars={15}>
+                        Для определённых сообщений существуют свои каналы<br/>
                         <small>(репорты в #репорты, баги в #тех-поддержка)</small>
                     </Rule>
-                    <Rule number={1.3} punishment={15}>
+                    <Rule number={1.3} stars={15}>
                         Спам и флуд запрещены
                     </Rule>
-                    <Rule number={1.4} punishment="Бан">
+                    <Rule number={1.4} text="Бан">
                         Контент NSFW (18+ и т. п.) запрещен
                     </Rule>
-                    <Rule number={1.5} punishment={20}>
+                    <Rule number={1.5} stars={35}>
                         Запрещено нарушение правил {" "}
                         <TextUrl href="https://twitch.tv/creatorcamp/ru-ru/paths/rules-policies-and-guidelines/">
                             платформы Twitch
                         </TextUrl><br/>
                         <Link href="/rules/blacklist" className="unic_color">Список банвордов</Link>
                     </Rule>
-                    <Rule number={1.6} punishment={20}>
+                    <Rule number={1.6} stars={20}>
                         Мат не приветствуется, череда матов = наказание
                     </Rule>
-                    <Rule number={1.7} punishment={300}>
+                    <Rule number={1.7} text="Бан">
                         Запрещён деанон, доксинг, манипуляция, слив личных данных без разрешения
                     </Rule>
                 </RulesBox>
 
                 <RulesBox name="game_interferences" heading="Игровые помехи" number={2}>
-                    <Rule number={2.1} punishment={30}>
+                    <Rule number={2.1} stars={30}>
                         <p>
                             Запрещена ходьба перед игроком, ломание блоков под или перед ним, стрельба
                             любым видом снарядов в игрока
                         </p>
                     </Rule>
-                    <Rule number={2.2} punishment="Суд">
+                    <Rule number={2.2} text="Суд">
                         <p>Пранки должны:</p>
                         <ul>
                             <li>
@@ -152,7 +152,7 @@ export default function Rules() {
                             </li>
                         </ul>
                     </Rule>
-                    <Rule number={2.3} punishment="Суд">
+                    <Rule number={2.3} text="Суд">
                         <p>Убийства должны:</p>
                         <ul>
                             <li>
@@ -215,11 +215,11 @@ export default function Rules() {
                             <li>
                                 Гриферить. Штраф: возврат ресурсов или компенсация алмазами{" "}
                                 <small>(по рыночной цене)</small> + моральная компенсация 5 алмазов
-                                <Punishment punishment="Возврат ресурсов + 5 алмазов"/>
+                                <Punishment text="От владельца (не больше x2)" stars={40}/>
                             </li>
                             <li>
                                 Строить, ломать и изменять блоки. За собой необходимо чинить взрывы от криперов
-                                <Punishment punishment="Починка или штраф от 8 алмазов"/>
+                                <Punishment text="Починка или штраф от 8 алмазов" stars={30}/>
                             </li>
                             <li>
                                 Убивать мирных и нейтральных существ.
@@ -227,15 +227,15 @@ export default function Rules() {
                                 <small>
                                     (используются в фермах, механизмах; окружены блоками)
                                 </small>
-                                <Punishment punishment="От владельца"/>
+                                <Punishment text="От владельца" stars={20}/>
                             </li>
                             <li>
                                 Торговаться с жителями
-                                <Punishment punishment="Возврат купленных ресурсов"/>
+                                <Punishment text="Возврат купленных ресурсов" stars={20}/>
                             </li>
                             <li>
                                 Если владелец просит, то необходимо покинуть территорию
-                                <Punishment punishment={20}/>
+                                <Punishment stars={10}/>
                             </li>
                         </ul>
                     </Rule>
@@ -269,13 +269,13 @@ export default function Rules() {
                             течение 5 минут, чтобы была возможность пройти через чужие базы
                         </p>
                     </Rule>
-                    <Rule number={3.4} punishment="Откуп алмазами">
+                    <Rule number={3.4} text="Откуп алмазами">
                         <p>
                             При занимании места ближе, чем на 60 блоков к чужой базе или на 150 блоков к нулевым
                             координатам, надо спрашивать их владельцев или мэра мира
                         </p>
                     </Rule>
-                    <Rule number={3.5} punishment={50}>
+                    <Rule number={3.5} stars={50}>
                         <p>Общими территориями являются <small>(их нельзя занимать)</small>:</p>
                         <ul>
                             <li>
@@ -290,7 +290,7 @@ export default function Rules() {
                             </li>
                         </ul>
                     </Rule>
-                    <Rule number={3.6} punishment={50}>
+                    <Rule number={3.6} stars={50}>
                         <p>
                             Нельзя запрещать проход к данжам или убийства мобов / боссов в нём{" "}
                             <small>(кроме фармилок мобов)</small>
@@ -309,7 +309,7 @@ export default function Rules() {
                             быть отдана в чужие руки
                         </p>
                     </Rule>
-                    <Rule number={3.8} punishment={30}>
+                    <Rule number={3.8} stars={30}>
                         <p>
                             Запрещено строительство некрасивых никчёмных построек, не имеющих никакого значения:
                             рандомные столбы и лестницы в небо и т.д.
@@ -321,7 +321,7 @@ export default function Rules() {
                 </RulesBox>
 
                 <RulesBox name="cheats" heading="Запрещённые преимущества" number={4}>
-                    <Rule number={4.1} punishment={200}>
+                    <Rule number={4.1} stars={200}>
                         <p>
                             Читы запрещены в любом виде: {" "}
                             <Link href="/rules/mods" className="unic_color medium-font">список модификаций</Link>
@@ -339,7 +339,7 @@ export default function Rules() {
                             </li>
                         </ul>
                     </Rule>
-                    <Rule number={4.2} punishment={200}>
+                    <Rule number={4.2} stars={200}>
                         <p>
                             Дюпы запрещены, но разрешены следующие:
                         </p>
@@ -355,37 +355,37 @@ export default function Rules() {
                             </li>
                         </ul>
                     </Rule>
-                    <Rule number={4.3} punishment={200}>
+                    <Rule number={4.3} stars={200}>
                         Лаг машины запрещены
                     </Rule>
-                    <Rule number={4.4} punishment={300}>
+                    <Rule number={4.4} stars={300}>
                         Любые попытки обхода блокировок категорически запрещены и будут приводить к продлению и
                         изменению их типа на более строгий
                     </Rule>
                 </RulesBox>
 
                 <RulesBox name="trading" heading="Торговля" number={5}>
-                    <Rule number={5.1} punishment={30}>
+                    <Rule number={5.1}>
                         Валюта сервера в городах и торговых зонах алмазы, за их пределами разрешён бартер
                     </Rule>
-                    <Rule number={5.2} punishment={300}>
+                    <Rule number={5.2} stars={400}>
                         Продажа ресурсов за реальные деньги запрещена. Продажа вещей за мостики осуществляется только
                         при администрации
                     </Rule>
-                    <Rule number={5.3} punishment={70}>
+                    <Rule number={5.3} stars={70}>
                         Запрещено намеренное создание дефицита и искусственное завышение цен на любые ресурсы.
                         Не пытайтесь {'"'}сломать{'"'} экономику сервера
                     </Rule>
                 </RulesBox>
 
                 <RulesBox name="unknown_url" heading="Сторонние ресурсы" number={6}>
-                    <Rule number={6.1} punishment={150}>
+                    <Rule number={6.1} stars={150}>
                         Ссылки на сторонние Discord-сервера запрещены
                     </Rule>
-                    <Rule number={6.2} punishment={200}>
+                    <Rule number={6.2} stars={200}>
                         Ссылки на сайты / соцсети майнкрафт серверов-конкурентов запрещены
                     </Rule>
-                    <Rule number={6.3} punishment={300}>
+                    <Rule number={6.3} stars={300}>
                         <p>
                             Реклама, не связанная с нашим проектом, без согласия администрации запрещена. {" "}
                             <TextUrl href="https://t.me/JustCheburek">
@@ -409,7 +409,7 @@ export default function Rules() {
                 </RulesBox>
 
                 <RulesBox name="lor" heading="Лор" number={7}>
-                    <Rule number={7.1} punishment={30}>
+                    <Rule number={7.1} stars={30}>
                         <p>
                             Лор — общее достояние и одна из уникальностей сервера
                         </p>
@@ -454,7 +454,7 @@ export default function Rules() {
                             Удобное время суда обговаривается для всех участвующих лиц суда
                         </p>
                     </Rule>
-                    <Rule number={8.2} punishment="-рейт каждый день">
+                    <Rule number={8.2} text="-рейт каждый день">
                         <p>
                             Невозможность собрания суда по причине отсутствия обвиняемого
                         </p>

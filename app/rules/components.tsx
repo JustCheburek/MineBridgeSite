@@ -46,22 +46,23 @@ export const RulesBox = ({name, heading, number, children}: PropsWithChildren<Ru
     )
 }
 
-export const Punishment = ({punishment}: { punishment?: string | number }) => {
-    const isNum = typeof punishment === "number"
-
-    return (
-        <p className={styles.punishment}>
-            {isNum && "-"}{punishment}{isNum && <StarsSvg height="0.75em"/>}
-        </p>
-    )
-}
+export const Punishment = ({text, stars}: { text?: string; stars?: number }) => (
+    <p className={styles.punishment}>
+        {text}
+        {text && stars && " / "}
+        {stars && <>
+            {"-"}{stars}<StarsSvg height="0.75em"/>
+        </>}
+    </p>
+)
 
 type Rule = {
     number: number
-    punishment?: string | number
+    text?: string
+    stars?: number
 }
 
-export const Rule = ({number, children, punishment}: PropsWithChildren<Rule>) => (
+export const Rule = ({number, children, stars, text}: PropsWithChildren<Rule>) => (
     <li className={styles.rule} id={number?.toString()}>
         {number &&
           <a href={"#" + number} className={styles.number}
@@ -72,8 +73,8 @@ export const Rule = ({number, children, punishment}: PropsWithChildren<Rule>) =>
 
         <div className={styles.rule_text}>
             {children}
-            {punishment &&
-              <Punishment punishment={punishment}/>
+            {(stars || text) &&
+              <Punishment stars={stars} text={text}/>
             }
         </div>
     </li>
