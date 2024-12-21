@@ -93,16 +93,7 @@ export const metadata: Metadata = {
         countryName: "Russia",
         emails: "russkielul@gmail.com",
         url: "./",
-        type: "website",
-        images: [{
-            url: "/logos/256x256/logo.png",
-            alt: "Лого майнбриджа",
-            width: 256,
-            height: 256
-        }, {
-            url: "/logos/svg/logo.svg",
-            type: "image/svg+xml"
-        }]
+        type: "website"
     },
     twitter: {
         card: "summary",

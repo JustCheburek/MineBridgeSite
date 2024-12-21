@@ -18,7 +18,7 @@ export default async function Image() {
     return new ImageResponse(
         (
             <OGImageBox paths={["Главная"]}>
-                Лучший полуванильный бесплатный майнкрафт сервер
+                Бесплатный полуванильный майнкрафт сервер
             </OGImageBox>
         ),
         {
