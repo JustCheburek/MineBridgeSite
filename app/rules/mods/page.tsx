@@ -29,8 +29,8 @@ export default function Mods() {
     }]
 
     const recommendMods: NameUrl[] = [{
-        name: "Simple Voice Chat",
-        url: new URL("https://modrinth.com/plugin/simple-voice-chat/")
+        name: "PlasmoVoice",
+        url: new URL("https://modrinth.com/plugin/plasmo-voice")
     }, {
         name: "EmoteCraft",
         url: new URL("https://modrinth.com/mod/emotecraft")
