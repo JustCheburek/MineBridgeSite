@@ -132,6 +132,13 @@ export default function Mods() {
                         </li>
                     )}
                 </ul>
+                <br/>
+                <p>
+                    Нерекомендуемый мод: Exordium
+                </p>
+                <p>
+                    Он ломает ресурс паки сервера, из-за него появляются красная обводка экрана
+                </p>
             </section>
 
             <section id="allowed_rps" className={styles.list_container}>
