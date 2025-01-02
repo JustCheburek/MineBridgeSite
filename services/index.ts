@@ -10,9 +10,11 @@ import axios from "axios";
 import type {Role} from "@/types/role";
 import {Case, Drop, RarityType} from "@/types/case";
 import {idOrName} from "@/types/idOrName";
+import {NO_ROLES} from "@/const";
 
 export interface isRoles {
     isHelper: boolean
+    isModer: boolean
     isAdmin: boolean
     isContentMaker: boolean
 }
@@ -24,7 +26,7 @@ export interface RolesApi extends isRoles {
 export const getRoles = cache(
     async (discordId?: string): Promise<RolesApi> => {
         if (!discordId) {
-            return {roles: [], isAdmin: false, isHelper: false, isContentMaker: false}
+            return {roles: [], ...NO_ROLES}
         }
 
         const allRoles = await axios.get<Role[]>(
@@ -47,10 +49,11 @@ export const getRoles = cache(
 
         const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
         const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
-        const isHelper = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("хелпер"))
+        const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
+        const isHelper = isModer || roles?.some(({name}) => name.toLowerCase().includes("хелпер"))
         const isContentMaker = roles?.some(({name}) => name.toLowerCase().includes("контент"))
 
-        return {roles, isHelper, isAdmin, isContentMaker}
+        return {roles, isHelper, isModer, isAdmin, isContentMaker}
     },
     ["roles", "userLike", "all"],
     {revalidate: 300, tags: ["roles", "userLike", "all"]}
@@ -104,9 +107,7 @@ export const getUser = cache(
         return {
             user,
             isMe,
-            isAdmin: false,
-            isHelper: false,
-            isContentMaker: false,
+            ...NO_ROLES,
             isContentMakerCheck: false,
             roles: []
         }

@@ -7,7 +7,6 @@ import type {User} from "lucia";
 import {FormBox, FormButton, FormInput, FormLabel, FormTextarea} from "@components/formBox";
 import {Modal, type ModalAction} from "@components/modal";
 import {useState} from "react";
-import type {isRoles} from "@/services";
 import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
 import {H1} from "@components/h1";
 import {DeleteUser, UpdateProfile} from "@services/user";
@@ -63,12 +62,12 @@ function NoPermModal({modal, setModal}: ModalAction) {
 
 type DeleteUser = {
     user: User
-    isAdmin: boolean
+    isModer: boolean
 }
 
-export function DeleteUserBox({user, isAdmin}: DeleteUser) {
+export function DeleteUserBox({user, isModer}: DeleteUser) {
     const [modal, setModal] = useState(false)
-    const access = isAdmin || user.rating >= 0
+    const access = isModer || user.rating >= 0
 
     return (<>
         <FormBox action={() => setModal(true)}>
@@ -93,7 +92,10 @@ export function DeleteUserBox({user, isAdmin}: DeleteUser) {
 type ChangeParam = {
     user: User
     isMe: boolean
-} & isRoles
+    isAdmin: boolean
+    isHelper: boolean
+    isContentMaker: boolean
+}
 
 export function ChangeParam(
     {

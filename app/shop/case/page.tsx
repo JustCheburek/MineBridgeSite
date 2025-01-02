@@ -4,7 +4,7 @@ import {getCases, getDrops} from "@/services";
 import {validate} from "@services/validate";
 import {userModel} from "@server/models";
 import {Info} from "@/types/case";
-import {unstable_expireTag as expireTag} from "next/cache";
+import {revalidateTag} from 'next/cache'
 import {Case} from "@/types/case";
 import {Drop} from "@/types/case";
 
@@ -58,7 +58,7 @@ export default async function CasePage() {
             }
         )
 
-        expireTag("userLike")
+        revalidateTag("userLike")
     }
 
     return (

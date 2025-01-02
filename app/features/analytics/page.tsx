@@ -1,7 +1,7 @@
 import {MaxSize} from "@components/maxSize";
 import {getUsers} from "@/services";
 import type {Metadata} from "next";
-import {unstable_expireTag as expireTag} from "next/cache";
+import {revalidateTag} from 'next/cache'
 import {H1} from "@components/h1";
 import {Invites, New, Online} from "./components";
 
@@ -18,7 +18,7 @@ export default async function Analytics() {
 
 				<H1 reload={async () => {
 					"use server";
-					expireTag("seasons")
+					revalidateTag("seasons")
 				}} paths={[
 					{name: "features", displayname: "Фичи"},
 					{name: "analytics", displayname: "Аналитика"}

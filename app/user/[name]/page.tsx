@@ -33,7 +33,7 @@ const timeAgo = new TimeAgo('ru-RU');
 
 export default async function Profile({params}: NameParams) {
     const {name} = await params
-    const {user: author, isHelper, isAdmin} = await validate()
+    const {user: author, isHelper, isModer} = await validate()
     const {
         user, roles, isMe, isContentMaker
     } = await getUser(
@@ -56,7 +56,7 @@ export default async function Profile({params}: NameParams) {
                     <h2 className="unic_color all_select">
                         {user.name}
                     </h2>
-                    {isAdmin &&
+                    {isModer &&
                       <small className="light_gray_color">
                         Айди: {" "}
                         <span className="all_select">{user._id}</span>

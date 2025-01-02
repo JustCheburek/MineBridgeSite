@@ -5,17 +5,14 @@ import {OnThisPageSeasons} from "@components/season";
 import {validate} from "@services/validate";
 import {getSeasons} from "@/services";
 import {Season} from "@/types/season";
-import {cookies} from "next/headers";
-import {lucia} from "@server/lucia";
 import {seasonModel} from "@server/models";
-import {unstable_expireTag as expireTag} from "next/cache";
+import {revalidateTag} from 'next/cache'
 
 export default async function News(
 		{
 			children,
 		}: PropsWithChildren
 ) {
-	const cookiesStore = await cookies()
 	const {isAdmin} = await validate()
 	const seasons = await getSeasons()
 
@@ -28,7 +25,7 @@ export default async function News(
 			endAt: new Date(season.endAt)
 		})
 
-		expireTag("seasons")
+		revalidateTag("seasons")
 	}
 
 	return (

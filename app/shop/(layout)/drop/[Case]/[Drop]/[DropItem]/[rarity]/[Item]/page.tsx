@@ -6,7 +6,6 @@ import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
-import {FormBox, FormInput, FormLabel} from "@/ui/components/formBox";
 
 type ParamsProp = {
     params: Promise<{
@@ -59,7 +58,7 @@ export default async function ShowCase(
     {params}: ParamsProp
 ) {
     const {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity, Item: ItemName} = await params
-    const {user} = await validate()
+    const {user, isModer} = await validate()
 
     const [Case, Drop, DropItem] = await Promise.all([
         getCase({name: CaseName}),
@@ -140,6 +139,11 @@ export default async function ShowCase(
                     </p>
                 </div>
             </div>
+            {isModer &&
+              <small className="light_gray_color flex_center all_select">
+                ultracosmetics.{DropItem.name}.{Item.name}
+              </small>
+            }
         </div>
     )
 }

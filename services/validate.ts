@@ -3,6 +3,7 @@ import {getAuthor, RolesApi} from "@/services";
 import type {User} from "lucia";
 import {cache} from "react";
 import {cookies} from "next/headers";
+import {NO_ROLES} from "@/const";
 
 export const validate = cache(
     async (): Promise<{ user: User | null } & RolesApi> => {
@@ -11,7 +12,7 @@ export const validate = cache(
         if (!sessionId) {
             return {
                 user: null, roles: [],
-                isHelper: false, isAdmin: false, isContentMaker: false
+                ...NO_ROLES
             }
         }
 

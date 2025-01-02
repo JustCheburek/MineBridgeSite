@@ -1,7 +1,6 @@
 // React
 import type {Metadata} from "next";
 import {validate} from "@services/validate";
-import {cookies} from "next/headers";
 import {getSeasons} from "@/services";
 import {MDXRemote} from 'next-mdx-remote/rsc'
 import {seasonModel} from "@server/models";
@@ -19,7 +18,7 @@ import {Img, ImgBox} from "@components/img";
 import {NotFound} from "@components/notFound";
 import {CheckLink} from "@components/checkLink";
 import {AddNewForm} from "@app/news/components/addNewForm";
-import {unstable_expireTag as expireTag} from "next/cache";
+import {revalidateTag} from 'next/cache'
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
@@ -28,7 +27,6 @@ export const metadata: Metadata = {
 };
 
 export default async function News() {
-    const cookiesStore = await cookies()
     const {isAdmin} = await validate()
     const seasons = await getSeasons()
 
@@ -44,14 +42,14 @@ export default async function News() {
             }
         )
 
-        expireTag("seasons")
+        revalidateTag("seasons")
     }
 
     return (
         <div className="news_content">
             <H1 up reload={async () => {
                 "use server";
-                expireTag("seasons")
+                revalidateTag("seasons")
             }}>
                 Новости
             </H1>

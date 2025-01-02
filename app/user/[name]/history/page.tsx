@@ -1,7 +1,7 @@
 import {getCaseLocal, getCases, getDropLocal, getDrops, getItems, getUser} from "@/services";
 import {validate} from "@services/validate";
 import {CaseData} from "@/types/purchase";
-import {unstable_expireTag as expireTag} from "next/cache";
+import {revalidateTag} from 'next/cache'
 import styles from "./history.module.scss";
 import {PunishmentSection} from "./components/ratingSection";
 import {CasesPurchasesSection} from "./components/casesPurchasesSection";
@@ -65,8 +65,8 @@ export default async function History({params}: NameParams) {
         <div className={styles.content}>
             <H1 up reload={async () => {
                 "use server";
-                expireTag("author")
-                expireTag("userLike")
+                revalidateTag("author")
+                revalidateTag("userLike")
             }}>
                 История
             </H1>

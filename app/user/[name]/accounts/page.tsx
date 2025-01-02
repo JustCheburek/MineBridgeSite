@@ -35,7 +35,7 @@ export default async function Accounts({params}: NameParams) {
     const {name} = await params
     const {
         user: author,
-        isAdmin, isHelper
+        isModer, isAdmin, isHelper
     } = await validate()
     const {
         user, isMe, isContentMakerCheck
@@ -43,7 +43,7 @@ export default async function Accounts({params}: NameParams) {
         {name}, true, true, author?._id, isHelper
     )
 
-    const adminAccess = isAdmin || isMe
+    const moderAccess = isModer || isMe
 
     return (
         <div className="account_content">
@@ -80,8 +80,8 @@ export default async function Accounts({params}: NameParams) {
                     </Provider>
                 ))}
             </div>
-            {adminAccess &&
-              <DeleteUserBox user={user} isAdmin={isAdmin}/>
+            {moderAccess &&
+              <DeleteUserBox user={user} isModer={isModer}/>
             }
         </div>
     )

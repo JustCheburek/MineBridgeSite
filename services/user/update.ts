@@ -3,7 +3,7 @@ import {cookies} from "next/headers";
 import {MBSESSION} from "@/const";
 import {AddWLConsole, RconVC, RemoveWLConsole, SuffixConsole} from "@services/console";
 import {userModel} from "@server/models";
-import {unstable_expireTag as expireTag} from "next/cache";
+import {revalidateTag} from 'next/cache'
 import {User} from "lucia";
 import {Action, Punishment} from "@/types/punishment";
 import {CaseData} from "@/types/purchase";
@@ -184,7 +184,7 @@ export async function AddWhitelist(_id: string, name: string) {
         console.error(e)
     }
 
-    expireTag(`userLike`)
+    revalidateTag(`userLike`)
 }
 
 export async function AddPunishment(user: User, punishment: Punishment, actions: Action[]) {
@@ -204,7 +204,7 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
 
     await CheckActions(user, actions)
 
-    expireTag("userLike")
+    revalidateTag("userLike")
 }
 
 export async function SelectSuffix(suffix: string, _id: string) {
@@ -218,7 +218,7 @@ export async function SelectSuffix(suffix: string, _id: string) {
         console.error(e)
     }
 
-    expireTag("userLike")
+    revalidateTag("userLike")
 }
 
 export async function AddSuffix(formData: FormData, _id: string, index: number) {
@@ -235,7 +235,7 @@ export async function AddSuffix(formData: FormData, _id: string, index: number) 
 
     await user.save()
 
-    expireTag("userLike")
+    revalidateTag("userLike")
 }
 
 export async function AddCasePurchase(_id: string, CaseData: CaseData, access: boolean) {
@@ -256,7 +256,7 @@ export async function AddCasePurchase(_id: string, CaseData: CaseData, access: b
         }
     )
 
-    expireTag("userLike")
+    revalidateTag("userLike")
 }
 
 export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
@@ -315,7 +315,7 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
 
     await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})
 
-    expireTag("userLike")
+    revalidateTag("userLike")
 
     redirect(`/user/${name}`)
 }
