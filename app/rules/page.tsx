@@ -57,44 +57,50 @@ export default function Rules() {
                     </li>
                 </ul>
                 <div className={styles.tldr}>
-                    <h2 className="unic_color center_text">
-                        Кратко
-                    </h2>
-                    <div>
-                        <h3 className="red_color">
-                            НEЛЬЗЯ:
-                        </h3>
-                        <strong>При общении</strong>
-                        <ul>
+                    <div className="center_text">
+                        <h2 className="red_color">
+                            НEЛЬЗЯ
+                        </h2>
+                        <small>
+                            Краткие правила
+                        </small>
+                    </div>
+
+                    <div className={styles.tldr_box}>
+                        <div>
+                            <h4>В общении:</h4>
+                            <ul>
                             <li>
-                                Говорить <Link href="/rules/blacklist" className="unic_color">бан-ворды</Link>
-                            </li>
-                            <li>
-                                Оскорблять
-                            </li>
-                            <li>
-                                Часто матерится
-                            </li>
-                            <li>
-                                Рекламировать конкурентов
-                            </li>
-                        </ul>
-                        <br/>
-                        <strong>При игре</strong>
-                        <ul>
-                            <li>
-                                Убивать
-                            </li>
-                            <li>
-                                Мешать другим игрокам
-                            </li>
-                            <li>
-                                Гриферить
-                            </li>
-                            <li>
-                                Читерить
-                            </li>
-                        </ul>
+                                    Говорить <Link href="/rules/blacklist" className="unic_color">бан-ворды</Link>
+                                </li>
+                                <li>
+                                    Оскорблять
+                                </li>
+                                <li>
+                                    Часто матерится
+                                </li>
+                                <li>
+                                    Рекламировать конкурентов
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>В игре:</h4>
+                            <ul>
+                                <li>
+                                    Убивать
+                                </li>
+                                <li>
+                                    Мешать другим игрокам
+                                </li>
+                                <li>
+                                    Гриферить
+                                </li>
+                                <li>
+                                    Читерить
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <p>

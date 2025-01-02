@@ -1,9 +1,14 @@
 @use "@styles/mixins";
 
 .tldr {
-	margin-block: 1.5em;
+	margin: 1.5em auto;
 	padding: 1.5em 3.5em;
 	width: fit-content;
+}
+
+.tldr_box {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 }
 
 // Правила
