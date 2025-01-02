@@ -58,7 +58,7 @@ export default async function ShowCase(
     {params}: ParamsProp
 ) {
     const {Case: CaseName, Drop: DropName, DropItem: DropItemName, rarity, Item: ItemName} = await params
-    const {user, isModer} = await validate()
+    const {user, isHelper} = await validate()
 
     const [Case, Drop, DropItem] = await Promise.all([
         getCase({name: CaseName}),
@@ -139,7 +139,7 @@ export default async function ShowCase(
                     </p>
                 </div>
             </div>
-            {isModer &&
+            {isHelper &&
               <small className="light_gray_color flex_center all_select">
                 ultracosmetics.{DropItem.name}.{Item.name}
               </small>
