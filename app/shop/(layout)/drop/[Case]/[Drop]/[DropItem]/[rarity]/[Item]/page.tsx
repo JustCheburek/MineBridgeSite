@@ -117,7 +117,7 @@ export default async function ShowCase(
                         {DropItem?.displayname}
                     </p>
                     <p>
-                        Прямая цена: {fullPrice} <MostikiSvg/>
+                        Конечная цена: {fullPrice} <MostikiSvg/>
                     </p>
                     <p>
                         У вас есть: {userHave}
