@@ -76,9 +76,10 @@ export function New({users}: { users: User[] }) {
 export function Invites({users}: { users: User[] }) {
     const total = users.reduce((all, {invites}) => all + (invites?.length || 0), 0)
 
-    const top5 = users
+    const max = 5
+    const topInvites = users
         .sort((a, b) => (b.invites?.length || 0) - (a.invites?.length || 0))
-        .slice(0, 5)
+        .slice(0, max)
 
     return (
         <PBox>
@@ -87,12 +88,46 @@ export function Invites({users}: { users: User[] }) {
             </PTitle>
             <PText>
                 <h4>Всего: <span className="unic_color medium-font">{total}</span></h4>
-                <h4>Топ 5 пригласителей</h4>
-                {top5.map(user => (
+                <h4>Топ {topInvites.length} пригласителей</h4>
+                {topInvites.map(user => (
                     <div key={user._id}>
                         <UserBox key={user._id} _id={user._id}>
                             <strong className={`unic_color ${styles.number}`}>{user.invites?.length || 0}</strong>
                         </UserBox>
+                    </div>
+                ))}
+            </PText>
+        </PBox>
+    )
+}
+
+export function Places({users}: { users: User[] }) {
+    const places: { [key: string]: number } = {}
+
+    users.forEach(user => {
+        const place = user.from?.place
+
+        if (place) {
+            places[place] = (places[place] || 0) + 1
+        }
+    })
+
+    const topPlaces = Object.entries(places)
+        .map(([place, count]) => ({place, count}))
+        .sort((a, b) => b.count - a.count)
+
+    return (
+        <PBox>
+            <PTitle>
+                <h2>Места</h2>
+            </PTitle>
+            <PText>
+                <h4>Всего: <span className="unic_color medium-font">{topPlaces.length}</span></h4>
+                <h4>Топ {topPlaces.length} мест:</h4>
+                {topPlaces.map(({place, count}) => (
+                    <div key={place} className={styles.place}>
+                        <p className="medium-font unic_color">{place}</p>
+                        <p className="green_color medium-font">{count}</p>
                     </div>
                 ))}
             </PText>
