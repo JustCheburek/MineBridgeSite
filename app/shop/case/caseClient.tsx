@@ -250,7 +250,9 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
                         <h3 className={`${styles.heading} unic_color center_text`}>
                             Тип дропа
                         </h3>
-                        {Drops.map((type) => (
+                        {Drops
+                            .filter(Drop => Drop.name !== "suffix")
+                            .map((type) => (
                             <label key={type.name} className={`${styles.select_item} no_select`}>
                                 <input
                                     type="radio" value={type.name} name="select_drop"

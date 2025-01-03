@@ -1,6 +1,6 @@
 import {getCase, getDrop} from "@/services";
 import {Img, ImgBox} from "@components/img";
-import {Case, Drop, Item, RarityNames, type RarityType} from "@/types/case";
+import {Case, Drop, Item, RarityCost, RarityNames, type RarityType} from "@/types/case";
 import {validate} from "@services/validate";
 import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
@@ -80,10 +80,11 @@ export default async function ShowCase(
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`)
     }
 
-    let amount = 0
+    const fullPrice = DropItem?.price * 2 + RarityCost[rarity]
 
+    let userHave = 0
     if (user) {
-        amount = user.casesPurchases.reduce((accum, purchase) => {
+        userHave = user.casesPurchases.reduce((accum, purchase) => {
             if (purchase.Item === Item._id) {
                 accum += 1
             }
@@ -116,7 +117,10 @@ export default async function ShowCase(
                         {DropItem?.displayname}
                     </p>
                     <p>
-                        У вас есть: {amount}
+                        Прямая цена: {fullPrice} <MostikiSvg/>
+                    </p>
+                    <p>
+                        У вас есть: {userHave}
                     </p>
                 </div>
             </div>

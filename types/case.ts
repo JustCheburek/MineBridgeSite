@@ -1,6 +1,15 @@
 import {modelOptions, prop} from "@typegoose/typegoose";
 import {Name, UniqueName} from "@/types/name";
 
+export const RarityCost = {
+	common: 0,
+	uncommon: 100,
+	rare: 200,
+	epic: 300,
+	mythic: 400,
+	legendary: 500
+}
+
 export const CaseNames = {
 	common: "Обычный",
 	rare: "Редкий",
