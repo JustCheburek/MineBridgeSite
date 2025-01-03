@@ -18,8 +18,11 @@ export interface CaseData {
 
 @modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})
 export class CasePurchase {
-	@prop({type: () => (Types.ObjectId || String)})
-	public Item!: (Types.ObjectId | string)
+	@prop({required: true, index: true})
+	public _id!: string
+
+	@prop({type: () => Types.ObjectId})
+	public Item!: Types.ObjectId
 
 	@prop({type: () => String})
 	public rarity!: RarityType

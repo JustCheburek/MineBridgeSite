@@ -136,7 +136,7 @@ export function ChangeParam(
                     placeholder="Ссылка на аватарку"
                     autoComplete="photo"
                     required
-                    maxLength={200}
+                    maxLength={300}
                     defaultValue={user.photo}
                     disabled={user.rating <= ratingAccess && !isHelper}
                 />
