@@ -4,7 +4,7 @@ import {Case, Drop, Item, type RarityType} from "@/types/case";
 import {Sticker} from "@/types/sticker";
 import {Types} from "mongoose";
 
-export type CaseData = {
+export interface CaseData {
 	Case: Case
 	Drop: Drop
 	DropItem: Drop

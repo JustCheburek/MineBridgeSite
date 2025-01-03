@@ -28,36 +28,32 @@ export default async function History({params}: NameParams) {
     )
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
-    const caseDatas = [] as CaseData[]
+    const caseDatas = [] as Partial<CaseData>[]
 
     if (user.casesPurchases) {
         for (const purchase of user.casesPurchases) {
-            const Case = await getCaseLocal({_id: purchase.Case}, Cases).catch(console.error)
-            if (!Case) return console.error("No case")
-            const Drop = await getDropLocal({_id: purchase.Drop}, Drops).catch(console.error)
-            if (!Drop) return console.error("No drop")
-            const DropItem = await getDropLocal({_id: purchase.DropItem}, Drops).catch(console.error)
-            if (!DropItem) return console.error("No drop item")
+            try {
+                const Case = await getCaseLocal({_id: purchase.Case}, Cases)
+                const Drop = await getDropLocal({_id: purchase.Drop}, Drops)
+                const DropItem = await getDropLocal({_id: purchase.DropItem}, Drops)
 
-            // Items
-            const items = await getItems(DropItem, purchase.rarity).catch(console.error)
-            if (!items) return console.error("No items")
+                // Items
+                const items = await getItems(DropItem, purchase.rarity)
 
-            const Item = items.find(({_id}) =>
-                JSON.stringify(_id) === JSON.stringify(purchase.Item)
-            )
+                const Item = items.find(({_id}) =>
+                    JSON.stringify(_id) === JSON.stringify(purchase.Item)
+                )
 
-            if (!Item) {
-                return console.error("No item")
+                caseDatas.push({
+                    ...purchase,
+                    Case,
+                    Drop,
+                    DropItem,
+                    Item
+                })
+            } catch (e) {
+                console.error(e)
             }
-
-            caseDatas.push({
-                ...purchase,
-                Case,
-                Drop,
-                DropItem,
-                Item
-            })
         }
     }
 

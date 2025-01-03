@@ -158,7 +158,7 @@ export const getCaseLocal = cache(
         )
 
         if (!Case) {
-            throw new Error(`Case не найден: ${JSON.stringify(param)}`)
+            console.error(`Case не найден: ${JSON.stringify(param)}`)
         }
 
         return Case
@@ -199,7 +199,7 @@ export const getDropLocal = cache(
         )
 
         if (!Drop) {
-            throw new Error(`Drop не найден: ${JSON.stringify(param)}`)
+            console.error(`Drop не найден: ${JSON.stringify(param)}`)
         }
 
         return Drop
@@ -232,20 +232,21 @@ export const getDrops = cache(
 
 export const getItems = cache(
     async (
-        DropItem: Drop,
+        DropItem: Drop | undefined,
         rarity: RarityType
     ) => {
         // Items
+        if (!DropItem) return []
         let {drop: items} = DropItem
         if (items?.length === 0) {
             items = DropItem[rarity]
         }
 
         if (items?.length === 0 || !items) {
-            throw new Error(`Items не найден`)
+            console.error(`Items не найден`)
         }
 
-        return items
+        return items || []
     },
     ["items", "shop", "all"],
     {revalidate: 3600, tags: ["items", "shop", "all"]}

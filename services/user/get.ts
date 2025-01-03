@@ -4,7 +4,7 @@ import {GetHours, RconMB, RconVC} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 
-export async function GetCosmetics(name: string, caseDatas: CaseData[]) {
+export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[]) {
     function wait(ms: number) {
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -16,7 +16,7 @@ export async function GetCosmetics(name: string, caseDatas: CaseData[]) {
     const client = await RconVC()
 
     for (const {DropItem, Item} of caseDatas) {
-        if (DropItem.name !== "suffix") {
+        if (DropItem?.name && Item?.name && DropItem.name !== "suffix") {
             await client.send(`lpv user ${name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
             await wait(1000)
         }

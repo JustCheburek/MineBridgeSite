@@ -70,7 +70,7 @@ function Suffix({_id, isMe, suffix, index, selected}: Suffix) {
 }
 
 type CasesPurchasesSection = {
-    caseDatas: CaseData[]
+    caseDatas: Partial<CaseData>[]
     access: boolean
     isMe: boolean
     user: User
@@ -120,7 +120,7 @@ export function CasesPurchasesSection(
                         className={`border-radius grid_center ${styles.item} ${rarity}_box`}
                         key={index}
                     >
-                        {DropItem.name === "suffix"
+                        {DropItem?.name === "suffix"
                             ? <Suffix
                                 _id={_id}
                                 isMe={isMe}
@@ -130,12 +130,12 @@ export function CasesPurchasesSection(
                             />
                             :
                             <ImgBox hover width="280px" height="160px">
-                                <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
+                                <Img src={`/shop/${DropItem?.name}/${Item?.name}.webp`} alt={Item?.displayname || ""}/>
                             </ImgBox>
                         }
 
                         <Link
-                            href={`/shop/drop/${Case.name}/${Drop.name}/${DropItem.name}/${rarity}/${Item.name}`}
+                            href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
                             className="helper"
                         >
                             ?
