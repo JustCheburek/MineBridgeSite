@@ -27,7 +27,7 @@ export class User {
     @prop({required: true, unique: true})
     public email!: string
 
-    @prop({required: true, trim: true, maxlength: 150})
+    @prop({required: true, trim: true, maxlength: 300})
     public photo!: string
 
     @prop()
@@ -96,7 +96,7 @@ export class User {
                 return {place: undefined, userId: undefined}
             }
 
-            if (!inviter.invites.includes(user._id)) {
+            if (!inviter.invites.includes(JSON.stringify(user._id))) {
                 let mostiki = 0
                 if (isContentMaker) {
 					mostiki = 10
