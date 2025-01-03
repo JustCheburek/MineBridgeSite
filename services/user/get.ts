@@ -1,27 +1,8 @@
 "use server";
-import {CaseData} from "@/types/purchase";
-import {GetHours, RconMB, RconVC} from "@services/console";
+
+import {GetHours, RconMB} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
-
-export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[]) {
-    function wait(ms: number) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve("Готово");
-            }, ms);
-        });
-    }
-
-    const client = await RconVC()
-
-    for (const {DropItem, Item} of caseDatas) {
-        if (DropItem?.name && Item?.name && DropItem.name !== "suffix") {
-            await client.send(`lpv user ${name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
-            await wait(1000)
-        }
-    }
-}
 
 export async function GetPrize(name: string) {
     const client = await RconMB()

@@ -24,6 +24,16 @@
 
 .actions {
 	position: absolute;
-	top: 1rem;
-	left: 0.6rem;
+	bottom: 0.6rem;
+	left: 1.4rem;
+
+	display: flex;
+	gap: 0.3rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.helper {
+	top: 0.65rem;
+	right: 1.35rem;
 }

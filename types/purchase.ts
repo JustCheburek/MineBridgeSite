@@ -13,6 +13,7 @@ export interface CaseData {
 	suffix?: string
 	createdAt?: Date
 	updatedAt?: Date
+	_id?: string
 }
 
 @modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})

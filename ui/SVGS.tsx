@@ -384,7 +384,18 @@ export const EditSvg = ({size = "1em", className = "", ...props}: SizeSvg) => (
         style={{width: size, height: size}} {...props}
     >
         <path
-            d="M3 21v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM17.6 7.8L19 6.4L17.6 5l-1.4 1.4z"/>
+            d="M13.896 3.03a2 2 0 0 1 2.701-.117l.127.117l4.243 4.243a2 2 0 0 1 .117 2.7l-.117.128l-10.314 10.314a2 2 0 0 1-1.238.578L9.239 21H4.006a1.01 1.01 0 0 1-1.004-.9l-.006-.11v-5.233a2 2 0 0 1 .467-1.284l.12-.13L13.895 3.03ZM12.17 7.584l-7.174 7.174V19H9.24l7.174-7.174l-4.243-4.243Zm3.14-3.14L13.584 6.17l4.243 4.243l1.726-1.726z"/>
+    </svg>
+)
+
+export const DeleteSvg = ({size = "1em", className = "", ...props}: SizeSvg) => (
+    <svg
+        fill="currentColor" viewBox="0 0 24 24"
+        className={className}
+        style={{width: size, height: size}} {...props}
+    >
+        <path
+            d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/>
     </svg>
 )
 

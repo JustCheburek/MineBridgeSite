@@ -4,7 +4,7 @@
 import styles from "../history.module.scss"
 
 // Сервер
-import {AddSuffix, GetCosmetics, SelectSuffix} from "@services/user";
+import {AddSuffix, GetCosmetics, RemoveCasePurchase, SelectSuffix} from "@services/user";
 import {useState} from "react";
 import {User} from "lucia";
 
@@ -18,6 +18,7 @@ import {FormBox, FormButton, FormInput, FormLabel, FormLink} from "@components/f
 import Form from "next/form";
 import {Img, ImgBox} from "@components/img";
 import Link from "next/link";
+import {DeleteSvg} from "@ui/SVGS";
 
 interface Suffix {
     _id: string
@@ -76,7 +77,6 @@ type CasesPurchasesSection = {
     user: User
     Cases: Case[]
     Drops: Drop[]
-    _id: string
 }
 
 export function CasesPurchasesSection(
@@ -86,8 +86,7 @@ export function CasesPurchasesSection(
         isMe,
         Cases,
         Drops,
-        user,
-        _id
+        user
     }: CasesPurchasesSection) {
     const [click, setClick] = useState<boolean>(false)
     const [modal, setModal] = useState<boolean>(false)
@@ -97,9 +96,7 @@ export function CasesPurchasesSection(
             Покупки кейсов
         </h2>
         {(isMe || access) && caseDatas.length > 0 &&
-          <FormBox action={() => {
-              GetCosmetics(user.name, caseDatas)
-          }}>
+          <FormBox action={() => GetCosmetics(user.name, caseDatas)}>
             <FormButton disabled={click} onClick={() => setClick(true)}>
                 {click
                     ? "Проверьте покупки"
@@ -114,7 +111,18 @@ export function CasesPurchasesSection(
         </p>
 
         <div className={styles.purchases}>
-            {caseDatas.map(({Case, Drop, DropItem, rarity, Item, suffix}, index) => (
+            {caseDatas.map(
+                ({
+                     Case,
+                     Drop,
+                     DropItem,
+                     rarity,
+                     Item,
+                     suffix,
+                    _id
+                 },
+                 index
+                ) =>
                     <div
                         style={{width: "280px", height: "160px"}}
                         className={`border-radius grid_center ${styles.item} ${rarity}_box`}
@@ -122,7 +130,7 @@ export function CasesPurchasesSection(
                     >
                         {DropItem?.name === "suffix"
                             ? <Suffix
-                                _id={_id}
+                                _id={user._id}
                                 isMe={isMe}
                                 suffix={suffix}
                                 index={index}
@@ -136,18 +144,30 @@ export function CasesPurchasesSection(
 
                         <Link
                             href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
-                            className="helper"
+                            className={`helper ${styles.helper}`}
                         >
                             ?
                         </Link>
 
-                        {/*{access &&
+                        {access &&
                           <div className={styles.actions}>
-                            <EditSvg size="1.3rem" className="helper_button"/>
+                              {/*<Form action={() => EditCosmetic()}>
+                              <button className="helper_box">
+                                <EditSvg size="1.3rem"/>
+                              </button>
+                            </Form>*/}
+
+                            <Form action={() => {
+                                _id ? RemoveCasePurchase(user._id, _id)
+                                    : console.error("Нет _id")
+                            }}>
+                              <button className="helper_box danger">
+                                <DeleteSvg size="1.3rem"/>
+                              </button>
+                            </Form>
                           </div>
-                        }*/}
+                        }
                     </div>
-                )
             )}
         </div>
 

@@ -76,7 +76,6 @@ export default async function History({params}: NameParams) {
             <CasesPurchasesSection
                 access={isAdmin} Cases={Cases} user={user}
                 Drops={Drops} isMe={isMe} caseDatas={caseDatas}
-                _id={user._id}
             />
         </div>
     )

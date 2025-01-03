@@ -195,7 +195,7 @@ iframe {
 }
 
 // Помогатор
-.helper_button, .helper {
+.helper_box, .helper {
   color: white;
 
   width: 1.5em;
@@ -206,8 +206,18 @@ iframe {
   transition: var(--short-transition) color;
 }
 
-.helper_button:hover, .helper:hover {
+.helper_box:hover, .helper:hover {
   color: var(--unic-color);
+
+  &.danger {
+    color: var(--red-color);
+  }
+}
+
+.helper_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .helper {

@@ -1,12 +1,11 @@
 "use server";
 import {cookies} from "next/headers";
 import {MBSESSION} from "@/const";
-import {AddWLConsole, RconVC, RemoveWLConsole, SuffixConsole} from "@services/console";
+import {AddWLConsole, RconVC, RemoveWLConsole} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from 'next/cache'
 import {User} from "lucia";
 import {Action, Punishment} from "@/types/punishment";
-import {CaseData} from "@/types/purchase";
 import axios from "axios";
 import {Social} from "@/types/url";
 import type {GuildDSUser} from "@/types/user";
@@ -203,58 +202,6 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
     }
 
     await CheckActions(user, actions)
-
-    revalidateTag("userLike")
-}
-
-export async function SelectSuffix(suffix: string, _id: string) {
-    try {
-        const {user} = await getUser({_id}, false)
-
-        await SuffixConsole(user.name, suffix)
-
-        await userModel.findByIdAndUpdate(_id, {suffix})
-    } catch (e) {
-        console.error(e)
-    }
-
-    revalidateTag("userLike")
-}
-
-export async function AddSuffix(formData: FormData, _id: string, index: number) {
-    const suffix = formData.get("name") as string
-
-    const user = await userModel.findByIdAndUpdate(_id)
-
-    if (!user) {
-        throw new Error(`Пользователь не найден`)
-    }
-
-    user.casesPurchases[index].suffix = suffix
-    user.suffix = suffix
-
-    await user.save()
-
-    revalidateTag("userLike")
-}
-
-export async function AddCasePurchase(_id: string, CaseData: CaseData, access: boolean) {
-    if (!access) return
-
-    await userModel.findByIdAndUpdate(
-        _id,
-        {
-            $push: {
-                casesPurchases: {
-                    ...CaseData,
-                    Case: CaseData.Case._id,
-                    Drop: CaseData.Drop._id,
-                    DropItem: CaseData.DropItem._id,
-                    Item: CaseData.Item._id
-                }
-            },
-        }
-    )
 
     revalidateTag("userLike")
 }

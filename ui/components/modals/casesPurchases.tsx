@@ -93,7 +93,6 @@ export const CasesPurchasesModal = (
                     if (!DropItem) return
                     updateData("DropItem", DropItem)
                 }}>
-
                     {caseData.Drop?.name !== "all"
                         ? <option value={caseData.Drop?.name} key={caseData.Drop?.name}>
                             {caseData.Drop?.displayname}
@@ -152,3 +151,4 @@ export const CasesPurchasesModal = (
         </Modal>
     )
 }
+
