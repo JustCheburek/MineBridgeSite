@@ -8,7 +8,7 @@ type InviteSection = {
 }
 
 export function InviteSection({user, isMe, isHelper}: InviteSection) {
-    const invites = user.invites.slice(user.invites.length - 5)
+    const invites = user.invites.slice(user.invites.length - 15)
 
     return (
         <section className="grid_center">

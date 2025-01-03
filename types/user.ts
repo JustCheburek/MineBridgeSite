@@ -61,7 +61,7 @@ export class User {
     public from?: From
 
     // Список с айди игроков
-    @prop({type: () => [String]})
+    @prop({type: () => [String], unique: true})
     public invites!: string[]
 
     @prop()
