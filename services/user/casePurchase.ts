@@ -67,7 +67,7 @@ export async function AddSuffix(formData: FormData, _id: string, index: number) 
     }
 
     user.casesPurchases[index].suffix = suffix
-    user.suffix = suffix
+    await SelectSuffix(suffix, _id)
 
     await user.save()
 
