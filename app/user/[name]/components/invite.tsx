@@ -20,7 +20,7 @@ export function InviteSection({user, isMe, isHelper}: InviteSection) {
             <FromBox user={user} isMe={isMe} isHelper={isHelper}/>
             <h4>Приглашений: <strong className="unic_color">{user.invites.length}</strong></h4>
             {invites.length > 0 && <>
-              <p>Последние 5:</p>
+              <p>Последние {invites.length}:</p>
                 {invites.map(userId => (
                     <UserBox key={userId} _id={userId}/>
                 ))}
