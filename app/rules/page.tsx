@@ -70,7 +70,7 @@ export default function Rules() {
                         <div>
                             <h4>В общении:</h4>
                             <ul>
-                            <li>
+                                <li>
                                     Говорить <Link href="/rules/blacklist" className="unic_color">бан-ворды</Link>
                                 </li>
                                 <li>
