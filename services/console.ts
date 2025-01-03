@@ -1,3 +1,5 @@
+"use server";
+
 import {RconClient} from '@0x0c/rcon';
 import {cache} from "react"
 

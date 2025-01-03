@@ -1,20 +1,23 @@
 import type {Metadata} from "next";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import {Suspense} from "react";
+import TimeAgo from "javascript-time-ago";
+
 import {validate} from "@services/validate";
 import {getUser} from "@/services";
-import Link from "next/link";
 import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
-import {Avatar} from "./components/avatar";
-import {WhitelistSection} from "./components/whitelist";
 import {userModel} from "@server/models";
 import {AutoSvg, MostikiSvg, StarsSvg} from "@ui/SVGS";
 import {URLS_START} from "@/const";
-import {User} from "lucia";
 import {NameParams} from "@/types/params";
-import TimeAgo from "javascript-time-ago";
-import {Suspense} from "react";
 import {Skeleton} from "@components/skeleton";
-import {HourStarSection} from "./components/hourstar";
+
+const Avatar = dynamic(() => import("./components/avatar"));
+const HourStarSection = dynamic(() => import("./components/hourstar"));
+const WhitelistSection = dynamic(() => import("./components/whitelist"));
+const TwitchFrame = dynamic(() => import("./components/twitch"));
 
 export const generateMetadata = async (
     {
@@ -138,15 +141,3 @@ export default async function Profile({params}: NameParams) {
     )
 }
 
-function TwitchFrame({user}: { user: User }) {
-    const twitchName = user?.socials?.find(({social}) => social === "twitch")?.name
-    if (!twitchName) return
-
-    return (
-        <iframe
-            src={`https://player.twitch.tv/?channel=${twitchName}&parent=${process.env.NEXT_PUBLIC_RU_DOMAIN}`}
-            allowFullScreen
-            frameBorder={0}
-        />
-    )
-}

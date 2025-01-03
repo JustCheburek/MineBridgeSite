@@ -4,7 +4,7 @@ import {Button} from "@components/button";
 import {FormBox} from "@components/formBox";
 import {GetStars} from "@services/user";
 
-export function HourStarForm({_id, name}: { _id: string, name: string }) {
+export function GetStarsForm({_id, name}: { _id: string, name: string }) {
     return (
         <FormBox action={() => GetStars(_id, name)}>
             <Button>

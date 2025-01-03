@@ -79,7 +79,7 @@ type CasesPurchasesSection = {
     Drops: Drop[]
 }
 
-export function CasesPurchasesSection(
+export default function CasesPurchasesSection(
     {
         caseDatas,
         access,

@@ -7,7 +7,7 @@ import type {User} from "lucia";
 // Компоненты
 import {Img, ImgBox} from "@components/img"
 
-export const Avatar = ({photo: userPhoto}: { photo: User["photo"] }) => {
+export default function Avatar({photo: userPhoto}: { photo: User["photo"] }) {
     const [photo, setPhoto] = useState<string>(userPhoto)
 
     return (

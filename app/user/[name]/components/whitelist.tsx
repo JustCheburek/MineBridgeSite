@@ -52,7 +52,7 @@ type WhitelistSection = {
     isHelper: boolean
 }
 
-export function WhitelistSection({user, isMe, isHelper}: WhitelistSection) {
+export default function WhitelistSection({user, isMe, isHelper}: WhitelistSection) {
     const [modal, setModal] = useState(false)
 
     if (user.rating <= -200) {

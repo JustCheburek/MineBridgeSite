@@ -1,13 +1,15 @@
+import dynamic from "next/dynamic";
 import {getCaseLocal, getCases, getDropLocal, getDrops, getItems, getUser} from "@/services";
 import {validate} from "@services/validate";
 import {CaseData} from "@/types/purchase";
 import {revalidateTag} from 'next/cache'
 import styles from "./history.module.scss";
-import {PunishmentSection} from "./components/ratingSection";
-import {CasesPurchasesSection} from "./components/casesPurchasesSection";
-import {InviteSection} from "../components/invite";
 import {H1} from "@components/h1";
 import {NameParams} from "@/types/params";
+
+const InviteSection = dynamic(() => import("./components/inviteSection"));
+const PunishmentSection = dynamic(() => import("./components/punishmentSection"));
+const CasesPurchasesSection = dynamic(() => import("./components/casesPurchasesSection"));
 
 export const generateMetadata = async ({params}: NameParams) => {
     const {name} = await params

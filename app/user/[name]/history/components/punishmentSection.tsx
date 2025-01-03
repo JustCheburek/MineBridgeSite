@@ -19,7 +19,7 @@ type PunishmentSection = {
     access?: boolean
 }
 
-export function PunishmentSection({user, name, access}: PunishmentSection) {
+export default function PunishmentSection({user, name, access}: PunishmentSection) {
     const [modal, setModal] = useState<boolean>(false)
 
     return (<>

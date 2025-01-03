@@ -1,13 +1,13 @@
 import type {User} from "lucia";
 import {UserBox} from "@components/userBox";
-import styles from "../profile.module.scss";
+import styles from "../../profile.module.scss";
 import {InviteLink} from "./inviteLink";
 
 type InviteSection = {
     user: User, isMe: boolean, isHelper: boolean
 }
 
-export function InviteSection({user, isMe, isHelper}: InviteSection) {
+export default function InviteSection({user, isMe, isHelper}: InviteSection) {
     const invites = user.invites.slice(user.invites.length - 15)
 
     return (
