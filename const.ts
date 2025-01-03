@@ -17,6 +17,10 @@ export const URLS_START = {
 export const NO_ROLES = {
 	isAdmin: false, isHelper: false, isContentMaker: false, isModer: false
 }
+export const AUTO = {
+	MOD: "AutoMod",
+	HOURS: "AutoHours"
+}
 
 export const MBSESSION = "minebridge-session"
 export type SocialName = keyof typeof URLS_START

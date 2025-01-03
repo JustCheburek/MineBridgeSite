@@ -25,7 +25,7 @@ export default async function Image(
     return new ImageResponse(
         (
             <OGImageBox paths={[name, "Истории действий"]}>
-                История рейтинга и всяких покупок игрока {name}
+                История рейтинга и всяких покупок {name}
             </OGImageBox>
         ),
         {

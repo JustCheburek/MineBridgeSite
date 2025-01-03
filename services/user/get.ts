@@ -3,6 +3,7 @@
 import {GetHours, RconMB} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
+import {AUTO} from "@/const";
 
 export async function GetPrize(name: string) {
     const client = await RconMB()
@@ -25,20 +26,29 @@ export async function GetStars(_id: string, name: string) {
         console.log(`text: ${text}`)
 
         if (text.endsWith("0")) {
-            await userModel.findByIdAndUpdate(_id, {
-                $push: {
-                    punishments: {
-                        reason: `Часы: ${hours}`,
-                        rating: hours,
-                        author: "AutoHours",
-                        createdAt: new Date(),
-                        updatedAt: new Date()
+            const user = await userModel.findById(_id)
+
+            if (!user) return
+
+            const fullHours = user.punishments?.reduce(
+                (accum, {rating, author}) => {
+                    if (author !== AUTO.HOURS) {
+                        rating = 0
                     }
-                },
-                $inc: {
-                    rating: hours
-                }
+
+                    return accum + rating
+                }, 0
+            ) + hours
+            user.punishments = user.punishments?.filter(({author}) => author !== AUTO.HOURS)
+            user.punishments?.push({
+                reason: `Часы: ${fullHours}`,
+                rating: fullHours,
+                author: AUTO.HOURS,
+                createdAt: new Date(),
+                updatedAt: new Date()
             })
+            user.rating += hours
+            user.save()
         } else {
             console.error(text)
         }

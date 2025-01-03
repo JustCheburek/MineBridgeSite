@@ -25,7 +25,7 @@ export default async function Image(
     return new ImageResponse(
         (
             <OGImageBox paths={[name, "Аккаунты"]}>
-                Привязанные интеграции игрока {name} (супер секретно)
+                Привязанные интеграции {name} (супер секретно)
             </OGImageBox>
         ),
         {

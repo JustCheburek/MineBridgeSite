@@ -31,8 +31,8 @@ export const RatingModal = (
         <Modal setModal={setModal} modal={modal}>
             <H1>Рейтинг</H1>
             <FormBox action={() => {
-                AddPunishment(user, punishment, actions)
                 setModal(false)
+                AddPunishment(user, punishment, actions)
             }}>
                 <FormLabel>
                     <FormInput

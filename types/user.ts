@@ -7,15 +7,17 @@ import {userModel} from "@server/models";
 import {cookies} from "next/headers";
 import {Social} from "@/types/url";
 import {getUser} from "@/services";
+import {AUTO} from "@/const";
 
 function updateRating(this: User) {
-    this.rating = this?.punishments?.reduce(
+    this.rating = this.punishments?.reduce(
         (accum, {rating}) => accum + rating, 0
     )
 }
 
 @pre<User>("save", updateRating)
 @pre<User>("findOneAndUpdate", updateRating)
+@pre<User>("findOne", updateRating)
 @modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false}})
 export class User {
     @prop({required: true, index: true})
@@ -110,7 +112,7 @@ export class User {
                             punishments: {
                                 reason: `Позвал ${user.name}`,
                                 rating: 5,
-                                author: "AutoMod",
+                                author: AUTO.MOD,
                                 createdAt: new Date(),
                                 updatedAt: new Date()
                             }

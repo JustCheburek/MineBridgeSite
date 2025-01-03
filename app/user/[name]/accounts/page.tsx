@@ -19,7 +19,7 @@ export const generateMetadata = async ({params}: NameParams) => {
 
     return {
         title: `${name} > Аккаунты`,
-        description: `Привязанные интеграции игрока ${name}! (супер секретно)`
+        description: `Привязанные интеграции ${name}! (супер секретно)`
     }
 }
 
