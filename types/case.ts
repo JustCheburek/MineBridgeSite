@@ -3,11 +3,11 @@ import {Name, UniqueName} from "@/types/name";
 
 export const RarityCost = {
 	common: 0,
-	uncommon: 100,
-	rare: 200,
+	uncommon: 80,
+	rare: 190,
 	epic: 300,
-	mythic: 400,
-	legendary: 500
+	mythic: 410,
+	legendary: 520
 }
 
 export const CaseNames = {
