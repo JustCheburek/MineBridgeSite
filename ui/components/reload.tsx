@@ -9,7 +9,7 @@ type ReloadButton = {
 
 export const ReloadButton = ({reload, className = ""}: ReloadButton) => (
     <button
-        onClick={() => reload}
+        onClick={() => reload()}
         className={`unic_button ${className}`} title="Перезагрузка"
     >
         <ReloadSvg
