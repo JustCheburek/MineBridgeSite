@@ -184,8 +184,10 @@ export function CasesPurchasesSection(
             Купить
         </FormLink>
 
-        <CasesPurchasesModal
+        {access &&
+          <CasesPurchasesModal
             modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} _id={user._id} access={access}
-        />
+          />
+        }
     </>)
 }

@@ -7,7 +7,7 @@ export default function NotFound() {
 			<MaxSize className="center_text">
 				<H1>А, где я?</H1>
 				<h3>Кажется, я в мире майнкрафта!</h3>
-				<Url href="/">Назад</Url>
+				<Url href="/">На главную</Url>
 			</MaxSize>
 	)
 }

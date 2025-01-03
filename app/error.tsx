@@ -23,7 +23,7 @@ export default function Error(
 				<H1>{error.name}</H1>
 				<h3>{error.message}</h3>
 				<Button onClick={() => reset()}>Перезагрузить</Button>
-				<Url href="/">Назад</Url>
+				<Url href="/">На главную</Url>
 			</MaxSize>
 	)
 }

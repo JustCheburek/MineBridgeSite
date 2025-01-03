@@ -25,9 +25,7 @@ export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[])
     }
 }
 
-export async function AddCasePurchase(_id: string, CaseData: CaseData, access: boolean) {
-    if (!access) return
-
+export async function AddCasePurchase(_id: string, CaseData: CaseData) {
     await userModel.findByIdAndUpdate(
         _id,
         {
