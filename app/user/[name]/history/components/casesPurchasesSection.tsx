@@ -4,7 +4,7 @@
 import styles from "../history.module.scss"
 
 // Сервер
-import {AddSuffix, GetCosmetics, RemoveCasePurchase, SelectSuffix} from "@services/user";
+import {AddSuffix, GetCosmetics, DeleteCasePurchase, SelectSuffix} from "@services/user";
 import {useState} from "react";
 import {User} from "lucia";
 
@@ -118,8 +118,7 @@ export default function CasesPurchasesSection(
                      DropItem,
                      rarity,
                      Item,
-                     suffix,
-                    _id
+                     suffix
                  },
                  index
                 ) =>
@@ -151,15 +150,9 @@ export default function CasesPurchasesSection(
 
                         {access &&
                           <div className={styles.actions}>
-                              {/*<Form action={() => EditCosmetic()}>
-                              <button className="helper_box">
-                                <EditSvg size="1.3rem"/>
-                              </button>
-                            </Form>*/}
-
                             <Form action={() => {
-                                _id ? RemoveCasePurchase(user._id, _id)
-                                    : console.error("Нет _id")
+                                Item?._id ? DeleteCasePurchase(user._id, Item?._id)
+                                    : console.error("no item _id to delete")
                             }}>
                               <button className="helper_box danger">
                                 <DeleteSvg size="1.3rem"/>

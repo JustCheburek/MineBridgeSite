@@ -134,7 +134,6 @@ export function Table<T>(
                 <FormInput
                     value={globalFilter}
                     onChange={e => {
-                        console.log("globalFilter:", globalFilter)
                         table.setGlobalFilter(String(e.target.value))
                     }}
                     placeholder="Начнём искать вместе..."

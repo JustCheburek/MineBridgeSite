@@ -64,13 +64,11 @@ export const CasesPurchasesModal = (
     }, [caseData.DropItem?.name]);
 
     useEffect(() => {
-        const {DropItem} = caseData
-
         updateData("Item", defRarity
-            ? DropItem.drop![0]
-            : DropItem[caseData.rarity]![0]
+            ? caseData.DropItem.drop![0]
+            : caseData.DropItem[caseData.rarity]![0]
         )
-    }, [caseData.DropItem?.name]);
+    }, [caseData.rarity, caseData.DropItem?.name]);
 
     return (
         <Modal setModal={setModal} modal={modal}>

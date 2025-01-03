@@ -13,14 +13,10 @@ export interface CaseData {
 	suffix?: string
 	createdAt?: Date
 	updatedAt?: Date
-	_id?: string
 }
 
-@modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true}})
+@modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true, _id: false}})
 export class CasePurchase {
-	@prop({required: true, index: true})
-	public _id!: string
-
 	@prop({type: () => Types.ObjectId})
 	public Item!: Types.ObjectId
 

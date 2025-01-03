@@ -5,6 +5,7 @@ import {RconVC, SuffixConsole} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {getUser} from "@/services";
+import {Types} from "mongoose";
 
 export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[]) {
     function wait(ms: number) {
@@ -26,29 +27,29 @@ export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[])
 }
 
 export async function AddCasePurchase(_id: string, CaseData: CaseData) {
-    await userModel.findByIdAndUpdate(
-        _id,
-        {
-            $push: {
-                casesPurchases: {
-                    ...CaseData,
-                    Case: CaseData.Case._id,
-                    Drop: CaseData.Drop._id,
-                    DropItem: CaseData.DropItem._id,
-                    Item: CaseData.Item._id
-                }
-            },
-        }
-    )
+    const user = await userModel.findById(_id)
+    if (!user) {
+        throw new Error(`Пользователь не найден`)
+    }
+
+    user.casesPurchases.push({
+        ...CaseData,
+        Case: CaseData.Case._id,
+        Drop: CaseData.Drop._id,
+        DropItem: CaseData.DropItem._id,
+        Item: CaseData.Item._id
+    })
+
+    await user.save()
 
     revalidateTag("userLike")
 }
 
-export async function RemoveCasePurchase(userId: string, _id: string) {
+export async function DeleteCasePurchase(userId: string, _id: Types.ObjectId) {
     await userModel.findByIdAndUpdate(userId, {
         $pull: {
             casesPurchases: {
-                _id
+                Item: _id
             }
         }
     })
