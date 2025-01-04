@@ -14,7 +14,7 @@ export class Name<N = string, D = string> {
 
 export class UniqueName<N = string, D = string> {
 	@prop({type: () => Types.ObjectId, required: true, unique: true})
-	public _id: Types.ObjectId
+	public _id!: Types.ObjectId
 
 	@prop({unique: true, required: true, trim: true, type: () => String})
 	public name!: N

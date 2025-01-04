@@ -4,13 +4,13 @@
 import styles from "../history.module.scss"
 
 // Сервер
-import {AddSuffix, GetCosmetics, DeleteCasePurchase, SelectSuffix} from "@services/user";
+import {AddSuffix, DeleteCasePurchase, GetCosmetics, SelectSuffix} from "@services/user";
 import {useState} from "react";
 import {User} from "lucia";
 
 // Типы
 import {Case, Drop} from "@/types/case";
-import type {CaseData} from "@/types/purchase";
+import type {CaseData, MultiCaseData} from "@/types/purchase";
 
 // Компоненты
 import {CasesPurchasesModal} from "@modals/casesPurchases";
@@ -19,6 +19,7 @@ import Form from "next/form";
 import {Img, ImgBox} from "@components/img";
 import Link from "next/link";
 import {DeleteSvg} from "@ui/SVGS";
+import {CaseBox} from "@components/shop";
 
 interface Suffix {
     _id: string
@@ -71,7 +72,7 @@ function Suffix({_id, isMe, suffix, index, selected}: Suffix) {
 }
 
 type CasesPurchasesSection = {
-    caseDatas: Partial<CaseData>[]
+    caseDatas: Partial<MultiCaseData>[]
     access: boolean
     isMe: boolean
     user: User
@@ -113,7 +114,7 @@ export default function CasesPurchasesSection(
         <div className={styles.purchases}>
             {caseDatas.map(
                 ({
-                     Case,
+                     MultiCase,
                      Drop,
                      DropItem,
                      rarity,
@@ -135,18 +136,32 @@ export default function CasesPurchasesSection(
                                 index={index}
                                 selected={user.suffix === suffix}
                             />
-                            :
-                            <ImgBox hover width="280px" height="160px">
-                                <Img src={`/shop/${DropItem?.name}/${Item?.name}.webp`} alt={Item?.displayname || ""}/>
+                            : <ImgBox hover width="280px" height="160px">
+                                <Img
+                                    src={`/shop/${DropItem?.name}/${Item?.name}.webp`}
+                                    alt={Item?.displayname || DropItem?.name || ""}
+                                />
                             </ImgBox>
                         }
 
-                        <Link
-                            href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
-                            className={`helper ${styles.helper}`}
-                        >
-                            ?
-                        </Link>
+                        {MultiCase && Drop?.name !== "suffix" &&
+                          <div className={styles.cases}>
+                              {MultiCase.map(({Case, amount}) => Case &&
+                                <Link
+                                  href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
+                                  key={Case?.name}
+                                >
+                                  <CaseBox Case={Case} size={40} helper={false} isModal={false}>
+                                      {amount > 1 &&
+                                        <p className={`unic_color medium-font ${styles.case_text}`}>
+                                            {amount}
+                                        </p>
+                                      }
+                                  </CaseBox>
+                                </Link>
+                              )}
+                          </div>
+                        }
 
                         {access &&
                           <div className={styles.actions}>

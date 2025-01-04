@@ -6,6 +6,7 @@ import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
+import {H1} from "@components/h1";
 
 type ParamsProp = {
     params: Promise<{
@@ -94,9 +95,18 @@ export default async function ShowCase(
 
     return (
         <div>
-            <h1>
+            <H1 paths={[
+                {displayname: "Магазин", name: "shop", hide: true},
+                {displayname: "Дроп", name: "drop", hide: true},
+                {displayname: `${Case.displayname} кейс`, name: Case.name},
+                {displayname: Drop.displayname, name: Drop.name},
+                {displayname: DropItem.displayname, name: DropItem.name},
+                {displayname: `${RarityNames[rarity]} дроп`, name: rarity},
+                {displayname: Item.displayname, name: Item.name}
+            ]}>
                 {Item?.displayname}
-            </h1>
+            </H1>
+
             <div className={styles.item}>
                 {DropItem.name !== "suffix"
                     ? <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">

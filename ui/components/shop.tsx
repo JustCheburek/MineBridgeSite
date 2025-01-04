@@ -111,50 +111,58 @@ export const StickerButton = () => (
     </Url>
 )
 
-export function CaseBox({Case}: { Case: Case }) {
+export function CaseBox({Case, size = 185, helper = true, isModal = true, children}: PropsWithChildren<{
+    Case: Case
+    size?: number
+    helper?: boolean
+    isModal?: boolean
+}>) {
     const chancesRarity = SumChances(Case.rarity)
     const chancesDrop = SumChances(Case.drop)
     const [modal, setModal] = useState(false)
 
     return (<>
-        <ImgBox className={styles[Case.name]} helper onClick={() => setModal(true)} hover overflow={false}>
+        <ImgBox className={styles[Case.name]} helper={helper} onClick={() => isModal && setModal(true)} hover overflow={false}>
             <Img
                 src={`/shop/${Case.name}.png`} alt={`${Case.displayname} кейс`}
-                width={185}
+                width={size}
             />
+            {children}
         </ImgBox>
-        <Modal modal={modal} setModal={setModal}>
+        {isModal &&
+          <Modal modal={modal} setModal={setModal}>
             <H1>{Case.displayname}</H1>
             <div className={styles.case_info}>
-                <div className={styles.rarity}>
-                    <h2 className="unic_color">
-                        Редкости
-                    </h2>
-                    {Case.rarity.map(rarity => {
-                        const translate = RarityNames[rarity.name]
+              <div className={styles.rarity}>
+                <h2 className="unic_color">
+                  Редкости
+                </h2>
+                  {Case.rarity.map(rarity => {
+                      const translate = RarityNames[rarity.name]
 
-                        return (
-                            <p key={rarity.name}>
-                                {translate} - {Math.round(rarity.chance / chancesRarity * 1000) / 10}%
-                            </p>
-                        )
-                    })}
-                </div>
-                <div className={styles.drop}>
-                    <h2 className="unic_color">
-                        Дроп
-                    </h2>
-                    {Case.drop.map(drop => {
-                        const translate = DropNames[drop.name]
+                      return (
+                          <p key={rarity.name}>
+                              {translate} - {Math.round(rarity.chance / chancesRarity * 1000) / 10}%
+                          </p>
+                      )
+                  })}
+              </div>
+              <div className={styles.drop}>
+                <h2 className="unic_color">
+                  Дроп
+                </h2>
+                  {Case.drop.map(drop => {
+                      const translate = DropNames[drop.name]
 
-                        return (
-                            <p key={drop.name}>
-                                {translate} - {Math.round(drop.chance / chancesDrop * 1000) / 10}%
-                            </p>
-                        )
-                    })}
-                </div>
+                      return (
+                          <p key={drop.name}>
+                              {translate} - {Math.round(drop.chance / chancesDrop * 1000) / 10}%
+                          </p>
+                      )
+                  })}
+              </div>
             </div>
-        </Modal>
+          </Modal>
+        }
     </>)
 }

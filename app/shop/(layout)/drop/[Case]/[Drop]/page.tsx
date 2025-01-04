@@ -36,13 +36,24 @@ export default async function DropsItems(
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropName}`)
     }
 
-    const drops = await getDrops()
+    const [Case, Drop, Drops] = await Promise.all([
+        getCase({name: CaseName}),
+        getDrop({name: DropName}),
+        getDrops()
+    ])
 
     return (
         <div>
-            <H1>Дроп предмета</H1>
+            <H1 paths={[
+                {displayname: "Магазин", name: "shop", hide: true},
+                {displayname: "Дроп", name: "drop", hide: true},
+                {displayname: `${Case.displayname} кейс`, name: Case.name},
+                {displayname: Drop.displayname, name: Drop.name}
+            ]}>
+                Дроп предмета
+            </H1>
             <Section name="cases">
-                {drops
+                {Drops
                     .filter(Drop => Drop.name !== "all")
                     .map(Drop => (
                         <Box key={Drop.name}>

@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import {getCaseLocal, getCases, getDropLocal, getDrops, getItems, getUser} from "@/services";
 import {validate} from "@services/validate";
-import {CaseData} from "@/types/purchase";
+import {MultiCaseData} from "@/types/purchase";
 import {revalidateTag} from 'next/cache'
 import styles from "./history.module.scss";
 import {H1} from "@components/h1";
@@ -30,7 +30,7 @@ export default async function History({params}: NameParams) {
     )
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
-    const caseDatas = [] as Partial<CaseData>[]
+    const caseDatas = [] as MultiCaseData[]
 
     if (user.casesPurchases) {
         for (const purchase of user.casesPurchases) {
@@ -46,17 +46,39 @@ export default async function History({params}: NameParams) {
                     JSON.stringify(_id) === JSON.stringify(purchase.Item)
                 )
 
-                caseDatas.push({
-                    ...purchase,
-                    Case,
-                    Drop,
-                    DropItem,
-                    Item
-                })
+                const multiCaseData = caseDatas.find(({Item: caseDataItem}) =>
+                    caseDataItem?._id === Item?._id
+                )
+
+                if (multiCaseData && multiCaseData.DropItem?.name !== "suffix") {
+                    const caseIn = multiCaseData.MultiCase.find(({Case: caseDataCase}) =>
+                        caseDataCase?.name === Case?.name
+                    )
+                    if (!caseIn) {
+                        multiCaseData.MultiCase.push({Case, amount: 1})
+                    } else {
+                        caseIn.amount++
+                    }
+                } else {
+                    caseDatas.push({
+                        ...purchase,
+                        MultiCase: [{Case, amount: 1}],
+                        Drop: Drop,
+                        DropItem,
+                        Item
+                    })
+                }
+
+                caseDatas[caseDatas.length - 1].MultiCase.sort(
+                    ({Case: Case1}, {Case: Case2}) =>
+                        (Case2?.price || 0) - (Case1?.price || 0)
+                )
             } catch (e) {
                 console.error(e)
             }
         }
+
+        console.log(caseDatas)
     }
 
     return (

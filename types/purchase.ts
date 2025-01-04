@@ -4,8 +4,7 @@ import {Case, Drop, Item, type RarityType} from "@/types/case";
 import {Sticker} from "@/types/sticker";
 import {Types} from "mongoose";
 
-export interface CaseData {
-	Case: Case
+interface Data {
 	Drop: Drop
 	DropItem: Drop
 	Item: Item
@@ -13,6 +12,17 @@ export interface CaseData {
 	suffix?: string
 	createdAt?: Date
 	updatedAt?: Date
+}
+
+export interface CaseData extends Data {
+	Case: Case
+}
+
+export interface MultiCaseData extends Partial<Data> {
+	MultiCase: {
+		Case?: Case
+		amount: number
+	}[]
 }
 
 @modelOptions({schemaOptions: {collection: "casesPurchases", timestamps: true, _id: false}})

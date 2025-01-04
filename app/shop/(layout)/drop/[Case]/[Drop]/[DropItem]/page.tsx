@@ -39,7 +39,11 @@ export default async function Rarities(
     {params}: ParamsProp
 ) {
     const {Case: CaseName, Drop: DropName, DropItem: DropItemName} = await params
-    const DropItem = await getDrop({name: DropItemName})
+    const [Case, Drop, DropItem] = await Promise.all([
+        getCase({name: CaseName}),
+        getDrop({name: DropName}),
+        getDrop({name: DropItemName})
+    ])
 
     if (DropItem.defaultRarity) {
         return redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${DropItem.defaultRarity}`)
@@ -47,7 +51,15 @@ export default async function Rarities(
 
     return (
         <div>
-            <H1>Редкость</H1>
+            <H1 paths={[
+                {displayname: "Магазин", name: "shop", hide: true},
+                {displayname: "Дроп", name: "drop", hide: true},
+                {displayname: `${Case.displayname} кейс`, name: Case.name},
+                {displayname: Drop.displayname, name: Drop.name},
+                {displayname: DropItem.displayname, name: DropItem.name}
+            ]}>
+                Редкость
+            </H1>
             <Section name="cases">
                 {rarityNames.map(rarity => (
                     <Box key={rarity}>

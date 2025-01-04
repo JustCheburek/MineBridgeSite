@@ -22,6 +22,43 @@
 	right: 1.4rem;
 }
 
+.cases {
+	position: absolute;
+	top: 0.6rem;
+	right: 1.4rem;
+
+	display: flex;
+	gap: 0.3rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.case_text {
+	position: absolute;
+	bottom: -0.2em;
+	right: 0.1em;
+}
+
+.drops {
+	position: absolute;
+	bottom: 0.6rem;
+	left: 1.4rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	opacity: 0;
+
+	transition: opacity var(--short-transition);
+}
+
+.item:hover {
+	.drops {
+		opacity: 1;
+	}
+}
+
 .actions {
 	position: absolute;
 	top: 0.6rem;
@@ -31,9 +68,4 @@
 	gap: 0.3rem;
 	justify-content: center;
 	align-items: center;
-}
-
-.helper {
-	top: 0.65rem;
-	right: 1.35rem;
 }

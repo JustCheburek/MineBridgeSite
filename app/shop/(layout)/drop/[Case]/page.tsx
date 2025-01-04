@@ -27,13 +27,22 @@ export default async function Drops(
     {params}: ParamsProp
 ) {
     const {Case: CaseName} = await params
-    const drops = await getDrops()
+    const [Case, Drops] = await Promise.all([
+        getCase({name: CaseName}),
+        getDrops()
+    ])
 
     return (
         <div>
-            <H1>Дроп кейса</H1>
+            <H1 paths={[
+                {displayname: "Магазин", name: "shop", hide: true},
+                {displayname: "Дроп", name: "drop", hide: true},
+                {displayname: `${Case.displayname} кейс`, name: Case.name}
+            ]}>
+                Дроп кейса
+            </H1>
             <Section name="cases">
-                {drops.map(Drop => (
+                {Drops.map(Drop => (
                     <Box key={Drop.name}>
                         <Text>
                             <CaseInfo>

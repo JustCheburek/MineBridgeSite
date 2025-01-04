@@ -7,11 +7,15 @@ import Link from "next/link";
 interface RelativePath {
     name: string
     displayname: string
+    hide?: boolean
 }
 
 const RelativeNav = ({paths}: { paths: RelativePath[] }) => (
     <nav className="center_text">
         {paths.map((path, index) => {
+            if (path.hide) {
+                return null
+            }
             const current = index + 1
             const last = current === paths.length
 
