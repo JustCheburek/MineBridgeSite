@@ -71,14 +71,12 @@ export default async function History({params}: NameParams) {
 
                 caseDatas[caseDatas.length - 1].MultiCase.sort(
                     ({Case: Case1}, {Case: Case2}) =>
-                        (Case2?.price || 0) - (Case1?.price || 0)
+                        (Case1?.price || 0) - (Case2?.price || 0)
                 )
             } catch (e) {
                 console.error(e)
             }
         }
-
-        console.log(caseDatas)
     }
 
     return (
