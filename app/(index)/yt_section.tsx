@@ -1,6 +1,7 @@
 import styles from "./styles/yt.module.scss"
-import {Img, ImgBox} from "@components/img";
+import {ImgBox} from "@components/img";
 import Link from "next/link";
+import {YouTubeEmbed} from '@next/third-parties/google'
 
 const YtSection = () => (
     <section className={`${styles.section} center_text`}>
@@ -16,14 +17,9 @@ const YtSection = () => (
             </h3>
         </div>
 
-        <Link className={`${styles.yt_link} border`} href="https://youtu.be/m7ipkVv_FPE" target="_blank">
-            <ImgBox type="post" borderRadius>
-                <Img
-                    src="https://i.ytimg.com/vi/m7ipkVv_FPE/maxresdefault.jpg"
-                    alt="Ссылка на видео о Майнбридже"
-                />
-            </ImgBox>
-        </Link>
+        <div className={styles.yt_link}>
+            <YouTubeEmbed videoid="m7ipkVv_FPE" params="controls=0"/>
+        </div>
     </section>
 )
 
