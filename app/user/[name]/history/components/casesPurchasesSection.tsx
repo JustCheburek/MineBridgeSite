@@ -144,7 +144,7 @@ export default function CasesPurchasesSection(
                             </ImgBox>
                         }
 
-                        {MultiCase && Drop?.name !== "suffix" &&
+                        {MultiCase && DropItem?.name !== "suffix" &&
                           <div className={styles.cases}>
                               {MultiCase.map(({Case, amount}) => Case &&
                                 <Link

@@ -2,9 +2,7 @@ import {ImageResponse} from 'next/og'
 import {OGImageBox} from "@components/ogimage";
 import {getUsers} from "@/services";
 
-export const alt = 'Майнбридж'
-export const size = {width: 1200, height: 600}
-export const contentType = 'image/png'
+export const size = {width: 1200, height: 630}
 
 export default async function Image() {
     const MontserratMedium = await fetch(

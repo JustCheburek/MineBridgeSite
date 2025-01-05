@@ -96,7 +96,7 @@ export const metadata: Metadata = {
         type: "website"
     },
     twitter: {
-        card: "summary",
+        card: "summary_large_image",
         images: [{
             url: "/logos/256x256/logo.png",
             alt: "Лого майнбриджа",

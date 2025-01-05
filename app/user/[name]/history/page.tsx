@@ -47,7 +47,7 @@ export default async function History({params}: NameParams) {
                 )
 
                 const multiCaseData = caseDatas.find(({Item: caseDataItem}) =>
-                    caseDataItem?._id === Item?._id
+                    JSON.stringify(caseDataItem?._id) === JSON.stringify(Item?._id)
                 )
 
                 if (multiCaseData && multiCaseData.DropItem?.name !== "suffix") {
