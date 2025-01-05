@@ -32,6 +32,7 @@ export const metadata: Metadata = {
         default: "Майнбридж - майнкрафт сервер",
     },
     description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
+    metadataBase: new URL(process.env.NEXT_PUBLIC_RU_URL!),
     creator: "JustCheburek",
     applicationName: "MineBridge",
     category: "game",
