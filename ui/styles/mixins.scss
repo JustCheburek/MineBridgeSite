@@ -1,8 +1,10 @@
 @mixin border($color: var(--border-color), $radius: var(--border-radius), $width: 1px, $background: var(--black-color-transparent), $hover: false) {
-  border: $color $width solid;
-  border-radius: $radius;
-  transition: border-color var(--long-transition);
-  background: $background;
+  & {
+    border: $color $width solid;
+    border-radius: $radius;
+    transition: border-color var(--long-transition);
+    background: $background;
+  }
 
   @if $hover {
     &:hover {
@@ -12,20 +14,22 @@
 }
 
 @mixin no_select() {
-  // iOS Safari
-  -webkit-touch-callout: none;
+  & {
+    // iOS Safari
+    -webkit-touch-callout: none;
 
-  // Safari
-  -webkit-user-select: none;
+    // Safari
+    -webkit-user-select: none;
 
-  // Old versions of Firefox
-  -moz-user-select: none;
+    // Old versions of Firefox
+    -moz-user-select: none;
 
-  // Internet Explorer/Edge
-  -ms-user-select: none;
+    // Internet Explorer/Edge
+    -ms-user-select: none;
 
-  // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
-  user-select: none;
+    // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
+    user-select: none;
+  }
 }
 
 @mixin background() {

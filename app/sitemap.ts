@@ -59,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         // Новости
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/news`,
-            changeFrequency: 'daily',
+            changeFrequency: 'monthly',
             priority: 0.9,
         },
         {
@@ -70,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         // Фичи
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/features`,
-            changeFrequency: 'daily',
+            changeFrequency: 'monthly',
             priority: 1,
         },
         {
@@ -85,7 +85,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/features/design`,
-            changeFrequency: 'monthly',
+            changeFrequency: 'yearly',
+            priority: 0.8,
+        },
+        {
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/features/analytics`,
+            changeFrequency: 'daily',
             priority: 0.8,
         },
         // Гайды

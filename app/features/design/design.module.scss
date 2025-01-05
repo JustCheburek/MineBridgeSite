@@ -7,7 +7,10 @@
 	gap: 3rem;
 
 	@include mixins.border($background: var(--gray-color));
-	padding: 2rem;
+
+	& {
+		padding: 2rem;
+	}
 
 	@media (width > 728px) {
 		grid-template-columns: 1fr 1fr;

@@ -13,17 +13,14 @@ import {FormBox, FormButton} from "@components/formBox";
 import {useState} from "react";
 import {H1} from "@components/h1";
 import {AddWhitelist} from "@services/user";
-import Link from "next/link";
 
 const UserWhitelisted = ({setModal}: { setModal: setModal }) => (
     <section className={`${styles.whitelist} grid_center center_text`}>
         <h2>Вы в Whitelist`е</h2>
 
-        <Link href="/features/guides/auth">
-            <h4 className="unic_color medium-font">
-                Java Edition
-            </h4>
-        </Link>
+        <h4 className="unic_color medium-font">
+            Java Edition
+        </h4>
         <p>
             IP:{" "}
             <strong className="unic_color all_select">secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}</strong>

@@ -3,7 +3,9 @@
 // FormBox
 .form_box {
 	@include mixins.border();
-	padding: 1.5rem;
+	& {
+		padding: 1.5rem;
+	}
 }
 
 // Информация о пользователе

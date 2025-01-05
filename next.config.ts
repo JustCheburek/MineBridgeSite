@@ -14,20 +14,12 @@ const nextConfig: NextConfig = {
       }
     ]
   },
-  sassOptions: {
-    silenceDeprecations: ["legacy-js-api"]
-  },
-  /*experimental: {
-    ppr: 'incremental',
-  }*/
-  /*webpack: (config) => {
-    config.externals.push("@node-rs/argon2", "@node-rs/bcrypt");
-    config.experiments = {
-      topLevelAwait: true,
-      layers: true
-    };
-    return config;
-  }*/
+  serverExternalPackages: ["mongoose", "eslint", "oslo", "typescript"],
+  experimental: {
+    // ppr: 'incremental',
+    typedEnv: true,
+    optimizeCss: true
+  }
 };
 
 export default nextConfig;

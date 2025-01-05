@@ -9,9 +9,10 @@ import {Table} from "@components/table"
 import {MaxSize} from "@components/maxSize";
 import {columns} from "@columns/users"
 import {H1} from "@components/h1";
+import {userModel} from "@server/models";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const usersL = (await getUsers()).length
+    const usersL = await userModel.countDocuments().lean()
 
     return {
         title: "Игроки",

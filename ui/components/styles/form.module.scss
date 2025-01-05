@@ -34,14 +34,15 @@
   }
 
   // Отступы
-  padding: 1rem 1.2rem;
+  & {
+    padding: 1rem 1.2rem;
+    transition:
+            border-color var(--long-transition),
+            color var(--short-transition);
+  }
 
   // Отображение
   @include mixins.border($background: var(--gray-color), $radius: 12px);
-
-  transition:
-          border-color var(--long-transition),
-          color var(--short-transition);
 
   &:disabled, &[aria-disabled="true"] {
     color: var(--light-gray-color);

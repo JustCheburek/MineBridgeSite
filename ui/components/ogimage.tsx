@@ -2,7 +2,7 @@ import {PropsWithChildren} from "react";
 import "@styles/vars.scss"
 import {MinebridgeSvg} from "@ui/SVGS";
 
-export function OGImageBox({children, paths}: PropsWithChildren<{ paths: string[] }>) {
+export function OGImageBox({children, paths}: PropsWithChildren<{ paths?: string[] }>) {
     return (
         <div
             style={{
@@ -17,18 +17,19 @@ export function OGImageBox({children, paths}: PropsWithChildren<{ paths: string[
             }}
         >
             <MinebridgeSvg size="80px" style={{position: "absolute", left: 30, top: 30}}/>
-
-            <p style={{fontSize: 50, color: "#D6D6D6", fontWeight: 500, display: "flex", gap: 6}}>
-                {paths.map((path, index) => (
-                    <span key={path}>
+            {paths &&
+              <p style={{fontSize: 50, color: "#D6D6D6", fontWeight: 500, display: "flex", gap: 6}}>
+                  {paths.map((path, index) => (
+                      <span key={path}>
                         {index === 0
                             ? ""
                             : <span style={{marginRight: 6}}>{">"}</span>
                         }
-                        {path}
+                          {path}
                     </span>
-                ))}
-            </p>
+                  ))}
+              </p>
+            }
             <p style={{fontSize: 110, color: "#00A7B1", fontWeight: 700, lineHeight: 0.85, marginBottom: 20}}>
                 MineBridge
             </p>

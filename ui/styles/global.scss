@@ -203,7 +203,9 @@ iframe {
 
   @include mixins.border($background: var(--info-bg-color), $color: var(--info-border-color));
 
-  transition: var(--short-transition) color;
+  & {
+    transition: var(--short-transition) color;
+  }
 }
 
 .helper_box:hover, .helper:hover {

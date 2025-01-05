@@ -32,13 +32,9 @@ export const metadata: Metadata = {
         default: "Майнбридж - майнкрафт сервер",
     },
     description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
-    metadataBase: new URL(process.env.NEXT_PUBLIC_RU_URL!),
     creator: "JustCheburek",
     applicationName: "MineBridge",
     category: "game",
-    alternates: {
-        canonical: './',
-    },
     icons: [{
         url: "/logos/256x256/logo.png",
         sizes: "256x256",
@@ -82,11 +78,14 @@ export const metadata: Metadata = {
         url: "https://t.me/JustCheburek"
     }, {
         name: "Kawa11Fox",
-        url: "https://t.me/AleksandraKanivec"
+        url: "https://t.me/Kawa11Fox"
     }, {
         name: "VeBray",
         url: "https://t.me/VeBrau"
     }],
+    alternates: {
+        canonical: './',
+    },
     openGraph: {
         siteName: "MineBridge",
         locale: "ru_RU",

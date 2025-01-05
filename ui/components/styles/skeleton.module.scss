@@ -1,4 +1,15 @@
 .box {
-  background: var(--text-color);
   border-radius: var(--button-border-radius);
+  background: var(--black-color);
+
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }

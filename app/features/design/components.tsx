@@ -6,9 +6,7 @@ import {parseAsStringEnum, useQueryState} from "nuqs";
 
 import styles from "./design.module.scss"
 
-import {Url} from "@components/button";
 import {FormBox, FormLink, FormSelect} from "@components/formBox";
-
 import {Img} from "@components/img";
 
 export function ColorsPie({data}: { data: PieChartProps["data"] }) {

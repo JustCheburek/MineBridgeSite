@@ -90,7 +90,9 @@ header {
     padding: 15px;
 
     @include mixins.border($background: var(--background-color-transparent));
-    border-top-right-radius: calc(var(--border-radius) / 4);
+    & {
+      border-top-right-radius: calc(var(--border-radius) / 4);
+    }
 
     &.menu_active {
       display: block;
@@ -167,9 +169,10 @@ header {
 
       @include mixins.border();
 
-      row-gap: clamp(0.1rem, 1vh, 1.5rem);
-
-      animation: nav_appearance 700ms;
+      & {
+        row-gap: clamp(0.1rem, 1vh, 1.5rem);
+        animation: nav_appearance 700ms;
+      }
     }
   }
 
