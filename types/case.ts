@@ -83,7 +83,7 @@ export class Drop extends UniqueName<DropType> {
 	public defaultRarity?: RarityType
 
 	@prop({type: () => String})
-	public give!: Give
+	public give?: Give
 
 	@prop({type: () => [Item]})
 	public common?: Item[]
