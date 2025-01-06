@@ -108,7 +108,7 @@ export default async function ShowCase(
             </H1>
 
             <div className={styles.item}>
-                {Item.name !== "suffix"
+                {DropItem.name !== "suffix"
                     ? <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">
                         <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
                     </ImgBox>
