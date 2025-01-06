@@ -69,6 +69,8 @@ export class Item extends Name {
 	public img!: boolean
 }
 
+type Give = "ultracosmetics" | "cmn"
+
 @modelOptions({schemaOptions: {collection: "drops"}})
 export class Drop extends UniqueName<DropType> {
 	@prop({required: true, unique: true, trim: true})
@@ -79,6 +81,9 @@ export class Drop extends UniqueName<DropType> {
 
 	@prop({type: () => String})
 	public defaultRarity?: RarityType
+
+	@prop({type: () => String})
+	public give!: Give
 
 	@prop({type: () => [Item]})
 	public common?: Item[]

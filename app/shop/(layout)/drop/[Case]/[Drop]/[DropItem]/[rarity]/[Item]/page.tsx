@@ -108,7 +108,7 @@ export default async function ShowCase(
             </H1>
 
             <div className={styles.item}>
-                {DropItem.name !== "suffix"
+                {Item.name !== "suffix"
                     ? <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">
                         <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname}/>
                     </ImgBox>
@@ -124,7 +124,7 @@ export default async function ShowCase(
                         {RarityNames[rarity]}
                     </p>
                     <p>
-                        {DropItem?.displayname}
+                        {DropItem?.description}
                     </p>
                     <p>
                         Конечная цена: {fullPrice} <MostikiSvg/>

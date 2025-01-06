@@ -101,7 +101,11 @@ export const getUser = cache(
 
         if (roles && user?.discordId) {
             const rolesApi = await getRoles(user.discordId)
-            return {user, isMe, ...rolesApi, isContentMakerCheck: (isMe || rolesApi.isHelper) && rolesApi.isContentMaker}
+            return {
+                user,
+                isMe, ...rolesApi,
+                isContentMakerCheck: (isMe || rolesApi.isHelper) && rolesApi.isContentMaker
+            }
         }
 
         return {
@@ -132,8 +136,6 @@ export const getAuthor = cache(
 export const getUsers = cache(
     async () => {
         const users: User[] = JSON.parse(JSON.stringify(await userModel.find().lean()))
-
-        console.log(users.filter(user => !user.name))
 
         users.sort(({createdAt: createdAt1}, {createdAt: createdAt2}) => {
             if (!createdAt1) return 1
@@ -225,7 +227,18 @@ export const getDrop = cache(
 )
 
 export const getDrops = cache(
-    async (): Promise<Drop[]> => JSON.parse(JSON.stringify(await dropModel.find().lean())),
+    async () => {
+        const drops: Drop[] = JSON.parse(JSON.stringify(await dropModel.find().lean()))
+
+        drops.sort(({price: price1}, {price: price2}) => {
+            if (price1 === 0) return -1
+            if (price2 === 0) return 1
+
+            return price2 - price1
+        })
+
+        return drops
+    },
     ["drops", "shop", "all"],
     {revalidate: 3600, tags: ["drops", "shop", "all"]}
 )
