@@ -34,7 +34,7 @@ export default async function CasePage() {
         try {
             if (DropItem.name !== "suffix") {
                 const client = await RconVC()
-                await client.send(`lpv user ${user.name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
+                await client.send(`lpv user ${user.name} permission set ${DropItem.give}.${DropItem.name}.${Item.name}`)
             }
         } catch (e) {
             console.log(e)

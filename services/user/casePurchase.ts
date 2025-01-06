@@ -19,8 +19,8 @@ export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[])
     const client = await RconVC()
 
     for (const {DropItem, Item} of caseDatas) {
-        if (DropItem?.name && Item?.name && DropItem.name !== "suffix") {
-            await client.send(`lpv user ${name} permission set ultracosmetics.${DropItem.name}.${Item.name}`)
+        if (DropItem?.name && Item?.name && DropItem?.give) {
+            await client.send(`lpv user ${name} permission set ${DropItem.give}.${DropItem.name}.${Item.name}`)
             await wait(1000)
         }
     }

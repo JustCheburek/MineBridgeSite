@@ -153,9 +153,9 @@ export default async function ShowCase(
                     </p>
                 </div>
             </div>
-            {isHelper &&
+            {isHelper && DropItem.give &&
               <small className="light_gray_color flex_center all_select">
-                ultracosmetics.{DropItem.name}.{Item.name}
+                {DropItem.give}.{DropItem.name}.{Item.name}
               </small>
             }
         </div>
