@@ -8,10 +8,9 @@ const WhitelistSection = dynamic(() => import("./whitelist"));
 type ServerStatus = {
     user: User
     isMe: boolean
-    access: boolean
 }
 
-export default async function ServerStatusSection({user, isMe, access}: ServerStatus) {
+export default async function ServerStatusSection({user, isMe}: ServerStatus) {
     const [hours, whitelist] = await Promise.all([
         GetHours(user.name),
         AddWLConsole(user.name)
@@ -22,6 +21,21 @@ export default async function ServerStatusSection({user, isMe, access}: ServerSt
           <HourStarSection user={user} hours={hours}/>
         }
 
-        <WhitelistSection user={user} isMe={isMe} access={access} whitelist={whitelist}/>
+        {whitelist
+            ? <WhitelistSection user={user} isMe={isMe}/>
+            : <section className="center_text">
+                <h2>
+                    Сервер не доступен
+                </h2>
+                <p>
+                    Попробуй зайти на сайт позже
+                </p>
+                {isMe &&
+                    <p>
+                      чтобы попасть в Whitelist
+                    </p>
+                }
+            </section>
+        }
     </>
 }

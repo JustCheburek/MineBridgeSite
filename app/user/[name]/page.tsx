@@ -132,7 +132,6 @@ export default async function Profile({params}: NameParams) {
             <Suspense fallback={<Skeleton width="100%" height={450}/>}>
                 <ServerStatusSection
                     user={user}
-                    access={isHelper}
                     isMe={isMe}
                 />
             </Suspense>
