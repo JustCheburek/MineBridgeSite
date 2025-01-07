@@ -37,7 +37,7 @@ export default async function Profile({params}: NameParams) {
     const {name} = await params
     const {user: author, isHelper} = await validate()
     const {
-        user, roles, isMe, isContentMaker
+        user, roles, isMe, isContentMaker, isAdmin
     } = await getUser(
         {name}, true, true, author?._id, isHelper
     )
@@ -59,9 +59,11 @@ export default async function Profile({params}: NameParams) {
                         <span className="unic_color all_select">
                             {user.name}
                         </span>{" "}
-                        <Link href={`/user/${user.name}/accounts`}>
+                        {(isMe || isHelper) &&
+                          <Link href={`/user/${user.name}/accounts`}>
                             <EditSvg size="0.6em" className="unic_color"/>
-                        </Link>
+                          </Link>
+                        }
                     </h2>
 
                     {isHelper &&
@@ -116,7 +118,17 @@ export default async function Profile({params}: NameParams) {
                             {user.rating}
                         </strong> {" "}
                         <StarsSvg/>{" "}
-                        <Link href="/rules" className="add">+</Link>
+                        {isMe &&
+                          <Link
+                            href={isHelper
+                                ? "/rules"
+                                : `/user/${user.name}/history`
+                            }
+                            className="add"
+                          >
+                            +
+                          </Link>
+                        }
                     </h4>
                     <h4>
                         Мостики: {" "}
@@ -124,7 +136,15 @@ export default async function Profile({params}: NameParams) {
                             {user.mostiki}
                         </strong> {" "}
                         <MostikiSvg/>{" "}
-                        <Link href="/shop" className="add">+</Link>
+                        {isMe &&
+                          <Link href={isAdmin
+                              ? "/shop"
+                              : `/user/${user.name}/accounts`
+                          }
+                                className="add">
+                            +
+                          </Link>
+                        }
                     </h4>
                 </div>
             </div>

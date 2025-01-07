@@ -2,7 +2,7 @@ import {User} from "lucia";
 import {GetStarsForm} from "./getStars";
 import {Url} from "@components/button";
 
-export default function HourStarSection({user, hours}: { user: User, hours: number }) {
+export default function HourStarSection({user, hours, isMe}: { user: User, hours: number, isMe: boolean }) {
     return (
         <section className="center_text grid_center">
             <h2>
@@ -16,7 +16,7 @@ export default function HourStarSection({user, hours}: { user: User, hours: numb
                 Посмотреть рейтинг
               </Url>
             }
-            {hours > 0 &&
+            {isMe && hours > 0 &&
               <GetStarsForm _id={user._id}/>
             }
         </section>

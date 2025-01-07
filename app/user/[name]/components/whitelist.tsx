@@ -4,12 +4,7 @@ import {User} from "lucia"
 // Стили
 import styles from "../profile.module.scss"
 
-type WhitelistSection = {
-    user: User
-    isMe: boolean
-}
-
-export default function WhitelistSection({user, isMe}: WhitelistSection) {
+export default function WhitelistSection({user, isMe}: { user: User, isMe: boolean }) {
     if (user.rating <= -200) {
         return (
             <section className="center_text">

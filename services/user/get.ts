@@ -17,7 +17,6 @@ export async function GetStars(_id: string) {
         if (!user) return
 
         const hours = await GetHours(user.name)
-        if (hours === 0) return
 
         const client = await RconMB()
         const text = await client.send(`scoreboard players set ${user.name} hours 0`)

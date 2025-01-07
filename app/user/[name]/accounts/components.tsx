@@ -62,12 +62,11 @@ function NoPermModal({modal, setModal}: ModalAction) {
 
 type DeleteUser = {
     user: User
-    isModer: boolean
+    access: boolean
 }
 
-export function DeleteUserBox({user, isModer}: DeleteUser) {
+export function DeleteUserBox({user, access}: DeleteUser) {
     const [modal, setModal] = useState(false)
-    const access = isModer || user.rating >= 0
 
     return (<>
         <FormBox action={() => setModal(true)}>

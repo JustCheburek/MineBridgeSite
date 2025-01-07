@@ -43,8 +43,6 @@ export default async function Accounts({params}: NameParams) {
         {name}, true, true, author?._id, isHelper
     )
 
-    const moderAccess = isModer || isMe
-
     return (
         <div className="account_content">
             <H1 up className={styles.for_bigger}>
@@ -80,8 +78,11 @@ export default async function Accounts({params}: NameParams) {
                     </Provider>
                 ))}
             </div>
-            {moderAccess &&
-              <DeleteUserBox user={user} isModer={isModer}/>
+            {(isModer || isMe) &&
+              <DeleteUserBox
+                user={user}
+                access={isModer || user.rating >= 0}
+              />
             }
         </div>
     )

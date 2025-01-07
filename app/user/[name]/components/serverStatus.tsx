@@ -20,7 +20,7 @@ export default async function ServerStatusSection({user, isMe}: ServerStatus) {
 
     return <>
         {hours > -1 &&
-          <HourStarSection user={user} hours={hours}/>
+          <HourStarSection user={user} hours={hours} isMe={isMe}/>
         }
 
         {whitelist
