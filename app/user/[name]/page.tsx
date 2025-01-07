@@ -9,7 +9,7 @@ import {getUser} from "@/services";
 import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
 import {userModel} from "@server/models";
-import {AutoSvg, EditSvg, MostikiSvg, StarsSvg} from "@ui/SVGS";
+import {AutoSvg, EditSvg, MostikiSvg, StarSvg} from "@ui/SVGS";
 import {URLS_START} from "@/const";
 import {NameParams} from "@/types/params";
 import {Skeleton} from "@components/skeleton";
@@ -113,16 +113,19 @@ export default async function Profile({params}: NameParams) {
                         </time>
                     </h4>
                     <h4>
-                        Звёзды: {" "}
-                        <strong className="yellow_color">
-                            {user.rating}
-                        </strong> {" "}
-                        <StarsSvg/>{" "}
-                        {isMe &&
+                        <Link href="/milkyway">
+                            Звёзды: {" "}
+                            <strong className="yellow_color">
+                                {user.rating}
+                            </strong> {" "}
+                            <StarSvg/>
+                        </Link>{" "}
+
+                        {(isMe || isHelper) &&
                           <Link
                             href={isHelper
-                                ? "/rules"
-                                : `/user/${user.name}/history`
+                                ? `/user/${user.name}/history`
+                                : "/rules"
                             }
                             className="add"
                           >
@@ -136,10 +139,10 @@ export default async function Profile({params}: NameParams) {
                             {user.mostiki}
                         </strong> {" "}
                         <MostikiSvg/>{" "}
-                        {isMe &&
+                        {(isMe || isAdmin) &&
                           <Link href={isAdmin
-                              ? "/shop"
-                              : `/user/${user.name}/accounts`
+                              ? `/user/${user.name}/accounts`
+                              : "/shop"
                           }
                                 className="add">
                             +
