@@ -2,7 +2,7 @@
 
 import type {PropsWithChildren} from "react";
 import styles from "./rules.module.scss"
-import {StarsSvg} from "@ui/SVGS";
+import {StarSvg} from "@ui/SVGS";
 
 const LinkSvg = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className={styles.link}>
@@ -51,7 +51,7 @@ export const Punishment = ({text, stars}: { text?: string; stars?: number }) => 
         {text}
         {text && stars && " / "}
         {stars && <>
-            {"-"}{stars}<StarsSvg height="0.75em"/>
+            {"-"}{stars}<StarSvg height="0.75em"/>
         </>}
     </p>
 )

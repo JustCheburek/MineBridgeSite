@@ -26,7 +26,18 @@ export const SBPSvg = ({className = "", size = "1em", ...props}: SizeSvg) => (
     </svg>
 )
 
-export const StarsSvg = ({className = "", width = "1em", height = "1em", ...props}: Svg) => (
+export const TriangleSvg = ({size = "1em", className = "", ...props}: SizeSvg) => (
+    <svg
+        viewBox="0 0 24 24"
+        className={className}
+        style={{width: size, height: size}} {...props}
+    >
+        <rect width="24" height="24" fill="none"/>
+        <path fill="currentColor" d="M1 21h22L12 2"/>
+    </svg>
+)
+
+export const StarSvg = ({className = "", width = "1em", height = "1em", ...props}: Svg) => (
     <svg
         viewBox="0 0 24 24"
         className={`yellow_color ${className}`}
