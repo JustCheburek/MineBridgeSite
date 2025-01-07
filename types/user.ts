@@ -38,9 +38,6 @@ export class User {
     @prop()
     public discordId?: string
 
-    @prop({default: false})
-    public whitelist!: boolean
-
     @prop({default: 0})
     public mostiki!: number
 

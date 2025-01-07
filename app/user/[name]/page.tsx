@@ -9,14 +9,13 @@ import {getUser} from "@/services";
 import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
 import {userModel} from "@server/models";
-import {AutoSvg, MostikiSvg, StarsSvg} from "@ui/SVGS";
+import {AutoSvg, EditSvg, MostikiSvg, StarsSvg} from "@ui/SVGS";
 import {URLS_START} from "@/const";
 import {NameParams} from "@/types/params";
 import {Skeleton} from "@components/skeleton";
 
 const Avatar = dynamic(() => import("./components/avatar"));
-const HourStarSection = dynamic(() => import("./components/hourstar"));
-const WhitelistSection = dynamic(() => import("./components/whitelist"));
+const ServerStatusSection = dynamic(() => import("./components/serverStatus"));
 const TwitchFrame = dynamic(() => import("./components/twitch"));
 
 export const generateMetadata = async (
@@ -56,9 +55,15 @@ export default async function Profile({params}: NameParams) {
                 <Avatar photo={user.photo}/>
 
                 <div className={styles.text}>
-                    <h2 className="unic_color all_select">
-                        {user.name}
+                    <h2>
+                        <span className="unic_color all_select">
+                            {user.name}
+                        </span>{" "}
+                        <Link href={`/user/${user.name}/accounts`}>
+                            <EditSvg size="0.6em" className="unic_color"/>
+                        </Link>
                     </h2>
+
                     {isHelper &&
                       <small className="light_gray_color">
                         Айди: {" "}
@@ -124,13 +129,13 @@ export default async function Profile({params}: NameParams) {
                 </div>
             </div>
 
-            {isMe && user.whitelist &&
-              <Suspense fallback={<Skeleton width="100%" height={100}/>}>
-                <HourStarSection user={user}/>
-              </Suspense>
-            }
-
-            <WhitelistSection user={user} isMe={isMe} isHelper={isHelper}/>
+            <Suspense fallback={<Skeleton width="100%" height={450}/>}>
+                <ServerStatusSection
+                    user={user}
+                    access={isHelper}
+                    isMe={isMe}
+                />
+            </Suspense>
 
             {isContentMaker &&
               <Suspense fallback={<Skeleton width="100%" height={307}/>}>

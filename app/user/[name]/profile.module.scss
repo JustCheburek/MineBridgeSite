@@ -1,13 +1,5 @@
 @use "@styles/mixins";
 
-// FormBox
-.form_box {
-	@include mixins.border();
-	& {
-		padding: 1.5rem;
-	}
-}
-
 // Информация о пользователе
 .profile {
 	display: grid;

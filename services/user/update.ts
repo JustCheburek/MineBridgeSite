@@ -1,7 +1,7 @@
 "use server";
 import {cookies} from "next/headers";
 import {MBSESSION} from "@/const";
-import {AddWLConsole, RconVC, RemoveWLConsole} from "@services/console";
+import {RconVC} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from 'next/cache'
 import {User} from "lucia";
@@ -75,15 +75,13 @@ export async function CheckActions(user: User, actions: Action[]) {
                 await client.send(`co rollback action:block user:${user.name} time:14d radius:#global`)
                 await client.send(`co rollback action:container user:${user.name} time:14d radius:#global`)
             }
+            client.disconnect()
         }
         if (actions.includes("minePardon")) {
             const client = await RconVC()
             console.log(`Разбан ${user.name}`)
             await client.send(`unban ${user.name}`)
-        }
-        if (actions.includes("mineBan") || actions.includes("minePardon")) {
-            await RemoveWLConsole(user.name)
-            await userModel.findByIdAndUpdate(user._id, {whitelist: false})
+            client.disconnect()
         }
     } catch (e) {
         console.error(e)
@@ -174,18 +172,6 @@ export async function Logout() {
     (await cookies()).delete(MBSESSION)
 }
 
-export async function AddWhitelist(_id: string, name: string) {
-    try {
-        await AddWLConsole(name)
-
-        await userModel.findByIdAndUpdate(_id, {whitelist: true})
-    } catch (e) {
-        console.error(e)
-    }
-
-    revalidateTag(`userLike`)
-}
-
 export async function AddPunishment(user: User, punishment: Punishment, actions: Action[]) {
     if (punishment.reason && punishment.rating) {
         await userModel.findByIdAndUpdate(
@@ -251,13 +237,9 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
     }
 
     if (user.name !== name) {
-        await RemoveWLConsole(user.name)
-
         // Смена аккаунта
         const client = await RconVC()
         await client.send(`librelogin user migrate ${user.name} ${name}`)
-
-        await AddWLConsole(name)
     }
 
     await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})

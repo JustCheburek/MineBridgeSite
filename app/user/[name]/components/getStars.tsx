@@ -1,15 +1,15 @@
 "use client";
 
 import {Button} from "@components/button";
-import {FormBox} from "@components/formBox";
+import {DefaultFormBox} from "@components/formBox";
 import {GetStars} from "@services/user";
 
-export function GetStarsForm({_id, name}: { _id: string, name: string }) {
+export function GetStarsForm({_id}: { _id: string }) {
     return (
-        <FormBox action={() => GetStars(_id, name)}>
+        <DefaultFormBox action={() => GetStars(_id)}>
             <Button>
                 Получить звёзды
             </Button>
-        </FormBox>
+        </DefaultFormBox>
     )
 }

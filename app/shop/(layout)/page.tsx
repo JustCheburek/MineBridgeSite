@@ -24,7 +24,6 @@ export const metadata: Metadata = {
 export default async function Shop() {
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
-    // todo: рынок за мостики
     // todo: скрытие с миникарты 10 мостиков в месяц
     // todo: чанки в месяц
     // todo: киты в дуэлях

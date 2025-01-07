@@ -46,25 +46,27 @@ export const GetHours = cache(
     }
 )
 
+export const AddWLConsole = cache(
+    async (name: string) => {
+        const clientVC = await RconVC()
+        let whitelist = false
+
+        try {
+            await clientVC.send(`lpv user ${name} group add whitelist`)
+            whitelist = true
+        } catch (e) {
+            console.error(e)
+        }
+
+        clientVC.disconnect()
+
+        return whitelist
+    }
+)
+
 export const SuffixConsole = cache(
     async (name: string, suffix: string) => {
         const client = await RconVC()
         return await client.send(`lpv user ${name} meta setsuffix 5 ${suffix}`)
-    }
-)
-
-export const AddWLConsole = cache(
-    async (name: string) => {
-        const clientVC = await RconVC()
-
-        await clientVC.send(`lpv user ${name} group add whitelist`)
-    }
-)
-
-export const RemoveWLConsole = cache(
-    async (name: string) => {
-        const clientVC = await RconVC()
-
-        await clientVC.send(`lpv user ${name} group remove whitelist`)
     }
 )

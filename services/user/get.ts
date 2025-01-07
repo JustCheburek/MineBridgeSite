@@ -11,25 +11,19 @@ export async function GetPrize(name: string) {
     await client.send(`tw trigger health_prize ${name}`)
 }
 
-export async function GetStars(_id: string, name: string) {
+export async function GetStars(_id: string) {
     try {
-        const client = await RconMB()
+        const user = await userModel.findById(_id)
+        if (!user) return
 
-        const hours = await GetHours(name)
-
+        const hours = await GetHours(user.name)
         if (hours === 0) return
 
-        const text = await client.send(`scoreboard players set ${name} hours 0`)
-
+        const client = await RconMB()
+        const text = await client.send(`scoreboard players set ${user.name} hours 0`)
         client.disconnect()
 
-        console.log(`text: ${text}`)
-
         if (text.endsWith("0")) {
-            const user = await userModel.findById(_id)
-
-            if (!user) return
-
             const fullHours = user.punishments?.reduce(
                 (accum, {rating, author}) => {
                     if (author !== AUTO.HOURS) {

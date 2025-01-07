@@ -1,22 +1,23 @@
 import {User} from "lucia";
 import {GetStarsForm} from "./getStars";
-import {GetHours} from "@services/console";
+import {Url} from "@components/button";
 
-export default async function HourStarSection({user}: { user: User }) {
-    const hours = await GetHours(user.name)
-
+export default function HourStarSection({user, hours}: { user: User, hours: number }) {
     return (
         <section className="center_text grid_center">
             <h2>
                 Часы: {hours}
             </h2>
-            {hours === -1 &&
-              <p>
-                Сервер не доступен
-              </p>
+            <small>
+                Максимум: 24
+            </small>
+            {hours === 0 &&
+              <Url href={`/user/${user.name}/history`}>
+                Посмотреть рейтинг
+              </Url>
             }
             {hours > 0 &&
-              <GetStarsForm _id={user._id} name={user.name}/>
+              <GetStarsForm _id={user._id}/>
             }
         </section>
     )
