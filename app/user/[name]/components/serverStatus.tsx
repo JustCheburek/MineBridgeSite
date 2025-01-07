@@ -13,7 +13,9 @@ type ServerStatus = {
 export default async function ServerStatusSection({user, isMe}: ServerStatus) {
     const [hours, whitelist] = await Promise.all([
         GetHours(user.name),
-        AddWLConsole(user.name)
+        isMe
+            ? AddWLConsole(user.name)
+            : true
     ])
 
     return <>
@@ -23,18 +25,14 @@ export default async function ServerStatusSection({user, isMe}: ServerStatus) {
 
         {whitelist
             ? <WhitelistSection user={user} isMe={isMe}/>
+            // только с isMe
             : <section className="center_text">
                 <h2>
                     Сервер не доступен
                 </h2>
                 <p>
-                    Попробуй зайти на сайт позже
+                    Попробуй зайти на сайт позже, чтобы попасть в Whitelist
                 </p>
-                {isMe &&
-                    <p>
-                      чтобы попасть в Whitelist
-                    </p>
-                }
             </section>
         }
     </>
