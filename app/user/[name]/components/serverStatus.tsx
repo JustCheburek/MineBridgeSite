@@ -23,17 +23,6 @@ export default async function ServerStatusSection({user, isMe}: ServerStatus) {
           <HourStarSection user={user} hours={hours} isMe={isMe}/>
         }
 
-        {whitelist
-            ? <WhitelistSection user={user} isMe={isMe}/>
-            // только с isMe
-            : <section className="center_text">
-                <h2>
-                    Сервер не доступен
-                </h2>
-                <p>
-                    Попробуй зайти на сайт позже, чтобы попасть в Whitelist
-                </p>
-            </section>
-        }
+        <WhitelistSection user={user} isMe={isMe} whitelist={whitelist}/>
     </>
 }
