@@ -151,7 +151,7 @@ export default function CasesPurchasesSection(
                                   href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
                                   key={Case?.name}
                                 >
-                                  <CaseBox Case={Case} size={40} helper={false} isModal={false}>
+                                  <CaseBox Case={Case} Drops={Drops} size={40} helper={false} isModal={false}>
                                       {amount > 1 &&
                                         <p className={`unic_color medium-font ${styles.case_text}`}>
                                             {amount}

@@ -6,7 +6,7 @@ import {useState} from "react";
 import Link from "next/link";
 
 // Типы
-import {Case, DropNames, RarityNames} from "@/types/case";
+import {Case, Drop, RarityNames} from "@/types/case";
 
 // Стили
 import styles from "./styles/shop.module.scss"
@@ -111,8 +111,9 @@ export const StickerButton = () => (
     </Url>
 )
 
-export function CaseBox({Case, size = 185, helper = true, isModal = true, children}: PropsWithChildren<{
+export function CaseBox({Case, Drops, size = 185, helper = true, isModal = true, children}: PropsWithChildren<{
     Case: Case
+    Drops: Drop[]
     size?: number
     helper?: boolean
     isModal?: boolean
@@ -122,7 +123,8 @@ export function CaseBox({Case, size = 185, helper = true, isModal = true, childr
     const [modal, setModal] = useState(false)
 
     return (<>
-        <ImgBox className={styles[Case.name]} helper={helper} onClick={() => isModal && setModal(true)} hover overflow={false}>
+        <ImgBox className={styles[Case.name]} helper={helper} onClick={() => isModal && setModal(true)} hover
+                overflow={false}>
             <Img
                 src={`/shop/${Case.name}.png`} alt={`${Case.displayname} кейс`}
                 width={size}
@@ -152,11 +154,21 @@ export function CaseBox({Case, size = 185, helper = true, isModal = true, childr
                   Дроп
                 </h2>
                   {Case.drop.map(drop => {
-                      const translate = DropNames[drop.name]
+                      const Drop = Drops.find(({name}) =>
+                          name === drop.name
+                      )
+
+                      if (!Drop) {
+                          return (
+                              <p key={drop.name}>
+                                  Неизвестный дроп - {drop.name}
+                              </p>
+                          )
+                      }
 
                       return (
                           <p key={drop.name}>
-                              {translate} - {Math.round(drop.chance / chancesDrop * 1000) / 10}%
+                              {Drop.displayname} - {Math.round(drop.chance / chancesDrop * 1000) / 10}%
                           </p>
                       )
                   })}

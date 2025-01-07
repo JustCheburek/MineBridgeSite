@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
 import Link from "next/link";
-import {getCases} from "@/services";
+import {getCases, getDrops} from "@/services";
 
 // Компоненты
 import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, Text} from "@components/shop";
@@ -14,6 +14,7 @@ import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {H1} from "@components/h1";
 import {Suspense} from "react";
 import {Skeleton} from "@components/skeleton";
+import {revalidateTag} from "next/cache";
 
 export const metadata: Metadata = {
     title: "Магазин",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Shop() {
-    const Cases = await getCases()
+    const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
     // todo: рынок за мостики
     // todo: скрытие с миникарты 10 мостиков в месяц
@@ -29,7 +30,12 @@ export default async function Shop() {
     // todo: киты в дуэлях
     return (<>
         <div>
-            <H1 up>Магазин</H1>
+            <H1 up reload={async () => {
+                "use server";
+                revalidateTag("shop")
+            }}>
+                Магазин
+            </H1>
 
             <div className="grid_center">
                 <p id="mostiki">
@@ -82,7 +88,7 @@ export default async function Shop() {
                 <Suspense fallback={<Skeleton width="100%" height={440}/>}>
                     {Cases.map(Case => (
                         <Box key={Case.name}>
-                            <CaseBox Case={Case}/>
+                            <CaseBox Case={Case} Drops={Drops}/>
                             <Text>
                                 <CaseInfo>
                                     {Case.displayname}

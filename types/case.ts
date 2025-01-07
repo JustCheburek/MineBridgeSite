@@ -28,12 +28,14 @@ export const RarityNames = {
 export const rarityNames = Object.keys(RarityNames) as RarityType[]
 export type RarityType = keyof typeof RarityNames
 
+// todo: переход к типизации с базы данных
 export const DropNames = {
 	all: "Весь дроп",
 	particleeffects: "Частицы",
 	suffix: "Суффикс",
 	deatheffects: "Эффекты смерти",
-	pets: "Питомец"
+	pets: "Питомец",
+	rename: "Скины"
 }
 export type DropType = keyof typeof DropNames
 

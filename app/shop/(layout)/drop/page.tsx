@@ -1,6 +1,6 @@
 import {Box, CaseBox, CaseInfo, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
-import {getCases} from "@/services";
+import {getCases, getDrops} from "@/services";
 import type {Metadata} from "next";
 import {H1} from "@components/h1";
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Cases() {
-    const Cases = await getCases()
+    const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
     return (
         <div>
@@ -18,7 +18,7 @@ export default async function Cases() {
             <Section name="cases">
                 {Cases.map(Case => (
                     <Box key={Case.name}>
-                        <CaseBox Case={Case}/>
+                        <CaseBox Case={Case} Drops={Drops}/>
                         <Text>
                             <CaseInfo>
                                 {Case.displayname}
