@@ -9,7 +9,7 @@ export default function HourStarSection({user, hours, isMe}: { user: User, hours
                 Часы: {hours}
             </h2>
             <small>
-                Максимум: 24
+                Максимум без получения на сайте: 24
             </small>
             {hours === 0 &&
               <Url href={`/user/${user.name}/history`}>
