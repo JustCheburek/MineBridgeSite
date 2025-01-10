@@ -34,8 +34,8 @@ export default function Rules() {
                         </strong>{" "}
                         <small>
                             ({LASTRULESUPDATE.toLocaleDateString("ru-RU", {
-                            dateStyle: "long"
-                        })})
+                                dateStyle: "long"
+                            })})
                         </small>
                     </time>
                 </p>
