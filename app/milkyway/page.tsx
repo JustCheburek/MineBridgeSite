@@ -3,6 +3,7 @@ import {MaxSize} from "@components/maxSize";
 import {validate} from "@services/validate";
 import {FormLink} from "@components/formBox";
 import styles from "./milkyway.module.scss"
+import type {Metadata} from "next";
 
 declare module 'csstype' {
     interface Properties {
@@ -13,6 +14,11 @@ declare module 'csstype' {
         '--_angle'?: string
     }
 }
+
+export const metadata: Metadata = {
+    title: "Млечный путь",
+    description: "Набирая звёзды, можно получать разные крутые вещи бесплатно!"
+};
 
 const size = 4.5
 
