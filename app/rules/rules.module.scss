@@ -8,7 +8,10 @@
 
 .tldr_box {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+
+	@media (width > 600px) {
+		grid-template-columns: 1fr 1fr;
+	}
 }
 
 // Правила

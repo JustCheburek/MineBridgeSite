@@ -1,22 +1,50 @@
 @use "@styles/mixins";
+@use "sass:math";
 
-.progress_box {
+.container {
+
+}
+
+.box {
   position: relative;
 
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  height: 8rem;
+  margin-bottom: var(--_y);
+
+  margin-left: var(--_x);
 }
 
-.progress {
+.rating {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  height: 4rem;
-  width: 100%;
+  width: var(--_size);
+  height: var(--_size);
+
+  z-index: var(--1z);
+
+  @include mixins.border($background: var(--black-color));
 }
 
+.line {
+  position: absolute;
+
+  width: var(--_long);
+  height: 1px;
+  background: var(--text-color);
+
+  transform: rotate(var(--_angle)) translate(50%);
+
+  &.unic {
+    background: var(--unic-color);
+  }
+}
+
+/*
 .rating_box {
   position: absolute;
   left: 50%;
@@ -39,20 +67,9 @@
   color: var(--black-color-transparent);
 }
 
-.line {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  translate: -50% -1em;
-
-  width: 0.1em;
-  height: 2rem;
-  background: var(--border-color);
-}
-
 .rating {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.1em;
-}
+}*/
