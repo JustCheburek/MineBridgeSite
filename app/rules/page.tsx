@@ -548,7 +548,7 @@ export default function Rules() {
                                 Тестирование
                             </li>
                             <li>
-                                Важные решения ситуаций
+                                Решения важных ситуаций
                             </li>
                         </ul>
                         <UserBox _id="8v4pdxujk92dgh5"/>
