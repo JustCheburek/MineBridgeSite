@@ -2,6 +2,7 @@
 import type {Metadata} from "next";
 import Link from "next/link";
 import TimeAgo from "javascript-time-ago";
+import ru from "javascript-time-ago/locale/ru";
 
 // Стили
 import styles from './rules.module.scss';
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
     description: "Звёзды — внутриигровая награда или наказание. Суды, баны, муты, всё это про нас!"
 };
 
+TimeAgo.addDefaultLocale(ru);
 const timeAgo = new TimeAgo('ru-RU');
 
 export default function Rules() {
@@ -33,9 +35,7 @@ export default function Rules() {
                             {timeAgo.format(LASTRULESUPDATE)}
                         </strong>{" "}
                         <small>
-                            ({LASTRULESUPDATE.toLocaleDateString("ru-RU", {
-                                dateStyle: "long"
-                            })})
+                            ({LASTRULESUPDATE.toLocaleDateString("ru-RU", {dateStyle: "long"})})
                         </small>
                     </time>
                 </p>
@@ -478,37 +478,148 @@ export default function Rules() {
                     </Rule>
                 </RulesBox>
 
-                <RulesBox name="roles" heading="Роли" number={9}>
-                    <Rule number={9.0}>
-                        На сервере действуют следующие роли, они расположены в иерархии:
-                    </Rule>
+                <RulesBox name="roles" heading="Иерархия ролей" number={9}>
                     <Rule number={9.1}>
                         <p>
-                            Админ — главная часть сервера
+                            Вышестоящая роль управляет нижестоящей
                         </p>
                         <p>
-                            Разработка сайта, ведение соцсетей и самого сервера осуществляются именно ими
+                            При отсутствии необходимых знаний нижестоящая роль может обратиться к вышестоящей
                         </p>
-                        <UserBox _id="j8bsrsdgzqa4n0c"/>
-                        <UserBox _id="i5mqq2js4nos1yj"/>
+                        <p>
+                            Админы и модеры имеют бóльшие права, чем правила, итоговое решение остаётся за ними
+                        </p>
+                        <br/>
+                        <p>
+                            Запрещён абъюз своих прав
+                        </p>
+                        <p>
+                            Запрещено раскрывать информацию, не доступную для обычных игроков
+                        </p>
                     </Rule>
                     <Rule number={9.2}>
                         <p>
-                            Модеры и помогаторы — помощники админов
+                            Админ — самая высшая роль <small>(= создатель)</small>
                         </p>
+                        <ul>
+                            <li>
+                                Разработка сайта
+                            </li>
+                            <li>
+                                Управление майнкрафт сервером и хостингом
+                            </li>
+                            <li>
+                                Ведение соцсетей и мониторинг серверов
+                            </li>
+                            <li>
+                                Исправление багов
+                            </li>
+                            <li>
+                                Креативные идеи
+                            </li>
+                            <li>
+                                Дизайнерство
+                            </li>
+                            <li>
+                                Билдерство
+                            </li>
+                            <li>
+                                Планы сервера
+                            </li>
+                            <li>
+                                Набор игроков на роли
+                            </li>
+                        </ul>
+                        <UserBox _id="j8bsrsdgzqa4n0c"/>
+                        <UserBox _id="i5mqq2js4nos1yj"/>
+                    </Rule>
+                    <Rule number={9.3}>
                         <p>
-                            Им запрещено абьюзить свои права
+                            Модер
                         </p>
+                        <ul>
+                            <li>
+                                Настройка и перевод плагинов, датапаков, ресурс паков и тому подобное
+                            </li>
+                            <li>
+                                Билдерство
+                            </li>
+                            <li>
+                                Тестирование
+                            </li>
+                            <li>
+                                Важные решения ситуаций
+                            </li>
+                        </ul>
+                        <UserBox _id="8v4pdxujk92dgh5"/>
+                    </Rule>
+                    <Rule number={9.4}>
+                        <p>
+                            Помогатор - категория, делится на 3 подкатегории:
+                        </p>
+                        <br/>
+                        <h4>
+                            Хелпер
+                        </h4>
+                        <ul>
+                            <li>
+                                Помощь игрокам с их вопросами и вайтлистом
+                            </li>
+                            <li>
+                                Осведомление админов о багах сервера
+                            </li>
+                            <li>
+                                Тестирование
+                            </li>
+                            <li>
+                                Откат ресурсов игроков в чрезвычайных ситуациях
+                            </li>
+                        </ul>
+                        <UserBox _id="ruef6d47y245c0x"/>
+                        <UserBox _id="djfp8h9j2ffbdzz"/>
+                        <UserBox _id="svp3okvcuo6062d"/>
+                        <br/>
+                        <h4>
+                            Судья
+                        </h4>
+                        <ul>
+                            <li>
+                                Помощь игрокам для определения общего решения конфликта
+                            </li>
+                            <li>
+                                Управление звёздами{" "}
+                                <small>(выдача звёзд за общественные дела и понижение звёзд за
+                                    проступки)</small>
+                            </li>
+                        </ul>
+                        <UserBox _id="t2dhhl5igw1sp43"/>
+                        <UserBox _id="cd8u5lqjg9zjr1b"/>
+                        <UserBox _id="7mrck4g9va16gbu"/>
+                        <br/>
+                        <h4>
+                            Акционер
+                        </h4>
+                        <ul>
+                            <li>
+                                Не имеет прав помогаторов
+                            </li>
+                            <li>
+                                Участие в различных голосованиях в чате помогаторов
+                            </li>
+                            <li>
+                                Представляет общественное мнение
+                            </li>
+                            <li>
+                                Покупается за 500₽ в месяц
+                            </li>
+                        </ul>
+                        <UserBox _id="biu4vqvuev0m0tp"/>
+                        <br/>
                         <TextUrl href="https://discord.gg/swrAFFqvH2">
                             Стать помогатором
                         </TextUrl>
                     </Rule>
-                    <Rule number={9.3}>
-                        <p>
-                            Админы, модеры и судьи имеют бóльшие права, чем правила, итоговое решение остаётся за ними
-                        </p>
-                    </Rule>
-                    <Rule number={9.4}>
+                    <Rule number={9.5}>
                         <p>
                             Мэр мира — избирается игроками на один сезон
                         </p>
@@ -523,16 +634,18 @@ export default function Rules() {
                             Стать мэром
                         </TextUrl>
                     </Rule>
-                    <Rule number={9.5}>
+                    <Rule number={9.6}>
                         <p>
-                            Художник — рисует <Link href="/features/stickers"
-                                                    className="unic_color medium-font">стикеры</Link>
+                            Художник — рисует{" "}
+                            <Link href="/features/stickers" className="unic_color medium-font">
+                                стикеры
+                            </Link>
                         </p>
                         <TextUrl href="https://t.me/MineBridgeOfficial/326">
                             Заказать
                         </TextUrl>
                     </Rule>
-                    <Rule number={9.6}>
+                    <Rule number={9.7}>
                         <p>
                             Тестировщик — проверяет новые фичи сервера и сайта
                         </p>
@@ -540,7 +653,7 @@ export default function Rules() {
                             Может получать от 5 звёзд за каждый продуктивный тест
                         </p>
                     </Rule>
-                    <Rule number={9.7}>
+                    <Rule number={9.8}>
                         <p>
                             Контент мейкер — стример / ютубер по MineBridge
                         </p>

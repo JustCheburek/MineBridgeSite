@@ -48,9 +48,15 @@ export const getRoles = cache(
         ).then(r => r.data).catch(console.error);
 
         const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
-        const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
-        const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
-        const isHelper = isModer || roles?.some(({name}) => name.toLowerCase().includes("помогатор"))
+        const isDonate = roles?.some(({name}) => name.toLowerCase().includes("акционер"))
+        let isAdmin = false, isModer = false, isHelper = false
+
+        if (!isDonate) {
+            isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
+            isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
+            isHelper = isModer || roles?.some(({name}) => name.toLowerCase().includes("помогатор"))
+        }
+
         const isContentMaker = roles?.some(({name}) => name.toLowerCase().includes("контент"))
 
         return {roles, isHelper, isModer, isAdmin, isContentMaker}
