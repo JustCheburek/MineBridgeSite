@@ -50,7 +50,7 @@ export const getRoles = cache(
         const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
         const isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
         const isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
-        const isHelper = isModer || roles?.some(({name}) => name.toLowerCase().includes("хелпер"))
+        const isHelper = isModer || roles?.some(({name}) => name.toLowerCase().includes("помогатор"))
         const isContentMaker = roles?.some(({name}) => name.toLowerCase().includes("контент"))
 
         return {roles, isHelper, isModer, isAdmin, isContentMaker}
