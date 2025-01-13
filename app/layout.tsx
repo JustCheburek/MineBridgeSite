@@ -71,7 +71,6 @@ export const metadata: Metadata = {
         type: "image/png"
     }, {
         url: "/logos/svg/logo.svg",
-        fetchPriority: "high",
         type: "image/svg+xml"
     }],
     authors: [{
