@@ -3,7 +3,7 @@ import type {Metadata} from "next";
 
 // Компоненты
 import {MaxSize} from "@components/maxSize";
-import {GBox, GContainer, GHint, GText} from "@components/grid";
+import {GBox, GContainer, GText} from "@components/grid";
 import {Img, ImgBox} from "@components/img";
 import {H1} from "@components/h1";
 
@@ -97,7 +97,6 @@ export default function Guides() {
                         />
                     </ImgBox>
 
-                    <GHint>Нужен гайд</GHint>
                     <GText>Litematica</GText>
                 </GBox>
             </GContainer>
