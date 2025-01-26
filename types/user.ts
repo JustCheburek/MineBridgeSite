@@ -29,7 +29,7 @@ export class User {
     @prop({required: true, unique: true})
     public email!: string
 
-    @prop({required: true, trim: true, maxlength: 300})
+    @prop({required: true, trim: true, maxlength: 1000})
     public photo!: string
 
     @prop()

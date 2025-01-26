@@ -154,9 +154,11 @@ export default async function ShowCase(
                 </div>
             </div>
             {isHelper && DropItem.give &&
-              <small className="light_gray_color flex_center all_select">
-                {DropItem.give}.{DropItem.name}.{Item.name}
-              </small>
+              <div>
+                <small className="light_gray_color flex_center all_select">
+                    {DropItem.give}.{DropItem.name}.{Item.name}
+                </small>
+              </div>
             }
         </div>
     )

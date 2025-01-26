@@ -1,8 +1,12 @@
 @use "@styles/mixins";
 @use "sass:math";
 
-.container {
+.milky_way {
+  background: var(--black-color);
+}
 
+.container {
+  padding-top: var(--_y);
 }
 
 .box {
@@ -12,12 +16,10 @@
   justify-content: center;
   align-items: center;
 
-  margin-bottom: var(--_y);
-
   margin-left: var(--_x);
 }
 
-.rating {
+.circle {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,49 +29,48 @@
 
   z-index: var(--1z);
 
-  @include mixins.border($background: var(--black-color));
+  @include mixins.border($background: var(--light-gray-color));
+
+  .unic & {
+    background: var(--text-color);
+  }
+}
+
+.rating {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  translate: -50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  filter: drop-shadow(0 0 15px var(--yellow-color));
 }
 
 .line {
   position: absolute;
 
   width: var(--_long);
-  height: 1px;
-  background: var(--text-color);
+  height: 2px;
+  background: var(--light-gray-color);
 
   transform: rotate(var(--_angle)) translate(50%);
 
-  &.unic {
-    background: var(--unic-color);
+  .unic & {
+    height: 3px;
+    background: var(--text-color);
   }
 }
 
-/*
-.rating_box {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  translate: -50%;
-
-  width: fit-content;
-  padding: 0.1rem 2rem;
-
-  @include mixins.border();
+.gradient_gray_black {
+  height: 7rem;
+  background: linear-gradient(to bottom, var(--background-color), var(--black-color));
 }
 
-.triangle {
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  translate: -50%;
-
-  z-index: var(--1z);
-  color: var(--black-color-transparent);
+.item {
+  aspect-ratio: 1 / 1;
+  object-position: center;
 }
-
-.rating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.1em;
-}*/

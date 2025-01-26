@@ -1,12 +1,10 @@
 @use "@styles/mixins";
 
 .form {
-  // flex-wrap: wrap;
   display: grid;
   place-content: center;
   gap: 8px;
 
-  margin-block: 20px;
   padding: 5px;
 }
 

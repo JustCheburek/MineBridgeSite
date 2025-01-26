@@ -14,12 +14,13 @@ import type {CaseData, MultiCaseData} from "@/types/purchase";
 
 // Компоненты
 import {CasesPurchasesModal} from "@modals/casesPurchases";
-import {FormBox, FormButton, FormInput, FormLabel, FormLink} from "@components/formBox";
+import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
 import Form from "next/form";
 import {Img, ImgBox} from "@components/img";
 import Link from "next/link";
 import {DeleteSvg} from "@ui/SVGS";
 import {CaseBox} from "@components/shop";
+import {Url} from "@components/button";
 
 interface Suffix {
     _id: string
@@ -92,110 +93,113 @@ export default function CasesPurchasesSection(
     const [click, setClick] = useState<boolean>(false)
     const [modal, setModal] = useState<boolean>(false)
 
-    return (<>
-        <h2 className="center_text">
-            Покупки кейсов
-        </h2>
-        {(isMe || access) && caseDatas.length > 0 &&
-          <FormBox action={() => GetCosmetics(user.name, caseDatas)}>
-            <FormButton disabled={click} onClick={() => setClick(true)}>
-                {click
-                    ? "Проверьте покупки"
-                    : "Получить покупки"
-                }
-            </FormButton>
-          </FormBox>
-        }
+    return (
+        <section>
+            <div className="center_text">
+                <h2>
+                    Покупки кейсов
+                </h2>
+                <p className={styles.description}>
+                    <code>/uc menu</code> для использования косметики
+                </p>
+            </div>
 
-        <p className="center_text">
-            <code>/uc menu</code> для использования косметики
-        </p>
+            {(isMe || access) && caseDatas.length > 0 &&
+              <FormBox action={() => GetCosmetics(user.name, caseDatas)}>
+                <FormButton disabled={click} onClick={() => setClick(true)}>
+                    {click
+                        ? "Проверьте покупки"
+                        : "Получить покупки"
+                    }
+                </FormButton>
+              </FormBox>
+            }
 
-        <div className={styles.purchases}>
-            {caseDatas.map(
-                ({
-                     MultiCase,
-                     Drop,
-                     DropItem,
-                     rarity,
-                     Item,
-                     suffix
-                 },
-                 index
-                ) =>
-                    <div
-                        style={{width: "280px", height: "160px"}}
-                        className={`border-radius grid_center ${styles.item} ${rarity}_box`}
-                        key={index}
-                    >
-                        {DropItem?.name === "suffix"
-                            ? <Suffix
-                                _id={user._id}
-                                isMe={isMe}
-                                suffix={suffix}
-                                index={index}
-                                selected={user.suffix === suffix}
-                            />
-                            : <ImgBox hover width="280px" height="160px">
-                                <Img
-                                    src={`/shop/${DropItem?.name}/${Item?.name}.webp`}
-                                    alt={Item?.displayname || DropItem?.name || ""}
+            <div className={styles.purchases}>
+                {caseDatas.map(
+                    ({
+                         MultiCase,
+                         Drop,
+                         DropItem,
+                         rarity,
+                         Item,
+                         suffix
+                     },
+                     index
+                    ) =>
+                        <div
+                            style={{width: "280px", height: "160px"}}
+                            className={`border-radius grid_center ${styles.item} ${rarity}_box`}
+                            key={index}
+                        >
+                            {DropItem?.name === "suffix"
+                                ? <Suffix
+                                    _id={user._id}
+                                    isMe={isMe}
+                                    suffix={suffix}
+                                    index={index}
+                                    selected={user.suffix === suffix}
                                 />
-                            </ImgBox>
-                        }
+                                : <ImgBox hover width="280px" height="160px">
+                                    <Img
+                                        src={`/shop/${DropItem?.name}/${Item?.name}.webp`}
+                                        alt={Item?.displayname || DropItem?.name || ""}
+                                    />
+                                </ImgBox>
+                            }
 
-                        {MultiCase && DropItem?.name !== "suffix" &&
-                          <div className={styles.cases}>
-                              {MultiCase.map(({Case, amount}) => Case &&
-                                <Link
-                                  href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
-                                  key={Case?.name}
-                                >
-                                  <CaseBox Case={Case} Drops={Drops} size={40} helper={false} isModal={false}>
-                                      {amount > 1 &&
-                                        <p className={`unic_color medium-font ${styles.case_text}`}>
-                                            {amount}
-                                        </p>
-                                      }
-                                  </CaseBox>
-                                </Link>
-                              )}
-                          </div>
-                        }
+                            {MultiCase && DropItem?.name !== "suffix" &&
+                              <div className={styles.cases}>
+                                  {MultiCase.map(({Case, amount}) => Case &&
+                                    <Link
+                                      href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
+                                      key={Case?.name}
+                                    >
+                                      <CaseBox Case={Case} Drops={Drops} size={40} helper={false} isModal={false}>
+                                          {amount > 1 &&
+                                            <p className={`unic_color medium-font ${styles.case_text}`}>
+                                                {amount}
+                                            </p>
+                                          }
+                                      </CaseBox>
+                                    </Link>
+                                  )}
+                              </div>
+                            }
 
-                        {access &&
-                          <div className={styles.actions}>
-                            <Form action={() => {
-                                Item?._id ? DeleteCasePurchase(user._id, Item?._id)
-                                    : console.error("no item _id to delete")
-                            }}>
-                              <button className="helper_box danger">
-                                <DeleteSvg size="1.3rem"/>
-                              </button>
-                            </Form>
-                          </div>
-                        }
-                    </div>
-            )}
-        </div>
+                            {access &&
+                              <div className={styles.actions}>
+                                <Form action={() => {
+                                    Item?._id ? DeleteCasePurchase(user._id, Item?._id)
+                                        : console.error("no item _id to delete")
+                                }}>
+                                  <button className="helper_box danger">
+                                    <DeleteSvg size="1.3rem"/>
+                                  </button>
+                                </Form>
+                              </div>
+                            }
+                        </div>
+                )}
+            </div>
 
-        {access &&
-          <FormButton onClick={e => {
-              e.preventDefault()
-              setModal(true)
-          }}>
-            Добавить
-          </FormButton>
-        }
+            {access &&
+              <FormBox action={() => setModal(true)}>
+                <FormButton>
+                  Добавить
+                </FormButton>
+              </FormBox>
+            }
 
-        <FormLink href="/shop/case">
-            Купить
-        </FormLink>
+            <Url href="/shop/case" margin={0}>
+                Купить
+            </Url>
 
-        {access &&
-          <CasesPurchasesModal
-            modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} _id={user._id} access={access}
-          />
-        }
-    </>)
+            {access &&
+              <CasesPurchasesModal
+                modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} _id={user._id} access={access}
+              />
+            }
+        </section>
+    )
 }

@@ -12,11 +12,13 @@ export const FormBox = (
     {
         children,
         className = "",
+        margin = "20px",
         ...props
-    }: FormProps
+    }: FormProps & {margin?: string | number}
 ) => (
     <Form
         className={`${styles.form} ${className}`}
+        style={{marginBlock: margin}}
         {...props}
     >
         {children}
@@ -27,11 +29,13 @@ export const DefaultFormBox = (
     {
         children,
         className = "",
+        margin = "20px",
         ...props
-    }: ComponentPropsWithoutRef<"form">
+    }: ComponentPropsWithoutRef<"form"> & {margin?: string | number}
 ) => (
     <form
         className={`${styles.form} ${className}`}
+        style={{marginBlock: margin}}
         {...props}
     >
         {children}

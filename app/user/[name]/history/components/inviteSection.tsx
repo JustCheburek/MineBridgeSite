@@ -13,7 +13,7 @@ export default function InviteSection({user, isMe, isHelper}: InviteSection) {
     return (
         <section className="grid_center">
             <h2 className="center_text">Приглашения</h2>
-            <h3 className="center_text">1 приглашение = 5 рейтинга</h3>
+            <h3 className="center_text">1 приглашение = 5 звёзд</h3>
             {isMe &&
               <InviteLink name={user.name}/>
             }

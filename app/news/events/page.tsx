@@ -28,7 +28,7 @@ export default function Events() {
                     За <strong>1 ивент</strong> можно получить до <strong>5 ПИ</strong>
                 </p>
                 <p>
-                    <strong>1 ПИ</strong> = <strong>25 рейтинга</strong>
+                    <strong>1 ПИ</strong> = <strong>25 звёзд</strong>
                 </p>
                 <p>
                     Если ивент нарушает правила сервера, то ПИ <strong>не начисляются</strong>

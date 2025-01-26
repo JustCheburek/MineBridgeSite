@@ -110,15 +110,6 @@ export default function Features() {
 
                     <GText>Аналитика</GText>
                 </GBox>
-
-                {/*<GBox href="/features/plugins">
-                    <ImgBox type="grid">
-
-                    </ImgBox>
-
-                    // todo: плагины
-                    <GText>Плагины</GText>
-                </GBox>*/}
             </GContainer>
         </MaxSize>
     )

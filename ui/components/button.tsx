@@ -6,7 +6,7 @@ import Link, {LinkProps} from "next/link";
 import styles from "./styles/button.module.scss"
 
 type Url = {
-    margin?: string
+    margin?: string | number
     target?: string
     className?: string
     download?: boolean

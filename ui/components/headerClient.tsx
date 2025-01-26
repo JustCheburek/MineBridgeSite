@@ -109,11 +109,11 @@ function User({user}: { user: User | null }) {
                             Профиль
                         </NavLink>
                     </li>
-                    {/*<li>
+                    <li>
                         <NavLink href="/milkyway" className="mini_button">
                             Мл. путь
                         </NavLink>
-                    </li>*/}
+                    </li>
                     <li>
                         <NavLink href="/users" className="mini_button">
                             Игроки

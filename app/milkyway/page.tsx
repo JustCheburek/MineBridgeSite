@@ -4,6 +4,9 @@ import {validate} from "@services/validate";
 import {FormLink} from "@components/formBox";
 import styles from "./milkyway.module.scss"
 import type {Metadata} from "next";
+import {StarSvg} from "@ui/SVGS";
+import {Img, ImgBox} from "@/ui/components/img";
+import {CaseData} from "@/types/purchase";
 
 declare module 'csstype' {
     interface Properties {
@@ -20,15 +23,20 @@ export const metadata: Metadata = {
     description: "Набирая звёзды, можно получать разные крутые вещи бесплатно!"
 };
 
-const size = 4.5
+const size = 3.5
+const y = 15
 
-const Path = ({rating, now, x, y = 0, next = 0}: {
-    rating: number,
-    now: number,
-    x: number,
-    y?: number,
+type Path = {
+    rating: number
+    now: number
+    x: number
+    caseData: CaseData
     next?: number
-}) => {
+}
+
+type PathWithRating = Path & {rating: number}
+
+const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, next = 0}: PathWithRating) => {
     let long = 0
     let angle = 0
 
@@ -49,16 +57,28 @@ const Path = ({rating, now, x, y = 0, next = 0}: {
             className={styles.container}
             style={{
                 '--_x': `${x}rem`,
-                '--_y': `${y}rem`,
                 '--_long': `${long}rem`,
                 '--_angle': `${angle}rad`
             }}
         >
-            <div className={styles.box}>
-                <h3 className={styles.rating}>
-                    {rating}
+            <div className={`${styles.box} ${now >= rating ? styles.unic : ""}`}>
+                <div className={styles.card}>
+                    <ImgBox
+                        className={`${styles.item} ${rarity}_box`}
+                        hover
+                    >
+                        <Img
+                            src={`/shop/${DropItem.name}/${Item.name}.webp`}
+                            alt={Item.displayname || DropItem.name || ""}
+                            className={styles.img}
+                        />
+                    </ImgBox>
+                </div>
+                <div className={styles.circle}/>
+                <h3 className={`yellow_color ${styles.rating}`}>
+                    {rating} <StarSvg width="0.9em" height="0.9em"/>
                 </h3>
-                <div className={`${styles.line} ${now >= rating ? styles.unic : ""}`}/>
+                <div className={styles.line}/>
             </div>
         </div>
     )
@@ -79,16 +99,49 @@ export default async function MilkyWay() {
         )
     }
 
+    /*const Paths: Path[] = [{
+        rating: 25,
+        x: -50,
+        caseData: {
+
+        },
+        next: 40
+    }, {
+        rating: 50,
+        x: 40,
+        caseData: {},
+        next: -40
+    }, {
+        rating: 75,
+        x: -40,
+        caseData: {},
+        next: 20
+    }, {
+        rating: 100,
+        x: 20,
+        caseData: {}
+    }]*/
+
     return (
-        <MaxSize className="center_text" style={{"--_size": `${size}rem`}}>
+        <div className="center_text" style={{"--_size": `${size}rem`, '--_y': `${y}rem`}}>
             <H1>
                 Млечный путь
             </H1>
 
-            <Path now={author.rating} rating={25} x={-15} y={2} next={20}/>
-            <Path now={author.rating} rating={50} x={20} y={5} next={-40}/>
-            <Path now={author.rating} rating={75} x={-40} y={10} next={20}/>
-            <Path now={author.rating} rating={100} x={20}/>
-        </MaxSize>
+            <div className={styles.gradient_gray_black}/>
+
+            {/*<div className={styles.milky_way}>
+                {Paths.map(({rating, x, caseData, next}, i) => (
+                    <Path
+                        key={i}
+                        rating={rating}
+                        now={author.rating}
+                        x={x}
+                        caseData={caseData}
+                        next={next}
+                    />
+                ))}
+            </div>*/}
+        </div>
     )
 }
