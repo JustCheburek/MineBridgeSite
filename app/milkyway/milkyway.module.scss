@@ -38,7 +38,7 @@
 
 .rating {
   position: absolute;
-  top: 110%;
+  top: 125%;
   left: 50%;
   translate: -50%;
 
@@ -70,7 +70,20 @@
   background: linear-gradient(to bottom, var(--background-color), var(--black-color));
 }
 
+.card {
+  position: absolute;
+  bottom: 140%;
+
+  z-index: var(--2z);
+}
+
 .item {
-  aspect-ratio: 1 / 1;
+  border-radius: var(--border-radius);
+  background: var(--black-color);
+}
+
+.img {
   object-position: center;
+  object-fit: cover;
+  padding: 1.5rem;
 }

@@ -1,4 +1,4 @@
-import {getCase, getDrop} from "@/services";
+import {getCase, getDrop, getItem, getItems} from "@/services";
 import {Img, ImgBox} from "@components/img";
 import {Case, Drop, Item, RarityCost, RarityNames, type RarityType} from "@/types/case";
 import {validate} from "@services/validate";
@@ -36,15 +36,12 @@ export const generateMetadata = async (
     }
 
     // Items
-    let {drop: items} = DropItem
-    if (items?.length === 0) {
-        items = DropItem[rarity]
-    }
-    if (items?.length === 0 || !items) {
+    const Items = await getItems(rarity, DropItem)
+    if (Items?.length === 0 || !Items) {
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}`)
     }
 
-    const Item = items.find(({name}) => name === ItemName)
+    const Item = await getItem({name: ItemName}, Items)
     if (!Item) {
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`)
     }
@@ -68,15 +65,12 @@ export default async function ShowCase(
     ])
 
     // Items
-    let {drop: items} = DropItem
-    if (items?.length === 0) {
-        items = DropItem[rarity]
-    }
-    if (items?.length === 0 || !items) {
+    const Items = await getItems(rarity, DropItem)
+    if (Items?.length === 0 || !Items) {
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}`)
     }
 
-    const Item = items.find(({name}) => name === ItemName)
+    const Item = await getItem({name: ItemName}, Items)
     if (!Item) {
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`)
     }
@@ -154,9 +148,24 @@ export default async function ShowCase(
                 </div>
             </div>
             {isHelper && DropItem.give &&
-              <div>
-                <small className="light_gray_color flex_center all_select">
+              <div className="grid_center light_gray_color">
+                <small className="all_select">
                     {DropItem.give}.{DropItem.name}.{Item.name}
+                </small>
+                <small>
+                  Case: <span className="all_select">{Case._id.toString()}</span>
+                </small>
+                <small>
+                  Drop: <span className="all_select">{Drop._id.toString()}</span>
+                </small>
+                <small>
+                  DropItem: <span className="all_select">{DropItem._id.toString()}</span>
+                </small>
+                <small>
+                  Item: <span className="all_select">{Item._id.toString()}</span>
+                </small>
+                <small>
+                  rarity: <span className="all_select">{rarity}</span>
                 </small>
               </div>
             }

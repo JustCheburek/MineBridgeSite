@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import {getCaseLocal, getCases, getDropLocal, getDrops, getItems, getUser} from "@/services";
+import {getCaseLocal, getCases, getDropLocal, getDrops, getItem, getItems, getUser} from "@/services";
 import {validate} from "@services/validate";
 import {MultiCaseData} from "@/types/purchase";
 import {revalidateTag} from 'next/cache'
@@ -39,12 +39,8 @@ export default async function History({params}: NameParams) {
                 const Drop = await getDropLocal({_id: purchase.Drop}, Drops)
                 const DropItem = await getDropLocal({_id: purchase.DropItem}, Drops)
 
-                // Items
-                const items = await getItems(DropItem, purchase.rarity)
-
-                const Item = items.find(({_id}) =>
-                    JSON.stringify(_id) === JSON.stringify(purchase.Item)
-                )
+                const Items = await getItems(purchase.rarity, DropItem)
+                const Item = await getItem(purchase.Item, Items)
 
                 const multiCaseData = caseDatas.find(({Item: caseDataItem}) =>
                     JSON.stringify(caseDataItem?._id) === JSON.stringify(Item?._id)

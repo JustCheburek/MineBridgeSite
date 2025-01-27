@@ -20,13 +20,13 @@ const RelativeNav = ({paths}: { paths: RelativePath[] }) => (
             const last = current === paths.length
 
             if (last) {
-                return <span key={path.name}>{path.displayname}</span>
+                return <span key={index}>{path.displayname}</span>
             }
 
             const absolutePath = `/${paths.slice(0, current).map(p => p.name).join("/")}`
 
             return (
-                <span key={path.name}>
+                <span key={index}>
                     <Link href={absolutePath}>{path.displayname}</Link>
                     <span className={styles.nav_arrow}> {">"} </span>
                 </span>

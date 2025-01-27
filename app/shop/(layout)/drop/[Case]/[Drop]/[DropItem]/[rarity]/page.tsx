@@ -1,7 +1,7 @@
 import {Box, CaseInfo, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {Case, Drop, RarityNames, RarityType} from "@/types/case";
-import {getCase, getDrop} from "@/services";
+import {getCase, getDrop, getItems} from "@/services";
 import {H1} from "@components/h1";
 import {Img, ImgBox} from "@components/img";
 import type {Metadata} from "next";
@@ -48,11 +48,8 @@ export default async function Items(
     ])
 
     // Items
-    let {drop: items} = DropItem
-    if (items?.length === 0) {
-        items = DropItem[rarity]
-    }
-    if (items?.length === 0 || !items) {
+    const Items = await getItems(rarity, DropItem)
+    if (Items?.length === 0 || !Items) {
         redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}`)
     }
 
@@ -69,7 +66,7 @@ export default async function Items(
                 Предмет
             </H1>
             <Section name="cases">
-                {items.map(Item => (
+                {Items.map(Item => (
                     <Box key={Item.name}>
                         <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">
                             <Img

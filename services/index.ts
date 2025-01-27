@@ -8,7 +8,7 @@ import {Season} from "@/types/season";
 import type {GuildDSUser} from "@/types/user";
 import axios from "axios";
 import type {Role} from "@/types/role";
-import {Case, Drop, RarityType} from "@/types/case";
+import {Case, Drop, Item, RarityType} from "@/types/case";
 import {idOrName} from "@/types/idOrName";
 import {NO_ROLES} from "@/const";
 
@@ -251,24 +251,43 @@ export const getDrops = cache(
 
 export const getItems = cache(
     async (
-        DropItem: Drop | undefined,
-        rarity: RarityType
+        rarity: RarityType,
+        DropItem?: Drop
     ) => {
-        // Items
         if (!DropItem) return []
-        let {drop: items} = DropItem
-        if (items?.length === 0) {
-            items = DropItem[rarity]
+        let Items = DropItem?.drop
+        if (Items?.length === 0) {
+            Items = DropItem[rarity]
         }
 
-        if (items?.length === 0 || !items) {
+        if (Items?.length === 0 || !Items) {
             console.error(`Items не найден`)
         }
 
-        return items || []
+        return Items || []
     },
     ["items", "shop", "all"],
     {revalidate: 3600, tags: ["items", "shop", "all"]}
+)
+
+export const getItem = cache(
+    async (
+        param: idOrName,
+        Items: Item[]
+    ) => {
+        const Item = Items.find(({_id, name}) =>
+            JSON.stringify(_id) === JSON.stringify(param._id) ||
+            name === param.name
+        )
+
+        if (!Item) {
+            console.error(`Item не найден: ${JSON.stringify(param)}`)
+        }
+
+        return Item
+    },
+    ["item", "shop", "all"],
+    {revalidate: 3600, tags: ["item", "shop", "all"]}
 )
 
 export const getSeasons = cache(
