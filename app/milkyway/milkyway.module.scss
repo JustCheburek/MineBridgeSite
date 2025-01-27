@@ -54,14 +54,19 @@
   position: absolute;
 
   width: var(--_long);
-  height: 2px;
+  height: 3px;
   background: var(--light-gray-color);
 
   transform: rotate(var(--_angle)) translate(50%);
 
-  .unic & {
-    height: 3px;
+  &::-webkit-progress-value {
     background: var(--text-color);
+    border-radius: var(--border-radius);
+  }
+
+  &::-moz-progress-bar {
+    background: var(--text-color);
+    border-radius: var(--border-radius);
   }
 }
 
@@ -77,6 +82,28 @@
   z-index: var(--2z);
 }
 
+.text {
+  position: absolute;
+
+  right: 0;
+  top: 50%;
+  translate: 0 -50%;
+
+  @include mixins.border();
+
+  & {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  }
+  padding: 1rem 1.5rem;
+  transition: translate var(--long-transition);
+}
+
+.card:hover {
+  .text {
+    translate: 100% -50%;
+  }
+}
+
 .item {
   border-radius: var(--border-radius);
   background: var(--black-color);
@@ -86,4 +113,8 @@
   object-position: center;
   object-fit: cover;
   padding: 1.5rem;
+
+  &.blur {
+    filter: blur(25px);
+  }
 }

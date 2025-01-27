@@ -30,7 +30,6 @@ const y = 15
 interface Path {
     rating: number
     x: number
-    next?: number
 }
 
 interface PathID extends Path {
@@ -48,11 +47,18 @@ interface PathDB extends Path {
         rarity: RarityType
     }
     now: number
+    index: number
 }
 
-const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, next = 0}: PathDB) => {
+const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, index}: PathDB) => {
     let long = 0
     let angle = 0
+    let next = 0
+    let difference = 0
+    if (index < Paths.length - 1) {
+        next = Paths[index + 1].x
+        difference = Paths[index + 1].rating - rating
+    }
 
     if (next !== 0) {
         const width = Math.abs(x) + Math.abs(next) + size
@@ -77,6 +83,16 @@ const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, next = 0}: Pa
         >
             <div className={`${styles.box} ${now >= rating ? styles.unic : ""}`}>
                 <div className={styles.card}>
+                    {now >= rating &&
+                      <div className={`${styles.text} ${rarity}_box`}>
+                        <h3 className={styles.heading}>
+                            {Item.displayname}
+                        </h3>
+                        <p className={styles.description}>
+                            {DropItem.displayname}
+                        </p>
+                      </div>
+                    }
                     <ImgBox
                         className={`${styles.item} ${rarity}_box`}
                         hover width="12rem" height="12rem"
@@ -84,7 +100,7 @@ const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, next = 0}: Pa
                         <Img
                             src={`/shop/${DropItem.name}/${Item.name}.webp`}
                             alt={Item.displayname || DropItem.name || ""}
-                            className={styles.img}
+                            className={`${styles.img} ${now < rating ? styles.blur : ""}`}
                         />
                     </ImgBox>
                 </div>
@@ -92,7 +108,9 @@ const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, next = 0}: Pa
                 <h3 className={`yellow_color ${styles.rating}`}>
                     {rating} <StarSvg width="0.9em" height="0.9em"/>
                 </h3>
-                <div className={styles.line}/>
+                {difference > 0 &&
+                  <progress value={now - rating} max={difference} className={styles.line}/>
+                }
             </div>
         </div>
     )
@@ -105,8 +123,7 @@ const Paths: PathID[] = [{
         Item: "662ddb0f8d5044c0b4ad7b5a",
         DropItem: "662ddb0f8d5044c0b4ad7b57",
         rarity: "common"
-    },
-    next: 40
+    }
 }, {
     rating: 50,
     x: 40,
@@ -114,8 +131,7 @@ const Paths: PathID[] = [{
         Item: "662ddb0f8d5044c0b4ad7b5a",
         DropItem: "662ddb0f8d5044c0b4ad7b57",
         rarity: "common"
-    },
-    next: -40
+    }
 }, {
     rating: 75,
     x: -40,
@@ -123,8 +139,7 @@ const Paths: PathID[] = [{
         Item: "662ddb0f8d5044c0b4ad7b5a",
         DropItem: "662ddb0f8d5044c0b4ad7b57",
         rarity: "common"
-    },
-    next: 20
+    }
 }, {
     rating: 100,
     x: 20,
@@ -162,7 +177,7 @@ export default async function MilkyWay() {
             <div className={styles.gradient_gray_black}/>
 
             <div className={styles.milky_way}>
-                {Paths.map(async ({rating, x, caseData, next}, i) => {
+                {Paths.map(async ({rating, x, caseData}, i) => {
                     const DropItem = await getDropLocal({_id: caseData.DropItem}, Drops)
                     const Items = await getItems(caseData.rarity, DropItem)
                     const Item = await getItem({_id: caseData.Item}, Items)
@@ -182,7 +197,7 @@ export default async function MilkyWay() {
                                 Item,
                                 DropItem
                             }}
-                            next={next}
+                            index={i}
                         />
                     )
                 })}

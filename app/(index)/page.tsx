@@ -11,7 +11,7 @@ const YtSection = dynamic(() => import("./yt_section"));
 
 export const metadata: Metadata = {
     title: "Главная",
-    description: "Хороший пинг, частые ивенты, уникальные данжы, кланы! Сервер с лета 2022!"
+    description: "Хороший пинг, частые ивенты, уникальные данжи, кланы! Сервер с лета 2022!"
 };
 
 export default function Index() {

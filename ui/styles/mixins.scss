@@ -2,11 +2,13 @@
   & {
     border: $color $width solid;
     border-radius: $radius;
-    transition: border-color var(--long-transition);
     background: $background;
   }
 
   @if $hover {
+    & {
+      transition: border-color var(--long-transition);
+    }
     &:hover {
       border-color: var(--unic-color);
     }
