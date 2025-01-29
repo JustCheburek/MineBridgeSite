@@ -44,10 +44,7 @@ function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
                 </small>
 
                 : <Form
-                    action={async () => {
-                        "use server";
-                        await SelectSuffix(suffix, _id, name)
-                    }}
+                    action={() => SelectSuffix(suffix, _id, name)}
                     className={styles.selected}
                 >
                     <button>
