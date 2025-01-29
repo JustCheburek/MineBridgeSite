@@ -58,7 +58,7 @@ interface PathDB extends Path {
 }
 
 async function SetPerm(perm: string, name: string) {
-    await SetPermConsole(perm, name)
+    // await SetPermConsole(perm, name)
     revalidateTag("userLike")
 }
 
@@ -115,7 +115,10 @@ async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffi
                                     Получено
                                 </Button>
                                 :*/}
-                          <Form action={() => SetPerm(perm, author.name)}>
+                          <Form action={async () => {
+                              "use server"
+                              await SetPerm(perm, author.name)
+                          }}>
                             <Button margin="1.2rem">
                               Получить
                             </Button>
