@@ -9,7 +9,7 @@ import {Img, ImgBox} from "@/ui/components/img";
 import {getDropLocal, getDrops, getItem, getItems} from "@/services";
 import {Drop, Item, RarityType} from "@/types/case";
 import {Button} from "@components/button";
-import {IsPerm, SetPermConsole} from "@services/console";
+import {SetPermConsole} from "@services/console";
 import {User} from "lucia";
 import Form from "next/form";
 import {revalidateTag} from "next/cache";
@@ -85,11 +85,11 @@ async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffi
     }
 
     // Права
-    let isPerm = false
     const perm = `${DropItem.give}.${DropItem.name}.${Item.name}`
+    /*let isPerm = false
     if (DropItem.give) {
         isPerm = await IsPerm(perm, author.name)
-    }
+    }*/
 
     const isHas = author.rating >= rating
 
@@ -110,16 +110,17 @@ async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffi
                           <h2>
                               {Item.displayname}
                           </h2>
-                            {isPerm
+                            {/*{isPerm
                                 ? <Button margin="1.2rem" disabled>
                                     Получено
                                 </Button>
-                                : <Form action={() => SetPerm(perm, author.name)}>
-                                    <Button margin="1.2rem">
-                                        Получить
-                                    </Button>
-                                </Form>
-                            }
+                                :*/}
+                          <Form action={() => SetPerm(perm, author.name)}>
+                            <Button margin="1.2rem">
+                              Получить
+                            </Button>
+                          </Form>
+                            {/*}*/}
                         </div>
                       </div>
                     }
