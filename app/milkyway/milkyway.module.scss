@@ -82,25 +82,65 @@
   z-index: var(--2z);
 }
 
+.text_box {
+  --_width: 60rem;
+
+  position: absolute;
+
+  top: 50%;
+  translate: 0 -50%;
+  right: 0;
+
+  display: grid;
+  align-items: center;
+
+  width: var(--_width);
+  height: 16rem;
+
+  padding: 2.5rem;
+
+  overflow: hidden;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
 .text {
   position: absolute;
 
-  right: 0;
-  top: 50%;
-  translate: 0 -50%;
+  width: max-content;
+  translate: 0;
 
-  @include mixins.border();
+  @include mixins.border($background: var(--background-color));
 
   & {
+    padding: 1rem 1.5rem;
+    transition: translate var(--long-transition), opacity var(--long-transition);
+  }
+
+  .left & {
+    right: calc(var(--_width) - 19rem);
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
   }
-  padding: 1rem 1.5rem;
-  transition: translate var(--long-transition);
+
+  .right & {
+    left: calc(var(--_width) - 19rem);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+  }
 }
 
-.card:hover {
-  .text {
-    translate: 100% -50%;
+.card:hover:has(.item:hover), .card:hover:has(.text:hover) {
+  .left .text {
+    translate: calc(100% - 1rem);
+  }
+
+  .right .text {
+    translate: calc(-100% + 1rem);
   }
 }
 
@@ -112,7 +152,6 @@
 .img {
   object-position: center;
   object-fit: cover;
-  padding: 1.5rem;
 
   &.blur {
     filter: blur(25px);

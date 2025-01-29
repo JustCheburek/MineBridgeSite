@@ -1,10 +1,9 @@
 "use server";
 
 import {CaseData} from "@/types/purchase";
-import {RconVC, SuffixConsole} from "@services/console";
+import {RconVC, SetPermConsole, SuffixConsole} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
-import {getUser} from "@/services";
 import {Types} from "mongoose";
 
 export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[]) {
@@ -57,7 +56,7 @@ export async function DeleteCasePurchase(userId: string, _id: Types.ObjectId) {
     revalidateTag("userLike")
 }
 
-export async function AddSuffix(formData: FormData, _id: string, index: number) {
+export async function AddSuffix(formData: FormData, _id: string, name: string, index: number) {
     const suffix = formData.get("name") as string
 
     const user = await userModel.findByIdAndUpdate(_id)
@@ -67,20 +66,28 @@ export async function AddSuffix(formData: FormData, _id: string, index: number) 
     }
 
     user.casesPurchases[index].suffix = suffix
-    await SelectSuffix(suffix, _id)
+    await SelectSuffix(suffix, _id, name)
 
     await user.save()
 
     revalidateTag("userLike")
 }
 
-export async function SelectSuffix(suffix: string, _id: string) {
+export async function SelectSuffix(suffix: string, _id: string, name: string) {
     try {
-        const {user} = await getUser({_id}, false)
-
-        await SuffixConsole(user.name, suffix)
+        await SuffixConsole(suffix, name)
 
         await userModel.findByIdAndUpdate(_id, {suffix})
+    } catch (e) {
+        console.error(e)
+    }
+
+    revalidateTag("userLike")
+}
+
+export async function SetPerm(perm: string, name: string) {
+    try {
+        await SetPermConsole(perm, name)
     } catch (e) {
         console.error(e)
     }

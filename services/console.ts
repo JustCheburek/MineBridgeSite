@@ -48,25 +48,62 @@ export const GetHours = cache(
 
 export const AddWLConsole = cache(
     async (name: string) => {
-        const clientVC = await RconVC()
+        const client = await RconVC()
         let whitelist = false
 
         try {
-            await clientVC.send(`lpv user ${name} group add whitelist`)
+            await client.send(`lpv user ${name} group add whitelist`)
             whitelist = true
         } catch (e) {
             console.error(e)
         }
 
-        clientVC.disconnect()
+        client.disconnect()
 
         return whitelist
     }
 )
 
 export const SuffixConsole = cache(
-    async (name: string, suffix: string) => {
+    async (suffix: string, name: string) => {
         const client = await RconVC()
-        return await client.send(`lpv user ${name} meta setsuffix 5 ${suffix}`)
+
+        try {
+            await client.send(`lpv user ${name} meta setsuffix 5 ${suffix}`)
+        } catch (e) {
+            console.error(e)
+        }
+
+        client.disconnect()
+    }
+)
+
+export const SetPermConsole = cache(
+    async (permission: string, name: string) => {
+        try {
+            const client = await RconVC()
+            await client.send(`lpv user ${name} permission set ${permission}`)
+        } catch (e) {
+            console.error(e)
+        }
+    }
+)
+
+export const IsPerm = cache(
+    async (permission: string, name: string) => {
+        const client = await RconVC()
+        let result = false
+
+        try {
+            result = (
+                await client.send(`lpv user ${name} permission check ${permission}`)
+            ).includes("true")
+        } catch (e) {
+            console.error(e)
+        }
+
+        client.disconnect()
+
+        return result
     }
 )

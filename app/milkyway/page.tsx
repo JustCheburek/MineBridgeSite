@@ -8,6 +8,11 @@ import {StarSvg} from "@ui/SVGS";
 import {Img, ImgBox} from "@/ui/components/img";
 import {getDropLocal, getDrops, getItem, getItems} from "@/services";
 import {Drop, Item, RarityType} from "@/types/case";
+import {Button} from "@components/button";
+import {IsPerm} from "@services/console";
+import {User} from "lucia";
+import Form from "next/form";
+import {SetPerm} from "@services/user";
 
 declare module 'csstype' {
     interface Properties {
@@ -37,6 +42,7 @@ interface PathID extends Path {
         Item: string
         DropItem: string
         rarity: RarityType
+        suffix?: string
     }
 }
 
@@ -45,12 +51,13 @@ interface PathDB extends Path {
         Item: Item
         DropItem: Drop
         rarity: RarityType
+        suffix?: string
     }
-    now: number
+    author: User
     index: number
 }
 
-const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, index}: PathDB) => {
+async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffix}, index}: PathDB) {
     let long = 0
     let angle = 0
     let next = 0
@@ -72,6 +79,15 @@ const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, index}: PathD
         )
     }
 
+    // Права
+    let isPerm = false
+    const perm = `${DropItem.give}.${DropItem.name}.${Item.name}`
+    if (DropItem.give) {
+        isPerm = await IsPerm(perm, author.name)
+    }
+
+    const isHas = author.rating >= rating
+
     return (
         <div
             className={styles.container}
@@ -81,35 +97,59 @@ const Path = ({rating, now, x, caseData: {rarity, DropItem, Item}, index}: PathD
                 '--_angle': `${angle}rad`
             }}
         >
-            <div className={`${styles.box} ${now >= rating ? styles.unic : ""}`}>
+            <div className={`${styles.box} ${isHas ? styles.unic : ""}`}>
                 <div className={styles.card}>
-                    {now >= rating &&
-                      <div className={`${styles.text} ${rarity}_box`}>
-                        <h3 className={styles.heading}>
-                            {Item.displayname}
-                        </h3>
-                        <p className={styles.description}>
-                            {DropItem.displayname}
-                        </p>
+                    {isHas &&
+                      <div className={`${styles.text_box} ${x < 0 ? styles.left : styles.right}`}>
+                        <div className={`${styles.text} ${rarity}_box`}>
+                          <h2>
+                              {Item.displayname}
+                          </h2>
+                            {isPerm
+                                ? <Button margin="1.2rem" disabled>
+                                    Получено
+                                </Button>
+                                : <Form action={async () => {
+                                    "use server";
+                                    await SetPerm(perm, author.name)
+                                }}>
+                                    <Button margin="1.2rem">
+                                        Получить
+                                    </Button>
+                                </Form>
+                            }
+                        </div>
                       </div>
                     }
-                    <ImgBox
-                        className={`${styles.item} ${rarity}_box`}
-                        hover width="12rem" height="12rem"
-                    >
-                        <Img
-                            src={`/shop/${DropItem.name}/${Item.name}.webp`}
-                            alt={Item.displayname || DropItem.name || ""}
-                            className={`${styles.img} ${now < rating ? styles.blur : ""}`}
-                        />
-                    </ImgBox>
+                    {!suffix
+                        ? <ImgBox
+                            className={`${styles.item} ${rarity}_box`}
+                            hover width="18rem" height="18rem"
+                        >
+                            <Img
+                                src={`/shop/${DropItem.name}/${Item.name}.webp`}
+                                alt={Item.displayname || DropItem.name || ""}
+                                className={`${styles.img} ${isHas ? "" : styles.blur}`}
+                            />
+                        </ImgBox>
+                        : <h3
+                            className={`${styles.item} grid_center border-radius center_text ${rarity}_box`}
+                            style={{width: "18rem", height: "18rem"}}
+                        >
+                            {isHas
+                                ? suffix
+                                : "Суффикс?"
+                            }
+                        </h3>
+                    }
+
                 </div>
                 <div className={styles.circle}/>
                 <h3 className={`yellow_color ${styles.rating}`}>
                     {rating} <StarSvg width="0.9em" height="0.9em"/>
                 </h3>
                 {difference > 0 &&
-                  <progress value={now - rating} max={difference} className={styles.line}/>
+                  <progress value={author.rating - rating} max={difference} className={styles.line}/>
                 }
             </div>
         </div>
@@ -128,23 +168,24 @@ const Paths: PathID[] = [{
     rating: 50,
     x: 40,
     caseData: {
-        Item: "662ddb0f8d5044c0b4ad7b5a",
-        DropItem: "662ddb0f8d5044c0b4ad7b57",
+        Item: "662de3cd8d5044c0b4ad86fb",
+        DropItem: "662de3cd8d5044c0b4ad86fa",
         rarity: "common"
     }
 }, {
     rating: 75,
     x: -40,
     caseData: {
-        Item: "662ddb0f8d5044c0b4ad7b5a",
-        DropItem: "662ddb0f8d5044c0b4ad7b57",
-        rarity: "common"
+        Item: "662de3d68d5044c0b4ad871b",
+        DropItem: "662de3d68d5044c0b4ad871a",
+        rarity: "epic",
+        suffix: "&7молодец"
     }
 }, {
     rating: 100,
     x: 20,
     caseData: {
-        Item: "662ddb0f8d5044c0b4ad7b5a",
+        Item: "662ddb0f8d5044c0b4ad7b5c",
         DropItem: "662ddb0f8d5044c0b4ad7b57",
         rarity: "common"
     }
@@ -190,7 +231,7 @@ export default async function MilkyWay() {
                         <Path
                             key={i}
                             rating={rating}
-                            now={author.rating}
+                            author={author}
                             x={x}
                             caseData={{
                                 ...caseData,

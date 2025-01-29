@@ -147,11 +147,13 @@ export default async function ShowCase(
                     </p>
                 </div>
             </div>
-            {isHelper && DropItem.give &&
+            {isHelper &&
               <div className="grid_center light_gray_color">
-                <small className="all_select">
-                    {DropItem.give}.{DropItem.name}.{Item.name}
-                </small>
+                  {DropItem.give &&
+                    <small className="all_select">
+                        {DropItem.give}.{DropItem.name}.{Item.name}
+                    </small>
+                  }
                 <small>
                   Case: <span className="all_select">{Case._id.toString()}</span>
                 </small>

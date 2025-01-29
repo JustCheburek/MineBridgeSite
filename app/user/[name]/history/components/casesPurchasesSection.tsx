@@ -24,13 +24,14 @@ import {Url} from "@components/button";
 
 interface Suffix {
     _id: string
+    name: string
     isMe: boolean
     suffix: CaseData["suffix"]
     index: number
     selected: boolean
 }
 
-function Suffix({_id, isMe, suffix, index, selected}: Suffix) {
+function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
     if (suffix) {
         return (<>
             <p>
@@ -42,7 +43,13 @@ function Suffix({_id, isMe, suffix, index, selected}: Suffix) {
                     выбран
                 </small>
 
-                : <Form action={() => SelectSuffix(suffix, _id)} className={styles.selected}>
+                : <Form
+                    action={async () => {
+                        "use server";
+                        await SelectSuffix(suffix, _id, name)
+                    }}
+                    className={styles.selected}
+                >
                     <button>
                         <small>
                             выбрать
@@ -56,7 +63,7 @@ function Suffix({_id, isMe, suffix, index, selected}: Suffix) {
     if (!isMe) return
 
     return (
-        <FormBox action={(formData: FormData) => AddSuffix(formData, _id, index)}>
+        <FormBox action={(formData: FormData) => AddSuffix(formData, _id, name, index)}>
             <FormLabel>
                 <FormInput
                     name="name"
@@ -135,6 +142,7 @@ export default function CasesPurchasesSection(
                             {DropItem?.name === "suffix"
                                 ? <Suffix
                                     _id={user._id}
+                                    name={user.name}
                                     isMe={isMe}
                                     suffix={suffix}
                                     index={index}
@@ -169,8 +177,9 @@ export default function CasesPurchasesSection(
 
                             {access &&
                               <div className={styles.actions}>
-                                <Form action={() => {
-                                    Item?._id ? DeleteCasePurchase(user._id, Item?._id)
+                                <Form action={async () => {
+                                    "use server";
+                                    Item?._id ? await DeleteCasePurchase(user._id, Item?._id)
                                         : console.error("no item _id to delete")
                                 }}>
                                   <button className="helper_box danger">
