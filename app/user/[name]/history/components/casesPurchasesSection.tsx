@@ -174,9 +174,8 @@ export default function CasesPurchasesSection(
 
                             {access &&
                               <div className={styles.actions}>
-                                <Form action={async () => {
-                                    "use server";
-                                    Item?._id ? await DeleteCasePurchase(user._id, Item?._id)
+                                <Form action={() => {
+                                    Item?._id ? DeleteCasePurchase(user._id, Item?._id)
                                         : console.error("no item _id to delete")
                                 }}>
                                   <button className="helper_box danger">
