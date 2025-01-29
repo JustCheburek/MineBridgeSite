@@ -122,16 +122,7 @@ export const metadata: Metadata = {
         type: "website"
     },
     twitter: {
-        card: "summary_large_image",
-        images: [{
-            url: "/logos/256x256/logo.png",
-            alt: "Лого майнбриджа",
-            width: 256,
-            height: 256
-        }, {
-            url: "/logos/svg/logo.svg",
-            type: "image/svg+xml"
-        }]
+        card: "summary_large_image"
     }
 }
 
