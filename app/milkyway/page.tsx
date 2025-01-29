@@ -9,10 +9,10 @@ import {Img, ImgBox} from "@/ui/components/img";
 import {getDropLocal, getDrops, getItem, getItems} from "@/services";
 import {Drop, Item, RarityType} from "@/types/case";
 import {Button} from "@components/button";
-import {IsPerm} from "@services/console";
+import {IsPerm, SetPermConsole} from "@services/console";
 import {User} from "lucia";
 import Form from "next/form";
-import {SetPerm} from "@services/user";
+import {revalidateTag} from "next/cache";
 
 declare module 'csstype' {
     interface Properties {
@@ -55,6 +55,11 @@ interface PathDB extends Path {
     }
     author: User
     index: number
+}
+
+async function SetPerm(perm: string, name: string) {
+    await SetPermConsole(perm, name)
+    revalidateTag("userLike")
 }
 
 async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffix}, index}: PathDB) {
@@ -109,10 +114,7 @@ async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffi
                                 ? <Button margin="1.2rem" disabled>
                                     Получено
                                 </Button>
-                                : <Form action={async () => {
-                                    "use server";
-                                    await SetPerm(perm, author.name)
-                                }}>
+                                : <Form action={() => SetPerm(perm, author.name)}>
                                     <Button margin="1.2rem">
                                         Получить
                                     </Button>

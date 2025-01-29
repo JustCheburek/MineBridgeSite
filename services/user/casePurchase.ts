@@ -74,22 +74,10 @@ export async function AddSuffix(formData: FormData, _id: string, name: string, i
 }
 
 export async function SelectSuffix(suffix: string, _id: string, name: string) {
-    try {
-        await SuffixConsole(suffix, name)
+    const answer = await SuffixConsole(suffix, name)
 
+    if (answer) {
         await userModel.findByIdAndUpdate(_id, {suffix})
-    } catch (e) {
-        console.error(e)
-    }
-
-    revalidateTag("userLike")
-}
-
-export async function SetPerm(perm: string, name: string) {
-    try {
-        await SetPermConsole(perm, name)
-    } catch (e) {
-        console.error(e)
     }
 
     revalidateTag("userLike")

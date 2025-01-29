@@ -1,6 +1,4 @@
-"use client"
-
-import {TypeAnimation} from "react-type-animation";
+import {Typing} from "@app/(index)/typing";
 import {Url} from "@components/button";
 
 // Стили
@@ -11,17 +9,7 @@ const InfoSection = () => (
         <article className="for_pc">
             <h1 className={styles.h1}>
                 <span className="unic_color">MineBridge</span>
-                <TypeAnimation
-                    sequence={[
-                        " — полуванильный майнкрафт сервер", 3500,
-                        " — лучший азиатский сервер", 3500,
-                        " — самый уникальный сервер", 3500,
-                        " — сервер без приватов и команд", 3500,
-                        " — самый абобовский сервер", 3500,
-                    ]}
-                    repeat={Infinity}
-                    cursor={false}
-                />
+                <Typing/>
             </h1>
 
             <Url href="/auth">
