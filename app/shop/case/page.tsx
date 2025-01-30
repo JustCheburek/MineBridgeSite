@@ -32,7 +32,7 @@ export default async function CasePage() {
         }
 
         try {
-            if (DropItem.name !== "suffix") {
+            if (DropItem.give) {
                 const client = await RconVC()
                 await client.send(`lpv user ${user.name} permission set ${DropItem.give}.${DropItem.name}.${Item.name}`)
             }

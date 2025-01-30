@@ -13,6 +13,8 @@ type DropAndItem = {
 }
 
 export async function GetCosmetic(name: string, {DropItem, Item}: DropAndItem) {
+    if (!DropItem.give) return
+
     const client = await RconVC()
 
     await client.send(`lpv user ${name} permission set ${DropItem.give}.${DropItem.name}.${Item.name}`)
