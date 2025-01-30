@@ -1,12 +1,26 @@
 "use server";
 
 import {CaseData} from "@/types/purchase";
-import {RconVC, SetPermConsole, SuffixConsole} from "@services/console";
+import {RconVC, SuffixConsole} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {Types} from "mongoose";
+import {Drop, Item} from "@/types/case";
 
-export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[]) {
+type DropAndItem = {
+    DropItem: Drop
+    Item: Item
+}
+
+export async function GetCosmetic(name: string, {DropItem, Item}: DropAndItem) {
+    const client = await RconVC()
+
+    await client.send(`lpv user ${name} permission set ${DropItem.give}.${DropItem.name}.${Item.name}`)
+
+    client.disconnect()
+}
+
+export async function GetCosmetics(name: string, caseDatas: Partial<DropAndItem>[]) {
     function wait(ms: number) {
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -23,6 +37,8 @@ export async function GetCosmetics(name: string, caseDatas: Partial<CaseData>[])
             await wait(1000)
         }
     }
+
+    client.disconnect()
 }
 
 export async function AddCasePurchase(_id: string, CaseData: CaseData) {
@@ -44,7 +60,7 @@ export async function AddCasePurchase(_id: string, CaseData: CaseData) {
     revalidateTag("userLike")
 }
 
-export async function DeleteCasePurchase(userId: string, _id: Types.ObjectId) {
+export async function DeleteCasePurchase(userId: string, _id?: Types.ObjectId) {
     await userModel.findByIdAndUpdate(userId, {
         $pull: {
             casesPurchases: {

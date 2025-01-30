@@ -57,7 +57,13 @@ function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
         </>)
     }
 
-    if (!isMe) return
+    if (!isMe) {
+        return (
+            <p>
+                Суффикс
+            </p>
+        )
+    }
 
     return (
         <FormBox action={(formData: FormData) => AddSuffix(formData, _id, name, index)}>
@@ -175,8 +181,7 @@ export default function CasesPurchasesSection(
                             {access &&
                               <div className={styles.actions}>
                                 <Form action={() => {
-                                    Item?._id ? DeleteCasePurchase(user._id, Item?._id)
-                                        : console.error("no item _id to delete")
+                                    DeleteCasePurchase(user._id, Item?._id)
                                 }}>
                                   <button className="helper_box danger">
                                     <DeleteSvg size="1.3rem"/>

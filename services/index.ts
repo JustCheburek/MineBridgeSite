@@ -275,6 +275,10 @@ export const getItem = cache(
         param: idOrName,
         Items: Item[]
     ) => {
+        if (Items.length === 0) {
+            return Items[0]
+        }
+
         const Item = Items.find(({_id, name}) =>
             JSON.stringify(_id) === JSON.stringify(param._id) ||
             name === param.name

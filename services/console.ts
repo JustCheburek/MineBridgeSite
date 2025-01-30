@@ -79,33 +79,3 @@ export const SuffixConsole = cache(
         return answer
     }
 )
-
-export const SetPermConsole = cache(
-    async (permission: string, name: string) => {
-        try {
-            const client = await RconVC()
-            await client.send(`lpv user ${name} permission set ${permission}`)
-        } catch (e) {
-            console.error(e)
-        }
-    }
-)
-
-export const IsPerm = cache(
-    async (permission: string, name: string) => {
-        const client = await RconVC()
-        let result = false
-
-        try {
-            result = (
-                await client.send(`lpv user ${name} permission check ${permission}`)
-            ).includes("true")
-        } catch (e) {
-            console.error(e)
-        }
-
-        client.disconnect()
-
-        return result
-    }
-)

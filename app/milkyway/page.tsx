@@ -6,13 +6,13 @@ import styles from "./milkyway.module.scss"
 import type {Metadata} from "next";
 import {StarSvg} from "@ui/SVGS";
 import {Img, ImgBox} from "@/ui/components/img";
-import {getDropLocal, getDrops, getItem, getItems} from "@/services";
-import {Drop, Item, RarityType} from "@/types/case";
-import {Button} from "@components/button";
-import {SetPermConsole} from "@services/console";
+import {getCase, getDropLocal, getDrops, getItem, getItems} from "@/services";
+import {RarityType} from "@/types/case";
 import {User} from "lucia";
+import {CaseData} from "@/types/purchase";
+import {Button} from "@components/button";
+import {AddCasePurchase, GetCosmetic} from "@services/user";
 import Form from "next/form";
-import {revalidateTag} from "next/cache";
 
 declare module 'csstype' {
     interface Properties {
@@ -47,22 +47,13 @@ interface PathID extends Path {
 }
 
 interface PathDB extends Path {
-    caseData: {
-        Item: Item
-        DropItem: Drop
-        rarity: RarityType
-        suffix?: string
-    }
+    caseData: CaseData
     author: User
     index: number
 }
 
-async function SetPerm(perm: string, name: string) {
-    // await SetPermConsole(perm, name)
-    revalidateTag("userLike")
-}
-
-async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffix}, index}: PathDB) {
+async function Path({rating, author, x, caseData, index}: PathDB) {
+    const {rarity, DropItem, Item, suffix} = caseData
     let long = 0
     let angle = 0
     let next = 0
@@ -85,11 +76,10 @@ async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffi
     }
 
     // Права
-    const perm = `${DropItem.give}.${DropItem.name}.${Item.name}`
-    /*let isPerm = false
-    if (DropItem.give) {
-        isPerm = await IsPerm(perm, author.name)
-    }*/
+    const isPerm = author.casesPurchases.some(
+        (casePurchase) =>
+            casePurchase.Item.toString() === Item._id.toString()
+    )
 
     const isHas = author.rating >= rating
 
@@ -110,20 +100,20 @@ async function Path({rating, author, x, caseData: {rarity, DropItem, Item, suffi
                           <h2>
                               {Item.displayname}
                           </h2>
-                            {/*{isPerm
+                            {isPerm
                                 ? <Button margin="1.2rem" disabled>
                                     Получено
                                 </Button>
-                                :*/}
-                          <Form action={async () => {
-                              "use server"
-                              await SetPerm(perm, author.name)
-                          }}>
-                            <Button margin="1.2rem">
-                              Получить
-                            </Button>
-                          </Form>
-                            {/*}*/}
+                                : <Form action={async () => {
+                                    "use server"
+                                    await AddCasePurchase(author._id, caseData)
+                                    await GetCosmetic(author.name, caseData)
+                                }}>
+                                    <Button margin="1.2rem">
+                                        Получить
+                                    </Button>
+                                </Form>
+                            }
                         </div>
                       </div>
                     }
@@ -198,7 +188,8 @@ const Paths: PathID[] = [{
 }]
 
 export default async function MilkyWay() {
-    const [Drops, {user: author}] = await Promise.all([
+    const [Case, Drops, {user: author}] = await Promise.all([
+        getCase({_id: "662ddba08d5044c0b4ad7bf4"}),
         getDrops(),
         validate()
     ])
@@ -241,6 +232,8 @@ export default async function MilkyWay() {
                             x={x}
                             caseData={{
                                 ...caseData,
+                                Case,
+                                Drop: DropItem,
                                 Item,
                                 DropItem
                             }}

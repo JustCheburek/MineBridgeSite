@@ -4,11 +4,14 @@ import {Case, Drop, Item, type RarityType} from "@/types/case";
 import {Sticker} from "@/types/sticker";
 import {Types} from "mongoose";
 
+type Author = "case" | "milkyway" | "combine" | "user"
+
 interface Data {
 	Drop: Drop
 	DropItem: Drop
 	Item: Item
 	rarity: RarityType
+	author?: Author
 	suffix?: string
 	createdAt?: Date
 	updatedAt?: Date
@@ -44,6 +47,9 @@ export class CasePurchase {
 
 	@prop()
 	public suffix?: string
+
+	@prop({type: () => String, default: "case"})
+	public author?: Author
 
 	@prop()
 	public createdAt?: Date
