@@ -40,7 +40,7 @@ export default async function History({params}: NameParams) {
                 const DropItem = await getDropLocal({_id: purchase.DropItem}, Drops)
 
                 const Items = await getItems(purchase.rarity, DropItem)
-                const Item = await getItem(purchase.Item, Items)
+                const Item = await getItem({_id: purchase.Item}, Items)
 
                 const multiCaseData = caseDatas.find(({Item: caseDataItem}) =>
                     JSON.stringify(caseDataItem?._id) === JSON.stringify(Item?._id)
