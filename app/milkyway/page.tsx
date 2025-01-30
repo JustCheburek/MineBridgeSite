@@ -13,6 +13,8 @@ import {CaseData} from "@/types/purchase";
 import {Button} from "@components/button";
 import {AddCasePurchase, GetCosmetic} from "@services/user";
 import Form from "next/form";
+import {Paths} from "@/const";
+import {PropsWithChildren} from "react";
 
 declare module 'csstype' {
     interface Properties {
@@ -29,15 +31,15 @@ export const metadata: Metadata = {
     description: "Набирая звёзды, можно получать разные крутые вещи бесплатно!"
 };
 
-const size = 3.5
-const y = 15
+const size = 3
+const y = 17
 
 interface Path {
     rating: number
     x: number
 }
 
-interface PathID extends Path {
+export interface PathID extends Path {
     caseData: {
         Item: string
         DropItem: string
@@ -152,40 +154,17 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
     )
 }
 
-const Paths: PathID[] = [{
-    rating: 25,
-    x: -50,
-    caseData: {
-        Item: "662ddb0f8d5044c0b4ad7b5a",
-        DropItem: "662ddb0f8d5044c0b4ad7b57",
-        rarity: "common"
-    }
-}, {
-    rating: 50,
-    x: 40,
-    caseData: {
-        Item: "662de3cd8d5044c0b4ad86fb",
-        DropItem: "662de3cd8d5044c0b4ad86fa",
-        rarity: "common"
-    }
-}, {
-    rating: 75,
-    x: -40,
-    caseData: {
-        Item: "662de3d68d5044c0b4ad871b",
-        DropItem: "662de3d68d5044c0b4ad871a",
-        rarity: "epic",
-        suffix: "&7молодец"
-    }
-}, {
-    rating: 100,
-    x: 20,
-    caseData: {
-        Item: "662ddb0f8d5044c0b4ad7b5c",
-        DropItem: "662ddb0f8d5044c0b4ad7b57",
-        rarity: "common"
-    }
-}]
+const Snow = ({children}: PropsWithChildren) => (
+    <div className={styles.milkyway_box}>
+        <div className={styles.stars_big}>
+            <div className={styles.stars_middle}>
+                <div className={styles.stars_small}>
+                    {children}
+                </div>
+            </div>
+        </div>
+    </div>
+)
 
 export default async function MilkyWay() {
     const [Case, Drops, {user: author}] = await Promise.all([
@@ -207,14 +186,14 @@ export default async function MilkyWay() {
     }
 
     return (
-        <div className="center_text" style={{"--_size": `${size}rem`, '--_y': `${y}rem`}}>
+        <div className={`${styles.milkyway_container} center_text`} style={{"--_size": `${size}rem`, '--_y': `${y}rem`}}>
             <H1>
                 Млечный путь
             </H1>
 
             <div className={styles.gradient_gray_black}/>
 
-            <div className={styles.milky_way}>
+            <Snow>
                 {Paths.map(async ({rating, x, caseData}, i) => {
                     const DropItem = await getDropLocal({_id: caseData.DropItem}, Drops)
                     const Items = await getItems(caseData.rarity, DropItem)
@@ -241,7 +220,7 @@ export default async function MilkyWay() {
                         />
                     )
                 })}
-            </div>
+            </Snow>
         </div>
     )
 }

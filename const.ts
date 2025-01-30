@@ -1,3 +1,5 @@
+import {PathID} from "@app/milkyway/page";
+
 export const DS_URL = "https://discord.gg/rmWAuKGb69"
 export const TG_URL = "https://t.me/MineBridgeOfficial"
 export const VK_URL = "https://vk.com/minebridge"
@@ -24,3 +26,38 @@ export const AUTO = {
 
 export const MBSESSION = "minebridge-session"
 export type SocialName = keyof typeof URLS_START
+
+export const Paths: PathID[] = [{
+	rating: 25,
+	x: -50,
+	caseData: {
+		Item: "662ddb0f8d5044c0b4ad7b5a",
+		DropItem: "662ddb0f8d5044c0b4ad7b57",
+		rarity: "common"
+	}
+}, {
+	rating: 50,
+	x: 40,
+	caseData: {
+		Item: "662de3cd8d5044c0b4ad86fb",
+		DropItem: "662de3cd8d5044c0b4ad86fa",
+		rarity: "common"
+	}
+}, {
+	rating: 75,
+	x: -40,
+	caseData: {
+		Item: "662de3d68d5044c0b4ad871b",
+		DropItem: "662de3d68d5044c0b4ad871a",
+		rarity: "epic",
+		suffix: "&7молодец"
+	}
+}, {
+	rating: 100,
+	x: 20,
+	caseData: {
+		Item: "662ddb0f8d5044c0b4ad7b5c",
+		DropItem: "662ddb0f8d5044c0b4ad7b57",
+		rarity: "common"
+	}
+}]
