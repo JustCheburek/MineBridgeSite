@@ -1,3 +1,5 @@
+@use "@styles/mixins";
+
 .button {
   // Расположение
   position: relative;
@@ -38,7 +40,6 @@
     height: 100%;
 
     background: var(--unic-color);
-    filter: drop-shadow(0 0 var(--_shadow) var(--unic-color));
     opacity: .75;
 
     border-radius: var(--border-radius);
@@ -60,6 +61,7 @@
 
     &:is(:active, :focus-visible)::before {
       opacity: 0.5;
+      filter: drop-shadow(0 0 var(--_shadow) var(--unic-color));
       --_shadow: 7px;
     }
   }
@@ -67,6 +69,5 @@
   &:disabled::before {
     // Отображение
     opacity: 0.5;
-    --_shadow: 0px;
   }
 }

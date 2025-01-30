@@ -131,12 +131,12 @@
   position: absolute;
 
   width: max-content;
+  padding: 1rem 1.5rem;
   translate: 0;
 
-  @include mixins.border($background: var(--background-color));
+  @include mixins.border($background: #151B1E, $color: #A6A6A6);
 
   & {
-    padding: 1rem 1.5rem;
     transition: translate var(--long-transition), opacity var(--long-transition);
   }
 
@@ -151,7 +151,7 @@
   }
 }
 
-.card:hover:has(.item:hover), .card:hover:has(.text:hover) {
+.card:has(.item:hover), .card:has(.text:hover) {
   .left .text {
     translate: calc(100% - 1rem);
   }
@@ -172,5 +172,13 @@
 
   &.blur {
     filter: blur(25px);
+  }
+}
+
+.button:disabled {
+  color: #939393;
+
+  &:before {
+    @include mixins.border($width: 1px, $color: #767676, $background: #263034);
   }
 }

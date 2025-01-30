@@ -98,12 +98,15 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                 <div className={styles.card}>
                     {isHas &&
                       <div className={`${styles.text_box} ${x < 0 ? styles.left : styles.right}`}>
-                        <div className={`${styles.text} ${rarity}_box`}>
+                        <div className={styles.text}>
                           <h2>
                               {Item.displayname}
                           </h2>
+                          <p>
+                              {DropItem.displayname}
+                          </p>
                             {isPerm
-                                ? <Button margin="1.2rem" disabled>
+                                ? <Button margin="1.2rem" disabled className={styles.button}>
                                     Получено
                                 </Button>
                                 : <Form action={async () => {
@@ -111,7 +114,7 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                                     await AddCasePurchase(author._id, caseData)
                                     await GetCosmetic(author.name, caseData)
                                 }}>
-                                    <Button margin="1.2rem">
+                                    <Button margin="1.2rem" className={styles.button}>
                                         Получить
                                     </Button>
                                 </Form>
@@ -186,7 +189,8 @@ export default async function MilkyWay() {
     }
 
     return (
-        <div className={`${styles.milkyway_container} center_text`} style={{"--_size": `${size}rem`, '--_y': `${y}rem`}}>
+        <div className={`${styles.milkyway_container} center_text`}
+             style={{"--_size": `${size}rem`, '--_y': `${y}rem`}}>
             <H1>
                 Млечный путь
             </H1>
