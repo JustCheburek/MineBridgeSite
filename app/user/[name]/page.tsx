@@ -14,7 +14,7 @@ import {URLS_START} from "@/const";
 import {NameParams} from "@/types/params";
 import {Skeleton} from "@components/skeleton";
 
-const Avatar = dynamic(() => import("./components/avatar"));
+const Avatar = dynamic(() => import("@components/avatar"));
 const ServerStatusSection = dynamic(() => import("./components/serverStatus"));
 const TwitchFrame = dynamic(() => import("./components/twitch"));
 
@@ -52,7 +52,7 @@ export default async function Profile({params}: NameParams) {
     return (
         <div className={styles.profile}>
             <div className={styles.container}>
-                <Avatar photo={user.photo}/>
+                <Avatar src={user.photo}/>
 
                 <div className={styles.text}>
                     <h2>

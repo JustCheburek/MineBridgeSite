@@ -36,7 +36,7 @@
   margin-left: var(--_x);
 }
 
-.circle {
+.circle, .player {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,38 +53,55 @@
   }
 }
 
-.rating {
+.player {
   position: absolute;
-  top: 125%;
-  left: 50%;
-  translate: -50%;
+  transform: rotate(var(--_angle)) translate(var(--_complete));
 
+  width: calc(var(--_size) - 1rem);
+  height: calc(var(--_size) - 1rem);
+}
+
+.player_card {
+  position: absolute;
+  transform: rotate(calc(var(--_angle) * -1)) translate(0, -70%);
+  padding: 0.5rem;
+
+  @include mixins.border($background: #101417, $color: var(--text-color));
+}
+
+.rating {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
 
-  filter: drop-shadow(0 0 15px var(--yellow-color));
+  filter: drop-shadow(0 0 30px var(--yellow-color));
+}
+
+.path_rating {
+  position: absolute;
+  top: 125%;
+  left: 50%;
+  translate: -50%;
+}
+
+.line, .complete {
+  position: absolute;
+
+  transform: rotate(var(--_angle)) translate(50%);
 }
 
 .line {
-  position: absolute;
-
   width: var(--_long);
   height: 3px;
   background: var(--light-gray-color);
+}
 
-  transform: rotate(var(--_angle)) translate(50%);
-
-  &::-webkit-progress-value {
-    background: var(--text-color);
-    border-radius: var(--border-radius);
-  }
-
-  &::-moz-progress-bar {
-    background: var(--text-color);
-    border-radius: var(--border-radius);
-  }
+.complete {
+  width: var(--_complete);
+  height: 7px;
+  background: var(--text-color);
+  border-radius: var(--border-radius);
 }
 
 .gradient_gray_black {

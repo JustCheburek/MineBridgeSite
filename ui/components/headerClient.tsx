@@ -4,6 +4,7 @@
 import Link from "next/link";
 import {Suspense, useEffect, useState} from "react";
 import type {User} from "lucia";
+import dynamic from "next/dynamic";
 
 // Стили
 import "./styles/header.scss";
@@ -12,10 +13,10 @@ import "./styles/header.scss";
 import {Urls} from "./urls";
 import {AuthSvg, MinebridgeSvg, MostikiSvg, StarSvg} from "@ui/SVGS";
 import {NavLink} from "@components/navlink";
-import {Img} from "@components/img";
 import {Burger} from "@components/burger";
 import {Skeleton} from "@components/skeleton";
 import {Logout} from "@services/user";
+const Avatar = dynamic(() => import("@components/avatar"));
 
 type Burger = {
     burger: boolean,
@@ -94,11 +95,7 @@ function User({user}: { user: User | null }) {
                     className="unic_color user_icon_box"
                     onClick={() => setIsMenu(prev => !prev)}
                 >
-                    <Img
-                        src={user.photo} alt="Ава"
-                        className="user_icon"
-                        width={38}
-                    />
+                    <Avatar src={user.photo} width={38}/>
                 </button>
             </div>
 

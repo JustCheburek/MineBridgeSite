@@ -15,6 +15,8 @@ import {AddCasePurchase, GetCosmetic} from "@services/user";
 import Form from "next/form";
 import {Paths} from "@/const";
 import {PropsWithChildren} from "react";
+import dynamic from "next/dynamic";
+const Avatar = dynamic(() => import("@components/avatar"));
 
 declare module 'csstype' {
     interface Properties {
@@ -22,6 +24,7 @@ declare module 'csstype' {
         '--_x'?: string
         '--_y'?: string
         '--_long'?: string
+        '--_complete'?: string
         '--_angle'?: string
     }
 }
@@ -31,7 +34,7 @@ export const metadata: Metadata = {
     description: "Набирая звёзды, можно получать разные крутые вещи бесплатно!"
 };
 
-const size = 3
+const size = 3.5
 const y = 17
 
 interface Path {
@@ -60,10 +63,19 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
     let angle = 0
     let next = 0
     let difference = 0
+    let complete = 0
     if (index < Paths.length - 1) {
         next = Paths[index + 1].x
         difference = Paths[index + 1].rating - rating
     }
+
+    // Права
+    const isPerm = author.casesPurchases.some(
+        (casePurchase) =>
+            casePurchase.Item.toString() === Item._id.toString()
+    )
+
+    const isHas = author.rating >= rating
 
     if (next !== 0) {
         const width = Math.abs(x) + Math.abs(next) + size
@@ -75,15 +87,17 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                 ? width
                 : -width
         )
+
+        console.log(`difference: ${difference}`)
+        console.log(`rating: ${rating}`)
+        console.log(`long: ${long}`)
+        const have = author.rating - rating
+        const percent = (difference - have) / difference
+        console.log(`%: ${percent}`)
+        console.log(`complete: ${long - long * percent}`)
+
+        complete = Math.min(long - long * percent, long)
     }
-
-    // Права
-    const isPerm = author.casesPurchases.some(
-        (casePurchase) =>
-            casePurchase.Item.toString() === Item._id.toString()
-    )
-
-    const isHas = author.rating >= rating
 
     return (
         <div
@@ -91,6 +105,7 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
             style={{
                 '--_x': `${x}rem`,
                 '--_long': `${long}rem`,
+                '--_complete': `${complete}rem`,
                 '--_angle': `${angle}rad`
             }}
         >
@@ -146,11 +161,22 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
 
                 </div>
                 <div className={styles.circle}/>
-                <h3 className={`yellow_color ${styles.rating}`}>
+                <h3 className={`yellow_color ${styles.rating} ${styles.path_rating}`}>
                     {rating} <StarSvg width="0.9em" height="0.9em"/>
                 </h3>
-                {difference > 0 &&
-                  <progress value={author.rating - rating} max={difference} className={styles.line}/>
+                {difference > 0 && <>
+                  <div className={styles.line}/>
+                  <div className={styles.complete}/>
+                </>}
+                {complete > 0 && complete < long &&
+                  <div className={styles.player}>
+                    <div className={styles.player_card}>
+                      <Avatar src={author.photo} className={styles.avatar} width={120}/>
+                      <h3 className={`yellow_color ${styles.rating}`}>
+                          {author.rating} <StarSvg width="0.9em" height="0.9em"/>
+                      </h3>
+                    </div>
+                  </div>
                 }
             </div>
         </div>
