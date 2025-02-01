@@ -2,7 +2,7 @@
 
 import {DefaultFormBox, FormGroup, FormInput, FormLabel, FormLink} from "@components/formBox";
 import {InputNameCheck} from "@components/formInputs";
-import {DiscordSvg, GoogleSvg, VKSvg} from "@ui/SVGS";
+import {DiscordSvg, GoogleSvg, TwitchSvg} from "@ui/SVGS";
 import {useState} from "react";
 
 import styles from "./auth.module.scss";
@@ -14,7 +14,7 @@ export function AuthForm({savedName}: { savedName?: string }) {
     const [name, setName] = useState(savedName || "")
     const [
         provider, , onChange, Check
-    ] = useChangeRadioState<"google" | "discord" | "vk">("discord")
+    ] = useChangeRadioState<"google" | "discord" | "twitch">("discord")
 
     return (
         <DefaultFormBox className={styles.form}>
@@ -47,11 +47,11 @@ export function AuthForm({savedName}: { savedName?: string }) {
                     <FormInput
                         name="provider"
                         type="radio"
-                        checked={Check("vk")}
+                        checked={Check("twitch")}
                         onChange={onChange}
-                        value="vk"
+                        value="twitch"
                     />
-                    <VKSvg className={`color ${styles.vk}`} size="1em"/>
+                    <TwitchSvg className={`color ${styles.twitch}`} size="1em"/>
                 </FormLabel>
             </FormGroup>
 

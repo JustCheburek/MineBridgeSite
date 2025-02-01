@@ -27,7 +27,7 @@ const providers = {
     email: "email",
     discord: "discordId",
     google: "googleId",
-    vk: "vkId"
+    twitch: "twitchId"
 }
 type providerName = keyof typeof providers
 const providersNames = Object.keys(providers) as providerName[]
