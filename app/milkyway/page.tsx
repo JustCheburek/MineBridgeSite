@@ -17,6 +17,7 @@ import {Paths} from "@/const";
 import {PropsWithChildren} from "react";
 import dynamic from "next/dynamic";
 import {revalidateTag} from "next/cache";
+
 const Avatar = dynamic(() => import("@components/avatar"));
 
 declare module 'csstype' {
@@ -66,8 +67,9 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
     let difference = 0
     let complete = 0
     if (index < Paths.length - 1) {
-        next = Paths[index + 1].x
-        difference = Paths[index + 1].rating - rating
+        const nextPath = Paths[index + 1]
+        next = nextPath.x
+        difference = nextPath.rating - rating
     }
 
     // Права
@@ -85,7 +87,7 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
     // Последняя не создаёт линию
     const last = Paths[Paths.length - 1].rating
     if (last !== rating) {
-        const width = Math.abs(x) + Math.abs(next) + size
+        const width = Math.abs(x - next) + size
         const height = (y + size) * 2
         long = Math.sqrt(width ** 2 + height ** 2) / 2.1
         angle = Math.atan2(
@@ -120,20 +122,11 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                           <p>
                               {DropItem.description}
                           </p>
-                            {isPerm
-                                ? <Button margin="1.2rem" disabled className={styles.button}>
-                                    Получено
-                                </Button>
-                                : <Form action={async () => {
-                                    "use server"
-                                    await AddCasePurchase(author._id, caseData)
-                                    await GetCosmetic(author.name, caseData)
-                                }}>
-                                    <Button margin="1.2rem" className={styles.button}>
-                                        Получить
-                                    </Button>
-                                </Form>
-                            }
+                          <GetButton
+                            author={author}
+                            isPerm={isPerm}
+                            caseData={caseData}
+                          />
                         </div>
                       </div>
                     }
@@ -149,18 +142,27 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                             />
                         </ImgBox>
                         : <div
-                            className={`${styles.item} ${rarity}_box`}
+                            className={`${styles.item} grid_center ${rarity}_box`}
                             style={{width: "18rem", height: "18rem"}}
                         >
-                            <h2>
-                                {isHas
-                                    ? suffix
-                                    : "Суффикс?"
-                                }
-                            </h2>
-                            <p>
-                                {DropItem.description}
-                            </p>
+                            <div>
+                                <h2>
+                                    {isHas
+                                        ? suffix
+                                        : "Суффикс?"
+                                    }
+                                </h2>
+                                <p>
+                                    {DropItem.description}
+                                </p>
+                            </div>
+                            {isHas &&
+                              <GetButton
+                                author={author}
+                                isPerm={isPerm}
+                                caseData={caseData}
+                              />
+                            }
                         </div>
                     }
                 </div>
@@ -184,6 +186,34 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                 }
             </div>
         </div>
+    )
+}
+
+type GetButton = {
+    author: User
+    isPerm: boolean
+    caseData: CaseData
+}
+
+function GetButton({author, isPerm, caseData}: GetButton) {
+    if (isPerm) {
+        return (
+            <Button margin="1.2rem" disabled className={styles.button}>
+                Получено
+            </Button>
+        )
+    }
+
+    return (
+        <Form action={async () => {
+            "use server"
+            await AddCasePurchase(author._id, caseData)
+            await GetCosmetic(author.name, caseData)
+        }}>
+            <Button margin="1.2rem" className={styles.button}>
+                Получить
+            </Button>
+        </Form>
     )
 }
 

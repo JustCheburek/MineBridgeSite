@@ -93,4 +93,36 @@ export const Paths: PathID[] = [{
         rarity: "epic",
         suffix: "&7атом"
     }
+}, {
+    rating: 225,
+    x: 45,
+    caseData: {
+        DropItem: "662ddb0f8d5044c0b4ad7b57",
+        Item: "662ddb0f8d5044c0b4ad7b5e",
+        rarity: "common"
+    }
+}, {
+    rating: 250,
+    x: -50,
+    caseData: {
+        DropItem: "662de3cd8d5044c0b4ad86fa",
+        Item: "662de3cd8d5044c0b4ad86ff",
+        rarity: "common"
+    }
+}, {
+    rating: 275,
+    x: 50,
+    caseData: {
+        DropItem: "662ddb0f8d5044c0b4ad7b57",
+        Item: "662ddb0f8d5044c0b4ad7b60",
+        rarity: "common"
+    }
+}, {
+    rating: 300,
+    x: 10,
+    caseData: {
+        DropItem: "677bc4cdc10a0180e42f7f1c",
+        Item: "677c94eb41427b6b226c8d1d",
+        rarity: "common"
+    }
 }]

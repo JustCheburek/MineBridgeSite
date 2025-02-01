@@ -61,6 +61,7 @@
   height: calc(var(--_size) - 1rem);
 }
 
+//noinspection CssInvalidFunction
 .player_card {
   position: absolute;
   transform: rotate(calc(-1 * var(--_angle))) translate(0, -70%);
