@@ -38,6 +38,9 @@ export class User {
     @prop()
     public discordId?: string
 
+    @prop()
+    public twitchId?: string
+
     @prop({default: 0})
     public mostiki!: number
 
@@ -177,3 +180,19 @@ export interface GUser {
     profile?: string
 }
 
+export interface DataTw {
+    data: TwUser[]
+}
+
+export interface TwUser {
+    id: string
+    login: string
+    display_name: string
+    type: "" | "admin" | "global_mod" | "staff"
+    broadcaster_type: "" | "affiliate" | "partner"
+    description: string
+    profile_image_url: string
+    offline_image_url: string
+    email: string
+    created_at: Date
+}

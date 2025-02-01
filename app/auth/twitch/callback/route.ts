@@ -1,7 +1,7 @@
-import {google, lucia} from "@server/lucia";
+import {twitch, lucia} from "@server/lucia";
 import {cookies} from "next/headers";
 import {generateId, User} from "lucia";
-import type {GUser} from "@/types/user";
+import type {DataTw} from "@/types/user";
 import {OAuth2RequestError} from "arctic";
 import {userModel} from "@server/models";
 import {NextRequest, NextResponse} from "next/server";
@@ -15,10 +15,9 @@ export async function GET(request: NextRequest) {
     const state = searchParams.get("state");
     const cookiesStore = await cookies()
 
-    const storedState = cookiesStore.get("google_oauth_state")?.value
-    const codeVerifier = cookiesStore.get("google_oauth_code_verifier")?.value
+    const storedState = cookiesStore.get("twitch_oauth_state")?.value
 
-    if (!code || !state || !storedState || !codeVerifier || state !== storedState ) {
+    if (!code || !state || !storedState || state !== storedState ) {
         return new NextResponse(
             "Неправильный код",
             {
@@ -29,24 +28,30 @@ export async function GET(request: NextRequest) {
 
     try {
         // Получение пользователя
-        const tokens = await google.validateAuthorizationCode(code, codeVerifier);
+        const tokens = await twitch.validateAuthorizationCode(code);
         const accessToken = tokens.accessToken();
-        const gUser = await axios.get<GUser>("https://openidconnect.googleapis.com/v1/userinfo", {
+        const dataTw = await axios.get<DataTw>("https://api.twitch.tv/helix/users", {
             headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${accessToken}`,
+                "Client-Id": process.env.TWITCH_CLIENT_ID!
             }
         }).then(r => r.data).catch(console.error);
 
-        if (!gUser || !gUser.email || !gUser.email_verified) {
+        if (!dataTw) {
+            return new NextResponse("Пользователь не найден", {status: 400})
+        }
+
+        const twUser = dataTw.data[0]
+        if (!twUser || !twUser.email) {
             return new NextResponse("Верифицируйте почту", {status: 400})
         }
 
         const userData = {
             _id: generateId(15),
-            name: cookiesStore.get("name")?.value,
-            googleId: gUser.sub,
-            email: gUser.email,
-            photo: gUser.picture
+            name: cookiesStore.get("name")?.value || twUser.login,
+            twitchId: twUser.id,
+            email: twUser.email,
+            photo: twUser.profile_image_url
         } as User
 
         const {user} = await validate()
@@ -56,21 +61,20 @@ export async function GET(request: NextRequest) {
                 user._id,
                 {
                     email: userData.email,
-                    googleId: userData.googleId
+                    twitchId: userData.twitchId
                 }
             )
         } else {
             let candidate = await userModel.findOneAndUpdate(
                 {
                     $or: [
-                        {googleId: userData.googleId},
-                        {googleId: Number(userData.googleId)},
+                        {twitchId: userData.twitchId},
                         {email: userData.email}
                     ]
                 },
                 {
                     email: userData.email,
-                    googleId: userData.googleId,
+                    twitchId: userData.twitchId,
                 },
                 {
                     new: true

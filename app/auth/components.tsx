@@ -68,10 +68,6 @@ export function AuthForm({savedName}: { savedName?: string }) {
                     Скачать обход Discord
                 </Link>
             </small>
-
-            <small className="light_gray_color">
-                ВК в разработке
-            </small>
         </DefaultFormBox>
     )
 }
