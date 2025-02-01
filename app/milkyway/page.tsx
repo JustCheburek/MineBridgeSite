@@ -16,6 +16,7 @@ import Form from "next/form";
 import {Paths} from "@/const";
 import {PropsWithChildren} from "react";
 import dynamic from "next/dynamic";
+import {revalidateTag} from "next/cache";
 const Avatar = dynamic(() => import("@components/avatar"));
 
 declare module 'csstype' {
@@ -71,8 +72,12 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
 
     // Права
     const isPerm = author.casesPurchases.some(
-        (casePurchase) =>
-            casePurchase.Item.toString() === Item._id.toString()
+        (casePurchase) => {
+            if (suffix) {
+                return casePurchase.suffix === suffix
+            }
+            return casePurchase.Item.toString() === Item._id.toString()
+        }
     )
 
     const isHas = author.rating >= rating
@@ -106,13 +111,13 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
         >
             <div className={`${styles.box} ${isHas ? styles.unic : ""}`}>
                 <div className={styles.card}>
-                    {isHas &&
+                    {isHas && !suffix &&
                       <div className={`${styles.text_box} ${x <= 0 ? styles.left : styles.right}`}>
-                        <div className={`center_text ${styles.text}`}>
+                        <div className={styles.text}>
                           <h2 className={styles.heading}>
                               {suffix || Item.displayname}
                           </h2>
-                          <p className={styles.description}>
+                          <p>
                               {DropItem.description}
                           </p>
                             {isPerm
@@ -153,6 +158,9 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                                     : "Суффикс?"
                                 }
                             </h2>
+                            <p>
+                                {DropItem.description}
+                            </p>
                         </div>
                     }
                 </div>
@@ -167,7 +175,7 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                 {complete > 0 && complete < long &&
                   <div className={styles.player}>
                     <div className={styles.player_card}>
-                      <Avatar src={author.photo} className={styles.avatar} width={120}/>
+                      <Avatar src={author.photo} width={120}/>
                       <h3 className={`yellow_color ${styles.rating}`}>
                           {author.rating} <StarSvg width="0.9em" height="0.9em"/>
                       </h3>
@@ -213,7 +221,10 @@ export default async function MilkyWay() {
     return (
         <div className={`${styles.milkyway_container} center_text`}
              style={{"--_size": `${size}rem`, '--_y': `${y}rem`}}>
-            <H1>
+            <H1 up reload={async () => {
+                "use server";
+                revalidateTag("all")
+            }}>
                 Млечный путь
             </H1>
 
