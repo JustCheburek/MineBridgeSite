@@ -57,10 +57,6 @@ export function AuthForm({savedName}: { savedName?: string }) {
                     Скачать обход Discord
                 </Link>
             </small>
-            <small>
-                *Discord - запрещённая<br/>
-                в РФ платформа
-            </small>
         </DefaultFormBox>
     )
 }

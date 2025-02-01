@@ -1,23 +1,24 @@
-import {H1} from "@components/h1";
-import {MaxSize} from "@components/maxSize";
-import {validate} from "@services/validate";
-import {FormLink} from "@components/formBox";
-import styles from "./milkyway.module.scss"
-import type {Metadata} from "next";
-import {StarSvg} from "@ui/SVGS";
-import {Img, ImgBox} from "@/ui/components/img";
-import {getCase, getDropLocal, getDrops, getItem, getItems} from "@/services";
-import {RarityType} from "@/types/case";
-import {User} from "lucia";
-import {CaseData} from "@/types/purchase";
-import {Button} from "@components/button";
-import {AddCasePurchase, GetCosmetic} from "@services/user";
-import Form from "next/form";
-import {Paths} from "@/const";
-import {PropsWithChildren} from "react";
 import dynamic from "next/dynamic";
 import {revalidateTag} from "next/cache";
+import {validate} from "@services/validate";
+import {getCase, getDropLocal, getDrops, getItem, getItems} from "@/services";
+import {AddCasePurchase, GetCosmetic} from "@services/user";
+import type {User} from "lucia";
+import type {PropsWithChildren} from "react";
+import type {Metadata} from "next";
+import type {CaseData} from "@/types/purchase";
+import type {RarityType} from "@/types/case";
 
+import styles from "./milkyway.module.scss"
+
+import {Img, ImgBox} from "@/ui/components/img";
+import {Paths} from "@/const";
+
+import {Button, Url} from "@components/button";
+import Form from "next/form";
+import {StarSvg} from "@ui/SVGS";
+import {H1} from "@components/h1";
+import {MaxSize} from "@components/maxSize";
 const Avatar = dynamic(() => import("@components/avatar"));
 
 declare module 'csstype' {
@@ -241,9 +242,9 @@ export default async function MilkyWay() {
             <MaxSize className="center_text">
                 <H1>Млечный путь</H1>
 
-                <FormLink href="/auth">
+                <Url href="/auth">
                     Войти в акк
-                </FormLink>
+                </Url>
             </MaxSize>
         )
     }

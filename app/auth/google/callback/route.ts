@@ -15,11 +15,10 @@ export async function GET(request: NextRequest) {
     const state = searchParams.get("state");
     const cookiesStore = await cookies()
 
-    const codeVerifier = cookiesStore.get("google_oauth_code_verifier")?.value ?? null;
-    const storedState = cookiesStore.get("google_oauth_state")?.value ?? null;
-    const storedCodeVerifier = cookiesStore.get("google_oauth_code_verifier")?.value ?? null;
+    const storedState = cookiesStore.get("google_oauth_state")?.value
+    const codeVerifier = cookiesStore.get("google_oauth_code_verifier")?.value
 
-    if (!code || !state || !storedState || state !== storedState || codeVerifier !== storedCodeVerifier) {
+    if (!code || !state || !storedState || !codeVerifier || state !== storedState ) {
         return new NextResponse(
             "Неправильный код",
             {
@@ -29,10 +28,12 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-        const tokens = await google.validateAuthorizationCode(code!, codeVerifier!);
+        // Получение пользователя
+        const tokens = await google.validateAuthorizationCode(code, codeVerifier);
+        const accessToken = tokens.accessToken();
         const gUser = await axios.get<GUser>("https://openidconnect.googleapis.com/v1/userinfo", {
             headers: {
-                Authorization: `Bearer ${tokens.accessToken}`
+                Authorization: `Bearer ${accessToken}`
             }
         }).then(r => r.data).catch(console.error);
 

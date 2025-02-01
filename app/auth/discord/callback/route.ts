@@ -15,9 +15,10 @@ export async function GET(request: NextRequest) {
     const state = searchParams.get("state");
     const cookiesStore = await cookies()
 
-    const storedState = cookiesStore.get("discord_oauth_state")?.value ?? null;
+    const storedState = cookiesStore.get("discord_oauth_state")?.value
+    const codeVerifier = cookiesStore.get("discord_oauth_code_verifier")?.value
 
-    if (!code || !state || !storedState || state !== storedState) {
+    if (!code || !state || !storedState || !codeVerifier || state !== storedState) {
         return new NextResponse(
             "Неправильный код",
             {
@@ -28,7 +29,8 @@ export async function GET(request: NextRequest) {
 
     try {
         // Получение пользователя
-        const {accessToken} = await discord.validateAuthorizationCode(code);
+        const tokens = await discord.validateAuthorizationCode(code, codeVerifier);
+        const accessToken = tokens.accessToken();
         const dsUser = await axios.get<DSUser>("https://discord.com/api/users/@me", {
             headers: {
                 Authorization: `Bearer ${accessToken}`

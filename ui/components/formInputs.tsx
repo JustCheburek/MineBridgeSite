@@ -33,7 +33,7 @@ export const InputNameCheck = (
     })
 
     return <>
-        {4 > name.length &&
+        {name.length !== 0 && 4 > name.length &&
           <small>
             Ник <span className="red_color">короткий</span> (мин: <strong className="red_color">4</strong>)
           </small>
@@ -45,8 +45,7 @@ export const InputNameCheck = (
         }
         {symbol &&
           <p>
-            недопустимый символ:<br/>
-            {symbol}
+              <strong className="unic_color">{symbol}</strong> <small>— недопустимый символ</small>
           </p>
         }
         <InputName
