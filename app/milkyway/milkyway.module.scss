@@ -63,7 +63,9 @@
 
 .player_card {
   position: absolute;
-  transform: rotate(calc(var(--_angle) * -1)) translate(0, -70%);
+  transform:
+          rotate(calc(-1 * var(--_angle)))
+          translate(0, -70%);
   padding: 0.5rem;
 
   @include mixins.border($background: #101417, $color: var(--text-color));
@@ -95,6 +97,7 @@
   width: var(--_long);
   height: 3px;
   background: var(--light-gray-color);
+  z-index: var(---1z);
 }
 
 .complete {
@@ -112,12 +115,10 @@
 .card {
   position: absolute;
   bottom: 180%;
-
-  z-index: var(--2z);
 }
 
 .text_box {
-  --_width: 60rem;
+  --_width: 50vw;
 
   position: absolute;
 
@@ -147,9 +148,9 @@
 .text {
   position: absolute;
 
-  width: max-content;
   padding: 1rem 1.5rem;
   translate: 0;
+  z-index: var(--1z);
 
   @include mixins.border($background: #151B1E, $color: #A6A6A6);
 
@@ -168,6 +169,11 @@
   }
 }
 
+.heading {
+  width: max-content;
+  min-width: 100%;
+}
+
 .card:has(.item:hover), .card:has(.text:hover) {
   .left .text {
     translate: calc(100% - 1rem);
@@ -181,6 +187,7 @@
 .item {
   border-radius: var(--border-radius);
   background: var(--black-color);
+  z-index: var(--2z);
 }
 
 .img {

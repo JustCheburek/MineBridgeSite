@@ -8,56 +8,89 @@ const utcDate = new Date(2025, 1 - 1, 12, 14 - 10, 30).toUTCString()
 export const LASTRULESUPDATE = new Date(utcDate)
 
 export const URLS_START = {
-	discord: `https://discord.gg/`,
-	telegram: `https://t.me/`,
-	vk: `https://vk.com/`,
-	twitch: `https://www.twitch.tv/`,
-	youtube: `https://youtube.com/@`,
-	donationAlerts: `https://donationalerts.com/r/`,
+    discord: `https://discord.gg/`,
+    telegram: `https://t.me/`,
+    vk: `https://vk.com/`,
+    twitch: `https://www.twitch.tv/`,
+    youtube: `https://youtube.com/@`,
+    donationAlerts: `https://donationalerts.com/r/`,
 }
 
 export const NO_ROLES = {
-	isAdmin: false, isHelper: false, isContentMaker: false, isModer: false
+    isAdmin: false, isHelper: false, isContentMaker: false, isModer: false
 }
 export const AUTO = {
-	MOD: "AutoMod",
-	HOURS: "AutoHours"
+    MOD: "AutoMod",
+    HOURS: "AutoHours"
 }
 
 export const MBSESSION = "minebridge-session"
 export type SocialName = keyof typeof URLS_START
 
 export const Paths: PathID[] = [{
-	rating: 25,
-	x: -50,
-	caseData: {
-		Item: "662ddb0f8d5044c0b4ad7b5a",
-		DropItem: "662ddb0f8d5044c0b4ad7b57",
-		rarity: "common"
-	}
+    rating: 25,
+    x: -15,
+    caseData: {
+        Item: "662ddb0f8d5044c0b4ad7b5a",
+        DropItem: "662ddb0f8d5044c0b4ad7b57",
+        rarity: "common"
+    }
 }, {
-	rating: 50,
-	x: 40,
-	caseData: {
-		Item: "662de3cd8d5044c0b4ad86fb",
-		DropItem: "662de3cd8d5044c0b4ad86fa",
-		rarity: "common"
-	}
+    rating: 50,
+    x: 40,
+    caseData: {
+        Item: "662de3cd8d5044c0b4ad86fb",
+        DropItem: "662de3cd8d5044c0b4ad86fa",
+        rarity: "common"
+    }
 }, {
-	rating: 75,
-	x: -40,
-	caseData: {
-		Item: "662de3d68d5044c0b4ad871b",
-		DropItem: "662de3d68d5044c0b4ad871a",
-		rarity: "epic",
-		suffix: "&7молодец"
-	}
+    rating: 75,
+    x: -30,
+    caseData: {
+        Item: "662de3d68d5044c0b4ad871b",
+        DropItem: "662de3d68d5044c0b4ad871a",
+        rarity: "epic",
+        suffix: "&7крутой"
+    }
 }, {
-	rating: 100,
-	x: 20,
-	caseData: {
-		Item: "662ddb0f8d5044c0b4ad7b5c",
-		DropItem: "662ddb0f8d5044c0b4ad7b57",
-		rarity: "common"
-	}
+    rating: 100,
+    x: 45,
+    caseData: {
+        Item: "662ddb0f8d5044c0b4ad7b5c",
+        DropItem: "662ddb0f8d5044c0b4ad7b57",
+        rarity: "common"
+    }
+}, {
+    rating: 125,
+    x: -50,
+    caseData: {
+        DropItem: "662de3cd8d5044c0b4ad86fa",
+        Item: "662de3cd8d5044c0b4ad86fc",
+        rarity: "common"
+    }
+}, {
+    rating: 150,
+    x: 50,
+    caseData: {
+        DropItem: "677bc4cdc10a0180e42f7f1c",
+        Item: "677c94c241427b6b226c8d1a",
+        rarity: "common"
+    }
+}, {
+    rating: 175,
+    x: 0,
+    caseData: {
+        DropItem: "662ddb0f8d5044c0b4ad7b57",
+        Item: "662ddb0f8d5044c0b4ad7b58",
+        rarity: "common"
+    }
+}, {
+    rating: 200,
+    x: -30,
+    caseData: {
+        Item: "662de3d68d5044c0b4ad871b",
+        DropItem: "662de3d68d5044c0b4ad871a",
+        rarity: "epic",
+        suffix: "&7атом"
+    }
 }]

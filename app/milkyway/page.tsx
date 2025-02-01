@@ -77,25 +77,20 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
 
     const isHas = author.rating >= rating
 
-    if (next !== 0) {
+    // Последняя не создаёт линию
+    const last = Paths[Paths.length - 1].rating
+    if (last !== rating) {
         const width = Math.abs(x) + Math.abs(next) + size
         const height = (y + size) * 2
-        long = Math.sqrt(width ** 2 + height ** 2) / 2
+        long = Math.sqrt(width ** 2 + height ** 2) / 2.1
         angle = Math.atan2(
-            height,
-            next > x
-                ? width
-                : -width
+            height + 1.5,
+            width * (next > x ? 1 : -1)
         )
 
-        console.log(`difference: ${difference}`)
-        console.log(`rating: ${rating}`)
-        console.log(`long: ${long}`)
         const have = author.rating - rating
         const percent = (difference - have) / difference
-        console.log(`%: ${percent}`)
-        console.log(`complete: ${long - long * percent}`)
-
+        // complete <= long
         complete = Math.min(long - long * percent, long)
     }
 
@@ -112,13 +107,13 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
             <div className={`${styles.box} ${isHas ? styles.unic : ""}`}>
                 <div className={styles.card}>
                     {isHas &&
-                      <div className={`${styles.text_box} ${x < 0 ? styles.left : styles.right}`}>
-                        <div className={styles.text}>
-                          <h2>
-                              {Item.displayname}
+                      <div className={`${styles.text_box} ${x <= 0 ? styles.left : styles.right}`}>
+                        <div className={`center_text ${styles.text}`}>
+                          <h2 className={styles.heading}>
+                              {suffix || Item.displayname}
                           </h2>
-                          <p>
-                              {DropItem.displayname}
+                          <p className={styles.description}>
+                              {DropItem.description}
                           </p>
                             {isPerm
                                 ? <Button margin="1.2rem" disabled className={styles.button}>
@@ -148,17 +143,18 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                                 className={`${styles.img} ${isHas ? "" : styles.blur}`}
                             />
                         </ImgBox>
-                        : <h3
-                            className={`${styles.item} grid_center border-radius center_text ${rarity}_box`}
+                        : <div
+                            className={`${styles.item} ${rarity}_box`}
                             style={{width: "18rem", height: "18rem"}}
                         >
-                            {isHas
-                                ? suffix
-                                : "Суффикс?"
-                            }
-                        </h3>
+                            <h2>
+                                {isHas
+                                    ? suffix
+                                    : "Суффикс?"
+                                }
+                            </h2>
+                        </div>
                     }
-
                 </div>
                 <div className={styles.circle}/>
                 <h3 className={`yellow_color ${styles.rating} ${styles.path_rating}`}>
