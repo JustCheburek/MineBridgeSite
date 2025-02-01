@@ -29,14 +29,20 @@ export async function GET(request: NextRequest) {
     try {
         // Получение пользователя
         const tokens = await vk.validateAuthorizationCode(code);
+
+        console.log(`tokens: ${JSON.stringify(tokens)}`)
+
         const accessToken = tokens.accessToken();
+
+        console.log(`accessToken: ${accessToken}`)
+
         const vkUser = await axios.get<VKUser>("https://api.vk.com/method/users.get", {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
         }).then(r => r.data).catch(console.error);
 
-        console.log(vkUser)
+        console.log(`vkUser: ${JSON.stringify(vkUser)}`)
 
         /*if (!vkUser || !vkUser.email) {
             return new NextResponse("Проверьте вк аккаунт", {status: 400})
