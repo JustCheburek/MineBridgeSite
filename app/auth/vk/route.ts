@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
     const state = generateState();
     const url = vk.createAuthorizationURL(
 		state,
-        ["photos", "status", "groups", "stats"],
+        ["photos", "status"],
     );
 
     cookiesStore.set("vk_oauth_state", state, {
