@@ -26,7 +26,8 @@ export const generateMetadata = async ({params}: NameParams) => {
 const providers = {
     email: "email",
     discord: "discordId",
-    google: "googleId"
+    google: "googleId",
+    vk: "vkId"
 }
 type providerName = keyof typeof providers
 const providersNames = Object.keys(providers) as providerName[]

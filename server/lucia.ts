@@ -1,5 +1,5 @@
 import {Lucia} from "lucia";
-import {Discord, Google} from "arctic";
+import {Discord, Google, VK} from "arctic";
 import {adapter} from "./adapter";
 import {User} from "@/types/user";
 import {MBSESSION} from "@/const";
@@ -24,3 +24,4 @@ declare module "lucia" {
 
 export const discord = new Discord(process.env.DISCORD_CLIENT_ID!, process.env.DISCORD_CLIENT_SECRET!, `${process.env.NEXT_PUBLIC_RU_URL}/auth/discord/callback`);
 export const google = new Google(process.env.GOOGLE_CLIENT_ID!, process.env.GOOGLE_CLIENT_SECRET!, `${process.env.NEXT_PUBLIC_PUNYCODE_URL}/auth/google/callback`)
+export const vk = new VK(process.env.VK_CLIENT_ID!, process.env.VK_CLIENT_SECRET!, `${process.env.NEXT_PUBLIC_PUNYCODE_URL}/auth/vk/callback`)

@@ -126,7 +126,7 @@ export const VkUrl = () => (
 
 export const VKSvg = ({className = "", size = "38px", ...props}: SizeSvg) => (
     <svg
-        className={`url vk ${className}`} fill="currentColor"
+        className={`url vk ${className}`} fill="currentColor" viewBox="0 0 38 38"
         style={{width: size, height: size}} {...props}
     >
         <path

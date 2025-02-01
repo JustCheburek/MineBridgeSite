@@ -11,11 +11,12 @@ export function InviteLink({name}: InviteLink) {
     const [from, setFrom] = useState("friend")
 
     const places = {
-        "friend": "Друг",
-        "youtube": "Ютуб",
-        "twitch": "Твич",
-        "discord": "Дискорд",
-        "telegram": "Телеграм",
+        friend: "Друг",
+        youtube: "Ютуб",
+        twitch: "Твич",
+        discord: "Дискорд",
+        vk: "ВК",
+        telegram: "Телеграм",
     }
 
     const placesList = Object.keys(places) as (keyof typeof places)[]

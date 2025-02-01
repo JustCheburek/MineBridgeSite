@@ -2,7 +2,7 @@
 
 import {DefaultFormBox, FormGroup, FormInput, FormLabel, FormLink} from "@components/formBox";
 import {InputNameCheck} from "@components/formInputs";
-import {DiscordSvg, GoogleSvg} from "@ui/SVGS";
+import {DiscordSvg, GoogleSvg, VKSvg} from "@ui/SVGS";
 import {useState} from "react";
 
 import styles from "./auth.module.scss";
@@ -14,7 +14,7 @@ export function AuthForm({savedName}: { savedName?: string }) {
     const [name, setName] = useState(savedName || "")
     const [
         provider, , onChange, Check
-    ] = useChangeRadioState<"google" | "discord">("discord")
+    ] = useChangeRadioState<"google" | "discord" | "vk">("discord")
 
     return (
         <DefaultFormBox className={styles.form}>
@@ -42,6 +42,17 @@ export function AuthForm({savedName}: { savedName?: string }) {
                     />
                     <GoogleSvg className={styles.google} size="1em"/>
                 </FormLabel>
+
+                <FormLabel className={styles.provider}>
+                    <FormInput
+                        name="provider"
+                        type="radio"
+                        checked={Check("vk")}
+                        onChange={onChange}
+                        value="vk"
+                    />
+                    <VKSvg className={`color ${styles.vk}`} size="1em"/>
+                </FormLabel>
             </FormGroup>
 
             <FormLink href={`/auth/${provider}?name=${name}`} aria-disabled={!access}>
@@ -52,10 +63,14 @@ export function AuthForm({savedName}: { savedName?: string }) {
                 <Link
                     href="https://t.me/MineBridgeOfficial/624"
                     target="_blank"
-                    className="unic_color"
+                    className="light_gray_color"
                 >
                     Скачать обход Discord
                 </Link>
+            </small>
+
+            <small className="light_gray_color">
+                ВК в разработке
             </small>
         </DefaultFormBox>
     )
