@@ -4,7 +4,6 @@ import {validate} from "@services/validate";
 import {getCase, getDropLocal, getDrops, getItem, getItems} from "@/services";
 import {AddCasePurchase, GetCosmetic} from "@services/user";
 import type {User} from "lucia";
-import type {PropsWithChildren} from "react";
 import type {Metadata} from "next";
 import type {CaseData} from "@/types/purchase";
 import type {RarityType} from "@/types/case";
@@ -225,18 +224,6 @@ function GetButton({author, isPerm, isHas, caseData}: GetButton) {
     )
 }
 
-const Snow = ({children}: PropsWithChildren) => (
-    <div className={styles.milkyway_box}>
-        <div className={styles.stars_big}>
-            <div className={styles.stars_middle}>
-                <div className={styles.stars_small}>
-                    {children}
-                </div>
-            </div>
-        </div>
-    </div>
-)
-
 export default async function MilkyWay() {
     const [Case, Drops, {user: author}] = await Promise.all([
         getCase({_id: "662ddba08d5044c0b4ad7bf4"}),
@@ -272,7 +259,7 @@ export default async function MilkyWay() {
 
             <div className={styles.gradient_gray_black}/>
 
-            <Snow>
+            <div className={styles.milkyway_box}>
                 {Paths.map(async ({rating, x, caseData}, i) => {
                     const DropItem = await getDropLocal({_id: caseData.DropItem}, Drops)
                     const Items = await getItems(caseData.rarity, DropItem)
@@ -299,7 +286,7 @@ export default async function MilkyWay() {
                         />
                     )
                 })}
-            </Snow>
+            </div>
         </div>
     )
 }
