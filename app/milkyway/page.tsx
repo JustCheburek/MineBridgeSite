@@ -175,7 +175,7 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                 </>}
                 {complete > 0 && complete < long &&
                   <div className={styles.player}>
-                    <div className={styles.player_card}>
+                    <div className={`common_box ${styles.player_card}`}>
                       <Avatar src={author.photo} width={120}/>
                       <h3 className={`yellow_color ${styles.rating}`}>
                           {author.rating} <StarSvg width="0.9em" height="0.9em"/>

@@ -53,6 +53,13 @@
   }
 }
 
+.circle {
+  filter: drop-shadow(0 0 30px var(--light-gray-color));
+  .unic & {
+    filter: drop-shadow(0 0 30px var(--text-color));
+  }
+}
+
 .player {
   position: absolute;
   transform: rotate(var(--_angle)) translate(var(--_complete));
@@ -72,7 +79,7 @@
   transform: rotate(calc(-1 * var(--_angle))) translate(0, -70%);
   padding: 1rem;
 
-  @include mixins.border($background: #101417, $color: var(--text-color));
+  @include mixins.border($background: #101417, $color: var(--text-color), $width: 2px);
 }
 
 .rating {
@@ -194,10 +201,6 @@
 .img {
   object-position: center;
   object-fit: cover;
-
-  &.blur {
-    filter: blur(25px);
-  }
 }
 
 .button:disabled {
