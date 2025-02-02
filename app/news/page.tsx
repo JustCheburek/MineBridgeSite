@@ -21,6 +21,7 @@ import {CheckLink} from "@components/checkLink";
 import {AddNewForm} from "@app/news/components/addNewForm";
 import {revalidateTag} from 'next/cache'
 import {H1} from "@components/h1";
+import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Новости",
@@ -43,9 +44,18 @@ function Blockquote({children}: PropsWithChildren) {
     )
 }
 
+function A({href, children}: PropsWithChildren<{href: string}>) {
+    return (
+        <Link href={href} className="unic_color medium-font">
+            {children}
+        </Link>
+    )
+}
+
 const mdxComponents = {
     p: P,
     blockquote: Blockquote,
+    a: A
 }
 
 export default async function News() {
@@ -110,7 +120,7 @@ export default async function News() {
                                 </PTitle>
                                 {news?.text &&
                                   <PText className={styles.text}>
-                                    {/* @ts-ignore */}
+                                     {/*@ts-ignore*/}
                                     <MDXRemote source={news.text} components={mdxComponents}/>
                                   </PText>
                                 }

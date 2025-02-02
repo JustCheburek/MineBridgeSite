@@ -1,5 +1,4 @@
 import styles from "./styles/yt.module.scss"
-import {ImgBox} from "@components/img";
 import Link from "next/link";
 import {YouTubeEmbed} from '@next/third-parties/google'
 
