@@ -11,7 +11,7 @@ import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Регистрация",
-	description: "Нужен лишь гугл или дискорд и вы уже на сервере!"
+	description: "Нужен лишь гугл, дискорд или твич и вы уже на сервере!"
 };
 
 export default async function Auth() {

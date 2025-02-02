@@ -16,7 +16,7 @@ export default async function Image() {
     return new ImageResponse(
         (
             <OGImageBox paths={["Регистрация"]}>
-                Нужен лишь гугл или дискорд и вы уже на сервере!
+                Нужен лишь гугл, дискорд или твич и вы уже на сервере!
             </OGImageBox>
         ),
         {
