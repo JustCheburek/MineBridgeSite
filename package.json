@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@edgestore/react": "^0.2.2",
+    "@edgestore/server": "^0.2.2",
     "@next/third-parties": "^15.1.6",
     "@tanstack/react-table": "^8.20.6",
     "@vercel/speed-insights": "^1.1.0",
@@ -24,11 +26,13 @@
     "nuqs": "^1.20.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-dropzone": "^14.3.5",
     "react-minimal-pie-chart": "^8.4.1",
     "react-type-animation": "^3.2.0",
     "resend": "^4.1.1",
     "sass": "1.82.0",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@0x0c/rcon": "^1.0.0",

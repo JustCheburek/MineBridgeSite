@@ -60,6 +60,7 @@ export const InputNameCheck = (
                     setSymbol("")
                 }
             }}
+            title="Ник"
             {...props}
         />
     </>

@@ -6,6 +6,7 @@ import {Montserrat} from "next/font/google";
 import TimeAgo from "javascript-time-ago";
 import ru from 'javascript-time-ago/locale/ru'
 import {SpeedInsights} from "@vercel/speed-insights/next"
+import {EdgeStoreProvider} from "@/lib/edgestore";
 
 // Стили
 import "@styles/normalize.scss"
@@ -144,11 +145,13 @@ export default function RootLayout(
     return (
         <html lang="ru">
         <body className={montserrat.className}>
-        <Header/>
-        <main>
-            {children}
-        </main>
-        <Footer/>
+        <EdgeStoreProvider>
+            <Header/>
+            <main>
+                {children}
+            </main>
+            <Footer/>
+        </EdgeStoreProvider>
         <SpeedInsights/>
         <Metrika/>
         </body>

@@ -11,6 +11,8 @@ import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs
 import {H1} from "@components/h1";
 import {DeleteUser, UpdateProfile} from "@services/user";
 import Link from "next/link";
+import {ImgUpload} from "@components/imgUpload";
+import {useEdgeStore} from "@/lib/edgestore";
 
 type SuccessModal = {
     user: User
@@ -18,6 +20,7 @@ type SuccessModal = {
 
 function SuccessModal({modal, setModal, user}: ModalAction & SuccessModal) {
     const [name, setName] = useState("")
+    const {edgestore} = useEdgeStore()
 
     return (
         <Modal modal={modal} setModal={setModal}>
@@ -29,7 +32,12 @@ function SuccessModal({modal, setModal, user}: ModalAction & SuccessModal) {
                 удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
             </p>
             <h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
-            <FormBox action={() => DeleteUser(user._id)}>
+            <FormBox action={async () => {
+                await edgestore.publicFiles.delete({
+                    url: user.photo,
+                });
+                await DeleteUser(user._id)
+            }}>
                 <InputNameCheck
                     danger placeholder={user.name}
                     autoComplete="off"
@@ -105,6 +113,16 @@ export function ChangeParam(
     const [access, setAccess] = useState(false)
     const ratingAccess = -50
 
+    const {edgestore} = useEdgeStore()
+    const [file, setFile] = useState<File>()
+    type Urls = {
+        photo?: string
+        thumbnail?: string
+    }
+    const [urls, setUrls] = useState<Urls>({
+        thumbnail: user.photo
+    })
+
     return (<>
         {user.rating <= ratingAccess &&
           <div className="grid_center">
@@ -117,6 +135,18 @@ export function ChangeParam(
           </div>
         }
         <FormBox action={async formData => {
+            if (urls.photo) {
+                if (user.photo.startsWith("https://files.edgestore.dev")) {
+                    await edgestore.publicFiles.delete({
+                        url: user.photo
+                    });
+                }
+
+                await edgestore.publicFiles.confirmUpload({
+                    url: urls.photo,
+                });
+            }
+
             try {
                 await UpdateProfile(user, formData, isAdmin)
             } catch (e) {
@@ -128,7 +158,30 @@ export function ChangeParam(
                 defaultName={user.name}
                 disabled={user.rating <= ratingAccess && !isHelper}
             />
-
+            <ImgUpload
+                value={file}
+                onChange={async (file) => {
+                    setFile(file)
+                    if (file) {
+                        const photo = await edgestore.publicFiles.upload({
+                            file,
+                            input: {type: "profile"},
+                            options: {
+                                replaceTargetUrl: urls.photo,
+                                temporary: true
+                            }
+                        })
+                        setUrls({
+                            photo: photo.url,
+                            thumbnail: photo.thumbnailUrl || photo.url
+                        })
+                    }
+                }}
+                dropzoneOptions={{
+                    maxSize: 1024 * 1024 * 2, // 2MB
+                }}
+                disabled={user.rating <= ratingAccess && !isHelper}
+            />
             <FormLabel>
                 <FormTextarea
                     name="photo"
@@ -136,10 +189,15 @@ export function ChangeParam(
                     autoComplete="photo"
                     required
                     maxLength={1000}
-                    defaultValue={user.photo}
+                    value={urls.thumbnail}
+                    onChange={() => setUrls(prev => ({
+                        ...prev,
+                        thumbnail: urls.thumbnail
+                    }))}
                     disabled={user.rating <= ratingAccess && !isHelper}
                 />
             </FormLabel>
+
             {isAdmin &&
               <FormLabel>
                 <FormInput
@@ -149,6 +207,7 @@ export function ChangeParam(
                   autoComplete="mostiki"
                   required
                   defaultValue={user.mostiki}
+                  title="Мостики"
                 />
               </FormLabel>
             }
@@ -167,6 +226,7 @@ export function ChangeParam(
                   placeholder="Youtube"
                   name="youtube"
                   autoComplete="name"
+                  title="Ютуб"
                   defaultValue={user.socials?.find(({social}) => social === "youtube")?.name}
                 />
               </FormLabel>
@@ -175,6 +235,7 @@ export function ChangeParam(
                   placeholder="Twitch"
                   name="twitch"
                   autoComplete="name"
+                  title="Твич"
                   defaultValue={user.socials?.find(({social}) => social === "twitch")?.name}
                 />
               </FormLabel>
@@ -183,6 +244,7 @@ export function ChangeParam(
                   placeholder="VK"
                   name="vk"
                   autoComplete="name"
+                  title="Вк"
                   defaultValue={user.socials?.find(({social}) => social === "vk")?.name}
                 />
               </FormLabel>
@@ -190,6 +252,8 @@ export function ChangeParam(
                 <FormInput
                   placeholder="DonationAlerts"
                   name="donationAlerts"
+                  autoComplete="name"
+                  title="DonationAlerts"
                   defaultValue={user.socials?.find(({social}) => social === "donationAlerts")?.name}
                 />
               </FormLabel>
@@ -202,6 +266,7 @@ export function ChangeParam(
                 <FormInput
                   placeholder="Discord"
                   name="discord"
+                  title="Дискорд"
                   defaultValue={user.socials?.find(({social}) => social === "discord")?.url}
                 />
               </FormLabel>
@@ -209,6 +274,7 @@ export function ChangeParam(
                 <FormInput
                   placeholder="Telegram"
                   name="telegram"
+                  title="Телеграм"
                   defaultValue={user.socials?.find(({social}) => social === "telegram")?.url}
                 />
               </FormLabel>
