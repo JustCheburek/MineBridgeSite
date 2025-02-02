@@ -32,6 +32,9 @@ export class User {
     @prop({required: true, trim: true, maxlength: 1000})
     public photo!: string
 
+    @prop({trim: true, maxlength: 1000})
+    public fullPhoto?: string
+
     @prop()
     public googleId?: string
 

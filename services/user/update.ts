@@ -195,6 +195,7 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
 export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
     const name = formData.get("name") as string
     const photo = formData.get("photo") as string
+    const fullPhoto = formData.get("fullPhoto") as string
 
     if (name !== user.name) {
         const candidate = await userModel.findOne({name})
@@ -214,6 +215,10 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
                 }
             ).catch(console.error)
         }
+
+        // Смена аккаунта
+        const client = await RconVC()
+        await client.send(`librelogin user migrate ${user.name} ${name}`)
     }
 
     const socials: Social[] = [
@@ -236,13 +241,7 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
         mostiki = Number(formData.get("mostiki"))
     }
 
-    if (user.name !== name) {
-        // Смена аккаунта
-        const client = await RconVC()
-        await client.send(`librelogin user migrate ${user.name} ${name}`)
-    }
-
-    await userModel.findByIdAndUpdate(user._id, {name, photo, mostiki, socials})
+    await userModel.findByIdAndUpdate(user._id, {name, photo, fullPhoto, mostiki, socials})
 
     revalidateTag("userLike")
 

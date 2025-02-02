@@ -136,9 +136,9 @@ export function ChangeParam(
         }
         <FormBox action={async formData => {
             if (urls.photo) {
-                if (user.photo.startsWith("https://files.edgestore.dev")) {
+                if (user.fullPhoto) {
                     await edgestore.publicFiles.delete({
-                        url: user.photo
+                        url: user.fullPhoto
                     });
                 }
 
@@ -197,6 +197,12 @@ export function ChangeParam(
                     disabled={user.rating <= ratingAccess && !isHelper}
                 />
             </FormLabel>
+
+            <FormTextarea
+                name="fullPhoto"
+                value={urls.photo || ""}
+                style={{display: "none"}}
+            />
 
             {isAdmin &&
               <FormLabel>
