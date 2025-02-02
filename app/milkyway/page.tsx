@@ -19,6 +19,7 @@ import Form from "next/form";
 import {StarSvg} from "@ui/SVGS";
 import {H1} from "@components/h1";
 import {MaxSize} from "@components/maxSize";
+
 const Avatar = dynamic(() => import("@components/avatar"));
 
 declare module 'csstype' {
@@ -114,7 +115,7 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
         >
             <div className={`${styles.box} ${isHas ? styles.unic : ""}`}>
                 <div className={styles.card}>
-                    {isHas && !suffix &&
+                    {!suffix &&
                       <div className={`${styles.text_box} ${x <= 0 ? styles.left : styles.right}`}>
                         <div className={styles.text}>
                           <h2 className={styles.heading}>
@@ -126,6 +127,7 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                           <GetButton
                             author={author}
                             isPerm={isPerm}
+                            isHas={isHas}
                             caseData={caseData}
                           />
                         </div>
@@ -139,7 +141,7 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                             <Img
                                 src={`/shop/${DropItem.name}/${Item.name}.webp`}
                                 alt={Item.displayname || DropItem.name || ""}
-                                className={`${styles.img} ${isHas ? "" : styles.blur}`}
+                                className={styles.img}
                             />
                         </ImgBox>
                         : <div
@@ -148,22 +150,18 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
                         >
                             <div>
                                 <h2>
-                                    {isHas
-                                        ? suffix
-                                        : "Суффикс?"
-                                    }
+                                    {suffix}
                                 </h2>
                                 <p>
                                     {DropItem.description}
                                 </p>
                             </div>
-                            {isHas &&
-                              <GetButton
+                            <GetButton
                                 author={author}
                                 isPerm={isPerm}
+                                isHas={isHas}
                                 caseData={caseData}
-                              />
-                            }
+                            />
                         </div>
                     }
                 </div>
@@ -193,14 +191,23 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
 type GetButton = {
     author: User
     isPerm: boolean
+    isHas: boolean
     caseData: CaseData
 }
 
-function GetButton({author, isPerm, caseData}: GetButton) {
+function GetButton({author, isPerm, isHas, caseData}: GetButton) {
+    if (!isHas) {
+        return (
+            <Button margin="0.8rem" disabled className={styles.button}>
+                Получить
+            </Button>
+        )
+    }
+
     if (isPerm) {
         return (
-            <Button margin="1.2rem" disabled className={styles.button}>
-                Получено
+            <Button margin="0.8rem" disabled className={styles.button}>
+                Получено!
             </Button>
         )
     }
@@ -211,7 +218,7 @@ function GetButton({author, isPerm, caseData}: GetButton) {
             await AddCasePurchase(author._id, caseData)
             await GetCosmetic(author.name, caseData)
         }}>
-            <Button margin="1.2rem" className={styles.button}>
+            <Button margin="0.8rem" className={styles.button}>
                 Получить
             </Button>
         </Form>
@@ -252,10 +259,14 @@ export default async function MilkyWay() {
     return (
         <div className={`${styles.milkyway_container} center_text`}
              style={{"--_size": `${size}rem`, '--_y': `${y}rem`}}>
-            <H1 up reload={async () => {
-                "use server";
-                revalidateTag("all")
-            }}>
+            <H1
+                up
+                description="Боевой пропуск 7 сезона!"
+                reload={async () => {
+                    "use server";
+                    revalidateTag("all")
+                }}
+            >
                 Млечный путь
             </H1>
 

@@ -29,7 +29,7 @@ export type SocialName = keyof typeof URLS_START
 
 export const Paths: PathID[] = [{
     rating: 25,
-    x: -15,
+    x: -35,
     caseData: {
         Item: "662ddb0f8d5044c0b4ad7b5a",
         DropItem: "662ddb0f8d5044c0b4ad7b57",

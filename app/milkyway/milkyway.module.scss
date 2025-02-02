@@ -45,8 +45,8 @@
   height: var(--_size);
 
   z-index: var(--1z);
-
-  @include mixins.border($background: var(--light-gray-color));
+  background: var(--light-gray-color);
+  border-radius: 50%;
 
   .unic & {
     background: var(--text-color);
@@ -64,6 +64,11 @@
 //noinspection CssInvalidFunction
 .player_card {
   position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
   transform: rotate(calc(-1 * var(--_angle))) translate(0, -70%);
   padding: 1rem;
 
@@ -146,7 +151,7 @@
 .text {
   position: absolute;
 
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 2rem;
   translate: 0;
 
   @include mixins.border($background: #151B1E, $color: #A6A6A6);

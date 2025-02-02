@@ -39,9 +39,10 @@ interface H1Props extends ComponentPropsWithoutRef<"h1"> {
     reload?: () => void
     up?: boolean
     paths?: RelativePath[]
+    description?: string
 }
 
-export const H1 = ({children, paths, reload, up = false, className = "", ...props}: PropsWithChildren<H1Props>) => (
+export const H1 = ({children, paths, reload, description, up = false, className = "", ...props}: PropsWithChildren<H1Props>) => (
     <div className={`${styles.container} ${className}`}>
         {paths && <RelativeNav paths={paths}/>}
 
@@ -56,9 +57,17 @@ export const H1 = ({children, paths, reload, up = false, className = "", ...prop
                 : <div/>
             }
 
-            <h1 className={styles.h1} {...props}>
-                {children}
-            </h1>
+            <div>
+                <h1 className={styles.h1} {...props}>
+                    {children}
+                </h1>
+
+                {description &&
+                  <p>
+                      {description}
+                  </p>
+                }
+            </div>
 
             {reload &&
               <ReloadButton reload={reload} className={styles.reload}/>

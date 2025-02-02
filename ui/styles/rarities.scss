@@ -10,7 +10,7 @@
 }
 
 .common_box {
-	@include box(var(--common-color), 10px, 0.9);
+	@include box(var(--common-color), 25px, 0.9);
 }
 
 .common {
