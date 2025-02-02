@@ -1,5 +1,18 @@
 @use "@styles/mixins";
 
+.text {
+	& > .p, .blockquote {
+		margin-block: 2px;
+	}
+
+	.blockquote {
+		border-left: var(--unic-color) solid 3.5px;
+		padding: 3px 10px;
+		background: rgb(var(--unic-color-rgb), 0.1);
+		border-radius: 10px;
+	}
+}
+
 .season {
 	--_line-width: 2px;
 

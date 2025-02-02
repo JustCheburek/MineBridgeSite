@@ -51,7 +51,11 @@ export async function GET(request: NextRequest) {
             name: cookiesStore.get("name")?.value || twUser.login,
             twitchId: twUser.id,
             email: twUser.email,
-            photo: twUser.profile_image_url
+            photo: twUser.profile_image_url,
+            socials: [{
+                social: "twitch",
+                name: twUser.login
+            }]
         } as User
 
         const {user} = await validate()
@@ -61,7 +65,10 @@ export async function GET(request: NextRequest) {
                 user._id,
                 {
                     email: userData.email,
-                    twitchId: userData.twitchId
+                    twitchId: userData.twitchId,
+                    $set: {
+                        socials: userData.socials[0]
+                    }
                 }
             )
         } else {
@@ -75,6 +82,9 @@ export async function GET(request: NextRequest) {
                 {
                     email: userData.email,
                     twitchId: userData.twitchId,
+                    $set: {
+                        socials: userData.socials[0]
+                    }
                 },
                 {
                     new: true

@@ -72,30 +72,32 @@ export default async function Profile({params}: NameParams) {
                         <span className="all_select">{user._id}</span>
                       </small>
                     }
-                    <div className={styles.social}>
-                        {user?.socials?.map((
-                            {
-                                social,
-                                url,
-                                name
-                            }: Social
-                        ) => {
-                            if (!social || (!url && !name)) return
+                    {isContentMaker &&
+                      <div className={styles.social}>
+                          {user?.socials?.map((
+                              {
+                                  social,
+                                  url,
+                                  name
+                              }: Social
+                          ) => {
+                              if (!social || (!url && !name)) return
 
-                            url = url || `${URLS_START[social]}${name}`
+                              url = url || `${URLS_START[social]}${name}`
 
-                            return (
-                                <Link
-                                    href={url}
-                                    target="_blank"
-                                    title={social}
-                                    key={social}
-                                >
-                                    <AutoSvg size="38px" type={social}/>
-                                </Link>
-                            )
-                        })}
-                    </div>
+                              return (
+                                  <Link
+                                      href={url}
+                                      target="_blank"
+                                      title={social}
+                                      key={social}
+                                  >
+                                      <AutoSvg size="38px" type={social}/>
+                                  </Link>
+                              )
+                          })}
+                      </div>
+                    }
                     <div className={styles.roles}>
                         {roles.map(role => {
                             const color = `#${role.color.toString(16)}`
@@ -116,7 +118,7 @@ export default async function Profile({params}: NameParams) {
                         <Link href="/milkyway">
                             Звёзды: {" "}
                             <strong className="yellow_color">
-                                {user.rating}
+                            {user.rating}
                             </strong> {" "}
                             <StarSvg/>
                         </Link>{" "}

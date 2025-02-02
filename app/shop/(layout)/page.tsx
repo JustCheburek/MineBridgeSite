@@ -25,7 +25,6 @@ export default async function Shop() {
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
     // todo: скрытие с миникарты 10 мостиков в месяц
-    // todo: чанки в месяц
     // todo: киты в дуэлях
     return (<>
         <div>

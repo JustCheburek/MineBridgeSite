@@ -4,6 +4,7 @@ import {validate} from "@services/validate";
 import {getSeasons} from "@/services";
 import {MDXRemote} from 'next-mdx-remote/rsc'
 import {seasonModel} from "@server/models";
+import {PropsWithChildren} from "react";
 
 // Стили
 import styles from "./news.module.scss"
@@ -25,6 +26,27 @@ export const metadata: Metadata = {
     title: "Новости",
     description: "Важнейшие новости, избираемые из телеграма майнбриджа. Здесь интересно!"
 };
+
+function P({children}: PropsWithChildren) {
+    return (
+        <p className={styles.p}>
+            {children}
+        </p>
+    )
+}
+
+function Blockquote({children}: PropsWithChildren) {
+    return (
+        <blockquote className={styles.blockquote}>
+            {children}
+        </blockquote>
+    )
+}
+
+const mdxComponents = {
+    p: P,
+    blockquote: Blockquote,
+}
 
 export default async function News() {
     const {isAdmin} = await validate()
@@ -88,7 +110,8 @@ export default async function News() {
                                 </PTitle>
                                 {news?.text &&
                                   <PText className={styles.text}>
-                                    <MDXRemote source={news.text}/>
+                                    {/* @ts-ignore */}
+                                    <MDXRemote source={news.text} components={mdxComponents}/>
                                   </PText>
                                 }
                             </PBox>
