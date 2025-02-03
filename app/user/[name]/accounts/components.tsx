@@ -7,12 +7,13 @@ import type {User} from "lucia";
 import {FormBox, FormButton, FormInput, FormLabel, FormTextarea} from "@components/formBox";
 import {Modal, type ModalAction} from "@components/modal";
 import {useState} from "react";
+import type {ChangeEvent} from "react";
 import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
 import {H1} from "@components/h1";
 import {DeleteUser, UpdateProfile} from "@services/user";
 import Link from "next/link";
 import {ImgUpload} from "@components/imgUpload";
-import {useEdgeStore} from "@/lib/edgestore";
+import {useEdgeStore} from "@/lib/edgestore"
 
 type SuccessModal = {
     user: User
@@ -190,10 +191,12 @@ export function ChangeParam(
                     required
                     maxLength={1000}
                     value={urls.thumbnail}
-                    onChange={() => setUrls(prev => ({
-                        ...prev,
-                        thumbnail: urls.thumbnail
-                    }))}
+                    onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+                        setUrls(prev => ({
+                            ...prev,
+                            thumbnail: e.target.value
+                        }))
+                    }
                     disabled={user.rating <= ratingAccess && !isHelper}
                 />
             </FormLabel>

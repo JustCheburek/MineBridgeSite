@@ -18,7 +18,7 @@ export function OGImageBox({children, paths}: PropsWithChildren<{ paths?: string
         >
             <MinebridgeSvg size="80px" style={{position: "absolute", left: 30, top: 30}}/>
             {paths &&
-              <p style={{fontSize: 50, color: "#D6D6D6", fontWeight: 500, display: "flex", gap: 6}}>
+              <h4 style={{fontSize: 50, color: "#D6D6D6", fontWeight: 500, display: "flex", gap: 6}}>
                   {paths.map((path, index) => (
                       <span key={path}>
                         {index === 0
@@ -28,11 +28,11 @@ export function OGImageBox({children, paths}: PropsWithChildren<{ paths?: string
                           {path}
                     </span>
                   ))}
-              </p>
+              </h4>
             }
-            <p style={{fontSize: 110, color: "#00A7B1", fontWeight: 700, lineHeight: 0.85, marginBottom: 20}}>
+            <h1 style={{fontSize: 110, color: "#00A7B1", fontWeight: 700, lineHeight: 0.85, marginBottom: 20}}>
                 MineBridge
-            </p>
+            </h1>
             <p style={{fontSize: 42, color: "#9C9C9C", textAlign: "center", maxWidth: "65%", fontWeight: 500}}>
                 {children}
             </p>

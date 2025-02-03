@@ -44,7 +44,7 @@ function Blockquote({children}: PropsWithChildren) {
     )
 }
 
-function A({href, children}: PropsWithChildren<{href: string}>) {
+function A({href, children}: PropsWithChildren<{ href: string }>) {
     return (
         <Link href={href} className="unic_color medium-font">
             {children}
@@ -120,7 +120,7 @@ export default async function News() {
                                 </PTitle>
                                 {news?.text &&
                                   <PText className={styles.text}>
-                                     {/*@ts-ignore*/}
+                                      {/*@ts-ignore*/}
                                     <MDXRemote source={news.text} components={mdxComponents}/>
                                   </PText>
                                 }

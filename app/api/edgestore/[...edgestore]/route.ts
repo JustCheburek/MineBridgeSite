@@ -6,7 +6,8 @@ const es = initEdgeStore.create();
 
 const edgeStoreRouter = es.router({
     publicFiles: es
-        .imageBucket({
+        .imageBucket(
+            {
                 maxSize: 1024 * 1024 * 2, // 2MB
             }
         )
@@ -15,7 +16,7 @@ const edgeStoreRouter = es.router({
                 type: z.enum(["profile", "news"])
             })
         )
-        .path(({input}) => [{ type: input.type }])
+        .path(({input}) => [{type: input.type}])
 });
 
 const handler = createEdgeStoreNextHandler({
