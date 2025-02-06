@@ -7,7 +7,7 @@ import {AddCasePurchase} from "@services/user";
 
 // Компоненты
 import {Modal, type setModal} from "@components/modal";
-import {FormBox, FormButton, FormSelect} from "@components/formBox";
+import {FormBox, FormButton, FormInput, FormLabel, FormSelect} from "@components/formBox";
 import {H1} from "@components/h1";
 import {valueOf} from "@/types/valueOf";
 
@@ -31,7 +31,8 @@ export const CasesPurchasesModal = (
         Drop: Drops[0],
         DropItem: Drops[1], // 0 - all drop
         rarity: "common",
-        Item: Drops[1].common![0]
+        Item: Drops[1].common![0],
+        suffix: ""
     })
 
     const defRarity = caseData.DropItem.defaultRarity
@@ -43,6 +44,13 @@ export const CasesPurchasesModal = (
                 [key]: value
             }))
         }
+    }
+
+    const updateSuffix = (suffix = "") => {
+        setCaseData(prev => ({
+            ...prev,
+            suffix
+        }))
     }
 
     function FindByEvent(Element: Case[] | Drop[] | Item[], e: ChangeEvent<HTMLSelectElement>) {
@@ -61,6 +69,7 @@ export const CasesPurchasesModal = (
         if (defRarity) {
             updateData("rarity", defRarity)
         }
+        updateSuffix()
     }, [caseData.DropItem?.name]);
 
     useEffect(() => {
@@ -168,6 +177,17 @@ export const CasesPurchasesModal = (
                         )
                     }
                 </FormSelect>
+
+                <h3>Суффикс</h3>
+                <FormLabel>
+                    <FormInput
+                        name="suffix"
+                        placeholder="Суффикс"
+                        disabled={caseData.DropItem.name !== "suffix"}
+                        value={caseData.suffix}
+                        onChange={e => updateSuffix(e.target.value)}
+                    />
+                </FormLabel>
 
                 <FormButton>
                     Добавить

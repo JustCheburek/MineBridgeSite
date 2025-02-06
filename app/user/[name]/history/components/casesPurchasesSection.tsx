@@ -181,7 +181,7 @@ export default function CasesPurchasesSection(
                             {access &&
                               <div className={styles.actions}>
                                 <Form action={() => {
-                                    DeleteCasePurchase(user._id, Item?._id)
+                                    DeleteCasePurchase(user._id, Item?._id, suffix)
                                 }}>
                                   <button className="helper_box danger">
                                     <DeleteSvg size="1.3rem"/>
