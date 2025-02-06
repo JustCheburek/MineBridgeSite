@@ -101,7 +101,7 @@ export class User {
                 return {place: undefined, userId: undefined}
             }
 
-            if (!inviter.invites.includes(JSON.stringify(user._id))) {
+            if (!inviter.invites.some(id => JSON.stringify(id) === JSON.stringify(user._id))) {
                 let mostiki = 0
                 if (isContentMaker) {
 					mostiki = 10
