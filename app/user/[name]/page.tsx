@@ -42,7 +42,7 @@ export default async function Profile({params}: NameParams) {
         {name}, true, true, author?._id, isHelper
     )
 
-    if (author && (!author?.from || !author.from?.place || !author.from?.userId)) {
+    if (author && (!author?.from)) {
         await userModel.findByIdAndUpdate(
             author._id,
             {from: await userModel.From(author)}
