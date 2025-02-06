@@ -77,7 +77,7 @@ export const Paths: PathID[] = [{
         rarity: "common"
     }
 }, {
-    rating: 175,
+    rating: 200,
     x: 0,
     caseData: {
         DropItem: "662ddb0f8d5044c0b4ad7b57",
@@ -85,7 +85,7 @@ export const Paths: PathID[] = [{
         rarity: "common"
     }
 }, {
-    rating: 200,
+    rating: 250,
     x: -30,
     caseData: {
         Item: "662de3d68d5044c0b4ad871b",
@@ -94,7 +94,7 @@ export const Paths: PathID[] = [{
         suffix: "&7атом"
     }
 }, {
-    rating: 225,
+    rating: 300,
     x: 45,
     caseData: {
         DropItem: "662ddb0f8d5044c0b4ad7b57",
@@ -102,7 +102,7 @@ export const Paths: PathID[] = [{
         rarity: "common"
     }
 }, {
-    rating: 250,
+    rating: 350,
     x: -50,
     caseData: {
         DropItem: "662de3cd8d5044c0b4ad86fa",
@@ -110,7 +110,7 @@ export const Paths: PathID[] = [{
         rarity: "common"
     }
 }, {
-    rating: 275,
+    rating: 400,
     x: 50,
     caseData: {
         DropItem: "662ddb0f8d5044c0b4ad7b57",
@@ -118,11 +118,19 @@ export const Paths: PathID[] = [{
         rarity: "common"
     }
 }, {
-    rating: 300,
+    rating: 500,
     x: 10,
     caseData: {
         DropItem: "677bc4cdc10a0180e42f7f1c",
         Item: "677c94eb41427b6b226c8d1d",
         rarity: "common"
+    }
+}, {
+    rating: 700,
+    x: -40,
+    caseData: {
+        DropItem: "677bc4cdc10a0180e42f7f1c",
+        Item: "677c950941427b6b226c8d20",
+        rarity: "rare"
     }
 }]

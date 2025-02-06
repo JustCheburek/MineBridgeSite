@@ -57,13 +57,13 @@ function NoPermModal({modal, setModal}: ModalAction) {
         <Modal modal={modal} setModal={setModal} centerText={false}>
             <H1>Нет прав</H1>
             <p>
-                Твой рейтинг меньше 0,
+                Твои звёзды меньше 0,
             </p>
             <p>
                 поэтому не можешь удалять аккаунт
             </p>
             <Link href="/rules" className="medium-font">
-                Как повысить рейтинг?
+                Как повысить звёзды?
             </Link>
         </Modal>
     )
@@ -128,10 +128,10 @@ export function ChangeParam(
         {user.rating <= ratingAccess &&
           <div className="grid_center">
             <h3>
-              У вас рейтинг ниже {ratingAccess}
+              У вас звёзды ниже {ratingAccess}
             </h3>
             <Link href="/rules" className="medium-font">
-              Как повысить рейтинг?
+              Как повысить звёзды?
             </Link>
           </div>
         }

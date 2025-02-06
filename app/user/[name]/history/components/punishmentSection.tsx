@@ -30,10 +30,10 @@ export default function PunishmentSection({user, name, access}: PunishmentSectio
             setModal={setModal}
             SaveAll={SavePunishments}
             _id={user._id}
-            notFound={<Link href="/rules" className="unic_color medium-font">Как повышать рейтинг?</Link>}
+            notFound={<Link href="/rules" className="unic_color medium-font">Как повышать звёзды?</Link>}
         >
             <h2>
-                Рейтинг
+                Звёзды
             </h2>
         </Table>
         <RatingModal modal={modal} setModal={setModal} user={user} name={name}/>

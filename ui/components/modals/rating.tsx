@@ -29,7 +29,7 @@ export const RatingModal = (
 
     return (
         <Modal setModal={setModal} modal={modal}>
-            <H1>Рейтинг</H1>
+            <H1>Звёзды</H1>
             <FormBox action={() => {
                 setModal(false)
                 AddPunishment(user, punishment, actions)
@@ -48,7 +48,7 @@ export const RatingModal = (
                     <FormInput
                         name="rating"
                         type="number"
-                        placeholder="Рейтинг"
+                        placeholder="Звёзды"
                         autoComplete="rating"
                         value={punishment.rating}
                         onChange={onPunishmentChange}

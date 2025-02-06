@@ -13,7 +13,7 @@ export default function HourStarSection({user, hours, isMe}: { user: User, hours
             </small>
             {hours === 0 &&
               <Url href={`/user/${user.name}/history`}>
-                Посмотреть рейтинг
+                Посмотреть звёзды
               </Url>
             }
             {isMe && hours > 0 &&
