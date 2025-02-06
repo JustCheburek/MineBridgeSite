@@ -62,11 +62,12 @@ export async function AddCasePurchase(_id: string, CaseData: CaseData) {
     revalidateTag("userLike")
 }
 
-export async function DeleteCasePurchase(userId: string, _id?: Types.ObjectId) {
+export async function DeleteCasePurchase(userId: string, _id?: Types.ObjectId, suffix?: string) {
     await userModel.findByIdAndUpdate(userId, {
         $pull: {
             casesPurchases: {
-                Item: _id
+                Item: _id,
+                suffix
             }
         }
     })
