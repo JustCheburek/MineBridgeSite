@@ -14,6 +14,17 @@ export const RconMB = cache(
     }
 )
 
+export const RconHUB = cache(
+    async () => {
+        console.log("Подключение к RCON HUB")
+        return new RconClient({
+            host: process.env.SERVER_IP!,
+            port: Number(process.env.SERVER_PORT_HUB!),
+            password: process.env.SECRET!
+        });
+    }
+)
+
 export const RconVC = cache(
     async () => {
         console.log("Подключение к RCON Velocity")
@@ -77,5 +88,61 @@ export const SuffixConsole = cache(
 
         client.disconnect()
         return answer
+    }
+)
+
+export const StarsMBConsole = cache(
+    async (stars: number, name: string) => {
+        const client = await RconMB()
+
+        try {
+            await client.send(`stars ${name} ${stars}`)
+        } catch (e) {
+            console.error(e)
+        }
+
+        client.disconnect()
+    }
+)
+
+export const StarsHUBConsole = cache(
+    async (stars: number, name: string) => {
+        const client = await RconHUB()
+
+        try {
+            await client.send(`stars ${name} ${stars}`)
+        } catch (e) {
+            console.error(e)
+        }
+
+        client.disconnect()
+    }
+)
+
+export const MostikiMBConsole = cache(
+    async (mostiki: number, name: string) => {
+        const client = await RconMB()
+
+        try {
+            await client.send(`mostiki ${name} ${mostiki}`)
+        } catch (e) {
+            console.error(e)
+        }
+
+        client.disconnect()
+    }
+)
+
+export const MostikiHUBConsole = cache(
+    async (mostiki: number, name: string) => {
+        const client = await RconHUB()
+
+        try {
+            await client.send(`mostiki ${name} ${mostiki}`)
+        } catch (e) {
+            console.error(e)
+        }
+
+        client.disconnect()
     }
 )

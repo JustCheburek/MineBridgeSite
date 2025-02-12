@@ -1,8 +1,9 @@
+"use server";
 import {User} from "lucia";
-import {GetStarsForm} from "./getStars";
 import {Url} from "@components/button";
+import {GetStarsForm} from "@app/user/[name]/components/getStars";
 
-export default function HourStarSection({user, hours, isMe}: { user: User, hours: number, isMe: boolean }) {
+export default async function HourStarSection({user, hours, isMe}: { user: User, hours: number, isMe: boolean }) {
     return (
         <section className="center_text grid_center">
             <h2>

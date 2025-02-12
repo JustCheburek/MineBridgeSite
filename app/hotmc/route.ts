@@ -1,36 +1,62 @@
 import {NextRequest, NextResponse} from "next/server";
 import {sha1} from "js-sha1";
 import {userModel} from "@server/models";
+import {StarsHUBConsole, StarsMBConsole} from "@services/console";
+import {AUTO} from "@/const";
 
 export async function POST(request: NextRequest) {
-	const res = await request.formData()
+    const res = await request.formData()
 
-	const nick = res.get("nick") as string | null
-	const time = res.get("time") as string | null
-	const sign = res.get("sign") as string | null
+    const name = res.get("nick") as string | null
+    const time = res.get("time") as string | null
+    const sign = res.get("sign") as string | null
 
-	if (!nick || !time || !sign) {
-		return new NextResponse("Не переданы необходимые данные", {
-			status: 422
-		});
-	}
+    if (!name || !time || !sign) {
+        return new NextResponse("Не переданы необходимые данные", {
+            status: 422
+        });
+    }
 
-	if (sign !== sha1(nick + time + process.env.HOTMC_SECRET)) {
-		return new NextResponse("Переданные данные не прошли проверку", {
-			status: 409
-		});
-	}
+    if (sign !== sha1(name + time + process.env.HOTMC_SECRET)) {
+        return new NextResponse("Переданные данные не прошли проверку", {
+            status: 409
+        });
+    }
 
-	await userModel.findOneAndUpdate(
-			{name: nick},
-			{
-				$inc: {
-					mostiki: 1
-				}
-			}
-	)
+    const user = await userModel.findOne({name})
 
-	return new NextResponse("ok", {
-		status: 200
-	});
+    if (!user) {
+        return new NextResponse("Игрок не найден", {
+            status: 404
+        });
+    }
+
+    const fullMonitoring = user.punishments?.reduce(
+        (accum, {rating, author}) => {
+            if (author !== AUTO.MONITORING) {
+                rating = 0
+            }
+
+            return accum + rating
+        }, 0
+    ) + 1
+    user.punishments = user.punishments?.filter(({author}) => author !== AUTO.MONITORING)
+    user.punishments?.push({
+        reason: `Голосование: ${fullMonitoring}`,
+        rating: fullMonitoring,
+        author: AUTO.MONITORING,
+        createdAt: new Date(),
+        updatedAt: new Date()
+    })
+    user.rating += 1
+    user.save()
+
+    await Promise.all([
+        StarsMBConsole(1, name),
+        StarsHUBConsole(1, name)
+    ])
+
+    return new NextResponse("ok", {
+        status: 200
+    });
 }

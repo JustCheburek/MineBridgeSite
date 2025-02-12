@@ -8,8 +8,9 @@ import {cookies} from "next/headers";
 import {Social} from "@/types/url";
 import {getUser} from "@/services";
 import {AUTO} from "@/const";
+import {MostikiHUBConsole, MostikiMBConsole, StarsHUBConsole, StarsMBConsole} from "@services/console";
 
-function updateRating(this: User) {
+async function updateRating(this: User) {
     this.rating = this.punishments?.reduce(
         (accum, {rating}) => accum + rating, 0
     )
@@ -126,6 +127,13 @@ export class User {
                         }
                     }
                 )
+
+                await Promise.all([
+                    MostikiMBConsole(mostiki, name),
+                    MostikiHUBConsole(mostiki, name),
+                    StarsMBConsole(5, name),
+                    StarsHUBConsole(5, name)
+                ])
             }
 
             return {place, userId: inviter._id}

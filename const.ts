@@ -21,7 +21,8 @@ export const NO_ROLES = {
 }
 export const AUTO = {
     MOD: "AutoMod",
-    HOURS: "AutoHours"
+    HOURS: "AutoHours",
+    MONITORING: "AutoMonitoring"
 }
 
 export const MBSESSION = "minebridge-session"

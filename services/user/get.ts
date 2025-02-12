@@ -1,6 +1,6 @@
 "use server";
 
-import {GetHours, RconMB} from "@services/console";
+import {GetHours, RconMB, StarsHUBConsole, StarsMBConsole} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {AUTO} from "@/const";
@@ -42,6 +42,11 @@ export async function GetStars(_id: string) {
             })
             user.rating += hours
             user.save()
+
+            await Promise.all([
+                StarsMBConsole(hours, user.name),
+                StarsHUBConsole(hours, user.name)
+            ])
         } else {
             console.error(text)
         }

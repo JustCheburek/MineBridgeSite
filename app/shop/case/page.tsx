@@ -10,7 +10,7 @@ import {Drop} from "@/types/case";
 
 // Компоненты
 import {CaseClient} from "./caseClient";
-import {RconVC} from "@services/console";
+import {MostikiHUBConsole, MostikiMBConsole, RconVC} from "@services/console";
 
 export const metadata: Metadata = {
     title: "Кейсы",
@@ -59,6 +59,11 @@ export default async function CasePage() {
         )
 
         revalidateTag("userLike")
+
+        await Promise.all([
+            MostikiMBConsole(-price, user?.name),
+            MostikiHUBConsole(-price, user?.name)
+        ])
     }
 
     return (
