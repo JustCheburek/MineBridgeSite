@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import {Suspense} from "react";
 import TimeAgo from "javascript-time-ago";
-
 import {validate} from "@services/validate";
 import {getUser} from "@/services";
 import {Social} from "@/types/url";
@@ -11,8 +10,10 @@ import styles from "./profile.module.scss"
 import {userModel} from "@server/models";
 import {AutoSvg, EditSvg, MostikiSvg, StarSvg} from "@ui/SVGS";
 import {URLS_START} from "@/const";
-import {NameParams} from "@/types/params";
+import type {NameParams} from "@/types/params";
 import {Skeleton} from "@components/skeleton";
+import type {User} from "lucia";
+import {GiftBox} from "@app/user/[name]/components/gift";
 
 const Avatar = dynamic(() => import("@components/avatar"));
 const ServerStatusSection = dynamic(() => import("./components/serverStatus"));
@@ -31,13 +32,43 @@ export const generateMetadata = async (
     }
 }
 
+const Mostiki = ({isMe, isAdmin, user, author}: {
+    isMe: boolean,
+    isAdmin: boolean,
+    user: User,
+    author: User | null
+}) => {
+    console.log(isMe)
+    console.log(isAdmin)
+    console.log(author?.mostiki)
+    if ((!isMe || !isAdmin) && (author?.mostiki && author?.mostiki <= 0)) return
+
+    return (<>
+        {(isAdmin || isMe) &&
+          <Link
+            href={isMe
+                ? "/shop"
+                : `/user/${user.name}/accounts`
+            }
+            className="add"
+          >
+            +
+          </Link>
+        }
+
+        {!isMe && author &&
+          <GiftBox user={user} author={author}/>
+        }
+    </>)
+}
+
 const timeAgo = new TimeAgo('ru-RU');
 
 export default async function Profile({params}: NameParams) {
     const {name} = await params
-    const {user: author, isHelper} = await validate()
+    const {user: author, isHelper, isAdmin} = await validate()
     const {
-        user, roles, isMe, isContentMaker, isAdmin
+        user, roles, isMe, isContentMaker
     } = await getUser(
         {name}, true, true, author?._id, isHelper
     )
@@ -118,7 +149,7 @@ export default async function Profile({params}: NameParams) {
                         <Link href="/milkyway">
                             Звёзды: {" "}
                             <strong className="yellow_color">
-                            {user.rating}
+                                {user.rating}
                             </strong> {" "}
                             <StarSvg/>
                         </Link>{" "}
@@ -135,22 +166,17 @@ export default async function Profile({params}: NameParams) {
                           </Link>
                         }
                     </h4>
-                    <h4>
-                        Мостики: {" "}
-                        <strong className="unic_color">
-                            {user.mostiki}
-                        </strong> {" "}
-                        <MostikiSvg/>{" "}
-                        {(isMe || isAdmin) &&
-                          <Link href={isAdmin
-                              ? `/user/${user.name}/accounts`
-                              : "/shop"
-                          }
-                                className="add">
-                            +
-                          </Link>
-                        }
-                    </h4>
+                    <div className={styles.mostiki_box}>
+                        <h4>
+                            Мостики: {" "}
+                            <strong className="unic_color">
+                                {user.mostiki}
+                            </strong> {" "}
+                            <MostikiSvg/>
+                        </h4>{" "}
+
+                        <Mostiki user={user} author={author} isMe={isMe} isAdmin={isAdmin}/>
+                    </div>
                 </div>
             </div>
 

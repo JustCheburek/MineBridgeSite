@@ -8,10 +8,9 @@ import {SeasonModal} from "@modals/season";
 type OnThisPageSeasons = {
 	seasons: Season[]
 	isAdmin: boolean
-	seasonFunc: Function
 }
 
-export function OnThisPageSeasons({seasons, isAdmin, seasonFunc}: OnThisPageSeasons) {
+export function OnThisPageSeasons({seasons, isAdmin}: OnThisPageSeasons) {
 	const [modal, setModal] = useState(false)
 
 	return (
@@ -28,7 +27,7 @@ export function OnThisPageSeasons({seasons, isAdmin, seasonFunc}: OnThisPageSeas
 					<OnThisPageButton onClick={() => setModal(true)}>
 						+ сезон
 					</OnThisPageButton>
-					<SeasonModal modal={modal} setModal={setModal} seasonFunc={seasonFunc}/>
+					<SeasonModal modal={modal} setModal={setModal}/>
 				</>}
 			</OnThisPage>
 	)

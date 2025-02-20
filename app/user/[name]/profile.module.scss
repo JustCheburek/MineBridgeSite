@@ -30,6 +30,12 @@
 	white-space: nowrap;
 }
 
+.mostiki_box {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+
 .from {
 	display: flex;
 	justify-content: center;

@@ -90,18 +90,6 @@
   appearance: none;
 }
 
-.edit, .add {
-  width: max(0.55em, 0.9rem);
-  height: 1em;
-  top: 0;
-  font-weight: 500;
-  transition: color var(--short-transition);
-
-  &:hover, &:active {
-    color: var(--unic-color);
-  }
-}
-
 .label:has(.input[type="radio"]), .label:has(.input[type="checkbox"]) {
   display: flex;
   gap: 0.8em;

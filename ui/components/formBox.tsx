@@ -1,8 +1,8 @@
-import {ComponentPropsWithoutRef, PropsWithChildren} from "react";
-import {setModal} from "@components/modal";
+import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
+import type {setModal} from "@components/modal";
 import styles from "./styles/form.module.scss"
-import Link, {LinkProps} from "next/link";
-import Form, {FormProps} from "next/form";
+import Link, {type LinkProps} from "next/link";
+import Form, {type FormProps} from "next/form";
 
 interface DangerProps {
     danger?: boolean
@@ -181,8 +181,8 @@ export interface EditProps extends ComponentPropsWithoutRef<"button"> {
 }
 
 export const Edit = ({className = "", setModal, ...props}: EditProps) => (
-    <button className={`${styles.edit} ${className}`} onClick={() => setModal(true)} {...props}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="edit" viewBox="0 0 16 16">
+    <button className={`edit ${className}`} onClick={() => setModal(true)} {...props}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
             <path
                 d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
             <path
@@ -195,8 +195,8 @@ export interface AddProps extends ComponentPropsWithoutRef<"button"> {
     setModal: setModal
 }
 
-export const Add = ({className = "", setModal, ...props}: AddProps) => (
-    <button className={`${styles.add} ${className}`} onClick={() => setModal(true)} {...props}>
-        +
+export const Add = ({className = "", setModal, children, ...props}: AddProps) => (
+    <button className={`add ${className}`} onClick={() => setModal(true)} {...props}>
+        {children || "+"}
     </button>
 )

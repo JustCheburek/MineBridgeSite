@@ -1,5 +1,5 @@
 // React
-import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
+import type {ComponentPropsWithoutRef} from "react";
 import Link, {LinkProps} from "next/link";
 
 // Стили
@@ -7,9 +7,6 @@ import styles from "./styles/button.module.scss"
 
 type Url = {
     margin?: string | number
-    target?: string
-    className?: string
-    download?: boolean
 }
 
 export const Url = (
@@ -21,7 +18,7 @@ export const Url = (
         margin = "2.5rem",
         download = false,
         ...props
-    }: PropsWithChildren<Url> & LinkProps) => {
+    }: ComponentPropsWithoutRef<"a"> & LinkProps & Url) => {
 
     if (!target) {
         if (download || href.toString().startsWith("http")) {

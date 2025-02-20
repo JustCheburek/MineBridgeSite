@@ -27,7 +27,7 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
                     Сервер не доступен
                 </h2>
                 <p>
-                    Попробуй зайти на сайт позже, чтобы попасть в Whitelist
+                    Попробуй перезагрузить страницу, чтобы попасть в Whitelist
                 </p>
             </section>
         )
@@ -40,11 +40,15 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
                 Java Edition
             </h4>
             <p>
-            IP:{" "}
+                IP:{" "}
                 <strong className="unic_color all_select">
                     secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}
                 </strong>
             </p>
+            <small>
+                При любых багах перезагружайте страницу<br/>
+                и пробуйте войти
+            </small>
         </section>
     )
 }

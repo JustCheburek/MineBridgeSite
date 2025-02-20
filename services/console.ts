@@ -63,8 +63,10 @@ export const AddWLConsole = cache(
         let whitelist = false
 
         try {
-            await client.send(`lpv user ${name} group add whitelist`)
-            whitelist = true
+            const text = await client.send(`lpv user ${name} group add whitelist`)
+            if (text === "") {
+                whitelist = true
+            }
         } catch (e) {
             console.error(e)
         }

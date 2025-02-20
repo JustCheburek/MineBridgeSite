@@ -12,10 +12,10 @@ export async function GetPrize(name: string) {
 }
 
 export async function GetStars(_id: string) {
-    try {
-        const user = await userModel.findById(_id)
-        if (!user) return
+    const user = await userModel.findById(_id)
+    if (!user) return
 
+    try {
         const hours = await GetHours(user.name)
 
         const client = await RconMB()

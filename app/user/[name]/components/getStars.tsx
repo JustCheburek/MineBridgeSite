@@ -7,7 +7,7 @@ import {GetStars} from "@services/user";
 export function GetStarsForm({_id}: { _id: string }) {
     return (
         <DefaultFormBox action={() => GetStars(_id)}>
-            <Button>
+            <Button margin="0.8rem">
                 Получить звёзды
             </Button>
         </DefaultFormBox>

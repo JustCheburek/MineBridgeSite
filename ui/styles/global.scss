@@ -92,6 +92,21 @@ button, input, fieldset, .no_select {
   cursor: pointer;
 }
 
+.edit, .add {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: max(0.55em, 0.9rem);
+  height: 1em;
+  font-weight: 500;
+  transition: color var(--short-transition);
+
+  &:hover, &:active {
+    color: var(--unic-color);
+  }
+}
+
 // Картинки
 img {
   object-fit: contain;

@@ -201,7 +201,7 @@ export default function CasesPurchasesSection(
               </FormBox>
             }
 
-            <Url href="/shop/case" margin={0}>
+            <Url href="/shop/case" margin={0} style={{marginTop: "3rem"}}>
                 Купить
             </Url>
 
