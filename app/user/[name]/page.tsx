@@ -38,9 +38,6 @@ const Mostiki = ({isMe, isAdmin, user, author}: {
     user: User,
     author: User | null
 }) => {
-    console.log(isMe)
-    console.log(isAdmin)
-    console.log(author?.mostiki)
     if ((!isMe || !isAdmin) && (author?.mostiki && author?.mostiki <= 0)) return
 
     return (<>

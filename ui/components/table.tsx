@@ -91,7 +91,6 @@ export function Table<T>(
                 )
             )
 
-            console.log(data)
             SaveAll && _id && SaveAll(_id, data)
         }
     )
