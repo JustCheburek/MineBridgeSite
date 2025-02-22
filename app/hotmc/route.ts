@@ -3,6 +3,7 @@ import {sha1} from "js-sha1";
 import {userModel} from "@server/models";
 import {StarsHUBConsole, StarsMBConsole} from "@services/console";
 import {AUTO} from "@/const";
+import {Punishment} from "@/types/punishment";
 
 export async function POST(request: NextRequest) {
     const res = await request.formData()
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     const fullMonitoring = user.punishments?.reduce(
-        (accum, {rating, author}) => {
+        (accum: number, {rating, author}: Punishment) => {
             if (author !== AUTO.MONITORING) {
                 rating = 0
             }
@@ -40,7 +41,7 @@ export async function POST(request: NextRequest) {
             return accum + rating
         }, 0
     ) + 1
-    user.punishments = user.punishments?.filter(({author}) => author !== AUTO.MONITORING)
+    user.punishments = user.punishments?.filter(({author}: Punishment) => author !== AUTO.MONITORING)
     user.punishments?.push({
         reason: `Голосование: ${fullMonitoring}`,
         rating: fullMonitoring,
