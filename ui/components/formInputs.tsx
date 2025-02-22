@@ -10,7 +10,7 @@ export const InputName = ({autoComplete = "name", ...props}: FormInputProps) => 
             name="name"
             autoComplete={autoComplete}
             required
-            minLength={4}
+            minLength={1}
             maxLength={30}
             {...props}
         />
@@ -33,11 +33,6 @@ export const InputNameCheck = (
     })
 
     return <>
-        {name.length !== 0 && 4 > name.length &&
-          <small>
-            Ник <span className="red_color">короткий</span> (мин: <strong className="red_color">4</strong>)
-          </small>
-        }
         {name.length > 30 &&
           <small>
             Ник <span className="red_color">длинный</span> (макс: <strong className="red_color">30</strong>)
