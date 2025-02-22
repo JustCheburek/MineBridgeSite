@@ -10,7 +10,6 @@ export const InputName = ({autoComplete = "name", ...props}: FormInputProps) => 
             name="name"
             autoComplete={autoComplete}
             required
-            minLength={1}
             maxLength={30}
             {...props}
         />
@@ -29,7 +28,7 @@ export const InputNameCheck = (
     const [symbol, setSymbol] = useState("")
 
     useEffect(() => {
-        setAccess && setAccess(4 < name.length && name.length < 30)
+        setAccess && setAccess(name.length < 30)
     })
 
     return <>
@@ -46,7 +45,7 @@ export const InputNameCheck = (
         <InputName
             value={name}
             onChange={e => {
-                setAccess && setAccess(4 < name.length && name.length < 30)
+                setAccess && setAccess(name.length < 30)
 
                 if (e.target.value.match(/[^a-zA-Z0-9-_]/)) {
                     setSymbol(JSON.stringify(e.target.value))

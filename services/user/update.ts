@@ -14,6 +14,7 @@ import {Resend} from "resend";
 import {getUser, getUsers} from "@/services";
 import {Who} from "@app/admin/email/components";
 import {redirect} from "next/navigation";
+import {lucia} from "@server/lucia";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -169,6 +170,8 @@ export async function CheckActions(user: User, actions: Action[]) {
 
 export async function Logout() {
     (await cookies()).delete(MBSESSION)
+    await lucia.deleteExpiredSessions()
+    revalidateTag("all")
 }
 
 export async function AddPunishment(user: User, punishment: Punishment, actions: Action[]) {
