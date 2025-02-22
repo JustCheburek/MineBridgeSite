@@ -6,7 +6,7 @@ import type {ComponentPropsWithoutRef} from "react";
 // Стили
 import styles from "./styles/img.module.scss"
 
-type ImgBox = {
+export type ImgBoxProps = {
     className?: string
     type?: "post" | "grid" | undefined
     background?: string
@@ -14,9 +14,9 @@ type ImgBox = {
     height?: string
     hover?: boolean
     overflow?: boolean
-    borderRadius?: boolean
+    borderRadius?: "up" | "down" | "all" | false
     helper?: boolean
-}
+} & ComponentPropsWithoutRef<"figure">
 
 export const ImgBox = (
     {
@@ -28,11 +28,11 @@ export const ImgBox = (
         height,
         overflow = true,
         hover = false,
-        borderRadius = false,
+        borderRadius,
         helper = false,
         style,
         ...props
-    }: ComponentPropsWithoutRef<"figure"> & ImgBox,
+    }: ImgBoxProps,
 ) => {
     let backgroundStyle, overflowStyle
 
@@ -46,11 +46,14 @@ export const ImgBox = (
 
     if (type === "post") {
         hover = true
+        if (borderRadius === undefined) {
+            borderRadius = "up"
+        }
     }
 
     return (<>
         <figure
-            className={`flex_center ${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${borderRadius ? "border-radius" : ""} ${helper ? "pointer" : ""} ${className}`}
+            className={`flex_center ${styles.box} ${!!type ? styles[type] : ""} ${hover ? styles.hover : ""} ${!!borderRadius ? styles[`border_${borderRadius}`] : ""} ${helper ? "pointer" : ""} ${className}`}
             style={{...backgroundStyle, ...overflowStyle, width, height, ...style}}
             {...props}
         >

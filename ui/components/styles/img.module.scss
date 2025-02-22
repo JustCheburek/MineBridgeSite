@@ -20,7 +20,6 @@
 
 .post {
   position: relative;
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
   overflow: hidden;
   aspect-ratio: 16 / 9;
 
@@ -34,4 +33,16 @@
 
   width: 50%;
   aspect-ratio: 1 / 1;
+}
+
+.border_all {
+  border-radius: var(--border-radius);
+}
+
+.border_up {
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.border_down {
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
 }

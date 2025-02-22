@@ -55,7 +55,7 @@ const AdvantageSection = () => (
         <MaxSize className={styles.max_size}>
             {/* Информация о создании групп */}
             <Box>
-                <ImgBox className={styles.img_box} type="post" borderRadius>
+                <ImgBox className={styles.img_box} type="post" borderRadius="all">
                     <Img
                         src="/index/advantage/group.webp"
                         alt="Ивент пандорума"
@@ -74,7 +74,7 @@ const AdvantageSection = () => (
 
             {/* Информация о городах */}
             <Box>
-                <ImgBox className={styles.img_box} type="post" borderRadius>
+                <ImgBox className={styles.img_box} type="post" borderRadius="all">
                     <Img
                         src="/index/advantage/project.webp"
                         alt="Пандорум здание"
@@ -88,7 +88,7 @@ const AdvantageSection = () => (
 
             {/* Информация о данжах */}
             <Box>
-                <ImgBox className={styles.img_box} type="post" borderRadius>
+                <ImgBox className={styles.img_box} type="post" borderRadius="all">
                     <Img
                         src="/index/advantage/dungeon.webp"
                         alt="Эндский данж"
@@ -102,7 +102,7 @@ const AdvantageSection = () => (
 
             {/* Информация о кастомизации */}
             <Box>
-                <ImgBox className={styles.img_box} type="post" borderRadius>
+                <ImgBox className={styles.img_box} type="post" borderRadius="all">
                     <Img
                         src="/index/advantage/pet.webp"
                         alt="Питомец"
