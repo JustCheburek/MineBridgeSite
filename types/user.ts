@@ -8,7 +8,6 @@ import {cookies} from "next/headers";
 import {Social} from "@/types/url";
 import {getUser} from "@/services";
 import {AUTO} from "@/const";
-import {MostikiHUBConsole, MostikiMBConsole, StarsHUBConsole, StarsMBConsole} from "@services/console";
 
 async function updateRating(this: User) {
     this.rating = this.punishments?.reduce(
@@ -90,6 +89,7 @@ export class User {
             const cookiesStore = await cookies()
             const from: { place: string, name: string } = JSON.parse(cookiesStore.get("from")?.value ?? "{}")
             if (!from) return {}
+            cookiesStore.delete("from")
 
             const {place, name} = from
             if (!name || !place || user.name === name) {
@@ -128,12 +128,12 @@ export class User {
                     }
                 )
 
-                await Promise.all([
+                /*await Promise.all([
                     MostikiMBConsole(mostiki, name),
                     MostikiHUBConsole(mostiki, name),
                     StarsMBConsole(5, name),
                     StarsHUBConsole(5, name)
-                ])
+                ])*/
             }
 
             return {place, userId: inviter._id}
