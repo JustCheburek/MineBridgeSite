@@ -6,8 +6,8 @@
   cursor: pointer;
   color: var(--white-color);
   @include mixins.border($background: var(--gray-color), $radius: 12px, $hover: true);
-  transition: var(--short-transition);
   & {
+    transition: var(--short-transition);
     min-height: 200px;
     overflow: hidden;
   }

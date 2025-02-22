@@ -46,8 +46,8 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
                 </strong>
             </p>
             <small>
-                При любых багах перезагружайте страницу<br/>
-                и пробуйте войти
+                Зайдите на сервер и перезагрузите страницу,<br/>
+                чтобы попасть в Whitelist
             </small>
         </section>
     )
