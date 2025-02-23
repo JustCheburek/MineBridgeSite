@@ -18,7 +18,7 @@ async function updateRating(this: User) {
 @pre<User>("save", updateRating)
 @pre<User>("findOneAndUpdate", updateRating)
 @pre<User>("findOne", updateRating)
-@modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false}})
+@modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false, overwriteModels: true}})
 export class User {
     @prop({required: true})
     public _id!: string

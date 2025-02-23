@@ -1,6 +1,6 @@
 import {modelOptions, prop} from "@typegoose/typegoose";
 
-@modelOptions({schemaOptions: {collection: "sessions", _id: false}})
+@modelOptions({schemaOptions: {collection: "sessions", _id: false, overwriteModels: true}})
 export class Session {
 	@prop({required: true})
 	public _id!: string
