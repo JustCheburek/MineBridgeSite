@@ -50,7 +50,7 @@ export class Chance<N = string> {
 export type RarityChance = Chance<RarityType>
 export type DropChance = Chance<DropType>
 
-@modelOptions({schemaOptions: {collection: "cases", overwriteModels: true}})
+@modelOptions({schemaOptions: {collection: "cases", overwriteModels: true}, options: {customName: "Case"}})
 export class Case extends UniqueName<CaseType> {
 	@prop()
 	public oldPrice?: number
@@ -73,7 +73,7 @@ export class Item extends Name {
 
 type Give = "ultracosmetics" | "cmn"
 
-@modelOptions({schemaOptions: {collection: "drops", overwriteModels: true}})
+@modelOptions({schemaOptions: {collection: "drops", overwriteModels: true}, options: {customName: "Drop"}})
 export class Drop extends UniqueName<DropType> {
 	@prop({required: true, unique: true, trim: true})
 	public description!: string
