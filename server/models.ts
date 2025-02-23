@@ -4,7 +4,7 @@ import {Session} from "@/types/session";
 import {Case, Drop} from "@/types/case";
 import {Season} from "@/types/season";
 import {Connect} from "./connect";
-import {models} from "mongoose";
+import {models, modelNames} from "mongoose";
 
 Connect()
 
@@ -13,3 +13,5 @@ export const sessionModel = (models.sessions as ReturnModelType<typeof Session>)
 export const caseModel = (models.cases as ReturnModelType<typeof Case>) || getModelForClass(Case);
 export const dropModel = (models.drops as ReturnModelType<typeof Drop>) || getModelForClass(Drop);
 export const seasonModel = (models.seasons as ReturnModelType<typeof Season>) || getModelForClass(Season);
+
+console.log(modelNames());
