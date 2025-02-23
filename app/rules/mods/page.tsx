@@ -61,8 +61,6 @@ export default function Mods() {
         name: "InvMove", url: new URL("https://modrinth.com/mod/invmove/version/latest")
     }, {
         name: "Gamma Utils", url: new URL("https://modrinth.com/mod/gamma-utils/version/latest")
-    }, {
-        name: "Freecam (Modrinth Edition)", url: new URL("https://modrinth.com/mod/freecam/version/latest")
     }]
 
     const blacklist: string[] = [
