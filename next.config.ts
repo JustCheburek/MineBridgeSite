@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   },
   serverExternalPackages: ["mongoose", "eslint", "oslo", "typescript"],
   experimental: {
-    // ppr: 'incremental',
+    ppr: 'incremental',
     typedEnv: true,
     optimizeCss: true
   }
