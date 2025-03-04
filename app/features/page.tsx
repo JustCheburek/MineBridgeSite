@@ -50,7 +50,7 @@ export default function Features() {
                         <Img src="/features/mods/voice_chat.png" alt="Войс чат"/>
                     </ImgBox>
 
-                    <GText>Моды</GText>
+                    <GText>Файлы</GText>
                 </GBox>
 
                 <GBox href={`http://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`} anotherSite imgs="one">

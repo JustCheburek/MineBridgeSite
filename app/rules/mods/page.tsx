@@ -12,7 +12,7 @@ import Link from "next/link";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
-    title: "Моды",
+    title: "Файлы",
     description: "Списки разрешённых и запрещённых дополнений. Здесь также есть сборки!"
 };
 
@@ -43,6 +43,9 @@ export default function Mods() {
     }, {
         name: "No Chat Reports",
         url: new URL("https://modrinth.com/mod/no-chat-reports")
+    }, {
+        name: "Ресурспак MineBridge",
+        url: new URL('./MBfull.zip', process.env.NEXT_PUBLIC_RU_URL!)
     }]
 
     const mods: Name[] = [{
@@ -76,7 +79,7 @@ export default function Mods() {
 
     return (<>
         <div className="mods_content">
-            <H1 up>Моды</H1>
+            <H1 up>Файлы</H1>
 
             <section id="allowed_mods" className={styles.list_container}>
                 <div className={`${styles.list_text} center_text`}>

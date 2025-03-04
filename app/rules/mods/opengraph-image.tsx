@@ -15,7 +15,7 @@ export default async function Image() {
 
     return new ImageResponse(
         (
-            <OGImageBox paths={["Правила", "Моды"]}>
+            <OGImageBox paths={["Правила", "Файлы"]}>
                 Списки разрешённых и запрещённых дополнений
             </OGImageBox>
         ),

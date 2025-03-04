@@ -16,7 +16,7 @@ export default function RulesLayout(
                     Правила
                 </SubsectionItem>
                 <SubsectionItem href="/rules/mods">
-                    Моды
+                    Файлы
                 </SubsectionItem>
                 <SubsectionItem href="/rules/blacklist">
                     Выражения

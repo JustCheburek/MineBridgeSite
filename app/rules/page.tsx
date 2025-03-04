@@ -532,6 +532,7 @@ export default function Rules() {
                         </ul>
                         <UserBox _id="j8bsrsdgzqa4n0c"/>
                         <UserBox _id="i5mqq2js4nos1yj"/>
+                        <UserBox _id="8v4pdxujk92dgh5"/>
                     </Rule>
                     <Rule number={9.3}>
                         <p>
@@ -551,7 +552,6 @@ export default function Rules() {
                                 Решения важных ситуаций
                             </li>
                         </ul>
-                        <UserBox _id="8v4pdxujk92dgh5"/>
                     </Rule>
                     <Rule number={9.4}>
                         <p>
