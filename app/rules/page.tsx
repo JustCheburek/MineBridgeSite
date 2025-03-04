@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description: "Звёзды — внутриигровая награда или наказание. Суды, баны, муты, всё это про нас!"
 };
 
-TimeAgo.addDefaultLocale(ru);
+TimeAgo.addLocale(ru);
 const timeAgo = new TimeAgo('ru-RU');
 
 export default function Rules() {

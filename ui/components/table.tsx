@@ -16,7 +16,7 @@ import {ColorText} from "@app/utils";
 import {FormButton, FormInput, FormLabel} from "@components/formBox";
 import {Button} from "@components/button";
 
-TimeAgo.addDefaultLocale(ru);
+TimeAgo.addLocale(ru);
 const timeAgo = new TimeAgo("ru-RU");
 
 type Table<T> = {

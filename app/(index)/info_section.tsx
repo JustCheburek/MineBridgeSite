@@ -1,8 +1,26 @@
-import {Typing} from "@app/(index)/typing";
+import {Typing} from "./typing";
 import {Url} from "@components/button";
+import {getUsersL} from "@/services";
+import {Skeleton} from "@components/skeleton";
 
 // Стили
 import styles from "./styles/info.module.scss"
+import {Suspense} from "react";
+
+async function AllUsers() {
+    const usersL = await getUsersL()
+
+    return (
+        <div className={styles.small}>
+            <small className="light_gray_color">
+                Нас уже <Suspense fallback={<Skeleton width="3em" height="1em"/>}>
+                {usersL}
+            </Suspense>, присоединяйся и ты,<br/>
+                Стань участником истории или же создай свою
+            </small>
+        </div>
+    )
+}
 
 const InfoSection = () => (
     <section className={`center_text ${styles.section}`}>
@@ -19,6 +37,8 @@ const InfoSection = () => (
             <p>
                 1.21+ · Minecraft: Java Edition · Лицензия не обязательна
             </p>
+
+            <AllUsers/>
         </article>
         <article className="for_mobile">
             <h1 className={styles.for_bigger}>
@@ -41,6 +61,8 @@ const InfoSection = () => (
             <p>1.21+</p>
             <p>Minecraft: Java Edition</p>
             <p>Лицензия не обязательна</p>
+
+            <AllUsers/>
         </article>
     </section>
 )
