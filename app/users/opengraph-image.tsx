@@ -1,7 +1,6 @@
 import {ImageResponse} from 'next/og'
 import {OGImageBox} from "@components/ogimage";
-
-export const runtime = 'edge'
+import {getUsersL} from "@/services";
 
 export const size = {width: 1200, height: 630}
 
@@ -12,11 +11,12 @@ export default async function Image() {
     const MontserratBold = await fetch(
         new URL('./Montserrat-Bold.ttf', process.env.NEXT_PUBLIC_GITHUB_URL!)
     ).then((res) => res.arrayBuffer())
+    const usersL = await getUsersL()
 
     return new ImageResponse(
         (
-            <OGImageBox paths={["Фичи", "Лор"]}>
-                Общая история, объединяющая сезоны
+            <OGImageBox paths={["Игроки"]}>
+                Братья и сестры всея Майнбридж! Игроков всего-то {usersL}...
             </OGImageBox>
         ),
         {

@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
 import type {User} from "lucia";
-import {getUsers} from "@/services";
+import {getUsers, getUsersL} from "@/services";
 import {revalidateTag} from 'next/cache'
 
 // Компоненты
@@ -9,10 +9,9 @@ import {Table} from "@components/table"
 import {MaxSize} from "@components/maxSize";
 import {columns} from "@columns/users"
 import {H1} from "@components/h1";
-import {userModel} from "@server/models";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const usersL = await userModel.countDocuments().lean()
+    const usersL = await getUsersL()
 
     return {
         title: "Игроки",

@@ -156,6 +156,14 @@ export const getUsers = cache(
     {revalidate: 1200, tags: ["users", "userLike", "all"]}
 )
 
+export const getUsersL = cache(
+    async () => {
+        return userModel.countDocuments().lean()
+    },
+    ["users", "userLike", "all"],
+    {revalidate: 3600, tags: ["users", "userLike", "all"]}
+)
+
 export const getCaseLocal = cache(
     async (
         param: idOrName,
