@@ -14,17 +14,6 @@ export const RconMB = cache(
     }
 )
 
-export const RconHUB = cache(
-    async () => {
-        console.log("Подключение к RCON HUB")
-        return new RconClient({
-            host: process.env.SERVER_IP!,
-            port: Number(process.env.SERVER_PORT_HUB!),
-            password: process.env.SECRET!
-        });
-    }
-)
-
 export const RconVC = cache(
     async () => {
         console.log("Подключение к RCON Velocity")

@@ -7,7 +7,7 @@ import {validate} from "@services/validate";
 import {MostikiSvg, SBPSvg} from "@ui/SVGS";
 import Link from "next/link";
 import {PBox, PText, PTitle} from "@components/post";
-import {OnThisPage, OnThisPageHeading, OnThisPageLink} from "@components/sideNav";
+import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
