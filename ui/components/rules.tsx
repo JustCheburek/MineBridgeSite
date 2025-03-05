@@ -20,7 +20,7 @@ export const RulesBox = ({name, heading, number, children}: PropsWithChildren<Ru
                 </LinkNumber>
 
                 {/* Кнопка */}
-                <h3 className={styles.heading_rules_text}>
+                <h3>
                     {heading}
                 </h3>
             </div>
