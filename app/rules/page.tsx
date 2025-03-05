@@ -8,12 +8,13 @@ import ru from "javascript-time-ago/locale/ru";
 import styles from './rules.module.scss';
 
 // Компоненты
-import {Punishment, Rule, RulesBox} from "./components";
+import {Punishment, Rule, RulesBox} from "@components/rules";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {TextUrl} from "@components/textUrl";
 import {UserBox} from "@components/userBox";
 import {LASTRULESUPDATE} from "@/const";
 import {H1} from "@components/h1";
+import {Number} from "@components/number";
 
 export const metadata: Metadata = {
     title: "Правила",
@@ -576,8 +577,6 @@ export default function Rules() {
                             </li>
                         </ul>
                         <UserBox _id="ruef6d47y245c0x"/>
-                        <UserBox _id="djfp8h9j2ffbdzz"/>
-                        <UserBox _id="svp3okvcuo6062d"/>
                         <br/>
                         <h4>
                             Судья
@@ -594,7 +593,6 @@ export default function Rules() {
                         </ul>
                         <UserBox _id="t2dhhl5igw1sp43"/>
                         <UserBox _id="cd8u5lqjg9zjr1b"/>
-                        <UserBox _id="7mrck4g9va16gbu"/>
                         <br/>
                         <h4>
                             Акционер
@@ -700,39 +698,39 @@ export default function Rules() {
 
             <OnThisPage>
                 <OnThisPageLink href="#general">
-                    <span className={styles.number_box}>1</span>
+                    <Number>1</Number>
                     Общение
                 </OnThisPageLink>
                 <OnThisPageLink href="#game_interferences">
-                    <span className={styles.number_box}>2</span>
+                    <Number>2</Number>
                     Игра
                 </OnThisPageLink>
                 <OnThisPageLink href="#areas">
-                    <span className={styles.number_box}>3</span>
+                    <Number>3</Number>
                     Территории
                 </OnThisPageLink>
                 <OnThisPageLink href="#cheats">
-                    <span className={styles.number_box}>4</span>
+                    <Number>4</Number>
                     Читы
                 </OnThisPageLink>
                 <OnThisPageLink href="#trading">
-                    <span className={styles.number_box}>5</span>
+                    <Number>5</Number>
                     Торговля
                 </OnThisPageLink>
                 <OnThisPageLink href="#unknown_url">
-                    <span className={styles.number_box}>6</span>
+                    <Number>6</Number>
                     Реклама
                 </OnThisPageLink>
                 <OnThisPageLink href="#lor">
-                    <span className={styles.number_box}>7</span>
+                    <Number>7</Number>
                     Лор
                 </OnThisPageLink>
                 <OnThisPageLink href="#court">
-                    <span className={styles.number_box}>8</span>
+                    <Number>8</Number>
                     Суд
                 </OnThisPageLink>
                 <OnThisPageLink href="#roles">
-                    <span className={styles.number_box}>9</span>
+                    <Number>9</Number>
                     Роли
                 </OnThisPageLink>
             </OnThisPage>

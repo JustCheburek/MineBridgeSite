@@ -1,17 +1,7 @@
-"use client";
-
 import type {PropsWithChildren} from "react";
-import styles from "./rules.module.scss"
+import styles from "./styles/rules.module.scss";
 import {StarSvg} from "@ui/SVGS";
-
-const LinkSvg = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className={styles.link}>
-        <path
-            d="M208 352h-64a96 96 0 010-192h64M304 160h64a96 96 0 010 192h-64M163.29 256h187.42"
-            fill="none" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round"
-            strokeWidth="36"/>
-    </svg>
-)
+import {LinkNumber} from "@components/number";
 
 type RulesBox = {
     name: string
@@ -25,11 +15,9 @@ export const RulesBox = ({name, heading, number, children}: PropsWithChildren<Ru
             {/* Заголовок */}
             <div className={styles.heading}>
                 {/* Цифра */}
-                <a href={"#" + name} className={styles.number_box}
-                   onClick={() => navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_EN_URL}/rules#${name}`)}>
-                    <LinkSvg/>
-                    <p className={`${styles.main_number} center_text medium-font`}>{number}</p>
-                </a>
+                <LinkNumber href={name}>
+                    {number}
+                </LinkNumber>
 
                 {/* Кнопка */}
                 <h3 className={styles.heading_rules_text}>
@@ -46,16 +34,6 @@ export const RulesBox = ({name, heading, number, children}: PropsWithChildren<Ru
     )
 }
 
-export const Punishment = ({text, stars}: { text?: string; stars?: number }) => (
-    <p className={styles.punishment}>
-        {text}
-        {text && stars && " / "}
-        {stars && <>
-            {"-"}{stars}<StarSvg height="0.75em"/>
-        </>}
-    </p>
-)
-
 type Rule = {
     number: number
     text?: string
@@ -65,10 +43,9 @@ type Rule = {
 export const Rule = ({number, children, stars, text}: PropsWithChildren<Rule>) => (
     <li className={styles.rule} id={number?.toString()}>
         {number &&
-          <a href={"#" + number} className={styles.number}
-             onClick={() => navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_EN_URL}/rules#${number}`)}>
+          <LinkNumber href={number.toString()} box={false}>
               {number}
-          </a>
+          </LinkNumber>
         }
 
         <div className={styles.rule_text}>
@@ -78,4 +55,14 @@ export const Rule = ({number, children, stars, text}: PropsWithChildren<Rule>) =
             }
         </div>
     </li>
+)
+
+export const Punishment = ({text, stars}: { text?: string; stars?: number }) => (
+    <p className={styles.punishment}>
+        {text}
+        {(text && stars) && " / "}
+        {stars && <>
+            {"-"}{stars}<StarSvg height="0.75em"/>
+        </>}
+    </p>
 )
