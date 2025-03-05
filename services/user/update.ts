@@ -1,7 +1,7 @@
 "use server";
 import {cookies} from "next/headers";
 import {MBSESSION} from "@/const";
-import {MostikiHUBConsole, MostikiMBConsole, RconVC, StarsHUBConsole, StarsMBConsole} from "@services/console";
+import {RconVC} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from 'next/cache'
 import {User} from "lucia";
@@ -192,11 +192,6 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
     await CheckActions(user, actions)
 
     revalidateTag("userLike")
-
-    await Promise.all([
-        StarsMBConsole(punishment.rating, user.name),
-        StarsHUBConsole(punishment.rating, user.name)
-    ])
 }
 
 export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
@@ -246,11 +241,6 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
     let mostiki = user.mostiki
     if (isAdmin) {
         mostiki = Number(formData.get("mostiki"))
-
-        await Promise.all([
-            MostikiMBConsole(mostiki, name),
-            MostikiHUBConsole(mostiki, name)
-        ])
     }
 
     await userModel.findByIdAndUpdate(user._id, {name, photo, fullPhoto, mostiki, socials})

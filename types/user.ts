@@ -127,13 +127,6 @@ export class User {
                         }
                     }
                 )
-
-                /*await Promise.all([
-                    MostikiMBConsole(mostiki, name),
-                    MostikiHUBConsole(mostiki, name),
-                    StarsMBConsole(5, name),
-                    StarsHUBConsole(5, name)
-                ])*/
             }
 
             return {place, userId: inviter._id}

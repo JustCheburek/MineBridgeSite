@@ -1,7 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {sha1} from "js-sha1";
 import {userModel} from "@server/models";
-import {StarsHUBConsole, StarsMBConsole} from "@services/console";
 import {AUTO} from "@/const";
 import {Punishment} from "@/types/punishment";
 
@@ -51,11 +50,6 @@ export async function POST(request: NextRequest) {
     })
     user.rating += 1
     user.save()
-
-    await Promise.all([
-        StarsMBConsole(1, name),
-        StarsHUBConsole(1, name)
-    ])
 
     return new NextResponse("ok", {
         status: 200
