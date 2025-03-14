@@ -8,8 +8,8 @@ import styles from "./accounts.module.scss"
 
 // Компоненты
 import {AutoSvg, SuccessSvg} from "@ui/SVGS";
-import {ChangeParam, DeleteUserBox} from "./components";
-import {User} from "lucia";
+import {ChangeParam} from "./components";  // DeleteUserBox
+import type {User} from "lucia";
 import {H1} from "@components/h1";
 import {CheckLink} from "@components/checkLink";
 import {NameParams} from "@/types/params";
@@ -79,12 +79,12 @@ export default async function Accounts({params}: NameParams) {
                     </Provider>
                 ))}
             </div>
-            {(isModer || isMe) &&
+            {/*{(isModer || isMe) &&
               <DeleteUserBox
                 user={user}
                 access={isModer || user.rating >= 0}
               />
-            }
+            }*/}
         </div>
     )
 }

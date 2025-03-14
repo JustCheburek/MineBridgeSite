@@ -116,7 +116,7 @@ export const FormLabel = (
     </label>
 )
 
-export interface FormGroupProps extends ComponentPropsWithoutRef<"div"> {
+interface FormGroupProps extends ComponentPropsWithoutRef<"div"> {
 }
 
 export const FormGroup = (
@@ -148,7 +148,7 @@ export const FormInput = (
     />
 )
 
-export interface FormTextareaProps extends ComponentPropsWithoutRef<"textarea"> {
+interface FormTextareaProps extends ComponentPropsWithoutRef<"textarea"> {
 }
 
 export const FormTextarea = (
@@ -161,7 +161,7 @@ export const FormTextarea = (
     <textarea className={`${styles.textarea} ${className}`} {...props}/>
 )
 
-export interface FormSelectProps extends ComponentPropsWithoutRef<"select"> {
+interface FormSelectProps extends ComponentPropsWithoutRef<"select"> {
 }
 
 export const FormSelect = (
@@ -176,7 +176,7 @@ export const FormSelect = (
     </select>
 )
 
-export interface EditProps extends ComponentPropsWithoutRef<"button"> {
+/*interface EditProps extends ComponentPropsWithoutRef<"button"> {
     setModal: setModal
 }
 
@@ -189,9 +189,9 @@ export const Edit = ({className = "", setModal, ...props}: EditProps) => (
                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
         </svg>
     </button>
-)
+)*/
 
-export interface AddProps extends ComponentPropsWithoutRef<"button"> {
+interface AddProps extends ComponentPropsWithoutRef<"button"> {
     setModal: setModal
 }
 

@@ -42,11 +42,9 @@ type Rule = {
 
 export const Rule = ({number, children, stars, text}: PropsWithChildren<Rule>) => (
     <li className={styles.rule} id={number?.toString()}>
-        {number &&
-          <LinkNumber href={number.toString()} box={false}>
-              {number}
-          </LinkNumber>
-        }
+        <LinkNumber href={number.toString()} box={false}>
+            {number}
+        </LinkNumber>
 
         <div className={styles.rule_text}>
             {children}

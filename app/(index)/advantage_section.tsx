@@ -36,13 +36,13 @@ export function Video({name}) {
 }
 */
 
-export const Text = ({children}: PropsWithChildren) => (
+const Text = ({children}: PropsWithChildren) => (
     <h4 className={styles.text}>
         {children}
     </h4>
 )
 
-export const Box = ({children}: PropsWithChildren) => (
+const Box = ({children}: PropsWithChildren) => (
     <article
         className={`${styles.advantage} appear`}
     >

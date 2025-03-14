@@ -4,7 +4,7 @@ import {MBSESSION} from "@/const";
 import {RconVC} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from 'next/cache'
-import {User} from "lucia";
+import type {User} from "lucia";
 import {Action, Punishment} from "@/types/punishment";
 import axios from "axios";
 import {Social} from "@/types/url";
@@ -64,7 +64,7 @@ export async function SendEmail(formData: FormData) {
     }
 }
 
-export async function CheckActions(user: User, actions: Action[]) {
+async function CheckActions(user: User, actions: Action[]) {
     if (actions.length === 0) return
 
     try {

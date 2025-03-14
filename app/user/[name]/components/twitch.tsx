@@ -1,4 +1,4 @@
-import {User} from "lucia";
+import type {User} from "lucia";
 
 export default function TwitchFrame({user}: { user: User }) {
     const twitchName = user?.socials?.find(({social}) => social === "twitch")?.name

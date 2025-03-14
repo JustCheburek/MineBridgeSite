@@ -1,6 +1,6 @@
 import {google, lucia} from "@server/lucia";
 import {cookies} from "next/headers";
-import {generateId, User} from "lucia";
+import {generateId, type User} from "lucia";
 import type {GUser} from "@/types/user";
 import {OAuth2RequestError} from "arctic";
 import {userModel} from "@server/models";

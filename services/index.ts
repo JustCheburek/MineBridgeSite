@@ -12,7 +12,7 @@ import {Case, Drop, Item, RarityType} from "@/types/case";
 import {idOrName} from "@/types/idOrName";
 import {NO_ROLES} from "@/const";
 
-export interface isRoles {
+interface isRoles {
     isHelper: boolean
     isModer: boolean
     isAdmin: boolean
@@ -23,7 +23,7 @@ export interface RolesApi extends isRoles {
     roles: Role[]
 }
 
-export const getRoles = cache(
+const getRoles = cache(
     async (discordId?: string): Promise<RolesApi> => {
         if (!discordId) {
             return {roles: [], ...NO_ROLES}

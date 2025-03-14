@@ -1,5 +1,5 @@
 // React
-import {User} from "lucia"
+import type {User} from "lucia"
 
 // Стили
 import styles from "../profile.module.scss"

@@ -108,10 +108,11 @@ export const GText = ({children, className, ...props}: ComponentPropsWithoutRef<
     </h3>
 )
 
+/*
 export const GHint = ({children, className, ...props}: ComponentPropsWithoutRef<"h4">) => (
     <h4 className={`${styles.hint} ${className}`} {...props}>
         <strong>
             {children}
         </strong>
     </h4>
-)
+)*/

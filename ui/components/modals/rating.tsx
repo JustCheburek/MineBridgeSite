@@ -1,6 +1,6 @@
 // React
 import {useChangeDictState, useChangeListState} from "@hooks/useChangeState";
-import {User} from "lucia";
+import type {User} from "lucia";
 import {type Action, Punishment} from "@/types/punishment";
 
 // Компоненты

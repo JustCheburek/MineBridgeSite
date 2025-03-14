@@ -4,8 +4,16 @@ export const DS_URL = "https://discord.gg/rmWAuKGb69"
 export const TG_URL = "https://t.me/MineBridgeOfficial"
 export const VK_URL = "https://vk.com/minebridge"
 export const SUPPORT_URL = "https://discord.gg/f95V9Rezqy"
-const utcDate = new Date(2025, 1 - 1, 12, 14 - 10, 30).toUTCString()
-export const LASTRULESUPDATE = new Date(utcDate)
+
+export const LASTRULESUPDATE = new Date(
+    new Date(2025, 1 - 1, 12, 14 - 10, 30).toUTCString()
+)
+export const LASTLORUPDATE = new Date(
+    new Date(2025, 3 - 1, 5, 14 - 10, 0).toUTCString()
+)
+export const LASTTERMSOFUSEUPDATE = new Date(
+    new Date(2025, 3 - 1, 5, 14 - 10, 0).toUTCString()
+)
 
 export const URLS_START = {
     discord: `https://discord.gg/`,

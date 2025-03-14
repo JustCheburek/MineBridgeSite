@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import {User} from "lucia";
+import type {User} from "lucia";
 import {AddWLConsole, GetHours} from "@services/console";
 
 const HourStarSection = dynamic(() => import("./hourstar"));

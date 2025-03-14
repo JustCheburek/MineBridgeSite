@@ -13,6 +13,8 @@ import {Img, ImgBox} from "@components/img";
 import {H1} from "@components/h1";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {Number} from "@components/number";
+import {LastUpdate} from "@components/lastUpdate";
+import {LASTLORUPDATE} from "@/const";
 
 export const metadata: Metadata = {
     title: "Лор",
@@ -49,6 +51,8 @@ export default function Lor() {
                 <h3 className="center_text">
                     <Link href="/rules#lor">Правила лора</Link>
                 </h3>
+                <br/>
+                <LastUpdate time={LASTLORUPDATE} className="center_text"/>
 
                 <PBox id="4">
                     <Link href="https://www.youtube.com/watch?v=IUeRmGEWUKw" target="_blank">
@@ -285,7 +289,7 @@ export default function Lor() {
                         </h4>
                     </PText>
                 </PBox>
-                {/*<PBox id="7">
+                <PBox id="7">
                     <PTitle>
                         <h2 className="unic_color">Демиан</h2>
                         <h4>7 сезон</h4>
@@ -293,7 +297,7 @@ export default function Lor() {
                     <PText>
 
                     </PText>
-                </PBox>*/}
+                </PBox>
             </div>
             <OnThisPage>
                 <OnThisPageLink href="#4">

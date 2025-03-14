@@ -68,7 +68,7 @@ export function BlacklistContent() {
     )
 }
 
-export function WordsContainer({children, hidden, show}: PropsWithChildren<{ hidden: string, show: boolean }>) {
+function WordsContainer({children, hidden, show}: PropsWithChildren<{ hidden: string, show: boolean }>) {
     children += " и т. д."
     hidden += " × ×. ×."
 

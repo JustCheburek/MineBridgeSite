@@ -188,7 +188,7 @@ export interface DataTw {
     data: TwUser[]
 }
 
-export interface TwUser {
+interface TwUser {
     id: string
     login: string
     display_name: string

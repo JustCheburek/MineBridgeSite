@@ -21,6 +21,9 @@ export default function RulesLayout(
                 <SubsectionItem href="/rules/blacklist">
                     Выражения
                 </SubsectionItem>
+                <SubsectionItem href="/rules/terms-of-use">
+                    Пользовательское соглашение
+                </SubsectionItem>
             </Subsections>
             {children}
         </MaxSize>

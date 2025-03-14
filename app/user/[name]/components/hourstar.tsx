@@ -1,5 +1,5 @@
 "use server";
-import {User} from "lucia";
+import type {User} from "lucia";
 import {Url} from "@components/button";
 import {GetStarsForm} from "@app/user/[name]/components/getStars";
 

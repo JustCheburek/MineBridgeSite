@@ -6,7 +6,7 @@ import styles from "../history.module.scss"
 // Сервер
 import {AddSuffix, DeleteCasePurchase, GetCosmetics, SelectSuffix} from "@services/user";
 import {useState} from "react";
-import {User} from "lucia";
+import type {User} from "lucia";
 
 // Типы
 import {Case, Drop} from "@/types/case";

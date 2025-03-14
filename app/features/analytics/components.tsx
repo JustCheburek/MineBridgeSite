@@ -1,5 +1,5 @@
 import {PBox, PText, PTitle} from "@components/post";
-import {User} from "lucia";
+import type {User} from "lucia";
 import {UserBox} from "@components/userBox";
 import styles from "./analytics.module.scss";
 

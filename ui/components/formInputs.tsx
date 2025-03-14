@@ -3,7 +3,7 @@
 import {type Dispatch, type SetStateAction, useEffect, useState} from "react";
 import {FormInput, type FormInputProps, FormLabel} from "@components/formBox";
 
-export const InputName = ({autoComplete = "name", ...props}: FormInputProps) => (
+const InputName = ({autoComplete = "name", ...props}: FormInputProps) => (
     <FormLabel>
         <FormInput
             placeholder="Майнкрафт никнейм"

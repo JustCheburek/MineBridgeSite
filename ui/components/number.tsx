@@ -5,7 +5,7 @@ import {LinkSvg} from "@ui/SVGS";
 import {ComponentPropsWithoutRef, PropsWithChildren} from "react";
 import Link, {LinkProps} from "next/link";
 
-export type LinkNumberProps = {
+type LinkNumberProps = {
     path?: string
     box?: boolean
 } & PropsWithChildren & LinkProps
@@ -20,7 +20,7 @@ export const LinkNumber = ({children, href, path = `rules`, box = true, ...props
     </Link>
 )
 
-export type NumberProps = {
+type NumberProps = {
     box?: boolean
 } & ComponentPropsWithoutRef<"span">
 export const Number = ({children, className, box = true, ...props}: NumberProps) => (

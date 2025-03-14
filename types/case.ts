@@ -10,7 +10,7 @@ export const RarityCost = {
 	legendary: 520
 }
 
-export const CaseNames = {
+const CaseNames = {
 	common: "Обычный",
 	rare: "Редкий",
 	legendary: "Легендарный",
@@ -29,7 +29,7 @@ export const rarityNames = Object.keys(RarityNames) as RarityType[]
 export type RarityType = keyof typeof RarityNames
 
 // todo: переход к типизации с базы данных
-export const DropNames = {
+const DropNames = {
 	all: "Весь дроп",
 	particleeffects: "Частицы",
 	suffix: "Суффикс",
@@ -47,8 +47,8 @@ export class Chance<N = string> {
 	public chance!: number
 }
 
-export type RarityChance = Chance<RarityType>
-export type DropChance = Chance<DropType>
+type RarityChance = Chance<RarityType>
+type DropChance = Chance<DropType>
 
 @modelOptions({schemaOptions: {collection: "cases", overwriteModels: true}, options: {customName: "Case"}})
 export class Case extends UniqueName<CaseType> {

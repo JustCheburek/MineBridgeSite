@@ -5,7 +5,7 @@ import type {MouseEventHandler} from "react";
 import {useEffect, useRef, useState} from "react";
 import type {CaseType, DropType, Info} from "@/types/case";
 import {Case, Drop, RarityNames} from "@/types/case";
-import {User} from "lucia";
+import type {User} from "lucia";
 import Link from "next/link";
 
 // Стили

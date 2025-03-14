@@ -54,18 +54,18 @@
 
 .empty {
   // Размеры
-  width: 1.7em;
+  width: 1.8em;
   aspect-ratio: 1 / 1;
 
   .link {
-    translate: 105%;
+    translate: 105% -10%;
     rotate: -45deg;
     opacity: 0;
   }
 
   :hover > & {
     .link {
-      translate: 0;
+      translate: 0 -10%;
       transition-delay: 0ms;
     }
 

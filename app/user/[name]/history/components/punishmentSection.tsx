@@ -2,7 +2,7 @@
 
 // React
 import {useState} from "react";
-import {User} from "lucia";
+import type {User} from "lucia";
 import {SavePunishments} from "@services/user";
 
 // Колонна

@@ -69,7 +69,7 @@ function NoPermModal({modal, setModal}: ModalAction) {
     )
 }
 
-type DeleteUser = {
+/*type DeleteUser = {
     user: User
     access: boolean
 }
@@ -95,7 +95,7 @@ export function DeleteUserBox({user, access}: DeleteUser) {
             />
         }
     </>)
-}
+}*/
 
 type ChangeParam = {
     user: User
