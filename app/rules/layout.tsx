@@ -22,7 +22,7 @@ export default function RulesLayout(
                     Выражения
                 </SubsectionItem>
                 <SubsectionItem href="/rules/terms-of-use">
-                    Пользовательское соглашение
+                    Соглашение
                 </SubsectionItem>
             </Subsections>
             {children}
