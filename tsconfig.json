@@ -52,6 +52,9 @@
 			"@columns/*": [
 				"./ui/columns/*"
 			],
+			"@email/*": [
+				"./ui/email/*"
+			],
 			"@server/*": [
 				"./server/*"
 			]

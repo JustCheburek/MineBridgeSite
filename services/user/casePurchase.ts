@@ -93,7 +93,7 @@ export async function AddSuffix(formData: FormData, _id: string, name: string, i
 }
 
 export async function DropSuffix(_id: string, name: string) {
-    const answer = await RemoveSuffixConsole(name)
+    await RemoveSuffixConsole(name)
     await userModel.findByIdAndUpdate(_id, {suffix: ""})
 
     revalidateTag("userLike")

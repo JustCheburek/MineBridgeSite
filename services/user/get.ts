@@ -4,6 +4,10 @@ import {GetHours, RconMB} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {AUTO} from "@/const";
+import {Resend} from "resend";
+import {HoursEmail} from "@email/hours";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function GetPrize(name: string) {
     const client = await RconMB()
@@ -42,6 +46,13 @@ export async function GetStars(_id: string) {
             })
             user.rating += hours
             user.save()
+
+            await resend.emails.send({
+                from: 'Майнбридж <hours@m-br.ru>',
+                to: user.email,
+                subject: 'Часы игры на MineBridge',
+                react: HoursEmail({name: user.name, hours})
+            })
         } else {
             console.error(text)
         }

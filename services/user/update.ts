@@ -15,6 +15,7 @@ import {getUser, getUsers} from "@/services";
 import {Who} from "@app/admin/email/components";
 import {redirect} from "next/navigation";
 import {lucia} from "@server/lucia";
+import {NewRatingEmail} from "@email/newRating";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -192,6 +193,15 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
     await CheckActions(user, actions)
 
     revalidateTag("userLike")
+
+    await resend.emails.send({
+        from: 'Майнбридж <rating@m-br.ru>',
+        to: user.email,
+        subject: 'Изменения в звёздах на MineBridge',
+        react: NewRatingEmail({
+            name: user.name, rating: user.rating, punishment
+        })
+    })
 }
 
 export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
