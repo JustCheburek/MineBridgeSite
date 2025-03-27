@@ -26,7 +26,7 @@ export const NewRatingEmail = async (
             Теперь у вас <strong>{rating} звёзд</strong>
         </p>
         <p>
-            Как поднять звёзд вы можете прочитать в{" "}
+            Как поднять звёзды? Можете прочитать в{" "}
             <strong><a href="https://m-br.ru/rules">правилах сервера</a></strong>
         </p>
         <br/>

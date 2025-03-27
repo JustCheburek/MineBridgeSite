@@ -19,6 +19,10 @@ export const RatingEmail = async (
             Ваш рейтинг был пересмотрен! Теперь у вас <strong>{rating} звёзд</strong>{" "}
             (было <strong>{oldRating} звёзд</strong>)
         </p>
+        <p>
+            Как поднять звёзды? Можете прочитать в{" "}
+            <strong><a href="https://m-br.ru/rules">правилах сервера</a></strong>
+        </p>
         <br/>
         <p>
             Вы получили это письмо, потому что вы ценный участник{" "}
