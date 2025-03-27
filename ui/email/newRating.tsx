@@ -18,7 +18,7 @@ export const NewRatingEmail = async (
         </p>
         <br/>
         <p>
-            Ваш рейтинг был изменён!
+            Ваш рейтинг был изменён!{" "}
             {punishment.author} {rating > 0 ? "добавил" : "забрал"}{" "}
             <strong>{punishment.rating} звёзд</strong> по причине "{punishment.reason}"
         </p>
