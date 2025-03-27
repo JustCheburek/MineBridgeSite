@@ -1,10 +1,12 @@
-.number {
+.number, .simple_number {
   position: relative;
 
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.number {
   margin-right: 15px; // Расстояние от текста до цифры
   overflow: hidden;
 

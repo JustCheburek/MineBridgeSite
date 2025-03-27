@@ -31,3 +31,12 @@ export const Number = ({children, className, box = true, ...props}: NumberProps)
         {children}
     </span>
 )
+
+export const SNumber = ({children, ...props}: ComponentPropsWithoutRef<"span">) => (
+    <span
+        className={`${styles.simple_number} ${styles.box}`}
+        {...props}
+    >
+        {children}
+    </span>
+)

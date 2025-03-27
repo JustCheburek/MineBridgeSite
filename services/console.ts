@@ -66,18 +66,30 @@ export const AddWLConsole = cache(
     }
 )
 
-export const SuffixConsole = cache(
+export const SetSuffixConsole = cache(
     async (suffix: string, name: string) => {
         const client = await RconVC()
-        let answer
 
         try {
-            answer = await client.send(`lpv user ${name} meta setsuffix 5 ${suffix}`)
+            await client.send(`lpv user ${name} meta setsuffix 5 ${suffix}`)
         } catch (e) {
             console.error(e)
         }
 
         client.disconnect()
-        return answer
+    }
+)
+
+export const RemoveSuffixConsole = cache(
+    async (name: string) => {
+        const client = await RconVC()
+
+        try {
+            await client.send(`lpv user ${name} meta removesuffix 5`)
+        } catch (e) {
+            console.error(e)
+        }
+
+        client.disconnect()
     }
 )

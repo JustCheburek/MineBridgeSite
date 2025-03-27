@@ -1,7 +1,7 @@
 "use server";
 
 import {CaseData} from "@/types/purchase";
-import {RconVC, SuffixConsole} from "@services/console";
+import {RconVC, RemoveSuffixConsole, SetSuffixConsole} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {Types} from "mongoose";
@@ -92,12 +92,16 @@ export async function AddSuffix(formData: FormData, _id: string, name: string, i
     revalidateTag("userLike")
 }
 
-export async function SelectSuffix(suffix: string, _id: string, name: string) {
-    const answer = await SuffixConsole(suffix, name)
+export async function DropSuffix(_id: string, name: string) {
+    const answer = await RemoveSuffixConsole(name)
+    await userModel.findByIdAndUpdate(_id, {suffix: ""})
 
-    if (answer) {
-        await userModel.findByIdAndUpdate(_id, {suffix})
-    }
+    revalidateTag("userLike")
+}
+
+export async function SelectSuffix(suffix: string, _id: string, name: string) {
+    await SetSuffixConsole(suffix, name)
+    await userModel.findByIdAndUpdate(_id, {suffix})
 
     revalidateTag("userLike")
 }

@@ -4,7 +4,7 @@
 import styles from "../history.module.scss"
 
 // Сервер
-import {AddSuffix, DeleteCasePurchase, GetCosmetics, SelectSuffix} from "@services/user";
+import {AddSuffix, DeleteCasePurchase, DropSuffix, GetCosmetics, SelectSuffix} from "@services/user";
 import {useState} from "react";
 import type {User} from "lucia";
 
@@ -22,7 +22,43 @@ import {DeleteSvg} from "@ui/SVGS";
 import {CaseBox} from "@components/shop";
 import {Url} from "@components/button";
 
-interface Suffix {
+type Select = {
+    selected: boolean
+    _id: string
+    name: string
+    suffix: string
+}
+function Select({selected, _id, name, suffix}: Select) {
+    if (selected) {
+        return (
+            <Form
+                action={() => DropSuffix(_id, name)}
+                className={styles.select}
+            >
+                <button>
+                    <small>
+                        убрать
+                    </small>
+                </button>
+            </Form>
+        )
+    }
+
+    return (
+        <Form
+            action={() => SelectSuffix(suffix, _id, name)}
+            className={styles.select}
+        >
+            <button>
+                <small>
+                    выбрать
+                </small>
+            </button>
+        </Form>
+    )
+}
+
+type Suffix = {
     _id: string
     name: string
     isMe: boolean
@@ -30,7 +66,6 @@ interface Suffix {
     index: number
     selected: boolean
 }
-
 function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
     if (suffix) {
         return (<>
@@ -38,21 +73,13 @@ function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
                 {suffix}
             </p>
 
-            {selected
-                ? <small className={`unic_color ${styles.selected}`}>
-                    выбран
-                </small>
-
-                : <Form
-                    action={() => SelectSuffix(suffix, _id, name)}
-                    className={styles.selected}
-                >
-                    <button>
-                        <small>
-                            выбрать
-                        </small>
-                    </button>
-                </Form>
+            {isMe &&
+                <Select
+                  selected={selected}
+                  suffix={suffix}
+                  _id={_id}
+                  name={name}
+                />
             }
         </>)
     }
