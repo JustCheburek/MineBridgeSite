@@ -136,7 +136,6 @@ export class User {
                     }
                 )
 
-                // todo: inviter email
                 if (inviter.notifications.invite) {
                     await resend.emails.send({
                         from: 'Майнбридж <invite@m-br.ru>',
