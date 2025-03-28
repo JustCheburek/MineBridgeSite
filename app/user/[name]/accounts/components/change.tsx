@@ -5,16 +5,14 @@ import type {User} from "lucia";
 
 // Компоненты
 import {FormBox, FormButton, FormInput, FormLabel, FormTextarea} from "@components/formBox";
-import {Modal, type ModalAction} from "@components/modal";
 import {useState} from "react";
 import type {ChangeEvent} from "react";
-import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
-import {H1} from "@components/h1";
-import {DeleteUser, UpdateProfile} from "@services/user";
+import {InputNameCheckWithoutState} from "@components/formInputs";
+import {UpdateProfile} from "@services/user";
 import Link from "next/link";
 import {ImgUpload} from "@components/imgUpload";
 import {useEdgeStore} from "@/lib/edgestore"
-
+/*
 type SuccessModal = {
     user: User
 }
@@ -69,7 +67,7 @@ function NoPermModal({modal, setModal}: ModalAction) {
     )
 }
 
-/*type DeleteUser = {
+type DeleteUser = {
     user: User
     access: boolean
 }
@@ -105,7 +103,7 @@ type ChangeParam = {
     isContentMaker: boolean
 }
 
-export function ChangeParam(
+export function ChangeForm(
     {
         user, isHelper, isAdmin,
         isContentMaker,
@@ -204,6 +202,7 @@ export function ChangeParam(
             <FormTextarea
                 name="fullPhoto"
                 value={urls.photo || ""}
+                disabled
                 style={{display: "none"}}
             />
 

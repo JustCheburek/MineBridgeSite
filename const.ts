@@ -9,7 +9,7 @@ export const LASTRULESUPDATE = new Date(
     new Date(2025, 1 - 1, 12, 14 - 10, 30).toUTCString()
 )
 export const LASTLORUPDATE = new Date(
-    new Date(2025, 3 - 1, 5, 14 - 10, 0).toUTCString()
+    new Date(2025, 3 - 1, 27, 12 - 10, 40).toUTCString()
 )
 export const LASTTERMSOFUSEUPDATE = new Date(
     new Date(2025, 3 - 1, 27, 12 - 10, 40).toUTCString()

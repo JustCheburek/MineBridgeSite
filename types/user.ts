@@ -8,6 +8,11 @@ import {cookies} from "next/headers";
 import {Social} from "@/types/url";
 import {getUser} from "@/services";
 import {AUTO} from "@/const";
+import {Notifications} from "@/types/notification";
+import {Resend} from "resend";
+import {InviteEmail} from "@email/invite";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function updateRating(this: User) {
     this.rating = this.punishments?.reduce(
@@ -69,6 +74,9 @@ export class User {
     @prop({type: () => [String], unique: true})
     public invites!: string[]
 
+    @prop({type: () => Notifications})
+    public notifications!: Notifications
+
     @prop()
     public createdAt!: Date
 
@@ -127,6 +135,16 @@ export class User {
                         }
                     }
                 )
+
+                // todo: inviter email
+                if (inviter.notifications.invite) {
+                    await resend.emails.send({
+                        from: 'Майнбридж <invite@m-br.ru>',
+                        to: inviter.email,
+                        subject: `Вы пригласили ${user.name} на MineBridge`,
+                        react: InviteEmail({name: user.name, from, isContentMaker})
+                    })
+                }
             }
 
             return {place, userId: inviter._id}

@@ -45,14 +45,16 @@ export async function GetStars(_id: string) {
                 updatedAt: new Date()
             })
             user.rating += hours
-            user.save()
+            await user.save()
 
-            await resend.emails.send({
-                from: 'Майнбридж <hours@m-br.ru>',
-                to: user.email,
-                subject: 'Часы игры на MineBridge',
-                react: HoursEmail({name: user.name, hours})
-            })
+            if (user.notifications.hours) {
+                await resend.emails.send({
+                    from: 'Майнбридж <hours@m-br.ru>',
+                    to: user.email,
+                    subject: 'Часы игры на MineBridge',
+                    react: HoursEmail({name: user.name, hours})
+                })
+            }
         } else {
             console.error(text)
         }

@@ -21,7 +21,7 @@ export async function SavePunishments(_id: string, data: Punishment[]) {
 
     revalidateTag("userLike")
 
-    if (oldRating !== user.rating) {
+    if (oldRating !== user.rating && user.notifications.rating) {
         await resend.emails.send({
             from: 'Майнбридж <rating@m-br.ru>',
             to: user.email,

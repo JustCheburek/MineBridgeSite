@@ -8,11 +8,12 @@ import styles from "./accounts.module.scss"
 
 // Компоненты
 import {AutoSvg, SuccessSvg} from "@ui/SVGS";
-import {ChangeParam} from "./components";  // DeleteUserBox
+import {ChangeForm} from "./components/change";
 import type {User} from "lucia";
 import {H1} from "@components/h1";
 import {CheckLink} from "@components/checkLink";
 import {NameParams} from "@/types/params";
+import {NotificationsForm} from "./components/notifications";
 
 export const generateMetadata = async ({params}: NameParams) => {
     const {name} = await params
@@ -54,11 +55,17 @@ export default async function Accounts({params}: NameParams) {
             </H1>
 
             {(isMe || isHelper) &&
-              <ChangeParam
+              <ChangeForm
                 user={user} isMe={isMe}
                 isHelper={isHelper} isAdmin={isAdmin}
                 isContentMaker={isContentMakerCheck}
               />
+            }
+
+            {/* todo: добавить отдельные кнопки сохранить */}
+
+            {(isMe || isHelper) &&
+              <NotificationsForm user={user}/>
             }
 
             <div className={styles.providers_box}>

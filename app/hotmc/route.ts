@@ -53,14 +53,16 @@ export async function POST(request: NextRequest) {
         updatedAt: new Date()
     })
     user.rating += 1
-    user.save()
+    await user.save()
 
-    await resend.emails.send({
-        from: 'Майнбридж <vote@m-br.ru>',
-        to: user.email,
-        subject: 'Спасибо за голос за MineBridge',
-        react: VoteEmail({name: user.name})
-    })
+    if (user.notifications.vote) {
+        await resend.emails.send({
+            from: 'Майнбридж <vote@m-br.ru>',
+            to: user.email,
+            subject: 'Спасибо за голос за MineBridge',
+            react: VoteEmail({name: user.name})
+        })
+    }
 
     return new NextResponse("ok", {
         status: 200

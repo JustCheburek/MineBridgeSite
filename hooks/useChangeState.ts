@@ -1,3 +1,5 @@
+"use client";
+
 import type {ChangeEvent, Dispatch, SetStateAction} from "react"
 import {useState} from "react";
 
