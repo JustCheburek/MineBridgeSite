@@ -15,9 +15,6 @@ export const Create = ({user}: { user: User }) => {
             <p>
                 Твой баланс: {user?.mostiki} <MostikiSvg/>
             </p>
-            <p>
-                Код приходит на почту
-            </p>
 
             <FormLabel>
                 <FormInput

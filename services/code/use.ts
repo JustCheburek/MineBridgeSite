@@ -21,10 +21,10 @@ export async function UseCode(codeId: Code["_id"], _id: User["_id"]) {
         }
     })
 
-    const {user: author} = await getUser({_id: code.authorId}, false)
-
     revalidateTag("userLike")
     revalidateTag("shop")
+
+    const {user: author} = await getUser({_id: code.authorId}, false)
 
     if (!user || !author) return
 
