@@ -1,4 +1,5 @@
 import {Template} from "@email/template";
+import {User} from "lucia";
 
 export const InviteEmail = async (
     {
@@ -6,14 +7,14 @@ export const InviteEmail = async (
         from,
         isContentMaker
     }: {
-        name: string,
+        name: User["name"],
         from: { place: string, name: string },
         isContentMaker: boolean
     }
 ) => (
     <Template name={name}>
         <p>
-            Вы позвали {from.name} ({from.place}), и мы дали тебе <strong>5 звёзд</strong>
+            От тебя пришёл {from.name} ({from.place}), и мы дали тебе <strong>5 звёзд</strong>
         </p>
         {isContentMaker} && (
         <p>

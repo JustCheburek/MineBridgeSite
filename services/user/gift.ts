@@ -1,23 +1,23 @@
 "use server";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
-import {HoursEmail} from "@email/hours";
 import {MostikiEmail} from "@email/mostiki";
 import {Resend} from "resend";
+import {User} from "lucia";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function GiveGift(mostiki: number, userId: string, authorId: string) {
+export async function GiveGift(mostiki: User["mostiki"], userId: User["_id"], authorId: User["_id"]) {
     const author = await userModel.findByIdAndUpdate(authorId, {
         $inc: {
             mostiki: -mostiki
         }
-    }, {upsert: true})
+    })
     const user = await userModel.findByIdAndUpdate(userId, {
         $inc: {
             mostiki: mostiki
         }
-    }, {upsert: true})
+    })
     revalidateTag("userLike")
 
     if (!author || !user) return
@@ -28,7 +28,7 @@ export async function GiveGift(mostiki: number, userId: string, authorId: string
             to: author.email,
             subject: 'Изменения в мостиках на MineBridge',
             react: MostikiEmail(
-                {name: author.name, mostiki, allMostiki: author.mostiki}
+                {name: author.name, mostiki: -mostiki, allMostiki: author.mostiki - mostiki}
             )
         })
     }
@@ -39,7 +39,7 @@ export async function GiveGift(mostiki: number, userId: string, authorId: string
             to: user.email,
             subject: 'Изменения в мостиках на MineBridge',
             react: MostikiEmail(
-                {name: user.name, mostiki, allMostiki: user.mostiki}
+                {name: user.name, mostiki, allMostiki: user.mostiki + mostiki}
             )
         })
     }

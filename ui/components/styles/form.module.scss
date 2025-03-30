@@ -25,6 +25,8 @@
 .label .textarea,
 .select,
 .button {
+  position: relative;
+
   --_color: var(--unic-color);
 
   &.danger {

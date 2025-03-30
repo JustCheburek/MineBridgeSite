@@ -88,7 +88,7 @@ export default async function Component() {
                         href="https://www.donationalerts.com/r/kawa11fox"
                         target="_blank"
                     >
-                        Комиссию оплачиваете Вы
+                        Комиссия на тебе)
                     </Link>
                 </PText>
             </PBox>

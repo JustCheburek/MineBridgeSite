@@ -1,11 +1,12 @@
 import {PropsWithChildren} from "react";
+import {User} from "lucia";
 
 export const Template = (
     {
         name,
         children
     }: PropsWithChildren<{
-        name: string
+        name: User["name"]
     }>
 ) => (
     <div className="text_color">

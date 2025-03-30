@@ -1,25 +1,30 @@
 import {Template} from "@email/template";
 import {User} from "lucia";
+import {Code} from "@/types/code";
 
-export const MostikiEmail = async (
+export const UseCodeEmail = async (
     {
         name,
         mostiki,
-        allMostiki
+        allMostiki,
+        code
     }: {
         name: User["name"],
         mostiki: User["mostiki"],
-        allMostiki: User["mostiki"]
+        allMostiki: User["mostiki"],
+        code: Code["_id"]
     }
 ) => (
     <Template name={name}>
         <p>
-            Твои мостики были изменены!{" "}
-            {mostiki > 0 ? "Вы получили" : "У тебя забрали"}{" "}
-            <strong>{Math.abs(mostiki)} мостиков</strong>
+            Промокод успешно использован! Вы получили{" "}
+            <strong>{mostiki} мостиков</strong>.
         </p>
         <p>
             Теперь у тебя <strong>{allMostiki} мостиков</strong>
         </p>
+        <h3>
+            {code}
+        </h3>
     </Template>
 )

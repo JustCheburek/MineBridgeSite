@@ -28,7 +28,6 @@ export const RarityNames = {
 export const rarityNames = Object.keys(RarityNames) as RarityType[]
 export type RarityType = keyof typeof RarityNames
 
-// todo: переход к типизации с базы данных
 const DropNames = {
 	all: "Весь дроп",
 	particleeffects: "Частицы",

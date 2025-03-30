@@ -1,5 +1,6 @@
 import {Punishment} from "@/types/punishment";
 import {Template} from "@email/template";
+import {User} from "lucia";
 
 export const NewRatingEmail = async (
     {
@@ -7,19 +8,19 @@ export const NewRatingEmail = async (
         rating,
         punishment
     }: {
-        name: string,
-        rating: number,
+        name: User["name"],
+        rating: User["rating"],
         punishment: Punishment
     }
 ) => (
     <Template name={name}>
         <p>
-            Ваш рейтинг был изменён!{" "}
+            Твой рейтинг был изменён!{" "}
             {punishment.author} {punishment.rating > 0 ? "добавил" : "забрал"}{" "}
-            <strong>{punishment.rating} звёзд</strong> по причине "{punishment.reason}"
+            <strong>{Math.abs(punishment.rating)} звёзд</strong> по причине "{punishment.reason}"
         </p>
         <p>
-            Теперь у вас <strong>{rating} звёзд</strong>
+            Теперь у тебя <strong>{rating} звёзд</strong>
         </p>
         <p>
             Как поднять звёзды? Можете прочитать в{" "}

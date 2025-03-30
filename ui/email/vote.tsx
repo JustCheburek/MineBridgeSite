@@ -1,10 +1,11 @@
 import {Template} from "@email/template";
+import {User} from "lucia";
 
 export const VoteEmail = async (
     {
         name
     }: {
-        name: string
+        name: User["name"]
     }
 ) => (
     <Template name={name}>

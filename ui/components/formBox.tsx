@@ -192,11 +192,11 @@ export const Edit = ({className = "", setModal, ...props}: EditProps) => (
 )*/
 
 interface AddProps extends ComponentPropsWithoutRef<"button"> {
-    setModal: setModal
+    setModal?: setModal
 }
 
 export const Add = ({className = "", setModal, children, ...props}: AddProps) => (
-    <button className={`add ${className}`} onClick={() => setModal(true)} {...props}>
+    <button className={`add ${className}`} onClick={() => setModal && setModal(true)} {...props}>
         {children || "+"}
     </button>
 )

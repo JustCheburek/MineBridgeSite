@@ -126,7 +126,7 @@ export function ChangeForm(
         {user.rating <= ratingAccess &&
           <div className="grid_center">
             <h3>
-              У вас звёзды ниже {ratingAccess}
+              Твои звёзды ниже {ratingAccess}
             </h3>
             <Link href="/rules" className="medium-font">
               Как повысить звёзды?
@@ -213,7 +213,7 @@ export function ChangeForm(
                   type="number"
                   placeholder="Мостики"
                   autoComplete="mostiki"
-                  required
+                  min={0}
                   defaultValue={user.mostiki}
                   title="Мостики"
                 />

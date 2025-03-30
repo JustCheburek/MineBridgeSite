@@ -3,7 +3,7 @@
 import type {User} from "lucia";
 import {notFound} from "next/navigation";
 import {unstable_cache as cache} from "next/cache";
-import {caseModel, dropModel, seasonModel, userModel} from "@server/models";
+import {caseModel, codeModel, dropModel, seasonModel, userModel} from "@server/models";
 import {Season} from "@/types/season";
 import type {GuildDSUser} from "@/types/user";
 import axios from "axios";
@@ -11,6 +11,9 @@ import type {Role} from "@/types/role";
 import {Case, Drop, Item, RarityType} from "@/types/case";
 import {idOrName} from "@/types/idOrName";
 import {NO_ROLES} from "@/const";
+import {Code} from "@/types/code";
+
+// todo: Разделение на папки
 
 interface isRoles {
     isHelper: boolean
@@ -324,4 +327,26 @@ export const getSeasons = cache(
     },
     ["seasons", "news", "events", "all"],
     {revalidate: 1800, tags: ["seasons", "news", "events", "all"]}
+)
+
+export const getCodes = cache(
+    async () => JSON.parse(JSON.stringify(await codeModel.find().lean())),
+    ["codes", "shop", "all"],
+    {revalidate: 3600, tags: ["codes", "shop", "all"]}
+)
+
+export const getCode = cache(
+    async (
+        _id: Code["_id"]
+    ) => {
+        const code: Code | null = JSON.parse(JSON.stringify(await codeModel.findById(_id).lean()))
+
+        if (!code) {
+            throw new Error(`Code не найден: ${JSON.stringify(_id)}`)
+        }
+
+        return code
+    },
+    ["code", "shop", "all"],
+    {revalidate: 1200, tags: ["code", "shop", "all"]}
 )

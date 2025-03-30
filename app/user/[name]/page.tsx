@@ -13,7 +13,7 @@ import {URLS_START} from "@/const";
 import type {NameParams} from "@/types/params";
 import {Skeleton} from "@components/skeleton";
 import type {User} from "lucia";
-import {GiftBox} from "@app/user/[name]/components/gift";
+import {GiftBox} from "./components/gift";
 
 const Avatar = dynamic(() => import("@components/avatar"));
 const ServerStatusSection = dynamic(() => import("./components/serverStatus"));
@@ -53,8 +53,8 @@ const Mostiki = ({isMe, isAdmin, user, author}: {
           </Link>
         }
 
-        {!isMe && author &&
-          <GiftBox user={user} author={author}/>
+        {author &&
+          <GiftBox user={user} author={author} isMe={isMe}/>
         }
     </>)
 }

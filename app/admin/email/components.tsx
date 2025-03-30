@@ -1,7 +1,6 @@
 "use client"
 
 import {FormBox, FormButton, FormGroup, FormInput, FormLabel} from "@components/formBox";
-import {SendEmail} from "@services/user/update";
 import {useChangeRadioState} from "@hooks/useChangeState";
 
 export type Who = "person" | "all"
@@ -11,8 +10,10 @@ export function SendEmailForm() {
         , , onChange, Check
     ] = useChangeRadioState<Who>("person")
 
+    //  action={SendEmail}
+
     return (
-        <FormBox action={SendEmail}>
+        <FormBox action="">
             <FormGroup>
                 <FormLabel>
                     <FormInput

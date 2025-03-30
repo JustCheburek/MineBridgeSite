@@ -49,7 +49,7 @@ export class User {
     @prop()
     public twitchId?: string
 
-    @prop({default: 0})
+    @prop({default: 0, min: 0})
     public mostiki!: number
 
     @prop({default: 0})

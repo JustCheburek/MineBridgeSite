@@ -1,4 +1,5 @@
 import {Template} from "@email/template";
+import {User} from "lucia";
 
 export const RatingEmail = async (
     {
@@ -6,14 +7,14 @@ export const RatingEmail = async (
         rating,
         oldRating
     }: {
-        name: string,
-        rating: number,
-        oldRating: number
+        name: User["name"],
+        rating: User["rating"],
+        oldRating: User["rating"]
     }
 ) => (
     <Template name={name}>
         <p>
-            Ваш рейтинг был пересмотрен! Теперь у вас <strong>{rating} звёзд</strong>{" "}
+            Твой рейтинг был пересмотрен! Теперь у тебя <strong>{rating} звёзд</strong>{" "}
             (было <strong>{oldRating} звёзд</strong>)
         </p>
         <p>

@@ -1,22 +1,17 @@
 "use server";
-import {cookies} from "next/headers";
-import {MBSESSION} from "@/const";
+
 import {RconVC} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from 'next/cache'
 import type {User} from "lucia";
 import axios from "axios";
 import {Social} from "@/types/url";
-import {EmailTemplate} from "@app/admin/email/emailTemplate";
 import {Resend} from "resend";
-import {getUser, getUsers} from "@/services";
-import {Who} from "@app/admin/email/components";
-import {lucia} from "@server/lucia";
 import {MostikiEmail} from "@email/mostiki";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-function chunk<T>(arr: T[], size: number) {
+/*function chunk<T>(arr: T[], size: number) {
     return Array.from({
             // длина списка в сотках
             length: Math.ceil(arr.length / size)
@@ -60,13 +55,7 @@ export async function SendEmail(formData: FormData) {
         }));
         await resend.batch.send(emails);
     }
-}
-
-export async function Logout() {
-    (await cookies()).delete(MBSESSION)
-    await lucia.deleteExpiredSessions()
-    revalidateTag("all")
-}
+}*/
 
 export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
     const name = formData.get("name") as string

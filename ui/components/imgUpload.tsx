@@ -92,8 +92,8 @@ export function ImgUpload(
                         <UploadSvg size="3rem" className="marginAuto"/>
 
                         <p>
-                            Место для ваших<br/>
-                            фотографий
+                            Место для твоих<br/>
+                            фоток
                         </p>
                     </div>
                 )}

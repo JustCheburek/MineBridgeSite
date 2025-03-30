@@ -22,14 +22,11 @@ export const GiftModal = (
         modal, setModal
     }: GiftModal) => {
     const [mostiki, setMostiki] = useState<number>(1)
-    /*const [
-        type, , onChange, Check
-    ] = useChangeRadioState<"promocode" | "give">("give")*/
 
     return (
         <Modal setModal={setModal} modal={modal}>
             <H1>
-                Подарок
+                Перевод
             </H1>
             <h2>
                 {user.name}
@@ -39,13 +36,11 @@ export const GiftModal = (
                 setModal(false)
 
                 GiveGift(mostiki, user._id, author._id)
-
-                /*if (type === "give") {
-                    return
-                } else if (type === "promocode") {
-
-                }*/
             }}>
+                <p>
+                    Твой баланс: {author.mostiki} <MostikiSvg/>
+                </p>
+
                 <FormLabel>
                     <FormInput
                         type="number"
@@ -58,44 +53,9 @@ export const GiftModal = (
                         onChange={e => setMostiki(Number(e.target.value))}
                     />
                 </FormLabel>
-               {/* <FormGroup>
-                    <FormLabel>
-                        <FormInput
-                            type="radio"
-                            name="type"
-                            checked={Check("give")}
-                            onChange={onChange}
-                            value="give"
-                        />
-                        Сразу
-                    </FormLabel>
-
-                    <FormLabel>
-                        <FormInput
-                            type="radio"
-                            name="type"
-                            checked={Check("promocode")}
-                            onChange={onChange}
-                            value="promocode"
-                        />
-                        Промокод
-                    </FormLabel>
-                </FormGroup>*/}
-
-                <div>
-                    <p>
-                        Ваш баланс:
-                    </p>
-                    <p>
-                        до {author.mostiki} <MostikiSvg/>
-                    </p>
-                    <p>
-                        после {author.mostiki - (mostiki || 0)} <MostikiSvg/>
-                    </p>
-                </div>
 
                 <FormButton disabled={!mostiki || mostiki <= 0 || mostiki > author.mostiki}>
-                    Добавить
+                    Перевести
                 </FormButton>
             </FormBox>
         </Modal>

@@ -14,6 +14,9 @@ export default function Shop({children}: PropsWithChildren) {
 						<SubsectionItem href="/shop/buy">
 							Покупка
 						</SubsectionItem>
+						<SubsectionItem href="/shop/code">
+							Коды
+						</SubsectionItem>
 						<SubsectionItem href="/shop/case">
 							Кейсы
 						</SubsectionItem>

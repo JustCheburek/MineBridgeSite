@@ -1,11 +1,12 @@
 import {Template} from "@email/template";
+import {User} from "lucia";
 
 export const HoursEmail = async (
     {
         name,
         hours
     }: {
-        name: string,
+        name: User["name"],
         hours: number
     }
 ) => (

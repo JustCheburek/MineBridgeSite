@@ -124,7 +124,7 @@ export default async function ShowCase(
                         Конечная цена: {fullPrice} <MostikiSvg/>
                     </p>
                     <p>
-                        У вас есть: {userHave}
+                        У тебя есть: {userHave}
                     </p>
                 </div>
             </div>
