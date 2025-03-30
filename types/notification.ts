@@ -1,5 +1,15 @@
 import {prop} from "@typegoose/typegoose";
 
+export const notificationsLabels = [
+    { name: "code", label: "Код" },
+    { name: "hours", label: "Часы" },
+    { name: "news", label: "Новости" },
+    { name: "mostiki", label: "Мостики" },
+    { name: "rating", label: "Рейтинг" },
+    { name: "invite", label: "Приглашения" },
+    { name: "vote", label: "Голос за сервер" },
+]
+
 export class Notifications {
     @prop({default: true})
     public news!: boolean
@@ -18,4 +28,7 @@ export class Notifications {
 
     @prop({default: true})
     public invite!: boolean
+
+    @prop({default: true})
+    public code!: boolean
 }

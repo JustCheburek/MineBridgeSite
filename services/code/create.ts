@@ -22,7 +22,7 @@ export async function CreateCode(mostiki: User["mostiki"], _id: User["_id"]) {
     revalidateTag("userLike")
     revalidateTag("shop")
 
-    if (!user || !user?.notifications?.mostiki) return
+    if (!user || !user?.notifications?.code) return
 
     await resend.emails.send({
         from: 'Майнбридж <code@m-br.ru>',

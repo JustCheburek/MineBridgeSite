@@ -23,7 +23,7 @@ export async function UseCode(codeId: Code["_id"], _id: User["_id"]) {
     revalidateTag("userLike")
     revalidateTag("shop")
 
-    if (!user || !user?.notifications?.mostiki) return
+    if (!user || !user?.notifications?.code) return
 
     await resend.emails.send({
         from: 'Майнбридж <code@m-br.ru>',
@@ -33,6 +33,4 @@ export async function UseCode(codeId: Code["_id"], _id: User["_id"]) {
             {name: user.name, mostiki: code.mostiki, allMostiki: user.mostiki + code.mostiki, code: code._id}
         )
     })
-
-    return
 }
