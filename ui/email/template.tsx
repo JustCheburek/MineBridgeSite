@@ -21,11 +21,11 @@ export const Template = (
 
         <br/>
         <p>
-            Вы получили это письмо, потому что вы ценный участник{" "}
+            Ты получил это письмо, потому что ты ценный участник{" "}
             <strong><a href="https://m-br.ru">сообщества MineBridge</a></strong>
         </p>
         <p>
-            Вы можете следить за актуальными новостями в{" "}
+            Можешь следить за актуальными новостями в{" "}
             <strong><a href="https://t.me/MineBridgeOfficial">телеграме</a></strong>{" "}
             или <strong><a href="https://discord.gg/rmWAuKGb69">дискорде</a></strong>
         </p>

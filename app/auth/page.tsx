@@ -11,7 +11,7 @@ import {H1} from "@components/h1";
 
 export const metadata: Metadata = {
 	title: "Регистрация",
-	description: "Нужен лишь гугл, дискорд или твич и вы уже на сервере!"
+	description: "Нужен лишь гугл, дискорд или твич и ты уже на сервере!"
 };
 
 export default async function Auth() {
@@ -28,7 +28,7 @@ export default async function Auth() {
 			<MaxSize className="center_text grid_center">
 				<H1>Введи ник</H1>
 				<p>
-					Вы уже близко к цели!
+					Ты уже близко к цели!
 				</p>
 
 				<AuthForm savedName={savedName}/>

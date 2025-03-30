@@ -140,7 +140,7 @@ export class User {
                     await resend.emails.send({
                         from: 'Майнбридж <invite@m-br.ru>',
                         to: inviter.email,
-                        subject: `Вы пригласили ${user.name} на MineBridge`,
+                        subject: `Приглашение ${user.name} на MineBridge`,
                         react: InviteEmail({name: user.name, from, isContentMaker})
                     })
                 }

@@ -10,7 +10,7 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
             <section className="center_text">
                 <h2>
                     {isMe
-                        ? "Вы в бане"
+                        ? "Ты в бане"
                         : "Игрок в бане"
                     }
                 </h2>
@@ -35,7 +35,7 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
 
     return (
         <section className={`${styles.whitelist} grid_center center_text`}>
-            <h2>Вы в Whitelist`е</h2>
+            <h2>Ты в Whitelist`е</h2>
             <h4 className="unic_color medium-font">
                 Java Edition
             </h4>

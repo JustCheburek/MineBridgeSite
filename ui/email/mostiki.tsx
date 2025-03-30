@@ -15,7 +15,7 @@ export const MostikiEmail = async (
     <Template name={name}>
         <p>
             Твои мостики были изменены!{" "}
-            {mostiki > 0 ? "Вы получили" : "У тебя забрали"}{" "}
+            {mostiki > 0 ? "Ты получил" : "У тебя забрали"}{" "}
             <strong>{Math.abs(mostiki)} мостиков</strong>
         </p>
         <p>

@@ -17,7 +17,7 @@ export const CreateCodeEmail = async (
 ) => (
     <Template name={name}>
         <p>
-            Промокод успешно создан! Вы положили на него{" "}
+            Промокод успешно создан! Ты положил на него{" "}
             <strong>{mostiki} мостиков</strong>.
         </p>
         <p>

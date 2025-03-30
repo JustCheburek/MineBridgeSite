@@ -130,7 +130,7 @@ export default async function News() {
                 </div>)}
 
             <NotFound buttonText="Телеграм" href="https://t.me/MineBridgeOfficial">
-                Если вы всё равно не нашли новость, можете перейти в телеграм канал и поискать там!
+                Если всё равно не нашли новость, можешь перейти в тг канал и поискать там!
             </NotFound>
         </div>
     )

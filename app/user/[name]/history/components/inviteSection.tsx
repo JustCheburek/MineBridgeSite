@@ -36,7 +36,7 @@ function FromBox({user, isMe, isHelper}: { user: User, isMe: boolean, isHelper: 
         <div className={styles.from}>
             <p>
                 {isMe
-                    ? "Вы пришли"
+                    ? "Ты пришёл"
                     : "Пришёл"
                 } от
             </p>
