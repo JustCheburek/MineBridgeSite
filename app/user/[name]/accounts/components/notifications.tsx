@@ -18,7 +18,7 @@ export function NotificationsForm({user}: { user: User }) {
                     <FormInput
                         type="checkbox"
                         name={name}
-                        defaultChecked={Boolean((user.notifications as any)?.[name])}
+                        defaultChecked={(user.notifications as any)?.[name] !== false}
                     />
                     {label}
                 </FormLabel>
