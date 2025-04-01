@@ -226,7 +226,7 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
                 <div className={`${styles.right_container} ${styles.container}`}>
                     <form className={styles.box}>
                         <h3 className={`${styles.heading} unic_color center_text`}>
-                            Тип кейса
+                            Кейс
                         </h3>
                         {Cases.map((type) => (
                             <label key={type.name} className={`${styles.select_item} no_select`}>
@@ -248,7 +248,7 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
 
                     <form className={styles.box}>
                         <h3 className={`${styles.heading} unic_color center_text`}>
-                            Тип дропа
+                            Дроп
                         </h3>
                         {Drops
                             .filter(Drop => Drop.name !== "suffix")

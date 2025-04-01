@@ -19,7 +19,7 @@ import Form from "next/form";
 import {Img, ImgBox} from "@components/img";
 import Link from "next/link";
 import {DeleteSvg} from "@ui/SVGS";
-import {CaseBox} from "@components/shop";
+import {CaseBox} from "@components/caseBox";
 import {Url} from "@components/button";
 
 type Select = {
@@ -193,7 +193,7 @@ export default function CasesPurchasesSection(
                                       href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
                                       key={Case?.name}
                                     >
-                                      <CaseBox Case={Case} Drops={Drops} size={40} helper={false} isModal={false}>
+                                      <CaseBox Case={Case} size={40}>
                                           {amount > 1 &&
                                             <p className={`unic_color medium-font ${styles.case_text}`}>
                                                 {amount}

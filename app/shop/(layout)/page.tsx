@@ -4,7 +4,8 @@ import Link from "next/link";
 import {getCases, getDrops} from "@/services";
 
 // Компоненты
-import {Author, Box, CaseBox, CaseInfo, Heading, Price, Section, StickerButton, Text} from "@components/shop";
+import {Author, Box, CaseButton, Heading, HideMeButton, Price, Section, StickerButton, Text} from "./components"
+import {CaseBoxWithModal} from "@components/caseBoxModal";
 
 // Компоненты
 import {MostikiSvg} from "@ui/SVGS";
@@ -15,6 +16,8 @@ import {H1} from "@components/h1";
 import {Suspense} from "react";
 import {Skeleton} from "@components/skeleton";
 import {revalidateTag} from "next/cache";
+import {LASTSHOPUPDATE} from "@/const";
+import {LastUpdate} from "@components/lastUpdate";
 
 export const metadata: Metadata = {
     title: "Магазин",
@@ -24,7 +27,6 @@ export const metadata: Metadata = {
 export default async function Shop() {
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
-    // todo: скрытие с миникарты 10 мостиков в месяц
     // todo: киты в дуэлях
     return (<>
         <div>
@@ -35,8 +37,9 @@ export default async function Shop() {
                 Магазин
             </H1>
 
-            <div className="grid_center">
-                <p id="mostiki">
+            <div className="grid_center" id="mostiki">
+                <LastUpdate time={LASTSHOPUPDATE}/>
+                <p>
                     На сервере действует внутриигровая валюта <strong className="unic_color">мостики</strong>:
                 </p>
                 <h3 className="center_text">
@@ -73,12 +76,15 @@ export default async function Shop() {
                 </ul>
             </div>
 
-            <Heading heading="Кейсы" href="/shop/case" id="cases">
+            <Heading id="cases">
+                <h2 className="center_text">
+                    <Link href="/shop/case">
+                        Кейсы
+                    </Link>
+                </h2>
                 <p>
-                    С помощью кейсов можно кастомизировать свой внешний вид
-                </p>
-                <p>
-                    Тип дропа с кейсов можно изменять
+                    С помощью кейсов можно<br/>
+                    кастомизировать свой внешний вид
                 </p>
             </Heading>
 
@@ -86,29 +92,30 @@ export default async function Shop() {
                 <Suspense fallback={<Skeleton width="100%" height={440}/>}>
                     {Cases.map(Case => (
                         <Box key={Case.name}>
-                            <CaseBox Case={Case} Drops={Drops}/>
+                            <CaseBoxWithModal Case={Case} Drops={Drops}/>
                             <Text>
-                                <CaseInfo>
+                                <h3>
                                     {Case.displayname}
-                                </CaseInfo>
+                                </h3>
                                 <Price oldPrice={Case.oldPrice}>
                                     {Case.price}
                                 </Price>
-                                <Url href="/shop/case" margin="10px">
-                                    Купить
-                                </Url>
+                                <CaseButton/>
                             </Text>
                         </Box>
                     ))}
                 </Suspense>
             </Section>
 
-            <Heading heading="Стикеры в телеграм" id="stickers" href="/features/stickers">
+            <Heading id="stickers">
+                <h2 className="center_text">
+                    <Link href="/features/stickers">
+                        Стикеры
+                    </Link>
+                </h2>
                 <p>
-                    При покупке можно указать свой скин, пожелания, идеи,
-                </p>
-                <p>
-                    чтобы стикер больше подходил под тебя
+                    Показывайте свой скин, пожелания и идеи,<br/>
+                    чтобы телеграм стикер ещё уникальнее
                 </p>
             </Heading>
 
@@ -130,9 +137,12 @@ export default async function Shop() {
 
                 <Box>
                     <Text>
-                        <CaseInfo description="Обычный стикер">
+                        <h3>
                             Стандарт
-                        </CaseInfo>
+                        </h3>
+                        <small>
+                            Обычный стикер
+                        </small>
                         <Price>
                             200
                         </Price>
@@ -142,9 +152,12 @@ export default async function Shop() {
 
                 <Box>
                     <Text>
-                        <CaseInfo description="Невероятно быстро">
+                        <h3>
                             Экспресс
-                        </CaseInfo>
+                        </h3>
+                        <small>
+                            Невероятно быстро
+                        </small>
                         <Price>
                             300
                         </Price>
@@ -171,9 +184,12 @@ export default async function Shop() {
 
                 <Box>
                     <Text>
-                        <CaseInfo description="Абстрактные стикеры">
+                        <h3>
                             Необычные
-                        </CaseInfo>
+                        </h3>
+                        <small>
+                            Абстрактные стикеры
+                        </small>
                         <Price>
                             400
                         </Price>
@@ -183,9 +199,12 @@ export default async function Shop() {
 
                 <Box>
                     <Text>
-                        <CaseInfo description="А где очередь?">
+                        <h3>
                             Speed UP
-                        </CaseInfo>
+                        </h3>
+                        <small>
+                            А где очередь?
+                        </small>
                         <Price>
                             500
                         </Price>
@@ -194,7 +213,7 @@ export default async function Shop() {
                 </Box>
             </Section>
 
-            <Author description="Админ сервера" href="https://t.me/HomeKawa11Fox">
+            <Author description="Главная лиса сервера" href="https://t.me/HomeKawa11Fox">
                 @HomeKawa11Fox
             </Author>
 
@@ -212,9 +231,12 @@ export default async function Shop() {
 
                 <Box>
                     <Text>
-                        <CaseInfo description="Стикеры, но качественнее">
+                        <h3>
                             Премиум
-                        </CaseInfo>
+                        </h3>
+                        <small>
+                            Стикеры, но качественнее
+                        </small>
                         <Price>
                             3000
                         </Price>
@@ -224,13 +246,73 @@ export default async function Shop() {
 
                 <Box>
                     <Text>
-                        <CaseInfo description="Лучшие стикеры, но ещё и быстрее">
+                        <h3>
                             Делюкс
-                        </CaseInfo>
+                        </h3>
+                        <small>
+                            Лучшие стикеры, но ещё и быстрее
+                        </small>
                         <Price>
                             4000
                         </Price>
                         <StickerButton/>
+                    </Text>
+                </Box>
+            </Section>
+
+            {/*<Heading id="kits">
+                <h2 className="center_text">
+                    Киты
+                </h2>
+                <p>
+                    Дуэльные киты
+                </p>
+                <small>
+                    В разработке
+                </small>
+            </Heading>*/}
+
+            <Heading id="hideme">
+                <h2 className="center_text">
+                    Где я?
+                </h2>
+                <p>
+                    Неожиданно пропасть с карты сервера...
+                </p>
+            </Heading>
+
+            <Section name="hideme">
+                <Box>
+                    <Text>
+                        <h3>
+                            1 неделя
+                        </h3>
+                        <Price>
+                            15
+                        </Price>
+                        <HideMeButton/>
+                    </Text>
+                </Box>
+                <Box>
+                    <Text>
+                        <h3>
+                            1 месяц
+                        </h3>
+                        <Price oldPrice={60}>
+                            50
+                        </Price>
+                        <HideMeButton/>
+                    </Text>
+                </Box>
+                <Box>
+                    <Text>
+                        <h3>
+                            1 год
+                        </h3>
+                        <Price oldPrice={600}>
+                            550
+                        </Price>
+                        <HideMeButton/>
                     </Text>
                 </Box>
             </Section>
@@ -245,6 +327,12 @@ export default async function Shop() {
             </OnThisPageLink>
             <OnThisPageLink href="#stickers">
                 Стикеры
+            </OnThisPageLink>
+            <OnThisPageLink href="#kits">
+                Киты
+            </OnThisPageLink>
+            <OnThisPageLink href="#hideme">
+                Где я?
             </OnThisPageLink>
         </OnThisPage>
     </>);

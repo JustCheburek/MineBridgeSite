@@ -5,6 +5,9 @@ export const TG_URL = "https://t.me/MineBridgeOfficial"
 export const VK_URL = "https://vk.com/minebridge"
 export const SUPPORT_URL = "https://discord.gg/f95V9Rezqy"
 
+export const LASTSHOPUPDATE = new Date(
+    new Date(2025, 4 - 1, 1, 16 - 10, 40).toUTCString()
+)
 export const LASTRULESUPDATE = new Date(
     new Date(2025, 1 - 1, 12, 14 - 10, 30).toUTCString()
 )

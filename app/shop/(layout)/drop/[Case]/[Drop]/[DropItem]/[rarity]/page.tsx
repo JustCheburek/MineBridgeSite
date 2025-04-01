@@ -1,4 +1,4 @@
-import {Box, CaseInfo, Section, Text} from "@components/shop";
+import {Box, Info, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {Case, Drop, RarityNames, RarityType} from "@/types/case";
 import {getCase, getDrop, getItems} from "@/services";
@@ -74,9 +74,9 @@ export default async function Items(
                             />
                         </ImgBox>
                         <Text>
-                            <CaseInfo>
+                            <Info>
                                 {Item.displayname}
-                            </CaseInfo>
+                            </Info>
                             <Url href={`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}/${Item.name}`} margin="10px">
                                 Выбрать
                             </Url>

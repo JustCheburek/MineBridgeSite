@@ -1,4 +1,4 @@
-import {Box, CaseBox, CaseInfo, Price, Section, Text} from "@components/shop";
+import {Box, CaseBox, Info, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {getCases, getDrops} from "@/services";
 import type {Metadata} from "next";
@@ -20,9 +20,9 @@ export default async function Cases() {
                     <Box key={Case.name}>
                         <CaseBox Case={Case} Drops={Drops}/>
                         <Text>
-                            <CaseInfo>
+                            <Info>
                                 {Case.displayname}
-                            </CaseInfo>
+                            </Info>
                             <Price oldPrice={Case.oldPrice}>
                                 {Case.price}
                             </Price>

@@ -17,7 +17,6 @@ export type ImgBoxProps = {
     borderRadius?: "up" | "down" | "all" | false
     helper?: boolean
 } & ComponentPropsWithoutRef<"figure">
-
 export const ImgBox = (
     {
         className = "",
