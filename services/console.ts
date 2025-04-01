@@ -94,6 +94,20 @@ export const RemoveSuffixConsole = cache(
     }
 )
 
+export const ResetPassConsole = cache(
+    async (name: string) => {
+        const client = await RconVC()
+
+        try {
+            await client.send(`librelogin user unregister ${name}`)
+        } catch (e) {
+            console.error(e)
+        }
+
+        client.disconnect()
+    }
+)
+
 /*
 export const GiveRolesConsole = cache(
     async (roles: Role[], name: string) => {

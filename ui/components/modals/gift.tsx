@@ -7,7 +7,7 @@ import {H1} from "@components/h1";
 import type {User} from "lucia";
 import {useState} from "react";
 import {MostikiSvg} from "@ui/SVGS";
-import {GiveGift} from "@services/user/gift";
+import {GiveGift} from "@services/user";
 
 type GiftModal = {
     modal: boolean

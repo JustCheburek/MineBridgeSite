@@ -12,8 +12,12 @@ export function NotificationsForm({user}: { user: User }) {
             <h3 className="center_text">
                 Уведомления
             </h3>
+            <p>
+                Вы можете настроить<br/>
+                уведомления по почте под себя
+            </p>
 
-            {notificationsLabels.map(({ name, label }) => (
+            {notificationsLabels.map(({name, label}) => (
                 <FormLabel key={name}>
                     <FormInput
                         type="checkbox"

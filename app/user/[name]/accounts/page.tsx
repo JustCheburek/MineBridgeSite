@@ -14,6 +14,7 @@ import {H1} from "@components/h1";
 import {CheckLink} from "@components/checkLink";
 import {NameParams} from "@/types/params";
 import {NotificationsForm} from "./components/notifications";
+import {PassForm} from "@app/user/[name]/accounts/components/pass";
 
 export const generateMetadata = async ({params}: NameParams) => {
     const {name} = await params
@@ -62,8 +63,6 @@ export default async function Accounts({params}: NameParams) {
               />
             }
 
-            {/* todo: добавить отдельные кнопки сохранить */}
-
             {(isMe || isHelper) &&
               <NotificationsForm user={user}/>
             }
@@ -86,6 +85,10 @@ export default async function Accounts({params}: NameParams) {
                     </Provider>
                 ))}
             </div>
+
+            {(isMe || isModer) &&
+              <PassForm user={user}/>
+            }
             {/*{(isModer || isMe) &&
               <DeleteUserBox
                 user={user}
