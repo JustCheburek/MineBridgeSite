@@ -1,6 +1,6 @@
 "use server";
 
-import {GetHours, RconMB} from "@services/console";
+import {GetHoursConsole, RconMB} from "@services/console";
 import {userModel} from "@server/models";
 import {revalidateTag} from "next/cache";
 import {AUTO} from "@/const";
@@ -20,7 +20,7 @@ export async function GetStars(_id: string) {
     if (!user) return
 
     try {
-        const hours = await GetHours(user.name)
+        const hours = await GetHoursConsole(user.name)
 
         const client = await RconMB()
         const text = await client.send(`scoreboard players set ${user.name} hours 0`)

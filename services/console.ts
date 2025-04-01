@@ -25,7 +25,7 @@ export const RconVC = cache(
     }
 )
 
-export const GetHours = cache(
+export const GetHoursConsole = cache(
     async (name: string) => {
         const client = await RconMB()
         let hours = -1
@@ -93,3 +93,40 @@ export const RemoveSuffixConsole = cache(
         client.disconnect()
     }
 )
+
+/*
+export const GiveRolesConsole = cache(
+    async (roles: Role[], name: string) => {
+        const client = await RconVC()
+
+        const MCRoles = Object.entries(ROLES)
+            .filter(([, roleValue]) =>
+                roles.some(role => role.name.toLowerCase().includes(roleValue))
+            )
+            .map(([roleKey]) => roleKey);
+
+        const remainingRoles = Object.entries(ROLES)
+            .filter(([, roleValue]) =>
+                !roles.some(role => role.name.toLowerCase().includes(roleValue))
+            )
+            .map(([roleKey]) => roleKey);
+
+        MCRoles.map(async MCRole => {
+            try {
+                await client.send(`lpv user ${name} parent add ${MCRole}`)
+            } catch (e) {
+                console.error(e)
+            }
+        })
+
+        remainingRoles.map(async MCRole => {
+            try {
+                await client.send(`lpv user ${name} parent remove ${MCRole}`)
+            } catch (e) {
+                console.error(e)
+            }
+        })
+
+        client.disconnect()
+    }
+)*/

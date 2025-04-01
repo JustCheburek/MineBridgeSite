@@ -10,7 +10,7 @@ import axios from "axios";
 import type {Role} from "@/types/role";
 import {Case, Drop, Item, RarityType} from "@/types/case";
 import {idOrName} from "@/types/idOrName";
-import {NO_ROLES} from "@/const";
+import {NO_ROLES, ROLES} from "@/const";
 import {Code} from "@/types/code";
 
 // todo: Разделение на папки
@@ -51,16 +51,17 @@ const getRoles = cache(
         ).then(r => r.data).catch(console.error);
 
         const roles = allRoles.filter(({id}) => dsUser?.roles?.includes(id))
-        const isDonate = roles?.some(({name}) => name.toLowerCase().includes("акционер"))
-        let isAdmin = false, isModer = false, isHelper = false
+        const isDonate = roles?.some(({name}) => name.toLowerCase().includes(ROLES.donate))
 
+        // Привилегии
+        let isAdmin = false, isModer = false, isHelper = false
         if (!isDonate) {
-            isAdmin = roles?.some(({name}) => name.toLowerCase().includes("админ"))
-            isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes("модер"))
-            isHelper = isModer || roles?.some(({name}) => name.toLowerCase().includes("помогатор"))
+            isAdmin = roles?.some(({name}) => name.toLowerCase().includes(ROLES.admin))
+            isModer = isAdmin || roles?.some(({name}) => name.toLowerCase().includes(ROLES.moder))
+            isHelper = isModer || roles?.some(({name}) => name.toLowerCase().includes(ROLES.helper))
         }
 
-        const isContentMaker = roles?.some(({name}) => name.toLowerCase().includes("контент"))
+        const isContentMaker = roles?.some(({name}) => name.toLowerCase().includes(ROLES.content))
 
         return {roles, isHelper, isModer, isAdmin, isContentMaker}
     },

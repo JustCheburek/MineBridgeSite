@@ -70,7 +70,7 @@ export const H1 = ({children, paths, reload, description, up = false, className 
             </div>
 
             {reload &&
-              <ReloadButton reload={reload} className={styles.reload}/>
+              <ReloadButton action={reload} className={styles.reload}/>
             }
         </div>
     </div>

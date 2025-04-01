@@ -39,6 +39,18 @@ export const AUTO = {
 export const MBSESSION = "minebridge-session"
 export type SocialName = keyof typeof URLS_START
 
+export const ROLES = {
+    admin: "админ",
+    helper: "помогатор",
+    content: "контент",
+    moder: "модер",
+    donate: "спонсор",
+    lor: "лородел",
+    mem: "мемодел",
+    tester: "тестировщик",
+    mer: "мэр"
+}
+
 export const Paths: PathID[] = [{
     rating: 25,
     x: -35,

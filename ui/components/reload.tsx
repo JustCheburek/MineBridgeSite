@@ -3,17 +3,19 @@
 import {ReloadSvg} from "@ui/SVGS";
 
 type ReloadButton = {
-    reload: () => void
+    action: () => void
+    size?: string
+    title?: string
     className?: string
 }
 
-export const ReloadButton = ({reload, className = ""}: ReloadButton) => (
+export const ReloadButton = ({action, size="3rem", title="Перезагрузка", className = ""}: ReloadButton) => (
     <button
-        onClick={() => reload()}
-        className={`unic_button ${className}`} title="Перезагрузка"
+        onClick={() => action()}
+        className={`unic_button ${className}`} title={title}
     >
         <ReloadSvg
-            size="3rem"
+            size={size}
             className="unic_color"
         />
     </button>
