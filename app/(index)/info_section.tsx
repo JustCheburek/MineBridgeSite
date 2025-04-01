@@ -35,7 +35,7 @@ const InfoSection = () => (
             </Url>
 
             <p>
-                1.21+ · Minecraft: Java Edition · Лицензия не обязательна
+                {process.env.NEXT_PUBLIC_VERSION} · Minecraft: Java Edition · Лицензия не обязательна
             </p>
 
             <AllUsers/>
@@ -58,7 +58,7 @@ const InfoSection = () => (
                 Влететь на сервер
             </Url>
 
-            <p>1.21+</p>
+            <p>{process.env.NEXT_PUBLIC_VERSION}</p>
             <p>Minecraft: Java Edition</p>
             <p>Лицензия не обязательна</p>
 

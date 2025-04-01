@@ -37,7 +37,7 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
         <section className={`${styles.whitelist} grid_center center_text`}>
             <h2>Ты в Whitelist`е</h2>
             <h4 className="unic_color medium-font">
-                Java Edition
+                {process.env.NEXT_PUBLIC_VERSION} Java Edition
             </h4>
             <p>
                 IP:{" "}
@@ -46,8 +46,8 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
                 </strong>
             </p>
             <small>
-                Зайдите на сервер и перезагрузите страницу,<br/>
-                чтобы попасть в Whitelist
+            Если не можете зайти, то<br/>
+                перезагрузите страницу
             </small>
         </section>
     )
