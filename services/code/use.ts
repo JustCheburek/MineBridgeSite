@@ -25,7 +25,6 @@ export async function UseCode(codeId: Code["_id"], _id: User["_id"]) {
     revalidateTag("shop")
 
     const {user: author} = await getUser({_id: code.authorId}, false)
-
     if (!user || !author) return
 
     if (user.notifications.code) {

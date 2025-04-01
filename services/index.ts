@@ -342,7 +342,8 @@ export const getCode = cache(
         const code: Code | null = JSON.parse(JSON.stringify(await codeModel.findById(_id).lean()))
 
         if (!code) {
-            throw new Error(`Code не найден: ${JSON.stringify(_id)}`)
+            console.error(`Code не найден: ${JSON.stringify(_id)}`)
+            notFound()
         }
 
         return code
