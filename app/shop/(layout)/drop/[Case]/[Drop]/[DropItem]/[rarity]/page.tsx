@@ -1,4 +1,4 @@
-import {Box, Info, Section, Text} from "@components/shop";
+import {Box, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {Case, Drop, RarityNames, RarityType} from "@/types/case";
 import {getCase, getDrop, getItems} from "@/services";
@@ -65,7 +65,7 @@ export default async function Items(
             ]}>
                 Предмет
             </H1>
-            <Section name="cases">
+            <Section type="third">
                 {Items.map(Item => (
                     <Box key={Item.name}>
                         <ImgBox className={`border-radius ${rarity}_box`} hover width="280px" height="160px">
@@ -74,9 +74,9 @@ export default async function Items(
                             />
                         </ImgBox>
                         <Text>
-                            <Info>
+                            <h2>
                                 {Item.displayname}
-                            </Info>
+                            </h2>
                             <Url href={`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}/${Item.name}`} margin="10px">
                                 Выбрать
                             </Url>

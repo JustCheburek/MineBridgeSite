@@ -1,8 +1,9 @@
-import {Box, CaseBox, Info, Price, Section, Text} from "@components/shop";
+import {Box, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {getCases, getDrops} from "@/services";
 import type {Metadata} from "next";
 import {H1} from "@components/h1";
+import {CaseBoxWithModal} from "@components/caseBoxModal";
 
 export const metadata: Metadata = {
     title: "Выберите кейс",
@@ -15,14 +16,14 @@ export default async function Cases() {
     return (
         <div>
             <H1>Кейсы</H1>
-            <Section name="cases">
+            <Section type="third">
                 {Cases.map(Case => (
                     <Box key={Case.name}>
-                        <CaseBox Case={Case} Drops={Drops}/>
+                        <CaseBoxWithModal Case={Case} Drops={Drops}/>
                         <Text>
-                            <Info>
+                            <h2>
                                 {Case.displayname}
-                            </Info>
+                            </h2>
                             <Price oldPrice={Case.oldPrice}>
                                 {Case.price}
                             </Price>

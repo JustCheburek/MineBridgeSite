@@ -1,4 +1,4 @@
-import {Box, Info, Price, Section, Text} from "@components/shop";
+import {Box, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {getCase, getDrop, getDrops} from "@/services";
 import {Case, Drop} from "@/types/case";
@@ -52,15 +52,15 @@ export default async function DropsItems(
             ]}>
                 Дроп предмета
             </H1>
-            <Section name="cases">
+            <Section type="third">
                 {Drops
                     .filter(Drop => Drop.name !== "all")
                     .map(Drop => (
                         <Box key={Drop.name}>
                             <Text>
-                                <Info>
+                                <h2>
                                     {Drop.displayname}
-                                </Info>
+                                </h2>
                                 <Price>
                                     {Drop.price}
                                 </Price>

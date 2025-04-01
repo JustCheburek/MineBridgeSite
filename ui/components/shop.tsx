@@ -1,18 +1,17 @@
 import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
-import styles from "./shop.module.scss";
 import Link from "next/link";
 import {MostikiSvg} from "@ui/SVGS";
-import {Url} from "@components/button";
+import styles from "./styles/shop.module.scss";
 
-export const Section = ({children, name}: PropsWithChildren<{ name: string }>) => (
-    <div className={`${styles.container} center_text ${styles[name]}`}>
+export const Section = ({children, type}: PropsWithChildren<{ type?: "preview" | "third" }>) => (
+    <div className={`${styles.container} center_text ${type && styles[type]}`}>
         {children}
     </div>
 )
 
 type Heading = ComponentPropsWithoutRef<"div">
 export const Heading = ({children, className, ...props}: Heading) => (
-    <div className={`grid_center ${styles.section_heading} ${className}`} {...props}>
+    <div className={`grid_center ${styles.heading} ${className}`} {...props}>
         {children}
     </div>
 )
@@ -23,7 +22,7 @@ type Author = {
 }
 
 export const Author = ({description, href, children}: PropsWithChildren<Author>) => (
-    <div className={`${styles.author_heading} center_text`}>
+    <div className={`${styles.heading} center_text`}>
         <Link href={href} target="_blank">
             <h3>
                 {children}
@@ -61,22 +60,4 @@ export const Price = ({children, oldPrice}: PropsWithChildren<{ oldPrice?: numbe
             <MostikiSvg/>
         </h3>
     </div>
-)
-
-export const CaseButton = () => (
-    <Url href="/shop/case" margin="10px">
-        Купить
-    </Url>
-)
-
-export const StickerButton = () => (
-    <Url href="https://t.me/MineBridgeOfficial/326" margin="10px">
-        Купить
-    </Url>
-)
-
-export const HideMeButton = () => (
-    <Url href="https://discord.gg/7zx8u4rY" margin="10px">
-        Купить
-    </Url>
 )

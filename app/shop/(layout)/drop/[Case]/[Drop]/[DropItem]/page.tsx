@@ -1,4 +1,4 @@
-import {Box, Info, Section, Text} from "@components/shop";
+import {Box, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {Case, Drop, RarityNames, rarityNames} from "@/types/case";
 import {getCase, getDrop} from "@/services";
@@ -60,13 +60,13 @@ export default async function Rarities(
             ]}>
                 Редкость
             </H1>
-            <Section name="cases">
+            <Section type="third">
                 {rarityNames.map(rarity => (
                     <Box key={rarity}>
                         <Text>
-                            <Info>
+                            <h2>
                                 {RarityNames[rarity]}
-                            </Info>
+                            </h2>
                             <Url href={`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`} margin="10px">
                                 Выбрать
                             </Url>

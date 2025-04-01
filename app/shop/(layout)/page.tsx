@@ -1,13 +1,8 @@
-// React
 import type {Metadata} from "next";
 import Link from "next/link";
 import {getCases, getDrops} from "@/services";
-
-// Компоненты
-import {Author, Box, CaseButton, Heading, HideMeButton, Price, Section, StickerButton, Text} from "./components"
+import {Author, Box, Heading, Price, Section, Text} from "@components/shop"
 import {CaseBoxWithModal} from "@components/caseBoxModal";
-
-// Компоненты
 import {MostikiSvg} from "@ui/SVGS";
 import {Url} from "@components/button";
 import {Img, ImgBox} from "@components/img";
@@ -23,6 +18,24 @@ export const metadata: Metadata = {
     title: "Магазин",
     description: "Мостики — внутриигровая валюта. 1 ₽ = 1 мостик. Кейсы, стикеры, всё это про нас!"
 };
+
+const CaseButton = () => (
+    <Url href="/shop/case" margin="10px">
+        Купить
+    </Url>
+)
+
+const StickerButton = () => (
+    <Url href="https://t.me/MineBridgeOfficial/326" margin="10px">
+        Купить
+    </Url>
+)
+
+const HideMeButton = () => (
+    <Url href="https://discord.gg/7zx8u4rY" margin="10px">
+        Купить
+    </Url>
+)
 
 export default async function Shop() {
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
@@ -88,7 +101,7 @@ export default async function Shop() {
                 </p>
             </Heading>
 
-            <Section name="cases">
+            <Section type="third">
                 <Suspense fallback={<Skeleton width="100%" height={440}/>}>
                     {Cases.map(Case => (
                         <Box key={Case.name}>
@@ -123,7 +136,7 @@ export default async function Shop() {
                 @coolpilot2O1O
             </Author>
 
-            <Section name="stickers">
+            <Section type="preview">
                 <Box preview>
                     <Link href="/features/stickers">
                         <ImgBox hover helper overflow={false}>
@@ -170,7 +183,7 @@ export default async function Shop() {
                 @Dezelink
             </Author>
 
-            <Section name="stickers">
+            <Section type="preview">
                 <Box preview>
                     <Link href="/features/stickers">
                         <ImgBox hover helper overflow={false}>
@@ -217,7 +230,7 @@ export default async function Shop() {
                 @HomeKawa11Fox
             </Author>
 
-            <Section name="stickers">
+            <Section type="preview">
                 <Box preview>
                     <Link href="/features/stickers">
                         <ImgBox hover helper overflow={false}>
@@ -260,17 +273,17 @@ export default async function Shop() {
                 </Box>
             </Section>
 
-            {/*<Heading id="kits">
+            <Heading id="kits">
                 <h2 className="center_text">
                     Киты
                 </h2>
                 <p>
-                    Дуэльные киты
+                    Для разнообразной игры в дуэлях
                 </p>
-                <small>
+                <h4 className="center_text">
                     В разработке
-                </small>
-            </Heading>*/}
+                </h4>
+            </Heading>
 
             <Heading id="hideme">
                 <h2 className="center_text">
@@ -281,7 +294,7 @@ export default async function Shop() {
                 </p>
             </Heading>
 
-            <Section name="hideme">
+            <Section>
                 <Box>
                     <Text>
                         <h3>
@@ -299,7 +312,7 @@ export default async function Shop() {
                             1 месяц
                         </h3>
                         <Price oldPrice={60}>
-                            50
+                            45
                         </Price>
                         <HideMeButton/>
                     </Text>
@@ -310,7 +323,7 @@ export default async function Shop() {
                             1 год
                         </h3>
                         <Price oldPrice={600}>
-                            550
+                            500
                         </Price>
                         <HideMeButton/>
                     </Text>
