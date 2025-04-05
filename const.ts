@@ -15,7 +15,10 @@ export const LASTLORUPDATE = new Date(
     new Date(2025, 3 - 1, 27, 12 - 10, 40).toUTCString()
 )
 export const LASTTERMSOFUSEUPDATE = new Date(
-    new Date(2025, 3 - 1, 27, 12 - 10, 40).toUTCString()
+    new Date(2025, 4 - 1, 5, 21 - 10, 0).toUTCString()
+)
+export const LASTPRIVACYPOLICEUPDATE = new Date(
+    new Date(2025, 4 - 1, 5, 21 - 10, 0).toUTCString()
 )
 
 export const URLS_START = {

@@ -250,6 +250,7 @@ export default function TermsOfUse() {
                     </p>
                     <ul>
                         <li>адрес электронной почты;</li>
+                        <li>ip-адрес;</li>
                         <li>уникальные публичные идентификаторы привязанных к аккаунту сторонних ресурсов;</li>
                         <li>дата и время осуществления доступа к сервисам;</li>
                         <li>информация о вашей активности во время использования сервисов;</li>
@@ -287,7 +288,7 @@ export default function TermsOfUse() {
                 </Rule>
                 <Rule number={9.5}>
                     Правила сервера находятся на{" "}
-                    <Link href="/rules" className="unic_color">{process.env.NEXT_PUBLIC_PUNYCODE_URL}/rules</Link>.
+                    <Link href="/rules" className="unic_color">{process.env.NEXT_PUBLIC_RU_URL}/rules</Link>.
                     Принимая пользовательское соглашение, вы соглашаетесь и принимаете правила сервера.
                 </Rule>
             </RulesBox>

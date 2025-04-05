@@ -24,6 +24,9 @@ export default function RulesLayout(
                 <SubsectionItem href="/rules/terms-of-use">
                     Соглашение
                 </SubsectionItem>
+                <SubsectionItem href="/rules/privacy-police">
+                    Приватность
+                </SubsectionItem>
             </Subsections>
             {children}
         </MaxSize>

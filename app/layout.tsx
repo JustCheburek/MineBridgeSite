@@ -29,7 +29,7 @@ const montserrat = Montserrat({subsets: ["latin"], preload: true, style: "normal
 
 export const metadata: Metadata = {
     title: {
-        template: "%s • МайнБридж - майнкрафт сервер",
+        template: "%s • Майнбридж - майнкрафт сервер",
         default: "Майнбридж - майнкрафт сервер",
     },
     description: "Лучший нелицензионный майнкрафт сервер на новых версиях",
