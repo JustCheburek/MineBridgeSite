@@ -34,12 +34,10 @@ export default function RefundPolice() {
                     </Link>.
                 </p>
             </RulesBox>
-            <RulesBox name="properly" heading="Отказ от услуги надлежащего качества по желанию Пользователя" number={1}>
+            <RulesBox name="properly" heading="Надлежащее качество" number={1}>
                 <Rule number={1.1}>
-                    <em>
-                        Отказ от услуги, которая удовлетворяет качеству, соответствует заявленным характеристикам, но от
-                        нее пользователь может отказаться по субъективным причинам.
-                    </em>
+                    Отказ от услуги, которая удовлетворяет качеству, соответствует заявленным характеристикам, но от
+                    нее пользователь может отказаться по субъективным причинам.
                 </Rule>
                 <Rule number={1.2}>
                     <h3>
@@ -54,9 +52,9 @@ export default function RefundPolice() {
                     <h3>
                         Услуги декорации
                     </h3>
-                    <em>
+                    <small>
                         Питомцы, частицы и другие украшения, отображаемые на игровом сервере
-                    </em>
+                    </small>
                     <p>
                         Возврат не осуществляется.
                     </p>
@@ -70,11 +68,84 @@ export default function RefundPolice() {
                     </p>
                 </Rule>
             </RulesBox>
+            <RulesBox name="improperly" heading="Ненадлежащее качество" number={2}>
+                <p>
+                    Отказ от услуги, не оказанной в течение 48 часов или отказ от услуги, не способной обеспечить в
+                    полной мере свои функциональные качества из-за существенного недостатка{" "}
+                    <small>
+                        (например: полная недоступность серверов длительное время по причинам, зависящих от
+                        администрации и компании)
+                    </small>
+                </p>
+                <br/>
+                <p>
+                    В данном случае мы возвращаем полную стоимость услуги или соразмерно уменьшаем установленную
+                    стоимость, если пользователь будет согласен, а способ оплаты позволяет осуществлять частичный
+                    возврат.
+                </p>
+            </RulesBox>
+            <RulesBox name="refund" heading="Возврат средств" number={3}>
+                <p>
+                    Для запроса денежных средств, Пользователь может обратиться по электронной почте{" "}
+                    <Link
+                        href={`mailto:refund@${process.env.NEXT_PUBLIC_EN_DOMAIN}`}
+                        className="unic_color medium-font"
+                    >
+                        refund@{process.env.NEXT_PUBLIC_EN_DOMAIN}
+                    </Link>.
+                </p>
+                <br/>
+                <p>
+                    При отправке запроса на возврат, обязательно укажите:
+                </p>
+                <ul>
+                    <li>
+                        Данные для идентификации аккаунта (никнейм Minecraft, указанный в профиле)
+                    </li>
+                    <li>
+                        Услуга, за которую необходимо осуществить возврат
+                    </li>
+                    <li>
+                        Причина возврата
+                    </li>
+                </ul>
+            </RulesBox>
+            <RulesBox name="methods" heading="Способы возврата" number={4}>
+                <p>
+                    Возврат осуществляется только на тот способ оплаты, с которого производилась оплата. Срок возврата
+                    зависит от способа оплаты.
+                </p>
+            </RulesBox>
+            <RulesBox name="violation" heading="Нарушение политик" number={5}>
+                <p>
+                    Возврат не осуществляется пользователям, нарушивших любую из политик сервисов.
+                </p>
+            </RulesBox>
         </div>
         <OnThisPage>
             <OnThisPageLink href="#terms">
                 <Number>0</Number>
                 Термины
+            </OnThisPageLink>
+            <OnThisPageLink href="#properly">
+                <Number>1</Number>
+                Надлежащее
+            </OnThisPageLink>
+            <OnThisPageLink href="#improperly">
+                <Number>2</Number>
+                Ненадлежащее
+            </OnThisPageLink>
+            <OnThisPageLink href="#refund">
+                <Number>3</Number>
+                Возврат
+            </OnThisPageLink>
+            <OnThisPageLink href="#methods">
+                <Number>4</Number>
+                Способы
+            </OnThisPageLink>
+            <OnThisPageLink href="#violation">
+                <Number>5</Number>
+                Нарушение
             </OnThisPageLink>
         </OnThisPage>
     </>)
