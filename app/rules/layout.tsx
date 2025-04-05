@@ -22,10 +22,13 @@ export default function RulesLayout(
                     Выражения
                 </SubsectionItem>
                 <SubsectionItem href="/rules/terms-of-use">
-                    Соглашение
+                    Условия
                 </SubsectionItem>
                 <SubsectionItem href="/rules/privacy-police">
                     Приватность
+                </SubsectionItem>
+                <SubsectionItem href="/rules/refund-police">
+                    Возврат
                 </SubsectionItem>
             </Subsections>
             {children}

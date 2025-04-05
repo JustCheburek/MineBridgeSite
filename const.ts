@@ -18,7 +18,10 @@ export const LASTTERMSOFUSEUPDATE = new Date(
     new Date(2025, 4 - 1, 5, 21 - 10, 0).toUTCString()
 )
 export const LASTPRIVACYPOLICEUPDATE = new Date(
-    new Date(2025, 4 - 1, 5, 21 - 10, 0).toUTCString()
+    new Date(2025, 4 - 1, 5, 22 - 10, 0).toUTCString()
+)
+export const LASTREFUNDPOLICEUPDATE = new Date(
+    new Date(2025, 4 - 1, 5, 22 - 10, 0).toUTCString()
 )
 
 export const URLS_START = {

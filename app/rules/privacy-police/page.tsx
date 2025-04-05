@@ -1,16 +1,33 @@
 import {H1} from "@components/h1";
 import {RulesBox} from "@components/rules";
-import {LASTTERMSOFUSEUPDATE} from "@/const";
+import {LASTPRIVACYPOLICEUPDATE} from "@/const";
 import {LastUpdate} from "@components/lastUpdate";
 import Link from "next/link";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {Number} from "@components/number";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Политика конфиденциальности",
+    description: "Защита персональных данных."
+};
 
 export default function PrivacyPolicy() {
     return (<>
         <div className="privacy_content">
             <H1 up>Приватность</H1>
-            <LastUpdate time={LASTTERMSOFUSEUPDATE}/>
+            <LastUpdate time={LASTPRIVACYPOLICEUPDATE}/>
+            <RulesBox name="terms" heading="Термины" number={0}>
+                <p>
+                    Термины используются в том же значении, что и в{" "}
+                    <Link
+                        href="/rules/terms-of-use"
+                        className="unic_color medium-font"
+                    >
+                        пользовательском соглашении
+                    </Link>.
+                </p>
+            </RulesBox>
             <RulesBox name="general" heading="Общие условия" number={1}>
                 <p>
                     Нормы настоящей политики конфиденциальности (далее – политика) действуют в отношении любой
@@ -51,8 +68,7 @@ export default function PrivacyPolicy() {
                 <p>
                     Администрация сервиса оставляет за собой право по своему личному усмотрению изменять или дополнять
                     настоящую политику конфиденциальности в любое время без предварительного и последующего уведомления.
-                    Политика является неотъемлемой частью правил оказания услуг. Термины используются в том же значении,
-                    что и в пользовательском соглашении. MineBridge вправе в любое время вносить изменения в политику.
+                    Политика является неотъемлемой частью правил оказания услуг. MineBridge вправе в любое время вносить изменения в политику.
                 </p>
                 <br/>
                 <p>
@@ -172,6 +188,10 @@ export default function PrivacyPolicy() {
             </RulesBox>
         </div>
         <OnThisPage>
+            <OnThisPageLink href="#terms">
+                <Number>0</Number>
+                Термины
+            </OnThisPageLink>
             <OnThisPageLink href="#general">
                 <Number>1</Number>
                 Условия

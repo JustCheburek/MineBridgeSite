@@ -5,14 +5,17 @@ import {Rule, RulesBox} from "@components/rules";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {Number} from "@components/number";
 import Link from "next/link";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Пользовательское соглашение",
+    description: "Соглашение между пользователем и компанией MineBridge."
+};
 
 export default function TermsOfUse() {
     return (<>
         <div className="termsofuse_content">
             <H1 up>Условия</H1>
-            <h3 className="center_text">
-                Пользовательское соглашение
-            </h3>
             <LastUpdate time={LASTTERMSOFUSEUPDATE}/>
             <br/>
             <p>
