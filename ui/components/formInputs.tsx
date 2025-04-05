@@ -48,7 +48,7 @@ export const InputNameCheck = (
                 setAccess && setAccess(name.length < 30)
 
                 if (e.target.value.match(/[^a-zA-Z0-9-_]/)) {
-                    setSymbol(JSON.stringify(e.target.value))
+                    setSymbol(String(e.target.value))
                 } else {
                     setName(e.target.value)
                     setSymbol("")

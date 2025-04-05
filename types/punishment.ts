@@ -10,12 +10,6 @@ export class Punishment {
 
 	@prop({trim: true})
 	public author!: string
-
-	@prop()
-	public createdAt!: Date
-
-	@prop()
-	public updatedAt!: Date
 }
 
-export type Action = "mineBan" | "minePardon" | "dsBan" | "mute" | "dsPardon" | "unmute" | "rollback"
+export type Action = "mineBan" | "minePardon" | "dsBan" | "dsPardon"

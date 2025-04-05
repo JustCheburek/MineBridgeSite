@@ -4,7 +4,7 @@ import Link from "next/link";
 import {Suspense} from "react";
 import TimeAgo from "javascript-time-ago";
 import {validate} from "@services/validate";
-import {getUser} from "@/services";
+import {getUser, updateFrom} from "@/services";
 import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
 import {userModel} from "@server/models";
@@ -14,6 +14,7 @@ import type {NameParams} from "@/types/params";
 import {Skeleton} from "@components/skeleton";
 import type {User} from "lucia";
 import {GiftBox} from "./components/gift";
+import {cookies} from "next/headers";
 
 const Avatar = dynamic(() => import("@components/avatar"));
 const ServerStatusSection = dynamic(() => import("./components/serverStatus"));
@@ -62,18 +63,22 @@ const Mostiki = ({isMe, isAdmin, user, author}: {
 const timeAgo = new TimeAgo('ru-RU');
 
 export default async function Profile({params}: NameParams) {
+    const cookiesStore = await cookies()
+
     const {name} = await params
-    const {user: author, isHelper, isAdmin} = await validate()
+    const {user: author, isHelper, isAdmin, roles: authorRoles} = await validate()
     const {
         user, roles, isMe, isContentMaker
     } = await getUser(
         {name}, true, true, author?._id, isHelper
     )
 
-    if (author && (!author?.from)) {
+    if (author) {
+        const from: { place: string, name: string } = JSON.parse(cookiesStore.get("from")?.value ?? "{}")
+
         await userModel.findByIdAndUpdate(
             author._id,
-            {from: await userModel.From(author)}
+            {from: await updateFrom(author, from, authorRoles)}
         )
     }
 

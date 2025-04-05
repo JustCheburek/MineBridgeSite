@@ -57,24 +57,6 @@ export default function Events() {
                 <Url href="https://discord.gg/ZrdQ2kGuXG">
                     Ивенты
                 </Url>
-
-                {/*<h4>
-                    Накопления:
-                </h4>
-                <ul className="remove_marker">
-                    <li>
-                        <strong className="unic_color">JustCheburek</strong>: 7 ПИ
-                    </li>
-                    <li>
-                        <strong className="unic_color">Kawa11Fox</strong>: 6 ПИ
-                    </li>
-                    <li>
-                        <strong className="unic_color">han_world</strong>: 3 ПИ
-                    </li>
-                    <li>
-                        <strong className="unic_color">sodplayy</strong>: 2 ПИ
-                    </li>
-                </ul>*/}
             </div>
         </div>
     </>)

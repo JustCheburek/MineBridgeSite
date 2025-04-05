@@ -40,9 +40,7 @@ export async function GetStars(_id: string) {
             user.punishments?.push({
                 reason: `Часы: ${fullHours}`,
                 rating: fullHours,
-                author: AUTO.HOURS,
-                createdAt: new Date(),
-                updatedAt: new Date()
+                author: AUTO.HOURS
             })
             user.rating += hours
             await user.save()

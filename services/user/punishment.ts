@@ -44,9 +44,6 @@ async function CheckActions(user: User, actions: Action[]) {
             const client = await RconVC()
             console.log(`Бан ${user.name}`)
             await client.send(`ban ${user.name} Нарушение правил сервера`)
-            if (actions.includes("rollback")) {
-                await client.send(`co rollback user:${user.name} time:3w radius:#global`)
-            }
             client.disconnect()
         }
         if (actions.includes("minePardon")) {

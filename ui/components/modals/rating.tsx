@@ -63,29 +63,6 @@ export const RatingModal = (
                         onChange={onPunishmentChange}
                     />
                 </FormLabel>
-                <h3>Везде</h3>
-                <FormGroup>
-                    <FormLabel>
-                        <FormInput
-                            type="checkbox"
-                            name="mute"
-                            disabled={punishment.rating > 0 || actions.includes("unmute")}
-                            checked={actions.includes("mute")}
-                            onChange={onActionsChange}
-                        />
-                        Мут
-                    </FormLabel>
-                    <FormLabel>
-                        <FormInput
-                            type="checkbox"
-                            name="unmute"
-                            disabled={punishment.rating < 0 || actions.includes("mute")}
-                            checked={actions.includes("unmute")}
-                            onChange={onActionsChange}
-                        />
-                        Размут
-                    </FormLabel>
-                </FormGroup>
                 <h3>Майн</h3>
                 <FormGroup>
                     <FormLabel>
@@ -109,16 +86,6 @@ export const RatingModal = (
                         Разбан
                     </FormLabel>
                 </FormGroup>
-                <FormLabel>
-                    <FormInput
-                        type="checkbox"
-                        name="rollback"
-                        disabled={!actions.includes("mineBan")}
-                        checked={actions.includes("rollback")}
-                        onChange={onActionsChange}
-                    />
-                    Откат действий
-                </FormLabel>
                 <h3 className={user.discordId ? "" : "red_color"}>
                     {user.discordId
                         ? "Дс"

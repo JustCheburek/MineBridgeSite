@@ -1,18 +1,10 @@
 // noinspection JSPotentiallyInvalidUsageOfClassThis
 import {Punishment} from "@/types/punishment";
 import {CasePurchase, StickerPurchase} from "@/types/purchase";
-import {modelOptions, pre, prop, ReturnModelType} from "@typegoose/typegoose";
+import {modelOptions, pre, prop} from "@typegoose/typegoose";
 import {From} from "@/types/invite";
-import {userModel} from "@server/models";
-import {cookies} from "next/headers";
 import {Social} from "@/types/url";
-import {getUser} from "@/services";
-import {AUTO} from "@/const";
 import {Notifications} from "@/types/notification";
-import {Resend} from "resend";
-import {InviteEmail} from "@email/invite";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function updateRating(this: User) {
     this.rating = this.punishments?.reduce(
@@ -88,70 +80,6 @@ export class User {
 
     @prop({type: () => [Social]})
     public socials: Social[]
-
-    public static async From(
-        this: ReturnModelType<typeof User>,
-        user: User,
-    ): Promise<From> {
-        try {
-            const cookiesStore = await cookies()
-            const from: { place: string, name: string } = JSON.parse(cookiesStore.get("from")?.value ?? "{}")
-            if (!from) return {}
-            cookiesStore.delete("from")
-
-            const {place, name} = from
-            if (!name || !place || user.name === name) {
-                return {place: undefined, userId: undefined}
-            }
-
-			const {user: inviter, isContentMaker} = await getUser({name})
-
-            if (!inviter || JSON.stringify(user._id) === JSON.stringify(inviter._id)) {
-                return {place: undefined, userId: undefined}
-            }
-
-            if (!inviter.invites.some(id => JSON.stringify(id) === JSON.stringify(user._id))) {
-                let mostiki = 0
-                if (isContentMaker) {
-					mostiki = 10
-				}
-
-                await userModel.findByIdAndUpdate(
-                    inviter._id,
-					{
-                        $push: {
-							invites: user._id,
-                            punishments: {
-                                reason: `Позвал ${user.name}`,
-                                rating: 5,
-                                author: AUTO.MOD,
-                                createdAt: new Date(),
-                                updatedAt: new Date()
-                            }
-                        },
-                        $inc: {
-                            rating: 5,
-                            mostiki
-                        }
-                    }
-                )
-
-                if (inviter.notifications.invite) {
-                    await resend.emails.send({
-                        from: 'Майнбридж <invite@m-br.ru>',
-                        to: inviter.email,
-                        subject: `Приглашение ${user.name} на MineBridge`,
-                        react: InviteEmail({name: user.name, from, isContentMaker})
-                    })
-                }
-            }
-
-            return {place, userId: inviter._id}
-        } catch (e) {
-            console.error(e)
-            return {place: undefined, userId: undefined}
-        }
-    }
 }
 
 export interface DSUser {

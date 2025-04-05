@@ -17,7 +17,7 @@ import {LastUpdate} from "@components/lastUpdate";
 
 export const metadata: Metadata = {
     title: "Правила",
-    description: "Звёзды — внутриигровая награда или наказание. Суды, баны, муты, всё это про нас!"
+    description: "Звёзды — внутриигровая награда или наказание. Суды, баны, всё это про нас!"
 };
 
 export default function Rules() {
@@ -30,16 +30,14 @@ export default function Rules() {
             </p>
             <ul id="social" className="remove_marker">
                 <li>
-                    <span className="green_color medium-font">+200 и больше</span> — особый значок в чате
+                    <span className="green_color medium-font">25 и больше</span> — особые призы на {" "}
+                    <Link href="/milkyway" className="unic_color medium-font">млечном пути</Link>
                 </li>
                 <li>
-                    <span className="red_color medium-font">-100 и меньше</span> — мут
+                    <span className="red_color medium-font">-200 и ниже</span> — бан в майне
                 </li>
                 <li>
-                    <span className="red_color medium-font">-200 и меньше</span> — бан в майне
-                </li>
-                <li>
-                    <span className="red_color medium-font">-300 и меньше</span> — бан в дс
+                    <span className="red_color medium-font">-300 и ниже</span> — бан в дс
                 </li>
             </ul>
             <div className={styles.tldr}>
@@ -57,7 +55,8 @@ export default function Rules() {
                         <h4>В общении:</h4>
                         <ul>
                             <li>
-                                Говорить <Link href="/rules/blacklist" className="unic_color">бан-ворды</Link>
+                                Говорить{" "}
+                                <Link href="/rules/blacklist" className="unic_color medium-font">бан-ворды</Link>
                             </li>
                             <li>
                                 Оскорблять
@@ -112,7 +111,7 @@ export default function Rules() {
                     <TextUrl href="https://twitch.tv/creatorcamp/ru-ru/paths/rules-policies-and-guidelines/">
                         платформы Twitch
                     </TextUrl><br/>
-                    <Link href="/rules/blacklist" className="unic_color">Список банвордов</Link>
+                    <Link href="/rules/blacklist" className="unic_color medium-font">Список банвордов</Link>
                 </Rule>
                 <Rule number={1.6} stars={20}>
                     Мат не приветствуется, череда матов = наказание

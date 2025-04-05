@@ -51,6 +51,11 @@ export const ROLES = {
     mer: "мэр"
 }
 
+export const ROLES_START = {
+    place: "p: ",
+    name: "u: "
+}
+
 export const Paths: PathID[] = [{
     rating: 25,
     x: -35,

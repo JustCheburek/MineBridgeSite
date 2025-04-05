@@ -10,10 +10,15 @@ import axios from "axios";
 import type {Role} from "@/types/role";
 import {Case, Drop, Item, RarityType} from "@/types/case";
 import {idOrName} from "@/types/idOrName";
-import {NO_ROLES, ROLES} from "@/const";
+import {AUTO, NO_ROLES, ROLES, ROLES_START} from "@/const";
 import {Code} from "@/types/code";
+import {InviteEmail} from "@email/invite";
+import {From} from "@/types/invite";
+import {Resend} from "resend";
 
 // todo: Разделение на папки
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface isRoles {
     isHelper: boolean
@@ -168,13 +173,85 @@ export const getUsersL = cache(
     {revalidate: 3600, tags: ["users", "userLike", "all"]}
 )
 
+export const updateFrom = cache(
+    async (user: User, from: { place: string, name: string }, authorRoles: Role[]): Promise<From> => {
+        const rolePlace = authorRoles.find(({name}) => name.startsWith(ROLES_START.place))
+        const roleName = authorRoles.find(({name}) => name.startsWith(ROLES_START.name))
+        const rPlace = rolePlace?.name.substring(ROLES_START.place.length)
+        const rName = roleName?.name.substring(ROLES_START.name.length)
+
+        async function updateInviter(inviter: User, isContentMaker: boolean) {
+            const mostiki = isContentMaker ? 10 : 0
+
+            await userModel.findByIdAndUpdate(
+                inviter._id,
+                {
+                    $push: {
+                        invites: user._id,
+                        punishments: {
+                            reason: `Позвал ${user.name}`,
+                            rating: 5,
+                            author: AUTO.MOD
+                        }
+                    },
+                    $inc: {
+                        rating: 5,
+                        mostiki
+                    }
+                }
+            )
+
+            if (inviter.notifications.invite) {
+                await resend.emails.send({
+                    from: 'Майнбридж <invite@m-br.ru>',
+                    to: inviter.email,
+                    subject: `Приглашение ${user.name} на MineBridge`,
+                    react: InviteEmail({name: user.name, from, isContentMaker})
+                })
+            }
+        }
+
+        console.log({rPlace, rName})
+        if (rPlace && rName) {
+            const {user: inviter} = await getUser({name: rName})
+
+            if (!user.from?.userId && !inviter.invites.some(id => String(id) === String(user._id))) {
+                await updateInviter(inviter, true)
+            }
+
+            return {place: rPlace, userId: inviter._id}
+        }
+
+        const nullFrom = {place: undefined, userId: undefined}
+        if (!from) return nullFrom
+
+        const {place, name} = from
+        if (!name || !place || user.name === name) {
+            return nullFrom
+        }
+
+        const {user: inviter, isContentMaker} = await getUser({name})
+        if (!inviter || String(user._id) === String(inviter._id)) {
+            return nullFrom
+        }
+
+        if (!user.from?.userId && !inviter.invites.some(id => String(id) === String(user._id))) {
+            await updateInviter(inviter, isContentMaker)
+        }
+
+        return {place, userId: inviter._id}
+    },
+    ["from"],
+    {revalidate: 3600, tags: ["from"]}
+)
+
 export const getCaseLocal = cache(
     async (
         param: idOrName,
         Cases: Case[]
     ) => {
         const Case = Cases.find(({name, _id}) =>
-            name === param.name || JSON.stringify(_id) === JSON.stringify(param._id)
+            name === param.name || String(_id) === String(param._id)
         )
 
         if (!Case) {
@@ -215,7 +292,7 @@ export const getDropLocal = cache(
         Drops: Drop[]
     ) => {
         const Drop = Drops.find(({name, _id}) =>
-            name === param.name || JSON.stringify(_id) === JSON.stringify(param._id)
+            name === param.name || String(_id) === String(param._id)
         )
 
         if (!Drop) {
@@ -292,7 +369,7 @@ export const getItem = cache(
         }
 
         const Item = Items.find(({_id, name}) =>
-            JSON.stringify(_id) === JSON.stringify(param._id) ||
+            String(_id) === String(param._id) ||
             name === param.name
         )
 
@@ -343,7 +420,7 @@ export const getCode = cache(
         const code: Code | null = JSON.parse(JSON.stringify(await codeModel.findById(_id).lean()))
 
         if (!code) {
-            console.error(`Code не найден: ${JSON.stringify(_id)}`)
+            console.error(`Code не найден: ${String(_id)}`)
             notFound()
         }
 

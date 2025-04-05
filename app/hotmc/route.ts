@@ -48,9 +48,7 @@ export async function POST(request: NextRequest) {
     user.punishments?.push({
         reason: `Голосование: ${fullMonitoring}`,
         rating: fullMonitoring,
-        author: AUTO.MONITORING,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        author: AUTO.MONITORING
     })
     user.rating += 1
     await user.save()
