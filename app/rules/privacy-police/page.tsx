@@ -6,7 +6,7 @@ import Link from "next/link";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {Number} from "@components/number";
 
-export default function Privacy() {
+export default function PrivacyPolicy() {
     return (<>
         <div className="privacy_content">
             <H1 up>Приватность</H1>
@@ -136,9 +136,9 @@ export default function Privacy() {
                     гарантировать сохранность информации в случае воздействия факторов. находящихся вне нашего влияния,
                     результатом действия которых станет раскрытие информации.
                     Сайт <Link href="/" className="unic_color medium-font">{process.env.NEXT_PUBLIC_RU_URL}</Link> и
-                    вся размещенная на нем информация представлены по принципу "как есть” без каких-либо гарантий. Мы не
-                    несем ответственности за неблагоприятные последствия, а также за любые убытки, причиненные
-                    вследствие ограничения доступа к сайту сервиса.
+                    вся размещенная на нем информация представлены по принципу {`"`}как есть{`"`} без каких-либо
+                    гарантий. Мы не несем ответственности за неблагоприятные последствия, а также за любые убытки,
+                    причиненные вследствие ограничения доступа к сайту сервиса.
                 </p>
             </RulesBox>
             <RulesBox name="conflict" heading="Разрешение споров" number={6}>
