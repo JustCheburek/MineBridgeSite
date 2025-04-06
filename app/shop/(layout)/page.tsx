@@ -318,7 +318,7 @@ export default async function Shop() {
                             1 месяц
                         </h3>
                         <Price oldPrice={80}>
-                            50
+                            60
                         </Price>
                         <HideMeButton/>
                     </Text>
