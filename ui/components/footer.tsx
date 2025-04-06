@@ -21,7 +21,7 @@ export function Footer() {
                 </div>
 
                 <div className={`${styles.links} flex_center`}>
-                    <NavLink href="/rules/privacy-policy" className="mini_button">
+                    <NavLink href="/rules/terms-of-use" className="mini_button">
                         Пользовательское соглашение
                     </NavLink>
                     <NavLink href="/rules/privacy-policy" className="mini_button">

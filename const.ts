@@ -6,7 +6,7 @@ export const VK_URL = "https://vk.com/minebridge"
 export const SUPPORT_URL = "https://discord.gg/f95V9Rezqy"
 
 export const LASTSHOPUPDATE = new Date(
-    new Date(2025, 4 - 1, 1, 18 - 10, 10).toUTCString()
+    new Date(2025, 4 - 1, 6, 11 - 10, 10).toUTCString()
 )
 export const LASTRULESUPDATE = new Date(
     new Date(2025, 1 - 1, 12, 14 - 10, 30).toUTCString()
@@ -17,10 +17,10 @@ export const LASTLORUPDATE = new Date(
 export const LASTTERMSOFUSEUPDATE = new Date(
     new Date(2025, 4 - 1, 5, 21 - 10, 0).toUTCString()
 )
-export const LASTPRIVACYPOLICEUPDATE = new Date(
+export const LASTPRIVACYPOLICYUPDATE = new Date(
     new Date(2025, 4 - 1, 5, 22 - 10, 0).toUTCString()
 )
-export const LASTREFUNDPOLICEUPDATE = new Date(
+export const LASTREFUNDPOLICYUPDATE = new Date(
     new Date(2025, 4 - 1, 5, 22 - 10, 0).toUTCString()
 )
 

@@ -24,10 +24,10 @@ export default function RulesLayout(
                 <SubsectionItem href="/rules/terms-of-use">
                     Условия
                 </SubsectionItem>
-                <SubsectionItem href="/rules/privacy-police">
+                <SubsectionItem href="/rules/privacy-policy">
                     Приватность
                 </SubsectionItem>
-                <SubsectionItem href="/rules/refund-police">
+                <SubsectionItem href="/rules/refund-policy">
                     Возврат
                 </SubsectionItem>
             </Subsections>

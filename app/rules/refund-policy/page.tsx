@@ -1,6 +1,6 @@
 import {H1} from "@components/h1";
 import type {Metadata} from "next";
-import {LASTREFUNDPOLICEUPDATE} from "@/const";
+import {LASTREFUNDPOLICYUPDATE} from "@/const";
 import {LastUpdate} from "@components/lastUpdate";
 import {Rule, RulesBox} from "@components/rules";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     description: "Политика отказа от услуг и возврата средств."
 };
 
-export default function RefundPolice() {
+export default function RefundPolicy() {
     return (<>
         <div className="refund_content">
             <H1 up>
                 Возврат
             </H1>
-            <LastUpdate time={LASTREFUNDPOLICEUPDATE}/>
+            <LastUpdate time={LASTREFUNDPOLICYUPDATE}/>
             <br/>
             <p>
                 Политика отказа от услуг и возврата средств компании «MineBridge (Майнбридж)»

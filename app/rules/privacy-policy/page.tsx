@@ -1,6 +1,6 @@
 import {H1} from "@components/h1";
 import {RulesBox} from "@components/rules";
-import {LASTPRIVACYPOLICEUPDATE} from "@/const";
+import {LASTPRIVACYPOLICYUPDATE} from "@/const";
 import {LastUpdate} from "@components/lastUpdate";
 import Link from "next/link";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
     return (<>
         <div className="privacy_content">
             <H1 up>Приватность</H1>
-            <LastUpdate time={LASTPRIVACYPOLICEUPDATE}/>
+            <LastUpdate time={LASTPRIVACYPOLICYUPDATE}/>
             <RulesBox name="terms" heading="Термины" number={0}>
                 <p>
                     Термины используются в том же значении, что и в{" "}

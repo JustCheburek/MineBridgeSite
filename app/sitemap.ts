@@ -1,5 +1,5 @@
 import {MetadataRoute} from 'next'
-import {LASTRULESUPDATE} from "@/const";
+import {LASTPRIVACYPOLICYUPDATE, LASTREFUNDPOLICYUPDATE, LASTRULESUPDATE, LASTTERMSOFUSEUPDATE} from "@/const";
 import {getCases, getUsers} from "@/services";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -20,17 +20,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/shop/case`,
-            changeFrequency: 'weekly',
             priority: 0.8,
         },
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/shop/buy`,
-            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/shop/code`,
             priority: 0.8,
         },
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/shop/drop`,
-            changeFrequency: 'monthly',
             priority: 0.8,
         },
         ...Cases.map(({name}) => ({
@@ -40,21 +41,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         // Правила
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/rules`,
-            changeFrequency: 'monthly',
             priority: 0.9,
             lastModified: LASTRULESUPDATE,
         },
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/mods`,
-            changeFrequency: 'monthly',
             priority: 0.8,
             lastModified: LASTRULESUPDATE,
         },
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/blacklist`,
-            changeFrequency: 'yearly',
             priority: 0.8,
             lastModified: LASTRULESUPDATE,
+        },
+        {
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/terms-of-use`,
+            priority: 0.8,
+            lastModified: LASTTERMSOFUSEUPDATE,
+        },
+        {
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/privacy-policy`,
+            priority: 0.8,
+            lastModified: LASTPRIVACYPOLICYUPDATE,
+        },
+        {
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/refund-policy`,
+            priority: 0.8,
+            lastModified: LASTREFUNDPOLICYUPDATE,
         },
         // Новости
         {
