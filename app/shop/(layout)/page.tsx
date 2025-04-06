@@ -273,7 +273,7 @@ export default async function Shop() {
                 </Box>
             </Section>
 
-            <Heading id="kits">
+            {/*<Heading id="kits">
                 <h2 className="center_text">
                     Киты
                 </h2>
@@ -283,7 +283,7 @@ export default async function Shop() {
                 <h4 className="center_text">
                     В разработке
                 </h4>
-            </Heading>
+            </Heading>*/}
 
             <Heading id="hideme">
                 <h2 className="center_text">
@@ -341,9 +341,9 @@ export default async function Shop() {
             <OnThisPageLink href="#stickers">
                 Стикеры
             </OnThisPageLink>
-            <OnThisPageLink href="#kits">
+            {/*<OnThisPageLink href="#kits">
                 Киты
-            </OnThisPageLink>
+            </OnThisPageLink>*/}
             <OnThisPageLink href="#hideme">
                 Где я?
             </OnThisPageLink>
