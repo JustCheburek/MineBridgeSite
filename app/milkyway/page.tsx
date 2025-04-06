@@ -7,12 +7,9 @@ import type {User} from "lucia";
 import type {Metadata} from "next";
 import type {CaseData} from "@/types/purchase";
 import type {RarityType} from "@/types/case";
-
 import styles from "./milkyway.module.scss"
-
 import {Img, ImgBox} from "@/ui/components/img";
 import {Paths} from "@/const";
-
 import {Button, Url} from "@components/button";
 import Form from "next/form";
 import {StarSvg} from "@ui/SVGS";

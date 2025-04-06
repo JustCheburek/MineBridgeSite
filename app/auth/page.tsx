@@ -39,22 +39,17 @@ export default async function Auth() {
                     Регистрируясь на сервисах MineBridge<br/>
                     Вы безусловно соглашаетесь с:
                 </small>
-                <ul>
-                    <li>
-                        <small>
-                            <Link href="/rules/privacy-policy" className="unic_color medium-font">
-                                Пользовательским соглашением
-                            </Link>
-                        </small>
-                    </li>
-                    <li>
-                        <small>
-                            <Link href="/rules/privacy-policy" className="unic_color medium-font">
-                                Политикой конфиденциальности
-                            </Link>
-                        </small>
-                    </li>
-                </ul>
+                <small>
+                    <Link href="/rules/privacy-policy" className="mini_button">
+                        Пользовательским соглашением
+                    </Link>
+                </small>
+
+                <small>
+                    <Link href="/rules/privacy-policy" className="mini_button">
+                        Политикой конфиденциальности
+                    </Link>
+                </small>
             </div>
         </MaxSize>
     )
