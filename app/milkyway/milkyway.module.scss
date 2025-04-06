@@ -10,10 +10,12 @@
   background: var(--black-color);
   background-image: url("stars.svg");
   background-size: 500px;
+  will-change: transform;
 }
 
 .container {
   padding-top: var(--_y);
+  contain: layout;
 }
 
 .box {
@@ -119,7 +121,7 @@
 }
 
 .text_box {
-  --_width: 50vw;
+  --_width: 70vw;
 
   position: absolute;
 
@@ -140,10 +142,20 @@
 
 .left {
   left: 0;
+
+  .text {
+    right: calc(var(--_width) - 19rem);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  }
 }
 
 .right {
   right: 0;
+
+  .text {
+    left: calc(var(--_width) - 19rem);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+  }
 }
 
 .text {
@@ -157,16 +169,6 @@
   & {
     transition: translate var(--long-transition), opacity var(--long-transition);
   }
-
-  .left & {
-    right: calc(var(--_width) - 19rem);
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  }
-
-  .right & {
-    left: calc(var(--_width) - 19rem);
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
-  }
 }
 
 .heading {
@@ -174,24 +176,16 @@
   min-width: 100%;
 }
 
-.card:has(.item:hover), .card:has(.text:hover) {
-  .left .text {
-    translate: calc(100% - 1rem);
-  }
-
-  .right .text {
-    translate: calc(-100% + 1rem);
-  }
-}
-
 .item {
   border-radius: var(--border-radius);
   background: var(--black-color);
+  contain: strict;
 }
 
 .img {
   object-position: center;
   object-fit: cover;
+  contain: layout;
 }
 
 .button:disabled {
@@ -199,5 +193,62 @@
 
   &:before {
     @include mixins.border($width: 1px, $color: #767676, $background: #263034);
+  }
+}
+
+@media (width > 768px) {
+  .card:has(.item:hover), .card:has(.text:hover) {
+    .left .text {
+      translate: calc(100% - 1rem);
+    }
+
+    .right .text {
+      translate: calc(-100% + 1rem);
+    }
+  }
+}
+
+@media (width < 768px) {
+  .container {
+    --_y: 4rem;
+  }
+
+  .box {
+    margin-left: 0;
+    flex-direction: column;
+  }
+
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    position: static;
+    margin-top: 1rem;
+  }
+
+  .text_box {
+    --_width: 100%;
+    position: static;
+    translate: 0;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .rating {
+    top: 103%;
+  }
+
+  .left, .right {
+    .text {
+      position: static;
+      translate: 0;
+      border-radius: var(--border-radius);
+    }
+  }
+
+  .line, .complete, .circle, .player {
+    display: none;
   }
 }

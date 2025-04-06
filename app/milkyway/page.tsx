@@ -6,7 +6,7 @@ import {AddCasePurchase, GetCosmetic} from "@services/user";
 import type {User} from "lucia";
 import type {Metadata} from "next";
 import type {CaseData} from "@/types/purchase";
-import type {RarityType} from "@/types/case";
+import {Case, Drop, type RarityType} from "@/types/case";
 import styles from "./milkyway.module.scss"
 import {Img, ImgBox} from "@/ui/components/img";
 import {Paths} from "@/const";
@@ -34,8 +34,9 @@ export const metadata: Metadata = {
     description: "Набирая звёзды, можно получать разные крутые вещи бесплатно!"
 };
 
-const size = 3.5
-const y = 17
+const SIZE = 3.5
+const Y = 17
+const CASE_ID = "662ddba08d5044c0b4ad7bf4"
 
 interface Path {
     rating: number
@@ -85,8 +86,8 @@ async function Path({rating, author, x, caseData, index}: PathDB) {
     // Последняя не создаёт линию
     const last = Paths[Paths.length - 1].rating
     if (last !== rating) {
-        const width = Math.abs(x - next) + size
-        const height = (y + size) * 2
+        const width = Math.abs(x - next) + SIZE
+        const height = (Y + SIZE) * 2
         long = Math.sqrt(width ** 2 + height ** 2) / 2.1
         angle = Math.atan2(
             height + 1.5,
@@ -221,9 +222,47 @@ function GetButton({author, isPerm, isHas, caseData}: GetButton) {
     )
 }
 
+type PathsLoader = {
+    author: User
+    Case: Case
+    Drops: Drop[]
+}
+async function PathsLoader({author, Case, Drops}: PathsLoader) {
+    const pathComponents = await Promise.all(
+        Paths.map(async ({rating, x, caseData}, i) => {
+            const DropItem = await getDropLocal({_id: caseData.DropItem}, Drops);
+            if (!DropItem) return null;
+
+            const Items = await getItems(caseData.rarity, DropItem);
+            const Item = await getItem({_id: caseData.Item}, Items);
+            if (!Item) return null;
+
+            return (
+                <Path
+                    key={i}
+                    rating={rating}
+                    author={author}
+                    x={x}
+                    caseData={{
+                        ...caseData,
+                        Case,
+                        Drop: DropItem,
+                        Item,
+                        DropItem
+                    }}
+                    index={i}
+                />
+            );
+        })
+    );
+
+    // Фильтруем null значения
+    return pathComponents.filter(Boolean);
+}
+
 export default async function MilkyWay() {
     const [Case, Drops, {user: author}] = await Promise.all([
-        getCase({_id: "662ddba08d5044c0b4ad7bf4"}),
+        getCase({_id: CASE_ID}),
         getDrops(),
         validate()
     ])
@@ -242,7 +281,7 @@ export default async function MilkyWay() {
 
     return (
         <div className={`${styles.milkyway_container} center_text`}
-             style={{"--_size": `${size}rem`, '--_y': `${y}rem`}}>
+             style={{"--_size": `${SIZE}rem`, '--_y': `${Y}rem`}}>
             <H1
                 up
                 description="Боевой пропуск 7 сезона!"
@@ -257,32 +296,11 @@ export default async function MilkyWay() {
             <div className={styles.gradient_gray_black}/>
 
             <div className={styles.milkyway_box}>
-                {Paths.map(async ({rating, x, caseData}, i) => {
-                    const DropItem = await getDropLocal({_id: caseData.DropItem}, Drops)
-                    const Items = await getItems(caseData.rarity, DropItem)
-                    const Item = await getItem({_id: caseData.Item}, Items)
-
-                    if (!DropItem || !Item) {
-                        return
-                    }
-
-                    return (
-                        <Path
-                            key={i}
-                            rating={rating}
-                            author={author}
-                            x={x}
-                            caseData={{
-                                ...caseData,
-                                Case,
-                                Drop: DropItem,
-                                Item,
-                                DropItem
-                            }}
-                            index={i}
-                        />
-                    )
-                })}
+                <PathsLoader
+                    Drops={Drops}
+                    author={author}
+                    Case={Case}
+                />
             </div>
         </div>
     )
