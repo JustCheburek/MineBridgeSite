@@ -5,6 +5,22 @@ import styles from "./styles/footer.module.scss";
 import {Urls} from "./urls";
 import {NavLink} from "@components/navlink";
 
+export function Policies() {
+    return (
+        <small className={styles.links}>
+            <NavLink href="/rules" className="mini_button" exact>
+                Правила
+            </NavLink>
+            <NavLink href="/rules/terms-of-use" className="mini_button">
+                Пользовательское соглашение
+            </NavLink>
+            <NavLink href="/rules/privacy-policy" className="mini_button">
+                Политика конфиденциальности
+            </NavLink>
+        </small>
+    )
+}
+
 export function Footer() {
     const YEAR = new Date().getFullYear()
 
@@ -20,14 +36,7 @@ export function Footer() {
                     </h4>
                 </div>
 
-                <div className={`${styles.links} flex_center`}>
-                    <NavLink href="/rules/terms-of-use" className="mini_button">
-                        Пользовательское соглашение
-                    </NavLink>
-                    <NavLink href="/rules/privacy-policy" className="mini_button">
-                        Политика конфиденциальности
-                    </NavLink>
-                </div>
+                <Policies/>
 
                 <small className={`light_gray_color ${styles.mc}`}>
                     Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang

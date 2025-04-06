@@ -8,7 +8,7 @@ import {MaxSize} from "@components/maxSize";
 import {AuthForm} from "./components";
 import {cookies} from "next/headers";
 import {H1} from "@components/h1";
-import Link from "next/link";
+import {Policies} from "@components/footer";
 
 export const metadata: Metadata = {
     title: "Регистрация",
@@ -34,22 +34,13 @@ export default async function Auth() {
 
             <AuthForm savedName={savedName}/>
 
-            <div>
+            <div className="center_text">
                 <small>
-                    Регистрируясь на сервисах MineBridge<br/>
-                    Вы безусловно соглашаетесь с:
-                </small>
-                <small>
-                    <Link href="/rules/privacy-policy" className="mini_button">
-                        Пользовательским соглашением
-                    </Link>
+                    Регистрируясь на сервисах MineBridge, <br/>
+                    Вы соглашаетесь с её политиками:
                 </small>
 
-                <small>
-                    <Link href="/rules/privacy-policy" className="mini_button">
-                        Политикой конфиденциальности
-                    </Link>
-                </small>
+                <Policies/>
             </div>
         </MaxSize>
     )
