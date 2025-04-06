@@ -53,7 +53,7 @@ export default function Features() {
                     <GText>Файлы</GText>
                 </GBox>
 
-                <GBox href={`http://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`} anotherSite imgs="one">
+                <GBox href={`http://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`} anotherSite imgs="one" id="map">
                     <ImgBox type="grid">
                         <Img src="/features/map.png" alt="Карта"/>
                     </ImgBox>

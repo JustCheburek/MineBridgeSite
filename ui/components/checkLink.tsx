@@ -1,10 +1,8 @@
 import {PropsWithChildren} from "react";
 import Link from "next/link";
 
-export function CheckLink({href, children}: PropsWithChildren<{ href?: string }>) {
+export function CheckLink({href, target="_self", children}: PropsWithChildren<{ href?: string, target?: string }>) {
 	if (!href) return children
-
-	let target = "_self"
 
 	if (href?.toString()?.startsWith("http")) {
 		target = "_blank"

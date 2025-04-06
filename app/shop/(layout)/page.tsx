@@ -290,7 +290,13 @@ export default async function Shop() {
                     Где я?
                 </h2>
                 <p>
-                    Неожиданно пропасть с карты сервера...
+                    Неожиданно пропасть с{" "}
+                    <Link href="/features#map" className="unic_color medium-font">
+                        карты сервера
+                    </Link>...
+                </p>
+                <p>
+                    Покупка выдаётся в течение дня
                 </p>
             </Heading>
 
@@ -301,7 +307,7 @@ export default async function Shop() {
                             1 неделя
                         </h3>
                         <Price>
-                            15
+                            20
                         </Price>
                         <HideMeButton/>
                     </Text>
@@ -311,8 +317,8 @@ export default async function Shop() {
                         <h3>
                             1 месяц
                         </h3>
-                        <Price oldPrice={60}>
-                            45
+                        <Price oldPrice={80}>
+                            50
                         </Price>
                         <HideMeButton/>
                     </Text>
@@ -320,10 +326,10 @@ export default async function Shop() {
                 <Box>
                     <Text>
                         <h3>
-                            1 год
+                            6 месяцев
                         </h3>
-                        <Price oldPrice={600}>
-                            500
+                        <Price oldPrice={480}>
+                            300
                         </Price>
                         <HideMeButton/>
                     </Text>

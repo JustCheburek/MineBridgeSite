@@ -58,7 +58,7 @@ type GBox = {
     anotherSite?: boolean
     imgs?: undefined | "one" | "two" | "three"
     target?: string
-    rel?: string
+    id?: string
 }
 
 export const GBox = (
@@ -67,14 +67,15 @@ export const GBox = (
         href = "",
         anotherSite = false,
         imgs,
-        target = "_blank",
-        className = ""
+        target = "_self",
+        className = "",
+        id
     }: PropsWithChildren<GBox>) => {
     const classNameResult = `${styles.box} ${imgs ? styles[imgs] : ""} ${className}`
 
     if (!href) {
         return (
-            <div className={classNameResult}>
+            <div className={classNameResult} id={id}>
                 {children}
                 {anotherSite &&
                   <AnotherSiteSvg className={styles.link}/>
@@ -83,21 +84,21 @@ export const GBox = (
         )
     }
 
-    if (anotherSite) {
-        return (
-            <Link href={href} target={target} className={classNameResult}>
-                {children}
-                <AnotherSiteSvg className={styles.link}/>
-            </Link>
-        )
+    if (href.toString().startsWith("http")) {
+        target = "_blank"
     }
 
     return (
         <Link
             href={href}
             className={classNameResult}
+            target={target}
+            id={id}
         >
             {children}
+            {anotherSite &&
+              <AnotherSiteSvg className={styles.link}/>
+            }
         </Link>
     )
 }

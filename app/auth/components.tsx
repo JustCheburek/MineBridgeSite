@@ -7,7 +7,6 @@ import {useState} from "react";
 
 import styles from "./auth.module.scss";
 import {useChangeRadioState} from "@hooks/useChangeState";
-import Link from "next/link";
 
 export function AuthForm({savedName}: { savedName?: string }) {
     const [access, setAccess] = useState(false)
@@ -59,7 +58,7 @@ export function AuthForm({savedName}: { savedName?: string }) {
                 Дальше
             </FormLink>
 
-            <small className="center_text">
+            {/*<small className="center_text">
                 <Link
                     href="https://t.me/MineBridgeOfficial/624"
                     target="_blank"
@@ -67,7 +66,7 @@ export function AuthForm({savedName}: { savedName?: string }) {
                 >
                     Скачать обход Discord
                 </Link>
-            </small>
+            </small>*/}
         </DefaultFormBox>
     )
 }

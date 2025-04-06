@@ -253,21 +253,21 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
                         {Drops
                             .filter(Drop => Drop.name !== "suffix")
                             .map((type) => (
-                            <label key={type.name} className={`${styles.select_item} no_select`}>
-                                <input
-                                    type="radio" value={type.name} name="select_drop"
-                                    checked={drop === type.name}
-                                    className={styles.select_input}
-                                    disabled={isRolling}
-                                    onChange={() => setSettingDrop(type.name)}
-                                    onLoad={() => setSettingDrop(drop)}
-                                />
-                                {type.displayname}
-                                <p className={`${styles.mostiki_text} unic_color`}>
-                                    {type.price} <MostikiSvg/>
-                                </p>
-                            </label>
-                        ))}
+                                <label key={type.name} className={`${styles.select_item} no_select`}>
+                                    <input
+                                        type="radio" value={type.name} name="select_drop"
+                                        checked={drop === type.name}
+                                        className={styles.select_input}
+                                        disabled={isRolling}
+                                        onChange={() => setSettingDrop(type.name)}
+                                        onLoad={() => setSettingDrop(drop)}
+                                    />
+                                    {type.displayname}
+                                    <p className={`${styles.mostiki_text} unic_color`}>
+                                        {type.price} <MostikiSvg/>
+                                    </p>
+                                </label>
+                            ))}
                     </form>
                 </div>
             </div>
@@ -278,6 +278,31 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
                 isWin={isWin}
                 Roll={Roll} Win={Win}
             />
+
+            <div>
+                <p>
+                    Косметика автоматически выдаётся<br/>
+                    и записывается в{" "}
+                    <Link
+                        href={user ? `/user/${user?.name}/history` : "/auth"}
+                        className="unic_color medium-font"
+                    >
+                        вашу историю
+                    </Link>
+                </p>
+                <br/>
+                <p>
+                    Для использования косметики:
+                </p>
+                <ul>
+                    <li>
+                        Зайдите на сервер
+                    </li>
+                    <li>
+                        Введите <code className="all_select">/uc menu</code>
+                    </li>
+                </ul>
+            </div>
         </MaxSize>
     )
 }

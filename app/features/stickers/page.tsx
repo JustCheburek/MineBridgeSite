@@ -20,9 +20,19 @@ export default function Stickers() {
 					{name: "features", displayname: "Фичи"},
 					{name: "stickers", displayname: "Стикеры"}
 				]}>
-					ТГ Стикеры
+					Стикеры
 				</H1>
-				<p className="center_text">Стикеры в телеграме на заказ</p>
+				<p>
+					Рисовка стикера занимает{" "}
+					<span className="medium-font">от 2 до 6 недель</span>{" "}
+					в зависимости от сложности, возможны задержки
+				</p>
+				<p>
+					Стикеры добавляются в{" "}
+					<span className="medium-font">телеграм</span>,
+					по желанию администрации могут добавиться и на{" "}
+					<span className="medium-font">дискорд сервер</span>
+				</p>
 
 				<Url href="https://t.me/addstickers/MineBridge">
 					Добавить
