@@ -360,15 +360,26 @@ export default function Rules() {
             <RulesBox name="cheats" heading="Запрещённые преимущества" number={5}>
                 <Rule number={5.1} stars={200}>
                     <p>
-                        Читы запрещены в любом виде: {" "}
-                        <Link href="/rules/mods" className="unic_color medium-font">список модификаций</Link>
+                        Можно использовать модификации и форки:
+                    </p>
+                    <ul>
+                        <li>
+                            перечисленные в{" "}
+                            <Link href="/rules/mods" className="unic_color medium-font">разрешённом списке</Link>
+                        </li>
+                        <li>
+                            участвующие в официальных сборках от сервера
+                        </li>
+                    </ul>
+                    <p>
+                        Иные модификации использовать на сервере нельзя
                     </p>
                 </Rule>
                 <Rule number={5.2} text="Бан">
                     <p>
                         Хелперы в праве вызвать вас на проверку читов.
                         Отказ от проверки или игнорирование в течение 5-15 минут = бан.
-                        Вы можете подать апелляцию, если считаете бан незаслуженным.
+                        Вы можете подать апелляцию, если считаете бан незаслуженным
                     </p>
                 </Rule>
                 <Rule number={5.2} stars={200}>
@@ -383,6 +394,7 @@ export default function Rules() {
                             <Link
                                 href="https://ru.minecraft.wiki/w/Руководство:Самодвижущиеся_аппараты_на_блоках_слизи"
                                 className="unic_color medium-font"
+                                target="_blank"
                             >
                                 ТНТ
                             </Link> (до 10 на команду / человека)
