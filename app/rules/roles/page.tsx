@@ -214,6 +214,10 @@ export default function Roles() {
         </div>
 
         <OnThisPage>
+            <OnThisPageLink href="#terms">
+                <Number>0</Number>
+                Термины
+            </OnThisPageLink>
             <OnThisPageLink href="#general">
                 <Number>1</Number>
                 Сведения
