@@ -136,7 +136,7 @@ export default function Rules() {
                 <Rule number={1.4}>
                     Правила действуют не зависимо от стримов, видео, кланов и других факторов
                 </Rule>
-                <Rule number={1.5}>
+                <Rule number={1.5} stars={100}>
                     Запрещена выдача себя за другого человека.
                 </Rule>
             </RulesBox>
