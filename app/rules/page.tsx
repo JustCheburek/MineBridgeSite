@@ -10,7 +10,6 @@ import styles from './rules.module.scss';
 import {Punishment, Rule, RulesBox} from "@components/rules";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {TextUrl} from "@components/textUrl";
-import {UserBox} from "@components/userBox";
 import {H1} from "@components/h1";
 import {Number} from "@components/number";
 import {LastUpdate} from "@components/lastUpdate";
@@ -25,21 +24,6 @@ export default function Rules() {
         <div className="rules_content">
             <H1 up>Правила</H1>
             <LastUpdate time={LASTRULESUPDATE}/>
-            <p>
-                На сервере действует особый <strong className="unic_color">звёздный рейтинг</strong>:
-            </p>
-            <ul id="social" className="remove_marker">
-                <li>
-                    <span className="green_color medium-font">25 и больше</span> — особые призы на {" "}
-                    <Link href="/milkyway" className="unic_color medium-font">млечном пути</Link>
-                </li>
-                <li>
-                    <span className="red_color medium-font">-200 и ниже</span> — бан в майне
-                </li>
-                <li>
-                    <span className="red_color medium-font">-300 и ниже</span> — бан в дс
-                </li>
-            </ul>
             <div className={styles.tldr}>
                 <div className="center_text">
                     <h2 className="red_color">
@@ -88,45 +72,110 @@ export default function Rules() {
                     </div>
                 </div>
             </div>
-            <p>
-                Снижаемые звёзды являются приблизительным, всё
-                зависит от тяжести содеянного
-            </p>
-            <RulesBox name="general" heading="Общение" number={1}>
-                <Rule number={1.1} stars={50}>
+
+            <RulesBox name="terms" heading="Термины" number={0}>
+                <Rule number={0.1}>
+                    Термины используются в том же значении, что и в пользовательском соглашении
+                </Rule>
+                <Rule number={0.2}>
+                    «Бан» — блокировка доступа пользователя к сервисам MineBridge
+                </Rule>
+                <Rule number={0.3}>
+                    <p>
+                        «Звёзды» — рейтинг игрового аккаунта, чем выше рейтинг, тем больше бонусов от сервера
+                    </p>
+                    <ul id="social" className="remove_marker">
+                        <li>
+                            <span className="green_color medium-font">25 и больше</span> — особые призы на {" "}
+                            <Link href="/milkyway" className="unic_color medium-font">млечном пути</Link>
+                        </li>
+                        <li>
+                            <span className="red_color medium-font">-200 и ниже</span> — бан в майне
+                        </li>
+                        <li>
+                            <span className="red_color medium-font">-300 и ниже</span> — бан в дс
+                        </li>
+                    </ul>
+                </Rule>
+                <Rule number={0.4}>
+                    «Игрок» — участник игрового сервера MineBridge
+                </Rule>
+                <Rule number={0.5}>
+                    <Link
+                        href="https://www.minecraft.net/ru-ru/article/what-is-minecraft-skin"
+                        target="_blank"
+                        className="medium-font unic_color"
+                    >
+                        «Скин»
+                    </Link> — визуальная составляющая игрока
+                </Rule>
+                <Rule number={0.6}>
+                    Все{" "}
+                    <Link
+                        href="/rules/roles"
+                        className="medium-font unic_color"
+                    >
+                        «роли»
+                    </Link>,
+                    осуществляющие действия против нарушителя, включают в себя саму роль и все вышестоящие<br/>
+                    <small>(т.е. судья — это судья, модератор или администратор)</small>
+                </Rule>
+            </RulesBox>
+            <RulesBox name="general" heading="Общие правила" number={1}>
+                <Rule number={1.1}>
+                    Незнание правил и их обновлений не освобождает от ответственности наказаний
+                </Rule>
+                <Rule number={1.2}>
+                    Ответственность всегда несет владелец аккаунта, независимо от того, кто совершал действия под данным
+                    аккаунтом
+                </Rule>
+                <Rule number={1.3}>
+                    Любые попытки обхода блокировок категорически запрещены и будут приводить к продлению и изменению их
+                    типа на более строгий.
+                </Rule>
+                <Rule number={1.4}>
+                    Правила действуют не зависимо от стримов, видео, кланов и других факторов
+                </Rule>
+                <Rule number={1.5}>
+                    Запрещена выдача себя за другого человека.
+                </Rule>
+            </RulesBox>
+
+            <RulesBox name="communication" heading="Общение" number={2}>
+                <Rule number={2.1} stars={50}>
                     Любые формы оскорблений запрещены
                 </Rule>
-                <Rule number={1.2} stars={15}>
+                <Rule number={2.2} stars={15}>
                     Для определённых сообщений существуют свои каналы<br/>
                     <small>(репорты в #репорты, баги в #тех-поддержка)</small>
                 </Rule>
-                <Rule number={1.3} stars={15}>
+                <Rule number={2.3} stars={15}>
                     Спам и флуд запрещены
                 </Rule>
-                <Rule number={1.4} text="Бан">
+                <Rule number={2.4} text="Бан">
                     Контент NSFW (18+ и т. п.) запрещен
                 </Rule>
-                <Rule number={1.5} stars={35}>
+                <Rule number={2.5} stars={35}>
                     Запрещено нарушение правил {" "}
-                    <TextUrl href="https://twitch.tv/creatorcamp/ru-ru/paths/rules-policies-and-guidelines/">
+                    <TextUrl href="https://legal.twitch.com/ru/legal/terms-of-service/">
                         платформы Twitch
                     </TextUrl><br/>
-                    <Link href="/rules/blacklist" className="unic_color medium-font">Список банвордов</Link>
+                    <Link href="/rules/blacklist" className="unic_color medium-font">Список запрещённых выражений</Link>
                 </Rule>
-                <Rule number={1.6} stars={20}>
+                <Rule number={2.6} stars={20}>
                     Мат не приветствуется, череда матов = наказание
                 </Rule>
-                <Rule number={1.7} text="Бан">
+                <Rule number={2.7} text="Бан">
                     Запрещён деанон, доксинг, манипуляция, слив личных данных без разрешения
                 </Rule>
             </RulesBox>
 
-            <RulesBox name="game_interferences" heading="Игровые помехи" number={2}>
-                <Rule number={2.1} stars={30}>
+            <RulesBox name="game_interferences" heading="Игровые помехи" number={3}>
+                <Rule number={3.1} stars={30}>
                     Запрещена ходьба перед игроком, ломание блоков под или перед ним, стрельба
                     любым видом снарядов в игрока
                 </Rule>
-                <Rule number={2.2} text="Суд">
+                <Rule number={3.2} text="Суд">
                     <p>Пранки должны:</p>
                     <ul>
                         <li>
@@ -137,23 +186,22 @@ export default function Rules() {
                             под пранк
                         </li>
                         <li>
-                            Или иметь согласие помогаторов, модеров или админов
+                            Или иметь согласие помогаторов
                         </li>
                     </ul>
                 </Rule>
-                <Rule number={2.3} text="Суд">
+                <Rule number={3.3} text="Суд">
                     <p>Убийства должны:</p>
                     <ul>
                         <li>
                             Иметь согласие у двух сторон
                         </li>
                         <li>
-                            Или иметь согласие администрации
+                            Или иметь согласие админов
                         </li>
                         <li>
-                            Удостоверьтесь, что пвп арена имеет письменный договор от одного из админов,
-                            модеров или судий, иначе вы можете понизить свои звёзды за участие в неофициальной
-                            пвп арене. {" "}
+                            Удостоверьтесь, что пвп арена имеет письменный договор от одного из судий, иначе вы можете
+                            понизить свои звёзды за участие в неофициальной пвп арене{" "}
                             <TextUrl
                                 href="https://discord.gg/f95V9Rezqy"
                             >
@@ -164,8 +212,8 @@ export default function Rules() {
                 </Rule>
             </RulesBox>
 
-            <RulesBox name="areas" heading="Территории" number={3}>
-                <Rule number={3.1}>
+            <RulesBox name="areas" heading="Территории" number={4}>
+                <Rule number={4.1}>
                     <p>Чтобы занять территорию вы должны:</p>
 
                     <ul>
@@ -178,7 +226,7 @@ export default function Rules() {
                         </li>
                     </ul>
                 </Rule>
-                <Rule number={3.2}>
+                <Rule number={4.2}>
                     <p>
                         На территориях, занимаемых игроками или имеющих признаки проживания игроков {" "}
                         <small>(если игрок не успел оградить территорию)</small>
@@ -228,7 +276,7 @@ export default function Rules() {
                         </li>
                     </ul>
                 </Rule>
-                <Rule number={3.3}>
+                <Rule number={4.3}>
                     <p>
                         Если вы хотите как-то дополнить эти правила, то напишите их в {" "}
                         <TextUrl
@@ -258,13 +306,13 @@ export default function Rules() {
                         течение 5 минут, чтобы была возможность пройти через чужие базы
                     </p>
                 </Rule>
-                <Rule number={3.4} text="Откуп алмазами">
+                <Rule number={4.4} text="Откуп алмазами">
                     <p>
                         При занимании места ближе, чем на 60 блоков к чужой базе или на 150 блоков к нулевым
                         координатам, надо спрашивать их владельцев или мэра мира
                     </p>
                 </Rule>
-                <Rule number={3.5} stars={50}>
+                <Rule number={4.5} stars={50}>
                     <p>Общими территориями являются <small>(их нельзя занимать)</small>:</p>
                     <ul>
                         <li>
@@ -279,13 +327,13 @@ export default function Rules() {
                         </li>
                     </ul>
                 </Rule>
-                <Rule number={3.6} stars={50}>
+                <Rule number={4.6} stars={50}>
                     <p>
                         Нельзя запрещать проход к данжам или убийства мобов / боссов в нём{" "}
                         <small>(кроме фармилок мобов)</small>
                     </p>
                 </Rule>
-                <Rule number={3.7}>
+                <Rule number={4.7}>
                     <p>
                         Максимальная расстояние всех территорий на одного игрока - 250 блоков на 250 блоков{" "}
                         <small>(Площадь - 62.500 блоков)</small>
@@ -294,11 +342,11 @@ export default function Rules() {
                         Игроки могут объединяться, чтобы захватывать территории побольше
                     </p>
                     <p>
-                        В случае привата огромной территории, по мнению админов или модеров, ваша территория может
+                        В случае привата огромной территории, по мнению модеров, ваша территория может
                         быть отдана в чужие руки
                     </p>
                 </Rule>
-                <Rule number={3.8} stars={30}>
+                <Rule number={4.8} stars={30}>
                     <p>
                         Запрещено строительство некрасивых никчёмных построек, не имеющих никакого значения:
                         рандомные столбы и лестницы в небо и т.д.
@@ -309,26 +357,21 @@ export default function Rules() {
                 </Rule>
             </RulesBox>
 
-            <RulesBox name="cheats" heading="Запрещённые преимущества" number={4}>
-                <Rule number={4.1} stars={200}>
+            <RulesBox name="cheats" heading="Запрещённые преимущества" number={5}>
+                <Rule number={5.1} stars={200}>
                     <p>
                         Читы запрещены в любом виде: {" "}
                         <Link href="/rules/mods" className="unic_color medium-font">список модификаций</Link>
                     </p>
-                    <p>
-                        Админы, модеры и хелперы в праве вызвать вас на проверку читов.
-                        Уход с проверки:
-                    </p>
-                    <ul>
-                        <li>
-                            В первый раз — бан на 3 дня
-                        </li>
-                        <li>
-                            Во второй раз — -200 звёзд
-                        </li>
-                    </ul>
                 </Rule>
-                <Rule number={4.2} stars={200}>
+                <Rule number={5.2} text="Бан">
+                    <p>
+                        Хелперы в праве вызвать вас на проверку читов.
+                        Отказ от проверки или игнорирование в течение 5-15 минут = бан.
+                        Вы можете подать апелляцию, если считаете бан незаслуженным.
+                    </p>
+                </Rule>
+                <Rule number={5.2} stars={200}>
                     <p>
                         Дюпы запрещены, но разрешены следующие:
                     </p>
@@ -337,46 +380,47 @@ export default function Rules() {
                             ковров
                         </li>
                         <li>
-                            тнт (гуси) (до 10 на команду / человека)
-                        </li>
-                        <li>
-                            сыпучих блоков
+                            <Link
+                                href="https://ru.minecraft.wiki/w/Руководство:Самодвижущиеся_аппараты_на_блоках_слизи"
+                                className="unic_color medium-font"
+                            >
+                                ТНТ
+                            </Link> (до 10 на команду / человека)
                         </li>
                     </ul>
                 </Rule>
-                <Rule number={4.3} stars={200}>
+                <Rule number={5.3} stars={200}>
                     Лаг машины запрещены
                 </Rule>
-                <Rule number={4.4} stars={300}>
+                <Rule number={5.4} stars={300}>
                     Любые попытки обхода блокировок категорически запрещены и будут приводить к продлению и
                     изменению их типа на более строгий
                 </Rule>
             </RulesBox>
 
-            <RulesBox name="trading" heading="Торговля" number={5}>
-                <Rule number={5.1}>
+            <RulesBox name="trading" heading="Торговля" number={6}>
+                <Rule number={6.1}>
                     Валюта сервера в городах и торговых зонах алмазы, за их пределами разрешён бартер
                 </Rule>
-                <Rule number={5.2} stars={400}>
-                    Продажа ресурсов за реальные деньги запрещена. Продажа вещей за мостики осуществляется только
-                    при администрации
+                <Rule number={6.2} stars={400}>
+                    Продажа ресурсов за реальные деньги запрещена.
                 </Rule>
-                <Rule number={5.3} stars={70}>
+                <Rule number={6.3} stars={70}>
                     Запрещено намеренное создание дефицита и искусственное завышение цен на любые ресурсы.
                     Не пытайтесь {'"'}сломать{'"'} экономику сервера
                 </Rule>
             </RulesBox>
 
-            <RulesBox name="unknown_url" heading="Сторонние ресурсы" number={6}>
-                <Rule number={6.1} stars={150}>
+            <RulesBox name="unknown_url" heading="Сторонние ресурсы" number={7}>
+                <Rule number={7.1} stars={150}>
                     Ссылки на сторонние Discord-сервера запрещены
                 </Rule>
-                <Rule number={6.2} stars={200}>
+                <Rule number={7.2} stars={200}>
                     Ссылки на сайты / соцсети майнкрафт серверов-конкурентов запрещены
                 </Rule>
-                <Rule number={6.3} stars={300}>
+                <Rule number={7.3} stars={300}>
                     <p>
-                        Реклама, не связанная с нашим проектом, без согласия администрации запрещена. {" "}
+                        Реклама, не связанная с нашим проектом, без согласия админов запрещена. {" "}
                         <TextUrl href="https://t.me/JustCheburek">
                             Купить согласие
                         </TextUrl>
@@ -397,8 +441,8 @@ export default function Rules() {
                 </Rule>
             </RulesBox>
 
-            <RulesBox name="lor" heading="Лор" number={7}>
-                <Rule number={7.1} stars={30}>
+            <RulesBox name="lor" heading="Лор" number={8}>
+                <Rule number={8.1} stars={30}>
                     <p>
                         Лор — общее достояние и одна из уникальностей сервера
                     </p>
@@ -431,8 +475,8 @@ export default function Rules() {
                 </Rule>
             </RulesBox>
 
-            <RulesBox name="court" heading="Суд" number={8}>
-                <Rule number={8.1}>
+            <RulesBox name="court" heading="Суд" number={9}>
+                <Rule number={9.1}>
                     <p>
                         На нём разбираются только самые тягостные нарушения
                     </p>
@@ -440,12 +484,12 @@ export default function Rules() {
                         Удобное время суда обговаривается для всех участвующих лиц суда
                     </p>
                 </Rule>
-                <Rule number={8.2} text="-рейт каждый день">
+                <Rule number={9.2} text="-рейт каждый день">
                     <p>
                         Невозможность собрания суда по причине отсутствия обвиняемого
                     </p>
                 </Rule>
-                <Rule number={8.3}>
+                <Rule number={9.3}>
                     <p>
                         Откуп назначенный в суде обязателен к выплате
                     </p>
@@ -458,198 +502,6 @@ export default function Rules() {
                 </Rule>
             </RulesBox>
 
-            <RulesBox name="roles" heading="Иерархия ролей" number={9}>
-                <Rule number={9.1}>
-                    <p>
-                        Вышестоящая роль управляет нижестоящей
-                    </p>
-                    <p>
-                        При отсутствии необходимых знаний нижестоящая роль может обратиться к вышестоящей
-                    </p>
-                    <p>
-                        Админы и модеры имеют бóльшие права, чем правила, итоговое решение остаётся за ними
-                    </p>
-                    <br/>
-                    <p>
-                        Запрещён абъюз своих прав
-                    </p>
-                    <p>
-                        Запрещено раскрывать информацию, не доступную для обычных игроков
-                    </p>
-                </Rule>
-                <Rule number={9.2}>
-                    <p>
-                        Админ — самая высшая роль <small>(= создатель)</small>
-                    </p>
-                    <ul>
-                        <li>
-                            Разработка сайта
-                        </li>
-                        <li>
-                            Управление майнкрафт сервером и хостингом
-                        </li>
-                        <li>
-                            Ведение соцсетей и мониторинг серверов
-                        </li>
-                        <li>
-                            Исправление багов
-                        </li>
-                        <li>
-                            Креативные идеи
-                        </li>
-                        <li>
-                            Дизайнерство
-                        </li>
-                        <li>
-                            Билдерство
-                        </li>
-                        <li>
-                            Планы сервера
-                        </li>
-                        <li>
-                            Набор игроков на роли
-                        </li>
-                    </ul>
-                    <UserBox _id="j8bsrsdgzqa4n0c"/>
-                    <UserBox _id="i5mqq2js4nos1yj"/>
-                    <UserBox _id="8v4pdxujk92dgh5"/>
-                </Rule>
-                <Rule number={9.3}>
-                    <p>
-                        Модер
-                    </p>
-                    <ul>
-                        <li>
-                            Настройка и перевод плагинов, датапаков, ресурс паков и тому подобное
-                        </li>
-                        <li>
-                            Билдерство
-                        </li>
-                        <li>
-                            Тестирование
-                        </li>
-                        <li>
-                            Решения важных ситуаций
-                        </li>
-                    </ul>
-                </Rule>
-                <Rule number={9.4}>
-                    <p>
-                        Помогатор - категория, делится на 3 подкатегории:
-                    </p>
-                    <br/>
-                    <h4>
-                        Хелпер
-                    </h4>
-                    <ul>
-                        <li>
-                            Помощь игрокам с их вопросами и вайтлистом
-                        </li>
-                        <li>
-                            Осведомление админов о багах сервера
-                        </li>
-                        <li>
-                            Тестирование
-                        </li>
-                        <li>
-                            Откат ресурсов игроков в чрезвычайных ситуациях
-                        </li>
-                    </ul>
-                    <UserBox _id="ruef6d47y245c0x"/>
-                    <br/>
-                    <h4>
-                        Судья
-                    </h4>
-                    <ul>
-                        <li>
-                            Помощь игрокам для определения общего решения конфликта
-                        </li>
-                        <li>
-                            Управление звёздами{" "}
-                            <small>(выдача звёзд за общественные дела и понижение звёзд за
-                                проступки)</small>
-                        </li>
-                    </ul>
-                    <UserBox _id="t2dhhl5igw1sp43"/>
-                    <UserBox _id="cd8u5lqjg9zjr1b"/>
-                    <br/>
-                    <h4>
-                        Акционер
-                    </h4>
-                    <ul>
-                        <li>
-                            Не имеет прав помогаторов
-                        </li>
-                        <li>
-                            Участие в различных голосованиях в чате помогаторов
-                        </li>
-                        <li>
-                            Представляет общественное мнение
-                        </li>
-                        <li>
-                            Покупается за 500₽ в месяц
-                        </li>
-                    </ul>
-                    <UserBox _id="biu4vqvuev0m0tp"/>
-                    <br/>
-                    <TextUrl href="https://discord.gg/swrAFFqvH2">
-                        Стать помогатором
-                    </TextUrl>
-                </Rule>
-                <Rule number={9.5}>
-                    <p>
-                        Мэр мира — избирается игроками на один сезон
-                    </p>
-                    <p>
-                        В течение и в конце сезона за ухоженный и красивый спавн получает звёзды
-                    </p>
-                    <p>
-                        Мэр имеет право запретить строительство на спавне / снести постройку без разрешения
-                        владельца
-                    </p>
-                    <TextUrl href="https://discord.gg/AkZHn9q5KV">
-                        Стать мэром
-                    </TextUrl>
-                </Rule>
-                <Rule number={9.6}>
-                    <p>
-                        Художник — рисует{" "}
-                        <Link href="/features/stickers" className="unic_color medium-font">
-                            стикеры
-                        </Link>
-                    </p>
-                    <TextUrl href="https://t.me/MineBridgeOfficial/326">
-                        Заказать
-                    </TextUrl>
-                </Rule>
-                <Rule number={9.7}>
-                    <p>
-                        Тестировщик — проверяет новые фичи сервера и сайта
-                    </p>
-                    <p>
-                        Может получать от 5 звёзд за каждый продуктивный тест
-                    </p>
-                </Rule>
-                <Rule number={9.8}>
-                    <p>
-                        Контент мейкер — стример / ютубер по MineBridge
-                    </p>
-                </Rule>
-            </RulesBox>
-
-            <p className="red_line">
-                Незнание правил и их обновлений не освобождает от ответственности наказаний
-            </p>
-            <p className="red_line">
-                Правила действуют не зависимо от стримов, видео, ролей, кланов и других факторов
-            </p>
-            <p className="red_line">
-                Ответственность всегда несет владелец аккаунта, а также игрок, который совершил эти
-                действия {" "}
-                <small>
-                    [Исключение: Взлом аккаунта, владельцу нужно только возместить ущерб]
-                </small>
-            </p>
             <p className="red_line">
                 Заметили нарушение правил? {" "}
                 <TextUrl href="https://discord.gg/VtXNje8xHq">
@@ -657,7 +509,7 @@ export default function Rules() {
                 </TextUrl>
             </p>
             <p className="red_line">
-                Администрация не обязана уведомлять игроков об небольшом изменении правил. Игрок сам должен
+                Админы не обязаны уведомлять игроков об небольшом изменении правил. Игрок сам должен
                 следить за изменениями в {" "}
                 <TextUrl href="https://t.me/MineBridgeOfficial">
                     Новостях проекта
@@ -668,39 +520,39 @@ export default function Rules() {
         <OnThisPage>
             <OnThisPageLink href="#general">
                 <Number>1</Number>
+                Общие
+            </OnThisPageLink>
+            <OnThisPageLink href="#communication">
+                <Number>2</Number>
                 Общение
             </OnThisPageLink>
             <OnThisPageLink href="#game_interferences">
-                <Number>2</Number>
+                <Number>3</Number>
                 Игра
             </OnThisPageLink>
             <OnThisPageLink href="#areas">
-                <Number>3</Number>
+                <Number>4</Number>
                 Территории
             </OnThisPageLink>
             <OnThisPageLink href="#cheats">
-                <Number>4</Number>
+                <Number>5</Number>
                 Читы
             </OnThisPageLink>
             <OnThisPageLink href="#trading">
-                <Number>5</Number>
+                <Number>6</Number>
                 Торговля
             </OnThisPageLink>
             <OnThisPageLink href="#unknown_url">
-                <Number>6</Number>
+                <Number>7</Number>
                 Реклама
             </OnThisPageLink>
             <OnThisPageLink href="#lor">
-                <Number>7</Number>
+                <Number>8</Number>
                 Лор
             </OnThisPageLink>
             <OnThisPageLink href="#court">
-                <Number>8</Number>
-                Суд
-            </OnThisPageLink>
-            <OnThisPageLink href="#roles">
                 <Number>9</Number>
-                Роли
+                Суд
             </OnThisPageLink>
         </OnThisPage>
     </>)

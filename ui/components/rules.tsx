@@ -7,9 +7,10 @@ type RulesBox = {
     name: string
     heading: string
     number: number
+    marker?: boolean
 }
 
-export const RulesBox = ({name, heading, number, children}: PropsWithChildren<RulesBox>) => {
+export const RulesBox = ({name, heading, number, marker=false, children}: PropsWithChildren<RulesBox>) => {
     return (
         <section className={styles.container} id={name}>
             {/* Заголовок */}
@@ -26,7 +27,7 @@ export const RulesBox = ({name, heading, number, children}: PropsWithChildren<Ru
             </div>
 
             {/* Содержание */}
-            <ul id={name + "_box"} className={`${styles.box} not_indent remove_marker`}>
+            <ul id={name + "_box"} className={`${styles.box} ${marker ? "" : "not_indent remove_marker"}`}>
                 {/* Rule */}
                 {children}
             </ul>
@@ -38,9 +39,9 @@ type Rule = {
     number: number
     text?: string
     stars?: number
-}
+} & PropsWithChildren
 
-export const Rule = ({number, children, stars, text}: PropsWithChildren<Rule>) => (
+export const Rule = ({number, children, stars, text}: Rule) => (
     <li className={styles.rule} id={number?.toString()}>
         <LinkNumber href={number.toString()} box={false}>
             {number}
@@ -55,7 +56,14 @@ export const Rule = ({number, children, stars, text}: PropsWithChildren<Rule>) =
     </li>
 )
 
-export const Punishment = ({text, stars}: { text?: string; stars?: number }) => (
+export const DotRule = ({children}: PropsWithChildren) => (
+    <li className={styles.dotrule}>
+        {children}
+    </li>
+)
+
+export const Punishment = ({
+text, stars}: { text?: string; stars?: number }) => (
     <p className={styles.punishment}>
         {text}
         {(text && stars) && " / "}
