@@ -211,35 +211,33 @@ export const updateFrom = cache(
             }
         }
 
-        console.log({rPlace, rName})
-        if (rPlace && rName) {
-            const {user: inviter} = await getUser({name: rName})
+        if (rPlace) {
+            const userInfo = await getUser({name: rName}, false).catch(console.error)
+            const inviter = userInfo?.user
 
-            if (!user.from?.userId && !inviter.invites.some(id => String(id) === String(user._id))) {
+            if (!user.from?.userId && inviter && !inviter.invites.some(id => String(id) === String(user._id))) {
                 await updateInviter(inviter, true)
             }
 
-            return {place: rPlace, userId: inviter._id}
+            return {place: rPlace, userId: inviter?._id}
         }
 
         const nullFrom = {place: undefined, userId: undefined}
         if (!from) return nullFrom
 
         const {place, name} = from
-        if (!name || !place || user.name === name) {
+        if (!place || user.name === name) {
             return nullFrom
         }
 
-        const {user: inviter, isContentMaker} = await getUser({name})
-        if (!inviter || String(user._id) === String(inviter._id)) {
-            return nullFrom
-        }
-
-        if (!user.from?.userId && !inviter.invites.some(id => String(id) === String(user._id))) {
+        const userInfo = await getUser({name}, false).catch(console.error)
+        const inviter = userInfo?.user
+        const isContentMaker = userInfo?.isContentMakerCheck || false
+        if (!user.from?.userId && inviter && !inviter.invites.some(id => String(id) === String(user._id))) {
             await updateInviter(inviter, isContentMaker)
         }
 
-        return {place, userId: inviter._id}
+        return {place, userId: inviter?._id}
     },
     ["from"],
     {revalidate: 3600, tags: ["from"]}
