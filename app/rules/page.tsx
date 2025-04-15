@@ -75,7 +75,13 @@ export default function Rules() {
 
             <RulesBox name="terms" heading="Термины" number={0}>
                 <Rule number={0.1}>
-                    Термины используются в том же значении, что и в пользовательском соглашении
+                    Термины используются в том же значении, что и в{" "}
+                    <Link
+                        href="/rules/terms-of-use"
+                        className="unic_color medium-font"
+                    >
+                        пользовательском соглашении
+                    </Link>
                 </Rule>
                 <Rule number={0.2}>
                     «Бан» — блокировка доступа пользователя к сервисам MineBridge
@@ -120,7 +126,16 @@ export default function Rules() {
                     осуществляющие действия против нарушителя, включают в себя саму роль и все вышестоящие<br/>
                     <small>(т.е. судья — это судья, модератор или администратор)</small>
                 </Rule>
+                <Rule number={0.7}>
+                    <p>
+                        «Админ» — администратор MineBridge
+                    </p>
+                    <p>
+                        «Модер» — модератор MineBridge
+                    </p>
+                </Rule>
             </RulesBox>
+
             <RulesBox name="general" heading="Общие правила" number={1}>
                 <Rule number={1.1}>
                     Незнание правил и их обновлений не освобождает от ответственности наказаний
@@ -153,10 +168,16 @@ export default function Rules() {
                     Спам и флуд запрещены
                 </Rule>
                 <Rule number={2.4} text="Бан">
-                    Контент NSFW (18+ и т. п.) запрещен
+                    Контент{" "}
+                    <Link href="https://ru.wikipedia.org/wiki/NSFW"
+                          target="_blank"
+                          className="medium-font unic_color"
+                    >
+                        NSFW
+                    </Link> (18+ и т. п.) запрещен
                 </Rule>
                 <Rule number={2.5} stars={35}>
-                    Запрещено нарушение правил {" "}
+                    Запрещено нарушение правил{" "}
                     <TextUrl href="https://legal.twitch.com/ru/legal/terms-of-service/">
                         платформы Twitch
                     </TextUrl><br/>

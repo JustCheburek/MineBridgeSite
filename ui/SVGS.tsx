@@ -2,7 +2,6 @@ import type {SVGProps} from "react";
 import {DS_URL, SUPPORT_URL, TG_URL, VK_URL} from "@/const";
 import "./styles/state.scss";
 import Link from "next/link";
-import styles from "*.module.scss";
 
 interface Svg extends SVGProps<SVGSVGElement> {
     className?: string
@@ -448,6 +447,8 @@ export const AutoSvg = ({type, ...props}: { type: string } & SizeSvg) => {
         case "vk":
             return <VKSvg {...props}/>
         case "twitch":
+            return <TwitchSvg {...props}/>
+        case "legal":
             return <TwitchSvg {...props}/>
         case "youtube":
             return <YouTubeSvg {...props}/>
