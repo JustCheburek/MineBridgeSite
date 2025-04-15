@@ -3,22 +3,27 @@
 import styles from "./styles/number.module.scss";
 import {LinkSvg} from "@ui/SVGS";
 import {ComponentPropsWithoutRef, PropsWithChildren} from "react";
-import Link, {LinkProps} from "next/link";
+import Link, {type LinkProps} from "next/link";
+import {usePathname} from "next/navigation";
 
 type LinkNumberProps = {
-    path?: string
     box?: boolean
 } & PropsWithChildren & LinkProps
-export const LinkNumber = ({children, href, path = `rules`, box = true, ...props}: LinkNumberProps) => (
-    <Link
-        href={`#${href}`} className={`${styles.number} ${box ? styles.box : styles.empty}`}
-        onClick={() => navigator.clipboard.writeText(new URL(`${path}#${href}`, process.env.NEXT_PUBLIC_EN_URL!).toString())}
-        {...props}
-    >
-        <LinkSvg className={styles.link}/>
-        <p className={`${styles.text} center_text ${box ? "medium-font" : ""}`}>{children}</p>
-    </Link>
-)
+export const LinkNumber = ({href, box = true, children, ...props}: LinkNumberProps) => {
+    const path = usePathname()
+    const url = new URL(`${path}#${href}`, process.env.NEXT_PUBLIC_EN_URL!).toString()
+
+    return (
+        <Link
+            href={`#${href}`} className={`${styles.number} ${box ? styles.box : styles.empty}`}
+            onClick={() => navigator.clipboard.writeText(url)}
+            {...props}
+        >
+            <LinkSvg className={styles.link}/>
+            <p className={`${styles.text} center_text ${box ? "medium-font" : ""}`}>{children}</p>
+        </Link>
+    )
+}
 
 type NumberProps = {
     box?: boolean
