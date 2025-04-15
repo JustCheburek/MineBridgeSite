@@ -13,6 +13,7 @@ import {TextUrl} from "@components/textUrl";
 import {H1} from "@components/h1";
 import {Number} from "@components/number";
 import {LastUpdate} from "@components/lastUpdate";
+import {StarSvg} from "@ui/SVGS";
 
 export const metadata: Metadata = {
     title: "Правила",
@@ -88,20 +89,13 @@ export default function Rules() {
                 </Rule>
                 <Rule number={0.3}>
                     <p>
-                        «Звёзды» — рейтинг игрового аккаунта, чем выше рейтинг, тем больше бонусов от сервера
+                        <Link
+                            href={"#stars"}
+                            className="medium-font unic_color"
+                        >
+                            «Звёзды»
+                        </Link> — рейтинг игрового аккаунта
                     </p>
-                    <ul id="social" className="remove_marker">
-                        <li>
-                            <span className="green_color medium-font">25 и больше</span> — особые призы на {" "}
-                            <Link href="/milkyway" className="unic_color medium-font">млечном пути</Link>
-                        </li>
-                        <li>
-                            <span className="red_color medium-font">-200 и ниже</span> — бан в майне
-                        </li>
-                        <li>
-                            <span className="red_color medium-font">-300 и ниже</span> — бан в дс
-                        </li>
-                    </ul>
                 </Rule>
                 <Rule number={0.4}>
                     «Игрок» — участник игрового сервера MineBridge
@@ -356,21 +350,20 @@ export default function Rules() {
                 </Rule>
                 <Rule number={4.7}>
                     <p>
-                        Максимальная расстояние всех территорий на одного игрока - 250 блоков на 250 блоков{" "}
-                        <small>(Площадь - 62.500 блоков)</small>
+                        Максимальная расстояние всех территорий на 1 игрока - 300 блоков на 300 блоков
                     </p>
                     <p>
                         Игроки могут объединяться, чтобы захватывать территории побольше
                     </p>
                     <p>
-                        В случае привата огромной территории, по мнению модеров, ваша территория может
+                        В случае привата огромной территории, по мнению судий, ваша территория может
                         быть отдана в чужие руки
                     </p>
                 </Rule>
                 <Rule number={4.8} stars={30}>
                     <p>
-                        Запрещено строительство некрасивых никчёмных построек, не имеющих никакого значения:
-                        рандомные столбы и лестницы в небо и т.д.
+                        Запрещено строительство некрасивых никчёмных построек, не имеющих никакого значения{" "}
+                        <small>(рандомные столбы и лестницы в небо и т.д.)</small>
                     </p>
                     <p>
                         Их нужно сносить сразу, иначе их владелец может получить понижение звёзд
@@ -435,7 +428,7 @@ export default function Rules() {
                 <Rule number={6.1}>
                     Валюта сервера в городах и торговых зонах алмазы, за их пределами разрешён бартер
                 </Rule>
-                <Rule number={6.2} stars={400}>
+                <Rule number={6.2} text="Бан">
                     Продажа ресурсов за реальные деньги запрещена.
                 </Rule>
                 <Rule number={6.3} stars={70}>
@@ -475,19 +468,19 @@ export default function Rules() {
             </RulesBox>
 
             <RulesBox name="lor" heading="Лор" number={8}>
-                <Rule number={8.1} stars={30}>
+                <Rule number={8.1}>
                     <p>
                         Лор — общее достояние и одна из уникальностей сервера
                     </p>
                     <p>
                         Вы можете строить свои гипотезы по поводу лора
                     </p>
-                    <br/>
-                    <p>
-                        Любые предметы и места лора <span className="red_color medium-font">нельзя</span> {" "}
-                        продавать или приватизировать
-                    </p>
-                    <br/>
+                </Rule>
+                <Rule number={8.2} stars={30}>
+                    Любые предметы и места лора <span className="red_color medium-font">нельзя</span> {" "}
+                    продавать или приватизировать
+                </Rule>
+                <Rule number={8.3}>
                     <p>
                         Как определить места лора:
                     </p>
@@ -532,6 +525,76 @@ export default function Rules() {
                     <p>
                         Не выплата - бан
                     </p>
+                </Rule>
+            </RulesBox>
+
+            <RulesBox name="stars" heading="Звёзды" number={10}>
+                <Rule number={10.1}>
+                    «Звёзды» — рейтинг игрового аккаунта, чем выше рейтинг, тем больше бонусов от сервера
+                </Rule>
+                <Rule number={10.2}>
+                    <ul id="social" className="remove_marker not_indent">
+                        <li>
+                            <span className="green_color medium-font">25 и больше</span> — особые призы на {" "}
+                            <Link
+                                href="/milkyway"
+                                className="unic_color medium-font"
+                            >
+                                млечном пути
+                            </Link>
+                        </li>
+                        <li>
+                            <span className="red_color medium-font">-200 и ниже</span> — бан в майне
+                        </li>
+                        <li>
+                            <span className="red_color medium-font">-300 и ниже</span> — бан в дс
+                        </li>
+                    </ul>
+                </Rule>
+                <Rule number={10.3}>
+                    Перед каждым сезоном звёзды сбрасываются <small>(если общий рейтинг больше 0)</small>
+                </Rule>
+                <Rule number={10.4}>
+                    <p>
+                        Звёзды можно заработать:
+                    </p>
+                    <ul>
+                        <li>
+                            1 час игры = 1 <StarSvg/>
+                        </li>
+                        <li>
+                            Стримы и видео:
+                            <p>
+                                1 регистрация по реферальной ссылке = 5 рейтинга<br/>
+                                <small>(и 5 мостиков для контент мейкеров)</small>
+                            </p>
+                        </li>
+                        <li>
+                            <Link
+                                href="/news/events"
+                                className="unic_color medium-font"
+                            >
+                                Проведение ивентов
+                            </Link>
+                        </li>
+                        <li>
+                            Красивые постройки на спавне
+                        </li>
+                        <li>
+                            <Link
+                                href="/rules/roles"
+                                className="unic_color medium-font"
+                            >
+                                Помощь с сервером
+                            </Link>
+                        </li>
+                        <li>
+                            Участие в {" "}
+                            <TextUrl href="https://t.me/MineBridgeOfficial">
+                                конкурсах
+                            </TextUrl>
+                        </li>
+                    </ul>
                 </Rule>
             </RulesBox>
 
@@ -586,6 +649,10 @@ export default function Rules() {
             <OnThisPageLink href="#court">
                 <Number>9</Number>
                 Суд
+            </OnThisPageLink>
+            <OnThisPageLink href="#stars">
+                <Number>10</Number>
+                Звёзды
             </OnThisPageLink>
         </OnThisPage>
     </>)
