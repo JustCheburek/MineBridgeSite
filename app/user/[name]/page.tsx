@@ -4,7 +4,7 @@ import Link from "next/link";
 import {Suspense} from "react";
 import TimeAgo from "javascript-time-ago";
 import {validate} from "@services/validate";
-import {getUser, updateFrom} from "@/services";
+import {getLastSeen, getUser, updateFrom} from "@/services";
 import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
 import {userModel} from "@server/models";
@@ -72,6 +72,7 @@ export default async function Profile({params}: NameParams) {
     } = await getUser(
         {name}, true, true, author?._id, isHelper
     )
+    const lastSeen = await getLastSeen(user.name)
 
     if (author) {
         const from: { place: string, name: string } = JSON.parse(cookiesStore.get("from")?.value ?? "{}")
@@ -141,12 +142,25 @@ export default async function Profile({params}: NameParams) {
                             )
                         })}
                     </div>
-                    <h4>
-                        Онлайн: {" "}
-                        <time dateTime={new Date(user.onlineAt || 0).toISOString()}>
-                            {timeAgo.format(new Date(user.onlineAt || 0))}
-                        </time>
-                    </h4>
+                    <div>
+                        <h4>
+                            Онлайн:
+                        </h4>
+                        <p>
+                            Сайт: {" "}
+                            <time dateTime={new Date(user.onlineAt || 0).toISOString()}>
+                                {timeAgo.format(new Date(user.onlineAt || 0))}
+                            </time>
+                        </p>
+                        {lastSeen &&
+                          <p>
+                            Сервер: {" "}
+                            <time dateTime={new Date(lastSeen || 0).toISOString()}>
+                                {timeAgo.format(new Date(lastSeen || 0))}
+                            </time>
+                          </p>
+                        }
+                    </div>
                     <h4>
                         <Link href="/milkyway">
                             Звёзды: {" "}
@@ -190,7 +204,7 @@ export default async function Profile({params}: NameParams) {
             </Suspense>
 
             {isContentMaker &&
-              <Suspense fallback={<Skeleton width="100%" height={307}/>}>
+                <Suspense fallback={<Skeleton width="100%" height={307}/>}>
                 <TwitchFrame user={user}/>
               </Suspense>
             }

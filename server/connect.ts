@@ -1,4 +1,5 @@
 import {connect, connections} from "mongoose";
+import mysql from "mysql2/promise.js"
 
 const MONGO_URL = process.env.MONGODB_URI!
 if (!MONGO_URL) {
@@ -7,7 +8,7 @@ if (!MONGO_URL) {
     );
 }
 
-export async function Connect() {
+export async function MGConnect() {
     if (connections[0].readyState) {
         return
     }
@@ -24,3 +25,16 @@ export async function Connect() {
         }
     }
 }
+
+export async function MySQLConnect() {
+    return mysql.createPool({
+        host: process.env.SERVER_IP!,
+        port: Number(process.env.MYSQL_PORT!),
+        user: process.env.MYSQL_USER!,
+        password: process.env.MYSQL_PASSWORD!,
+        database: process.env.MYSQL_DATABASE!,
+        connectTimeout: 10000
+    })
+}
+
+
