@@ -431,11 +431,15 @@ export const getCode = cache(
 
 export const getLastSeen = cache(
     async (name: string) => {
-        const [rows] = await sqlPool.execute<mysql.RowDataPacket[]>(
-            "SELECT last_seen FROM librepremium_data WHERE last_nickname = ? LIMIT 1",
-            [name]
-        );
+        try {
+            const [rows] = await sqlPool.execute<mysql.RowDataPacket[]>(
+                "SELECT last_seen FROM librepremium_data WHERE last_nickname = ? LIMIT 1",
+                [name]
+            );
 
-        return rows[0]?.last_seen ?? null;
+            return new Date(rows[0]?.last_seen) ?? null;
+        } catch (e) {
+            console.error(e)
+        }
     }
 );

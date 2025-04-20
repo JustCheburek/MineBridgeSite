@@ -6,10 +6,11 @@ import {Season} from "@/types/season";
 import {Code} from "@/types/code";
 import {MGConnect, MySQLConnect} from "./connect";
 import {models} from "mongoose";
+import {DBS} from "@/const";
 
 MGConnect()
 
-export const sqlPool = await MySQLConnect(process.env.MYSQL_DATABASE!)
+export const sqlPool = await MySQLConnect(DBS.LL)
 
 export const userModel = (models.User as ReturnModelType<typeof User>) || getModelForClass(User);
 const sessionModel = (models.Session as ReturnModelType<typeof Session>) || getModelForClass(Session);

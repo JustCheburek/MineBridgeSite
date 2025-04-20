@@ -5,19 +5,21 @@ import type {User} from "lucia";
 
 // Компоненты
 import {FormBox, FormButton, FormInput, FormLabel, FormTextarea} from "@components/formBox";
-import {useState} from "react";
 import type {ChangeEvent} from "react";
-import {InputNameCheckWithoutState} from "@components/formInputs";
-import {UpdateProfile} from "@services/user";
+import {useState} from "react";
+import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
+import {DeleteUser, UpdateProfile} from "@services/user";
 import Link from "next/link";
 import {ImgUpload} from "@components/imgUpload";
 import {useEdgeStore} from "@/lib/edgestore"
-/*
-type SuccessModal = {
+import {Modal, type ModalAction} from "@components/modal";
+import {H1} from "@components/h1";
+
+type Modal = {
     user: User
 }
 
-function SuccessModal({modal, setModal, user}: ModalAction & SuccessModal) {
+function DeleteModal({modal, setModal, user}: ModalAction & Modal) {
     const [name, setName] = useState("")
     const {edgestore} = useEdgeStore()
 
@@ -50,29 +52,11 @@ function SuccessModal({modal, setModal, user}: ModalAction & SuccessModal) {
     )
 }
 
-function NoPermModal({modal, setModal}: ModalAction) {
-    return (
-        <Modal modal={modal} setModal={setModal} centerText={false}>
-            <H1>Нет прав</H1>
-            <p>
-                Твои звёзды меньше 0,
-            </p>
-            <p>
-                поэтому не можешь удалять аккаунт
-            </p>
-            <Link href="/rules" className="medium-font">
-                Как повысить звёзды?
-            </Link>
-        </Modal>
-    )
-}
-
 type DeleteUser = {
     user: User
-    access: boolean
 }
 
-export function DeleteUserBox({user, access}: DeleteUser) {
+export function DeleteUserBox({user}: DeleteUser) {
     const [modal, setModal] = useState(false)
 
     return (<>
@@ -81,19 +65,13 @@ export function DeleteUserBox({user, access}: DeleteUser) {
                 Удалить аккаунт
             </FormButton>
         </FormBox>
-        {access
-            ? <SuccessModal
-                modal={modal}
-                setModal={setModal}
-                user={user}
-            />
-            : <NoPermModal
-                modal={modal}
-                setModal={setModal}
-            />
-        }
+        <DeleteModal
+            modal={modal}
+            setModal={setModal}
+            user={user}
+        />
     </>)
-}*/
+}
 
 type ChangeParam = {
     user: User
