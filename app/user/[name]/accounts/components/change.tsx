@@ -30,13 +30,18 @@ function DeleteModal({modal, setModal, user}: ModalAction & Modal) {
                 Ты уверен, что хочешь
             </p>
             <p>
-                удалить свой аккаунт <strong className="red_color">безвозвратно</strong>?
+                удалить аккаунт <strong className="red_color">безвозвратно</strong>?
             </p>
-            <h4>Тогда введи свой <strong className="red_color">ник</strong></h4>
+            <h4>Тогда введи <strong className="red_color">ник</strong></h4>
             <FormBox action={async () => {
-                await edgestore.publicFiles.delete({
-                    url: user.photo,
-                });
+                try {
+                    await edgestore.publicFiles.delete({
+                        url: user.photo,
+                    });
+                } catch (e) {
+                    console.error(e)
+                }
+
                 await DeleteUser(user._id)
             }}>
                 <InputNameCheck
