@@ -26,13 +26,13 @@ export async function MGConnect() {
     }
 }
 
-export async function MySQLConnect() {
+export async function MySQLConnect(db?: string) {
     return mysql.createPool({
         host: process.env.SERVER_IP!,
         port: Number(process.env.MYSQL_PORT!),
         user: process.env.MYSQL_USER!,
         password: process.env.MYSQL_PASSWORD!,
-        database: process.env.MYSQL_DATABASE!,
+        database: db,
         connectTimeout: 10000
     })
 }

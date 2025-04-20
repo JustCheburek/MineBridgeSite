@@ -1,6 +1,6 @@
 "use client"
 
-import {type Dispatch, type SetStateAction, useEffect, useState} from "react";
+import {type Dispatch, type SetStateAction, useState} from "react";
 import {FormInput, type FormInputProps, FormLabel} from "@components/formBox";
 
 const InputName = ({autoComplete = "name", ...props}: FormInputProps) => (
@@ -23,13 +23,9 @@ type InputNameCheck = {
 }
 
 export const InputNameCheck = (
-    {name, setName, setAccess, ...props}: InputNameCheck & FormInputProps
+    {name, setName, ...props}: InputNameCheck & FormInputProps
 ) => {
     const [symbol, setSymbol] = useState("")
-
-    useEffect(() => {
-        setAccess && setAccess(name.length < 30)
-    })
 
     return <>
         {name.length > 30 &&
@@ -45,8 +41,6 @@ export const InputNameCheck = (
         <InputName
             value={name}
             onChange={e => {
-                setAccess && setAccess(name.length < 30)
-
                 if (e.target.value.match(/[^a-zA-Z0-9-_]/)) {
                     setSymbol(String(e.target.value))
                 } else {

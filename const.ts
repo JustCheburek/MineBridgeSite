@@ -62,6 +62,11 @@ export const ROLES_START = {
     name: "u: "
 }
 
+export const DBS = {
+    librelogin: "librelogin",
+    
+}
+
 export const Paths: PathID[] = [{
     rating: 25,
     x: -35,

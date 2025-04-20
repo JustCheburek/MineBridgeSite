@@ -9,28 +9,16 @@ import styles from "./auth.module.scss";
 import {useChangeRadioState} from "@hooks/useChangeState";
 
 export function AuthForm({savedName}: { savedName?: string }) {
-    const [access, setAccess] = useState(false)
-    const [name, setName] = useState(savedName || "")
+    const [name, setName] = useState(savedName ?? "")
     const [
         provider, , onChange, Check
-    ] = useChangeRadioState<"google" | "discord" | "twitch">("discord")
+    ] = useChangeRadioState<"google" | "discord" | "twitch">("google")
 
     return (
         <DefaultFormBox className={styles.form}>
-            <InputNameCheck name={name} setName={setName} setAccess={setAccess} autoFocus/>
+            <InputNameCheck name={name} setName={setName} autoFocus/>
 
             <FormGroup>
-                <FormLabel className={styles.provider}>
-                    <FormInput
-                        name="provider"
-                        type="radio"
-                        checked={Check("discord")}
-                        onChange={onChange}
-                        value="discord"
-                    />
-                    <DiscordSvg className={`color ${styles.ds}`} size="1em"/>
-                </FormLabel>
-
                 <FormLabel className={styles.provider}>
                     <FormInput
                         name="provider"
@@ -46,6 +34,17 @@ export function AuthForm({savedName}: { savedName?: string }) {
                     <FormInput
                         name="provider"
                         type="radio"
+                        checked={Check("discord")}
+                        onChange={onChange}
+                        value="discord"
+                    />
+                    <DiscordSvg className={`color ${styles.ds}`} size="1em"/>
+                </FormLabel>
+
+                <FormLabel className={styles.provider}>
+                    <FormInput
+                        name="provider"
+                        type="radio"
                         checked={Check("twitch")}
                         onChange={onChange}
                         value="twitch"
@@ -54,19 +53,13 @@ export function AuthForm({savedName}: { savedName?: string }) {
                 </FormLabel>
             </FormGroup>
 
-            <FormLink href={`/auth/${provider}?name=${name}`} aria-disabled={!access}>
+            <FormLink href={`/auth/${provider}?name=${name}`}>
                 Дальше
             </FormLink>
 
-            {/*<small className="center_text">
-                <Link
-                    href="https://t.me/MineBridgeOfficial/624"
-                    target="_blank"
-                    className="light_gray_color"
-                >
-                    Скачать обход Discord
-                </Link>
-            </small>*/}
+            <small className="center_text light_gray_color">
+                Вход через дискорд не работает в РФ
+            </small>
         </DefaultFormBox>
     )
 }

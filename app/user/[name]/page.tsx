@@ -155,9 +155,11 @@ export default async function Profile({params}: NameParams) {
                         {lastSeen &&
                           <p>
                             Сервер: {" "}
-                            <time dateTime={new Date(lastSeen || 0).toISOString()}>
-                                {timeAgo.format(new Date(lastSeen || 0))}
-                            </time>
+                            <Suspense fallback={<Skeleton width={130} height="1em"/>}>
+                              <time dateTime={new Date(lastSeen || 0).toISOString()}>
+                                  {timeAgo.format(new Date(lastSeen || 0))}
+                              </time>
+                            </Suspense>
                           </p>
                         }
                     </div>

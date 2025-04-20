@@ -9,7 +9,7 @@ import {models} from "mongoose";
 
 MGConnect()
 
-export const sqlPool = await MySQLConnect()
+export const sqlPool = await MySQLConnect(process.env.MYSQL_DATABASE!)
 
 export const userModel = (models.User as ReturnModelType<typeof User>) || getModelForClass(User);
 const sessionModel = (models.Session as ReturnModelType<typeof Session>) || getModelForClass(Session);

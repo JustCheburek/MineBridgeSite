@@ -109,7 +109,6 @@ export function ChangeForm(
         isContentMaker,
     }: ChangeParam) {
     const [result, setResult] = useState("")
-    const [access, setAccess] = useState(false)
     const ratingAccess = -50
 
     const {edgestore} = useEdgeStore()
@@ -153,7 +152,6 @@ export function ChangeForm(
             }
         }}>
             <InputNameCheckWithoutState
-                setAccess={setAccess}
                 defaultName={user.name}
                 disabled={user.rating <= ratingAccess && !isHelper}
             />
@@ -292,7 +290,7 @@ export function ChangeForm(
                   {result}
               </strong>
             }
-            <FormButton disabled={user.rating <= ratingAccess && !isHelper || !access}>
+            <FormButton disabled={user.rating <= ratingAccess && !isHelper}>
                 Сохранить
             </FormButton>
         </FormBox>
