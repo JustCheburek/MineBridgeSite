@@ -11,9 +11,10 @@ import {DS_URL} from "@/const";
 
 export async function GET(request: NextRequest) {
     const {searchParams} = request.nextUrl
+    const cookiesStore = await cookies()
+
     const code = searchParams.get("code");
     const state = searchParams.get("state");
-    const cookiesStore = await cookies()
 
     const storedState = cookiesStore.get("discord_oauth_state")?.value
     const codeVerifier = cookiesStore.get("discord_oauth_code_verifier")?.value
@@ -22,7 +23,10 @@ export async function GET(request: NextRequest) {
         return new NextResponse(
             "Неправильный код",
             {
-                status: 400
+                status: 307,
+                headers: {
+                    Location: `/auth/error?error=code&code=${code}&state=${state}&code_verifier=${codeVerifier}&storedState=${storedState}`
+                }
             }
         )
     }
@@ -38,7 +42,15 @@ export async function GET(request: NextRequest) {
         }).then(r => r.data).catch(console.error);
 
         if (!dsUser || !dsUser.email || !dsUser.verified) {
-            return new NextResponse("Что-то пошло не так", {status: 400})
+            return new NextResponse(
+                "Нет почты",
+                {
+                    status: 307,
+                    headers: {
+                        Location: `/auth/error?error=email&name=${dsUser?.username}&email=${dsUser?.email}&ver=${dsUser?.verified}`
+                    }
+                }
+            )
         }
 
         // Добавление в гильдию
@@ -67,7 +79,7 @@ export async function GET(request: NextRequest) {
 
         if (!guildMember) {
             return new NextResponse(`Пожалуйста, присоединитесь к дс группе майнбриджа и попробуйте ещё раз! ${DS_URL}`, {
-                status: 400
+                status: 412
             });
         }
 

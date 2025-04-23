@@ -42,9 +42,9 @@ export default async function Accounts({params}: NameParams) {
     } = await validate()
     const {
         user, isMe, isContentMakerCheck
-    } = await getUser(
-        {name}, true, true, author?._id, isHelper
-    )
+    } = await getUser({
+        name, roles: true, authorId: author?._id, show: isHelper
+    })
 
     return (
         <div className="account_content">

@@ -2,7 +2,7 @@
 import {getUser} from "@/services";
 import Link from "next/link";
 import {type PropsWithChildren, Suspense} from "react";
-import {idOrName} from "@/types/idOrName";
+import {idOrNameUser} from "@/types/idOrName";
 import dynamic from "next/dynamic";
 
 // Стили
@@ -12,8 +12,8 @@ import styles from "./styles/user.module.scss";
 import {Skeleton} from "@components/skeleton";
 const Avatar = dynamic(() => import("@components/avatar"));
 
-export async function UserBox({_id, name, children}: PropsWithChildren<idOrName>) {
-    const info = await getUser({_id, name}, false).catch(console.error)
+export async function UserBox({_id, name, children}: PropsWithChildren<idOrNameUser>) {
+    const info = await getUser({_id, name, throwNotFound: false}).catch(console.error)
 
     if (!info) return
 

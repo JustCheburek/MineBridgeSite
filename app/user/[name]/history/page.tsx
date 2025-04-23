@@ -25,9 +25,9 @@ export default async function History({params}: NameParams) {
     const {user: author, isHelper, isAdmin} = await validate()
     const {
         user, isMe
-    } = await getUser(
-        {name}, true, false, author?._id, isHelper
-    )
+    } = await getUser({
+        name, authorId: author?._id, show: isHelper
+    })
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
     const caseDatas = [] as MultiCaseData[]

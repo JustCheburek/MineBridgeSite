@@ -11,9 +11,10 @@ import axios from "axios";
 
 export async function GET(request: NextRequest) {
     const {searchParams} = request.nextUrl
+    const cookiesStore = await cookies()
+
     const code = searchParams.get("code");
     const state = searchParams.get("state");
-    const cookiesStore = await cookies()
 
     const storedState = cookiesStore.get("twitch_oauth_state")?.value
 
@@ -21,7 +22,10 @@ export async function GET(request: NextRequest) {
         return new NextResponse(
             "Неправильный код",
             {
-                status: 400
+                status: 307,
+                headers: {
+                    Location: `/auth/error?error=code&code=${code}&state=${state}&storedState=${storedState}`
+                }
             }
         )
     }
@@ -38,12 +42,28 @@ export async function GET(request: NextRequest) {
         }).then(r => r.data).catch(console.error);
 
         if (!dataTw) {
-            return new NextResponse("Пользователь не найден", {status: 400})
+            return new NextResponse(
+                "Нет почты",
+                {
+                    status: 307,
+                    headers: {
+                        Location: `/auth/error?error=email`
+                    }
+                }
+            )
         }
 
         const twUser = dataTw.data[0]
         if (!twUser || !twUser.email) {
-            return new NextResponse("Верифицируйте почту", {status: 400})
+            return new NextResponse(
+                "Нет почты",
+                {
+                    status: 307,
+                    headers: {
+                        Location: `/auth/error?error=email&name=${twUser?.login}&email=${twUser?.email}`
+                    }
+                }
+            )
         }
 
         const userData = {

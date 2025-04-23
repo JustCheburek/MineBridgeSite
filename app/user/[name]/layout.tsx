@@ -10,9 +10,9 @@ export const generateMetadata = async ({params}: NameParams): Promise<Metadata> 
     const {name} = await params
     const {
         user
-    } = await getUser(
-        {name}, true, false
-    )
+    } = await getUser({
+        name
+    })
 
     return {
         openGraph: {

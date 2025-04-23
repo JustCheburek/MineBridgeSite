@@ -69,9 +69,9 @@ export default async function Profile({params}: NameParams) {
     const {user: author, isHelper, isAdmin, roles: authorRoles} = await validate()
     const {
         user, roles, isMe, isContentMaker
-    } = await getUser(
-        {name}, true, true, author?._id, isHelper
-    )
+    } = await getUser({
+        name, roles: true, authorId: author?._id, show: isHelper
+    })
     const lastSeen = await getLastSeen(user.name)
 
     if (author) {

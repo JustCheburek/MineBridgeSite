@@ -9,7 +9,7 @@ import type {GuildDSUser} from "@/types/user";
 import axios from "axios";
 import type {Role} from "@/types/role";
 import {Case, Drop, Item, RarityType} from "@/types/case";
-import {idOrName} from "@/types/idOrName";
+import {idOrName, idOrNameUser} from "@/types/idOrName";
 import {AUTO, NO_ROLES, ROLES, ROLES_START} from "@/const";
 import {Code} from "@/types/code";
 import {InviteEmail} from "@email/invite";
@@ -75,32 +75,43 @@ const getRoles = cache(
     {revalidate: 300, tags: ["roles", "userLike", "all"]}
 )
 
+type GetUser = {
+    throwNotFound?: boolean
+    roles?: boolean
+    authorId?: User["_id"]
+    show?: boolean
+} & idOrNameUser
 export const getUser = cache(
     async (
-        param: idOrName,
-        throwNotFound: boolean = true,
-        roles: boolean = false,
-        _id?: User["_id"],
-        show: boolean = false
+        {
+            name,
+            _id,
+            throwNotFound = true,
+            roles = false,
+            authorId,
+            show = false
+        }: GetUser
     ) => {
-        let user: User
-        if (param?.name) {
-            user = JSON.parse(JSON.stringify(await userModel.findOne(param).lean()))
+        let userM
+
+        if (name) {
+            userM = await userModel.findOne({name}, {}, {lean: true})
         } else {
-            user = JSON.parse(JSON.stringify(await userModel.findById(param._id).lean()))
+            userM = await userModel.findById(_id, {}, {lean: true})
         }
+
+        const user: User | null = JSON.parse(JSON.stringify(userM))
 
         if (!user) {
             if (throwNotFound) {
-                console.error("User не найден: ", JSON.stringify(param))
+                console.error(`User не найден: ${name ?? _id}`)
                 notFound()
             }
 
-            throw new Error(`User не найден: ${JSON.stringify(param)}`)
+            throw new Error(`User не найден: ${name ?? _id}`)
         }
 
-        user._id = user._id.toString()
-        const isMe = _id === user._id
+        const isMe = authorId ? (authorId.toString() === user._id.toString()) : false
 
         if (!show && !isMe) {
             user.email = "×".repeat(user.email.length - 4) + user.email.substring(user.email.length - 4)
@@ -140,8 +151,9 @@ export const getAuthor = cache(
     async (id?: string): Promise<{ user: User | null } & RolesApi> => {
         const user: User | null = JSON.parse(JSON.stringify(await userModel.findByIdAndUpdate(
             id,
-            {onlineAt: new Date()}
-        ).lean()))
+            {onlineAt: new Date()},
+            {lean: true},
+        )))
 
         return {user, ...await getRoles(user?.discordId)}
     },
@@ -149,16 +161,27 @@ export const getAuthor = cache(
     {revalidate: 300, tags: ["author", "userLike", "all"]}
 )
 
+type getUsers = {
+    page?: number
+    perPage?: number
+}
 export const getUsers = cache(
-    async () => {
-        const users: User[] = JSON.parse(JSON.stringify(await userModel.find().lean()))
-
-        users.sort(({createdAt: createdAt1}, {createdAt: createdAt2}) => {
-            if (!createdAt1) return 1
-            if (!createdAt2) return -1
-
-            return new Date(createdAt2).getTime() - new Date(createdAt1).getTime()
-        })
+    async ({page = 0, perPage = 0}: getUsers = {}) => {
+        const users: User[] = JSON.parse(JSON.stringify(
+            await userModel
+                .find(
+                    {},
+                    {
+                        name: 1, photo: 1, mostiki: 1, rating: 1, createdAt: 1, onlineAt: 1, invites: 1, from: 1
+                    },
+                    {
+                        lean: true,
+                        sort: {createdAt: -1},
+                        skip: perPage * page,
+                        limit: perPage
+                    }
+                )
+        ))
 
         return users
     },
@@ -168,7 +191,7 @@ export const getUsers = cache(
 
 export const getUsersL = cache(
     async () => {
-        return userModel.countDocuments().lean()
+        return userModel.countDocuments({}, {lean: true})
     },
     ["users", "userLike", "all"],
     {revalidate: 3600, tags: ["users", "userLike", "all"]}
@@ -213,7 +236,12 @@ export const updateFrom = cache(
         }
 
         if (rPlace) {
-            const userInfo = await getUser({name: rName}, false).catch(console.error)
+            let userInfo
+            if (rName) {
+                userInfo = await getUser({
+                    name: rName, throwNotFound: false
+                }).catch(console.error)
+            }
             const inviter = userInfo?.user
 
             if (!user.from?.userId && inviter && !inviter.invites.some(id => String(id) === String(user._id))) {
@@ -231,7 +259,7 @@ export const updateFrom = cache(
             return nullFrom
         }
 
-        const userInfo = await getUser({name}, false).catch(console.error)
+        const userInfo = await getUser({name, throwNotFound: false}).catch(console.error)
         const inviter = userInfo?.user
         const isContentMaker = userInfo?.isContentMakerCheck || false
         if (!user.from?.userId && inviter && !inviter.invites.some(id => String(id) === String(user._id))) {
@@ -267,7 +295,14 @@ export const getCase = cache(
     async (
         param: idOrName
     ) => {
-        const Case: Case | null = JSON.parse(JSON.stringify(await caseModel.findOne(param).lean()))
+        const Case: Case | null = JSON.parse(JSON.stringify(
+            await caseModel.findOne(
+                param,
+                {},
+                {
+                    lean: true
+                })
+        ))
 
         if (!Case) {
             throw new Error(`Case не найден: ${JSON.stringify(param)}`)
@@ -280,7 +315,14 @@ export const getCase = cache(
 )
 
 export const getCases = cache(
-    async (): Promise<Case[]> => JSON.parse(JSON.stringify(await caseModel.find().lean())),
+    async (): Promise<Case[]> => JSON.parse(JSON.stringify(
+        await caseModel.find(
+            {},
+            {},
+            {
+                lean: true
+            })
+    )),
     ["cases", "shop", "all"],
     {revalidate: 3600, tags: ["cases", "shop", "all"]}
 )
@@ -308,7 +350,15 @@ export const getDrop = cache(
     async (
         param: idOrName
     ) => {
-        const Drop: Drop | null = JSON.parse(JSON.stringify(await dropModel.findOne(param).lean()))
+        const Drop: Drop | null = JSON.parse(JSON.stringify(
+            await dropModel.findOne(
+                param,
+                {},
+                {
+                    lean: true
+                }
+            )
+        ))
 
         if (!Drop) {
             throw new Error(`Drop не найден: ${JSON.stringify(param)}`)
@@ -322,14 +372,16 @@ export const getDrop = cache(
 
 export const getDrops = cache(
     async () => {
-        const drops: Drop[] = JSON.parse(JSON.stringify(await dropModel.find().lean()))
-
-        drops.sort(({price: price1}, {price: price2}) => {
-            if (price1 === 0) return -1
-            if (price2 === 0) return 1
-
-            return price2 - price1
-        })
+        const drops: Drop[] = JSON.parse(JSON.stringify(
+            await dropModel.find(
+                {},
+                {},
+                {
+                    lean: true,
+                    sort: {price: -1}
+                }
+            )
+        ))
 
         return drops
     },
@@ -384,11 +436,13 @@ export const getItem = cache(
 
 export const getSeasons = cache(
     async () => {
-        const seasons: Season[] = JSON.parse(JSON.stringify(await seasonModel.find().lean()))
-
-        seasons.sort(({number: number1}, {number: number2}) =>
-            number2 - number1
-        )
+        const seasons: Season[] = JSON.parse(JSON.stringify(
+            await seasonModel.find(
+                {},
+                {},
+                {lean: true, sort: {number: -1}}
+            )
+        ))
 
         seasons.map(season => {
             season.news.sort(({createdAt: createdAt1}, {createdAt: createdAt2}) =>
@@ -407,7 +461,13 @@ export const getSeasons = cache(
 )
 
 export const getCodes = cache(
-    async () => JSON.parse(JSON.stringify(await codeModel.find().lean())),
+    async () => JSON.parse(JSON.stringify(
+        await codeModel.find(
+            {},
+            {},
+            {lean: true}
+        )
+    )),
     ["codes", "shop", "all"],
     {revalidate: 3600, tags: ["codes", "shop", "all"]}
 )
@@ -416,7 +476,13 @@ export const getCode = cache(
     async (
         _id: Code["_id"]
     ) => {
-        const code: Code | null = JSON.parse(JSON.stringify(await codeModel.findById(_id).lean()))
+        const code: Code | null = JSON.parse(JSON.stringify(
+            await codeModel.findById(
+                _id,
+                {},
+                {lean: true}
+            )
+        ))
 
         if (!code) {
             console.error(`Code не найден: ${String(_id)}`)
