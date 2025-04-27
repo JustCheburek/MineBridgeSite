@@ -19,14 +19,16 @@ export async function GET(request: NextRequest) {
         ["identify", "email", "guilds", "guilds.join", "guilds.members.read"],
     );
 
-    cookiesStore.set("discord_oauth_state", state, {
+    const response = NextResponse.redirect(url)
+
+    response.cookies.set("discord_oauth_state", state, {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
         maxAge: 60 * 60,
         sameSite: "lax"
     });
-    cookiesStore.set("discord_oauth_code_verifier", codeVerifier, {
+    response.cookies.set("discord_oauth_code_verifier", codeVerifier, {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
@@ -34,7 +36,7 @@ export async function GET(request: NextRequest) {
         sameSite: "lax"
     });
 
-    cookiesStore.set("name", name, {
+    response.cookies.set("name", name, {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
@@ -42,5 +44,5 @@ export async function GET(request: NextRequest) {
         sameSite: "lax"
     })
 
-    return NextResponse.redirect(url)
+    return response
 }

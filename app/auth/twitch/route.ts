@@ -18,7 +18,9 @@ export async function GET(request: NextRequest) {
         ["openid", "user:read:email"]
     );
 
-    cookiesStore.set("twitch_oauth_state", state, {
+    const response = NextResponse.redirect(url)
+
+    response.cookies.set("twitch_oauth_state", state, {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
@@ -26,7 +28,7 @@ export async function GET(request: NextRequest) {
         sameSite: "lax"
     });
 
-    cookiesStore.set("name", name, {
+    response.cookies.set("name", name, {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,

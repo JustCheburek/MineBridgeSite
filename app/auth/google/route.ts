@@ -1,16 +1,12 @@
 import {generateCodeVerifier, generateState} from "arctic";
 import {google} from "@server/lucia";
-import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
-    const cookiesStore = await cookies()
     const name = searchParams.get("name");
-    console.log(name)
 
     if (!name) {
-        console.log(`no name`)
         return NextResponse.redirect(`${request.nextUrl.origin}/auth`)
     }
 
@@ -21,22 +17,23 @@ export async function GET(request: NextRequest) {
         ["profile", "email"],
     );
 
-    cookiesStore.set("google_oauth_state", state, {
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-        httpOnly: true,
-        maxAge: 60 * 60,
-        sameSite: "lax"
-    });
-    cookiesStore.set("google_oauth_code_verifier", codeVerifier, {
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-        httpOnly: true,
-        maxAge: 60 * 60,
-        sameSite: "lax"
-    });
+    const response = NextResponse.redirect(url)
 
-    cookiesStore.set("name", name, {
+    response.cookies.set("google_oauth_state", state, {
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        maxAge: 60 * 60,
+        sameSite: "lax"
+    });
+    response.cookies.set("google_oauth_code_verifier", codeVerifier, {
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        maxAge: 60 * 60,
+        sameSite: "lax"
+    });
+    response.cookies.set("name", name, {
         path: "/",
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
@@ -44,5 +41,5 @@ export async function GET(request: NextRequest) {
         sameSite: "lax"
     })
 
-    return NextResponse.redirect(url)
+    return response
 }
