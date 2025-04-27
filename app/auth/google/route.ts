@@ -7,8 +7,10 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const cookiesStore = await cookies()
     const name = searchParams.get("name");
+    console.log(name)
 
     if (!name) {
+        console.log(`no name`)
         return NextResponse.redirect(`${request.nextUrl.origin}/auth`)
     }
 
