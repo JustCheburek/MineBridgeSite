@@ -53,7 +53,7 @@ export function AuthForm({savedName}: { savedName?: string }) {
                 </FormLabel>
             </FormGroup>
 
-            <FormLink href={`/auth/${provider}?name=${name}`}>
+            <FormLink href={`/auth/${provider}?name=${name}`} prefetch={false}>
                 Дальше
             </FormLink>
 
