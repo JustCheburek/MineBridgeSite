@@ -20,11 +20,11 @@ export async function GET(
 
 	const week = 60 * 60 * 24 * 7
 
-	console.log(`Новый игрок из ${place} от ${name}`)
+	console.log(`Новый игрок из ${place.toLowerCase()} от ${name}`)
 
 	cookiesStore.set({
 		name: "from",
-		value: JSON.stringify({name, place}),
+		value: JSON.stringify({name, place: place.toLowerCase()}),
 		path: "/",
 		secure: process.env.NODE_ENV === "production",
 		httpOnly: true,
