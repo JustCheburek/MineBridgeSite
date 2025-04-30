@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     user.rating += 1
     await user.save()
 
-    if (user.notifications.vote) {
+    if (user?.notifications?.vote) {
         await resend.emails.send({
             from: 'Майнбридж <vote@m-br.ru>',
             to: user.email,

@@ -45,7 +45,7 @@ export async function GetStars(_id: string) {
             user.rating += hours
             await user.save()
 
-            if (user.notifications.hours) {
+            if (user?.notifications?.hours) {
                 await resend.emails.send({
                     from: 'Майнбридж <hours@m-br.ru>',
                     to: user.email,

@@ -33,7 +33,7 @@ export async function GiveGift(mostiki: User["mostiki"], userId: User["_id"], au
         })
     }
 
-    if (user.notifications.mostiki) {
+    if (user?.notifications?.mostiki) {
         await resend.emails.send({
             from: 'Майнбридж <mostiki@m-br.ru>',
             to: user.email,

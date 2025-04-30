@@ -27,7 +27,7 @@ export async function UseCode(codeId: Code["_id"], _id: User["_id"]) {
     const {user: author} = await getUser({_id: code.authorId, throwNotFound: false})
     if (!user || !author) return
 
-    if (user.notifications.code) {
+    if (user?.notifications?.code) {
         await resend.emails.send({
             from: 'Майнбридж <code@m-br.ru>',
             to: user.email,

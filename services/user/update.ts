@@ -106,7 +106,7 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
         const newMostiki = Number(formData.get("mostiki"))
 
         if (newMostiki !== mostiki) {
-            if (user.notifications.mostiki) {
+            if (user?.notifications?.mostiki) {
                 await resend.emails.send({
                     from: 'Майнбридж <mostiki@m-br.ru>',
                     to: user.email,
