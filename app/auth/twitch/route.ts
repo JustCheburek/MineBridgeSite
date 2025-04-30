@@ -1,11 +1,9 @@
 import {generateState} from "arctic";
 import {twitch} from "@db/lucia";
-import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
-    const cookiesStore = await cookies()
     const name = searchParams.get("name");
 
     if (!name) {
@@ -18,7 +16,7 @@ export async function GET(request: NextRequest) {
         ["openid", "user:read:email"]
     );
 
-    const response = NextResponse.redirect(url)
+    const response = NextResponse.redirect(url);
 
     response.cookies.set("twitch_oauth_state", state, {
         path: "/",
@@ -36,5 +34,5 @@ export async function GET(request: NextRequest) {
         sameSite: "lax"
     })
 
-    return NextResponse.redirect(url)
+    return response
 }

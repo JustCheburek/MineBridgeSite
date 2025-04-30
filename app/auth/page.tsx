@@ -9,7 +9,6 @@ import {AuthForm} from "./components";
 import {cookies} from "next/headers";
 import {H1} from "@components/h1";
 import {Policies} from "@components/footer";
-import {LoadingSvg} from "@ui/SVGS";
 
 export const metadata: Metadata = {
     title: "Регистрация",
