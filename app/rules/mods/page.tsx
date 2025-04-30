@@ -73,7 +73,6 @@ export default function Mods() {
         "Модификации, выполняющие действия за игрока (ИИ, принтер и так далее, но автокликер разрешён)",
         "Чит-модификации", "Модификации, позволяющие летать сквозь блоки не выходя с сервера",
         "Aristois", "Baritone", "Better PVP",
-        "BetterClicker (используйте обычный автокликер, не использующий окружающую среду)",
         "ClientCommands", "CMDCam", "Impact", "Inertia", "Jello", "LavaClearView",
         "MultiConnect (используйте только ViaFabric / Forge)",
         "SeedCracker (или другие моды и программы, выполняющие функции этого мода)", "Sigma", "StepUp", "Tweakeroo",
