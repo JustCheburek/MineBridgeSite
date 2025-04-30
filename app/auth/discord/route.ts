@@ -1,11 +1,9 @@
 import {generateCodeVerifier, generateState} from "arctic";
-import {discord} from "@server/lucia";
-import {cookies} from "next/headers";
+import {discord} from "@db/lucia";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
-    const cookiesStore = await cookies()
     const name = searchParams.get("name");
 
     if (!name) {
@@ -19,7 +17,7 @@ export async function GET(request: NextRequest) {
         ["identify", "email", "guilds", "guilds.join", "guilds.members.read"],
     );
 
-    const response = NextResponse.redirect(url)
+    const response = NextResponse.redirect(url);
 
     response.cookies.set("discord_oauth_state", state, {
         path: "/",

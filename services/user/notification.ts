@@ -1,7 +1,7 @@
 "use server"
 
 import type {User} from "lucia";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {revalidateTag} from "next/cache";
 import {Notifications} from "@/types/notification";
 

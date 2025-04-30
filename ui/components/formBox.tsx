@@ -14,7 +14,7 @@ export const FormBox = (
         className = "",
         margin = "20px",
         ...props
-    }: FormProps & {margin?: string | number}
+    }: FormProps & { margin?: string | number }
 ) => (
     <Form
         className={`${styles.form} ${className}`}
@@ -31,7 +31,7 @@ export const DefaultFormBox = (
         className = "",
         margin = "20px",
         ...props
-    }: ComponentPropsWithoutRef<"form"> & {margin?: string | number}
+    }: ComponentPropsWithoutRef<"form"> & { margin?: string | number }
 ) => (
     <form
         className={`${styles.form} ${className}`}
@@ -101,6 +101,43 @@ export const FormLink = (
                 {children}
             </strong>
         </Link>
+    )
+}
+
+interface FormA extends DangerProps, ComponentPropsWithoutRef<"a"> {
+}
+
+export const FormA = (
+    {
+        href,
+        children,
+        target,
+        className = "",
+        download = false,
+        danger = false,
+        ...props
+    }: FormA
+) => {
+    if (!target) {
+        if (download || href?.startsWith("http")) {
+            target = "_blank"
+        } else {
+            target = "_self"
+        }
+    }
+
+    return (
+        <a
+            href={href}
+            target={target}
+            className={`${styles.button} center_text ${danger ? styles.danger : ""} ${className}`}
+            download={download}
+            {...props}
+        >
+            <strong>
+                {children}
+            </strong>
+        </a>
     )
 }
 

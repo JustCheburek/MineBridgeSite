@@ -7,7 +7,7 @@ import {validate} from "@services/validate";
 import {getLastSeen, getUser, updateFrom} from "@/services";
 import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {AutoSvg, EditSvg, MostikiSvg, StarSvg} from "@ui/SVGS";
 import {URLS_START} from "@/const";
 import type {NameParams} from "@/types/params";

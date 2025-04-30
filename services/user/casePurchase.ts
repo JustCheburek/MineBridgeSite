@@ -2,7 +2,7 @@
 
 import {CaseData} from "@/types/purchase";
 import {RconVC} from "@services/console";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {revalidateTag} from "next/cache";
 import {Types} from "mongoose";
 import {Drop, Item} from "@/types/case";

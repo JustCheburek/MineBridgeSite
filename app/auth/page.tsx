@@ -36,7 +36,7 @@ export default async function Auth() {
 
             <div className="center_text">
                 <small>
-                    Регистрируясь на сервисах MineBridge, <br/>
+                    Регистрируясь на сервисах MineBridge,<br/>
                     Вы соглашаетесь с её политиками:
                 </small>
 

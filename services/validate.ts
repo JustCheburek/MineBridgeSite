@@ -1,4 +1,4 @@
-import {lucia} from "@server/lucia";
+import {lucia} from "@db/lucia";
 import {getAuthor, RolesApi} from "@/services";
 import type {User} from "lucia";
 import {cache} from "react";

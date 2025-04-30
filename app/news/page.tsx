@@ -3,7 +3,7 @@ import type {Metadata} from "next";
 import {validate} from "@services/validate";
 import {getSeasons} from "@/services";
 import {MDXRemote} from 'next-mdx-remote/rsc'
-import {seasonModel} from "@server/models";
+import {seasonModel} from "@db/models";
 import {PropsWithChildren} from "react";
 
 // Стили

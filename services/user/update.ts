@@ -1,7 +1,7 @@
 "use server";
 
 import {RconVC} from "@services/console";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {revalidateTag} from 'next/cache'
 import type {User} from "lucia";
 import axios from "axios";

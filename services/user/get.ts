@@ -1,7 +1,7 @@
 "use server";
 
 import {GetHoursConsole, RconMB} from "@services/console";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {revalidateTag} from "next/cache";
 import {AUTO} from "@/const";
 import {Resend} from "resend";

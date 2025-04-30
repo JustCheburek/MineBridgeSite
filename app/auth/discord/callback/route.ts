@@ -1,8 +1,8 @@
-import {discord, lucia} from "@server/lucia";
+import {discord, lucia} from "@db/lucia";
 import {cookies} from "next/headers";
 import {generateId, type User} from "lucia";
 import type {DSUser, GuildDSUser} from "@/types/user";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {NextRequest, NextResponse} from "next/server";
 import {validate} from "@services/validate";
 import axios from "axios";

@@ -2,7 +2,7 @@
 
 import {cookies} from "next/headers";
 import {MBSESSION} from "@/const";
-import {lucia} from "@server/lucia";
+import {lucia} from "@db/lucia";
 import {revalidateTag} from "next/cache";
 
 export async function Logout() {

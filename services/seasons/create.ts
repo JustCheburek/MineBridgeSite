@@ -1,6 +1,6 @@
 "use server";
 import {Season} from "@/types/season";
-import {seasonModel} from "@server/models";
+import {seasonModel} from "@db/models";
 import {revalidateTag} from "next/cache";
 
 export async function createSeason(season: Season) {

@@ -1,5 +1,5 @@
 "use server";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {revalidateTag} from "next/cache";
 import {MostikiEmail} from "@email/mostiki";
 import {Resend} from "resend";

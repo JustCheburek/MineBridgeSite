@@ -2,7 +2,7 @@
 import type {Metadata} from "next";
 import {getCases, getDrops} from "@/services";
 import {validate} from "@services/validate";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {Info} from "@/types/case";
 import {revalidateTag} from 'next/cache'
 import {Case} from "@/types/case";
