@@ -1,6 +1,6 @@
 "use client"
 
-import {DefaultFormBox, FormGroup, FormInput, FormLabel, FormLink} from "@components/formBox";
+import {DefaultFormBox, FormA, FormGroup, FormInput, FormLabel} from "@components/formBox";
 import {InputNameCheck} from "@components/formInputs";
 import {DiscordSvg, GoogleSvg, TwitchSvg} from "@ui/SVGS";
 import {useState} from "react";
@@ -53,9 +53,9 @@ export function AuthForm({savedName}: { savedName?: string }) {
                 </FormLabel>
             </FormGroup>
 
-            <FormLink href={`/auth/${provider}?name=${name}`} prefetch={false}>
+            <FormA href={`/auth/${provider}?name=${name}`}>
                 Дальше
-            </FormLink>
+            </FormA>
         </DefaultFormBox>
     )
 }
