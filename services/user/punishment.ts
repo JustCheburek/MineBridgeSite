@@ -3,7 +3,7 @@ import type {User} from "lucia";
 import {Action, Punishment} from "@/types/punishment";
 import {RconVC} from "@services/console";
 import axios from "axios";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {revalidateTag} from "next/cache";
 import {NewRatingEmail} from "@email/newRating";
 import {Resend} from "resend";

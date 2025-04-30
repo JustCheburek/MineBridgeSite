@@ -9,6 +9,7 @@ import {AuthForm} from "./components";
 import {cookies} from "next/headers";
 import {H1} from "@components/h1";
 import {Policies} from "@components/footer";
+import {LoadingSvg} from "@ui/SVGS";
 
 export const metadata: Metadata = {
     title: "Регистрация",
@@ -36,7 +37,7 @@ export default async function Auth() {
 
             <div className="center_text">
                 <small>
-                    Регистрируясь на сервисах MineBridge, <br/>
+                    Регистрируясь на сервисах MineBridge,<br/>
                     Вы соглашаетесь с её политиками:
                 </small>
 

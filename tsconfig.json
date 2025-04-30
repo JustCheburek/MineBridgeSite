@@ -55,8 +55,8 @@
 			"@email/*": [
 				"./ui/email/*"
 			],
-			"@server/*": [
-				"./server/*"
+			"@db/*": [
+				"./db/*"
 			]
 		},
 		"experimentalDecorators": true,

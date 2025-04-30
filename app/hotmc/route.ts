@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import {sha1} from "js-sha1";
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {AUTO} from "@/const";
 import {Punishment} from "@/types/punishment";
 import {Resend} from "resend";

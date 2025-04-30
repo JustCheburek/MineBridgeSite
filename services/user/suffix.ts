@@ -1,6 +1,6 @@
 "use server";
 
-import {userModel} from "@server/models";
+import {userModel} from "@db/models";
 import {revalidateTag} from "next/cache";
 import {RemoveSuffixConsole, SetSuffixConsole} from "@services/console";
 

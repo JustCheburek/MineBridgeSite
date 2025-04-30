@@ -1,5 +1,5 @@
 import {generateState} from "arctic";
-import {twitch} from "@server/lucia";
+import {twitch} from "@db/lucia";
 import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 

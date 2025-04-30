@@ -1,7 +1,7 @@
 "use server";
 
 import {User} from "@/types/user";
-import {codeModel, userModel} from "@server/models";
+import {codeModel, userModel} from "@db/models";
 import {Resend} from "resend";
 import {Code} from "@/types/code";
 import {UseCodeEmail} from "@email/useCode";

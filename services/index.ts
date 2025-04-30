@@ -3,7 +3,7 @@
 import type {User} from "lucia";
 import {notFound} from "next/navigation";
 import {unstable_cache as cache} from "next/cache";
-import {caseModel, codeModel, dropModel, seasonModel, sqlPool, userModel} from "@server/models";
+import {caseModel, codeModel, dropModel, seasonModel, sqlPool, userModel} from "@db/models";
 import {Season} from "@/types/season";
 import type {GuildDSUser} from "@/types/user";
 import axios from "axios";

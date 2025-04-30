@@ -1,5 +1,5 @@
 import {generateCodeVerifier, generateState} from "arctic";
-import {discord} from "@server/lucia";
+import {discord} from "@db/lucia";
 import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 

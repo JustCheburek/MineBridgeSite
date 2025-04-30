@@ -1,5 +1,5 @@
 import {generateCodeVerifier, generateState} from "arctic";
-import {google} from "@server/lucia";
+import {google} from "@db/lucia";
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET(request: NextRequest) {
