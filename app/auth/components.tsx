@@ -56,10 +56,6 @@ export function AuthForm({savedName}: { savedName?: string }) {
             <FormLink href={`/auth/${provider}?name=${name}`} prefetch={false}>
                 Дальше
             </FormLink>
-
-            <small className="center_text light_gray_color">
-                Вход через дискорд не работает в РФ
-            </small>
         </DefaultFormBox>
     )
 }
