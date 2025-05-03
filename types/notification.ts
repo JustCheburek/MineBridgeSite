@@ -6,8 +6,7 @@ export const notificationsLabels = [
     { name: "news", label: "Новости" },
     { name: "mostiki", label: "Мостики" },
     { name: "rating", label: "Рейтинг" },
-    { name: "invite", label: "Приглашения" },
-    { name: "vote", label: "Голос за сервер" },
+    { name: "invite", label: "Приглашения" }
 ]
 
 export class Notifications {
@@ -22,9 +21,6 @@ export class Notifications {
 
     @prop({default: true})
     public hours!: boolean
-
-    @prop({default: true})
-    public vote!: boolean
 
     @prop({default: true})
     public invite!: boolean

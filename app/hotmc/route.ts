@@ -3,10 +3,7 @@ import {sha1} from "js-sha1";
 import {userModel} from "@db/models";
 import {AUTO} from "@/const";
 import {Punishment} from "@/types/punishment";
-import {Resend} from "resend";
-import {VoteEmail} from "@email/vote";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
     const res = await request.formData()
@@ -52,15 +49,6 @@ export async function POST(request: NextRequest) {
     })
     user.rating += 1
     await user.save()
-
-    if (user?.notifications?.vote) {
-        await resend.emails.send({
-            from: 'Майнбридж <vote@m-br.ru>',
-            to: user.email,
-            subject: 'Спасибо за голос за MineBridge',
-            react: VoteEmail({name: user.name})
-        })
-    }
 
     return new NextResponse("ok", {
         status: 200
