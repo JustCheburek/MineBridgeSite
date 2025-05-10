@@ -7,7 +7,7 @@
 }
 
 .number {
-  .rightM {
+  &:not(.removeM) {
     margin-right: 15px; // Расстояние от текста до цифры
   }
   overflow: hidden;

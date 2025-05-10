@@ -1,7 +1,16 @@
 "use client";
 
 // React
-import {Dispatch, MouseEvent, PropsWithChildren, ReactNode, SetStateAction, useEffect, useState} from "react";
+import {
+    Dispatch,
+    MouseEvent,
+    PropsWithChildren,
+    ReactNode,
+    SetStateAction,
+    useEffect,
+    useLayoutEffect,
+    useState
+} from "react";
 import {
     Cell,
     ColumnDef,
@@ -79,7 +88,7 @@ export function Table<T>(
             }))
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setSorting(extractDefaultSorting(columns))
     }, [])
 
@@ -207,7 +216,7 @@ export function Table<T>(
                                 className={` ${current === idx ? 'bold-font' : ''}`}
                                 onClick={() => table.setPageIndex(idx)}
                             >
-                                <Number rightM={false}>
+                                <Number removeM>
                                     {idx + 1}
                                 </Number>
                             </button>
