@@ -33,6 +33,7 @@ export default async function Component() {
             <Table<User>
                 columns={columns}
                 data={users}
+                pagination={true}
             />
         </MaxSize>
     )

@@ -1,15 +1,26 @@
 "use client";
 
 // React
-import type {Dispatch, MouseEvent, PropsWithChildren, ReactNode, SetStateAction} from "react";
-import {useEffect, useState} from "react";
-import type {Cell, ColumnDef, ColumnMeta, Row} from "@tanstack/react-table";
-import {flexRender, getCoreRowModel, getFilteredRowModel, useReactTable} from "@tanstack/react-table";
+import {Dispatch, MouseEvent, PropsWithChildren, ReactNode, SetStateAction, useEffect, useState} from "react";
+import {
+    Cell,
+    ColumnDef,
+    ColumnMeta,
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    PaginationState,
+    Row,
+    useReactTable
+} from "@tanstack/react-table";
+import {useUrlState} from "state-in-url";
 import TimeAgo from "javascript-time-ago";
 import ru from "javascript-time-ago/locale/ru";
+import {Number} from "@components/number";
 
 // Стили
-import "./styles/table.scss"
+import styles from "./styles/table.module.scss"
 
 // Utils
 import {ColorText} from "@app/utils";
@@ -23,11 +34,11 @@ type Table<T> = {
     columns: ColumnDef<T>[]
     data: T[]
     editable?: boolean
-    className?: string
     setModal?: (value: boolean) => void
     notFound?: ReactNode
     _id?: string
     SaveAll?: (_id: string, data: T[]) => void
+    pagination?: boolean
 }
 
 export function Table<T>(
@@ -35,28 +46,43 @@ export function Table<T>(
         columns,
         data: defaultData,
         editable = false,
-        className = "",
         setModal,
         notFound,
         SaveAll,
         _id,
-        children
+        children,
+        pagination = false,
     }: PropsWithChildren<Table<T>>
 ) {
     const [data, setData] = useState(() => [...defaultData])
     const [originalData, setOriginalData] = useState(() => [...defaultData])
     const [editingRows, setEditingRows] = useState({})
-    const [globalFilter, setGlobalFilter] = useState<string>("")
+    const {
+        urlState: {globalFilter, pageIndex},
+        setUrl,
+        setState
+    } = useUrlState(
+        {
+            globalFilter: "",
+            pageIndex: 0,
+            pageSize: 20
+        }
+    );
 
-    const table = useReactTable({
+    const table = useReactTable<T>({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: pagination ? getPaginationRowModel() : undefined,
         state: {
             globalFilter,
+            pagination: pagination ? ({pageIndex, pageSize: 20} as PaginationState) : undefined,
         },
-        onGlobalFilterChange: setGlobalFilter
+        onGlobalFilterChange: (value) => setState({globalFilter: value, pageIndex: 0}),
+        // @ts-ignore
+        onPaginationChange: setUrl,
+        manualPagination: false
     });
 
     if (!data.length && notFound) {
@@ -126,24 +152,69 @@ export function Table<T>(
         table.resetRowSelection()
     }
 
+    const PaginationControls = () => {
+        const pageCount = table.getPageCount();
+        const current = table.getState().pagination.pageIndex;
+        const start = Math.max(0, current - 2);
+        const end = Math.min(pageCount, start + 5);
+        return (
+            <div className={styles.pagination}>
+                <button
+                    onClick={() => table.setPageIndex(0)} disabled={!table.getCanPreviousPage()}
+                    className={styles.start}
+                >
+                    &laquo;
+                </button>
+                <div className={styles.buttons}>
+                    {Array.from({length: end - start}).map((_, i) => {
+                        const idx = start + i;
+                        return (
+                            <button
+                                key={idx}
+                                className={` ${current === idx ? 'bold-font' : ''}`}
+                                onClick={() => table.setPageIndex(idx)}
+                            >
+                                <Number rightM={false}>
+                                    {idx + 1}
+                                </Number>
+                            </button>
+                        );
+                    })}
+                </div>
+                <button
+                    onClick={() => table.setPageIndex(pageCount - 1)}
+                    disabled={!table.getCanNextPage()}
+                >
+                    &raquo;
+                </button>
+            </div>
+        );
+    };
+
     return (
-        <div className="table_container">
-            <div className="center_text caption">{children}</div>
+        <div className={styles.table_container}>
+            <div className={`center_text ${styles.caption}`}>{children}</div>
             <FormLabel>
                 <FormInput
                     value={globalFilter}
-                    onChange={e => {
-                        table.setGlobalFilter(String(e.target.value))
-                    }}
+                    onChange={e =>
+                        setState({globalFilter: e.target.value})
+                    }
+                    onBlur={e =>
+                        table.setGlobalFilter(e.target.value)
+                    }
                     placeholder="Начнём искать вместе..."
                 />
             </FormLabel>
-            <table className={className}>
-                <thead>
+
+            {pagination && <PaginationControls/>}
+
+            <table className={styles.table}>
+                <thead className={styles.thead}>
                 {table.getHeaderGroups().map(headerGroup => (
-                    <tr key={headerGroup.id}>
+                    <tr key={headerGroup.id} className={styles.tr}>
                         {headerGroup.headers.map(header => (
-                            <th key={header.id} scope="col">
+                            <th key={header.id} scope="col" className={styles.th}>
                                 {flexRender(
                                     header.column.columnDef.header,
                                     header.getContext()
@@ -151,16 +222,16 @@ export function Table<T>(
                             </th>
                         ))}
                         {editable &&
-                          <th scope="col">
+                          <th scope="col" className={styles.th}>
                             ✐
                           </th>
                         }
                     </tr>
                 ))}
                 </thead>
-                <tbody>
+                <tbody className={styles.tbody}>
                 {table.getRowModel().rows.map(row => (
-                    <tr key={row.id}>
+                    <tr key={row.id} className={styles.tr}>
                         {row.getVisibleCells().map(cell => {
                             const value = cell.getValue<string | number>()
                             const {columnDef} = cell.column
@@ -182,7 +253,7 @@ export function Table<T>(
                             return (
                                 <td
                                     key={cell.id}
-                                    className={className}
+                                    className={`${styles.td} ${className}`}
                                 >
                                     <Value<T>
                                         cell={cell}
@@ -198,8 +269,8 @@ export function Table<T>(
                             )
                         })}
                         {editable &&
-                          <td className="center_text">
-                            <div className="func_buttons">
+                          <td className={`center_text ${styles.td}`}>
+                            <div className={styles.func_buttons}>
                                 {/* @ts-ignore */}
                                 {editingRows[row.id]
                                     ? <>
@@ -235,16 +306,16 @@ export function Table<T>(
                 ))}
                 </tbody>
                 {editable &&
-                  <tfoot>
-                  <tr>
-                    <th colSpan={table.getCenterLeafColumns().length - 1}>
+                  <tfoot className={styles.tfoot}>
+                  <tr className={styles.tr}>
+                    <th colSpan={table.getCenterLeafColumns().length - 1} className={styles.th}>
                         {table.getSelectedRowModel().rows.length > 0 &&
                           <FormButton className="red_color" onClick={removeRows} danger>
                             Удалить выделенное
                           </FormButton>
                         }
                     </th>
-                    <th colSpan={table.getCenterLeafColumns().length}>
+                    <th colSpan={table.getCenterLeafColumns().length} className={styles.th}>
                         {setModal &&
                           <FormButton onClick={e => {
                               e.preventDefault()
@@ -258,6 +329,8 @@ export function Table<T>(
                   </tfoot>
                 }
             </table>
+
+            {pagination && <PaginationControls/>}
         </div>
     );
 }

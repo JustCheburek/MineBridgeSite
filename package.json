@@ -29,6 +29,7 @@
     "react-type-animation": "^3.2.0",
     "resend": "^4.4.1",
     "sass": "1.82.0",
+    "state-in-url": "^4.3.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {

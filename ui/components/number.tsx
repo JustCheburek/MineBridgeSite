@@ -27,10 +27,11 @@ export const LinkNumber = ({href, box = true, children, ...props}: LinkNumberPro
 
 type NumberProps = {
     box?: boolean
+    rightM?: boolean
 } & ComponentPropsWithoutRef<"span">
-export const Number = ({children, className, box = true, ...props}: NumberProps) => (
+export const Number = ({children, className, box = true, rightM = true, ...props}: NumberProps) => (
     <span
-        className={`${styles.number} ${box ? styles.box : styles.empty}`}
+        className={`${styles.number} ${rightM ? styles.rightM : ""} ${box ? styles.box : styles.empty}`}
         {...props}
     >
         {children}
