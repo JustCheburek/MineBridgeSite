@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import {ColumnDef} from "@tanstack/react-table";
 import dynamic from "next/dynamic";
+
 const Avatar = dynamic(() => import("@components/avatar"));
 
 
@@ -33,6 +34,7 @@ export const columns: ColumnDef<User>[] = [
         accessorKey: "photo",
         header: "Ава",
         cell: AvatarBox,
+        enableSorting: false,
         meta: {
             className: "center_text",
             notEditable: true
@@ -48,6 +50,7 @@ export const columns: ColumnDef<User>[] = [
         header: "Рейтинг",
         meta: {
             type: "number",
+            defaultSort: "desc"
         }
     },
     {

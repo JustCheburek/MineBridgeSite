@@ -9,9 +9,9 @@ import {
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
-    getPaginationRowModel,
+    getPaginationRowModel, getSortedRowModel, HeaderGroup,
     PaginationState,
-    Row,
+    Row, SortingState,
     useReactTable
 } from "@tanstack/react-table";
 import {useUrlState} from "state-in-url";
@@ -68,21 +68,39 @@ export function Table<T>(
             pageSize: 20
         }
     );
+    const [sorting, setSorting] = useState<SortingState>([]);
+
+    function extractDefaultSorting(columns: any[]): SortingState {
+        return columns
+            .filter(col => col.meta?.defaultSort)
+            .map(col => ({
+                id: col.id ?? col.accessorKey,
+                desc: col.meta.defaultSort === "desc"
+            }))
+    }
+
+    useEffect(() => {
+        setSorting(extractDefaultSorting(columns))
+    }, [])
 
     const table = useReactTable<T>({
         data,
         columns,
+        defaultColumn: {enableSorting: true},
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getPaginationRowModel: pagination ? getPaginationRowModel() : undefined,
+        getSortedRowModel: getSortedRowModel(),
         state: {
             globalFilter,
             pagination: pagination ? ({pageIndex, pageSize: 20} as PaginationState) : undefined,
+            sorting
         },
         onGlobalFilterChange: (value) => setState({globalFilter: value, pageIndex: 0}),
         // @ts-ignore
         onPaginationChange: setUrl,
-        manualPagination: false
+        manualPagination: false,
+        onSortingChange: setSorting
     });
 
     if (!data.length && notFound) {
@@ -152,6 +170,21 @@ export function Table<T>(
         table.resetRowSelection()
     }
 
+    function Header({header}: { header: HeaderGroup<T>['headers'][0] }) {
+        const sortItem = sorting.find(s => s.id === header.column.id);
+        return (
+            <th
+                scope="col"
+                className={`${styles.th} ${styles.header}`}
+                onClick={header.column.getToggleSortingHandler()}
+                style={{cursor: header.column.getCanSort() ? 'pointer' : 'default'}}
+            >
+                {flexRender(header.column.columnDef.header, header.getContext())}
+                {sortItem && (sortItem.desc ? ' ↓' : ' ↑')}
+            </th>
+        );
+    }
+
     const PaginationControls = () => {
         const pageCount = table.getPageCount();
         const current = table.getState().pagination.pageIndex;
@@ -214,12 +247,7 @@ export function Table<T>(
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr key={headerGroup.id} className={styles.tr}>
                         {headerGroup.headers.map(header => (
-                            <th key={header.id} scope="col" className={styles.th}>
-                                {flexRender(
-                                    header.column.columnDef.header,
-                                    header.getContext()
-                                )}
-                            </th>
+                            <Header key={header.id} header={header}/>
                         ))}
                         {editable &&
                           <th scope="col" className={styles.th}>

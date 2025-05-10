@@ -135,6 +135,7 @@ declare module '@tanstack/react-table' {
         className?: string,
         type?: HTMLInputTypeAttribute
         notEditable?: boolean
+        defaultSort?: "asc" | "desc"
     }
 }
 
