@@ -21,7 +21,7 @@ export default async function Success() {
                     Мостики выдаются автоматически в течение нескольких минут
                 </p>
                 <p>
-                    Если есть вопросы, задавайте:{" "}
+                    При любых проблемах пишите:{" "}
                     <TextUrl href="https://t.me/JustCheburek">JustCheburek</TextUrl>{" "}
                     <TextUrl href="https://t.me/Dezelink">Dezelink</TextUrl>
                 </p>
