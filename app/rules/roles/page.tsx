@@ -189,7 +189,7 @@ export default function Roles() {
                         стикеры
                     </Link>
                 </DotRule>
-                <TextUrl href="https://t.me/MineBridgeOfficial/326">
+                <TextUrl href="/shop#stickers">
                     Заказать
                 </TextUrl>
             </RulesBox>

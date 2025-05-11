@@ -51,7 +51,7 @@ export default function Stickers() {
 				</GContainer>
 
 				<h3 className="center_text">Тоже хотите попасть в стикер пак?</h3>
-				<Url href="https://t.me/MineBridgeOfficial/326">
+				<Url href="/shop#stickers">
 					Да, и что?
 				</Url>
 			</MaxSize>

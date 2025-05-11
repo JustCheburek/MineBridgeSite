@@ -26,14 +26,8 @@ const CaseButton = () => (
     </Url>
 )
 
-const StickerButton = () => (
-    <Url href="https://t.me/MineBridgeOfficial/326" margin="10px">
-        Купить
-    </Url>
-)
-
-const HideMeButton = () => (
-    <Url href="https://discord.gg/7zx8u4rY" margin="10px">
+const StickerButton = ({mostiki}: { mostiki: number }) => (
+    <Url href={`/shop/buy?mostiki=${mostiki}`} margin="10px">
         Купить
     </Url>
 )
@@ -62,14 +56,6 @@ export default async function Shop() {
                 <Url href="/shop/buy">
                     Купить
                 </Url>
-                <div>
-                    <p>
-                        Покупка <Link href={"#stickers"} className="unic_color"><strong>стикеров</strong></Link>:
-                    </p>
-                    <TextUrl href="https://discord.gg/7zx8u4rY">#покупка</TextUrl>{" "}
-                    <TextUrl href="https://t.me/JustCheburek">JustCheburek</TextUrl>{" "}
-                    <TextUrl href="https://t.me/Dezelink">Dezelink</TextUrl>
-                </div>
             </div>
 
             <Heading id="cases">
@@ -111,7 +97,11 @@ export default async function Shop() {
                 </h2>
                 <p>
                     Показывайте свой скин, пожелания и идеи,<br/>
-                    чтобы телеграм стикер ещё уникальнее
+                    чтобы телеграм стикер ещё уникальнее<br/>
+
+                    <TextUrl href="https://discord.gg/7zx8u4rY">#покупка</TextUrl>{" "}
+                    <TextUrl href="https://t.me/JustCheburek">JustCheburek</TextUrl>{" "}
+                    <TextUrl href="https://t.me/Dezelink">Dezelink</TextUrl>
                 </p>
             </Heading>
 
@@ -142,7 +132,7 @@ export default async function Shop() {
                         <Price>
                             200
                         </Price>
-                        <StickerButton/>
+                        <StickerButton mostiki={200}/>
                     </Text>
                 </Box>
 
@@ -157,7 +147,7 @@ export default async function Shop() {
                         <Price>
                             300
                         </Price>
-                        <StickerButton/>
+                        <StickerButton mostiki={300}/>
                     </Text>
                 </Box>
             </Section>
@@ -189,7 +179,7 @@ export default async function Shop() {
                         <Price>
                             400
                         </Price>
-                        <StickerButton/>
+                        <StickerButton mostiki={400}/>
                     </Text>
                 </Box>
 
@@ -204,7 +194,7 @@ export default async function Shop() {
                         <Price>
                             500
                         </Price>
-                        <StickerButton/>
+                        <StickerButton mostiki={500}/>
                     </Text>
                 </Box>
             </Section>
@@ -267,57 +257,6 @@ export default async function Shop() {
                     В разработке
                 </h4>
             </Heading>*/}
-
-            {/*<Heading id="hideme">
-                <h2 className="center_text">
-                    Где я?
-                </h2>
-                <p>
-                    Неожиданно пропасть с{" "}
-                    <Link href="/features#map" className="unic_color medium-font">
-                        карты сервера
-                    </Link>...
-                </p>
-                <p>
-                    Покупка выдаётся в течение дня
-                </p>
-            </Heading>
-
-            <Section>
-                <Box>
-                    <Text>
-                        <h3>
-                            1 неделя
-                        </h3>
-                        <Price>
-                            20
-                        </Price>
-                        <HideMeButton/>
-                    </Text>
-                </Box>
-                <Box>
-                    <Text>
-                        <h3>
-                            1 месяц
-                        </h3>
-                        <Price oldPrice={80}>
-                            60
-                        </Price>
-                        <HideMeButton/>
-                    </Text>
-                </Box>
-                <Box>
-                    <Text>
-                        <h3>
-                            6 месяцев
-                        </h3>
-                        <Price oldPrice={480}>
-                            300
-                        </Price>
-                        <HideMeButton/>
-                    </Text>
-                </Box>
-            </Section>*/}
         </div>
 
         <OnThisPage>
