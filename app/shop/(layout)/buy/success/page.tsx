@@ -3,6 +3,7 @@ import {TextUrl} from "@components/textUrl";
 import {Url} from "@components/button";
 import {validate} from "@services/validate";
 import {redirect} from "next/navigation";
+import {revalidateTag} from "next/cache";
 
 export default async function Success() {
     const {user} = await validate()
@@ -13,7 +14,12 @@ export default async function Success() {
 
     return (
         <div className="grid_center">
-            <H1>
+            <H1
+                reload={async () => {
+                    "use server";
+                    revalidateTag("userLike")
+                }}
+            >
                 Успешно
             </H1>
             <div>
