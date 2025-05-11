@@ -10,8 +10,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request: NextRequest) {
     const payment = await request.json() as PaymentPost
 
-    console.log(payment)
-
     const hashString = [payment.payment_id, payment.cost, payment.customer].join('@')
     const expected = crypto
         .createHmac('sha256', process.env.EASYDONATE_SECRET!)
@@ -23,9 +21,9 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({error: 'Bad signature.'}, {status: 400})
     }
 
-    /*if (payment.payment_type === "test") {
+    if (payment.payment_type === "test") {
         return NextResponse.json({status: 'OK'})
-    }*/
+    }
 
     const mostiki = payment.cost
 
