@@ -11,7 +11,7 @@ export default function Shop({children}: PropsWithChildren) {
 						<SubsectionItem href="/shop">
 							Магазин
 						</SubsectionItem>
-						<SubsectionItem href="/shop/buy">
+						<SubsectionItem href="/shop/buy" exact={false}>
 							Покупка
 						</SubsectionItem>
 						<SubsectionItem href="/shop/code">

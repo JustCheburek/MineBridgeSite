@@ -6,6 +6,8 @@ import {userModel} from "@db/models";
 export async function POST(request: NextRequest) {
     const payment = await request.json() as PaymentPost
 
+    console.log(payment)
+
     const hashString = [payment.payment_id, payment.cost, payment.customer].join('@')
     const expected = crypto
         .createHmac('sha256', process.env.EASYDONATE_SECRET!)
@@ -13,6 +15,7 @@ export async function POST(request: NextRequest) {
         .digest('hex')
 
     if (expected !== payment.signature) {
+        console.log(`Bad signature: ${expected}, ${payment.signature}`)
         return NextResponse.json({error: 'Bad signature.'}, {status: 400})
     }
 
