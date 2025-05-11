@@ -28,14 +28,6 @@ export interface Product {
     count: number
     cost: number
     commands: string[]
-    custom_fields: CustomField[]
     image: string
-}
-
-export interface CustomField {
-    name: string
-    type: string
-    description: string
-    value: string
 }
 

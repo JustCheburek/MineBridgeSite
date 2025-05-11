@@ -19,10 +19,16 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({error: 'Bad signature.'}, {status: 400})
     }
 
-    await userModel.findOneAndUpdate(
-        {name: payment.customer},
+    /*if (payment.payment_type === "test") {
+        return NextResponse.json({status: 'OK'})
+    }*/
+
+    const user = await userModel.findOneAndUpdate(
+        {email: payment.email},
         {$inc: {mostiki: payment.cost}}
     )
+
+    console.log(user)
 
     return NextResponse.json({status: 'OK'})
 }
