@@ -4,7 +4,6 @@ import {PaymentPost} from "@/types/payment";
 import {userModel} from "@db/models";
 import {MostikiEmail} from "@email/mostiki";
 import {Resend} from "resend";
-import {revalidateTag} from "next/cache";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -45,8 +44,6 @@ export async function POST(request: NextRequest) {
             )
         })
     }
-
-    revalidateTag("userLike")
 
     return NextResponse.json({status: 'OK'})
 }
