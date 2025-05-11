@@ -31,7 +31,7 @@ export function PaymentForm({user}: { user: User }) {
                 />
             </FormLabel>
 
-            <FormButton disabled={mostiki < 1} danger>
+            <FormButton disabled={mostiki < 1}>
                 Купить
             </FormButton>
         </FormBox>

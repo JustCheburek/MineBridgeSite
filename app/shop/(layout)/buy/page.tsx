@@ -27,10 +27,6 @@ export default async function Component() {
                 1 ₽ = 1 <MostikiSvg/>
             </h3>
 
-            <h4 className="red_color center_text semibold-font">
-                В бета тестировании
-            </h4>
-
             <PaymentForm user={user}/>
 
             <div>
