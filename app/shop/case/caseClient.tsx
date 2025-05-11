@@ -407,9 +407,9 @@ function RollButton(
     // Недостаточно баланса
     if (price > user.mostiki) {
         return (
-            <Button disabled>
+            <Url href={`/shop/buy?mostiki=${price-user.mostiki}`} danger>
                 Баланс
-            </Button>
+            </Url>
         )
     }
 

@@ -12,6 +12,7 @@
     "@edgestore/react": "^0.2.2",
     "@edgestore/server": "^0.2.2",
     "@next/third-parties": "^15.3.2",
+    "@scondic/easydonate-sdk": "^0.1.0",
     "@tanstack/react-table": "^8.21.3",
     "@vercel/speed-insights": "^1.2.0",
     "axios": "^1.9.0",

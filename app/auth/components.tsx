@@ -4,7 +4,6 @@ import {DefaultFormBox, FormA, FormGroup, FormInput, FormLabel} from "@component
 import {InputNameCheck} from "@components/formInputs";
 import {DiscordSvg, GoogleSvg, TwitchSvg} from "@ui/SVGS";
 import {useState} from "react";
-
 import styles from "./auth.module.scss";
 import {useChangeRadioState} from "@hooks/useChangeState";
 

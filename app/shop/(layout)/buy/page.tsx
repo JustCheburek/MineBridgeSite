@@ -1,14 +1,10 @@
-// Сервер
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 import {validate} from "@services/validate";
-
-// Компоненты
-import {MostikiSvg, SBPSvg} from "@ui/SVGS";
-import Link from "next/link";
-import {PBox, PText, PTitle} from "@components/post";
-import {OnThisPage, OnThisPageLink} from "@components/sideNav";
+import {MostikiSvg} from "@ui/SVGS";
 import {H1} from "@components/h1";
+import {TextUrl} from "@components/textUrl";
+import {PaymentForm} from "@app/shop/(layout)/buy/components";
 
 export const metadata: Metadata = {
     title: "Покупка",
@@ -22,91 +18,31 @@ export default async function Component() {
         return redirect("/auth")
     }
 
-    return (<>
-        <div className="center_text">
+    return (
+        <div className="grid_center">
             <H1>
                 Покупка
             </H1>
-            <h3 id="mostiki">
+            <h3 id="mostiki" className="center_text">
                 1 ₽ = 1 <MostikiSvg/>
             </h3>
 
-            <h4>
-                Для покупки позовите {" "}
-                <Link
-                    href="https://discord.gg/f95V9Rezqy"
-                    className="unic_color medium-font" target="_blank"
-                >
-                    админа
-                </Link>
+            <h4 className="red_color center_text semibold-font">
+                В бета тестировании
             </h4>
 
-            <PBox id="sbp">
-                <PTitle>
-                    <h2 className="unic_color">СБП</h2>
-                </PTitle>
-                <PText className="center_text">
-                    <h4 className="all_select green_color">
-                        СберБанк
-                    </h4>
-                    <h4 className="all_select">
-                        8 914 344 8578
-                    </h4>
-                </PText>
-            </PBox>
+            <PaymentForm user={user}/>
 
-            <PBox id="sber">
-                <PTitle>
-                    <Link
-                        href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
-                        target="_blank" className="unic_color"
-                    >
-                        <h2>СБЕР</h2>
-                    </Link>
-                </PTitle>
-                <PText>
-                    <Link
-                        href="https://www.sberbank.com/sms/pbpn?requisiteNumber=79143448578"
-                        target="_blank"
-                    >
-                        <SBPSvg size="15rem"/>
-                    </Link>
-                </PText>
-            </PBox>
-
-            <PBox id="donationAlerts">
-                <PTitle>
-                    <Link
-                        href="https://www.donationalerts.com/r/kawa11fox"
-                        target="_blank" className="unic_color"
-                    >
-                        <h2>Donation Alerts</h2>
-                    </Link>
-                </PTitle>
-                <PText>
-                    <Link
-                        href="https://www.donationalerts.com/r/kawa11fox"
-                        target="_blank"
-                    >
-                        Комиссия на тебе)
-                    </Link>
-                </PText>
-            </PBox>
+            <div>
+                <p>
+                    Мостики выдаются автоматически в течение нескольких минут
+                </p>
+                <p>
+                    Если есть вопросы, задавайте:{" "}
+                    <TextUrl href="https://t.me/JustCheburek">JustCheburek</TextUrl>{" "}
+                    <TextUrl href="https://t.me/Dezelink">Dezelink</TextUrl>
+                </p>
+            </div>
         </div>
-
-        <OnThisPage>
-            <OnThisPageLink href="#mostiki">
-                Цена
-            </OnThisPageLink>
-            <OnThisPageLink href="#sbp">
-                СБП
-            </OnThisPageLink>
-            <OnThisPageLink href="#sber">
-                Сбер
-            </OnThisPageLink>
-            <OnThisPageLink href="#donationAlerts">
-                Donation Alerts
-            </OnThisPageLink>
-        </OnThisPage>
-    </>)
+    )
 }

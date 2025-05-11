@@ -13,6 +13,7 @@ import {Skeleton} from "@components/skeleton";
 import {revalidateTag} from "next/cache";
 import {LASTSHOPUPDATE} from "@/const";
 import {LastUpdate} from "@components/lastUpdate";
+import {TextUrl} from "@components/textUrl";
 
 export const metadata: Metadata = {
     title: "Магазин",
@@ -61,32 +62,14 @@ export default async function Shop() {
                 <Url href="/shop/buy">
                     Купить
                 </Url>
-                <p>
-                    Покупка <Link href={"#stickers"} className="unic_color"><strong>стикеров</strong></Link> {" "}
-                    происходит только:
-                </p>
-                <ul>
-                    <li>
-                        В дс канале <Link
-                        href="https://discord.gg/7zx8u4rY"
-                        target="_blank"
-                    >
-                        <strong className="unic_color">
-                            #покупка
-                        </strong>
-                    </Link>
-                    </li>
-                    <li>
-                        У <Link
-                        href="https://t.me/Kawa11Fox"
-                        target="_blank"
-                    >
-                        <strong className="unic_color">
-                            Kawa11Fox
-                        </strong>
-                    </Link>
-                    </li>
-                </ul>
+                <div>
+                    <p>
+                        Покупка <Link href={"#stickers"} className="unic_color"><strong>стикеров</strong></Link>:
+                    </p>
+                    <TextUrl href="https://discord.gg/7zx8u4rY">#покупка</TextUrl>{" "}
+                    <TextUrl href="https://t.me/JustCheburek">JustCheburek</TextUrl>{" "}
+                    <TextUrl href="https://t.me/Dezelink">Dezelink</TextUrl>
+                </div>
             </div>
 
             <Heading id="cases">
@@ -226,7 +209,7 @@ export default async function Shop() {
                 </Box>
             </Section>
 
-            <Author description="Главная лиса сервера" href="https://t.me/HomeKawa11Fox">
+            {/*<Author description="Главная лиса сервера" href="https://t.me/HomeKawa11Fox">
                 @HomeKawa11Fox
             </Author>
 
@@ -271,7 +254,7 @@ export default async function Shop() {
                         <StickerButton/>
                     </Text>
                 </Box>
-            </Section>
+            </Section>*/}
 
             {/*<Heading id="kits">
                 <h2 className="center_text">
@@ -285,7 +268,7 @@ export default async function Shop() {
                 </h4>
             </Heading>*/}
 
-            <Heading id="hideme">
+            {/*<Heading id="hideme">
                 <h2 className="center_text">
                     Где я?
                 </h2>
@@ -334,7 +317,7 @@ export default async function Shop() {
                         <HideMeButton/>
                     </Text>
                 </Box>
-            </Section>
+            </Section>*/}
         </div>
 
         <OnThisPage>
@@ -350,9 +333,9 @@ export default async function Shop() {
             {/*<OnThisPageLink href="#kits">
                 Киты
             </OnThisPageLink>*/}
-            <OnThisPageLink href="#hideme">
+            {/*<OnThisPageLink href="#hideme">
                 Где я?
-            </OnThisPageLink>
+            </OnThisPageLink>*/}
         </OnThisPage>
     </>);
 }

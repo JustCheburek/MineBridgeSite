@@ -4,7 +4,7 @@ import styles from "./styles/form.module.scss"
 import Link, {type LinkProps} from "next/link";
 import Form, {type FormProps} from "next/form";
 
-interface DangerProps {
+export interface DangerProps {
     danger?: boolean
 }
 
