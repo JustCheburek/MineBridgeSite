@@ -272,9 +272,6 @@ export default async function Shop() {
             {/*<OnThisPageLink href="#kits">
                 Киты
             </OnThisPageLink>*/}
-            {/*<OnThisPageLink href="#hideme">
-                Где я?
-            </OnThisPageLink>*/}
         </OnThisPage>
     </>);
 }
