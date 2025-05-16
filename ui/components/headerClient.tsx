@@ -86,7 +86,7 @@ function User({user}: { user: User | null }) {
                     </NavLink>
 
                     <small className="user_has semibold-font">
-                        <Link href="/rules">
+                        <Link href="/milkyway">
                             <p className="yellow_color user_mostiki">
                                 {user?.rating || 0} <StarSvg width="0.8em" height="0.8em"/>
                             </p>

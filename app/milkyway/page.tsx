@@ -284,7 +284,7 @@ export default async function MilkyWay() {
              style={{"--_size": `${SIZE}rem`, '--_y': `${Y}rem`}}>
             <H1
                 up
-                description="Боевой пропуск 7 сезона!"
+                description="Боевой пропуск 7 сезона"
                 reload={async () => {
                     "use server";
                     revalidateTag("all")
