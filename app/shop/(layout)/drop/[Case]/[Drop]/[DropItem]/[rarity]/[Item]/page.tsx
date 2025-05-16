@@ -81,7 +81,7 @@ function BuyButton({user, price, caseData}: { user: User | null, price: number, 
             await GetCosmetic(user.name, caseData)
         }}>
             <Button>
-                Получить
+                Купить
             </Button>
         </Form>
     )
