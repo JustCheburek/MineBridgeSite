@@ -4,7 +4,7 @@ import Link from "next/link";
 import {Suspense} from "react";
 import TimeAgo from "javascript-time-ago";
 import {validate} from "@services/validate";
-import {getLastSeen, getUser, updateFrom} from "@/services";
+import {getUser, updateFrom} from "@/services";
 import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
 import {userModel} from "@db/models";
@@ -72,7 +72,6 @@ export default async function Profile({params}: NameParams) {
     } = await getUser({
         name, roles: true, authorId: author?._id, show: isHelper
     })
-    const lastSeen = await getLastSeen(user.name)
 
     if (author) {
         const from: { place: string, name: string } = JSON.parse(cookiesStore.get("from")?.value ?? "{}")
@@ -144,24 +143,11 @@ export default async function Profile({params}: NameParams) {
                     </div>
                     <div>
                         <h4>
-                            Онлайн:
-                        </h4>
-                        <p>
-                            Сайт: {" "}
+                            Онлайн:{" "}
                             <time dateTime={new Date(user.onlineAt || 0).toISOString()}>
                                 {timeAgo.format(new Date(user.onlineAt || 0))}
                             </time>
-                        </p>
-                        <Suspense fallback={<Skeleton width={130} height="1em"/>}>
-                            {lastSeen &&
-                              <p>
-                                Сервер: {" "}
-                                <time dateTime={new Date(lastSeen || 0).toISOString()}>
-                                    {timeAgo.format(new Date(lastSeen || 0))}
-                                </time>
-                              </p>
-                            }
-                        </Suspense>
+                        </h4>
                     </div>
                     <h4>
                         <Link href="/milkyway">

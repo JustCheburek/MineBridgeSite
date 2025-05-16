@@ -3,7 +3,7 @@
 import type {User} from "lucia";
 import {notFound} from "next/navigation";
 import {unstable_cache as cache} from "next/cache";
-import {caseModel, codeModel, dropModel, seasonModel, sqlPool, userModel} from "@db/models";
+import {caseModel, codeModel, dropModel, seasonModel, userModel} from "@db/models";
 import {Season} from "@/types/season";
 import type {GuildDSUser} from "@/types/user";
 import axios from "axios";
@@ -15,7 +15,6 @@ import {Code} from "@/types/code";
 import {InviteEmail} from "@email/invite";
 import {From} from "@/types/invite";
 import {Resend} from "resend";
-import mysql from "mysql2/promise";
 
 // todo: Разделение на папки
 
@@ -494,18 +493,3 @@ export const getCode = cache(
     ["code", "shop", "all"],
     {revalidate: 1200, tags: ["code", "shop", "all"]}
 )
-
-export const getLastSeen = cache(
-    async (name: string) => {
-        try {
-            const [rows] = await sqlPool.execute<mysql.RowDataPacket[]>(
-                "SELECT last_seen FROM librepremium_data WHERE last_nickname = ? LIMIT 1",
-                [name]
-            );
-
-            return new Date(rows[0]?.last_seen) ?? null;
-        } catch (e) {
-            console.error(e)
-        }
-    }
-);
