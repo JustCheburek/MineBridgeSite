@@ -2,7 +2,6 @@
 import type {Metadata} from "next";
 import {getCases, getDrops} from "@/services";
 import {validate} from "@services/validate";
-import {userModel} from "@db/models";
 import {Info} from "@/types/case";
 import {revalidateTag} from 'next/cache'
 import {Case} from "@/types/case";
@@ -10,7 +9,7 @@ import {Drop} from "@/types/case";
 
 // Компоненты
 import {CaseClient} from "./caseClient";
-import {RconVC} from "@services/console";
+import {AddCasePurchase, GetCosmetic} from "@services/user";
 
 export const metadata: Metadata = {
     title: "Кейсы",
@@ -31,32 +30,8 @@ export default async function CasePage() {
             throw new Error("Произошла ошибка при выдаче")
         }
 
-        try {
-            if (DropItem.give) {
-                const client = await RconVC()
-                await client.send(`lpv user ${user.name} permission set ${DropItem.give}.${DropItem.name}.${Item.name}`)
-            }
-        } catch (e) {
-            console.log(e)
-        }
-
-        await userModel.findOneAndUpdate(
-            {name: user?.name},
-            {
-                $inc: {
-                    mostiki: -price
-                },
-                $push: {
-                    casesPurchases: {
-                        Item: Item._id,
-                        rarity,
-                        Case: Case._id,
-                        Drop: Drop._id,
-                        DropItem: DropItem._id
-                    }
-                }
-            }
-        )
+        await AddCasePurchase(user.name, {Case, Drop, DropItem, Item, rarity}, price)
+        await GetCosmetic(user.name, {DropItem, Item})
 
         revalidateTag("userLike")
     }

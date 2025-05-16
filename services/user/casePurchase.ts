@@ -14,10 +14,13 @@ type DropAndItem = {
 
 export async function GetCosmetic(name: string, {DropItem, Item}: DropAndItem) {
     if (!DropItem.give) return
-
     const client = await RconVC()
 
-    await client.send(`lpv user ${name} permission set ${DropItem.give}.${DropItem.name}.${Item.name}`)
+    try {
+        await client.send(`lpv user ${name} permission set ${DropItem.give}.${DropItem.name}.${Item.name}`)
+    } catch (e) {
+        console.log(e)
+    }
 
     client.disconnect()
 }
@@ -43,7 +46,7 @@ export async function GetCosmetics(name: string, caseDatas: Partial<DropAndItem>
     client.disconnect()
 }
 
-export async function AddCasePurchase(_id: string, CaseData: CaseData) {
+export async function AddCasePurchase(_id: string, CaseData: CaseData, price = 0) {
     const user = await userModel.findById(_id)
     if (!user) {
         throw new Error(`Пользователь не найден`)
@@ -56,6 +59,10 @@ export async function AddCasePurchase(_id: string, CaseData: CaseData) {
         DropItem: CaseData.DropItem._id,
         Item: CaseData.Item._id
     })
+
+    if (price) {
+        user.mostiki -= price
+    }
 
     await user.save()
 

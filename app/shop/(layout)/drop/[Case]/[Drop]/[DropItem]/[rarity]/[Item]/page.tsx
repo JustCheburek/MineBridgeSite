@@ -7,6 +7,11 @@ import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 import {H1} from "@components/h1";
+import {Button, Url} from "@components/button";
+import {User} from "lucia";
+import {AddCasePurchase, GetCosmetic} from "@services/user";
+import Form from "next/form";
+import {CaseData} from "@/types/purchase";
 
 type ParamsProp = {
     params: Promise<{
@@ -50,6 +55,36 @@ export const generateMetadata = async (
         title: `${Item.displayname} • ${Case.displayname} кейс • ${RarityNames[rarity]} дроп: ${DropTitle}`,
         description: `${Item.displayname}! ${RarityNames[rarity]} дроп: ${DropTitle}. ${Case.displayname} кейс.`
     }
+}
+
+function BuyButton({user, price, caseData}: { user: User | null, price: number, caseData: CaseData }) {
+    if (!user) {
+        return (
+            <Url href="/auth">
+                Войти
+            </Url>
+        )
+    }
+
+    if (price > user.mostiki) {
+        return (
+            <Url href={`/shop/buy?mostiki=${price - user.mostiki}`} danger title={`Не хватает ${price - user.mostiki}м`}>
+                Баланс
+            </Url>
+        )
+    }
+
+    return (
+        <Form action={async () => {
+            "use server"
+            await AddCasePurchase(user._id, caseData, price)
+            await GetCosmetic(user.name, caseData)
+        }}>
+            <Button>
+                Получить
+            </Button>
+        </Form>
+    )
 }
 
 export default async function ShowCase(
@@ -147,6 +182,11 @@ export default async function ShowCase(
                     </p>
                 </div>
             </div>
+
+            <BuyButton user={user} price={fullPrice} caseData={
+                {rarity, Item, Case, Drop, DropItem}
+            }/>
+
             {isHelper &&
               <div className="grid_center light_gray_color">
                   {DropItem.give &&
