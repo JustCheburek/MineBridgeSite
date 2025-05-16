@@ -64,9 +64,9 @@ export default async function Rarities(
                 {rarityNames.map(rarity => (
                     <Box key={rarity}>
                         <Text>
-                            <h2>
+                            <h3>
                                 {RarityNames[rarity]}
-                            </h2>
+                            </h3>
                             <Url href={`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`} margin="10px">
                                 Выбрать
                             </Url>

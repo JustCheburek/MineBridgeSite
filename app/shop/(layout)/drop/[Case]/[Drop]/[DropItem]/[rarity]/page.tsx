@@ -74,9 +74,9 @@ export default async function Items(
                             />
                         </ImgBox>
                         <Text>
-                            <h2>
+                            <h3>
                                 {Item.displayname}
-                            </h2>
+                            </h3>
                             <Url href={`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}/${Item.name}`} margin="10px">
                                 Выбрать
                             </Url>

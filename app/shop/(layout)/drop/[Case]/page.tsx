@@ -45,9 +45,9 @@ export default async function Drops(
                 {Drops.map(Drop => (
                     <Box key={Drop.name}>
                         <Text>
-                            <h2>
+                            <h3>
                                 {Drop.displayname}
-                            </h2>
+                            </h3>
                             <Price>
                                 {Drop.price}
                             </Price>

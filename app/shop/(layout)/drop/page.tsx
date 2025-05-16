@@ -21,9 +21,9 @@ export default async function Cases() {
                     <Box key={Case.name}>
                         <CaseBoxWithModal Case={Case} Drops={Drops}/>
                         <Text>
-                            <h2>
+                            <h3>
                                 {Case.displayname}
-                            </h2>
+                            </h3>
                             <Price oldPrice={Case.oldPrice}>
                                 {Case.price}
                             </Price>
