@@ -26,7 +26,7 @@ const CaseButton = () => (
     </Url>
 )
 
-const StickerButton = ({mostiki}: { mostiki: number }) => (
+const MostikiButton = ({mostiki = 1}: { mostiki?: number }) => (
     <Url href={`/shop/buy?mostiki=${mostiki}`} margin="10px">
         Купить
     </Url>
@@ -132,7 +132,7 @@ export default async function Shop() {
                         <Price>
                             200
                         </Price>
-                        <StickerButton mostiki={200}/>
+                        <MostikiButton mostiki={200}/>
                     </Text>
                 </Box>
 
@@ -147,7 +147,7 @@ export default async function Shop() {
                         <Price>
                             300
                         </Price>
-                        <StickerButton mostiki={300}/>
+                        <MostikiButton mostiki={300}/>
                     </Text>
                 </Box>
             </Section>
@@ -179,7 +179,7 @@ export default async function Shop() {
                         <Price>
                             400
                         </Price>
-                        <StickerButton mostiki={400}/>
+                        <MostikiButton mostiki={400}/>
                     </Text>
                 </Box>
 
@@ -194,57 +194,75 @@ export default async function Shop() {
                         <Price>
                             500
                         </Price>
-                        <StickerButton mostiki={500}/>
+                        <MostikiButton mostiki={500}/>
                     </Text>
                 </Box>
             </Section>
 
-            {/*<Author description="Главная лиса сервера" href="https://t.me/HomeKawa11Fox">
-                @HomeKawa11Fox
-            </Author>
-
-            <Section type="preview">
-                <Box preview>
-                    <Link href="/features/stickers">
-                        <ImgBox hover helper overflow={false}>
-                            <Img
-                                src="/features/stickers/13.png" alt="Стикер"
-                                width={225}
-                            />
-                        </ImgBox>
+            <Heading id="pass">
+                <h2 className="center_text">
+                    <Link href="/shop/case">
+                        Проходки
                     </Link>
-                </Box>
+                </h2>
+                <p className="center_text">
+                    Следите за <span className="unic_color medium-font">скидками</span>
+                </p>
+            </Heading>
 
+            <Section type="third">
                 <Box>
+                    <ImgBox hover overflow={false}>
+                        <Img
+                            src={`/shop/common.png`} alt={`Месяц`}
+                            width={185}
+                        />
+                    </ImgBox>
                     <Text>
                         <h3>
-                            Премиум
+                            Месяц
                         </h3>
-                        <small>
-                            Стикеры, но качественнее
-                        </small>
                         <Price>
-                            3000
+                            ?
                         </Price>
-                        <StickerButton/>
+                        <MostikiButton/>
                     </Text>
                 </Box>
-
                 <Box>
+                    <ImgBox hover overflow={false}>
+                        <Img
+                            src={`/shop/rare.png`} alt={`3 месяца`}
+                            width={185}
+                        />
+                    </ImgBox>
                     <Text>
                         <h3>
-                            Делюкс
+                            3 месяца
                         </h3>
-                        <small>
-                            Лучшие стикеры, но ещё и быстрее
-                        </small>
                         <Price>
-                            4000
+                            ?
                         </Price>
-                        <StickerButton/>
+                        <MostikiButton/>
                     </Text>
                 </Box>
-            </Section>*/}
+                <Box>
+                    <ImgBox hover overflow={false}>
+                        <Img
+                            src={`/shop/legendary.png`} alt={`Год`}
+                            width={185}
+                        />
+                    </ImgBox>
+                    <Text>
+                        <h3>
+                            Год
+                        </h3>
+                        <Price>
+                            ?
+                        </Price>
+                        <MostikiButton/>
+                    </Text>
+                </Box>
+            </Section>
 
             {/*<Heading id="kits">
                 <h2 className="center_text">
@@ -268,6 +286,9 @@ export default async function Shop() {
             </OnThisPageLink>
             <OnThisPageLink href="#stickers">
                 Стикеры
+            </OnThisPageLink>
+            <OnThisPageLink href="#pass">
+                Проходки
             </OnThisPageLink>
             {/*<OnThisPageLink href="#kits">
                 Киты
