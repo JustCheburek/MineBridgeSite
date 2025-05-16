@@ -40,7 +40,7 @@ export default async function Shop() {
         <div>
             <H1 up reload={async () => {
                 "use server";
-                revalidateTag("shop")
+                revalidateTag("all")
             }}>
                 Магазин
             </H1>

@@ -21,36 +21,22 @@ export function SumChances<T extends Chance>(
 }
 
 /**
- * Генерирует случайное число в диапазоне от 0 до указанного max_number.
+ * Генерирует случайное целое от 0 до maxNumber‑1,
+ * в идеале через Web Crypto API везде, где он есть.
  */
-export const Random = (maxNumber: number) => (
-		Math.floor(Math.random() * maxNumber)
-)
+export const Random = (maxNumber: number): number => {
+	// Универсальный крипто‑объект
+	const cryptoObj =
+		typeof globalThis !== "undefined" && "crypto" in globalThis
+			? (globalThis.crypto as Crypto)
+			: null;
 
-/**
- * Достаёт рандомный value из списка
- */
-export function RandomValue<T extends Chance>(
-		array: T[],
-		sumChances: number
-): T {
-	if (array.length <= 1) {
-		return array[0]
+	if (cryptoObj?.getRandomValues) {
+		const array = new Uint32Array(1);
+		cryptoObj.getRandomValues(array);
+		return array[0] % maxNumber;
 	}
 
-	const randomChance = Random(sumChances || array.length)
-
-	let id = 0;
-
-	// Пока шанс не будет равен random_chance
-	for (
-			let chance = array[0].chance;
-			chance <= randomChance;
-			chance += array[id]?.chance | 1
-	) {
-		// Прибавляем айди
-		id++;
-	}
-
-	return array[id]
-}
+	// Фоллбэк для совсем старых окружений
+	return Math.floor(Math.random() * maxNumber);
+};

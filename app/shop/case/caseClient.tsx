@@ -3,8 +3,7 @@
 // Next и сервер
 import type {MouseEventHandler} from "react";
 import {useEffect, useRef, useState} from "react";
-import type {CaseType, DropType, Info} from "@/types/case";
-import {Case, Drop, RarityNames} from "@/types/case";
+import {Case, CaseType, Chance, Drop, DropType, Info, RarityNames} from "@/types/case";
 import type {User} from "lucia";
 import Link from "next/link";
 
@@ -13,7 +12,7 @@ import styles from "./case.module.scss"
 
 // Компоненты
 import {MaxSize} from "@components/maxSize";
-import {Random, RandomValue, SumChances} from "@app/utils";
+import {Random, SumChances} from "@app/utils";
 import {Img, ImgBox} from "@components/img";
 import {MostikiSvg} from "@ui/SVGS";
 import {Button, Url} from "@components/button";
@@ -48,7 +47,7 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
 
     const rollSettings = useRef<rollSettings>({
         timeRoll: 20000,
-        rollWidth: 16050 + Random(200)
+        rollWidth: 16100 + Random(80)
     })
 
     const [rarity, setRarity] = useState<CaseType>(Cases[0].name)
@@ -102,51 +101,72 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
         setPrice(caseType.price + dropType.price)
     }
 
+    /** Строит пул имён, повторяя каждое имя chance раз */
+    function buildPool<T>(items: Chance<T>[]): T[] {
+        const pool: T[] = []
+        for (const {name, chance} of items) {
+            for (let i = 0; i < chance; i++) {
+                pool.push(name)
+            }
+        }
+        return pool
+    }
+
+    /** Fisher–Yates shuffle на месте */
+    function shuffle<T>(arr: T[]): void {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Random(i + 1)
+            ;[arr[i], arr[j]] = [arr[j], arr[i]]
+        }
+    }
+
+    function draw<T>(pool: T[]): T {
+        return pool.pop()!
+    }
+
     function Update() {
         const {caseType} = getInfo()
 
         const infos: Info[] = []
-        let dropDefault
 
-        if (drop !== "all") {
-            dropDefault = Drops.find(({name}) => name === drop)
+        // для каждого «слота» рулетки
+        for (let i = 0; i < AMOUNT; i++) {
+            // 1) выбираем дроп
+            const dropPool = buildPool(
+                drop === "all"
+                    ? caseType.drop
+                    : [{name: drop, chance: 1}]
+            )
+            shuffle(dropPool)
+            const chosenDropName = draw(dropPool)
+            const chosenDrop = Drops.find(({name}) => name ===  chosenDropName)!
+
+            // 2) выбираем редкость
+            let rarityPool = buildPool(
+                chosenDrop.defaultRarity
+                    ? [{name: chosenDrop.defaultRarity, chance: 1}]
+                    : caseType.rarity
+            )
+            shuffle(rarityPool)
+            const chosenRarity = draw(rarityPool)
+
+            // 3) выбираем сам предмет из массива нужной редкости
+            const itemsArr =
+                chosenDrop[chosenRarity] && chosenDrop[chosenRarity]!.length > 0
+                    ? chosenDrop[chosenRarity]!
+                    : chosenDrop.drop!
+            const item = itemsArr[Random(itemsArr.length)]
+
+            infos.push({
+                DropItem: chosenDrop,
+                rarity: chosenRarity,
+                Item: item,
+                img: item.img
+                    ? `/shop/${chosenDrop.name}/${item.name}.webp`
+                    : undefined
+            })
         }
 
-        for (let itemIndex = 0; itemIndex < AMOUNT; itemIndex++) {
-            const info: Info = {
-                DropItem: dropDefault
-            }
-
-            // Drop
-            if (!dropDefault) {
-                const randomDrop = RandomValue(caseType.drop, sumChances.current.drop).name
-                info.DropItem = Drops.find(({name}) => name === randomDrop)
-            }
-
-            if (!info.DropItem) return console.error("Drop не найден")
-
-            // Rarity
-            info.rarity = info.DropItem?.defaultRarity ||
-                RandomValue(caseType.rarity, sumChances.current.drop).name
-
-            // Items
-            let {drop: items} = info.DropItem
-            if (items?.length === 0) {
-                items = info.DropItem[info.rarity]
-            }
-
-            if (!items) return console.error("Items не найден")
-            info.Item = items[Random(items.length)]
-
-            // Картинка
-            info.img = info.Item?.img
-                ? `/shop/${info.DropItem.name}/${info.Item.name}.webp`
-                : undefined
-
-            infos.push(info)
-        }
-
-        // Смена
         setItems(infos)
         setSelectedItem(0)
     }
@@ -184,6 +204,7 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
                 '--_roll-time': `${rollSettings.current.timeRoll}ms`,
                 '--_roll-width': `-${rollSettings.current.rollWidth}px`
             }}
+            suppressHydrationWarning
         >
             <H1 paths={[
                 {displayname: "Магазин", name: "shop"},
@@ -407,7 +428,7 @@ function RollButton(
     // Недостаточно баланса
     if (price > user.mostiki) {
         return (
-            <Url href={`/shop/buy?mostiki=${price-user.mostiki}`} danger>
+            <Url href={`/shop/buy?mostiki=${price - user.mostiki}`} danger>
                 Баланс
             </Url>
         )
