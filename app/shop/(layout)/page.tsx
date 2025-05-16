@@ -214,7 +214,7 @@ export default async function Shop() {
                 <Box>
                     <ImgBox hover overflow={false}>
                         <Img
-                            src={`/shop/common.png`} alt={`Месяц`}
+                            src={`/shop/month.png`} alt={`Месяц`}
                             width={185}
                         />
                     </ImgBox>

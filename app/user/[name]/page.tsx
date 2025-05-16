@@ -152,16 +152,16 @@ export default async function Profile({params}: NameParams) {
                                 {timeAgo.format(new Date(user.onlineAt || 0))}
                             </time>
                         </p>
-                        {lastSeen &&
-                          <p>
-                            Сервер: {" "}
-                            <Suspense fallback={<Skeleton width={130} height="1em"/>}>
-                              <time dateTime={new Date(lastSeen || 0).toISOString()}>
-                                  {timeAgo.format(new Date(lastSeen || 0))}
-                              </time>
-                            </Suspense>
-                          </p>
-                        }
+                        <Suspense fallback={<Skeleton width={130} height="1em"/>}>
+                            {lastSeen &&
+                              <p>
+                                Сервер: {" "}
+                                <time dateTime={new Date(lastSeen || 0).toISOString()}>
+                                    {timeAgo.format(new Date(lastSeen || 0))}
+                                </time>
+                              </p>
+                            }
+                        </Suspense>
                     </div>
                     <h4>
                         <Link href="/milkyway">
@@ -206,7 +206,7 @@ export default async function Profile({params}: NameParams) {
             </Suspense>
 
             {isContentMaker &&
-                <Suspense fallback={<Skeleton width="100%" height={307}/>}>
+              <Suspense fallback={<Skeleton width="100%" height={307}/>}>
                 <TwitchFrame user={user}/>
               </Suspense>
             }
