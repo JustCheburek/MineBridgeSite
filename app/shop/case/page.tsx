@@ -30,7 +30,7 @@ export default async function CasePage() {
             throw new Error("Произошла ошибка при выдаче")
         }
 
-        await AddCasePurchase(user.name, {Case, Drop, DropItem, Item, rarity}, price)
+        await AddCasePurchase(user._id, {Case, Drop, DropItem, Item, rarity}, price)
         await GetCosmetic(user.name, {DropItem, Item})
 
         revalidateTag("userLike")
