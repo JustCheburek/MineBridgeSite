@@ -16,6 +16,7 @@ import {NavLink} from "@components/navlink";
 import {Burger} from "@components/burger";
 import {Skeleton} from "@components/skeleton";
 import {Logout} from "@services/user";
+
 const Avatar = dynamic(() => import("@components/avatar"));
 
 type Burger = {
@@ -79,23 +80,31 @@ function User({user}: { user: User | null }) {
             onClick={e => e.stopPropagation()}
         >
             <div className="user_info">
-                <Link href="/rules" className="for_tablet">
-                    <strong className="yellow_color user_mostiki">
-                        {user?.rating || 0} <StarSvg/>
-                    </strong>
-                </Link>
+                <div className="user_text for_tablet">
+                    <NavLink href={`/user/${user.name}`} className="user_name medium-font">
+                        {user.name}
+                    </NavLink>
 
-                <Link href="/shop/buy" className="for_tablet">
-                    <strong className="unic_color user_mostiki">
-                        {user?.mostiki || 0} <MostikiSvg/>
-                    </strong>
-                </Link>
+                    <small className="user_has semibold-font">
+                        <Link href="/rules">
+                            <p className="yellow_color user_mostiki">
+                                {user?.rating || 0} <StarSvg width="0.8em" height="0.8em"/>
+                            </p>
+                        </Link>
+
+                        <Link href="/shop/buy">
+                            <p className="unic_color user_mostiki">
+                                {user?.mostiki || 0} <MostikiSvg width="0.9em" height="0.7em"/>
+                            </p>
+                        </Link>
+                    </small>
+                </div>
 
                 <button
-                    className="unic_color user_icon_box"
+                    className="user_info"
                     onClick={() => setIsMenu(prev => !prev)}
                 >
-                    <Avatar src={user.photo} width={38}/>
+                    <Avatar src={user.photo} width={38} className="unic_color"/>
                 </button>
             </div>
 

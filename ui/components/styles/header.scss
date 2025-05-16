@@ -72,13 +72,25 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--_gap)
+    gap: calc(var(--_gap)/2);
+  }
+
+  .user_text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user_has {
+    display: flex;
+    gap: 0.5rem;
+    line-height: normal;
+    justify-content: flex-end;
   }
 
   .user_mostiki {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 2.5px;
   }
 
   .user_menu {
