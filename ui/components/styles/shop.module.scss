@@ -76,14 +76,7 @@
   opacity: .68;
 }
 
-.case_info {
-  display: grid;
-  gap: 4rem;
 
-  h2 {
-    margin-bottom: 2rem;
-  }
-}
 
 // Планшет
 @media (1300px > width > 728px) {
@@ -111,21 +104,6 @@
       margin-inline: auto;
       width: 50%;
       grid-area: preview;
-    }
-  }
-}
-
-// Планшет+
-@media (width > 728px) {
-  .case_info {
-    grid-template-columns: repeat(2, 1fr);
-
-    .rarity {
-      text-align: left;
-    }
-
-    .drop {
-      text-align: right;
     }
   }
 }

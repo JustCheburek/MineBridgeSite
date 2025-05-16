@@ -13,3 +13,27 @@
 .legendary {
 	@include box(var(--legendary-color), 17px, 0.5);
 }
+
+.case_info {
+	display: grid;
+	gap: 4rem;
+
+	h2 {
+		margin-bottom: 2rem;
+	}
+}
+
+// Планшет+
+@media (width > 728px) {
+	.case_info {
+		grid-template-columns: repeat(2, 1fr);
+
+		.rarity {
+			text-align: left;
+		}
+
+		.drop {
+			text-align: right;
+		}
+	}
+}
