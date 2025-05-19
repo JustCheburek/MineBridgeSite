@@ -24,7 +24,7 @@ export default function RulesLayout(
                 <SubsectionItem href="/rules/roles">
                     Роли
                 </SubsectionItem>
-                <SubsectionItem href="/rules/legal">
+                <SubsectionItem href="/rules/legal" exact={false}>
                     Legal
                 </SubsectionItem>
             </Subsections>
