@@ -160,12 +160,8 @@ export const getAuthor = cache(
     {revalidate: 300, tags: ["author", "userLike", "all"]}
 )
 
-type getUsers = {
-    page?: number
-    perPage?: number
-}
 export const getUsers = cache(
-    async ({page = 0, perPage = 0}: getUsers = {}) => {
+    async () => {
         const users: User[] = JSON.parse(JSON.stringify(
             await userModel
                 .find(
@@ -175,9 +171,7 @@ export const getUsers = cache(
                     },
                     {
                         lean: true,
-                        sort: {createdAt: -1},
-                        skip: perPage * page,
-                        limit: perPage
+                        sort: {createdAt: -1}
                     }
                 )
         ))
