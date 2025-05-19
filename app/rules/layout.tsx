@@ -24,14 +24,8 @@ export default function RulesLayout(
                 <SubsectionItem href="/rules/roles">
                     Роли
                 </SubsectionItem>
-                <SubsectionItem href="/rules/terms-of-use">
-                    Условия
-                </SubsectionItem>
-                <SubsectionItem href="/rules/privacy-policy">
-                    Приватность
-                </SubsectionItem>
-                <SubsectionItem href="/rules/refund-policy">
-                    Возврат
+                <SubsectionItem href="/rules/legal">
+                    Legal
                 </SubsectionItem>
             </Subsections>
             {children}

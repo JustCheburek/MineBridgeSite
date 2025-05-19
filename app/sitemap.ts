@@ -55,18 +55,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: LASTRULESUPDATE,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/terms-of-use`,
-            priority: 0.8,
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/legal`,
+            priority: 0.6,
+        },
+        {
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/legal/terms-of-use`,
+            priority: 0.6,
             lastModified: LASTTERMSOFUSEUPDATE,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/privacy-policy`,
-            priority: 0.8,
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/legal/privacy-policy`,
+            priority: 0.6,
             lastModified: LASTPRIVACYPOLICYUPDATE,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/refund-policy`,
-            priority: 0.8,
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/legal/refund-policy`,
+            priority: 0.6,
             lastModified: LASTREFUNDPOLICYUPDATE,
         },
         // Новости
@@ -136,7 +140,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
         {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/users`,
-            changeFrequency: 'weekly',
+            changeFrequency: 'daily',
             priority: 0.9,
         },
 

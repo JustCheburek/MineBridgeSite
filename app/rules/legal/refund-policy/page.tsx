@@ -15,7 +15,14 @@ export const metadata: Metadata = {
 export default function RefundPolicy() {
     return (<>
         <div className="refund_content">
-            <H1 up>
+            <H1
+                up
+                paths={[
+                    {name: "rules", displayname: "Правила"},
+                    {name: "legal", displayname: "Legal"},
+                    {name: "refund-policy", displayname: "Политика возврата средств"},
+                ]}
+            >
                 Возврат
             </H1>
             <LastUpdate time={LASTREFUNDPOLICYUPDATE}/>

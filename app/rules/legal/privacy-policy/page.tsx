@@ -15,7 +15,16 @@ export const metadata: Metadata = {
 export default function PrivacyPolicy() {
     return (<>
         <div className="privacy_content">
-            <H1 up>Приватность</H1>
+            <H1
+                up
+                paths={[
+                    {name: "rules", displayname: "Правила"},
+                    {name: "legal", displayname: "Legal"},
+                    {name: "privacy-policy", displayname: "Приватность"}
+                ]}
+            >
+                Приватность
+            </H1>
             <LastUpdate time={LASTPRIVACYPOLICYUPDATE}/>
             <RulesBox name="terms" heading="Термины" number={0}>
                 <p>
@@ -68,7 +77,8 @@ export default function PrivacyPolicy() {
                 <p>
                     Администрация сервиса оставляет за собой право по своему личному усмотрению изменять или дополнять
                     настоящую политику конфиденциальности в любое время без предварительного и последующего уведомления.
-                    Политика является неотъемлемой частью правил оказания услуг. MineBridge вправе в любое время вносить изменения в политику.
+                    Политика является неотъемлемой частью правил оказания услуг. MineBridge вправе в любое время вносить
+                    изменения в политику.
                 </p>
                 <br/>
                 <p>

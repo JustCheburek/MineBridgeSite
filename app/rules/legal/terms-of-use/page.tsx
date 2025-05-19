@@ -15,7 +15,16 @@ export const metadata: Metadata = {
 export default function TermsOfUse() {
     return (<>
         <div className="termsofuse_content">
-            <H1 up>Условия</H1>
+            <H1
+                up
+                paths={[
+                    {name: "rules", displayname: "Правила"},
+                    {name: "legal", displayname: "Legal"},
+                    {name: "terms-of-use", displayname: "Политика возврата средств"},
+                ]}
+            >
+                Условия
+            </H1>
             <LastUpdate time={LASTTERMSOFUSEUPDATE}/>
             <br/>
             <p>

@@ -19,7 +19,26 @@ const nextConfig: NextConfig = {
     ppr: 'incremental',
     typedEnv: true,
     optimizeCss: true
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/rules/privacy-policy',
+        destination: '/rules/legal/privacy-policy',
+        permanent: false,
+      },
+      {
+        source: '/rules/refund-policy',
+        destination: '/rules/legal/refund-policy',
+        permanent: false,
+      },
+      {
+        source: '/rules/terms-of-use',
+        destination: '/rules/legal/terms-of-use',
+        permanent: false,
+      },
+    ]
+  },
 };
 
 export default nextConfig;

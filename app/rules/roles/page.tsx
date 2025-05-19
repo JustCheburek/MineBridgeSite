@@ -9,7 +9,7 @@ import {Number} from "@components/number";
 export default function Roles() {
     return (<>
         <div className="roles_content">
-            <H1>
+            <H1 up>
                 Роли
             </H1>
             <RulesBox name="general" heading="Общие сведения" number={1}>
