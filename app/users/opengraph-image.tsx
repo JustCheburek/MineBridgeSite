@@ -2,7 +2,8 @@ import {ImageResponse} from 'next/og'
 import {OGImageBox} from "@components/ogimage";
 import {getUsersL} from "@/services";
 
-export const runtime = 'edge'
+// вызывает ошибку!
+// export const runtime = 'edge'
 
 export const size = {width: 1200, height: 630}
 
