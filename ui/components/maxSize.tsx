@@ -15,13 +15,14 @@ type MaxSize = {
     sideNav?: boolean
 }
 
-export function MaxSize({
-                            children,
-                            sideNav = false,
-                            className = "",
-                            width = 1200,
-                            ...props
-                        }: ComponentPropsWithoutRef<"div"> & MaxSize) {
+export function MaxSize(
+    {
+        children,
+        sideNav = false,
+        className = "",
+        width = 1200,
+        ...props
+    }: ComponentPropsWithoutRef<"div"> & MaxSize) {
     if (sideNav && width === 1200) {
         width = 1300
     }

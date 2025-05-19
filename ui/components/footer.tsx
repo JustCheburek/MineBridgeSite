@@ -11,10 +11,10 @@ export function Policies() {
             <NavLink href="/rules" className="mini_button" exact>
                 Правила
             </NavLink>
-            <NavLink href="/rules/terms-of-use" className="mini_button">
+            <NavLink href="/rules/legal/terms-of-use" className="mini_button">
                 Пользовательское соглашение
             </NavLink>
-            <NavLink href="/rules/privacy-policy" className="mini_button">
+            <NavLink href="/rules/legal/privacy-policy" className="mini_button">
                 Политика конфиденциальности
             </NavLink>
         </small>

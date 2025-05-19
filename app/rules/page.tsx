@@ -78,7 +78,7 @@ export default function Rules() {
                 <Rule number={0.1}>
                     Термины используются в том же значении, что и в{" "}
                     <Link
-                        href="/rules/terms-of-use"
+                        href="/rules/legal/terms-of-use"
                         className="unic_color medium-font"
                     >
                         пользовательском соглашении
