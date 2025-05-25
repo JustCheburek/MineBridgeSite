@@ -6,29 +6,36 @@ import {Code} from "@/types/code";
 import {notFound} from "next/navigation";
 
 export const getCode = cache(
-    async (code: string): Promise<Code> => {
-        const codeM = await codeModel.findOne({code}, {}, {lean: true})
-        const code_: Code | null = JSON.parse(JSON.stringify(codeM))
+    async (
+        _id: Code["_id"]
+    ) => {
+        const code: Code | null = JSON.parse(JSON.stringify(
+            await codeModel.findById(
+                _id,
+                {},
+                {lean: true}
+            )
+        ))
 
-        if (!code_) {
-            console.error(`Code не найден: ${code}`)
+        if (!code) {
+            console.error(`Code не найден: ${String(_id)}`)
             notFound()
         }
 
-        return code_
+        return code
     },
-    ["code", "all"],
-    {revalidate: 300, tags: ["code", "all"]}
+    ["code", "shop", "all"],
+    {revalidate: 1200, tags: ["code", "shop", "all"]}
 )
 
 export const getCodes = cache(
-    async () => {
-        const codes: Code[] = JSON.parse(JSON.stringify(
-            await codeModel.find({}, {}, {lean: true})
-        ))
-
-        return codes
-    },
-    ["codes", "all"],
-    {revalidate: 300, tags: ["codes", "all"]}
-) 
+    async () => JSON.parse(JSON.stringify(
+        await codeModel.find(
+            {},
+            {},
+            {lean: true}
+        )
+    )),
+    ["codes", "shop", "all"],
+    {revalidate: 3600, tags: ["codes", "shop", "all"]}
+)
