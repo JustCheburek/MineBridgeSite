@@ -1,5 +1,5 @@
 import {MaxSize} from "@components/maxSize";
-import {getUsers} from "@/services";
+import {getUsers} from "@/services/user";
 import type {Metadata} from "next";
 import {revalidateTag} from 'next/cache'
 import {H1} from "@components/h1";

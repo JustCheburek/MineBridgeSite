@@ -1,7 +1,7 @@
 import {H1} from "@components/h1";
 import {TextUrl} from "@components/textUrl";
 import {Url} from "@components/button";
-import {validate} from "@services/validate";
+import {validate} from "@/services/user/validate";
 import {redirect} from "next/navigation";
 import {revalidateTag} from "next/cache";
 

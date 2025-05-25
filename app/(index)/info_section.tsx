@@ -1,6 +1,6 @@
 import {Typing} from "./typing";
 import {Url} from "@components/button";
-import {getUsersL} from "@/services";
+import {getUsersL} from "@/services/user";
 import {Skeleton} from "@components/skeleton";
 
 // Стили

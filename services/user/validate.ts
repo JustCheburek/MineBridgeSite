@@ -1,9 +1,10 @@
 import {lucia} from "@db/lucia";
-import {getAuthor, RolesApi} from "@/services";
+import {getAuthor} from "@/services/user";
 import type {User} from "lucia";
 import {cache} from "react";
 import {cookies} from "next/headers";
 import {NO_ROLES} from "@/const";
+import {RolesApi} from "@/services/user";
 
 export const validate = cache(
     async (): Promise<{ user: User | null } & RolesApi> => {
@@ -31,4 +32,4 @@ export const validate = cache(
 
         return await getAuthor(user?.id)
     }
-);
+); 

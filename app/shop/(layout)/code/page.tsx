@@ -1,7 +1,7 @@
 // Сервер
 import type {Metadata} from "next";
-import {validate} from "@services/validate";
-import {getCodes} from "@/services";
+import {validate} from "@/services/user/validate";
+import {getCodes} from "@/services/code";
 
 // Компоненты
 import {H1} from "@components/h1";

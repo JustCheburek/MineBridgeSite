@@ -2,8 +2,8 @@ import type {PropsWithChildren} from "react";
 import {SubsectionItem, Subsections} from "@components/sideNav";
 import {MaxSize} from "@/ui/components/maxSize";
 import {OnThisPageSeasons} from "@components/season";
-import {validate} from "@services/validate";
-import {getSeasons} from "@/services";
+import {validate} from "@/services/user/validate";
+import {getSeasons} from "@/services/seasons";
 
 export default async function News(
 		{

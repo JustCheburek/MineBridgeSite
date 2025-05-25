@@ -1,7 +1,7 @@
 import {Box, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
 import {Case, Drop, RarityNames, RarityType} from "@/types/case";
-import {getCase, getDrop, getItems} from "@/services";
+import {getCase, getDrop, getItems} from "@/services/shop";
 import {H1} from "@components/h1";
 import {Img, ImgBox} from "@components/img";
 import type {Metadata} from "next";

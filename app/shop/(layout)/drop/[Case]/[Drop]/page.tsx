@@ -1,6 +1,6 @@
 import {Box, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
-import {getCase, getDrop, getDrops} from "@/services";
+import {getCase, getDrop, getDrops} from "@/services/shop";
 import {Case, Drop} from "@/types/case";
 import {redirect} from "next/navigation";
 import type {Metadata} from "next";

@@ -1,7 +1,7 @@
 // Next
 import type {Metadata} from "next";
-import {getCases, getDrops} from "@/services";
-import {validate} from "@services/validate";
+import {getCases, getDrops} from "@/services/shop";
+import {validate} from "@/services/user/validate";
 import {Info} from "@/types/case";
 import {revalidateTag} from 'next/cache'
 import {Case} from "@/types/case";

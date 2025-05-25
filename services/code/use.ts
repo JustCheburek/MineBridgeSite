@@ -6,7 +6,8 @@ import {Resend} from "resend";
 import {Code} from "@/types/code";
 import {UseCodeEmail} from "@email/useCode";
 import {revalidateTag} from "next/cache";
-import {getCode, getUser} from "@/services";
+import {getCode} from "@/services/code";
+import {getUser} from "@/services/user";
 import {UsedCodeEmail} from "@email/usedCode";
 
 const resend = new Resend(process.env.RESEND_API_KEY);

@@ -3,8 +3,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import {Suspense} from "react";
 import TimeAgo from "javascript-time-ago";
-import {validate} from "@services/validate";
-import {getUser, updateFrom} from "@/services";
+import {validate} from "@/services/user/validate";
+import {getUser, updateFrom} from "@/services/user";
 import {Social} from "@/types/url";
 import styles from "./profile.module.scss"
 import {userModel} from "@db/models";

@@ -1,6 +1,6 @@
 import type {PropsWithChildren} from "react";
 import {ProfilePage} from "schema-dts";
-import {getUser} from "@/services";
+import {getUser} from "@/services/user";
 import {SubsectionItem, Subsections} from "@components/sideNav";
 import {MaxSize} from "@components/maxSize";
 import type {Metadata} from "next";

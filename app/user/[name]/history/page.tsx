@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
-import {getCaseLocal, getCases, getDropLocal, getDrops, getItem, getItems, getUser} from "@/services";
-import {validate} from "@services/validate";
+import {getCaseLocal, getCases, getDropLocal, getDrops, getItem, getItems} from "@/services/shop";
+import {getUser} from "@/services/user";
+import {validate} from "@/services/user/validate";
 import {MultiCaseData} from "@/types/purchase";
 import {revalidateTag} from 'next/cache'
 import styles from "./history.module.scss";

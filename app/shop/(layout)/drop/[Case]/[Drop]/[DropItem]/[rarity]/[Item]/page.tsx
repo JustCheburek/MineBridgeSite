@@ -1,7 +1,7 @@
-import {getCase, getDrop, getItem, getItems} from "@/services";
+import {getCase, getDrop, getItem, getItems} from "@/services/shop";
 import {Img, ImgBox} from "@components/img";
 import {Case, Drop, Item, RarityCost, RarityNames, type RarityType} from "@/types/case";
-import {validate} from "@services/validate";
+import {validate} from "@/services/user/validate";
 import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";

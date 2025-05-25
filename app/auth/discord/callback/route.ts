@@ -4,7 +4,7 @@ import {generateId, type User} from "lucia";
 import type {DSUser, GuildDSUser} from "@/types/user";
 import {userModel} from "@db/models";
 import {NextRequest, NextResponse} from "next/server";
-import {validate} from "@services/validate";
+import {validate} from "@/services/user/validate";
 import axios from "axios";
 import {OAuth2RequestError} from "arctic";
 import {DS_URL} from "@/const";
