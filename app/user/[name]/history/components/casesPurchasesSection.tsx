@@ -1,18 +1,12 @@
 "use client"
 
-// Стили
 import styles from "../history.module.scss"
-
-// Сервер
-import {AddSuffix, DeleteCasePurchase, DropSuffix, GetCosmetics, SelectSuffix} from "@services/user";
+import {AddSuffix, DropSuffix, SelectSuffix} from "@/services/user/suffix";
+import {DeleteCasePurchase, GetCosmetics} from "@/services/user/casePurchase";
 import {useState} from "react";
 import type {User} from "lucia";
-
-// Типы
 import {Case, Drop} from "@/types/case";
 import type {CaseData, MultiCaseData} from "@/types/purchase";
-
-// Компоненты
 import {CasesPurchasesModal} from "@modals/casesPurchases";
 import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
 import Form from "next/form";

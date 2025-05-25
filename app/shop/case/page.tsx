@@ -9,7 +9,7 @@ import {Drop} from "@/types/case";
 
 // Компоненты
 import {CaseClient} from "./caseClient";
-import {AddCasePurchase, GetCosmetic} from "@services/user";
+import {AddCasePurchase, GetCosmetic} from "@/services/user/casePurchase";
 
 export const metadata: Metadata = {
     title: "Кейсы",
