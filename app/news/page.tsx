@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
-import {validate} from "@/services/user/validate";
-import {getSeasons} from "@/services/seasons";
+import {validate} from "@services/user/validate";
+import {getSeasons} from "@services/seasons";
 import {MDXRemote} from 'next-mdx-remote/rsc'
 import {seasonModel} from "@db/models";
 import {PropsWithChildren} from "react";

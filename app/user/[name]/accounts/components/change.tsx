@@ -8,7 +8,8 @@ import {FormBox, FormButton, FormInput, FormLabel, FormTextarea} from "@componen
 import type {ChangeEvent} from "react";
 import {useState} from "react";
 import {InputNameCheck, InputNameCheckWithoutState} from "@components/formInputs";
-import {DeleteUser, UpdateProfile} from "@services/user";
+import {UpdateProfile} from "@services/user/update";
+import {DeleteUser} from "@services/user/delete";
 import Link from "next/link";
 import {ImgUpload} from "@components/imgUpload";
 import {useEdgeStore} from "@/lib/edgestore"

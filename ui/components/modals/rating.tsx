@@ -7,7 +7,7 @@ import {type Action, Punishment} from "@/types/punishment";
 import {Modal, type setModal} from "@components/modal";
 import {FormBox, FormButton, FormGroup, FormInput, FormLabel} from "@components/formBox";
 import {H1} from "@components/h1";
-import {AddPunishment} from "@services/user";
+import {AddPunishment} from "@services/user/punishment";
 
 type RatingModal = {
     name?: User["name"]

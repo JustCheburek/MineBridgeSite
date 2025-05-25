@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import {revalidateTag} from "next/cache";
-import {validate} from "@/services/user/validate";
-import {getCase, getDropLocal, getDrops, getItem, getItems} from "@/services/shop";
-import {AddCasePurchase, GetCosmetic} from "@services/user";
+import {validate} from "@services/user/validate";
+import {getCase, getDropLocal, getDrops, getItem, getItems} from "@services/shop";
+import {AddCasePurchase, GetCosmetic} from "@services/user/casePurchase";
 import type {User} from "lucia";
 import type {Metadata} from "next";
 import type {CaseData} from "@/types/purchase";

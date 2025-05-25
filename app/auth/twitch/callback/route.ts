@@ -5,7 +5,7 @@ import type {DataTw} from "@/types/user";
 import {OAuth2RequestError} from "arctic";
 import {userModel} from "@db/models";
 import {NextRequest, NextResponse} from "next/server";
-import {validate} from "@/services/user/validate";
+import {validate} from "@services/user/validate";
 import axios from "axios";
 
 

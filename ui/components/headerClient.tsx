@@ -15,7 +15,7 @@ import {AuthSvg, MinebridgeSvg, MostikiSvg, StarSvg} from "@ui/SVGS";
 import {NavLink} from "@components/navlink";
 import {Burger} from "@components/burger";
 import {Skeleton} from "@components/skeleton";
-import {Logout} from "@services/user";
+import {Logout} from "@services/user/logout";
 
 const Avatar = dynamic(() => import("@components/avatar"));
 

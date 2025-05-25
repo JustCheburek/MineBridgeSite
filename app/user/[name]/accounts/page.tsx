@@ -1,7 +1,7 @@
 // Сервер
 import type {PropsWithChildren} from "react";
-import {validate} from "@/services/user/validate"
-import {getUser} from "@/services/user";
+import {validate} from "@services/user/validate"
+import {getUser} from "@services/user";
 
 // Стили
 import styles from "./accounts.module.scss"

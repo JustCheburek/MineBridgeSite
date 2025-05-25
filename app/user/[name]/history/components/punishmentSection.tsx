@@ -3,7 +3,7 @@
 // React
 import {useState} from "react";
 import type {User} from "lucia";
-import {SavePunishments} from "@services/user";
+import {SavePunishments} from "@services/user/punishment";
 
 // Колонна
 import {Punishment} from "@/types/punishment";

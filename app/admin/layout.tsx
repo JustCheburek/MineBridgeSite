@@ -1,5 +1,5 @@
 import {PropsWithChildren} from "react";
-import {validate} from "@/services/user/validate";
+import {validate} from "@services/user/validate";
 import {redirect} from "next/navigation";
 import {Metadata} from "next";
 

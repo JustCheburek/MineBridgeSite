@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
-import {validate} from "@/services/user/validate";
+import {validate} from "@services/user/validate";
 import {MostikiSvg} from "@ui/SVGS";
 import {H1} from "@components/h1";
 import {TextUrl} from "@components/textUrl";

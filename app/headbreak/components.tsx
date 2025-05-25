@@ -4,7 +4,7 @@ import {useState} from "react";
 import styles from "./headbreak.module.scss"
 import {FormBox, FormButton, FormLabel} from "@components/formBox";
 import {Random} from "@app/utils";
-import {GetPrize} from "@services/user";
+import {GetPrize} from "@services/user/get";
 
 type Element = "" | "⚪" | "❌" | "❓️" | "❔"
 type Path = Element[]

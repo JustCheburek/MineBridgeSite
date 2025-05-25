@@ -1,5 +1,5 @@
 // Сервер
-import {getUser} from "@/services/user";
+import {getUser} from "@services/user";
 import Link from "next/link";
 import {type PropsWithChildren, Suspense} from "react";
 import {idOrNameUser} from "@/types/idOrName";

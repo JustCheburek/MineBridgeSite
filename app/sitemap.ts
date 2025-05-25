@@ -1,7 +1,7 @@
 import {MetadataRoute} from 'next'
 import {LASTPRIVACYPOLICYUPDATE, LASTREFUNDPOLICYUPDATE, LASTRULESUPDATE, LASTTERMSOFUSEUPDATE} from "@/const";
-import {getCases} from "@/services/shop";
-import {getUsers} from "@/services/user";
+import {getCases} from "@services/shop";
+import {getUsers} from "@services/user";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const [users, Cases] = await Promise.all([getUsers(), getCases()])

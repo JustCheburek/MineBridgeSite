@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import Link from "next/link";
-import {getCases, getDrops} from "@/services/shop";
+import {getCases, getDrops} from "@services/shop";
 import {Author, Box, Heading, Price, Section, Text} from "@components/shop"
 import {CaseBoxWithModal} from "@components/caseBoxModal";
 import {MostikiSvg} from "@ui/SVGS";

@@ -1,8 +1,8 @@
 "use client"
 
 import styles from "../history.module.scss"
-import {AddSuffix, DropSuffix, SelectSuffix} from "@/services/user/suffix";
-import {DeleteCasePurchase, GetCosmetics} from "@/services/user/casePurchase";
+import {AddSuffix, DropSuffix, SelectSuffix} from "@services/user/suffix";
+import {DeleteCasePurchase, GetCosmetics} from "@services/user/casePurchase";
 import {useState} from "react";
 import type {User} from "lucia";
 import {Case, Drop} from "@/types/case";

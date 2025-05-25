@@ -1,6 +1,6 @@
 import {ImageResponse} from 'next/og'
 import {OGImageBox} from "@components/ogimage";
-import {getUsersL} from "@/services/user";
+import {getUsersL} from "@services/user";
 
 // вызывает ошибку!
 // export const runtime = 'edge'

@@ -1,6 +1,6 @@
 import {MaxSize} from "@components/maxSize";
 import {Url} from "@components/button";
-import {validate} from "@/services/user/validate";
+import {validate} from "@services/user/validate";
 import {redirect} from "next/navigation";
 import {H1} from "@components/h1";
 

@@ -1,6 +1,6 @@
 import {Box, Price, Section, Text} from "@components/shop";
 import {Url} from "@components/button";
-import {getCases, getDrops} from "@/services/shop";
+import {getCases, getDrops} from "@services/shop";
 import type {Metadata} from "next";
 import {H1} from "@components/h1";
 import {CaseBoxWithModal} from "@components/caseBoxModal";

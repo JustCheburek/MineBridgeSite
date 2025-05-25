@@ -1,7 +1,7 @@
 // React
 import type {Metadata} from "next";
 import type {User} from "lucia";
-import {getUsers, getUsersL} from "@/services/user";
+import {getUsers, getUsersL} from "@services/user";
 import {revalidateTag} from 'next/cache'
 
 // Компоненты

@@ -1,6 +1,6 @@
 import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
 import type {User} from "lucia";
-import {UpdateNotification} from "@services/user";
+import {UpdateNotification} from "@services/user/notification";
 import {notificationsLabels} from "@/types/notification";
 
 export function NotificationsForm({user}: { user: User }) {

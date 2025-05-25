@@ -1,7 +1,7 @@
-import {getCase, getDrop, getItem, getItems} from "@/services/shop";
+import {getCase, getDrop, getItem, getItems} from "@services/shop";
 import {Img, ImgBox} from "@components/img";
 import {Case, Drop, Item, RarityCost, RarityNames, type RarityType} from "@/types/case";
-import {validate} from "@/services/user/validate";
+import {validate} from "@services/user/validate";
 import styles from "./item.module.scss"
 import {MostikiSvg} from "@ui/SVGS";
 import type {Metadata} from "next";
@@ -9,7 +9,7 @@ import {redirect} from "next/navigation";
 import {H1} from "@components/h1";
 import {Button, Url} from "@components/button";
 import {User} from "lucia";
-import {AddCasePurchase, GetCosmetic} from "@services/user";
+import {AddCasePurchase, GetCosmetic} from "@services/user/casePurchase";
 import Form from "next/form";
 import {CaseData} from "@/types/purchase";
 
