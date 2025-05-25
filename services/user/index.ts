@@ -75,7 +75,6 @@ type GetUser = {
     authorId?: User["_id"]
     show?: boolean
 } & idOrNameUser
-
 export const getUser = cache(
     async (
         {
@@ -244,17 +243,19 @@ export const updateFrom = cache(
         if (!from) return nullFrom
 
         const {place, name} = from
-        if (!place || !name) return nullFrom
+        if (!place || user.name === name) {
+            return nullFrom
+        }
 
         const userInfo = await getUser({name, throwNotFound: false}).catch(console.error)
         const inviter = userInfo?.user
-
+        const isContentMaker = userInfo?.isContentMakerCheck || false
         if (!user.from?.userId && inviter && !inviter.invites.some(id => String(id) === String(user._id))) {
-            await updateInviter(inviter, false)
+            await updateInviter(inviter, isContentMaker)
         }
 
         return {place, userId: inviter?._id}
     },
-    ["from", "userLike", "all"],
-    {revalidate: 300, tags: ["from", "userLike", "all"]}
+    ["from"],
+    {revalidate: 3600, tags: ["from"]}
 )
