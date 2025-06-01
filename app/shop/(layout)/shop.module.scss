@@ -7,11 +7,28 @@
   position: absolute;
   bottom: 0;
   right: 0;
+  z-index: var(--2z);
 }
 
 .text {
   background-color: var(--background-color-transparent) !important;
   border-radius: var(--border-radius) 0 0 0 !important;
+}
+
+@media (max-width: 700px) {
+  .box {
+    position: static;
+    min-width: 50%;
+  }
+
+  .text {
+    background: none !important;
+    border: none !important;
+  }
+
+  .img {
+    filter: brightness(0.4);
+  }
 }
 
 

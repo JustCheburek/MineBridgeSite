@@ -21,6 +21,7 @@ export function PreSeason({ author }: { author: User | null }) {
         >
             <Img
                 src="/shop/preseason.jpg" alt="Проходка на межсезонье"
+                className={styles.img}
             />
             <Box className={styles.box}>
                 <Text className={styles.text}>
