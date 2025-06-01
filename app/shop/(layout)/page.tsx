@@ -89,25 +89,6 @@ export default async function Shop() {
                 </Suspense>
             </Section>
 
-            <Section type="third">
-                <Suspense fallback={<Skeleton width="100%" height={440}/>}>
-                    {Cases.map(Case => (
-                        <Box key={Case.name}>
-                            <CaseBoxWithModal Case={Case} Drops={Drops}/>
-                            <Text>
-                                <h3>
-                                    {Case.displayname}
-                                </h3>
-                                <Price oldPrice={Case.oldPrice}>
-                                    {Case.price}
-                                </Price>
-                                <CaseButton/>
-                            </Text>
-                        </Box>
-                    ))}
-                </Suspense>
-            </Section>
-
             <Heading id="stickers">
                 <h2 className="center_text">
                     <Link href="/features/stickers">
