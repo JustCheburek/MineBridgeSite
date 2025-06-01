@@ -2,3 +2,16 @@
   // main
   background: linear-gradient(180deg, var(--background-color) 30%, var(--black-color));
 }
+
+.box {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.text {
+  background-color: var(--background-color-transparent) !important;
+  border-radius: var(--border-radius) 0 0 0 !important;
+}
+
+

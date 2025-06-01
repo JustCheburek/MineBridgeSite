@@ -6,6 +6,7 @@
 }
 
 .container {
+  position: relative;
   display: grid;
   place-content: center;
   gap: 2rem 4rem;
@@ -76,7 +77,9 @@
   opacity: .68;
 }
 
-
+.full {
+  aspect-ratio: 16/9;
+}
 
 // Планшет
 @media (1300px > width > 728px) {
@@ -84,10 +87,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .cases {
+  .third {
     grid-template-areas:
-              "case1 case2"
-              "case3 case3";
+      "case1 case2"
+      "case3 case3";
 
     .box:last-child {
       grid-area: case3;
@@ -95,10 +98,10 @@
     }
   }
 
-  .stickers {
+  .preview {
     grid-template-areas:
-              "preview preview"
-              "sticker1 sticker2";
+      "preview preview"
+      "sticker1 sticker2";
 
     .preview {
       margin-inline: auto;
@@ -111,7 +114,9 @@
 // ПК
 @media (width > 1300px) {
   .container {
-    grid-template-columns: repeat(3, 1fr);
+    &:not(.full) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .preview {

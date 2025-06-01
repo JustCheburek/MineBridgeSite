@@ -1,19 +1,21 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
-import {getCases, getDrops} from "@services/shop";
-import {Author, Box, Heading, Price, Section, Text} from "@components/shop"
-import {CaseBoxWithModal} from "@components/caseBoxModal";
-import {MostikiSvg} from "@ui/SVGS";
-import {Url} from "@components/button";
-import {Img, ImgBox} from "@components/img";
-import {OnThisPage, OnThisPageLink} from "@components/sideNav";
-import {H1} from "@components/h1";
-import {Suspense} from "react";
-import {Skeleton} from "@components/skeleton";
-import {revalidateTag} from "next/cache";
-import {LASTSHOPUPDATE} from "@/const";
-import {LastUpdate} from "@components/lastUpdate";
-import {TextUrl} from "@components/textUrl";
+import { getCases, getDrops } from "@services/shop";
+import { Author, Box, Heading, Price, Section, Text } from "@components/shop"
+import { CaseBoxWithModal } from "@components/caseBoxModal";
+import { MostikiSvg } from "@ui/SVGS";
+import { Url } from "@components/button";
+import { Img, ImgBox } from "@components/img";
+import { OnThisPage, OnThisPageLink } from "@components/sideNav";
+import { H1 } from "@components/h1";
+import { Suspense } from "react";
+import { Skeleton } from "@components/skeleton";
+import { revalidateTag } from "next/cache";
+import { LASTSHOPUPDATE } from "@/const";
+import { LastUpdate } from "@components/lastUpdate";
+import { TextUrl } from "@components/textUrl";
+import { PreSeason } from "./preseason";
+import { validate } from "@/services/user/validate";
 
 export const metadata: Metadata = {
     title: "Магазин",
@@ -26,13 +28,14 @@ const CaseButton = () => (
     </Url>
 )
 
-const MostikiButton = ({mostiki = 1}: { mostiki?: number }) => (
+const MostikiButton = ({ mostiki = 1 }: { mostiki?: number }) => (
     <Url href={`/shop/buy?mostiki=${mostiki}`} margin="10px">
         Купить
     </Url>
 )
 
 export default async function Shop() {
+    const { user: author } = await validate()
     const [Cases, Drops] = await Promise.all([getCases(), getDrops()])
 
     // todo: киты в дуэлях
@@ -46,17 +49,28 @@ export default async function Shop() {
             </H1>
 
             <div className="grid_center" id="mostiki">
-                <LastUpdate time={LASTSHOPUPDATE}/>
+                <LastUpdate time={LASTSHOPUPDATE} />
                 <p>
                     На сервере действует внутриигровая валюта <strong className="unic_color">мостики</strong>:
                 </p>
                 <h3 className="center_text">
-                    1 ₽ = 1 <MostikiSvg/>
+                    1 ₽ = 1 <MostikiSvg />
                 </h3>
                 <Url href="/shop/buy">
                     Купить
                 </Url>
             </div>
+
+            <Heading id="preseason" className="center_text">
+                <h2>
+                    Межсезонье
+                </h2>
+                <p>
+                    Проходки на межсезонье
+                </p>
+            </Heading>
+
+            <PreSeason author={author} />
 
             <Heading id="cases">
                 <h2 className="center_text">
@@ -65,16 +79,16 @@ export default async function Shop() {
                     </Link>
                 </h2>
                 <p>
-                    С помощью кейсов можно<br/>
+                    С помощью кейсов можно<br />
                     кастомизировать свой внешний вид
                 </p>
             </Heading>
 
             <Section type="third">
-                <Suspense fallback={<Skeleton width="100%" height={440}/>}>
+                <Suspense fallback={<Skeleton width="100%" height={440} />}>
                     {Cases.map(Case => (
                         <Box key={Case.name}>
-                            <CaseBoxWithModal Case={Case} Drops={Drops}/>
+                            <CaseBoxWithModal Case={Case} Drops={Drops} />
                             <Text>
                                 <h3>
                                     {Case.displayname}
@@ -82,7 +96,7 @@ export default async function Shop() {
                                 <Price oldPrice={Case.oldPrice}>
                                     {Case.price}
                                 </Price>
-                                <CaseButton/>
+                                <CaseButton />
                             </Text>
                         </Box>
                     ))}
@@ -96,8 +110,8 @@ export default async function Shop() {
                     </Link>
                 </h2>
                 <p>
-                    Показывайте свой скин, пожелания и идеи,<br/>
-                    чтобы телеграм стикер ещё уникальнее<br/>
+                    Показывайте свой скин, пожелания и идеи,<br />
+                    чтобы телеграм стикер ещё уникальнее<br />
 
                     <TextUrl href="https://discord.gg/7zx8u4rY">#покупка</TextUrl>{" "}
                     <TextUrl href="https://t.me/JustCheburek">JustCheburek</TextUrl>{" "}
@@ -132,7 +146,7 @@ export default async function Shop() {
                         <Price>
                             200
                         </Price>
-                        <MostikiButton mostiki={200}/>
+                        <MostikiButton mostiki={200} />
                     </Text>
                 </Box>
 
@@ -147,7 +161,7 @@ export default async function Shop() {
                         <Price>
                             300
                         </Price>
-                        <MostikiButton mostiki={300}/>
+                        <MostikiButton mostiki={300} />
                     </Text>
                 </Box>
             </Section>
@@ -179,7 +193,7 @@ export default async function Shop() {
                         <Price>
                             400
                         </Price>
-                        <MostikiButton mostiki={400}/>
+                        <MostikiButton mostiki={400} />
                     </Text>
                 </Box>
 
@@ -194,7 +208,7 @@ export default async function Shop() {
                         <Price>
                             500
                         </Price>
-                        <MostikiButton mostiki={500}/>
+                        <MostikiButton mostiki={500} />
                     </Text>
                 </Box>
             </Section>
@@ -212,12 +226,12 @@ export default async function Shop() {
 
             <Section type="third">
                 <Box>
-                    <ImgBox hover overflow={false}>
+                    {/* <ImgBox hover overflow={false}>
                         <Img
                             src={`/shop/month.png`} alt={`Месяц`}
                             width={185}
                         />
-                    </ImgBox>
+                    </ImgBox> */}
                     <Text>
                         <h3>
                             Месяц
@@ -225,16 +239,16 @@ export default async function Shop() {
                         <Price>
                             ?
                         </Price>
-                        <MostikiButton/>
+                        <MostikiButton />
                     </Text>
                 </Box>
                 <Box>
-                    <ImgBox hover overflow={false}>
+                    {/* <ImgBox hover overflow={false}>
                         <Img
                             src={`/shop/3months.png`} alt={`3 месяца`}
                             width={185}
                         />
-                    </ImgBox>
+                    </ImgBox> */}
                     <Text>
                         <h3>
                             3 месяца
@@ -242,16 +256,16 @@ export default async function Shop() {
                         <Price>
                             ?
                         </Price>
-                        <MostikiButton/>
+                        <MostikiButton />
                     </Text>
                 </Box>
                 <Box>
-                    <ImgBox hover overflow={false}>
+                    {/* <ImgBox hover overflow={false}>
                         <Img
                             src={`/shop/legendary.png`} alt={`Год`}
                             width={185}
                         />
-                    </ImgBox>
+                    </ImgBox> */}
                     <Text>
                         <h3>
                             Год
@@ -259,7 +273,7 @@ export default async function Shop() {
                         <Price>
                             ?
                         </Price>
-                        <MostikiButton/>
+                        <MostikiButton />
                     </Text>
                 </Box>
             </Section>
