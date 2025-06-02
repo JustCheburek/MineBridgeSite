@@ -21,10 +21,6 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({error: 'Bad signature.'}, {status: 400})
     }
 
-    if (payment.payment_type === "test") {
-        return NextResponse.json({status: 'OK'})
-    }
-
     const mostiki = payment.cost
 
     const user = await userModel.findOneAndUpdate(
