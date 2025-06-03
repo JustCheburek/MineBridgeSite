@@ -138,7 +138,7 @@ export const getUser = cache(
         }
     },
     ["user", "userLike", "all"],
-    {revalidate: 600, tags: ["user", "userLike", "all"]}
+    {revalidate: 300, tags: ["user", "userLike", "all"]}
 )
 
 export const getAuthor = cache(
@@ -152,7 +152,7 @@ export const getAuthor = cache(
         return {user, ...await getRoles(user?.discordId)}
     },
     ["author", "userLike", "all"],
-    {revalidate: 300, tags: ["author", "userLike", "all"]}
+    {revalidate: 120, tags: ["author", "userLike", "all"]}
 )
 
 export const getUsers = cache(
@@ -174,7 +174,7 @@ export const getUsers = cache(
         return users
     },
     ["users", "userLike", "all"],
-    {revalidate: 1200, tags: ["users", "userLike", "all"]}
+    {revalidate: 300, tags: ["users", "userLike", "all"]}
 )
 
 export const getUsersL = cache(
@@ -182,7 +182,7 @@ export const getUsersL = cache(
         return userModel.countDocuments({}, {lean: true})
     },
     ["users", "userLike", "all"],
-    {revalidate: 3600, tags: ["users", "userLike", "all"]}
+    {revalidate: 450, tags: ["users", "userLike", "all"]}
 )
 
 export const updateFrom = cache(
