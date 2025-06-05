@@ -50,14 +50,18 @@ function MDXContent({ source }: { source: string }) {
   // Используем useMemo для создания компонента только при изменении compiledCode
   const Component = useMemo(() => {
     if (!compiledCode) {
-      return () => <p>Загрузка контента...</p>
+      const LoadingComponent = () => <p>Загрузка контента...</p>
+      LoadingComponent.displayName = 'MDX_LoadingComponent'
+      return LoadingComponent
     }
 
     try {
       return getMDXComponent(compiledCode)
     } catch (err) {
       console.error('Ошибка при компиляции MDX:', err)
-      return () => <p>Ошибка при отображении контента</p>
+      const ErrorComponent = () => <p>Ошибка при отображении контента</p>
+      ErrorComponent.displayName = 'MDX_ErrorComponent'
+      return ErrorComponent
     }
   }, [compiledCode])
 
@@ -165,7 +169,7 @@ export function NewsInfiniteList() {
                   </ImgBox>
                 </CheckLink>
               )}
-              <PTitle startAt={new Date(news.date * 1000)} endAt={undefined}>
+              <PTitle>
                 <h3>
                   {news.heading || 'Без заголовка'}
                 </h3>
@@ -198,4 +202,4 @@ export function NewsInfiniteList() {
       </div>
     </div>
   )
-} 
+}
