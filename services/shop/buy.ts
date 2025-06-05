@@ -5,6 +5,7 @@ import {Resend} from "resend";
 import {User} from "lucia";
 import { revalidateTag } from "next/cache";
 import { AddWLConsole } from "@services/console";
+import { redirect } from "next/navigation";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function Buy(mostiki: User["mostiki"], authorId: User["_id"]) {
@@ -31,4 +32,6 @@ export async function Buy(mostiki: User["mostiki"], authorId: User["_id"]) {
             )
         })
     }
+
+    redirect(`/user/${author.name}`)
 }

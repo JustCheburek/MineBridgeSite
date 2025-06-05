@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/ui/components/button";
+import { Button } from "@components/button";
 import { BuyModal } from "@/ui/components/modals/buy";
 import { useState } from "react";
 import type { User } from "lucia";
@@ -27,14 +27,7 @@ export function PreSeason({ author }: { author: User | null }) {
                 <Text className={styles.text}>
                     <h3 className="center_text">Межсезонье</h3>
                     <Price>100</Price>
-                    {author
-                        ? <Button margin="10px" onClick={() => setModal(true)}>
-                            Купить
-                        </Button>
-                        : <Button margin="10px">
-                            Войти
-                        </Button>
-                    }
+                    <BuyButton onClick={() => setModal(true)} author={author} />
                 </Text>
             </Box>
         </ImgBox>
@@ -42,4 +35,28 @@ export function PreSeason({ author }: { author: User | null }) {
             <BuyModal modal={modal} setModal={setModal} author={author} />
         }
     </>)
+}
+
+function BuyButton({ onClick, author }: { onClick: () => void, author: User | null }) {
+    if (!author) {
+        return (
+            <Button margin="10px">
+                Войти
+            </Button>
+        )
+    }
+
+    if (author.whitelist) {
+        return (
+            <Button margin="10px" disabled>
+                Куплено
+            </Button>
+        )
+    }
+
+    return (
+        <Button onClick={onClick} margin="10px">
+            Купить
+        </Button>
+    )
 }
