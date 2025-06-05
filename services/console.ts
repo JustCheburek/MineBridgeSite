@@ -49,20 +49,14 @@ export const GetHoursConsole = cache(
 export const AddWLConsole = cache(
     async (name: string) => {
         const client = await RconVC()
-        let whitelist = false
 
         try {
-            const text = await client.send(`vclist add ${name}`)
-            if (text === "") {
-                whitelist = true
-            }
+            await client.send(`vclist add ${name}`)
         } catch (e) {
             console.error(e)
         }
 
         client.disconnect()
-
-        return whitelist
     }
 )
 

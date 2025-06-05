@@ -12,9 +12,12 @@ export default async function AdminPanel() {
         <MaxSize className="center_text grid_center">
             <H1>Админ панель</H1>
 
-            <GContainer>
+            <GContainer width={150} height={50}>
+                <GBox href="/admin/whitelist">
+                    <h3>Проходка</h3>
+                </GBox>
                 <GBox href="/admin/email">
-                    <GText>Почта</GText>
+                    <h3>Почта</h3>
                 </GBox>
             </GContainer>
         </MaxSize>

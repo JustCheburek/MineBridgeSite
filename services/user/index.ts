@@ -162,7 +162,12 @@ export const getUsers = cache(
                 .find(
                     {},
                     {
-                        name: 1, photo: 1, mostiki: 1, rating: 1, createdAt: 1, onlineAt: 1, invites: 1, from: 1
+                        name: 1, photo: 1, 
+                        mostiki: 1, rating: 1, 
+                        createdAt: 1, onlineAt: 1, updatedAt: 1,
+                        invites: 1, from: 1, 
+                        whitelist: 1,
+                        suffix: 1
                     },
                     {
                         lean: true,

@@ -37,11 +37,7 @@ export const BuyModal = (
                 <p>
                     Стоимость: {fixedAmount} <MostikiSvg />
                 </p>
-
-                <p className="red_color">
-                    Ещё не работает
-                </p>
-
+                
                 {author.mostiki >= fixedAmount
                     ? <FormButton>
                         Купить

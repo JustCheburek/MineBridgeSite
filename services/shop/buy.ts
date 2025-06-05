@@ -9,6 +9,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function Buy(mostiki: User["mostiki"], authorId: User["_id"]) {
     const author = await userModel.findByIdAndUpdate(authorId, {
+        whitelist: true,
         $inc: {
             mostiki: -mostiki
         }
@@ -18,7 +19,7 @@ export async function Buy(mostiki: User["mostiki"], authorId: User["_id"]) {
 
     if (!author) return
 
-    AddWLConsole(author.name)
+    await AddWLConsole(author.name)
 
     if (author.notifications.mostiki) {
         await resend.emails.send({

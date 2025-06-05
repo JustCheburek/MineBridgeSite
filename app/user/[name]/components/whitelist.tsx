@@ -1,10 +1,11 @@
 // React
-import type {User} from "lucia"
+import type { User } from "lucia"
 
 // Стили
 import styles from "../profile.module.scss"
+import Link from "next/link"
 
-export default function WhitelistSection({user, isMe, whitelist}: { user: User, isMe: boolean, whitelist: boolean }) {
+export default function WhitelistSection({ user, isMe }: { user: User, isMe: boolean }) {
     if (user.rating <= -200) {
         return (
             <section className="center_text">
@@ -18,24 +19,39 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
         )
     }
 
-    if (!isMe) return
+    if (!isMe) {
+        if (user.whitelist) {
+            return (
+                <section className="center_text">
+                    <h2 className="red_color">
+                        Игрок не купил <Link href="/shop" className="unic_color">проходку</Link>
+                    </h2>
+                </section>
+            )
+        }
 
-    if (!whitelist) {
         return (
             <section className="center_text">
                 <h2>
-                    Сервер не доступен
+                    Игрок купил <Link href="/shop" className="unic_color">проходку</Link>
                 </h2>
-                <p>
-                    Попробуй перезагрузить страницу, чтобы попасть в Whitelist
-                </p>
+            </section>
+        )
+    }
+
+    if (!user.whitelist) {
+        return (
+            <section className="center_text">
+                <h2>
+                    Купите <Link href="/shop" className="unic_color">проходку</Link>, чтобы играть на сервере
+                </h2>
             </section>
         )
     }
 
     return (
         <section className={`${styles.whitelist} grid_center center_text`}>
-            <h2>Ты в Whitelist`е</h2>
+            <h2>Межсезонье</h2>
             <h4 className="unic_color medium-font">
                 {process.env.NEXT_PUBLIC_VERSION} Java Edition
             </h4>
@@ -46,7 +62,7 @@ export default function WhitelistSection({user, isMe, whitelist}: { user: User, 
                 </strong>
             </p>
             <small>
-            Если не можете зайти, то<br/>
+                Если просит авторизацию, то<br />
                 перезагрузите страницу
             </small>
         </section>

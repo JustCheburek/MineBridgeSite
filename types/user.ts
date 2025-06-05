@@ -47,6 +47,9 @@ export class User {
     @prop({default: 0})
     public rating!: number
 
+    @prop({default: false})
+    public whitelist!: boolean
+
     @prop({type: () => [Punishment]})
     public punishments!: Punishment[]
 
