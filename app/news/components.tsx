@@ -11,6 +11,7 @@ import type { New } from '@/types/new'
 import { Button } from '@/ui/components/button'
 import { getMDXComponent } from 'mdx-bundler/client'
 import { useMdxCompile } from '@/hooks/useMdxCompile'
+import React from 'react'
 
 function P({ children }: PropsWithChildren) {
   return (

@@ -7,16 +7,10 @@ import { api } from '@/axios'
 // для предотвращения проблем с суспендом
 async function fetchNews(limit: number, offset: number) {
   try {
-    console.log('Запрос к API:', {
-      url: '/',
-      params: { limit, offset }
-    })
-
     const response = await api.get('/', {
       params: { limit, offset }
     })
     
-    console.log('Ответ API:', response.data)
     return response.data
   } catch (error) {
     console.error('Ошибка при запросе к API:', error)

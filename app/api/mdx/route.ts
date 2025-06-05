@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { compileMDX } from '@/services/mdx/compile'
 
+// Функция для обработки запросов на компиляцию MDX
 export async function POST(request: Request) {
   try {
     // Получаем MDX контент из запроса
