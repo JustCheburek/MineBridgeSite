@@ -1,7 +1,7 @@
 "use client"
 
 // Next и сервер
-import type {MouseEventHandler} from "react";
+import type {MouseEventHandler, PropsWithChildren} from "react";
 import {useEffect, useRef, useState} from "react";
 import {Case, CaseType, Chance, Drop, DropType, Info, RarityNames} from "@/types/case";
 import type {User} from "lucia";
@@ -35,9 +35,9 @@ type CaseClient = {
     Drops: Drop[]
     user: User | null
     Add: (Case: Case, Drop: Drop, price: number, item: Info) => Promise<void>
-}
+} & PropsWithChildren
 
-export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
+export function CaseClient({Cases, Drops, user, Add, children}: CaseClient) {
     const AMOUNT = 50
     const RESULT = AMOUNT - 2
 
@@ -206,12 +206,7 @@ export function CaseClient({Cases, Drops, user, Add}: CaseClient) {
             }}
             suppressHydrationWarning
         >
-            <H1 paths={[
-                {displayname: "Магазин", name: "shop"},
-                {displayname: "Кейсы", name: "case"},
-            ]}>
-                Кейсы
-            </H1>
+            {children}
 
             <div className={styles.main_container}>
                 <div className={`${styles.left_container} ${styles.container} center_text`}>

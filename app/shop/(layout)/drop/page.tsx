@@ -4,6 +4,7 @@ import {getCases, getDrops} from "@services/shop";
 import type {Metadata} from "next";
 import {H1} from "@components/h1";
 import {CaseBoxWithModal} from "@components/caseBoxModal";
+import { revalidateTag } from "next/cache";
 
 export const metadata: Metadata = {
     title: "Выберите кейс",
@@ -15,7 +16,9 @@ export default async function Cases() {
 
     return (
         <div>
-            <H1>Кейсы</H1>
+            <H1>
+                Кейсы
+            </H1>
             <Section type="third">
                 {Cases.map(Case => (
                     <Box key={Case.name}>

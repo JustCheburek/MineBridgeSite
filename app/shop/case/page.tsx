@@ -10,6 +10,7 @@ import {Drop} from "@/types/case";
 // Компоненты
 import {CaseClient} from "./caseClient";
 import {AddCasePurchase, GetCosmetic} from "@services/user/casePurchase";
+import { H1 } from "@/ui/components/h1";
 
 export const metadata: Metadata = {
     title: "Кейсы",
@@ -37,6 +38,16 @@ export default async function CasePage() {
     }
 
     return (
-        <CaseClient Cases={Cases} Drops={Drops} user={user} Add={Add}/>
+        <CaseClient Cases={Cases} Drops={Drops} user={user} Add={Add}>
+            <H1 up reload={async () => {
+                "use server";
+                revalidateTag("all")
+            }} paths={[
+                {displayname: "Магазин", name: "shop"},
+                {displayname: "Кейсы", name: "case"},
+            ]}>
+                Кейсы
+            </H1>
+        </CaseClient>
     )
 }

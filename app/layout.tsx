@@ -7,6 +7,7 @@ import TimeAgo from "javascript-time-ago";
 import ru from 'javascript-time-ago/locale/ru'
 import {SpeedInsights} from "@vercel/speed-insights/next"
 import {EdgeStoreProvider} from "@/lib/edgestore";
+import {Providers} from "./providers";
 
 // Стили
 import "@styles/normalize.scss"
@@ -146,13 +147,15 @@ export default function RootLayout(
     return (
         <html lang="ru">
         <body className={montserrat.className}>
-        <EdgeStoreProvider>
-            <Header/>
-            <main>
-                {children}
-            </main>
-            <Footer/>
-        </EdgeStoreProvider>
+        <Providers>
+          <EdgeStoreProvider>
+              <Header/>
+              <main>
+                  {children}
+              </main>
+              <Footer/>
+          </EdgeStoreProvider>
+        </Providers>
         <SpeedInsights/>
         <Metrika/>
         </body>

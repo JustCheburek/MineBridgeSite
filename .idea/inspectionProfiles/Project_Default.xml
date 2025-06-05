@@ -32,7 +32,6 @@
           <option value="http://javafx.com/javafx/" />
           <option value="http://json-schema.org/draft" />
           <option value="http://localhost" />
-          <option value="http://map.minebridge.site" />
           <option value="http://maven.apache.org/POM/" />
           <option value="http://maven.apache.org/xsd/" />
           <option value="http://primefaces.org/ui" />

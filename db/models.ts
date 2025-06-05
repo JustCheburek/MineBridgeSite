@@ -6,6 +6,7 @@ import {Season} from "@/types/season";
 import {Code} from "@/types/code";
 import {MGConnect} from "./connect";
 import {models} from "mongoose";
+import {Event} from "@/types/event";
 
 MGConnect()
 // export const sqlPool = await MySQLConnect(DBS.LL)
@@ -16,3 +17,4 @@ export const caseModel = (models.Case as ReturnModelType<typeof Case>) || getMod
 export const dropModel = (models.Drop as ReturnModelType<typeof Drop>) || getModelForClass(Drop);
 export const seasonModel = (models.Season as ReturnModelType<typeof Season>) || getModelForClass(Season);
 export const codeModel = (models.Code as ReturnModelType<typeof Code>) || getModelForClass(Code);
+export const eventModel = (models.Event as ReturnModelType<typeof Event>) || getModelForClass(Event);

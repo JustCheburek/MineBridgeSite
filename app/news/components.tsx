@@ -1,56 +1,201 @@
-// Стили
-import Link from "next/link"
-import styles from "./news.module.scss"
+'use client'
 
-type SeasonBox = {
-	number: number,
-	startAt: Date,
-	endAt: Date,
-	link?: string
+import { PropsWithChildren, useEffect, useRef, useMemo } from 'react'
+import { useInfiniteNews } from '@/hooks/useInfiniteNews'
+import { PBox, PTag, PTags, PText, PTitle } from "@components/post"
+import { Img, ImgBox } from "@components/img"
+import { CheckLink } from "@components/checkLink"
+import styles from './news.module.scss'
+import Link from 'next/link'
+import type { New } from '@/types/new'
+import { Button } from '@/ui/components/button'
+import { getMDXComponent } from 'mdx-bundler/client'
+import { useMdxCompile } from '@/hooks/useMdxCompile'
+
+function P({ children }: PropsWithChildren) {
+  return (
+    <p className={styles.p}>
+      {children}
+    </p>
+  )
 }
 
-export const SeasonBox = (
-		{
-			number, startAt, endAt, link
-		}: SeasonBox) => (
-		<div className={styles.season} id={`${number}season`}>
-			<div className={`${styles.time_box} ${styles.start}`}>
-				<div className={styles.time_icon}>
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-					     className="bi bi-flag" viewBox="0 0 16 16">
-						<path
-								d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z"/>
-					</svg>
-				</div>
-				<time className={styles.time_text} dateTime={startAt.toISOString()}>
-					<strong>
-						{startAt.toLocaleDateString("ru-RU", {
-							timeZone: "Asia/Vladivostok"
-						})}
-					</strong>
-				</time>
-			</div>
-			<h2 className={`${styles.season_text} unic_color center_text`}>
-				{link
-						? <Link href={link} target="_blank" className="unic_color">
-							{number} сезон
-						</Link>
-						: <>{number} сезон</>
-				}
-			</h2>
-			<div className={`${styles.time_box} ${styles.end}`}>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-				     className={styles.time_icon} viewBox="0 0 16 16">
-					<path
-							d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001"/>
-				</svg>
-				<time className={styles.time_text} dateTime={endAt.toISOString()}>
-					<strong>
-						{endAt.toLocaleDateString("ru-RU", {
-							timeZone: "Asia/Vladivostok"
-						})}
-					</strong>
-				</time>
-			</div>
-		</div>
-)
+function Blockquote({ children }: PropsWithChildren) {
+  return (
+    <blockquote className={styles.blockquote}>
+      {children}
+    </blockquote>
+  )
+}
+
+function A({ href, children }: PropsWithChildren<{ href: string }>) {
+  return (
+    <Link href={href} className="unic_color medium-font">
+      {children}
+    </Link>
+  )
+}
+
+
+const mdxComponents = {
+  p: P,
+  blockquote: Blockquote,
+  a: A
+}
+
+// Компонент для рендеринга MDX контента
+function MDXContent({ source }: { source: string }) {
+  const { compiledCode, isLoading, error } = useMdxCompile(source)
+
+  // Используем useMemo для создания компонента только при изменении compiledCode
+  const Component = useMemo(() => {
+    if (!compiledCode) {
+      return () => <p>Загрузка контента...</p>
+    }
+
+    try {
+      return getMDXComponent(compiledCode)
+    } catch (err) {
+      console.error('Ошибка при компиляции MDX:', err)
+      return () => <p>Ошибка при отображении контента</p>
+    }
+  }, [compiledCode])
+
+  if (isLoading) {
+    return <p>Загрузка контента...</p>
+  }
+
+  if (error) {
+    return <p>Ошибка при загрузке контента: {error.message}</p>
+  }
+
+  return <Component components={mdxComponents} />
+}
+
+export function NewsInfiniteList() {
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+    error,
+    refetch
+  } = useInfiniteNews(5)
+
+  const observerRef = useRef<IntersectionObserver | null>(null)
+  const loadMoreRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Настройка IntersectionObserver для бесконечной прокрутки
+    if (loadMoreRef.current) {
+      observerRef.current = new IntersectionObserver(
+        (entries) => {
+          const [entry] = entries
+          if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+            fetchNextPage()
+          }
+        },
+        { threshold: 0.5 }
+      )
+
+      observerRef.current.observe(loadMoreRef.current)
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect()
+      }
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage])
+
+  // Логирование для отладки
+  useEffect(() => {
+    if (isError) {
+      console.error('Ошибка при загрузке новостей:', error)
+    }
+    if (data) {
+      console.log('Полученные данные:', data)
+    }
+  }, [isError, error, data])
+
+  // Функция для повторной попытки загрузки
+  const handleRetry = () => {
+    console.log('Повторная попытка загрузки...')
+    refetch()
+  }
+
+  // Возвращаем состояние загрузки
+  if (isLoading) {
+    return <h3 className="center_text">Загрузка новостей...</h3>
+  }
+
+  // Возвращаем состояние ошибки
+  if (isError) {
+    return (
+      <div className="center_text">
+        <h3>Ошибка при загрузке новостей</h3>
+        <p>
+          {error instanceof Error ? error.message : 'Неизвестная ошибка'}
+        </p>
+        <Button onClick={handleRetry}>
+          Повторить попытку
+        </Button>
+      </div>
+    )
+  }
+
+  // Если данных нет
+  if (!data || !data.pages.length || data.pages[0].length === 0) {
+    return <h3 className="center_text">Новости не найдены</h3>
+  }
+
+  // Рендерим новости
+  return (
+    <div>
+      {data.pages.map((newsPage, pageIndex) => (
+        <div key={pageIndex}>
+          {newsPage.map((news: New) => news.text && (
+            <PBox key={news.id}>
+              {news.photoUrl && (
+                <CheckLink href={news.photoUrl}>
+                  <ImgBox type="post">
+                    <Img src={news.photoUrl} alt={news.heading || 'Новость'} />
+                  </ImgBox>
+                </CheckLink>
+              )}
+              <PTitle startAt={new Date(news.date * 1000)} endAt={undefined}>
+                <h3>
+                  {news.heading || 'Без заголовка'}
+                </h3>
+              </PTitle>
+              <PText className={styles.text}>
+                <MDXContent source={news.text} />
+
+                {news.tags && <PTags tags={news.tags} >
+                  {news.tags.map(tag => (
+                    <PTag key={tag}>
+                      {tag}
+                    </PTag>
+                  ))}
+                </PTags>}
+              </PText>
+            </PBox>
+          ))}
+        </div>
+      ))}
+
+      <div ref={loadMoreRef} className={styles.loadMore}>
+        <small className="light_gray_color">
+          {isFetchingNextPage
+            ? 'Загрузка...'
+            : hasNextPage
+              ? 'Прокрутите для загрузки'
+              : 'Больше новостей нет'
+          }
+        </small>
+      </div>
+    </div>
+  )
+} 

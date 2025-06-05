@@ -1,7 +1,7 @@
 import {modelOptions, prop} from "@typegoose/typegoose";
 import {Types} from "mongoose";
 
-@modelOptions({schemaOptions: {collection: "news", timestamps: true}})
+@modelOptions({schemaOptions: {collection: "events", timestamps: true, overwriteModels: true}, options: {customName: "Event"}})
 export class Event {
 	@prop({required: true})
 	public heading!: string

@@ -9,57 +9,7 @@
 		border-left: var(--unic-color) solid 3.5px;
 		padding: 3px 10px;
 		background: rgb(var(--unic-color-rgb), 0.1);
-		border-radius: 10px;
-	}
-}
-
-.season {
-	--_line-width: 2px;
-
-	// Расположение
-	position: relative;
-
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	gap: 0.5em;
-}
-
-.season_text::before {
-	content: "";
-
-	position: absolute;
-	top: 50%;
-	left: 0;
-
-	width: 100%;
-	height: var(--_line-width);
-
-	background: var(--border-color);
-	z-index: var(---1z);
-}
-
-.season_text {
-	// Расположение
-	padding: 1rem 3rem;
-
-	// Отображение
-	@include mixins.border($width: var(--_line-width), $background: var(--background-color));
-}
-
-// Время
-.time_box {
-	display: none;
-}
-
-// Время
-.time {
-	color: var(--unic-color);
-	font-weight: 600;
-
-	&:not(.not_center) {
-		display: block;
-		text-align: center;
+		border-radius: 5px;
 	}
 }
 
@@ -67,42 +17,7 @@
 	line-height: 1.7em;
 }
 
-@media (width > 728px) {
-	// Время
-	.time_box {
-		display: grid;
-		justify-content: space-between;
-		grid-template-rows: 1fr 1fr;
-	}
-
-	.time_icon {
-		// Размеры
-		width: 2.7em;
-		height: 2.7em;
-	}
-
-	.time_text {
-		padding-block: .5em;
-	}
-
-	.start {
-		justify-items: start;
-
-		* {
-			color: var(--green-color);
-		}
-	}
-
-	.end {
-		justify-items: end;
-
-		* {
-			color: var(--red-color);
-		}
-
-		.time_icon {
-			scale: -1 1;
-		}
-	}
+.loadMore {
+	text-align: center;
+	margin: 20px 0;
 }
-
