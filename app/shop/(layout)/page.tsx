@@ -227,19 +227,7 @@ export default async function Shop() {
                 </p>
             </Heading>
 
-            <Section type="third">
-                {author && (
-                    <Box className={styles.for_bigger}>
-                        <Text style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                            <h3>
-                                {author.faded_rating || 0} <StarSvg width="1em" height="1em" className="light_gray_color" />
-                            </h3>
-                        </Text>
-                    </Box>
-                )}
-                <StarSlider max={author?.faded_rating ?? 0} />
-            </Section>
-            <br />
+            <StarSlider max={author?.faded_rating ?? 0} />
             <Section type="third">
                 <Box>
                     {/* <ImgBox hover overflow={false}>

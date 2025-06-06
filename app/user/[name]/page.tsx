@@ -1,20 +1,20 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import {Suspense} from "react";
+import { Suspense } from "react";
 import TimeAgo from "javascript-time-ago";
-import {validate} from "@services/user/validate";
-import {getUser, updateFrom} from "@services/user";
-import {Social} from "@/types/url";
+import { validate } from "@services/user/validate";
+import { getUser, updateFrom } from "@services/user";
+import { Social } from "@/types/url";
 import styles from "./profile.module.scss"
-import {userModel} from "@db/models";
-import {AutoSvg, EditSvg, MostikiSvg, StarSvg} from "@ui/SVGS";
-import {URLS_START} from "@/const";
-import type {NameParams} from "@/types/params";
-import {Skeleton} from "@components/skeleton";
-import type {User} from "lucia";
-import {GiftBox} from "./components/gift";
-import {cookies} from "next/headers";
+import { userModel } from "@db/models";
+import { AutoSvg, EditSvg, MostikiSvg, StarSvg } from "@ui/SVGS";
+import { URLS_START } from "@/const";
+import type { NameParams } from "@/types/params";
+import { Skeleton } from "@components/skeleton";
+import type { User } from "lucia";
+import { GiftBox } from "./components/gift";
+import { cookies } from "next/headers";
 
 const Avatar = dynamic(() => import("@components/avatar"));
 const ServerStatusSection = dynamic(() => import("./components/serverStatus"));
@@ -25,7 +25,7 @@ export const generateMetadata = async (
         params
     }: NameParams
 ): Promise<Metadata> => {
-    const {name} = await params
+    const { name } = await params
 
     return {
         title: name,
@@ -33,7 +33,7 @@ export const generateMetadata = async (
     }
 }
 
-const Mostiki = ({isMe, isAdmin, user, author}: {
+const Mostiki = ({ isMe, isAdmin, user, author }: {
     isMe: boolean,
     isAdmin: boolean,
     user: User,
@@ -43,30 +43,30 @@ const Mostiki = ({isMe, isAdmin, user, author}: {
 
     return (<>
         {(isAdmin || isMe) &&
-          <Link
-            href={isMe
-                ? "/shop"
-                : `/user/${user.name}/accounts`
-            }
-            className="add"
-          >
-            +
-          </Link>
+            <Link
+                href={isMe
+                    ? "/shop"
+                    : `/user/${user.name}/accounts`
+                }
+                className="add"
+            >
+                +
+            </Link>
         }
 
-        {/* {author &&
-          <GiftBox user={user} author={author} isMe={isMe}/>
-        } */}
+        {author &&
+            <GiftBox user={user} author={author} isMe={isMe} />
+        }
     </>)
 }
 
 const timeAgo = new TimeAgo('ru-RU');
 
-export default async function Profile({params}: NameParams) {
+export default async function Profile({ params }: NameParams) {
     const cookiesStore = await cookies()
 
-    const {name} = await params
-    const {user: author, isHelper, isAdmin, roles: authorRoles} = await validate()
+    const { name } = await params
+    const { user: author, isHelper, isAdmin, roles: authorRoles } = await validate()
     const {
         user, roles, isMe, isContentMaker
     } = await getUser({
@@ -78,14 +78,14 @@ export default async function Profile({params}: NameParams) {
 
         await userModel.findByIdAndUpdate(
             author._id,
-            {from: await updateFrom(author, from, authorRoles)}
+            { from: await updateFrom(author, from, authorRoles) }
         )
     }
 
     return (
         <div className={styles.profile}>
             <div className={styles.container}>
-                <Avatar src={user.photo}/>
+                <Avatar src={user.photo} />
 
                 <div className={styles.text}>
                     <h2>
@@ -93,49 +93,49 @@ export default async function Profile({params}: NameParams) {
                             {user.name}
                         </span>{" "}
                         {(isMe || isHelper) &&
-                          <Link href={`/user/${user.name}/accounts`}>
-                            <EditSvg size="0.6em" className="unic_color"/>
-                          </Link>
+                            <Link href={`/user/${user.name}/accounts`}>
+                                <EditSvg size="0.6em" className="unic_color" />
+                            </Link>
                         }
                     </h2>
 
                     {isHelper &&
-                      <small className="light_gray_color">
-                        Айди: {" "}
-                        <span className="all_select">{user._id}</span>
-                      </small>
+                        <small className="light_gray_color">
+                            Айди: {" "}
+                            <span className="all_select">{user._id}</span>
+                        </small>
                     }
                     {isContentMaker &&
-                      <div className={styles.social}>
-                          {user?.socials?.map((
-                              {
-                                  social,
-                                  url,
-                                  name
-                              }: Social
-                          ) => {
-                              if (!social || (!url && !name)) return
+                        <div className={styles.social}>
+                            {user?.socials?.map((
+                                {
+                                    social,
+                                    url,
+                                    name
+                                }: Social
+                            ) => {
+                                if (!social || (!url && !name)) return
 
-                              url = url || `${URLS_START[social]}${name}`
+                                url = url || `${URLS_START[social]}${name}`
 
-                              return (
-                                  <Link
-                                      href={url}
-                                      target="_blank"
-                                      title={social}
-                                      key={social}
-                                  >
-                                      <AutoSvg size="38px" type={social}/>
-                                  </Link>
-                              )
-                          })}
-                      </div>
+                                return (
+                                    <Link
+                                        href={url}
+                                        target="_blank"
+                                        title={social}
+                                        key={social}
+                                    >
+                                        <AutoSvg size="38px" type={social} />
+                                    </Link>
+                                )
+                            })}
+                        </div>
                     }
                     <div className={styles.roles}>
                         {roles.map(role => {
                             const color = `#${role.color.toString(16)}`
                             return (
-                                <small key={role.id} style={{color}}>
+                                <small key={role.id} style={{ color }}>
                                     {role.name}
                                 </small>
                             )
@@ -155,19 +155,19 @@ export default async function Profile({params}: NameParams) {
                             <strong className="yellow_color">
                                 {user.rating}
                             </strong> {" "}
-                            <StarSvg/>
+                            <StarSvg />
                         </Link>{" "}
 
                         {(isMe || isHelper) &&
-                          <Link
-                            href={isHelper
-                                ? `/user/${user.name}/history`
-                                : "/rules"
-                            }
-                            className="add"
-                          >
-                            +
-                          </Link>
+                            <Link
+                                href={isHelper
+                                    ? `/user/${user.name}/history`
+                                    : "/rules"
+                                }
+                                className="add"
+                            >
+                                +
+                            </Link>
                         }
                     </h4>
                     <div className={styles.mostiki_box}>
@@ -176,15 +176,15 @@ export default async function Profile({params}: NameParams) {
                             <strong className="unic_color">
                                 {user.mostiki}
                             </strong> {" "}
-                            <MostikiSvg/>
+                            <MostikiSvg />
                         </h4>{" "}
 
-                        <Mostiki user={user} author={author} isMe={isMe} isAdmin={isAdmin}/>
+                        <Mostiki user={user} author={author} isMe={isMe} isAdmin={isAdmin} />
                     </div>
                 </div>
             </div>
 
-            <Suspense fallback={<Skeleton width="100%" height={450}/>}>
+            <Suspense fallback={<Skeleton width="100%" height={450} />}>
                 <ServerStatusSection
                     user={user}
                     isMe={isMe}
@@ -192,9 +192,9 @@ export default async function Profile({params}: NameParams) {
             </Suspense>
 
             {isContentMaker &&
-              <Suspense fallback={<Skeleton width="100%" height={307}/>}>
-                <TwitchFrame user={user}/>
-              </Suspense>
+                <Suspense fallback={<Skeleton width="100%" height={307} />}>
+                    <TwitchFrame user={user} />
+                </Suspense>
             }
         </div>
     )

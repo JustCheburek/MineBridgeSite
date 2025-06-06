@@ -22,12 +22,6 @@
   flex-wrap: wrap;
 }
 
-.for_bigger {
-  @media (width <= 1300px) {
-    display: none;
-  }
-}
-
 @media (max-width: 700px) {
   .box {
     position: static;

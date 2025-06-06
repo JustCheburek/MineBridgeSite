@@ -6,9 +6,8 @@
     align-items: center;
     gap: 0.5rem;
 
-    grid-column: 2 / -1;
-
     padding: 1rem 2rem;
+    margin-bottom: 2rem;
     
     @include mixins.border($background: var(--gray-color));
 
