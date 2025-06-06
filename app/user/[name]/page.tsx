@@ -54,9 +54,9 @@ const Mostiki = ({isMe, isAdmin, user, author}: {
           </Link>
         }
 
-        {author &&
+        {/* {author &&
           <GiftBox user={user} author={author} isMe={isMe}/>
-        }
+        } */}
     </>)
 }
 
