@@ -17,9 +17,10 @@ async function updateRating(this: User) {
 @pre<User>("findOne", updateRating)
 @modelOptions({schemaOptions: {collection: "users", timestamps: true, _id: false, overwriteModels: true}, options: {customName: "User"}})
 export class User {
+    // Основные поля
     @prop({required: true})
     public _id!: string
-
+    
     @prop({required: true, unique: true, trim: true, maxlength: 30, minlength: 1})
     public name!: string
 
@@ -32,6 +33,7 @@ export class User {
     @prop({trim: true, maxlength: 1000})
     public fullPhoto?: string
 
+    // id
     @prop()
     public googleId?: string
 
@@ -41,21 +43,28 @@ export class User {
     @prop()
     public twitchId?: string
 
+    // Накопления
     @prop({default: 0, min: 0})
     public mostiki!: number
 
     @prop({default: 0})
     public rating!: number
 
+    @prop({default: 0})
+    public faded_rating!: number
+
+    // Проходки
     @prop({default: false})
     public whitelist!: boolean
 
+    // Истории
     @prop({type: () => [Punishment]})
     public punishments!: Punishment[]
 
     @prop({type: () => [CasePurchase]})
     public casesPurchases!: CasePurchase[]
 
+    // Суффикс
     @prop({trim: true, maxlength: 15})
     public suffix?: string
 
@@ -65,13 +74,16 @@ export class User {
     @prop({type: () => From})
     public from?: From
 
-    // Список с айди игроков
+    @prop({type: () => [Social]})
+    public socials: Social[]
+
     @prop({type: () => [String], unique: true})
     public invites!: string[]
 
     @prop({type: () => Notifications})
     public notifications!: Notifications
 
+    // Даты
     @prop()
     public createdAt!: Date
 
@@ -80,9 +92,6 @@ export class User {
 
     @prop({default: new Date()})
     public onlineAt!: Date
-
-    @prop({type: () => [Social]})
-    public socials: Social[]
 }
 
 export interface DSUser {

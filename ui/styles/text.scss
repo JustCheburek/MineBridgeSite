@@ -39,10 +39,6 @@ small {
 }
 
 // Цвета
-.text_color {
-  color: var(--text-color) !important;
-}
-
 .unic_color {
   color: var(--unic-color) !important;
 }
@@ -61,6 +57,10 @@ small {
 
 .light_gray_color {
   color: var(--light-gray-color) !important;
+}
+
+.text_color {
+  color: var(--text-color) !important;
 }
 
 // Настройки текстов

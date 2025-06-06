@@ -77,10 +77,6 @@
   opacity: .68;
 }
 
-.full {
-  aspect-ratio: 16/9;
-}
-
 // Планшет
 @media (1300px > width > 728px) {
   .container {
@@ -112,11 +108,9 @@
 }
 
 // ПК
-@media (width > 1300px) {
+@media (width >= 1300px) {
   .container {
-    &:not(.full) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .preview {

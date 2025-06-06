@@ -11,7 +11,7 @@ export function AdminWhitelistReset({ userswl }: { userswl: User[] }) {
     return (
         <>
             <Button danger onClick={() => setModal(true)} style={{ marginBottom: 16 }}>
-                Сбросить проходку у всех
+                Сбросить
             </Button>
             <WhitelistModal modal={modal} setModal={setModal} />
         </>

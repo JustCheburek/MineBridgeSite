@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getCases, getDrops } from "@services/shop";
 import { Author, Box, Heading, Price, Section, Text } from "@components/shop"
 import { CaseBoxWithModal } from "@components/caseBoxModal";
-import { MostikiSvg } from "@ui/SVGS";
+import { MostikiSvg, StarSvg } from "@ui/SVGS";
 import { Url } from "@components/button";
 import { Img, ImgBox } from "@components/img";
 import { OnThisPage, OnThisPageLink } from "@components/sideNav";
@@ -16,6 +16,8 @@ import { LastUpdate } from "@components/lastUpdate";
 import { TextUrl } from "@components/textUrl";
 import { PreSeason } from "./preseason";
 import { validate } from "@/services/user/validate";
+import styles from "./shop.module.scss";
+import { StarSlider } from "./starslider";
 
 export const metadata: Metadata = {
     title: "Магазин",
@@ -50,13 +52,16 @@ export default async function Shop() {
 
             <div className="grid_center" id="mostiki">
                 <LastUpdate time={LASTSHOPUPDATE} />
-                <p>
-                    На сервере действует внутриигровая валюта <strong className="unic_color">мостики</strong>:
-                </p>
-                <h3 className="center_text">
-                    1 ₽ = 1 <MostikiSvg />
-                </h3>
-                <Url href="/shop/buy">
+                <div className={styles.mostiki}>
+                    <p>
+                        Донатная валюта — <strong className="unic_color">мостики</strong>:
+                    </p>
+                    <h3 className="center_text">
+                        1 ₽ = 1 <MostikiSvg />
+                    </h3>
+                </div>
+
+                <Url href="/shop/buy" margin="2rem">
                     Купить
                 </Url>
             </div>
@@ -215,15 +220,26 @@ export default async function Shop() {
 
             <Heading id="pass">
                 <h2 className="center_text">
-                    <Link href="/shop/case">
-                        Проходки
-                    </Link>
+                    Проходки
                 </h2>
-                <p className="center_text">
-                    Следите за <span className="unic_color medium-font">скидками</span>
+                <p>
+                    Валюта скидок — <strong className="unic_color">погасшие звёзды</strong><br />
                 </p>
             </Heading>
 
+            <Section type="third">
+                {author && (
+                    <Box className={styles.for_bigger}>
+                        <Text style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                            <h3>
+                                {author.faded_rating || 0} <StarSvg width="1em" height="1em" className="light_gray_color" />
+                            </h3>
+                        </Text>
+                    </Box>
+                )}
+                <StarSlider max={author?.faded_rating ?? 0} />
+            </Section>
+            <br />
             <Section type="third">
                 <Box>
                     {/* <ImgBox hover overflow={false}>
@@ -234,7 +250,7 @@ export default async function Shop() {
                     </ImgBox> */}
                     <Text>
                         <h3>
-                            Месяц
+                            1 месяц
                         </h3>
                         <Price>
                             ?
@@ -268,7 +284,7 @@ export default async function Shop() {
                     </ImgBox> */}
                     <Text>
                         <h3>
-                            Год
+                            12 месяцев
                         </h3>
                         <Price>
                             ?
@@ -294,6 +310,9 @@ export default async function Shop() {
         <OnThisPage>
             <OnThisPageLink href="#mostiki">
                 Мостики
+            </OnThisPageLink>
+            <OnThisPageLink href="#preseason">
+                Межсезонье
             </OnThisPageLink>
             <OnThisPageLink href="#cases">
                 Кейсы

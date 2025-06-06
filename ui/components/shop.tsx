@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MostikiSvg } from "@ui/SVGS";
 import styles from "./styles/shop.module.scss";
 
-type Section = { type?: "preview" | "third" | "full" } & ComponentPropsWithoutRef<"div">
+type Section = { type?: "preview" | "third" } & ComponentPropsWithoutRef<"div">
 export const Section = ({ children, type, ...props }: Section) => (
     <div className={`${styles.container} center_text ${type && styles[type]}`} {...props}>
         {children}
