@@ -20,7 +20,7 @@ export default function WhitelistSection({ user, isMe }: { user: User, isMe: boo
     }
 
     if (!isMe) {
-        if (user.whitelist) {
+        if (!user.whitelist) {
             return (
                 <section className="center_text">
                     <h2 className="red_color">
