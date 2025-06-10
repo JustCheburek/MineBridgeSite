@@ -14,20 +14,13 @@ export const metadata: Metadata = {
 }
 
 export default async function HeadBreak() {
-    const {user} = await validate()
-
     return (
         <MaxSize className="grid_center">
             <H1>
                 Головоломка
             </H1>
 
-            {user
-                ? <HeadBreakBox name={user.name}/>
-                : <FormLink href="/auth">
-                    Сначала зарегистрируйся
-                </FormLink>
-            }
+            <HeadBreakBox/>
         </MaxSize>
     )
 }

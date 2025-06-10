@@ -4,14 +4,13 @@ import { useState } from "react";
 import styles from "./headbreak.module.scss"
 import { Form, FormLabel } from "@components/form";
 import { Random } from "@app/utils";
-import { GetPrize } from "@services/user/get";
 import { HookButton } from "@components/hookbutton";
 
 type Element = "" | "⚪" | "❌" | "❓️" | "❔"
 type Path = Element[]
 type Buttons = Path[]
 
-export function HeadBreakBox({ name }: { name: string }) {
+export function HeadBreakBox() {
     const [step, setStep] = useState(0)
     const [nextStep, setNextStep] = useState<boolean>(false)
     const steps: { path: Path, buttons: Buttons }[] = [
