@@ -8,7 +8,7 @@ import styles from "./history.module.scss";
 import {H1} from "@components/h1";
 import {NameParams} from "@/types/params";
 import { Suspense } from "react";
-import { Skeleton } from "@/ui/components/skeleton";
+import { Skeleton } from "@components/skeleton";
 
 const InviteSection = dynamic(() => import("./components/inviteSection"));
 const PunishmentSection = dynamic(() => import("./components/punishmentSection"));

@@ -1,6 +1,6 @@
 import type {PropsWithChildren} from "react";
 import {SubsectionItem, Subsections} from "@components/sideNav";
-import {MaxSize} from "@/ui/components/maxSize";
+import {MaxSize} from "@components/maxSize";
 import {OnThisPageSeasons} from "@components/season";
 import {validate} from "@services/user/validate";
 import {getSeasons} from "@services/seasons";

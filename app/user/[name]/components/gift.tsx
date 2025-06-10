@@ -1,7 +1,7 @@
 "use client"
 
 import {GiftSvg} from "@ui/SVGS";
-import {Add} from "@components/formBox";
+import {Add} from "@components/form";
 import {useState} from "react";
 import {GiftModal} from "@modals/gift";
 import type {User} from "lucia";

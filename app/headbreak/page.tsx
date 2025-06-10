@@ -3,7 +3,7 @@ import {MaxSize} from "@components/maxSize";
 import {H1} from "@components/h1";
 import {HeadBreakBox} from "./components";
 import {validate} from "@services/user/validate";
-import {FormLink} from "@components/formBox";
+import {FormLink} from "@components/form";
 
 export const metadata: Metadata = {
     title: "Головоломка",

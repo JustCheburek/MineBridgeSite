@@ -3,8 +3,8 @@ import {H1} from "@components/h1";
 import {GBox, GContainer, GText} from "@components/grid";
 
 export const metadata: Metadata = {
-    title: "Правила",
-    description: "Звёзды — внутриигровая награда или наказание. Суды, баны, всё это про нас!"
+    title: "Политики",
+    description: "Политики использования сайта"
 };
 
 export default function Rules() {

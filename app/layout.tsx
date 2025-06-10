@@ -1,13 +1,13 @@
 // React / next
 // noinspection JSUnusedGlobalSymbols
-import type {Metadata} from "next";
-import type {HTMLInputTypeAttribute, PropsWithChildren} from "react";
-import {Montserrat} from "next/font/google";
+import type { Metadata } from "next";
+import type { HTMLInputTypeAttribute, PropsWithChildren } from "react";
+import { Montserrat } from "next/font/google";
 import TimeAgo from "javascript-time-ago";
 import ru from 'javascript-time-ago/locale/ru'
-import {SpeedInsights} from "@vercel/speed-insights/next"
-import {EdgeStoreProvider} from "@/lib/edgestore";
-import {Providers} from "./providers";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { EdgeStoreProvider } from "@/lib/edgestore";
+import { z } from "zod/v4";
 
 // Стили
 import "@styles/normalize.scss"
@@ -20,13 +20,14 @@ import "@styles/rarities.scss"
 import "@styles/global.scss"
 
 // Компоненты
-import {Header} from "@components/header";
-import {Footer} from "@components/footer";
-import {Metrika} from "./script";
+import { Header } from "@components/header";
+import { Footer } from "@components/footer";
+import { Metrika } from "./script";
+import { Providers } from "./providers";
 
 export const experimental_ppr = true
 
-const montserrat = Montserrat({subsets: ["latin"], preload: true, style: "normal"});
+const montserrat = Montserrat({ subsets: ["latin"], preload: true, style: "normal" });
 
 export const metadata: Metadata = {
     title: {
@@ -129,6 +130,7 @@ export const metadata: Metadata = {
 }
 
 TimeAgo.addDefaultLocale(ru)
+z.config(z.locales.ru());
 
 declare module '@tanstack/react-table' {
     // @ts-ignore
@@ -146,19 +148,19 @@ export default function RootLayout(
     }: PropsWithChildren) {
     return (
         <html lang="ru">
-        <body className={montserrat.className}>
-        <Providers>
-          <EdgeStoreProvider>
-              <Header/>
-              <main>
-                  {children}
-              </main>
-              <Footer/>
-          </EdgeStoreProvider>
-        </Providers>
-        <SpeedInsights/>
-        <Metrika/>
-        </body>
+            <body className={montserrat.className}>
+                <Providers>
+                    <EdgeStoreProvider>
+                        <Header />
+                        <main>
+                            {children}
+                        </main>
+                        <Footer />
+                    </EdgeStoreProvider>
+                </Providers>
+                <SpeedInsights />
+                <Metrika />
+            </body>
         </html>
     );
 }

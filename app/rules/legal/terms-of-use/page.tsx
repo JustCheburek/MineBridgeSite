@@ -1,4 +1,4 @@
-import {H1} from "@/ui/components/h1";
+import {H1} from "@components/h1";
 import {LASTTERMSOFUSEUPDATE} from "@/const";
 import {LastUpdate} from "@components/lastUpdate";
 import {Rule, RulesBox} from "@components/rules";

@@ -1,12 +1,13 @@
 "use client";
 
 // Компоненты
-import {Modal, type setModal} from "@components/modal";
-import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
-import {useChangeDictState} from "@hooks/useChangeState";
-import {Season} from "@/types/season";
-import {H1} from "@components/h1";
-import {createSeason} from "@services/seasons/create";
+import { Modal, type setModal } from "@components/modal";
+import { Form, FormInput, FormLabel } from "@components/form";
+import { useChangeDictState } from "@hooks/useChangeState";
+import { Season } from "@/types/season";
+import { H1 } from "@components/h1";
+import { createSeason } from "@services/seasons/create";
+import { HookButton } from "../hookbutton";
 
 type SeasonModal = {
     modal: boolean
@@ -22,10 +23,7 @@ export const SeasonModal = (
     return (
         <Modal setModal={setModal} modal={modal}>
             <H1>Новый сезон</H1>
-            <FormBox action={() => {
-                setModal(false)
-                createSeason(season)
-            }}>
+            <Form action={createSeason} onSubmit={() => setModal(false)}>
                 <FormLabel>
                     <FormInput
                         type="number"
@@ -54,10 +52,10 @@ export const SeasonModal = (
                         onChange={onSeasonChange}
                     />
                 </FormLabel>
-                <FormButton>
-                    Добавить
-                </FormButton>
-            </FormBox>
+                <HookButton>
+                    Создать
+                </HookButton>
+            </Form>
         </Modal>
     )
 }

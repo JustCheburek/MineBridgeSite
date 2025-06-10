@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getCases, getDrops } from "@services/shop";
 import { Author, Box, Heading, Price, Section, Text } from "@components/shop"
 import { CaseBoxWithModal } from "@components/caseBoxModal";
-import { MostikiSvg, StarSvg } from "@ui/SVGS";
+import { MostikiSvg } from "@ui/SVGS";
 import { Url } from "@components/button";
 import { Img, ImgBox } from "@components/img";
 import { OnThisPage, OnThisPageLink } from "@components/sideNav";

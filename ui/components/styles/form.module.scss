@@ -15,7 +15,7 @@
   flex-wrap: wrap;
   gap: 10px;
 
-  & > * {
+  &>* {
     flex: 1;
   }
 }
@@ -28,6 +28,7 @@
   position: relative;
 
   --_color: var(--unic-color);
+
   &.danger {
     --_color: var(--red-color);
   }
@@ -36,19 +37,23 @@
   & {
     padding: 1rem 1.2rem;
     transition:
-            border-color var(--long-transition),
-            color var(--short-transition);
+      border-color var(--long-transition),
+      color var(--short-transition);
   }
 
   // Отображение
   @include mixins.border($background: var(--gray-color), $radius: 12px);
 
-  &:disabled, &[aria-disabled="true"] {
+  &:disabled,
+  &[aria-disabled="true"] {
     color: var(--light-gray-color);
   }
 
   &:not(:disabled):not([aria-disabled="true"]) {
-    &:active, &:focus-visible, &:hover {
+
+    &:active,
+    &:focus-visible,
+    &:hover {
       border-color: var(--_color);
     }
   }
@@ -60,7 +65,8 @@
   }
 }
 
-.input:not([type="checkbox"]), .textarea {
+.input:not([type="checkbox"]),
+.textarea {
   min-width: 100%;
 }
 
@@ -82,7 +88,8 @@
 
   color: var(--_color);
 
-  &:disabled, &[aria-disabled="true"] {
+  &:disabled,
+  &[aria-disabled="true"] {
     color: var(--light-gray-color);
   }
 }
@@ -91,7 +98,8 @@
   appearance: none;
 }
 
-.label:has(.input[type="radio"]), .label:has(.input[type="checkbox"]) {
+.label:has(.input[type="radio"]),
+.label:has(.input[type="checkbox"]) {
   display: flex;
   gap: 0.8em;
   align-items: center;

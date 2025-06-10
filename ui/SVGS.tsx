@@ -332,6 +332,27 @@ export const LoadingSvg = ({className = "", size = "1em", ...props}: SizeSvg) =>
     </svg>
 )
 
+export const HorizontalLoadingSvg = ({className = "", width = "60px", height = "18px", ...props}: {className?: string, width?: string|number, height?: string|number} & React.SVGProps<SVGSVGElement>) => (
+    <svg
+        fill="currentColor" viewBox="0 0 60 18"
+        className={`unic_color horizontal_loading_svg ${className}`}
+        style={{width, height, display: "block"}} {...props}
+    >
+        <rect className="block block-1" x="0" y="4" width="12" height="10" rx="2">
+            <animate attributeName="opacity" values=".4;.8;.4" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" begin="0s"/>
+        </rect>
+        <rect className="block block-2" x="16" y="4" width="12" height="10" rx="2">
+            <animate attributeName="opacity" values=".4;.8;.4" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" begin="0.2s"/>
+        </rect>
+        <rect className="block block-3" x="32" y="4" width="12" height="10" rx="2">
+            <animate attributeName="opacity" values=".4;.8;.4" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" begin="0.4s"/>
+        </rect>
+        <rect className="block block-4" x="48" y="4" width="12" height="10" rx="2">
+            <animate attributeName="opacity" values=".4;.8;.4" keyTimes="0;0.5;1" dur="1s" repeatCount="indefinite" begin="0.6s"/>
+        </rect>
+    </svg>
+)
+
 export const UpSvg = ({size = "1em", ...props}: SizeSvg) => (
     <svg
         fill="currentColor" viewBox="0 0 16 16"

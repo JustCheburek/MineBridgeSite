@@ -10,7 +10,6 @@ import {H1} from "@components/h1";
 import {Button, Url} from "@components/button";
 import {User} from "lucia";
 import {AddCasePurchase, GetCosmetic} from "@services/user/casePurchase";
-import Form from "next/form";
 import {CaseData} from "@/types/purchase";
 
 type ParamsProp = {
@@ -75,7 +74,7 @@ function BuyButton({user, price, caseData}: { user: User | null, price: number, 
     }
 
     return (
-        <Form action={async () => {
+        <form action={async () => {
             "use server"
             await AddCasePurchase(user._id, caseData, price)
             await GetCosmetic(user.name, caseData)
@@ -83,7 +82,7 @@ function BuyButton({user, price, caseData}: { user: User | null, price: number, 
             <Button>
                 Купить
             </Button>
-        </Form>
+        </form>
     )
 }
 

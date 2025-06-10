@@ -1,7 +1,8 @@
 "use client"
 
-import {FormBox, FormButton, FormGroup, FormInput, FormLabel} from "@components/formBox";
+import {Form, FormGroup, FormInput, FormLabel} from "@components/form";
 import {useChangeRadioState} from "@hooks/useChangeState";
+import { HookButton } from "@components/hookbutton";
 
 export type Who = "person" | "all"
 
@@ -13,7 +14,7 @@ export function SendEmailForm() {
     //  action={SendEmail}
 
     return (
-        <FormBox action="">
+        <Form action="">
             <FormGroup>
                 <FormLabel>
                     <FormInput
@@ -25,7 +26,6 @@ export function SendEmailForm() {
                     />
                     Человеку
                 </FormLabel>
-
                 <FormLabel>
                     <FormInput
                         type="radio"
@@ -45,9 +45,9 @@ export function SendEmailForm() {
                     required
                 />
             </FormLabel>
-            <FormButton>
+            <HookButton>
                 Отправить
-            </FormButton>
-        </FormBox>
+            </HookButton>
+        </Form>
     )
 }

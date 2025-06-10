@@ -1,19 +1,24 @@
 "use client"
 
-import {MostikiSvg} from "@ui/SVGS";
-import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
-import {User} from "lucia";
-import {CreateCode} from "@services/code/create";
-import {useState} from "react";
-import {UseCode} from "@services/code/use";
+import { MostikiSvg } from "@ui/SVGS";
+import { Form, FormInput, FormLabel } from "@components/form";
+import { User } from "@/types/user";
+import { CreateCode } from "@services/code/create";
+import { UseCode } from "@services/code/use";
+import { HookButton } from "@components/hookbutton";
+import { ErrorMessage } from "@components/error";
+import { useActionStateId } from "@/hooks/useActionStateId";
 
-export const Create = ({user}: { user: User }) => {
-    const [mostiki, setMostiki] = useState<number>(1)
+export const Create = ({ _id, mostiki }: { _id: User["_id"], mostiki: User["mostiki"] }) => {
+    const [state, formAction] = useActionStateId(
+        CreateCode,
+        { success: true, data: { _id } }
+    );
 
     return (
-        <FormBox action={() => CreateCode(mostiki, user._id)}>
+        <Form action={formAction}>
             <p>
-                Твой баланс: {user?.mostiki} <MostikiSvg/>
+                Твой баланс: {mostiki} <MostikiSvg />
             </p>
 
             <FormLabel>
@@ -22,26 +27,29 @@ export const Create = ({user}: { user: User }) => {
                     type="number"
                     placeholder="Мостики"
                     min={1}
-                    max={user.mostiki}
+                    max={mostiki}
                     autoComplete="mostiki"
-                    value={mostiki}
-                    onChange={e => setMostiki(Number(e.target.value))}
                 />
             </FormLabel>
 
-            <FormButton disabled={!mostiki || mostiki <= 0 || mostiki > user.mostiki}>
+            <ErrorMessage state={state} />
+
+            <HookButton>
                 Сгенерировать
-            </FormButton>
-        </FormBox>
+            </HookButton>
+        </Form>
     )
 }
 
-export const Use = ({user}: { user: User }) => {
-    const [code, setCode] = useState<string>("")
+export const Use = ({ _id }: { _id: User["_id"] }) => {
+    const [state, formAction] = useActionStateId(
+        UseCode,
+        { success: true, data: { _id } }
+    );
 
     return (
-        <FormBox
-            action={() => UseCode(code, user._id)}
+        <Form
+            action={formAction}
         >
             <FormLabel>
                 <FormInput
@@ -49,13 +57,14 @@ export const Use = ({user}: { user: User }) => {
                     name="code"
                     autoComplete="code"
                     required
-                    value={code}
-                    onChange={e => setCode(e.target.value)}
                 />
             </FormLabel>
-            <FormButton disabled={!code}>
+
+            <ErrorMessage state={state} />
+
+            <HookButton>
                 Использовать
-            </FormButton>
-        </FormBox>
+            </HookButton>
+        </Form>
     )
 }

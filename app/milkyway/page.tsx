@@ -8,10 +8,9 @@ import type {Metadata} from "next";
 import type {CaseData} from "@/types/purchase";
 import {Case, Drop, type RarityType} from "@/types/case";
 import styles from "./milkyway.module.scss"
-import {Img, ImgBox} from "@/ui/components/img";
+import {Img, ImgBox} from "@components/img";
 import {Paths} from "@/const";
 import {Button, Url} from "@components/button";
-import Form from "next/form";
 import {StarSvg} from "@ui/SVGS";
 import {H1} from "@components/h1";
 import {MaxSize} from "@components/maxSize";
@@ -210,7 +209,7 @@ function GetButton({author, isPerm, isHas, caseData}: GetButton) {
     }
 
     return (
-        <Form action={async () => {
+        <form action={async () => {
             "use server"
             await AddCasePurchase(author._id, caseData)
             await GetCosmetic(author.name, caseData)
@@ -218,7 +217,7 @@ function GetButton({author, isPerm, isHas, caseData}: GetButton) {
             <Button margin="0.8rem" className={styles.button}>
                 Получить
             </Button>
-        </Form>
+        </form>
     )
 }
 

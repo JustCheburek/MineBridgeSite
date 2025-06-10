@@ -2,11 +2,15 @@
 
 // Компоненты
 import { Modal, type setModal } from "@components/modal";
-import { FormBox, FormButton, FormLink } from "@components/formBox";
+import { Form, FormLink } from "@components/form";
+import { HookButton } from "@components/hookbutton";
 import { H1 } from "@components/h1";
 import type { User } from "lucia";
 import { MostikiSvg } from "@ui/SVGS";
-import { Buy } from "@/services/shop/buy";
+import { Buy } from "@services/shop/buy";
+import { ErrorMessage } from "@components/error";
+import { PREMBCOST } from "@/const";
+import { useActionStateId } from "@/hooks/useActionStateId";
 
 type BuyModal = {
     modal: boolean
@@ -19,34 +23,36 @@ export const BuyModal = (
         author,
         modal, setModal
     }: BuyModal) => {
-    const fixedAmount = 100;
+    const [state, formAction] = useActionStateId(
+        Buy,
+        { success: true, data: { _id: author._id } }
+    );
 
     return (
         <Modal setModal={setModal} modal={modal}>
             <H1>
                 Межсезонье
             </H1>
-            <FormBox action={() => {
-                setModal(false);
-                Buy(fixedAmount, author._id);
-            }}>
+            <Form action={formAction} onSubmit={() => state.success && setModal(false)}>
                 <p>
                     Твой баланс: {author.mostiki} <MostikiSvg />
                 </p>
 
                 <p>
-                    Стоимость: {fixedAmount} <MostikiSvg />
+                    Стоимость: {PREMBCOST} <MostikiSvg />
                 </p>
-                
-                {author.mostiki >= fixedAmount
-                    ? <FormButton>
+
+                <ErrorMessage state={state} />
+
+                {author.mostiki >= PREMBCOST
+                    ? <HookButton>
                         Купить
-                    </FormButton>
+                    </HookButton>
                     : <FormLink href="/shop/buy">
                         Пополнить баланс
                     </FormLink>
                 }
-            </FormBox>
+            </Form>
         </Modal>
     )
 }

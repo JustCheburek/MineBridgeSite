@@ -5,6 +5,12 @@ import {TextUrl} from "@components/textUrl";
 import {H1} from "@components/h1";
 import {OnThisPage, OnThisPageLink} from "@components/sideNav";
 import {Number} from "@components/number";
+import type {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: "Роли",
+    description: "Роли и обязанности на сервере MineBridge"
+};
 
 export default function Roles() {
     return (<>

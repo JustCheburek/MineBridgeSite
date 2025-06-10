@@ -1,16 +1,17 @@
 "use client"
 
-import {useState} from "react";
+import { useState } from "react";
 import styles from "./headbreak.module.scss"
-import {FormBox, FormButton, FormLabel} from "@components/formBox";
-import {Random} from "@app/utils";
-import {GetPrize} from "@services/user/get";
+import { Form, FormLabel } from "@components/form";
+import { Random } from "@app/utils";
+import { GetPrize } from "@services/user/get";
+import { HookButton } from "@components/hookbutton";
 
 type Element = "" | "⚪" | "❌" | "❓️" | "❔"
 type Path = Element[]
 type Buttons = Path[]
 
-export function HeadBreakBox({name}: {name: string}) {
+export function HeadBreakBox({ name }: { name: string }) {
     const [step, setStep] = useState(0)
     const [nextStep, setNextStep] = useState<boolean>(false)
     const steps: { path: Path, buttons: Buttons }[] = [
@@ -101,17 +102,17 @@ export function HeadBreakBox({name}: {name: string}) {
                             ))}
                         </label>
                     ))}
-                    <FormBox action={() => {
+                    <Form action={() => {
                         setPath(steps[step + 1].path)
                         setStep(step + 1)
                         setNextStep(false)
                     }}>
                         <FormLabel>
-                            <FormButton disabled={!nextStep}>
+                            <HookButton disabled={!nextStep}>
                                 Дальше
-                            </FormButton>
+                            </HookButton>
                         </FormLabel>
-                    </FormBox>
+                    </Form>
                 </>
                 : <>
                     <h2 className="center_text">
@@ -125,13 +126,15 @@ export function HeadBreakBox({name}: {name: string}) {
                         Получить награду можно только 1 раз
                     </p>
 
-                    <FormBox action={() => GetPrize(name)}>
-                        <FormLabel>
-                            <FormButton>
-                                Получить награду
-                            </FormButton>
-                        </FormLabel>
-                    </FormBox>
+                    <p className="red_color">
+                        Устарело
+                    </p>
+
+                    <Form action="">
+                        <HookButton disabled>
+                            Получить награду
+                        </HookButton>
+                    </Form>
                 </>
             }
         </>

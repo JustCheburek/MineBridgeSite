@@ -1,7 +1,7 @@
 "use client"
 
 import {type Dispatch, type SetStateAction, useState} from "react";
-import {FormInput, type FormInputProps, FormLabel} from "@components/formBox";
+import {FormInput, type FormInputProps, FormLabel} from "@components/form";
 
 const InputName = ({autoComplete = "name", ...props}: FormInputProps) => (
     <FormLabel>

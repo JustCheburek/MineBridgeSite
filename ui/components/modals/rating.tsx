@@ -1,47 +1,47 @@
+"use client";
+
 // React
-import {useChangeDictState, useChangeListState} from "@hooks/useChangeState";
-import type {User} from "lucia";
-import {type Action, Punishment} from "@/types/punishment";
+import type { User } from "lucia";
 
 // Компоненты
-import {Modal, type setModal} from "@components/modal";
-import {FormBox, FormButton, FormGroup, FormInput, FormLabel} from "@components/formBox";
-import {H1} from "@components/h1";
-import {AddPunishment} from "@services/user/punishment";
+import { Modal, type setModal } from "@components/modal";
+import { Form, FormGroup, FormInput, FormLabel } from "@components/form";
+import { H1 } from "@components/h1";
+import { AddPunishment } from "@services/user/punishment";
+import { HookButton } from "@components/hookbutton";
+import { ErrorMessage } from "@components/error";
+import { useActionStateId } from "@/hooks/useActionStateId";
 
-type RatingModal = {
+type RatingModalProps = {
     name?: User["name"]
     user: User
     modal: boolean
     setModal: setModal
 }
 
-export const RatingModal = (
-    {
-        name, user,
-        modal, setModal
-    }: RatingModal) => {
-    const [punishment, , onPunishmentChange] = useChangeDictState(
-        {author: name} as Punishment
-    )
-
-    const [actions, , onActionsChange] = useChangeListState<Action>()
+export function RatingModal({
+    name, user,
+    modal, setModal
+}: RatingModalProps) {
+    const [state, formAction] = useActionStateId(
+        AddPunishment,
+        { success: true, data: { _id: user._id } }
+    );
 
     return (
         <Modal setModal={setModal} modal={modal}>
             <H1>Звёзды</H1>
-            <FormBox action={() => {
-                setModal(false)
-                AddPunishment(user, punishment, actions)
-            }}>
+            <Form
+                action={formAction}
+                onSubmit={() => state.success && setModal(false)}
+            >
                 <FormLabel>
                     <FormInput
                         name="reason"
                         placeholder="Причина"
                         autoComplete="reason"
                         maxLength={26}
-                        value={punishment.reason}
-                        onChange={onPunishmentChange}
+                        required
                     />
                 </FormLabel>
                 <FormLabel>
@@ -50,8 +50,7 @@ export const RatingModal = (
                         type="number"
                         placeholder="Звёзды"
                         autoComplete="rating"
-                        value={punishment.rating}
-                        onChange={onPunishmentChange}
+                        required
                     />
                 </FormLabel>
                 <FormLabel>
@@ -59,29 +58,25 @@ export const RatingModal = (
                         name="author"
                         placeholder="Автор"
                         autoComplete="author"
-                        value={punishment.author}
-                        onChange={onPunishmentChange}
+                        defaultValue={name}
+                        required
                     />
                 </FormLabel>
                 <h3>Майн</h3>
                 <FormGroup>
                     <FormLabel>
                         <FormInput
-                            type="checkbox"
-                            name="mineBan"
-                            disabled={punishment.rating > 0 || actions.includes("minePardon")}
-                            checked={actions.includes("mineBan")}
-                            onChange={onActionsChange}
+                            type="radio"
+                            name="mine"
+                            value="ban"
                         />
                         Бан
                     </FormLabel>
                     <FormLabel>
                         <FormInput
-                            type="checkbox"
-                            name="minePardon"
-                            disabled={punishment.rating < 0 || actions.includes("mineBan")}
-                            checked={actions.includes("minePardon")}
-                            onChange={onActionsChange}
+                            type="radio"
+                            name="mine"
+                            value="pardon"
                         />
                         Разбан
                     </FormLabel>
@@ -95,29 +90,30 @@ export const RatingModal = (
                 <FormGroup>
                     <FormLabel>
                         <FormInput
-                            type="checkbox"
-                            name="dsBan"
-                            disabled={punishment.rating > 0 || actions.includes("dsPardon") || !user.discordId}
-                            checked={actions.includes("dsBan")}
-                            onChange={onActionsChange}
+                            type="radio"
+                            name="ds"
+                            value="ban"
+                            disabled={!user.discordId}
                         />
                         Бан
                     </FormLabel>
                     <FormLabel>
                         <FormInput
-                            type="checkbox"
-                            name="dsPardon"
-                            disabled={punishment.rating < 0 || actions.includes("dsBan") || !user.discordId}
-                            checked={actions.includes("dsPardon")}
-                            onChange={onActionsChange}
+                            type="radio"
+                            name="ds"
+                            value="pardon"
+                            disabled={!user.discordId}
                         />
                         Разбан
                     </FormLabel>
                 </FormGroup>
-                <FormButton>
+
+                <ErrorMessage state={state} />
+
+                <HookButton>
                     Добавить
-                </FormButton>
-            </FormBox>
+                </HookButton>
+            </Form>
         </Modal>
     )
 }

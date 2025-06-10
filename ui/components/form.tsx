@@ -1,31 +1,14 @@
-import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
-import type {setModal} from "@components/modal";
+import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import type { setModal } from "@components/modal";
 import styles from "./styles/form.module.scss"
-import Link, {type LinkProps} from "next/link";
-import Form, {type FormProps} from "next/form";
+import Link, { type LinkProps } from "next/link";
+import { HorizontalLoadingSvg } from "@ui/SVGS";
 
 export interface DangerProps {
     danger?: boolean
 }
 
-export const FormBox = (
-    {
-        children,
-        className = "",
-        margin = "20px",
-        ...props
-    }: FormProps & { margin?: string | number }
-) => (
-    <Form
-        className={`${styles.form} ${className}`}
-        style={{marginBlock: margin}}
-        {...props}
-    >
-        {children}
-    </Form>
-)
-
-export const DefaultFormBox = (
+export const Form = (
     {
         children,
         className = "",
@@ -35,7 +18,7 @@ export const DefaultFormBox = (
 ) => (
     <form
         className={`${styles.form} ${className}`}
-        style={{marginBlock: margin}}
+        style={{ marginBlock: margin }}
         {...props}
     >
         {children}
@@ -43,6 +26,7 @@ export const DefaultFormBox = (
 )
 
 interface FormButton extends ComponentPropsWithoutRef<"button">, DangerProps {
+    isLoading?: boolean
 }
 
 export const FormButton = (
@@ -50,17 +34,21 @@ export const FormButton = (
         children,
         className = "",
         danger = false,
+        isLoading = false,
+        disabled = false,
         ...props
     }: FormButton
 ) => (
     <button
-        className={`${styles.button} center_text ${danger ? styles.danger : ""}`}
+        className={`${styles.button} center_text bold-font ${danger ? styles.danger : ""} ${className}`}
         type="submit"
+        disabled={isLoading || disabled}
         {...props}
     >
-        <strong className={className}>
-            {children}
-        </strong>
+        {isLoading
+            ? <HorizontalLoadingSvg width="7em" height="1.15em" />
+            : children
+        }
     </button>
 )
 
@@ -93,13 +81,11 @@ export const FormLink = (
         <Link
             href={href}
             target={target}
-            className={`${styles.button} center_text ${danger ? styles.danger : ""} ${className}`}
+            className={`${styles.button} center_text bold-font ${danger ? styles.danger : ""} ${className}`}
             download={download}
             {...props}
         >
-            <strong>
-                {children}
-            </strong>
+            {children}
         </Link>
     )
 }
@@ -130,13 +116,11 @@ export const FormA = (
         <a
             href={href}
             target={target}
-            className={`${styles.button} center_text ${danger ? styles.danger : ""} ${className}`}
+            className={`${styles.button} center_text bold-font ${danger ? styles.danger : ""} ${className}`}
             download={download}
             {...props}
         >
-            <strong>
-                {children}
-            </strong>
+            {children}
         </a>
     )
 }
@@ -195,7 +179,7 @@ export const FormTextarea = (
         ...props
     }: FormTextareaProps
 ) => (
-    <textarea className={`${styles.textarea} ${className}`} {...props}/>
+    <textarea className={`${styles.textarea} ${className}`} {...props} />
 )
 
 interface FormSelectProps extends ComponentPropsWithoutRef<"select"> {
@@ -232,7 +216,7 @@ interface AddProps extends ComponentPropsWithoutRef<"button"> {
     setModal?: setModal
 }
 
-export const Add = ({className = "", setModal, children, ...props}: AddProps) => (
+export const Add = ({ className = "", setModal, children, ...props }: AddProps) => (
     <button className={`add ${className}`} onClick={() => setModal && setModal(true)} {...props}>
         {children || "+"}
     </button>

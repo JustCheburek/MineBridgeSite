@@ -8,7 +8,7 @@ import { CheckLink } from "@components/checkLink"
 import styles from './news.module.scss'
 import Link from 'next/link'
 import type { New } from '@/types/new'
-import { Button } from '@/ui/components/button'
+import { Button } from '@components/button'
 import { getMDXComponent } from 'mdx-bundler/client'
 import { useMdxCompile } from '@/hooks/useMdxCompile'
 import React from 'react'

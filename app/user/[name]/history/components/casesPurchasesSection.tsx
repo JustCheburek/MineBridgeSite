@@ -1,20 +1,20 @@
 "use client"
 
 import styles from "../history.module.scss"
-import {AddSuffix, DropSuffix, SelectSuffix} from "@services/user/suffix";
-import {DeleteCasePurchase, GetCosmetics} from "@services/user/casePurchase";
-import {useState} from "react";
-import type {User} from "lucia";
-import {Case, Drop} from "@/types/case";
-import type {CaseData, MultiCaseData} from "@/types/purchase";
-import {CasesPurchasesModal} from "@modals/casesPurchases";
-import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
-import Form from "next/form";
-import {Img, ImgBox} from "@components/img";
+import { AddSuffix, DropSuffix, SelectSuffix } from "@services/user/suffix";
+import { DeleteCasePurchase, GetCosmetics } from "@services/user/casePurchase";
+import { useState } from "react";
+import type { User } from "lucia";
+import { Case, Drop } from "@/types/case";
+import type { CaseData, MultiCaseData } from "@/types/purchase";
+import { CasesPurchasesModal } from "@modals/casesPurchases";
+import { Form, FormInput, FormLabel } from "@components/form";
+import { Img, ImgBox } from "@components/img";
 import Link from "next/link";
-import {DeleteSvg} from "@ui/SVGS";
-import {CaseBox} from "@components/caseBox";
-import {Url} from "@components/button";
+import { DeleteSvg } from "@ui/SVGS";
+import { CaseBox } from "@components/caseBox";
+import { Url } from "@components/button";
+import { HookButton } from "@components/hookbutton";
 
 type Select = {
     selected: boolean
@@ -22,10 +22,10 @@ type Select = {
     name: string
     suffix: string
 }
-function Select({selected, _id, name, suffix}: Select) {
+function Select({ selected, _id, name, suffix }: Select) {
     if (selected) {
         return (
-            <Form
+            <form
                 action={() => DropSuffix(_id, name)}
                 className={styles.select}
             >
@@ -34,12 +34,12 @@ function Select({selected, _id, name, suffix}: Select) {
                         убрать
                     </small>
                 </button>
-            </Form>
+            </form>
         )
     }
 
     return (
-        <Form
+        <form
             action={() => SelectSuffix(suffix, _id, name)}
             className={styles.select}
         >
@@ -48,7 +48,7 @@ function Select({selected, _id, name, suffix}: Select) {
                     выбрать
                 </small>
             </button>
-        </Form>
+        </form>
     )
 }
 
@@ -60,7 +60,7 @@ type Suffix = {
     index: number
     selected: boolean
 }
-function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
+function Suffix({ _id, name, isMe, suffix, index, selected }: Suffix) {
     if (suffix) {
         return (<>
             <p>
@@ -69,10 +69,10 @@ function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
 
             {isMe &&
                 <Select
-                  selected={selected}
-                  suffix={suffix}
-                  _id={_id}
-                  name={name}
+                    selected={selected}
+                    suffix={suffix}
+                    _id={_id}
+                    name={name}
                 />
             }
         </>)
@@ -87,7 +87,7 @@ function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
     }
 
     return (
-        <FormBox action={(formData: FormData) => AddSuffix(formData, _id, name, index)}>
+        <Form action={(formData: FormData) => AddSuffix(formData, _id, name, index)}>
             <FormLabel>
                 <FormInput
                     name="name"
@@ -96,10 +96,10 @@ function Suffix({_id, name, isMe, suffix, index, selected}: Suffix) {
                     required
                 />
             </FormLabel>
-            <FormButton>
+            <HookButton>
                 Сохранить
-            </FormButton>
-        </FormBox>
+            </HookButton>
+        </Form>
     )
 }
 
@@ -136,30 +136,30 @@ export default function CasesPurchasesSection(
             </div>
 
             {(isMe || access) && caseDatas.length > 0 &&
-              <FormBox action={() => GetCosmetics(user.name, caseDatas)}>
-                <FormButton disabled={click} onClick={() => setClick(true)}>
-                    {click
-                        ? "Проверьте покупки"
-                        : "Получить покупки"
-                    }
-                </FormButton>
-              </FormBox>
+                <Form action={() => GetCosmetics(user.name, caseDatas)}>
+                    <HookButton disabled={click} onClick={() => setClick(true)}>
+                        {click
+                            ? "Проверьте покупки"
+                            : "Получить покупки"
+                        }
+                    </HookButton>
+                </Form>
             }
 
             <div className={styles.purchases}>
                 {caseDatas.map(
                     ({
-                         MultiCase,
-                         Drop,
-                         DropItem,
-                         rarity,
-                         Item,
-                         suffix
-                     },
-                     index
+                        MultiCase,
+                        Drop,
+                        DropItem,
+                        rarity,
+                        Item,
+                        suffix
+                    },
+                        index
                     ) =>
                         <div
-                            style={{width: "280px", height: "160px"}}
+                            style={{ width: "280px", height: "160px" }}
                             className={`border-radius grid_center ${styles.item} ${rarity}_box`}
                             key={index}
                         >
@@ -181,55 +181,55 @@ export default function CasesPurchasesSection(
                             }
 
                             {MultiCase && DropItem?.name !== "suffix" &&
-                              <div className={styles.cases}>
-                                  {MultiCase.map(({Case, amount}) => Case &&
-                                    <Link
-                                      href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
-                                      key={Case?.name}
-                                    >
-                                      <CaseBox Case={Case} size={40}>
-                                          {amount > 1 &&
-                                            <p className={`unic_color medium-font ${styles.case_text}`}>
-                                                {amount}
-                                            </p>
-                                          }
-                                      </CaseBox>
-                                    </Link>
-                                  )}
-                              </div>
+                                <div className={styles.cases}>
+                                    {MultiCase.map(({ Case, amount }) => Case &&
+                                        <Link
+                                            href={`/shop/drop/${Case?.name}/${Drop?.name}/${DropItem?.name}/${rarity}/${Item?.name}`}
+                                            key={Case?.name}
+                                        >
+                                            <CaseBox Case={Case} size={40}>
+                                                {amount > 1 &&
+                                                    <p className={`unic_color medium-font ${styles.case_text}`}>
+                                                        {amount}
+                                                    </p>
+                                                }
+                                            </CaseBox>
+                                        </Link>
+                                    )}
+                                </div>
                             }
 
                             {access &&
-                              <div className={styles.actions}>
-                                <Form action={() => {
-                                    DeleteCasePurchase(user._id, Item?._id, suffix)
-                                }}>
-                                  <button className="helper_box danger">
-                                    <DeleteSvg size="1.3rem"/>
-                                  </button>
-                                </Form>
-                              </div>
+                                <div className={styles.actions}>
+                                    <form action={() => {
+                                        DeleteCasePurchase(user._id, Item?._id, suffix)
+                                    }}>
+                                        <button className="helper_box danger">
+                                            <DeleteSvg size="1.3rem" />
+                                        </button>
+                                    </form>
+                                </div>
                             }
                         </div>
                 )}
             </div>
 
             {access &&
-              <FormBox action={() => setModal(true)}>
-                <FormButton>
-                  Добавить
-                </FormButton>
-              </FormBox>
+                <Form action={() => setModal(true)}>
+                    <HookButton>
+                        Добавить
+                    </HookButton>
+                </Form>
             }
 
-            <Url href="/shop/case" margin={0} style={{marginTop: "3rem"}}>
+            <Url href="/shop/case" margin={0} style={{ marginTop: "3rem" }}>
                 Купить
             </Url>
 
             {access &&
-              <CasesPurchasesModal
-                modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} _id={user._id} access={access}
-              />
+                <CasesPurchasesModal
+                    modal={modal} setModal={setModal} Cases={Cases} Drops={Drops} _id={user._id} access={access}
+                />
             }
         </section>
     )

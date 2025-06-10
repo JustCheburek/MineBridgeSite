@@ -10,7 +10,7 @@ import {Drop} from "@/types/case";
 // Компоненты
 import {CaseClient} from "./caseClient";
 import {AddCasePurchase, GetCosmetic} from "@services/user/casePurchase";
-import { H1 } from "@/ui/components/h1";
+import { H1 } from "@components/h1";
 
 export const metadata: Metadata = {
     title: "Кейсы",

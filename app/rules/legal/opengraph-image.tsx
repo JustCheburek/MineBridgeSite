@@ -1,8 +1,8 @@
-import {ImageResponse} from 'next/og'
-import {OGImageBox} from "@components/ogimage";
+import { ImageResponse } from "next/og";
+import { OGImageBox } from "@components/ogimage";
 
-export const runtime = 'edge'
-export const size = {width: 1200, height: 630}
+export const runtime = "edge";
+export const size = { width: 1200, height: 630 };
 
 export default async function Image() {
     const MontserratMedium = await fetch(
@@ -14,8 +14,8 @@ export default async function Image() {
 
     return new ImageResponse(
         (
-            <OGImageBox paths={["Правила", "Legal", "Пользовательское соглашение"]}>
-                Соглашение между пользователем и компанией MineBridge
+            <OGImageBox paths={["Правила", "Политики"]}>
+                Политики использования сайта
             </OGImageBox>
         ),
         {
@@ -34,5 +34,5 @@ export default async function Image() {
                 },
             ]
         }
-    )
-}
+    );
+} 

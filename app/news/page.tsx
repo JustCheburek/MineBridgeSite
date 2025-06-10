@@ -5,7 +5,7 @@ import { SeasonBox } from "@components/post";
 import { NewsInfiniteList } from "./components";
 import { getSeasons } from "@/services/seasons";
 import { Suspense } from "react";
-import { Skeleton } from "@/ui/components/skeleton";
+import { Skeleton } from "@components/skeleton";
 
 export const revalidate = 3600
 

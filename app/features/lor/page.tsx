@@ -255,7 +255,7 @@ export default function Lor() {
                                 всё что было!
                             </Page>
                             <Page day={"100?"}>
-                                Надо вернутся и <strong className="red_color">отомстить</strong> ему!
+                                Надо вернуться и <strong className="red_color">отомстить</strong> ему!
                             </Page>
                         </Book>
                     </PText>

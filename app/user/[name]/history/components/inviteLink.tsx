@@ -1,6 +1,6 @@
 "use client"
 
-import {FormBox, FormGroup, FormInput, FormLabel} from "@components/formBox";
+import {Form, FormGroup, FormInput, FormLabel} from "@components/form";
 import {type ChangeEvent, useState} from "react";
 
 type InviteLink = {
@@ -26,7 +26,7 @@ export function InviteLink({name}: InviteLink) {
     }
 
     return (
-        <FormBox action="">
+        <Form action="">
             <FormGroup>
                 {placesList.map(place =>
                     <FormLabel key={place}>
@@ -44,6 +44,6 @@ export function InviteLink({name}: InviteLink) {
             <p className="all_select unic_color break">
                 {process.env.NEXT_PUBLIC_EN_URL}/invite/{name}/{from}
             </p>
-        </FormBox>
+        </Form>
     )
 }

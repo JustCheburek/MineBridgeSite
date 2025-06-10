@@ -1,13 +1,15 @@
 "use server";
-import type {User} from "lucia";
-import {Action, Punishment} from "@/types/punishment";
-import {RconVC} from "@services/console";
+import type { User } from "lucia";
+import { Punishment } from "@/types/punishment";
+import { RconVC } from "@services/console";
 import axios from "axios";
-import {userModel} from "@db/models";
-import {revalidateTag} from "next/cache";
-import {NewRatingEmail} from "@email/newRating";
-import {Resend} from "resend";
-import {RatingEmail} from "@email/rating";
+import { userModel } from "@db/models";
+import { revalidateTag } from "next/cache";
+import { NewRatingEmail } from "@email/newRating";
+import { Resend } from "resend";
+import { RatingEmail } from "@email/rating";
+import { z } from "zod/v4";
+import type { StateId } from "@/types/state";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -17,7 +19,7 @@ export async function SavePunishments(_id: string, data: Punishment[]) {
 
     const oldRating = user.rating
     user.rating = data.reduce(
-        (accum, {rating}) => accum + rating, 0
+        (accum, { rating }) => accum + rating, 0
     )
     user.punishments = data
 
@@ -30,24 +32,24 @@ export async function SavePunishments(_id: string, data: Punishment[]) {
             from: 'Майнбридж <rating@m-br.ru>',
             to: user.email,
             subject: 'Изменения в звёздах на MineBridge',
-            react: RatingEmail({name: user.name, rating: user.rating, oldRating})
+            react: RatingEmail({ name: user.name, rating: user.rating, oldRating })
         })
     }
 }
 
-async function CheckActions(user: User, actions: Action[]) {
-    if (actions.length === 0) return
+async function CheckActions(user: User, mine?: "ban" | "pardon", ds?: "ban" | "pardon") {
+    if (!mine && !ds) return
 
     try {
-        if (actions.includes("mineBan")) {
+        if (mine === "ban") {
             const client = await RconVC()
-            console.log(`Бан ${user.name}`)
+            console.log(`Бан в майне ${user.name}`)
             await client.send(`ban ${user.name} Нарушение правил сервера`)
             client.disconnect()
         }
-        if (actions.includes("minePardon")) {
+        if (mine === "pardon") {
             const client = await RconVC()
-            console.log(`Разбан ${user.name}`)
+            console.log(`Разбан в майне ${user.name}`)
             await client.send(`unban ${user.name}`)
             client.disconnect()
         }
@@ -55,19 +57,22 @@ async function CheckActions(user: User, actions: Action[]) {
         console.error(e)
     }
 
-    if (actions.includes("dsBan")) {
+    if (!user.discordId) return
+
+    if (ds === "ban") {
+        console.log(`Бан в дискорде ${user.name}`)
         await axios.put(
             `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/bans/${user.discordId}`,
-            {delete_message_days: 7},
+            { delete_message_days: 7 },
             {
                 headers: {
                     Authorization: `Bot ${process.env.DISCORD_TOKEN}`
                 }
             }
         ).catch(console.error)
-        return
     }
-    if (actions.includes("dsPardon")) {
+    if (ds === "pardon") {
+        console.log(`Разбан в дискорде ${user.name}`)
         await axios.delete(
             `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/bans/${user.discordId}`,
             {
@@ -79,8 +84,42 @@ async function CheckActions(user: User, actions: Action[]) {
     }
 }
 
-export async function AddPunishment(user: User, punishment: Punishment, actions: Action[]) {
-    if (punishment.reason && punishment.rating) {
+const punishmentSchema = z.object({
+    reason: z.string().min(1, "Укажите причину"),
+    rating: z.preprocess(
+        (val) => Number(val),
+        z.number().int()
+    ),
+    author: z.string().min(1, "Укажите автора"),
+    mine: z.enum(["ban", "pardon"]).optional(),
+    ds: z.enum(["ban", "pardon"]).optional()
+});
+
+export async function AddPunishment({ data: { _id } }: StateId, formData: FormData): Promise<StateId> {
+    const result = punishmentSchema.safeParse(Object.fromEntries(formData.entries()))
+
+    console.log(Object.fromEntries(formData.entries()))
+
+    if (!result.success) {
+        return {
+            success: false,
+            error: result.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join('; '),
+            data: { _id }
+        }
+    }
+
+    const { reason, rating, author, mine, ds } = result.data
+
+    try {
+        const user = await userModel.findById(_id) as User
+        if (!user) return { success: false, error: 'Пользователь не найден', data: { _id } }
+
+        const punishment = {
+            reason,
+            rating,
+            author
+        } satisfies Punishment
+
         await userModel.findByIdAndUpdate(
             user._id,
             {
@@ -92,18 +131,28 @@ export async function AddPunishment(user: User, punishment: Punishment, actions:
                 }
             }
         )
+
+        await CheckActions(user, mine, ds)
+
+        revalidateTag("userLike")
+
+        if (user.notifications?.rating) {
+            await resend.emails.send({
+                from: 'Майнбридж <rating@m-br.ru>',
+                to: user.email,
+                subject: 'Изменения в звёздах на MineBridge',
+                react: NewRatingEmail({
+                    name: user.name, rating: user.rating + punishment.rating, punishment
+                })
+            })
+        }
+
+        return { success: true, data: { _id } }
+    } catch (error) {
+        return {
+            success: false,
+            error: error instanceof Error ? error.message : 'Ошибка при добавлении звёзд',
+            data: { _id }
+        }
     }
-
-    await CheckActions(user, actions)
-
-    revalidateTag("userLike")
-
-    await resend.emails.send({
-        from: 'Майнбридж <rating@m-br.ru>',
-        to: user.email,
-        subject: 'Изменения в звёздах на MineBridge',
-        react: NewRatingEmail({
-            name: user.name, rating: user.rating + punishment.rating, punishment
-        })
-    })
 }

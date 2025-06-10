@@ -10,10 +10,6 @@
     margin-bottom: 2rem;
     
     @include mixins.border($background: var(--gray-color));
-
-    @media (width <= 1300px) {
-        grid-column: 1 / -1;
-    }
 }
 
 .range {
@@ -31,7 +27,7 @@
 
 .values {
     display: flex;
-    gap: 1rem;
+    gap: 0.3rem;
     flex-wrap: wrap;
     justify-content: space-between;
 

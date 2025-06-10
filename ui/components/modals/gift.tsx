@@ -1,27 +1,31 @@
 "use client";
 
 // Компоненты
-import {Modal, type setModal} from "@components/modal";
-import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
-import {H1} from "@components/h1";
-import type {User} from "lucia";
-import {useState} from "react";
-import {MostikiSvg} from "@ui/SVGS";
-import {GiveGift} from "@services/user/gift";
+import { Modal, type setModal } from "@components/modal";
+import { Form, FormInput, FormLabel } from "@components/form";
+import { H1 } from "@components/h1";
+import type { User } from "lucia";
+import { MostikiSvg } from "@ui/SVGS";
+import { GiveGift } from "@services/user/gift";
+import { useActionStateId } from "@/hooks/useActionStateId";
+import { HookButton } from "@components/hookbutton";
+import { ErrorMessage } from "@components/error";
 
-type GiftModal = {
+type GiftModalProps = {
     modal: boolean
     setModal: setModal
     user: User
     author: User
 }
 
-export const GiftModal = (
-    {
-        user, author,
-        modal, setModal
-    }: GiftModal) => {
-    const [mostiki, setMostiki] = useState<number>(1)
+export function GiftModal({
+    user, author,
+    modal, setModal
+}: GiftModalProps) {
+    const [state, formAction] = useActionStateId(
+        GiveGift,
+        { success: true, data: { _id: user._id, authorId: author._id } }
+    );
 
     return (
         <Modal setModal={setModal} modal={modal}>
@@ -31,33 +35,33 @@ export const GiftModal = (
             <h2>
                 {user.name}
             </h2>
-            <FormBox action={() => {
-                if (!mostiki || mostiki <= 0 || mostiki > author.mostiki) return
-                setModal(false)
 
-                GiveGift(mostiki, user._id, author._id)
-            }}>
+            <Form
+                action={formAction} 
+                onSubmit={() => 
+                    state.success && setModal(false)
+                }
+            >
                 <p>
-                    Твой баланс: {author.mostiki} <MostikiSvg/>
+                    Твой баланс: {author.mostiki} <MostikiSvg />
                 </p>
 
                 <FormLabel>
                     <FormInput
                         type="number"
-                        name="number"
+                        name="mostiki"
                         placeholder="Мостики"
-                        min={1}
                         max={author.mostiki}
                         autoComplete="mostiki"
-                        value={mostiki}
-                        onChange={e => setMostiki(Number(e.target.value))}
                     />
                 </FormLabel>
 
-                <FormButton disabled={!mostiki || mostiki <= 0 || mostiki > author.mostiki}>
+                <ErrorMessage state={state} />
+
+                <HookButton>
                     Перевести
-                </FormButton>
-            </FormBox>
+                </HookButton>
+            </Form>
         </Modal>
     )
 }

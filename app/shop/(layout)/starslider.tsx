@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import styles from "./starslider.module.scss";
-import { Text } from "@components/shop";
 
 export function StarSlider({ max }: { max: number }) {
     const values = [0, 100, 200, 300, 400, 500]
     const [selected, setSelected] = useState(0)
 
     return (
-        <Text className={styles.starslider}>
+        <div className={styles.starslider}>
             <input
                 type="range"
                 min={0}
@@ -38,6 +37,6 @@ export function StarSlider({ max }: { max: number }) {
                     </p>
                 ))}
             </div>
-        </Text>
+        </div>
     )
 }

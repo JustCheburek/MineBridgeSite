@@ -66,6 +66,8 @@ export const DBS = {
     LL: "librelogin"
 }
 
+export const PREMBCOST = 100
+
 export const Paths: PathID[] = [{
     rating: 25,
     x: -35,

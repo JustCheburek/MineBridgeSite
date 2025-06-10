@@ -5,12 +5,6 @@ import {userModel} from "@db/models";
 import {revalidateTag} from "next/cache";
 import {AUTO} from "@/const";
 
-export async function GetPrize(name: string) {
-    const client = await RconMB()
-
-    await client.send(`tw trigger health_prize ${name}`)
-}
-
 export async function GetStars(_id: string) {
     const user = await userModel.findById(_id)
     if (!user) return

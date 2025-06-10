@@ -11,5 +11,3 @@ export class Punishment {
 	@prop({trim: true})
 	public author!: string
 }
-
-export type Action = "mineBan" | "minePardon" | "dsBan" | "dsPardon"

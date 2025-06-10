@@ -6,7 +6,7 @@ import {parseAsStringEnum, useQueryState} from "nuqs";
 
 import styles from "./design.module.scss"
 
-import {FormBox, FormLink, FormSelect} from "@components/formBox";
+import {Form, FormLink, FormSelect} from "@components/form";
 import {Img} from "@components/img";
 
 export function ColorsPie({data}: { data: PieChartProps["data"] }) {
@@ -59,8 +59,6 @@ export function Download() {
     const [logoName, setLogoName] = useQueryState("logo", parseAsStringEnum(names).withDefault("256x256"))
 
     function selectLogo(e: ChangeEvent<HTMLSelectElement>) {
-        "use client"
-        e.preventDefault()
         setLogoName(e.target.value)
     }
 
@@ -69,7 +67,7 @@ export function Download() {
     return (
         <div className={styles.download}>
             <div>
-                <FormBox action="">
+                <Form action="">
                     <FormSelect name="logos" id="logos" onChange={selectLogo} value={logoName}>
                         {logos.map(logo => (
                             <option key={logo.name} value={logo.name}>
@@ -81,7 +79,7 @@ export function Download() {
                     <FormLink href={path} download>
                         Скачать
                     </FormLink>
-                </FormBox>
+                </Form>
             </div>
 
             <Img

@@ -1,24 +1,25 @@
 "use server";
-import {userModel} from "@db/models";
-import {MostikiEmail} from "@email/mostiki";
-import {Resend} from "resend";
-import {User} from "lucia";
+import { userModel } from "@db/models";
+import { MostikiEmail } from "@email/mostiki";
+import { Resend } from "resend";
 import { revalidateTag } from "next/cache";
 import { AddWLConsole } from "@services/console";
 import { redirect } from "next/navigation";
+import type { StateId } from "@/types/state";
+import { PREMBCOST } from "@/const";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function Buy(mostiki: User["mostiki"], authorId: User["_id"]) {
-    const author = await userModel.findByIdAndUpdate(authorId, {
+export async function Buy({data: {_id}}: StateId): Promise<StateId> {
+    const author = await userModel.findByIdAndUpdate(_id, {
         whitelist: true,
         $inc: {
-            mostiki: -mostiki
+            mostiki: -PREMBCOST
         }
     })
 
     revalidateTag("userLike")
 
-    if (!author) return
+    if (!author) return { success: false, error: 'Пользователь не найден', data: {_id} }
 
     await AddWLConsole(author.name)
 
@@ -28,7 +29,7 @@ export async function Buy(mostiki: User["mostiki"], authorId: User["_id"]) {
             to: author.email,
             subject: 'Изменения в мостиках на MineBridge',
             react: MostikiEmail(
-                {name: author.name, mostiki: -mostiki, allMostiki: author.mostiki - mostiki}
+                { name: author.name, mostiki: -PREMBCOST, allMostiki: author.mostiki - PREMBCOST }
             )
         })
     }

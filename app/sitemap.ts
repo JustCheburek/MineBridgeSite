@@ -51,6 +51,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: LASTRULESUPDATE,
         },
         {
+            url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/roles`,
+            priority: 0.7,
+            lastModified: LASTRULESUPDATE,
+        },
+        {
             url: `${process.env.NEXT_PUBLIC_RU_URL}/rules/blacklist`,
             priority: 0.8,
             lastModified: LASTRULESUPDATE,

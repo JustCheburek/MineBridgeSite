@@ -1,10 +1,11 @@
-import {FormBox, FormButton} from "@components/formBox";
+import {Form} from "@components/form";
 import type {User} from "lucia";
 import {ResetPassConsole} from "@services/console";
+import { HookButton } from "@components/hookbutton";
 
 export function PassForm({user}: { user: User }) {
     return (
-        <FormBox action={async () => {
+        <Form action={async () => {
             "use server";
             await ResetPassConsole(user.name)
         }}>
@@ -15,9 +16,9 @@ export function PassForm({user}: { user: User }) {
                 Можно сбросить свой пароль в майнкрафте
             </p>
 
-            <FormButton danger>
+            <HookButton danger>
                 Сбросить
-            </FormButton>
-        </FormBox>
+            </HookButton>
+        </Form>
     )
 }

@@ -1,14 +1,15 @@
 // React
-import type {ComponentPropsWithoutRef} from "react";
-import Link, {LinkProps} from "next/link";
+import type { ComponentPropsWithoutRef } from "react";
+import Link, { LinkProps } from "next/link";
 
 // Стили
 import styles from "./styles/button.module.scss"
-import {DangerProps} from "@components/formBox";
+import { DangerProps } from "@components/form";
+import { HorizontalLoadingSvg } from "@ui/SVGS"
 
 type Url = {
     margin?: string | number
-}
+} & ComponentPropsWithoutRef<"a"> & LinkProps & DangerProps
 
 export const Url = (
     {
@@ -20,7 +21,7 @@ export const Url = (
         download = false,
         danger = false,
         ...props
-    }: ComponentPropsWithoutRef<"a"> & LinkProps & Url & DangerProps) => {
+    }: Url) => {
 
     if (!target) {
         if (download || href.toString().startsWith("http")) {
@@ -35,7 +36,7 @@ export const Url = (
             href={href}
             target={target}
             className={`${styles.button} ${className} ${danger ? styles.danger : ""}`}
-            style={{marginBlock: margin}}
+            style={{ marginBlock: margin }}
             download={download}
             {...props}
         >
@@ -44,9 +45,9 @@ export const Url = (
     )
 }
 
-type Button = {
+export type ButtonProps = {
     margin?: string
-}
+} & ComponentPropsWithoutRef<"button"> & DangerProps
 
 export const Button = (
     {
@@ -55,12 +56,14 @@ export const Button = (
         margin = "2.5rem",
         danger = false,
         ...props
-    }: ComponentPropsWithoutRef<"button"> & Button & DangerProps) => (
-    <button
-        className={`${styles.button} ${className} ${danger ? styles.danger : ""}`}
-        style={{marginBlock: margin}}
-        {...props}
-    >
-        {children}
-    </button>
-)
+    }: ButtonProps) => {
+    return (
+        <button
+            className={`${styles.button} ${className} ${danger ? styles.danger : ""}`}
+            style={{ marginBlock: margin }}
+            {...props}
+        >
+            {children}
+        </button>
+    )
+}

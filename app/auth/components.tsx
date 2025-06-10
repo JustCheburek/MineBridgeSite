@@ -1,7 +1,7 @@
 "use client"
 
-import {DefaultFormBox, FormA, FormGroup, FormInput, FormLabel} from "@components/formBox";
-import {InputNameCheck} from "@components/formInputs";
+import {FormA, Form, FormGroup, FormInput, FormLabel} from "@components/form";
+import {InputNameCheck} from "@components/inputName";
 import {DiscordSvg, GoogleSvg, TwitchSvg} from "@ui/SVGS";
 import {useState} from "react";
 import styles from "./auth.module.scss";
@@ -12,9 +12,9 @@ export function AuthForm({savedName}: { savedName?: string }) {
     const [
         provider, , onChange, Check
     ] = useChangeRadioState<"google" | "discord" | "twitch">("google")
-
+  
     return (
-        <DefaultFormBox className={styles.form}>
+        <Form className={styles.form}>
             <InputNameCheck name={name} setName={setName} autoFocus/>
 
             <FormGroup>
@@ -55,6 +55,6 @@ export function AuthForm({savedName}: { savedName?: string }) {
             <FormA href={`/auth/${provider}?name=${name}`}>
                 Дальше
             </FormA>
-        </DefaultFormBox>
+        </Form>
     )
 }

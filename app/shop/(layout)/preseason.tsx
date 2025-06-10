@@ -1,14 +1,14 @@
 "use client";
 
 import { Button } from "@components/button";
-import { BuyModal } from "@/ui/components/modals/buy";
+import { BuyModal } from "@components/modals/buy";
 import { useState } from "react";
 import type { User } from "lucia";
-import { Img } from "@/ui/components/img";
-import { ImgBox } from "@/ui/components/img";
-import { Box } from "@/ui/components/shop";
-import { Text } from "@/ui/components/shop";
-import { Price } from "@/ui/components/shop";
+import { Img } from "@components/img";
+import { ImgBox } from "@components/img";
+import { Box } from "@components/shop";
+import { Text } from "@components/shop";
+import { Price } from "@components/shop";
 import styles from "./shop.module.scss";
 
 export function PreSeason({ author }: { author: User | null }) {
@@ -31,7 +31,7 @@ export function PreSeason({ author }: { author: User | null }) {
                 </Text>
             </Box>
         </ImgBox>
-        {author &&
+        {author && !author.whitelist &&
             <BuyModal modal={modal} setModal={setModal} author={author} />
         }
     </>)

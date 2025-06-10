@@ -1,36 +1,37 @@
-import {FormBox, FormButton, FormInput, FormLabel} from "@components/formBox";
-import type {User} from "lucia";
-import {UpdateNotification} from "@services/user/notification";
-import {notificationsLabels} from "@/types/notification";
+"use client";
 
-export function NotificationsForm({user}: { user: User }) {
+import { Form, FormInput, FormLabel } from "@components/form";
+import type { User } from "lucia";
+import { UpdateNotification } from "@services/user/notification";
+import { notificationsLabels } from "@/types/notification";
+import { HookButton } from "@components/hookbutton";
+import { ErrorMessage } from "@components/error";
+import { useActionStateId } from "@/hooks/useActionStateId";
+
+export function NotificationsForm({ user }: { user: User }) {
+    const [state, formAction] = useActionStateId(
+        UpdateNotification,
+        { success: true, data: { _id: user._id } }
+    );
+
     return (
-        <FormBox action={async FormData => {
-            "use server";
-            await UpdateNotification(user._id, FormData)
-        }}>
-            <h3 className="center_text">
-                Уведомления
-            </h3>
-            <p>
-                Вы можете настроить<br/>
-                уведомления по почте под себя
-            </p>
-
-            {notificationsLabels.map(({name, label}) => (
+        <Form action={formAction}>
+            {notificationsLabels.map(({ name, label }) => (
                 <FormLabel key={name}>
                     <FormInput
                         type="checkbox"
                         name={name}
-                        defaultChecked={(user.notifications as any)?.[name] !== false}
+                        defaultChecked={user.notifications?.[name as keyof typeof user.notifications]}
                     />
                     {label}
                 </FormLabel>
             ))}
 
-            <FormButton>
+            <ErrorMessage state={state} />
+
+            <HookButton>
                 Сохранить
-            </FormButton>
-        </FormBox>
+            </HookButton>
+        </Form>
     )
 }

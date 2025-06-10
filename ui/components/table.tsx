@@ -33,8 +33,9 @@ import styles from "./styles/table.module.scss"
 
 // Utils
 import {ColorText} from "@app/utils";
-import {FormButton, FormInput, FormLabel} from "@components/formBox";
+import {FormButton, FormInput, FormLabel} from "@components/form";
 import {Button} from "@components/button";
+import { HookButton } from "@components/hookbutton";
 
 TimeAgo.addLocale(ru);
 const timeAgo = new TimeAgo("ru-RU");
@@ -347,9 +348,9 @@ export function Table<T>(
                   <tr className={styles.tr}>
                     <th colSpan={table.getCenterLeafColumns().length - 1} className={styles.th}>
                         {table.getSelectedRowModel().rows.length > 0 &&
-                          <FormButton className="red_color" onClick={removeRows} danger>
+                          <HookButton className="red_color" onClick={removeRows} danger>
                             Удалить выделенное
-                          </FormButton>
+                          </HookButton>
                         }
                     </th>
                     <th colSpan={table.getCenterLeafColumns().length} className={styles.th}>

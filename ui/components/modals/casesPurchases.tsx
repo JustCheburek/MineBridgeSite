@@ -1,15 +1,16 @@
 "use client";
 
-import {type ChangeEvent, useEffect, useState} from "react";
-import {Case, Drop, Item, RarityNames, rarityNames} from "@/types/case";
-import {CaseData} from "@/types/purchase";
-import {AddCasePurchase} from "@services/user/casePurchase";
+import { type ChangeEvent, useEffect, useState } from "react";
+import { Case, Drop, Item, RarityNames, rarityNames } from "@/types/case";
+import { CaseData } from "@/types/purchase";
+import { AddCasePurchase } from "@services/user/casePurchase";
 
 // Компоненты
-import {Modal, type setModal} from "@components/modal";
-import {FormBox, FormButton, FormInput, FormLabel, FormSelect} from "@components/formBox";
-import {H1} from "@components/h1";
-import {valueOf} from "@/types/valueOf";
+import { Modal, type setModal } from "@components/modal";
+import { Form, FormInput, FormLabel, FormSelect } from "@components/form";
+import { H1 } from "@components/h1";
+import { valueOf } from "@/types/valueOf";
+import { HookButton } from "../hookbutton";
 
 type CasesPurchasesModal = {
     Cases: Case[]
@@ -83,7 +84,7 @@ export const CasesPurchasesModal = (
         <Modal setModal={setModal} modal={modal}>
             <H1>Кейсы</H1>
 
-            <FormBox action={() => {
+            <Form action={() => {
                 setModal(false)
                 AddCasePurchase(_id, caseData)
             }}>
@@ -189,10 +190,10 @@ export const CasesPurchasesModal = (
                     />
                 </FormLabel>
 
-                <FormButton>
+                <HookButton>
                     Добавить
-                </FormButton>
-            </FormBox>
+                </HookButton>
+            </Form>
         </Modal>
     )
 }
