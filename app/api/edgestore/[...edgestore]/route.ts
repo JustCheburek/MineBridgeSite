@@ -12,10 +12,12 @@ const edgeStoreRouter = es.router({
             }
         )
         .input(
+            // @ts-ignore
             z.object({
                 type: z.enum(["profile", "news"])
             })
         )
+        // @ts-ignore
         .path(({input}) => [{type: input.type}])
 });
 
