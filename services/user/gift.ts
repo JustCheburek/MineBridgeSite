@@ -4,7 +4,7 @@ import { revalidateTag } from "next/cache";
 import { MostikiEmail } from "@email/mostiki";
 import { Resend } from "resend";
 import { z } from "zod/v4";
-import type { StateId } from "@/types/state";
+import type { ExtraStateId } from "@/types/state";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -15,7 +15,10 @@ const giftSchema = z.object({
     )
 });
 
-export async function GiveGift({data: {_id, authorId}}: StateId, formData: FormData): Promise<StateId> {
+export type AuthorId = {authorId: string}
+export type AuthorState = ExtraStateId<AuthorId>
+
+export async function GiveGift({data: {_id, authorId}}: AuthorState, formData: FormData): Promise<AuthorState> {
     const result = giftSchema.safeParse(Object.fromEntries(formData.entries()))
     
     if (!result.success) {

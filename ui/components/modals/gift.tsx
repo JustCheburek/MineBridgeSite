@@ -6,7 +6,7 @@ import { Form, FormInput, FormLabel } from "@components/form";
 import { H1 } from "@components/h1";
 import type { User } from "lucia";
 import { MostikiSvg } from "@ui/SVGS";
-import { GiveGift } from "@services/user/gift";
+import { AuthorId, GiveGift } from "@services/user/gift";
 import { useActionStateId } from "@/hooks/useActionStateId";
 import { HookButton } from "@components/hookbutton";
 import { ErrorMessage } from "@components/error";
@@ -22,7 +22,7 @@ export function GiftModal({
     user, author,
     modal, setModal
 }: GiftModalProps) {
-    const [state, formAction] = useActionStateId(
+    const [state, formAction] = useActionStateId<AuthorId>(
         GiveGift,
         { success: true, data: { _id: user._id, authorId: author._id } }
     );
