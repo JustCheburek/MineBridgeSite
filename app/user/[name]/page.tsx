@@ -100,9 +100,8 @@ export default async function Profile({ params }: NameParams) {
                     </h2>
 
                     {isHelper &&
-                        <small className="light_gray_color">
-                            Айди: {" "}
-                            <span className="all_select">{user._id}</span>
+                        <small className="light_gray_color all_select">
+                            {user._id}
                         </small>
                     }
                     {isContentMaker &&
@@ -141,14 +140,16 @@ export default async function Profile({ params }: NameParams) {
                             )
                         })}
                     </div>
-                    <div>
-                        <h4>
-                            Онлайн:{" "}
-                            <time dateTime={new Date(user.onlineAt || 0).toISOString()}>
-                                {timeAgo.format(new Date(user.onlineAt || 0))}
-                            </time>
-                        </h4>
-                    </div>
+                    {!isMe &&
+                        <div>
+                            <h4>
+                                Онлайн:{" "}
+                                <time dateTime={new Date(user.onlineAt || 0).toISOString()}>
+                                    {timeAgo.format(new Date(user.onlineAt || 0))}
+                                </time>
+                            </h4>
+                        </div>
+                    }
                     <h4>
                         <Link href="/milkyway">
                             Звёзды: {" "}
