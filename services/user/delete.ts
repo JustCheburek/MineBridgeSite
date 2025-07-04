@@ -1,13 +1,13 @@
-"use server";
-import {userModel} from "@db/models";
-import {revalidateTag} from 'next/cache'
-import {redirect} from "next/navigation";
+'use server'
+import { userModel } from '@db/models'
+import { revalidateTag } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 export async function DeleteUser(_id: string) {
-    "use server"
+  'use server'
 
-    await userModel.findByIdAndDelete(_id)
+  await userModel.findByIdAndDelete(_id)
 
-    revalidateTag("userLike")
-    redirect("/auth")
+  revalidateTag('userLike')
+  redirect('/auth')
 }

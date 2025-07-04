@@ -1,26 +1,26 @@
-import dynamic from "next/dynamic";
-import type {User} from "lucia";
-import {AddWLConsole, GetHoursConsole} from "@services/console";
+import dynamic from 'next/dynamic'
+import type { User } from 'lucia'
+import { AddWLConsole, GetHoursConsole } from '@services/console'
 
-const HourStarSection = dynamic(() => import("./hourstar"));
-const WhitelistSection = dynamic(() => import("./whitelist"));
+const HourStarSection = dynamic(() => import('./hourstar'))
+const WhitelistSection = dynamic(() => import('./whitelist'))
 
 type ServerStatus = {
-    user: User
-    isMe: boolean
+  user: User
+  isMe: boolean
 }
 
-export default async function ServerStatusSection({user, isMe}: ServerStatus) {
-    const [hours] = await Promise.all([
-        GetHoursConsole(user.name),
-        user.whitelist && AddWLConsole(user.name)
-    ])
+export default async function ServerStatusSection({ user, isMe }: ServerStatus) {
+  const [hours] = await Promise.all([
+    GetHoursConsole(user.name),
+    user.whitelist && AddWLConsole(user.name),
+  ])
 
-    return <>
-        {hours > -1 &&
-          <HourStarSection user={user} hours={hours} isMe={isMe}/>
-        }
+  return (
+    <>
+      {hours > -1 && <HourStarSection user={user} hours={hours} isMe={isMe} />}
 
-        <WhitelistSection user={user} isMe={isMe}/>
+      <WhitelistSection user={user} isMe={isMe} />
     </>
+  )
 }

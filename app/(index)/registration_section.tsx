@@ -1,26 +1,25 @@
-import {Url} from "@components/button";
-import styles from "./styles/registation.module.scss"
+import { Url } from '@components/button'
 
 const RegistrationSection = () => (
-    <section className={`${styles.registration_section} center_text`}>
-        <article className={`${styles.registration} hidden_once`}>
-            <div className={`${styles.registration_text}`}>
-                <h2 className="unic_color">Заходи прямо сейчас</h2>
-                <p className="for_pc">
-                    {process.env.NEXT_PUBLIC_VERSION} · Minecraft: Java Edition · Лицензия не обязательна
-                </p>
-                <p className="for_mobile">
-                    {process.env.NEXT_PUBLIC_VERSION}<br/>
-                    Minecraft: Java + Bedrock Edition<br/>
-                    Лицензия не обязательна
-                </p>
-            </div>
+  <section className='py-page grid place-items-center text-center'>
+    <article className='md:px-page md:borderbox hidden_once grid w-[min(910px,90%)] md:bg-black/30 md:pb-[10px] md:pt-[50px]'>
+      <div className='grid gap-8'>
+        <h2 className='text-unic'>Заходи прямо сейчас</h2>
+        <p className='max-[1200px]:hidden'>
+          {process.env.NEXT_PUBLIC_VERSION} · Minecraft: Java Edition · Лицензия не обязательна
+        </p>
+        <p className='min-[1200px]:hidden'>
+          {process.env.NEXT_PUBLIC_VERSION}
+          <br />
+          Minecraft: Java + Bedrock Edition
+          <br />
+          Лицензия не обязательна
+        </p>
+      </div>
 
-            <Url href="/auth">
-                Влететь на сервер
-            </Url>
-        </article>
-    </section>
+      <Url href='/auth'>Влететь на сервер</Url>
+    </article>
+  </section>
 )
 
 export default RegistrationSection

@@ -1,58 +1,58 @@
 // Редкости
 @mixin box($color, $radius, $opacity) {
-	box-shadow: 0 0 $radius rgba($color, $opacity);
-	border: solid 1px rgb($color);
+  box-shadow: 0 0 $radius rgba($color, $opacity);
+  border: solid 1px rgb($color);
 }
 
 @mixin text($color, $radius, $opacity) {
-	color: rgb($color);
-	text-shadow: 0 0 $radius rgba($color, $opacity);
+  color: rgb($color);
+  text-shadow: 0 0 $radius rgba($color, $opacity);
 }
 
 .common_box {
-	@include box(var(--common-color), 30px, 0.7);
+  @include box(var(--common-color), 30px, 0.7);
 }
 
 .common {
-	@include text(var(--common-color), 15px, 0.9);
+  @include text(var(--common-color), 15px, 0.9);
 }
 
 .uncommon_box {
-	@include box(var(--uncommon-color), 20px, 0.6);
+  @include box(var(--uncommon-color), 20px, 0.6);
 }
 
 .uncommon {
-	@include text(var(--uncommon-color), 20px, 0.6);
+  @include text(var(--uncommon-color), 20px, 0.6);
 }
 
 .rare_box {
-	@include box(var(--rare-color), 30px, 1);
+  @include box(var(--rare-color), 30px, 1);
 }
 
 .rare {
-	@include text(var(--rare-color), 30px, 1);
+  @include text(var(--rare-color), 30px, 1);
 }
 
 .epic_box {
-	@include box(var(--epic-color), 30px, 0.9)
+  @include box(var(--epic-color), 30px, 0.9);
 }
 
 .epic {
-	@include text(var(--epic-color), 30px, 0.9);
+  @include text(var(--epic-color), 30px, 0.9);
 }
 
 .mythic_box {
-	@include box(var(--mythic-color), 35px, 1)
+  @include box(var(--mythic-color), 35px, 1);
 }
 
 .mythic {
-	@include text(var(--mythic-color), 35px, 1);
+  @include text(var(--mythic-color), 35px, 1);
 }
 
 .legendary_box {
-	@include box(var(--legendary-color), 40px, 1);
+  @include box(var(--legendary-color), 40px, 1);
 }
 
 .legendary {
-	@include text(var(--legendary-color), 40px, 1);
+  @include text(var(--legendary-color), 40px, 1);
 }

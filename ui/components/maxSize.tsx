@@ -1,36 +1,27 @@
 // React
-import type {ComponentPropsWithoutRef} from "react";
-
-// Стили
-import styles from "./styles/maxSize.module.scss";
-
-declare module 'csstype' {
-    interface Properties {
-        '--max-width'?: string
-    }
-}
+import type { ComponentPropsWithoutRef } from 'react'
+import { cn } from '@/lib/utils'
 
 type MaxSize = {
-    width?: number
-    sideNav?: boolean
+  sideNav?: boolean
 }
 
-export function MaxSize(
-    {
-        children,
-        sideNav = false,
-        className = "",
-        width = 1200,
-        ...props
-    }: ComponentPropsWithoutRef<"div"> & MaxSize) {
-    if (sideNav && width === 1200) {
-        width = 1300
-    }
-
-    return (
-        <div className={`${styles.max_size} ${sideNav ? styles.sideNav : ""} ${className}`}
-             style={{"--max-width": `${width}px`}} {...props}>
-            {children}
-        </div>
-    )
+export function MaxSize({
+  children,
+  sideNav = false,
+  className = '',
+  ...props
+}: ComponentPropsWithoutRef<'div'> & MaxSize) {
+  return (
+    <div
+      className={cn(
+        'py-(--spacing-page) container relative mx-auto',
+        sideNav && 'grid lg:grid-cols-[1fr_4fr_1fr] lg:gap-12',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  )
 }

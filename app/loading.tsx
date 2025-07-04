@@ -1,10 +1,10 @@
-import {MaxSize} from "@components/maxSize";
-import {LoadingSvg} from "@ui/SVGS";
+import { MaxSize } from '@components/maxSize'
+import { LoadingSvg } from '@ui/SVGS'
 
 export default function Loading() {
-    return (
-        <MaxSize className="grid_center">
-            <LoadingSvg size="40vh"/>
-        </MaxSize>
-    )
+  return (
+    <MaxSize className='grid place-items-center'>
+      <LoadingSvg className='size-[40vh]' />
+    </MaxSize>
+  )
 }

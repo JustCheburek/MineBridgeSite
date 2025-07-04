@@ -1,9 +1,9 @@
-import {prop} from "@typegoose/typegoose";
+import { prop } from '@typegoose/typegoose'
 
 export class From {
-	@prop()
-	public place?: string
+  @prop()
+  public place?: string
 
-	@prop()
-	public userId?: string
+  @prop()
+  public userId?: string
 }

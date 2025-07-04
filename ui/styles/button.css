@@ -1,0 +1,28 @@
+@layer base {
+  /* Базовые стили для кнопок, инпутов и лейблов */
+  button,
+  input,
+  label {
+    @apply text-text cursor-pointer border-none bg-transparent outline-none;
+  }
+
+  /* Базовые стили для ссылок */
+  a {
+    @apply text-text inline-block transition-colors duration-300;
+  }
+}
+
+@layer components {
+  /* Стили для уникальных кнопок */
+  .unic_button {
+    @apply flex items-center justify-center transition-transform duration-300;
+
+    &:hover {
+      @apply scale-110;
+    }
+
+    &:active {
+      @apply scale-90;
+    }
+  }
+}

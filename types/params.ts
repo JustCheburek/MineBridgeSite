@@ -1,3 +1,3 @@
 export type NameParams = {
-    params: Promise<{ name: string }>
+  params: Promise<{ name: string }>
 }

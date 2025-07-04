@@ -1,21 +1,29 @@
-import {DiscordUrl, SupportUrl, TelegramUrl, VkUrl} from "@ui/SVGS";
+import { DiscordUrl, SupportUrl, TelegramUrl, VkUrl } from '@ui/SVGS'
+import { cn } from '@/lib/utils'
 
-export function Urls({className}: { className?: string }) {
-	return (
-			<ul className={`remove_marker no_select not_indent ${className}`}>
-				{/* Навигация по ссылкам */}
-				<li className="url">
-					<TelegramUrl/>
-				</li>
-				<li className="url">
-					<DiscordUrl/>
-				</li>
-				<li className="url">
-					<VkUrl/>
-				</li>
-				<li className="url">
-					<SupportUrl/>
-				</li>
-			</ul>
-	)
+export function Urls({ className }: { className?: string }) {
+  return (
+    <ul
+      className={cn(
+        'mx-auto flex w-fit min-w-[180px] items-center justify-between',
+        'remove_marker not_indent select-none',
+        '*:inline-flex *:aspect-square *:items-center *:justify-center',
+        className
+      )}
+    >
+      {/* Навигация по ссылкам */}
+      <li>
+        <TelegramUrl />
+      </li>
+      <li>
+        <DiscordUrl />
+      </li>
+      <li>
+        <VkUrl />
+      </li>
+      <li>
+        <SupportUrl />
+      </li>
+    </ul>
+  )
 }

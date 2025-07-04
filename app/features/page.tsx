@@ -1,116 +1,117 @@
 // React
-import type {Metadata} from "next";
-
-// Стили
-import styles from "./features.module.scss"
+import type { Metadata } from 'next'
 
 // Компоненты
-import {AnalyticsSvg, BatSvg} from "@ui/SVGS";
-import {MaxSize} from "@components/maxSize";
-import {GBox, GContainer, GText} from "@components/grid";
-import {Url} from "@components/button";
-import {Img, ImgBox} from "@components/img";
-import {H1} from "@components/h1";
+import { AnalyticsSvg, BatSvg } from '@ui/SVGS'
+import { MaxSize } from '@components/maxSize'
+import { GLink, GContainer, GImg, GText, GBox } from '@components/grid'
+import { Url } from '@components/button'
+import { Img } from '@components/img'
+import { H1 } from '@components/h1'
 
 export const metadata: Metadata = {
-    title: "Фичи",
-    description: "Список всяких полезностей для более комфортной игры. Слишком полезно!"
-};
+  title: 'Фичи',
+  description: 'Список всяких полезностей для более комфортной игры. Слишком полезно!',
+}
 
 export default function Features() {
-    return (
-        <MaxSize>
-            <H1>Фичи</H1>
+  return (
+    <MaxSize>
+      <H1>Фичи</H1>
 
-            <GContainer border>
-                <GBox href="/features/lor" imgs="one">
-                    <ImgBox type="grid">
-                        <BatSvg size="100%"/>
-                    </ImgBox>
+      <GContainer border>
+        <GLink href='/features/lor'>
+          <GImg imgs="one">
+            <BatSvg className='size-[100%]' />
+          </GImg>
 
-                    <GText>Лор</GText>
-                </GBox>
+          <GText>Лор</GText>
+        </GLink>
 
-                <GBox href="/features/guides" imgs="two">
-                    <ImgBox type="grid">
-                        <Img src="/features/guides/thinking.png" alt="Думающий чел"/>
-                    </ImgBox>
-                    <ImgBox type="grid">
-                        <Img src="/features/guides/blocks.png" alt="Блоки"/>
-                    </ImgBox>
+        <GLink href='/features/guides'>
+          <GImg imgs="two">
+            <Img src='/features/guides/thinking.png' alt='Думающий чел' />
+          </GImg>
+          <GImg imgs="two">
+            <Img src='/features/guides/blocks.png' alt='Блоки' />
+          </GImg>
 
-                    <GText>Гайды</GText>
-                </GBox>
+          <GText>Гайды</GText>
+        </GLink>
 
-                <GBox href="/rules/mods" imgs="two">
-                    <ImgBox type="grid">
-                        <Img src="/features/mods/replay_mod.png" alt="Реплей мод"/>
-                    </ImgBox>
-                    <ImgBox type="grid">
-                        <Img src="/features/mods/voice_chat.png" alt="Войс чат"/>
-                    </ImgBox>
+        <GLink href='/rules/mods'>
+          <GImg imgs="two">
+            <Img src='/features/mods/replay_mod.png' alt='Реплей мод' />
+          </GImg>
+          <GImg imgs="two">
+            <Img src='/features/mods/voice_chat.png' alt='Войс чат' />
+          </GImg>
 
-                    <GText>Файлы</GText>
-                </GBox>
+          <GText>Файлы</GText>
+        </GLink>
 
-                <GBox href={`http://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`} anotherSite imgs="one" id="map">
-                    <ImgBox type="grid">
-                        <Img src="/features/map.png" alt="Карта"/>
-                    </ImgBox>
+        <GLink
+          href={`http://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`}
+          anotherSite
+          id='map'
+        >
+          <GImg imgs="one">
+            <Img src='/features/map.png' alt='Карта' />
+          </GImg>
 
-                    <GText>Карта</GText>
-                </GBox>
+          <GText>Карта</GText>
+        </GLink>
 
-                <GBox anotherSite>
-                    <ul className={`not_indent remove_marker ${styles.vote_box}`}>
-                        <li>
-                            <Url href="https://hotmc.ru/minecraft-server-259948" margin="0">
-                                HotMC
-                            </Url>
-                        </li>
-                        <li>
-                            <Url href="https://minecraftrating.ru/server/minebridge" margin="0">
-                                Rating
-                            </Url>
-                        </li>
-                    </ul>
+        <GBox anotherSite>
+          <ul className='not_indent remove_marker flex flex-wrap justify-center gap-4'>
+            <li>
+              <Url href='https://hotmc.ru/minecraft-server-259948' className='m-0'>
+                HotMC
+              </Url>
+            </li>
+            <li>
+              <Url href='https://minecraftrating.ru/server/minebridge' className='m-0'>
+                Rating
+              </Url>
+            </li>
+          </ul>
 
-                    <GText>Голосование</GText>
-                </GBox>
+          <GText>Голосование</GText>
+        </GBox>
 
-                <GBox href="/features/stickers" imgs="three">
-                    <ImgBox type="grid">
-                        <Img src="/features/stickers/10.png" alt="Стикер"/>
-                    </ImgBox>
-                    <ImgBox type="grid">
-                        <Img src="/features/stickers/0.png" alt="Стикер"/>
-                    </ImgBox>
-                    <ImgBox type="grid">
-                        <Img src="/features/stickers/8.png" alt="Стикер"/>
-                    </ImgBox>
+        <GLink href='/features/stickers'>
+          <GImg imgs="three">
+            <Img src='/features/stickers/10.png' alt='Стикер' />
+          </GImg>
+          <GImg imgs="three">
+            <Img src='/features/stickers/0.png' alt='Стикер' />
+          </GImg>
+          <GImg imgs="three">
+            <Img src='/features/stickers/8.png' alt='Стикер' />
+          </GImg>
 
-                    <GText>Стикеры</GText>
-                </GBox>
+          <GText>Стикеры</GText>
+        </GLink>
 
-                <GBox href="/features/design" imgs="two">
-                    <ImgBox type="grid">
-                        <Img src="/index/unic/heart.webp" alt="Сердце" pixel/>
-                    </ImgBox>
-                    <ImgBox type="grid">
-                        <Img src="/index/unic/calendar.webp" alt="Календарь" pixel/>
-                    </ImgBox>
+        <GLink href='/features/design'>
+          <GImg imgs="two">
+            <Img src='/index/unic/heart.webp' alt='Сердце' pixel />
+          </GImg>
+          <GImg imgs="two">
+            <Img src='/index/unic/calendar.webp' alt='Календарь' pixel />
+          </GImg>
 
-                    <GText>Дизайн</GText>
-                </GBox>
+          <GText>Дизайн</GText>
+        </GLink>
 
-                <GBox href="/features/analytics" imgs="one">
-                    <ImgBox type="grid">
-                        <AnalyticsSvg size="90%"/>
-                    </ImgBox>
+        <GLink href='/features/analytics'>
+          <GImg imgs="one">
+            <AnalyticsSvg className='size-[90%]' />
+          </GImg>
 
-                    <GText>Аналитика</GText>
-                </GBox>
-            </GContainer>
-        </MaxSize>
-    )
+          <GText>Аналитика</GText>
+        </GLink>
+      </GContainer>
+    </MaxSize>
+  )
 }

@@ -1,5 +1,5 @@
-@use "@styles/mixins";
-@use "sass:math";
+@use '@styles/mixins';
+@use 'sass:math';
 
 .milkyway_container {
   height: 100%;
@@ -8,7 +8,7 @@
 
 .milkyway_box {
   background: var(--black-color);
-  background-image: url("stars.svg");
+  background-image: url('stars.svg');
   background-size: 500px;
   will-change: transform;
 }
@@ -28,7 +28,8 @@
   margin-left: var(--_x);
 }
 
-.circle, .player {
+.circle,
+.player {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,7 +92,8 @@
   translate: -50%;
 }
 
-.line, .complete {
+.line,
+.complete {
   position: absolute;
 
   transform: rotate(var(--_angle)) translate(50%);
@@ -164,10 +166,12 @@
   padding: 0.8rem 2rem;
   translate: 0;
 
-  @include mixins.border($background: #151B1E, $color: #A6A6A6);
+  @include mixins.border($background: #151b1e, $color: #a6a6a6);
 
   & {
-    transition: translate var(--long-transition), opacity var(--long-transition);
+    transition:
+      translate var(--long-transition),
+      opacity var(--long-transition);
   }
 }
 
@@ -197,7 +201,8 @@
 }
 
 @media (width > 768px) {
-  .card:has(.item:hover), .card:has(.text:hover) {
+  .card:has(.item:hover),
+  .card:has(.text:hover) {
     .left .text {
       translate: calc(100% - 1rem);
     }
@@ -240,7 +245,8 @@
     top: 103%;
   }
 
-  .left, .right {
+  .left,
+  .right {
     .text {
       position: static;
       translate: 0;
@@ -248,7 +254,10 @@
     }
   }
 
-  .line, .complete, .circle, .player {
+  .line,
+  .complete,
+  .circle,
+  .player {
     display: none;
   }
 }

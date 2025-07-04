@@ -1,77 +1,85 @@
-import {ReloadButton} from "@components/reload";
-import styles from "./styles/h1.module.scss"
-import type {ComponentPropsWithoutRef, PropsWithChildren} from "react";
-import {UpSvg} from "@ui/SVGS";
-import Link from "next/link";
+import { ReloadButton } from '@components/reload'
+import type { ComponentPropsWithoutRef, PropsWithChildren } from 'react'
+import { UpSvg } from '@ui/SVGS'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
 
 interface RelativePath {
-    name: string
-    displayname: string
-    hide?: boolean
+  name: string
+  displayname: string
+  hide?: boolean
 }
 
-const RelativeNav = ({paths}: { paths: RelativePath[] }) => (
-    <nav className="center_text">
-        {paths.map((path, index) => {
-            if (path.hide) {
-                return null
-            }
-            const current = index + 1
-            const last = current === paths.length
+const RelativeNav = ({ paths }: { paths: RelativePath[] }) => (
+  <nav className='text-center'>
+    {paths.map((path, index) => {
+      if (path.hide) {
+        return null
+      }
+      const current = index + 1
+      const last = current === paths.length
 
-            if (last) {
-                return <span key={index}>{path.displayname}</span>
-            }
+      if (last) {
+        return <span key={index}>{path.displayname}</span>
+      }
 
-            const absolutePath = `/${paths.slice(0, current).map(p => p.name).join("/")}`
+      const absolutePath = `/${paths
+        .slice(0, current)
+        .map(p => p.name)
+        .join('/')}`
 
-            return (
-                <span key={index}>
-                    <Link href={absolutePath}>{path.displayname}</Link>
-                    <span className={styles.nav_arrow}> {">"} </span>
-                </span>
-            )
-        })}
-    </nav>
+      return (
+        <span key={index}>
+          <Link href={absolutePath}>{path.displayname}</Link>
+          <span className='text-light-gray'> {'>'} </span>
+        </span>
+      )
+    })}
+  </nav>
 )
 
-interface H1Props extends ComponentPropsWithoutRef<"h1"> {
-    reload?: () => void
-    up?: boolean
-    paths?: RelativePath[]
-    description?: string
+interface H1Props extends ComponentPropsWithoutRef<'h1'> {
+  reload?: () => void
+  up?: boolean
+  paths?: RelativePath[]
+  description?: string
 }
 
-export const H1 = ({children, paths, reload, description, up = false, className = "", ...props}: PropsWithChildren<H1Props>) => (
-    <div className={`${styles.container} ${className}`}>
-        {paths && <RelativeNav paths={paths}/>}
+export const H1 = ({
+  children,
+  paths,
+  reload,
+  description,
+  up = false,
+  className = '',
+  ...props
+}: PropsWithChildren<H1Props>) => (
+  <div
+    className={cn(
+      'min-h-header bg-background/80 sticky top-[-1px] z-30 mb-6 grid place-content-center backdrop-blur-sm',
+      className
+    )}
+  >
+    {paths && <RelativeNav paths={paths} />}
 
-        <div className={styles.box} id="top">
-            {up
-                ? <Link href={"#top"} className={`unic_button ${styles.top}`} title="Наверх">
-                    <UpSvg
-                        size="4.5rem"
-                        className="unic_color"
-                    />
-                </Link>
-                : <div/>
-            }
+    <div className='grid items-center justify-center sm:grid-cols-[1fr_5fr_1fr]'>
+      {up ? (
+        <Link href={'#top'} className={cn('unic_button max-sm:hidden')} title='Наверх'>
+          <UpSvg className='text-unic size-[4.5rem]' />
+        </Link>
+      ) : (
+        <div />
+      )}
 
-            <div>
-                <h1 className={styles.h1} {...props}>
-                    {children}
-                </h1>
+      <div>
+        <h1 className='m-0' {...props}>
+          {children}
+        </h1>
 
-                {description &&
-                  <p>
-                      {description}
-                  </p>
-                }
-            </div>
+        {description && <p>{description}</p>}
+      </div>
 
-            {reload &&
-              <ReloadButton action={reload} className={styles.reload}/>
-            }
-        </div>
+      {reload && <ReloadButton action={reload} className='max-sm:hidden' />}
     </div>
+  </div>
 )

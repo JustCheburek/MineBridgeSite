@@ -1,4 +1,5 @@
-.item, .case {
+.item,
+.case {
   display: grid;
   justify-content: center;
   align-items: center;
@@ -15,7 +16,8 @@
 }
 
 @media (width > 500px) {
-  .item, .case {
+  .item,
+  .case {
     grid-template-columns: 1fr 1fr;
   }
   .right_text {

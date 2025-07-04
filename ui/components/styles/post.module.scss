@@ -1,148 +1,152 @@
-@use "@styles/mixins";
+@use '@styles/mixins';
 
 .container {
-	// Расположение
-	display: flex;
-	place-content: center;
-	flex-direction: column;
+  // Расположение
+  display: flex;
+  place-content: center;
+  flex-direction: column;
 
-	margin-inline: auto;
+  margin-inline: auto;
 
-	// Размеры
-	width: min(750px, 100%);
+  // Размеры
+  width: min(750px, 100%);
 
-	margin-block: 4rem;
+  margin-block: 4rem;
 
-	overflow: hidden;
+  overflow: hidden;
 
-	// Отображение
-	@include mixins.border();
+  // Отображение
+  @include mixins.border();
 }
 
 .text {
-	display: grid;
-	place-content: center;
+  display: grid;
+  place-content: center;
 
-	margin-inline: auto;
-	margin-bottom: 2rem;
-	padding-inline: 1.5rem;
+  margin-inline: auto;
+  margin-bottom: 2rem;
+  padding-inline: 1.5rem;
 
-	max-width: 29rem;
+  max-width: 29rem;
 }
 
 .title {
-	text-align: center;
-	margin-block: 2rem;
+  text-align: center;
+  margin-block: 2rem;
 }
 
 .time {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 // Стили для SeasonBox
 .season {
-	--_line-width: 2px;
+  --_line-width: 2px;
 
-	// Расположение
-	position: relative;
+  // Расположение
+  position: relative;
 
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	gap: 0.5em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0.5em;
 }
 
 .season_text::before {
-	content: "";
+  content: '';
 
-	position: absolute;
-	top: 50%;
-	left: 0;
+  position: absolute;
+  top: 50%;
+  left: 0;
 
-	width: 100%;
-	height: var(--_line-width);
+  width: 100%;
+  height: var(--_line-width);
 
-	background: var(--border-color);
-	z-index: var(---1z);
+  background: var(--border-color);
+  z-index: var(---1z);
 }
 
 .season_text {
-	// Расположение
-	padding: 1rem 3rem;
+  // Расположение
+  padding: 1rem 3rem;
 
-	// Отображение
-	@include mixins.border($width: var(--_line-width), $background: var(--background-color));
+  // Отображение
+  @include mixins.border($width: var(--_line-width), $background: var(--background-color));
 }
 
 // Время
 .time_box {
-	display: none;
+  display: none;
 }
 
 // Время
 .time {
-	color: var(--unic-color);
-	font-weight: 600;
+  color: var(--unic-color);
+  font-weight: 600;
 
-	&:not(.not_center) {
-		display: block;
-		text-align: center;
-	}
+  &:not(.not_center) {
+    display: block;
+    text-align: center;
+  }
 }
 
 @media (width > 728px) {
-	// Время
-	.time_box {
-		display: grid;
-		justify-content: space-between;
-		grid-template-rows: 1fr 1fr;
-	}
+  // Время
+  .time_box {
+    display: grid;
+    justify-content: space-between;
+    grid-template-rows: 1fr 1fr;
+  }
 
-	.time_icon {
-		// Размеры
-		width: 2.7em;
-		height: 2.7em;
-	}
+  .time_icon {
+    // Размеры
+    width: 2.7em;
+    height: 2.7em;
+  }
 
-	.time_text {
-		padding-block: .5em;
-	}
+  .time_text {
+    padding-block: 0.5em;
+  }
 
-	.start {
-		justify-items: start;
+  .start {
+    justify-items: start;
 
-		* {
-			color: var(--green-color);
-		}
-	}
+    * {
+      color: var(--green-color);
+    }
+  }
 
-	.end {
-		justify-items: end;
+  .end {
+    justify-items: end;
 
-		* {
-			color: var(--red-color);
-		}
+    * {
+      color: var(--red-color);
+    }
 
-		.time_icon {
-			scale: -1 1;
-		}
-	}
+    .time_icon {
+      scale: -1 1;
+    }
+  }
 }
 
 .tags {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.3rem;
-	margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 1rem 0;
 }
 
 .tag {
-	padding: 0.2em 0.5em;
+  padding: 0.2em 0.5em;
 
-	color: var(--unic-color);
+  color: var(--unic-color);
 
-	@include mixins.border($width: 1px, $radius: 0.7rem, $background: rgba(var(--unic-color-rgb), 0.1));
+  @include mixins.border(
+    $width: 1px,
+    $radius: 0.7rem,
+    $background: rgba(var(--unic-color-rgb), 0.1)
+  );
 }

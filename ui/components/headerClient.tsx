@@ -1,167 +1,193 @@
-"use client";
+'use client'
 
 // React
-import Link from "next/link";
-import {Suspense, useEffect, useState} from "react";
-import type {User} from "lucia";
-import dynamic from "next/dynamic";
-
-// Стили
-import "./styles/header.scss";
+import Link from 'next/link'
+import { Suspense, useEffect, useState } from 'react'
+import type { User } from 'lucia'
+import dynamic from 'next/dynamic'
+import { cn } from '@/lib/utils'
 
 // Компоненты
-import {Urls} from "./urls";
-import {AuthSvg, MinebridgeSvg, MostikiSvg, StarSvg} from "@ui/SVGS";
-import {NavLink} from "@components/navlink";
-import {Burger} from "@components/burger";
-import {Skeleton} from "@components/skeleton";
-import {Logout} from "@services/user/logout";
+import { Urls } from './urls'
+import { AuthSvg, MinebridgeSvg, MostikiSvg, StarSvg } from '@ui/SVGS'
+import { NavLink } from '@components/navlink'
+import { Burger } from '@components/burger'
+import { Skeleton } from '@components/skeleton'
+import { MiniLink } from '@components/button'
 
-const Avatar = dynamic(() => import("@components/avatar"));
+const Avatar = dynamic(() => import('@components/avatar'))
 
 type Burger = {
-    burger: boolean,
-    setBurger: any
+  burger: boolean
+  setBurger: any
 }
 
-const MainNav = ({burger, setBurger}: Burger) => (
-    <nav
-        className={`nav_container ${burger ? "burger_active" : ""}`}
-        onClick={() => setBurger(false)}
-    >
-        <ul className="text_nav nav_box remove_marker not_indent">
-            {/* Основная навигация */}
-            <li>
-                <NavLink href="/" className="mini_button">Главная</NavLink>
-            </li>
-            <li>
-                <NavLink href="/shop" className="mini_button">Магазин</NavLink>
-            </li>
-            <li>
-                <NavLink href="/rules" className="mini_button">Правила</NavLink>
-            </li>
-            <li>
-                <NavLink href="/news" className="mini_button">Новости</NavLink>
-            </li>
-            <li>
-                <NavLink href="/features" className="mini_button">Фичи</NavLink>
-            </li>
-        </ul>
+// todo: Анимация появления
+const MainNav = ({ burger, setBurger }: Burger) => (
+  <nav
+    className={cn(
+      'lg:grid lg:grid-cols-[3fr_1fr] lg:place-items-center lg:gap-8 xl:gap-14',
+      'max-lg:bg-background/80 max-lg:fixed max-lg:inset-0 max-lg:flex max-lg:h-dvh max-lg:flex-col max-lg:items-center max-lg:justify-center max-lg:gap-x-8 max-lg:gap-y-2 max-lg:overflow-y-auto',
+      {
+        'max-lg:flex': burger,
+        'max-lg:hidden': !burger,
+      }
+    )}
+    onClick={() => setBurger(false)}
+  >
+    <ul className='max-lg:text-h2 max-lg:leading-h2 max-lg:borderbox flex items-center justify-between gap-2.5 max-lg:flex-col max-lg:gap-[clamp(0.1rem,1vh,1.5rem)] max-lg:p-6'>
+      {/* Основная навигация */}
+      <li>
+        <MiniLink href='/'>Главная</MiniLink>
+      </li>
+      <li>
+        <MiniLink href='/shop'>Магазин</MiniLink>
+      </li>
+      <li>
+        <MiniLink href='/rules'>Правила</MiniLink>
+      </li>
+      <li>
+        <MiniLink href='/news'>Новости</MiniLink>
+      </li>
+      <li>
+        <MiniLink href='/features'>Фичи</MiniLink>
+      </li>
+    </ul>
 
-        <Urls className="url_nav nav_box"/>
-    </nav>
+    <Urls className='max-lg:borderbox flex items-center justify-between gap-2.5 max-lg:p-6' />
+  </nav>
 )
 
-function User({user}: { user: User | null }) {
-    const [isMenu, setIsMenu] = useState(false)
+function User({ user }: { user: User | null }) {
+  const [isMenu, setIsMenu] = useState(false)
 
-    useEffect(() => {
-        document.body.addEventListener('click', () => setIsMenu(false))
+  useEffect(() => {
+    document.body.addEventListener('click', () => setIsMenu(false))
 
-        return function cleanUp() {
-            document.body.removeEventListener('click', () => setIsMenu(false))
-        }
-    }, [isMenu]);
-
-    if (!user) {
-        return (
-            <NavLink href="/auth" className="registration_nav">
-                <AuthSvg size="2em" className="auth_icon"/>
-                <p className="for_pc semibold-font">
-                    Войти
-                </p>
-            </NavLink>
-        )
+    return function cleanUp() {
+      document.body.removeEventListener('click', () => setIsMenu(false))
     }
+  }, [isMenu])
 
+  if (!user) {
     return (
-        <nav
-            className="user_nav"
-            onClick={e => e.stopPropagation()}
-        >
-            <div className="user_info">
-                <div className="user_text for_tablet">
-                    <NavLink href={`/user/${user.name}`} className="user_name medium-font">
-                        {user.name}
-                    </NavLink>
-
-                    <small className="user_has semibold-font">
-                        <Link href="/milkyway">
-                            <p className="yellow_color user_mostiki">
-                                {user?.rating || 0} <StarSvg width="0.8em" height="0.8em"/>
-                            </p>
-                        </Link>
-
-                        <Link href="/shop/buy">
-                            <p className="unic_color user_mostiki">
-                                {user?.mostiki || 0} <MostikiSvg width="0.9em" height="0.7em"/>
-                            </p>
-                        </Link>
-                    </small>
-                </div>
-
-                <button
-                    className="user_info"
-                    onClick={() => setIsMenu(prev => !prev)}
-                >
-                    <Avatar src={user.photo} width={38} className="unic_color"/>
-                </button>
-            </div>
-
-            <nav className={`user_menu ${isMenu ? "menu_active" : ""}`} id="user_menu">
-                <ul className="remove_marker not_indent">
-                    <li>
-                        <NavLink href={`/user/${user.name}`} className="mini_button">
-                            Профиль
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="/milkyway" className="mini_button">
-                            Мл. путь
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="/users" className="mini_button">
-                            Игроки
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink href="https://discord.gg/UBB92NjedW" className="mini_button">
-                            Кланы
-                        </NavLink>
-                    </li>
-                    <li>
-                        <button className="mini_button medium-font red_color logout" onClick={() => Logout()}>
-                            Выход
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-        </nav>
+      <NavLink
+        href='/auth'
+        className='hover:text-unic active:text-unic flex items-center justify-center gap-2.5'
+      >
+        <AuthSvg className='size-[38px] lg:size-9' />
+        <p className='font-semibold max-lg:hidden'>Войти</p>
+      </NavLink>
     )
+  }
+
+  return (
+    <nav className='relative' onClick={e => e.stopPropagation()}>
+      <div className='flex items-center justify-center gap-[17.5px] max-lg:grid-cols-1'>
+        <div className='flex flex-col max-xl:hidden'>
+          <NavLink href={`/user/${user.name}`} className='user_name font-medium'>
+            {user.name}
+          </NavLink>
+
+          <small className='flex justify-end gap-2 font-semibold leading-normal'>
+            <Link href='/milkyway'>
+              <p className='text-yellow flex items-center gap-[2.5px]'>
+                {user?.rating || 0} <StarSvg className='size-[0.8em]' />
+              </p>
+            </Link>
+
+            <Link href='/shop/buy'>
+              <p className='text-unic flex items-center gap-[2.5px]'>
+                {user?.mostiki || 0} <MostikiSvg className='size-[0.9em]' />
+              </p>
+            </Link>
+          </small>
+        </div>
+
+        <button
+          className='flex items-center justify-center gap-[17.5px] max-lg:grid-cols-1'
+          onClick={() => setIsMenu(true)}
+        >
+          <Avatar src={user.photo} className='size-[38px]' />
+        </button>
+      </div>
+
+      <nav
+        className={cn(
+          'border-info-border rounded-base rounded-tr-1 bg-background/80 absolute right-0 rounded-tr-md border p-[15px]',
+          {
+            block: isMenu,
+            hidden: !isMenu,
+          }
+        )}
+      >
+        <ul>
+          <li>
+            <MiniLink href={`/user/${user.name}`}>Профиль</MiniLink>
+          </li>
+          <li>
+            <MiniLink href='/milkyway'>Мл. путь</MiniLink>
+          </li>
+          <li>
+            <MiniLink href='/users'>Игроки</MiniLink>
+          </li>
+          <li>
+            <MiniLink href='https://discord.gg/UBB92NjedW'>Кланы</MiniLink>
+          </li>
+          <li>
+            <MiniLink href='/api/logout' danger>
+              Выход
+            </MiniLink>
+          </li>
+        </ul>
+      </nav>
+    </nav>
+  )
 }
 
-export function HeaderClient({user}: { user: User | null }) {
-    const [burger, setBurger] = useState<boolean>(false)
+export function HeaderClient({ user }: { user: User | null }) {
+  const [burger, setBurger] = useState<boolean>(false)
 
-    return (
-        <header className={burger ? "burger_active" : ""}>
-            <div className="header">
-                {/* Бургер иконка */}
-                <Burger burger={burger} setBurger={setBurger}/>
+  useEffect(() => {
+    if (burger) {
+      document.body.style.overflowY = 'hidden'
+    } else {
+      document.body.style.overflowY = ''
+    }
+  }, [burger])
 
-                {/* Лого */}
-                <Link href="/" className="logo" rel="shortcut icon" aria-label="Переход на главную страницу">
-                    <MinebridgeSvg/>
-                </Link>
+  return (
+    <header
+      className={cn(
+        'min-h-header borderbox sticky top-[-1px] z-40 flex items-center justify-center rounded-none border-none backdrop-blur-sm',
+        {
+          burger_active: burger,
+        }
+      )}
+    >
+      <div className='container mx-auto grid w-full grid-cols-3 place-items-center gap-[35px] font-medium lg:grid-cols-[1fr_5fr_1fr]'>
+        {/* Бургер иконка */}
+        <div className='max-lg:block lg:hidden'>
+          <Burger burger={burger} setBurger={setBurger} />
+        </div>
 
-                {/* Навигация */}
-                <MainNav burger={burger} setBurger={setBurger}/>
+        {/* Лого */}
+        <Link
+          href='/'
+          className='h-[38px] w-[38px]'
+          rel='shortcut icon'
+          aria-label='Переход на главную страницу'
+        >
+          <MinebridgeSvg className='size-full' />
+        </Link>
 
-                <Suspense fallback={<Skeleton width={180} height={40}/>}>
-                    <User user={user}/>
-                </Suspense>
-            </div>
-        </header>
-    )
+        {/* Навигация */}
+        <MainNav burger={burger} setBurger={setBurger} />
+
+        <Suspense fallback={<Skeleton className='h-[40px] w-[180px]' />}>
+          <User user={user} />
+        </Suspense>
+      </div>
+    </header>
+  )
 }

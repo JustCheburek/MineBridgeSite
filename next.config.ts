@@ -1,4 +1,4 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -11,14 +11,14 @@ const nextConfig: NextConfig = {
       {
         protocol: 'http',
         hostname: '**',
-      }
-    ]
+      },
+    ],
   },
-  serverExternalPackages: ["mongoose", "eslint", "oslo", "typescript"],
+  serverExternalPackages: ['mongoose', 'eslint', 'oslo', 'typescript'],
   experimental: {
-    ppr: 'incremental',
+    //ppr: 'incremental',
     typedEnv: true,
-    optimizeCss: true
+    //optimizeCss: true,
   },
   async redirects() {
     return [
@@ -39,6 +39,6 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

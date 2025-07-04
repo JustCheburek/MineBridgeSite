@@ -1,15 +1,15 @@
-"use server";
+'use server'
 
-import {RconVC} from "@services/console";
-import {userModel} from "@db/models";
-import {revalidateTag} from 'next/cache'
-import type {User} from "lucia";
-import axios from "axios";
-import {Social} from "@/types/url";
-import {Resend} from "resend";
-import {MostikiEmail} from "@email/mostiki";
+import { RconVC } from '@services/console'
+import { userModel } from '@db/models'
+import { revalidateTag } from 'next/cache'
+import type { User } from 'lucia'
+import axios from 'axios'
+import { Social } from '@/types/url'
+import { Resend } from 'resend'
+import { MostikiEmail } from '@email/mostiki'
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 /*function chunk<T>(arr: T[], size: number) {
     return Array.from({
@@ -58,70 +58,79 @@ export async function SendEmail(formData: FormData) {
 }*/
 
 export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
-    const name = formData.get("name") as string
-    const photo = formData.get("photo") as string
-    const fullPhoto = formData.get("fullPhoto") as string
+  const name = formData.get('name') as string
+  const photo = formData.get('photo') as string
+  const fullPhoto = formData.get('fullPhoto') as string
 
-    if (name !== user.name) {
-        const candidate = await userModel.findOne({name})
-        if (candidate) {
-            throw new Error(`Ник занят`)
-        }
-        if (user.discordId) {
-            await axios.patch(
-                `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user.discordId}`,
-                {
-                    nick: name
-                },
-                {
-                    headers: {
-                        Authorization: `Bot ${process.env.DISCORD_TOKEN}`
-                    }
-                }
-            ).catch(console.error)
-        }
-
-        // Смена аккаунта
-        const client = await RconVC()
-        await client.send(`librelogin user migrate ${user.name} ${name}`)
+  if (name !== user.name) {
+    const candidate = await userModel.findOne({ name })
+    if (candidate) {
+      throw new Error(`Ник занят`)
+    }
+    if (user.discordId) {
+      await axios
+        .patch(
+          `https://discord.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user.discordId}`,
+          {
+            nick: name,
+          },
+          {
+            headers: {
+              Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+            },
+          }
+        )
+        .catch(console.error)
     }
 
-    const socials: Social[] = [
-        {name: formData.get("youtube")?.toString(), social: "youtube"},
-        {name: formData.get("twitch")?.toString(), social: "twitch"},
-        {name: formData.get("vk")?.toString(), social: "vk"},
-        {name: formData.get("donationAlerts")?.toString(), social: "donationAlerts"},
-        {url: formData.get("discord")?.toString(), social: "discord"},
-        {url: formData.get("telegram")?.toString(), social: "telegram"},
-    ]
+    // Смена аккаунта
+    const client = await RconVC()
+    await client.send(`librelogin user migrate ${user.name} ${name}`)
+  }
 
-    socials.forEach(({url, social}) => {
-        if (url && !url.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/)) {
-            throw new Error(`Некорректная ссылка в ${social}`)
-        }
-    })
+  const socials: Social[] = [
+    { name: formData.get('youtube')?.toString(), social: 'youtube' },
+    { name: formData.get('twitch')?.toString(), social: 'twitch' },
+    { name: formData.get('vk')?.toString(), social: 'vk' },
+    { name: formData.get('donationAlerts')?.toString(), social: 'donationAlerts' },
+    { url: formData.get('discord')?.toString(), social: 'discord' },
+    { url: formData.get('telegram')?.toString(), social: 'telegram' },
+  ]
 
-    let mostiki = user.mostiki
-    if (isAdmin) {
-        const newMostiki = Number(formData.get("mostiki"))
-
-        if (newMostiki !== mostiki) {
-            if (user?.notifications?.mostiki) {
-                await resend.emails.send({
-                    from: 'Майнбридж <mostiki@m-br.ru>',
-                    to: user.email,
-                    subject: 'Изменения в мостиках на MineBridge',
-                    react: MostikiEmail(
-                        {name: user.name, mostiki: newMostiki - mostiki, allMostiki: newMostiki}
-                    )
-                })
-            }
-
-            mostiki = newMostiki
-        }
+  socials.forEach(({ url, social }) => {
+    if (
+      url &&
+      !url.match(
+        /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/
+      )
+    ) {
+      throw new Error(`Некорректная ссылка в ${social}`)
     }
+  })
 
-    await userModel.findByIdAndUpdate(user._id, {name, photo, fullPhoto, mostiki, socials})
+  let mostiki = user.mostiki
+  if (isAdmin) {
+    const newMostiki = Number(formData.get('mostiki'))
 
-    revalidateTag("userLike")
+    if (newMostiki !== mostiki) {
+      if (user?.notifications?.mostiki) {
+        await resend.emails.send({
+          from: 'Майнбридж <mostiki@m-br.ru>',
+          to: user.email,
+          subject: 'Изменения в мостиках на MineBridge',
+          react: MostikiEmail({
+            name: user.name,
+            mostiki: newMostiki - mostiki,
+            allMostiki: newMostiki,
+          }),
+        })
+      }
+
+      mostiki = newMostiki
+    }
+  }
+
+  await userModel.findByIdAndUpdate(user._id, { name, photo, fullPhoto, mostiki, socials })
+
+  revalidateTag('userLike')
 }

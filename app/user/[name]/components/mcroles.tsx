@@ -1,5 +1,5 @@
 /*
-<Suspense fallback={<Skeleton width="1rem"/>}>
+<Suspense fallback={<Skeleton className="w-[1rem]"/>}>
     <MCRoles roles={roles} name={name}/>
 </Suspense>
 
@@ -12,7 +12,7 @@ export function MCRoles({roles, name}: { roles: Role[], name: string }) {
     return (<>
         <button onClick={() => GiveRolesConsole(roles, name)}>
             <small
-                className="unic_color"
+                className="text-unic"
             >
                 Получить роли в майне
             </small>

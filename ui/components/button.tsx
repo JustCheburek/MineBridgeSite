@@ -1,69 +1,91 @@
 // React
-import type { ComponentPropsWithoutRef } from "react";
-import Link, { LinkProps } from "next/link";
+import type { ComponentPropsWithoutRef } from 'react'
+import Link, { LinkProps } from 'next/link'
+import { cn } from '@/lib/utils'
 
-// Стили
-import styles from "./styles/button.module.scss"
-import { DangerProps } from "@components/form";
-import { HorizontalLoadingSvg } from "@ui/SVGS"
+// Компоненты
+import { DangerProps } from '@components/form'
+import { NavLink } from './navlink'
 
-type Url = {
-    margin?: string | number
-} & ComponentPropsWithoutRef<"a"> & LinkProps & DangerProps
-
-export const Url = (
-    {
-        href,
-        children,
-        target,
-        className = "",
-        margin = "2.5rem",
-        download = false,
-        danger = false,
-        ...props
-    }: Url) => {
-
-    if (!target) {
-        if (download || href.toString().startsWith("http")) {
-            target = "_blank"
-        } else {
-            target = "_self"
-        }
-    }
-
-    return (
-        <Link
-            href={href}
-            target={target}
-            className={`${styles.button} ${className} ${danger ? styles.danger : ""}`}
-            style={{ marginBlock: margin }}
-            download={download}
-            {...props}
-        >
-            {children}
-        </Link>
-    )
+// Базовые стили для кнопки
+const buttonBaseStyles = {
+  container:
+    'relative flex justify-center items-center w-fit mx-auto py-[15px] px-[45px] my-[2.5rem] z-10 group/button select-none',
 }
 
-export type ButtonProps = {
-    margin?: string
-} & ComponentPropsWithoutRef<"button"> & DangerProps
+export const MiniLink = ({ children, className = '', href, ...props }: NavLink) => {
+  return (
+    <NavLink
+      href={href}
+      className={cn(
+        'rounded-button w-full px-[17px] py-[9px] transition-colors duration-500',
+        'hover:bg-gray active:text-unic focus:text-unic',
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </NavLink>
+  )
+}
 
-export const Button = (
-    {
-        children,
-        className = "",
-        margin = "2.5rem",
-        danger = false,
-        ...props
-    }: ButtonProps) => {
-    return (
-        <button
-            className={`${styles.button} ${className} ${danger ? styles.danger : ""}`}
-            style={{ marginBlock: margin }}
-            {...props}
-        >
-            {children}
-        </button>
-    )
+export const BG = ({ className = '', danger = false, ...props }: ComponentPropsWithoutRef<'span'> & DangerProps) => {
+  return (
+    <span
+      className={cn(
+        'absolute inset-0 rounded-button -z-10 opacity-75 transition-all duration-600 drop-shadow-[0_0_10px]',
+        danger ? 'bg-red drop-shadow-red' : 'bg-unic drop-shadow-unic',
+        'group-hover/button:multi-["scale-115;opacity-100;drop-shadow-[0_0_13px]"]',
+        'group-active/button:multi-["opacity-50;drop-shadow-[0_0_7px]"]',
+        'group-focus/button:multi-["opacity-50;drop-shadow-[0_0_7px]"]',
+        'group-disabled/button:opacity-50',
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+type Url = ComponentPropsWithoutRef<'a'> & LinkProps & DangerProps
+
+export const Url = ({
+  href,
+  children,
+  target,
+  className = '',
+  download = false,
+  danger = false,
+  ...props
+}: Url) => {
+  if (!target) {
+    if (download || href.toString().startsWith('http')) {
+      target = '_blank'
+    } else {
+      target = '_self'
+    }
+  }
+
+  return (
+    <Link
+      href={href}
+      target={target}
+      className={cn(buttonBaseStyles.container, className)}
+      download={download}
+      {...props}
+    >
+      <BG danger={danger} />
+      <h3>{children}</h3>
+    </Link>
+  )
+}
+
+export type Button = ComponentPropsWithoutRef<'button'> & DangerProps
+
+export const Button = ({ children, className = '', danger = false, ...props }: Button) => {
+  return (
+    <button className={cn(buttonBaseStyles.container, className)} {...props}>
+      <BG danger={danger} />
+      <h3>{children}</h3>
+    </button>
+  )
 }

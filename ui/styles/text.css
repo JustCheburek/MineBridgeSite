@@ -1,0 +1,34 @@
+@layer base {
+  h1,
+  h2,
+  h3 {
+    @apply max-md:break-all;
+  }
+
+  h1 {
+    @apply text-unic text-h1 leading-h1 mb-[0.67em] w-full text-center font-bold;
+  }
+
+  h2 {
+    @apply text-h2 leading-h2 font-bold;
+  }
+
+  h3 {
+    @apply text-h3 leading-h3 font-bold;
+  }
+
+  h4 {
+    @apply text-h4 leading-h4 font-normal;
+  }
+
+  small {
+    @apply text-small leading-small;
+  }
+}
+
+@layer components {
+  /* Красная строка */
+  .red_line::first-letter {
+    @apply my-[9px] ml-[30px];
+  }
+}

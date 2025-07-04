@@ -1,86 +1,85 @@
-@use "@styles/mixins";
+@use '@styles/mixins';
 
 .table {
-	position: relative;
-	border-collapse: separate;
-	border-spacing: 0 1.5rem;
-	width: 100%;
+  position: relative;
+  border-collapse: separate;
+  border-spacing: 0 1.5rem;
+  width: 100%;
 }
 
 .caption:not(:has(h1)) {
-	margin-block: 0.67em;
+  margin-block: 0.67em;
 }
 
 .thead {
-	@include mixins.background();
+  @include mixins.background();
 }
 
 .th {
-	padding: 1rem 1.5rem;
-	white-space: nowrap;
+  padding: 1rem 1.5rem;
+  white-space: nowrap;
 }
 
 .tr {
-	&:nth-child(even) {
-		background-color: var(--black-color-transparent);
-	}
+  &:nth-child(even) {
+    background-color: var(--black-color-transparent);
+  }
 }
 
 .td {
-	padding: 1rem 0.5rem;
-	text-wrap: balance;
+  padding: 1rem 0.5rem;
+  text-wrap: balance;
 
-	&:first-child {
-		border-radius: 15px 0 0 15px;
-	}
+  &:first-child {
+    border-radius: 15px 0 0 15px;
+  }
 
-	&:last-child {
-		border-radius: 0 15px 15px 0;
-	}
+  &:last-child {
+    border-radius: 0 15px 15px 0;
+  }
 }
 
 .func_buttons {
-	display: flex;
-	place-content: center;
-	gap: 10px;
+  display: flex;
+  place-content: center;
+  gap: 10px;
 }
 
 .pagination {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 0.5rem;
-	margin: 1rem auto;
-	width: min-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem auto;
+  width: min-content;
 
-	.buttons {
-		width: max-content;
-	}
+  .buttons {
+    width: max-content;
+  }
 
-	button {
-		padding: 0.5rem 0.75rem;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
+  button {
+    padding: 0.5rem 0.75rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 
-		&:disabled {
-			opacity: 0.5;
-			cursor: default;
-		}
-	}
+    &:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+  }
 }
 
-
 @media (width >= 900px) {
-	.thead {
-		position: sticky;
-		top: var(--header-size);
-	}
+  .thead {
+    position: sticky;
+    top: var(--header-size);
+  }
 }
 
 @media (width < 900px) {
-	.table_container {
-		overflow-x: auto;
-	}
+  .table_container {
+    overflow-x: auto;
+  }
 }

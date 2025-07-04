@@ -1,74 +1,40 @@
 {
-	"compilerOptions": {
-		"strictPropertyInitialization": false,
-		"lib": [
-			"dom",
-			"dom.iterable",
-			"esnext",
-			"es2020"
-		],
-		"target": "es2020",
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "bundler",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"incremental": true,
-		"plugins": [
-			{
-				"name": "next"
-			}
-		],
-		"paths": {
-			"@/*": [
-				"./*"
-			],
-			"@app/*": [
-				"./app/*"
-			],
-			"@hooks/*": [
-				"./hooks/*"
-			],
-			"@services/*": [
-				"./services/*"
-			],
-			"@ui/*": [
-				"./ui/*"
-			],
-			"@styles/*": [
-				"./ui/styles/*"
-			],
-			"@components/*": [
-				"./ui/components/*"
-			],
-			"@modals/*": [
-				"./ui/components/modals/*"
-			],
-			"@columns/*": [
-				"./ui/columns/*"
-			],
-			"@email/*": [
-				"./ui/email/*"
-			],
-			"@db/*": [
-				"./db/*"
-			]
-		},
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
-	},
-	"include": [
-		"next-env.d.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		".next/types/**/*.ts"
-	],
-	"exclude": [
-		"node_modules"
-	]
+  "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "lib": ["dom", "dom.iterable", "esnext", "es2020"],
+    "target": "es2020",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"],
+      "@app/*": ["./app/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@services/*": ["./services/*"],
+      "@ui/*": ["./ui/*"],
+      "@styles/*": ["./ui/styles/*"],
+      "@components/*": ["./ui/components/*"],
+      "@modals/*": ["./ui/components/modals/*"],
+      "@columns/*": ["./ui/columns/*"],
+      "@email/*": ["./ui/email/*"],
+      "@db/*": ["./db/*"]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

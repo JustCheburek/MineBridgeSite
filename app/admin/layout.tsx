@@ -1,20 +1,20 @@
-import {PropsWithChildren} from "react";
-import {validate} from "@services/user/validate";
-import {redirect} from "next/navigation";
-import {Metadata} from "next";
+import { PropsWithChildren } from 'react'
+import { validate } from '@services/user/validate'
+import { redirect } from 'next/navigation'
+import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    robots: {
-        index: false
-    },
+  robots: {
+    index: false,
+  },
 }
 
-export default async function Layout({children}: PropsWithChildren) {
-    const {isAdmin} = await validate()
+export default async function Layout({ children }: PropsWithChildren) {
+  const { isAdmin } = await validate()
 
-    if (!isAdmin) {
-        redirect("/")
-    }
+  if (!isAdmin) {
+    redirect('/')
+  }
 
-    return children
+  return children
 }

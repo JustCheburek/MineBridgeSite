@@ -1,408 +1,292 @@
 {
-	"wheatbeer": {
-		"name": "Отстойное ржаное пиво/Ржаное пиво/Отменное ржаное пиво",
-		"ingredients": [
-			"пшеницы/3"
-		],
-		"cookingtime": 8,
-		"distillruns": 0,
-		"wood": 1,
-		"age": 2,
-		"color": "ffb84d",
-		"difficulty": 1,
-		"alcohol": 5
-	},
-	"beer": {
-		"name": "Отстойное пиво/Пиво/Отменное пиво",
-		"ingredients": [
-			"пшеницы/6"
-		],
-		"cookingtime": 8,
-		"distillruns": 0,
-		"wood": 0,
-		"age": 3,
-		"color": "ffd333",
-		"difficulty": 1,
-		"alcohol": 6
-	},
-	"darkbeer": {
-		"name": "Отстойное тёмное пиво/Тёмное пиво/Отменное тёмное пиво",
-		"ingredients": [
-			"пшеницы/6"
-		],
-		"cookingtime": 8,
-		"distillruns": 0,
-		"wood": 6,
-		"age": 8,
-		"color": "650013",
-		"difficulty": 2,
-		"alcohol": 7
-	},
-	"wine": {
-		"name": "Вино Black&White",
-		"ingredients": [
-			"сладких ягод/5"
-		],
-		"cookingtime": 5,
-		"distillruns": 0,
-		"wood": 0,
-		"age": 20,
-		"color": "RED",
-		"difficulty": 4,
-		"alcohol": 8
-	},
-	"mead": {
-		"name": "Несладкая медовуха/Мёдовуха/Золотая медовуха",
-		"ingredients": [
-			"сахар. тростника/6"
-		],
-		"cookingtime": 3,
-		"distillruns": 0,
-		"wood": 2,
-		"age": 4,
-		"color": "ORANGE",
-		"difficulty": 2,
-		"alcohol": 9
-	},
-	"ap_mead": {
-		"name": "Яблочная медовуха/Сладкая яблочная медовуха/Сладкая медовуха из золотых яблок",
-		"ingredients": [
-			"сахар. тростника/6",
-			"яблока/2"
-		],
-		"cookingtime": 4,
-		"distillruns": 0,
-		"wood": 2,
-		"age": 4,
-		"color": "ORANGE",
-		"difficulty": 4,
-		"alcohol": 11,
-		"effects": [
-			"WATER_BREATHING/1-2/150"
-		]
-	},
-	"cidre": {
-		"name": "Слабый сидр/Яблочный сидр/Отличный яблочный сидр",
-		"ingredients": [
-			"яблок/14"
-		],
-		"cookingtime": 7,
-		"distillruns": 0,
-		"wood": 0,
-		"age": 3,
-		"color": "f86820",
-		"difficulty": 4,
-		"alcohol": 7
-	},
-	"apple_liquor": {
-		"name": "Ликер из Кислых яблок/Яблочный ликер/Кальвадос",
-		"ingredients": [
-			"яблок/12"
-		],
-		"cookingtime": 16,
-		"distillruns": 3,
-		"wood": 5,
-		"age": 6,
-		"color": "BRIGHT_RED",
-		"difficulty": 5,
-		"alcohol": 14
-	},
-	"whiskey": {
-		"name": "Неприятный виски/Виски/Шотландский виски",
-		"ingredients": [
-			"пшеницы/10"
-		],
-		"cookingtime": 10,
-		"distillruns": 2,
-		"distilltime": 50,
-		"wood": 4,
-		"age": 18,
-		"color": "ORANGE",
-		"difficulty": 7,
-		"alcohol": 26
-	},
-	"rum": {
-		"name": "Сливочный Ром/Пряный Ром/Золотистый Ром",
-		"ingredients": [
-			"сахар. тростника/18"
-		],
-		"cookingtime": 6,
-		"distillruns": 2,
-		"distilltime": 30,
-		"wood": 2,
-		"age": 14,
-		"color": "DARK_RED",
-		"difficulty": 6,
-		"alcohol": 30,
-		"effects": [
-			"FIRE_RESISTANCE/1/20-100",
-			"POISON/1-0/30-0"
-		]
-	},
-	"vodka": {
-		"name": "Палёная водка/Водка/Столичная водка",
-		"ingredients": [
-			"картошки/10"
-		],
-		"cookingtime": 15,
-		"distillruns": 3,
-		"age": 0,
-		"color": "WHITE",
-		"difficulty": 4,
-		"alcohol": 20,
-		"effects": [
-			"WEAKNESS/15",
-			"POISON/10"
-		]
-	},
-	"shroom_vodka": {
-		"name": "Палёная грибная водка/Грибная водка/Самогон деда",
-		"ingredients": [
-			"картошки/10",
-			"мухомора/3",
-			"серый гриб/3"
-		],
-		"cookingtime": 18,
-		"distillruns": 5,
-		"age": 0,
-		"color": "ff9999",
-		"difficulty": 7,
-		"alcohol": 95,
-		"effects": [
-			"WEAKNESS/80",
-			"CONFUSION/27",
-			"NIGHT_VISION/50-80",
-			"BLINDNESS/12-2",
-			"SLOW/10-3"
-		]
-	},
-	"gin": {
-		"name": "Светлый Джин/Джин/Джин Старого Тома",
-		"ingredients": [
-			"пшеницы/9",
-			"синих цветов/6",
-			"яблоко/1"
-		],
-		"cookingtime": 6,
-		"distillruns": 2,
-		"color": "99ddff",
-		"difficulty": 6,
-		"alcohol": 20
-	},
-	"tequila": {
-		"name": "Мескаль/Текила/Текила Аньехо",
-		"ingredients": [
-			"кактусов/8"
-		],
-		"cookingtime": 15,
-		"distillruns": 2,
-		"color": "f5f07e",
-		"difficulty": 5,
-		"wood": 1,
-		"age": 12,
-		"alcohol": 20
-	},
-	"absinthe": {
-		"name": "Фиговый Абсент/Абсент/Лучший Абсент",
-		"ingredients": [
-			"травы/15"
-		],
-		"cookingtime": 3,
-		"distillruns": 6,
-		"distilltime": 80,
-		"color": "GREEN",
-		"difficulty": 8,
-		"alcohol": 42,
-		"effects": [
-			"POISON/15-25"
-		]
-	},
-	"gr_absinthe": {
-		"name": "Слабый Абсент/Зелёный Абсент/Ярко-Зелёный Абсент",
-		"ingredients": [
-			"травы/17",
-			"ядовитых картошки/2"
-		],
-		"cookingtime": 5,
-		"distillruns": 6,
-		"distilltime": 85,
-		"color": "LIME",
-		"difficulty": 9,
-		"alcohol": 46,
-		"effects": [
-			"POISON/25-40",
-			"HARM/2",
-			"NIGHT_VISION/40-60"
-		]
-	},
-	"potato_soup": {
-		"name": "Картофельный суп",
-		"ingredients": [
-			"картошки/5",
-			"травы/3"
-		],
-		"cookingtime": 3,
-		"color": "ORANGE",
-		"difficulty": 1,
-		"effects": [
-			"HEAL/0-1"
-		]
-	},
-	"coffee": {
-		"name": "Несвежый Кофе/Кофе/Крепкий кофе",
-		"ingredients": [
-			"какао бобов/12",
-			"ведра молока/2"
-		],
-		"cookingtime": 2,
-		"color": "BLACK",
-		"difficulty": 3,
-		"alcohol": -6,
-		"effects": [
-			"REGENERATION/1/2-5",
-			"SPEED/1/30-140"
-		]
-	},
-	"eggnog": {
-		"name": "Яичный Ликер/Гоголь-моголь/Адвокат Байкал-1",
-		"ingredients": [
-			"яиц/5",
-			"сахара/2",
-			"ведро молока/1"
-		],
-		"cookingtime": 2,
-		"color": "ffe680",
-		"difficulty": 4,
-		"alcohol": 10,
-		"wood": 0,
-		"age": 3
-	},
-	"g_vodka": {
-		"name": "Вонючая Водка/Золотая Водка/Блестящая вонючая водка",
-		"ingredients": [
-			"картошки/10",
-			"золотых самородка/2"
-		],
-		"cookingtime": 18,
-		"distillruns": 3,
-		"age": 0,
-		"color": "ORANGE",
-		"difficulty": 6,
-		"alcohol": 50,
-		"effects": [
-			"WEAKNESS/28",
-			"POISON/4"
-		]
-	},
-	"otrezvitel": {
-		"name": "Слабый отрезвитель/Отрезвитель/Как стёклышко",
-		"ingredients": [
-			"картошки/32",
-			"сахара/4",
-			"ядовитая картошка/1"
-		],
-		"cookingtime": 30,
-		"distillruns": 5,
-		"age": 0,
-		"color": "WHITE",
-		"difficulty": 6,
-		"alcohol": 101,
-		"effects": [
-			"WEAKNESS/40",
-			"POISON/8"
-		]
-	},
-	"fire_whiskey": {
-		"name": "Тёплый Виски/Горячий Виски/Пылающий Виски",
-		"ingredients": [
-			"пшеницы/10",
-			"блейз палки/2"
-		],
-		"cookingtime": 12,
-		"distillruns": 3,
-		"distilltime": 55,
-		"wood": 4,
-		"age": 18,
-		"color": "ORANGE",
-		"difficulty": 7,
-		"alcohol": 28,
-		"drinkmessage": "Вы чуствуете жжение у себя во рту"
-	},
-	"hot_chocolete": {
-		"name": "Горячий Шоколад",
-		"ingredients": [
-			"печеньки/3"
-		],
-		"cookingtime": 2,
-		"color": "DARK_RED",
-		"difficulty": 2,
-		"effects": [
-			"FAST_DIGGING/40"
-		]
-	},
-	"iced_coffee": {
-		"name": "Охлаждённый кофе/Кофе со льдом/Крепкий Кофе Со льдом",
-		"ingredients": [
-			"печенек/8",
-			"снежка/4",
-			"ведро молока/1"
-		],
-		"cookingtime": 1,
-		"color": "BLACK",
-		"difficulty": 4,
-		"alcohol": -8,
-		"effects": [
-			"REGENERATION/30",
-			"SPEED/10"
-		]
-	},
-	"blackberry_nastoika": {
-		"name": "Ежевичная настойка",
-		"ingredients": [
-			"сладких ягод/5",
-			"сахара/2",
-			"чёрный краситель/1",
-			"яблоко/1"
-		],
-		"cookingtime": 2,
-		"distillruns": 0,
-		"wood": 1,
-		"age": 1,
-		"color": "8b008b",
-		"difficulty": 3,
-		"alcohol": 0,
-		"drinkmessage": "Выпить настойку ежевички непросто, но результат стоит того."
-	},
-	"gazirovka_yabloko": {
-		"name": "Газированная вода с ароматом яблока",
-		"ingredients": [
-			"льда/2",
-			"яблоко/2"
-		],
-		"cookingtime": 3,
-		"distillruns": 2,
-		"distilltime": 30,
-		"color": "WATER",
-		"difficulty": 5,
-		"alcohol": 0,
-		"drinkmessage": "Вы ощущаете легкую газировку на языке и слегка сладкий вкус яблока."
-	},
-	"kvas": {
-		"name": "Тёплый квас/Квас/Охлаждённый квас",
-		"ingredients": [
-			"хлеба/5",
-			"соты/3",
-			"бутылка мёда/1"
-		],
-		"cookingtime": 6,
-		"color": "b8860b",
-		"difficulty": 4,
-		"alcohol": 4,
-		"effects": [
-			"REGENERATION/3",
-			"SPEED/5",
-			"FAST_DIGGING/4"
-		],
-		"drinkmessage": "Ничего лучше не пробовал!"
-	}
+  "wheatbeer": {
+    "name": "Отстойное ржаное пиво/Ржаное пиво/Отменное ржаное пиво",
+    "ingredients": ["пшеницы/3"],
+    "cookingtime": 8,
+    "distillruns": 0,
+    "wood": 1,
+    "age": 2,
+    "color": "ffb84d",
+    "difficulty": 1,
+    "alcohol": 5
+  },
+  "beer": {
+    "name": "Отстойное пиво/Пиво/Отменное пиво",
+    "ingredients": ["пшеницы/6"],
+    "cookingtime": 8,
+    "distillruns": 0,
+    "wood": 0,
+    "age": 3,
+    "color": "ffd333",
+    "difficulty": 1,
+    "alcohol": 6
+  },
+  "darkbeer": {
+    "name": "Отстойное тёмное пиво/Тёмное пиво/Отменное тёмное пиво",
+    "ingredients": ["пшеницы/6"],
+    "cookingtime": 8,
+    "distillruns": 0,
+    "wood": 6,
+    "age": 8,
+    "color": "650013",
+    "difficulty": 2,
+    "alcohol": 7
+  },
+  "wine": {
+    "name": "Вино Black&White",
+    "ingredients": ["сладких ягод/5"],
+    "cookingtime": 5,
+    "distillruns": 0,
+    "wood": 0,
+    "age": 20,
+    "color": "RED",
+    "difficulty": 4,
+    "alcohol": 8
+  },
+  "mead": {
+    "name": "Несладкая медовуха/Мёдовуха/Золотая медовуха",
+    "ingredients": ["сахар. тростника/6"],
+    "cookingtime": 3,
+    "distillruns": 0,
+    "wood": 2,
+    "age": 4,
+    "color": "ORANGE",
+    "difficulty": 2,
+    "alcohol": 9
+  },
+  "ap_mead": {
+    "name": "Яблочная медовуха/Сладкая яблочная медовуха/Сладкая медовуха из золотых яблок",
+    "ingredients": ["сахар. тростника/6", "яблока/2"],
+    "cookingtime": 4,
+    "distillruns": 0,
+    "wood": 2,
+    "age": 4,
+    "color": "ORANGE",
+    "difficulty": 4,
+    "alcohol": 11,
+    "effects": ["WATER_BREATHING/1-2/150"]
+  },
+  "cidre": {
+    "name": "Слабый сидр/Яблочный сидр/Отличный яблочный сидр",
+    "ingredients": ["яблок/14"],
+    "cookingtime": 7,
+    "distillruns": 0,
+    "wood": 0,
+    "age": 3,
+    "color": "f86820",
+    "difficulty": 4,
+    "alcohol": 7
+  },
+  "apple_liquor": {
+    "name": "Ликер из Кислых яблок/Яблочный ликер/Кальвадос",
+    "ingredients": ["яблок/12"],
+    "cookingtime": 16,
+    "distillruns": 3,
+    "wood": 5,
+    "age": 6,
+    "color": "BRIGHT_RED",
+    "difficulty": 5,
+    "alcohol": 14
+  },
+  "whiskey": {
+    "name": "Неприятный виски/Виски/Шотландский виски",
+    "ingredients": ["пшеницы/10"],
+    "cookingtime": 10,
+    "distillruns": 2,
+    "distilltime": 50,
+    "wood": 4,
+    "age": 18,
+    "color": "ORANGE",
+    "difficulty": 7,
+    "alcohol": 26
+  },
+  "rum": {
+    "name": "Сливочный Ром/Пряный Ром/Золотистый Ром",
+    "ingredients": ["сахар. тростника/18"],
+    "cookingtime": 6,
+    "distillruns": 2,
+    "distilltime": 30,
+    "wood": 2,
+    "age": 14,
+    "color": "DARK_RED",
+    "difficulty": 6,
+    "alcohol": 30,
+    "effects": ["FIRE_RESISTANCE/1/20-100", "POISON/1-0/30-0"]
+  },
+  "vodka": {
+    "name": "Палёная водка/Водка/Столичная водка",
+    "ingredients": ["картошки/10"],
+    "cookingtime": 15,
+    "distillruns": 3,
+    "age": 0,
+    "color": "WHITE",
+    "difficulty": 4,
+    "alcohol": 20,
+    "effects": ["WEAKNESS/15", "POISON/10"]
+  },
+  "shroom_vodka": {
+    "name": "Палёная грибная водка/Грибная водка/Самогон деда",
+    "ingredients": ["картошки/10", "мухомора/3", "серый гриб/3"],
+    "cookingtime": 18,
+    "distillruns": 5,
+    "age": 0,
+    "color": "ff9999",
+    "difficulty": 7,
+    "alcohol": 95,
+    "effects": ["WEAKNESS/80", "CONFUSION/27", "NIGHT_VISION/50-80", "BLINDNESS/12-2", "SLOW/10-3"]
+  },
+  "gin": {
+    "name": "Светлый Джин/Джин/Джин Старого Тома",
+    "ingredients": ["пшеницы/9", "синих цветов/6", "яблоко/1"],
+    "cookingtime": 6,
+    "distillruns": 2,
+    "color": "99ddff",
+    "difficulty": 6,
+    "alcohol": 20
+  },
+  "tequila": {
+    "name": "Мескаль/Текила/Текила Аньехо",
+    "ingredients": ["кактусов/8"],
+    "cookingtime": 15,
+    "distillruns": 2,
+    "color": "f5f07e",
+    "difficulty": 5,
+    "wood": 1,
+    "age": 12,
+    "alcohol": 20
+  },
+  "absinthe": {
+    "name": "Фиговый Абсент/Абсент/Лучший Абсент",
+    "ingredients": ["травы/15"],
+    "cookingtime": 3,
+    "distillruns": 6,
+    "distilltime": 80,
+    "color": "GREEN",
+    "difficulty": 8,
+    "alcohol": 42,
+    "effects": ["POISON/15-25"]
+  },
+  "gr_absinthe": {
+    "name": "Слабый Абсент/Зелёный Абсент/Ярко-Зелёный Абсент",
+    "ingredients": ["травы/17", "ядовитых картошки/2"],
+    "cookingtime": 5,
+    "distillruns": 6,
+    "distilltime": 85,
+    "color": "LIME",
+    "difficulty": 9,
+    "alcohol": 46,
+    "effects": ["POISON/25-40", "HARM/2", "NIGHT_VISION/40-60"]
+  },
+  "potato_soup": {
+    "name": "Картофельный суп",
+    "ingredients": ["картошки/5", "травы/3"],
+    "cookingtime": 3,
+    "color": "ORANGE",
+    "difficulty": 1,
+    "effects": ["HEAL/0-1"]
+  },
+  "coffee": {
+    "name": "Несвежый Кофе/Кофе/Крепкий кофе",
+    "ingredients": ["какао бобов/12", "ведра молока/2"],
+    "cookingtime": 2,
+    "color": "BLACK",
+    "difficulty": 3,
+    "alcohol": -6,
+    "effects": ["REGENERATION/1/2-5", "SPEED/1/30-140"]
+  },
+  "eggnog": {
+    "name": "Яичный Ликер/Гоголь-моголь/Адвокат Байкал-1",
+    "ingredients": ["яиц/5", "сахара/2", "ведро молока/1"],
+    "cookingtime": 2,
+    "color": "ffe680",
+    "difficulty": 4,
+    "alcohol": 10,
+    "wood": 0,
+    "age": 3
+  },
+  "g_vodka": {
+    "name": "Вонючая Водка/Золотая Водка/Блестящая вонючая водка",
+    "ingredients": ["картошки/10", "золотых самородка/2"],
+    "cookingtime": 18,
+    "distillruns": 3,
+    "age": 0,
+    "color": "ORANGE",
+    "difficulty": 6,
+    "alcohol": 50,
+    "effects": ["WEAKNESS/28", "POISON/4"]
+  },
+  "otrezvitel": {
+    "name": "Слабый отрезвитель/Отрезвитель/Как стёклышко",
+    "ingredients": ["картошки/32", "сахара/4", "ядовитая картошка/1"],
+    "cookingtime": 30,
+    "distillruns": 5,
+    "age": 0,
+    "color": "WHITE",
+    "difficulty": 6,
+    "alcohol": 101,
+    "effects": ["WEAKNESS/40", "POISON/8"]
+  },
+  "fire_whiskey": {
+    "name": "Тёплый Виски/Горячий Виски/Пылающий Виски",
+    "ingredients": ["пшеницы/10", "блейз палки/2"],
+    "cookingtime": 12,
+    "distillruns": 3,
+    "distilltime": 55,
+    "wood": 4,
+    "age": 18,
+    "color": "ORANGE",
+    "difficulty": 7,
+    "alcohol": 28,
+    "drinkmessage": "Вы чуствуете жжение у себя во рту"
+  },
+  "hot_chocolete": {
+    "name": "Горячий Шоколад",
+    "ingredients": ["печеньки/3"],
+    "cookingtime": 2,
+    "color": "DARK_RED",
+    "difficulty": 2,
+    "effects": ["FAST_DIGGING/40"]
+  },
+  "iced_coffee": {
+    "name": "Охлаждённый кофе/Кофе со льдом/Крепкий Кофе Со льдом",
+    "ingredients": ["печенек/8", "снежка/4", "ведро молока/1"],
+    "cookingtime": 1,
+    "color": "BLACK",
+    "difficulty": 4,
+    "alcohol": -8,
+    "effects": ["REGENERATION/30", "SPEED/10"]
+  },
+  "blackberry_nastoika": {
+    "name": "Ежевичная настойка",
+    "ingredients": ["сладких ягод/5", "сахара/2", "чёрный краситель/1", "яблоко/1"],
+    "cookingtime": 2,
+    "distillruns": 0,
+    "wood": 1,
+    "age": 1,
+    "color": "8b008b",
+    "difficulty": 3,
+    "alcohol": 0,
+    "drinkmessage": "Выпить настойку ежевички непросто, но результат стоит того."
+  },
+  "gazirovka_yabloko": {
+    "name": "Газированная вода с ароматом яблока",
+    "ingredients": ["льда/2", "яблоко/2"],
+    "cookingtime": 3,
+    "distillruns": 2,
+    "distilltime": 30,
+    "color": "WATER",
+    "difficulty": 5,
+    "alcohol": 0,
+    "drinkmessage": "Вы ощущаете легкую газировку на языке и слегка сладкий вкус яблока."
+  },
+  "kvas": {
+    "name": "Тёплый квас/Квас/Охлаждённый квас",
+    "ingredients": ["хлеба/5", "соты/3", "бутылка мёда/1"],
+    "cookingtime": 6,
+    "color": "b8860b",
+    "difficulty": 4,
+    "alcohol": 4,
+    "effects": ["REGENERATION/3", "SPEED/5", "FAST_DIGGING/4"],
+    "drinkmessage": "Ничего лучше не пробовал!"
+  }
 }

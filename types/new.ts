@@ -8,4 +8,4 @@ export interface New {
   tags?: string[]
   photoPath?: string
   photoUrl?: string
-} 
+}

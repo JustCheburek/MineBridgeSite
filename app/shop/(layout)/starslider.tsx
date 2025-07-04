@@ -1,42 +1,39 @@
-"use client"
+'use client'
 
-import { useState } from "react";
-import styles from "./starslider.module.scss";
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
 
 export function StarSlider({ max }: { max: number }) {
-    const values = [0, 100, 200, 300, 400, 500]
-    const [selected, setSelected] = useState(0)
+  const values = [0, 100, 200, 300, 400, 500]
+  const [selected, setSelected] = useState(0)
 
-    return (
-        <div className={styles.starslider}>
-            <input
-                type="range"
-                min={0}
-                max={values.length - 1}
-                step={1}
-                value={values.indexOf(selected)}
-                onChange={e => setSelected(values[+e.target.value])}
-                className={
-                    [
-                        styles.range,
-                        selected > max ? styles.notenough : styles.enough
-                    ].filter(Boolean).join(" ")
-                }
-            />
-            <div className={styles.values}>
-                {values.map(v => (
-                    <p
-                        key={v}
-                        className={[
-                            styles.value,
-                            v === selected ? styles.selected : "",
-                            v > max ? styles.notenough : styles.enough
-                        ].filter(Boolean).join(" ")}
-                    >
-                        {v}
-                    </p>
-                ))}
-            </div>
-        </div>
-    )
+  return (
+    <div className='borderbox bg-gray/80 mb-8 flex flex-col items-center gap-2 p-4 px-8'>
+      <input
+        type='range'
+        min={0}
+        max={values.length - 1}
+        step={1}
+        value={values.indexOf(selected)}
+        onChange={e => setSelected(values[+e.target.value])}
+        className={cn('w-full max-w-[40rem]', selected > max ? 'accent-red' : 'accent-unic')}
+      />
+      <div className='flex w-full max-w-[40rem] flex-wrap justify-between gap-[0.3rem]'>
+        {values.map(v => (
+          <h4
+            key={v}
+            className={cn(
+              'transition-all duration-300',
+              v === selected && 'font-semibold',
+              v === selected && v > max ? 'text-red' : '',
+              v === selected && v <= max ? 'text-unic' : '',
+              v > max ? 'text-red/70' : 'text-unic/70'
+            )}
+          >
+            {v}
+          </h4>
+        ))}
+      </div>
+    </div>
+  )
 }

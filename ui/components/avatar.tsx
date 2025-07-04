@@ -1,30 +1,29 @@
-"use client"
+'use client'
 
 // Сервер
-import {useState} from "react";
-import type {User} from "lucia";
-
-import styles from "./styles/avatar.module.scss"
+import { useState } from 'react'
+import type { User } from 'lucia'
 
 // Компоненты
-import {Img, ImgBox} from "@components/img"
+import { Img, ImgBox } from '@components/img'
+import { cn } from '@/lib/utils'
 
 type Avatar = {
-    src: User["photo"]
-    className?: string
-    width?: number | `${number}`
+  src: User['photo']
+  className?: string
 }
 
-export default function Avatar({src, className="", width = 180}: Avatar) {
-    const [photo, setPhoto] = useState<string>(src)
+export default function Avatar({ src, className = '' }: Avatar) {
+  const [photo, setPhoto] = useState<string>(src)
 
-    return (
-        <ImgBox className={`${styles.avatar_box} ${className}`}>
-            <Img
-                src={photo} alt="Ава"
-                className={styles.avatar} width={width}
-                onError={() => setPhoto("/person.svg")}
-            />
-        </ImgBox>
-    )
+  return (
+    <ImgBox className={cn('size-[180px] overflow-hidden !rounded-[25%]', className)} hover>
+      <Img
+        src={photo}
+        alt='Ава'
+        className='object-cover transition-transform group-hover:scale-110'
+        onError={() => setPhoto('/person.svg')}
+      />
+    </ImgBox>
+  )
 }

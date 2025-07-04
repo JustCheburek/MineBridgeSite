@@ -1,30 +1,48 @@
-"use client";
+'use client'
 
-import {usePathname} from "next/navigation";
-import Link from "next/link";
-import {PropsWithChildren} from "react";
+import { usePathname } from 'next/navigation'
+import Link, { type LinkProps } from 'next/link'
+import type { PropsWithChildren } from 'react'
+import type { DangerProps } from './form'
+import { cn } from '@/lib/utils'
 
-type NavLink = {
-    href: string
-    activeClassName?: string
-    className?: string
-    exact?: boolean
-}
+export type NavLink = {
+  href: string
+  activeClassName?: string
+  className?: string
+  exact?: boolean
+} & LinkProps &
+  PropsWithChildren &
+  DangerProps
 
-export function NavLink(
-    {
-        href, children, activeClassName = "active", className = "", exact = false, ...props
-    }: PropsWithChildren<NavLink>
-) {
-    const pathname = usePathname()
-    if (href === "/") {
-        exact = true
-    }
-    const isActive = exact ? pathname === href : pathname.startsWith(href)
+export function NavLink({
+  href,
+  children,
+  activeClassName = 'text-unic',
+  className = '',
+  exact = false,
+  danger = false,
+  ...props
+}: NavLink) {
+  const pathname = usePathname()
+  if (href === '/') {
+    exact = true
+  }
+  const isActive = exact ? pathname === href : pathname.startsWith(href)
 
-    return (
-        <Link href={href} className={`${isActive ? activeClassName : ""} ${className}`} {...props}>
-            {children}
-        </Link>
-    )
+  return (
+    <Link
+      href={href}
+      className={cn(
+        {
+          'text-red': danger,
+          [activeClassName]: isActive,
+        },
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </Link>
+  )
 }

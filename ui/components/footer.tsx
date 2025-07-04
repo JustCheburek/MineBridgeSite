@@ -1,48 +1,39 @@
-// Стили
-import styles from "./styles/footer.module.scss";
-
 // Компоненты
-import {Urls} from "./urls";
-import {NavLink} from "@components/navlink";
+import { Urls } from './urls'
+import { MiniLink } from '@components/button'
 
 export function Policies() {
-    return (
-        <small className={styles.links}>
-            <NavLink href="/rules" className="mini_button" exact>
-                Правила
-            </NavLink>
-            <NavLink href="/rules/legal/terms-of-use" className="mini_button">
-                Пользовательское соглашение
-            </NavLink>
-            <NavLink href="/rules/legal/privacy-policy" className="mini_button">
-                Политика конфиденциальности
-            </NavLink>
-        </small>
-    )
+  return (
+    <small className='my-4 flex flex-wrap items-center justify-center gap-x-4 *:w-fit'>
+      <MiniLink href='/rules' exact>
+        Правила
+      </MiniLink>
+      <MiniLink href='/rules/legal/terms-of-use'>Пользовательское соглашение</MiniLink>
+      <MiniLink href='/rules/legal/privacy-policy'>Политика конфиденциальности</MiniLink>
+    </small>
+  )
 }
 
 export function Footer() {
-    const YEAR = new Date().getFullYear()
+  const YEAR = new Date().getFullYear()
 
-    return (
-        <footer className={styles.container}>
-            <div className={styles.box}>
-                <div>
-                    <Urls className="urls"/>
+  return (
+    <footer className='flex min-h-[350px] items-center justify-center bg-black'>
+      <div className='p-page flex w-[min(900px,100%)] flex-col items-center'>
+        <div>
+          <Urls className='urls' />
 
-                    {/*Копирайт*/}
-                    <h4 className="center_text">
-                        &#169; MineBridge 2022-{YEAR}
-                    </h4>
-                </div>
+          {/*Копирайт*/}
+          <h4 className='text-center'>&#169; MineBridge 2022-{YEAR}</h4>
+        </div>
 
-                <Policies/>
+        <Policies />
 
-                <small className={`light_gray_color ${styles.mc}`}>
-                    Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang
-                    Synergies AB, Microsoft Corporation or other rightsholders.
-                </small>
-            </div>
-        </footer>
-    )
+        <small className='text-light-gray'>
+          Not an official Minecraft product. We are in no way affiliated with or endorsed by Mojang
+          Synergies AB, Microsoft Corporation or other rightsholders.
+        </small>
+      </div>
+    </footer>
+  )
 }

@@ -18,9 +18,10 @@ body:has(.modal.active) {
   // Анимация появления
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--long-transition),
-  backdrop-filter var(--long-transition),
-  background var(--long-transition);
+  transition:
+    opacity var(--long-transition),
+    backdrop-filter var(--long-transition),
+    background var(--long-transition);
 
   overflow-y: scroll;
   padding: 20px;

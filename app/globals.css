@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+@import "tw-animate-css";
+@plugin "tailwindcss-multi";
+
+@theme {
+  /* Типографика */
+  --text-h1: 3.75rem;
+  --leading-h1: 4rem;
+
+  --text-h2: 2.5rem;
+  --leading-h2: 2.75rem;
+
+  --text-h3: 1.5rem;
+  --leading-h3: 2rem;
+
+  --text-h4: 1.25rem;
+  --leading-h4: 1.85rem;
+
+  --text-p: 1.125rem;
+  --leading-p: 1.8rem;
+
+  --text-small: calc(var(--text-p) - 15%);
+  --leading-small: calc(var(--leading-p) - 15%);
+
+  /* Цвета */
+  --color-unic: oklch(65% 0.14 195);
+  --color-text: #f1f1f1;
+  --color-background: #161c1f;
+  --color-black: #020202;
+  --color-info-bg: #303338;
+  --color-info-border: #4c4a52;
+  --color-gray: rgba(37, 40, 48, 0.5);
+  --color-light-gray: #afb8bd;
+
+  --color-border: #52525b4d;
+  --color-yellow: #f6d51a;
+  --color-red: oklch(from rgb(255, 77, 77) 65% 0.25 25);
+  --color-green: oklch(from rgb(133, 187, 101) 70% 0.15 140);
+
+  /* Социальные сети */
+  --color-tg: #229ed9;
+  --color-ds: #5865f2;
+  --color-vk: #0077ff;
+  --color-boosty: #f15f2c;
+  --color-yt: #ff0000;
+  --color-twitch: #9146ff;
+  --color-donation-alerts: #f57d07;
+
+  /* Редкости предметов */
+  --color-common: rgb(178, 178, 178); /* Обычный */
+  --color-uncommon: rgb(73, 206, 73); /* Необычный */
+  --color-rare: rgb(95, 145, 255); /* Редкий */
+  --color-epic: rgb(189, 64, 255); /* Эпический */
+  --color-mythic: rgb(249, 48, 48); /* Мифический */
+  --color-legendary: rgb(255, 215, 0); /* Легендарный */
+
+  /* Скругления */
+  --radius-base: 35px;
+  --radius-button: 45px;
+  --radius-input: 12px;
+
+  /* Анимация */
+  --transition-short: 300ms;
+  --transition-long: 500ms;
+  --transition-hover-delay: 350ms;
+
+  /* Брейкпоинты */
+  --breakpoint-xs: 30rem;
+  --breakpoint-2md: 56rem;
+
+  /* Отступы и размеры */
+  --spacing-page: clamp(0.5rem, 3svw, 3rem);
+  --spacing-header: clamp(108px, 15svh, 180px);
+
+  --animate-moveBlock1: moveBlock1 1.5s ease-in-out infinite;
+  --animate-moveBlock2: moveBlock2 1.5s ease-in-out infinite;
+
+  @keyframes moveBlock1 {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(12px, 0);
+    }
+    50% {
+      transform: translate(12px, 12px);
+    }
+    75% {
+      transform: translate(0, 12px);
+    }
+  }
+
+  @keyframes moveBlock2 {
+    0%,
+    100% {
+      transform: translate(12px, 12px);
+    }
+    25% {
+      transform: translate(0, 12px);
+    }
+    50% {
+      transform: translate(0, 0);
+    }
+    75% {
+      transform: translate(12px, 0);
+    }
+  }
+}
+
+@utility borderbox {
+  @apply border-border rounded-base bg-background/80 border;
+}
+
+/* Кастомные утилитарные классы */
+@utility grid-cols-autofit-* {
+  grid-template-columns: repeat(auto-fit, minmax(min(--spacing(--value(integer)), 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(--value([percentage], [length]), 100%), 1fr));
+}
+
+@import '../ui/styles/text.css';
+@import '../ui/styles/global.css';
+@import '../ui/styles/button.css';
+@import '../ui/styles/appear.css';
+/* @import '../ui/styles/animation.css'; */

@@ -1,4 +1,5 @@
-.number, .simple_number {
+.number,
+.simple_number {
   position: relative;
 
   display: flex;
@@ -14,7 +15,10 @@
 
   & > * {
     position: absolute;
-    transition: rotate 750ms, translate 750ms, opacity 800ms;
+    transition:
+      rotate 750ms,
+      translate 750ms,
+      opacity 800ms;
 
     width: 100%;
     height: 100%;
@@ -28,7 +32,7 @@
 
   // Задний фон
   border-radius: 10px;
-  background: rgba(63, 63, 70, .5);
+  background: rgba(63, 63, 70, 0.5);
 
   --_side: 1;
 
@@ -50,7 +54,8 @@
       translate: 105%;
     }
 
-    .text, .link {
+    .text,
+    .link {
       rotate: 145deg;
     }
   }

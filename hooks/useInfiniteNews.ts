@@ -8,9 +8,9 @@ import { api } from '@/axios'
 async function fetchNews(limit: number, offset: number) {
   try {
     const response = await api.get('/', {
-      params: { limit, offset }
+      params: { limit, offset },
     })
-    
+
     return response.data
   } catch (error) {
     console.error('Ошибка при запросе к API:', error)
@@ -41,4 +41,4 @@ export function useInfiniteNews(limit: number = 5) {
     retry: 3,
     retryDelay: 1000,
   })
-} 
+}

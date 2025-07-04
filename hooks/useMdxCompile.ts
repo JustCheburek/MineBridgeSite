@@ -11,15 +11,15 @@ interface UseMdxCompileResult {
 
 // Функция для предварительной обработки текста MDX
 function preprocessMdxText(source: string): string {
-  if (!source) return '';
-  
+  if (!source) return ''
+
   // Заменяем строковые представления \n на реальные переносы строк
-  return source.replace(/\\n/g, '\n');
+  return source.replace(/\\n/g, '\n')
 }
 
 /**
  * Хук для компиляции MDX контента через API
- * 
+ *
  * @param source MDX строка для компиляции
  * @returns Объект с результатами компиляции
  */
@@ -40,8 +40,8 @@ export function useMdxCompile(source: string): UseMdxCompileResult {
 
       try {
         // Предварительно обрабатываем текст перед отправкой на сервер
-        const processedSource = preprocessMdxText(source);
-        
+        const processedSource = preprocessMdxText(source)
+
         const response = await axios.post('/api/mdx', { source: processedSource })
         setCompiledCode(response.data.code)
       } catch (err) {
@@ -56,4 +56,4 @@ export function useMdxCompile(source: string): UseMdxCompileResult {
   }, [source])
 
   return { compiledCode, isLoading, error }
-} 
+}

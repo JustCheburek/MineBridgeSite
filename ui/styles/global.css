@@ -1,0 +1,180 @@
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body {
+    @apply h-full;
+  }
+
+  body {
+    @apply text-p leading-p bg-background text-text accent-unic caret-unic flex min-h-full flex-col;
+  }
+
+  *::selection {
+    background: oklch(from var(--color-unic) l c h / 0.2);
+  }
+
+  main {
+    @apply flex-1 flex-shrink-0;
+  }
+
+  footer {
+    @apply flex-none;
+  }
+
+  html {
+    @apply scroll-smooth dark:text-white;
+    scroll-padding: calc(var(--spacing-header-header) + var(--spacing-page));
+    color-scheme: dark;
+    scrollbar-gutter: stable;
+  }
+
+  /* Стили для скроллбара */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-unic) var(--color-black);
+  }
+
+  *::-webkit-scrollbar {
+    @apply h-2 w-2.5;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: var(--color-black);
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-unic);
+    border-radius: var(--radius-base);
+  }
+
+  button,
+  input,
+  fieldset,
+  .no-select {
+    @apply select-none;
+  }
+
+  :disabled,
+  [aria-disabled='true'] {
+    @apply cursor-not-allowed;
+  }
+
+  [aria-disabled='true'] {
+    @apply pointer-events-none;
+  }
+
+  img {
+    @apply object-contain;
+  }
+
+  svg {
+    @apply inline-block h-full w-full;
+  }
+
+  path {
+    transition:
+      var(--transition-short) fill,
+      var(--transition-short) stroke;
+  }
+
+  a.text-unic:active,
+  button.text-unic:active {
+    color: oklch(from var(--color-unic) l c h / 0.8);
+  }
+
+  iframe {
+    @apply aspect-video h-auto w-full;
+  }
+
+  code {
+    @apply select-all;
+  }
+}
+
+/* Утилитарные классы */
+.edit,
+.add {
+  @apply inline-flex items-center justify-center font-medium;
+  width: max(0.55em, 0.9rem);
+  height: 1em;
+  transition: color var(--transition-short);
+}
+
+.edit:hover,
+.edit:active,
+.add:hover,
+.add:active {
+  color: var(--color-unic);
+}
+
+.mostiki {
+  @apply inline;
+  width: 1em;
+  height: 0.85em;
+}
+
+/* .border {
+  @apply rounded-base;
+  border: 1px solid var(--color-border);
+  background: var(--color-black-transparent);
+} */
+
+.background {
+  @apply rounded-base;
+  background: var(--color-black-transparent);
+}
+
+.pixel {
+  @apply [image-rendering:pixelated];
+}
+
+.helper-box,
+.helper {
+  @apply text-white;
+  width: 1.5em;
+  height: 1.5em;
+  border: 1px solid var(--color-info-border);
+  @apply rounded-base;
+  background: var(--color-info-bg);
+  transition: var(--transition-short) color;
+}
+
+.helper-box:hover,
+.helper:hover {
+  color: var(--color-unic);
+}
+
+.helper-box:hover.danger,
+.helper:hover.danger {
+  color: var(--color-red);
+}
+
+.helper-box {
+  @apply flex items-center justify-center;
+}
+
+.helper {
+  @apply absolute right-4 top-4 grid place-items-center font-medium;
+}
+
+/* Адаптивные классы */
+@media (min-width: 1024px) {
+  .for-mobile {
+    @apply hidden;
+  }
+}
+
+@media (max-width: 1199px) {
+  .for-tablet {
+    @apply hidden;
+  }
+}
+
+@media (max-width: 1023px) {
+  .for-pc {
+    @apply hidden;
+  }
+}

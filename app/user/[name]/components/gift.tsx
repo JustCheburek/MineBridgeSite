@@ -1,29 +1,31 @@
-"use client"
+'use client'
 
-import {GiftSvg} from "@ui/SVGS";
-import {Add} from "@components/form";
-import {useState} from "react";
-import {GiftModal} from "@modals/gift";
-import type {User} from "lucia";
-import Link from "next/link";
+import { GiftSvg } from '@ui/SVGS'
+import { Add } from '@components/form'
+import { useState } from 'react'
+import { GiftModal } from '@modals/gift'
+import type { User } from 'lucia'
+import Link from 'next/link'
 
-export function GiftBox({user, author, isMe}: { user: User, author: User, isMe: boolean }) {
-    const [modal, setModal] = useState(false)
+export function GiftBox({ user, author, isMe }: { user: User; author: User; isMe: boolean }) {
+  const [modal, setModal] = useState(false)
 
-    if (isMe) {
-        return (
-            <Link href="/users">
-                <Add>
-                    <GiftSvg size="100%"/>
-                </Add>
-            </Link>
-        )
-    }
-
-    return (<>
-        <Add setModal={setModal}>
-            <GiftSvg size="100%"/>
+  if (isMe) {
+    return (
+      <Link href='/users'>
+        <Add>
+          <GiftSvg className='size-[100%]' />
         </Add>
-        <GiftModal modal={modal} setModal={setModal} user={user} author={author}/>
-    </>)
+      </Link>
+    )
+  }
+
+  return (
+    <>
+      <Add setModal={setModal}>
+        <GiftSvg className='size-[100%]' />
+      </Add>
+      <GiftModal modal={modal} setModal={setModal} user={user} author={author} />
+    </>
+  )
 }

@@ -1,200 +1,255 @@
-import type { ComponentPropsWithoutRef, PropsWithChildren } from "react";
-import type { setModal } from "@components/modal";
-import styles from "./styles/form.module.scss"
-import Link, { type LinkProps } from "next/link";
-import { HorizontalLoadingSvg } from "@ui/SVGS";
+import type { ComponentPropsWithoutRef, PropsWithChildren } from 'react'
+import type { setModal } from '@components/modal'
+import Link, { type LinkProps } from 'next/link'
+import { HorizontalLoadingSvg } from '@ui/SVGS'
+import { cn } from '@/lib/utils'
+import React from 'react'
+
+// Базовые стили для элементов формы
+const ElementStyles =
+  'relative py-4 font-medium px-[1.2rem] bg-gray border border-solid border-gray rounded-input transition-all duration-500'
+const ButtonStyles = 'text-center font-semibold py-4 px-[3rem] text-unic select-none'
+
+// Стили для разных состояний
+const formStateStyles = {
+  disabled: 'text-light-gray',
+  normal: 'hover:border-unic has-focus-visible:border-unic has-active:border-unic',
+  danger: 'hover:border-red has-focus-visible:border-red has-active:border-red',
+}
 
 export interface DangerProps {
-    danger?: boolean
+  danger?: boolean
 }
 
-export const Form = (
-    {
-        children,
-        className = "",
-        margin = "20px",
-        ...props
-    }: ComponentPropsWithoutRef<"form"> & { margin?: string | number }
-) => (
-    <form
-        className={`${styles.form} ${className}`}
-        style={{ marginBlock: margin }}
-        {...props}
-    >
-        {children}
-    </form>
+export const Form = ({
+  children,
+  className = '',
+  ...props
+}: ComponentPropsWithoutRef<'form'> & { margin?: string | number }) => (
+  <form className={cn('m-[20px] grid place-content-center gap-2 p-[5px]', className)} {...props}>
+    {children}
+  </form>
 )
 
-interface FormButton extends ComponentPropsWithoutRef<"button">, DangerProps {
-    isLoading?: boolean
+interface FormButton extends ComponentPropsWithoutRef<'button'>, DangerProps {
+  isLoading?: boolean
 }
 
-export const FormButton = (
-    {
-        children,
-        className = "",
-        danger = false,
-        isLoading = false,
-        disabled = false,
-        ...props
-    }: FormButton
-) => (
-    <button
-        className={`${styles.button} center_text bold-font ${danger ? styles.danger : ""} ${className}`}
-        type="submit"
-        disabled={isLoading || disabled}
-        {...props}
-    >
-        {isLoading
-            ? <HorizontalLoadingSvg width="7em" height="1.15em" />
-            : children
-        }
-    </button>
+export const FormButton = ({
+  children,
+  className = '',
+  danger = false,
+  isLoading = false,
+  disabled = false,
+  ...props
+}: FormButton) => (
+  <button
+    className={cn(
+      ElementStyles,
+      ButtonStyles,
+      danger ? 'text-red' : 'text-unic',
+      !disabled && !isLoading && (danger ? formStateStyles.danger : formStateStyles.normal),
+      (disabled || isLoading) && formStateStyles.disabled,
+      className
+    )}
+    type='submit'
+    disabled={isLoading || disabled}
+    {...props}
+  >
+    {isLoading ? <HorizontalLoadingSvg className='h-[1.15em] w-[7em]' /> : children}
+  </button>
 )
 
 interface FormLink extends DangerProps, PropsWithChildren, LinkProps {
-    className?: string
-    download?: boolean
-    target?: string
+  className?: string
+  download?: boolean
+  target?: string
 }
 
-export const FormLink = (
-    {
-        href,
-        children,
-        target,
-        className = "",
-        download = false,
-        danger = false,
-        ...props
-    }: FormLink
-) => {
-    if (!target) {
-        if (download || href.toString().startsWith("http")) {
-            target = "_blank"
-        } else {
-            target = "_self"
-        }
+export const FormLink = ({
+  href,
+  children,
+  target,
+  className = '',
+  download = false,
+  danger = false,
+  ...props
+}: FormLink) => {
+  if (!target) {
+    if (download || href.toString().startsWith('http')) {
+      target = '_blank'
+    } else {
+      target = '_self'
     }
+  }
 
-    return (
-        <Link
-            href={href}
-            target={target}
-            className={`${styles.button} center_text bold-font ${danger ? styles.danger : ""} ${className}`}
-            download={download}
-            {...props}
-        >
-            {children}
-        </Link>
-    )
+  return (
+    <Link
+      href={href}
+      target={target}
+      className={cn(
+        ElementStyles,
+        ButtonStyles,
+        danger ? 'text-red' : 'text-unic',
+        danger ? formStateStyles.danger : formStateStyles.normal,
+        className
+      )}
+      download={download}
+      {...props}
+    >
+      {children}
+    </Link>
+  )
 }
 
-interface FormA extends DangerProps, ComponentPropsWithoutRef<"a"> {
-}
+interface FormA extends DangerProps, ComponentPropsWithoutRef<'a'> {}
 
-export const FormA = (
-    {
-        href,
-        children,
-        target,
-        className = "",
-        download = false,
-        danger = false,
-        ...props
-    }: FormA
-) => {
-    if (!target) {
-        if (download || href?.startsWith("http")) {
-            target = "_blank"
-        } else {
-            target = "_self"
-        }
+export const FormA = ({
+  href,
+  children,
+  target,
+  className = '',
+  download = false,
+  danger = false,
+  ...props
+}: FormA) => {
+  if (!target) {
+    if (download || href?.startsWith('http')) {
+      target = '_blank'
+    } else {
+      target = '_self'
     }
+  }
 
-    return (
-        <a
-            href={href}
-            target={target}
-            className={`${styles.button} center_text bold-font ${danger ? styles.danger : ""} ${className}`}
-            download={download}
-            {...props}
-        >
-            {children}
-        </a>
-    )
+  return (
+    <a
+      href={href}
+      target={target}
+      className={cn(
+        ElementStyles,
+        ButtonStyles,
+        danger ? 'text-red' : 'text-unic',
+        danger ? formStateStyles.danger : formStateStyles.normal,
+        className
+      )}
+      download={download}
+      {...props}
+    >
+      {children}
+    </a>
+  )
 }
 
-export const FormLabel = (
-    {
-        children,
-        className = "",
-        ...props
-    }: ComponentPropsWithoutRef<"label">
-) => (
-    <label className={`${styles.label} ${className} no_select flex_center`} {...props}>
-        {children}
+type FormLabelProps = {
+  hasRadio?: boolean
+  hasCheckbox?: boolean
+} & ComponentPropsWithoutRef<'label'> &
+  DangerProps
+
+export const FormLabel = ({
+  children,
+  className = '',
+  danger = false,
+  hasRadio = false,
+  hasCheckbox = false,
+  ...props
+}: FormLabelProps) => {
+  return (
+    <label
+      className={cn(
+        ElementStyles,
+        {
+          'flex items-center gap-[0.8em]': hasCheckbox || hasRadio,
+        },
+        'group select-none',
+        danger
+          ? formStateStyles.danger + ' has-checked:border-red'
+          : formStateStyles.normal + ' has-checked:border-unic',
+        className
+      )}
+      {...props}
+    >
+      {children}
     </label>
-)
-
-interface FormGroupProps extends ComponentPropsWithoutRef<"div"> {
+  )
 }
 
-export const FormGroup = (
-    {
-        children,
-        className = "",
-        ...props
-    }: FormGroupProps
-) => (
-    <div className={`${styles.group} ${className}`} {...props}>
-        {children}
-    </div>
+type FormGroupProps = ComponentPropsWithoutRef<'div'>
+export const FormGroup = ({ children, className = '', ...props }: FormGroupProps) => (
+  <div
+    className={cn('flex flex-wrap items-center justify-around gap-[10px] [&>*]:flex-1', className)}
+    {...props}
+  >
+    {children}
+  </div>
 )
 
-export interface FormInputProps extends ComponentPropsWithoutRef<"input">, DangerProps {
-}
+export type FormInputProps = ComponentPropsWithoutRef<'input'>
+export const FormInput = ({
+  children,
+  className = '',
+  type,
+  disabled = false,
+  ...props
+}: FormInputProps) => (
+  <input
+    className={cn(
+      { hidden: type === 'radio' || type === 'checkbox' },
+      type === 'checkbox' ? 'h-[1.2em] w-[1.2em]' : 'min-w-full',
 
-export const FormInput = (
-    {
-        children,
-        className = "",
-        danger = false,
-        ...props
-    }: FormInputProps
-) => (
-    <input
-        className={`${styles.input} ${danger ? styles.danger : ""} ${className}`}
-        {...props}
-    />
+      { [formStateStyles.disabled]: disabled },
+
+      className
+    )}
+    type={type}
+    disabled={disabled}
+    {...props}
+  />
 )
 
-interface FormTextareaProps extends ComponentPropsWithoutRef<"textarea"> {
-}
+interface FormTextareaProps extends ComponentPropsWithoutRef<'textarea'> {}
 
-export const FormTextarea = (
-    {
-        children,
-        className = "",
-        ...props
-    }: FormTextareaProps
-) => (
-    <textarea className={`${styles.textarea} ${className}`} {...props} />
+export const FormTextarea = ({
+  children,
+  className = '',
+  disabled = false,
+  ...props
+}: FormTextareaProps) => (
+  <textarea
+    className={cn(
+      ElementStyles,
+      formStateStyles.normal,
+      'max-sm:resize-vertical max-h-[450px] min-h-[150px] min-w-[250px] max-w-[500px]',
+      { [formStateStyles.disabled]: disabled },
+      className
+    )}
+    disabled={disabled}
+    {...props}
+  />
 )
 
-interface FormSelectProps extends ComponentPropsWithoutRef<"select"> {
-}
+interface FormSelectProps extends ComponentPropsWithoutRef<'select'>, DangerProps {}
 
-export const FormSelect = (
-    {
-        children,
-        className = "",
-        ...props
-    }: FormSelectProps
-) => (
-    <select className={`${styles.select} ${className}`} {...props}>
-        {children}
-    </select>
+export const FormSelect = ({
+  children,
+  className = '',
+  danger = false,
+  disabled = false,
+  ...props
+}: FormSelectProps) => (
+  <select
+    className={cn(
+      ElementStyles,
+      'appearance-none',
+      !disabled && (danger ? formStateStyles.danger : formStateStyles.normal),
+      { [formStateStyles.disabled]: disabled },
+      className
+    )}
+    disabled={disabled}
+    {...props}
+  >
+    {children}
+  </select>
 )
 
 /*interface EditProps extends ComponentPropsWithoutRef<"button"> {
@@ -212,12 +267,12 @@ export const Edit = ({className = "", setModal, ...props}: EditProps) => (
     </button>
 )*/
 
-interface AddProps extends ComponentPropsWithoutRef<"button"> {
-    setModal?: setModal
+interface AddProps extends ComponentPropsWithoutRef<'button'> {
+  setModal?: setModal
 }
 
-export const Add = ({ className = "", setModal, children, ...props }: AddProps) => (
-    <button className={`add ${className}`} onClick={() => setModal && setModal(true)} {...props}>
-        {children || "+"}
-    </button>
+export const Add = ({ className = '', setModal, children, ...props }: AddProps) => (
+  <button className={`add ${className}`} onClick={() => setModal && setModal(true)} {...props}>
+    {children || '+'}
+  </button>
 )
