@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description: 'Хороший пинг, частые ивенты, уникальные данжи, кланы! Сервер с лета 2022!',
 }
 
-// todo: анимация на прокрутку
 export default function Index() {
   return (
     <>

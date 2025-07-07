@@ -216,7 +216,7 @@
 
 @keyframes appear-scale {
   from {
-    opacity: 0.3;
+    opacity: 0.1;
     scale: 0.1;
   }
   to {
@@ -235,21 +235,21 @@
 @utility appear-left {
   animation-name: appear-left;
   animation-timeline: view();
-  animation-range: 10% 60%;
+  animation-range: 10% 50%;
   animation-fill-mode: both;
 }
 
 @utility appear-right {
   animation-name: appear-right;
   animation-timeline: view();
-  animation-range: 10% 60%;
+  animation-range: 10% 50%;
   animation-fill-mode: both;
 }
 
 @utility appear-scale {
   animation-name: appear-scale;
   animation-timeline: view();
-  animation-range: 10% 60%;
+  animation-range: 5% 40%;
   animation-fill-mode: both;
 }
 
