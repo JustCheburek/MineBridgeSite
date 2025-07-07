@@ -117,7 +117,7 @@ export const Paths: PathID[] = [
   },
   {
     rating: 200,
-    x: 0,
+    x: 10,
     caseData: {
       DropItem: '662ddb0f8d5044c0b4ad7b57',
       Item: '662ddb0f8d5044c0b4ad7b58',

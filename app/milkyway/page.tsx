@@ -21,7 +21,6 @@ declare module 'csstype' {
   interface Properties {
     '--_size'?: string
     '--_x'?: string
-    '--_y'?: string
     '--_long'?: string
     '--_complete'?: string
     '--_angle'?: string
@@ -34,7 +33,6 @@ export const metadata: Metadata = {
 }
 
 const SIZE = 3.5
-const Y = 17
 const CASE_ID = '662ddba08d5044c0b4ad7bf4'
 
 interface Path {
@@ -64,6 +62,8 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
   let next = 0
   let difference = 0
   let complete = 0
+
+  // Получение next и difference
   if (index < Paths.length - 1) {
     const nextPath = Paths[index + 1]
     next = nextPath.x
@@ -80,13 +80,16 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
 
   const isHas = author.rating >= rating
 
+  const height = (SIZE + 24.45) / 0.065
+  const place1 = 8 * x + 740
+  const place2 = 8 * next + 740
+  const width = Math.abs(place2 - place1)
+
   // Последняя не создаёт линию
   const last = Paths[Paths.length - 1].rating
   if (last !== rating) {
-    const width = Math.abs(x - next) + SIZE
-    const height = (Y + SIZE) * 2
-    long = Math.sqrt(width ** 2 + height ** 2) / 2.1
-    angle = Math.atan2(height + 1.5, width * (next > x ? 1 : -1))
+    long = Math.sqrt(width ** 2 + height ** 2)
+    angle = Math.atan2(height, width * (next > x ? 1 : -1))
 
     const have = author.rating - rating
     const percent = (difference - have) / difference
@@ -94,45 +97,80 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
     complete = Math.min(long - long * percent, long)
   }
 
+  const avatar = complete > 0 && complete < long
+
   return (
     <div
-      className='pt-[var(--_y)] contain-layout'
+      className='contain-layout'
       style={{
         '--_x': `${x}rem`,
-        '--_long': `${long}rem`,
-        '--_complete': `${complete}rem`,
+        '--_long': `${long}px`,
+        '--_complete': `${complete}px`,
         '--_angle': `${angle}rad`,
       }}
     >
-      <div className={cn('relative flex justify-center items-center md:ml-[var(--_x)] max-md:flex-col')}>
-        <div className='absolute bottom-[180%] max-md:static max-md:flex max-md:justify-center max-md:items-center max-md:flex-col max-md:mt-4 group/card'>
+      <div className={cn('relative grid gap-10 justify-center items-center md:ml-[var(--_x)] max-md:flex-col')}>
+        <div className='max-md:flex max-md:justify-center max-md:items-center max-md:flex-col max-md:mt-4 group/card'>
           {!suffix
             ? <ItemImg x={x} Item={Item} DropItem={DropItem} rarity={rarity} author={author} isPerm={isPerm} isHas={isHas} caseData={caseData} />
             : <Suffix suffix={suffix} DropItem={DropItem} rarity={rarity} author={author} isPerm={isPerm} isHas={isHas} caseData={caseData} />
           }
         </div>
-        <div className={`flex justify-center items-center w-[var(--_size)] h-[var(--_size)] z-[var(--1z)] ${isHas ? 'bg-text' : 'bg-light-gray'} rounded-full ${isHas ? 'shadow-[0_0_30px_var(--color-text)]' : 'shadow-[0_0_30px_var(--color-light-gray)]'} max-md:hidden`} />
-        <h3 className='text-yellow flex justify-center items-center gap-[5px] absolute top-[125%] left-1/2 -translate-x-1/2 text-shadow-[0_0_30px] text-shadow-yellow max-md:top-[103%]'>
-          {rating} <StarSvg className='size-[0.9em]' />
-        </h3>
-        {difference > 0 && (
-          <>
-            <div className='absolute w-(--_long) h-[3px] bg-light-gray rotate-(--_angle) translate-x-1/2 max-md:hidden' />
-            {/* <div className='absolute w-(--_complete) h-[7px] bg-text rounded-base rotate-(--_angle) translate-x-1/2 max-md:hidden' /> */}
-          </>
-        )}
-        {/* {complete > 0 && complete < long && (
-          <div className='absolute w-[calc(var(--_size)-1rem)] h-[calc(var(--_size)-1rem)] flex justify-center items-center rotate-[var(--_angle)] translate-[var(--_complete)] bg-light-gray rounded-full max-md:hidden'>
-            <div
-              className='absolute flex flex-col gap-2 p-4 -rotate-[var(--_angle)] -translate-y-[70%] bg-[#101417] border-2 common box'
-            >
-              <Avatar src={author.photo} className='size-[120px]' />
-              <h3 className='text-yellow flex justify-center items-center gap-[5px] text-shadow-yellow text-shadow-[0_0_30px]'>
-                {author.rating} <StarSvg className='size-[0.9em]' />
-              </h3>
+        <div className='relative flex flex-col items-center gap-4'>
+          <div className={cn(
+            "size-(--_size) z-10 rounded-full shadow-[0_0_30px] max-md:hidden",
+            isHas
+              ? "bg-text shadow-text"
+              : "bg-light-gray shadow-light-gray"
+          )} />
+          <h3 className='text-yellow flex justify-center items-center gap-[5px] text-shadow-[0_0_30px] text-shadow-yellow'>
+            {rating} <StarSvg className='size-[0.9em]' />
+          </h3>
+          {difference > 0 && <>
+            <div className={cn(
+              'absolute w-(--_long) h-[3px] bg-light-gray max-md:hidden',
+              'rotate-(--_angle) translate-y-[calc(var(--_size)/2)] translate-x-1/2 origin-left'
+            )} />
+            <div className={cn(
+              'absolute w-(--_complete) h-[7px] bg-text rounded-base max-md:hidden',
+              'rotate-(--_angle) translate-y-[calc(var(--_size)/2)] translate-x-1/2 origin-left'
+            )} />
+          </>}
+
+          {avatar && (
+            <div className={cn(
+              'absolute size-[calc(var(--_size)-1rem)] z-20 bg-text rounded-full max-md:hidden',
+              'flex justify-center items-center',
+              'transform-[rotate(var(--_angle))_translate(var(--_complete))]'
+            )}>
+              <div
+                className={cn(
+                  'absolute flex gap-4 p-4 borderbox border-text box common -rotate-(--_angle)',
+                  x >= 0
+                  ? '-translate-x-15 -translate-y-22'
+                  : '-translate-x-22 translate-y-15'
+                )}
+              >
+                <Avatar src={author.photo} className='size-9' />
+                <h3 className='text-yellow flex justify-center items-center gap-[5px] text-shadow-yellow text-shadow-[0_0_30px]'>
+                  {author.rating} <StarSvg className='size-[0.9em]' />
+                </h3>
+              </div>
             </div>
-          </div>
-        )} */}
+          )}
+        </div>
+
+        {/* <p className='absolute top-0 right-0 z-50'>
+          x: {x} <br />
+          long: {long} <br />
+          angle: {angle} <br />
+          place1: {place1} <br />
+          place2: {place2} <br />
+          width: {width} <br />
+          height: {height}
+        </p> */}
+
+
       </div>
     </div>
   )
@@ -171,7 +209,7 @@ function ItemImg({ x, Item, DropItem, rarity, ...props }: ItemImg) {
       />
     </ImgBox>
 
-    <div className={cn(
+    {/* <div className={cn(
       'md:absolute top-1/2 md:-translate-y-1/2 grid items-center w-[70vw] h-64 p-4 md:p-10 overflow-hidden max-md:w-full max-md:h-auto',
       x <= 0
         ? 'left-0'
@@ -188,7 +226,7 @@ function ItemImg({ x, Item, DropItem, rarity, ...props }: ItemImg) {
         <p>{DropItem.description}</p>
         <GetButton {...props} />
       </div>
-    </div>
+    </div> */}
   </>)
 }
 
@@ -289,7 +327,7 @@ export default async function MilkyWay() {
   return (
     <div
       className='bg-gradient-to-b from-background to-black text-center'
-      style={{ '--_size': `${SIZE}rem`, '--_y': `${Y}rem` }}
+      style={{ '--_size': `${SIZE}rem` }}
     >
       <H1
         up
@@ -304,7 +342,7 @@ export default async function MilkyWay() {
 
       <div className='h-28 bg-gradient-to-b from-background to-black' />
 
-      <div className='bg-black bg-[url(/stars.svg)] bg-repeat bg-size-[500px] will-change-transform'>
+      <div className='bg-black bg-[url(/milkyway/stars.svg)] bg-repeat bg-size-[500px] will-change-transform py-5'>
         <PathsLoader Drops={Drops} author={author} Case={Case} />
       </div>
     </div>
