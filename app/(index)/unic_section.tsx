@@ -1,12 +1,16 @@
 // React
-import type { PropsWithChildren } from 'react'
+import type { ComponentPropsWithRef } from 'react'
 
 // Компоненты
 import { Img, ImgBox } from '@components/img'
+import { cn } from '@/lib/utils'
 
-const Box = ({ children }: PropsWithChildren) => {
+type BoxProps = ComponentPropsWithRef<'article'>
+const Box = ({ children, className, ...props }: BoxProps) => {
   return (
-    <article className='mx-auto grid w-fit flex-1 place-items-center gap-12'>{children}</article>
+    <article className={cn('mx-auto grid w-fit place-items-center gap-12 appear', className)} {...props}>
+      {children}
+    </article>
   )
 }
 
@@ -38,7 +42,7 @@ const UnicSection = () => (
       </Box>
 
       {/* Кастомизация */}
-      <Box>
+      <Box className='appear-start-17'>
         <Img
           src='/index/unic/amogus.webp'
           alt='Амогус'
@@ -56,7 +60,7 @@ const UnicSection = () => (
       </Box>
 
       {/* Ивенты */}
-      <Box>
+      <Box className='appear-start-21'>
         <Img
           src='/index/unic/calendar.webp'
           alt='Календарь'
@@ -74,7 +78,7 @@ const UnicSection = () => (
       </Box>
 
       {/* Комьюнити */}
-      <Box>
+      <Box className='appear-start-35'>
         <Img
           src='/index/unic/heart.webp'
           alt='heart'

@@ -34,19 +34,17 @@ export function Video({name}) {
 type AdvantageImgBoxProps = {
   src: string
   alt: string
-  side: 'left' | 'right'
 }
 
-const AdvantageImgBox = ({ src, alt, side }: AdvantageImgBoxProps) => (
+const AdvantageImgBox = ({ src, alt }: AdvantageImgBoxProps) => (
   <ImgBox
     className={cn(
-      'border-3 border-light-gray rounded-base w-[min(550px,100%)]',
+      'border-3 border-light-gray rounded-base w-[min(550px,100%)] max-lg:appear',
       'transition-all duration-1000',
       'hover:border-unic',
-      'shadow-[0_5px_20px_var(--light-gray-color)] hover:shadow-[0_5px_35px_var(--unic-color)]',
-      side === 'right'
-        ? 'lg:col-start-2 lg:row-start-1 lg:shadow-[30px_5px_20px_var(--light-gray-color)] lg:hover:shadow-[30px_5px_35px_var(--unic-color)]'
-        : 'lg:col-start-1 lg:row-start-1 lg:shadow-[-30px_5px_20px_var(--light-gray-color)] lg:hover:shadow-[-30px_5px_35px_var(--unic-color)]'
+      'shadow-light-gray/90 hover:shadow-unic shadow-[0_5px_20px] hover:shadow-[0_5px_35px]',
+      'group-[.right]:lg:multi-["col-start-2;row-start-1;shadow-[5px_5px_20px];hover:shadow-[10px_5px_35px];appear-right"]',
+      'group-[.left]:lg:multi-["col-start-1;row-start-1;shadow-[-5px_5px_20px];hover:shadow-[-10px_5px_35px];appear-left"]'
     )}
     type='post'
   >
@@ -54,14 +52,24 @@ const AdvantageImgBox = ({ src, alt, side }: AdvantageImgBoxProps) => (
   </ImgBox>
 )
 
-const Text = ({ children }: PropsWithChildren) => <h4 className='min-w-[60%]'>{children}</h4>
+const Text = ({ children }: PropsWithChildren) => (
+  <h4 className={cn(
+    'min-w-[60%]',
+    'group-[.left]:lg:appear-right group-[.right]:lg:appear-left',
+    'max-lg:appear'
+  )}>
+    {children}
+  </h4>
+)
 
-const Box = ({ children }: PropsWithChildren) => (
+// Side - картинка слева или справа
+const Box = ({ children, side }: PropsWithChildren<{ side: 'left' | 'right' }>) => (
   <article
     className={cn(
       'grid min-w-full max-w-[800px] place-items-center gap-16',
       'lg:grid-cols-2',
-      'max-lg:text-center'
+      'max-lg:text-center',
+      'group', side
     )}
   >
     {children}
@@ -72,7 +80,7 @@ const AdvantageSection = () => (
   <section className='px-page bg-black pt-[100px]'>
     <MaxSize className='grid place-items-center gap-32 bg-black'>
       {/* Информация о создании групп */}
-      <Box>
+      <Box side='left'>
         <AdvantageImgBox src='/index/advantage/group.webp' alt='Ивент пандорума' side='left' />
         <Text>
           Объединяйся в{' '}
@@ -91,7 +99,7 @@ const AdvantageSection = () => (
       </Box>
 
       {/* Информация о городах */}
-      <Box>
+      <Box side='right'>
         <AdvantageImgBox src='/index/advantage/project.webp' alt='Пандорум здание' side='right' />
         <Text>
           Строй города и фермы
@@ -100,7 +108,7 @@ const AdvantageSection = () => (
       </Box>
 
       {/* Информация о данжах */}
-      <Box>
+      <Box side='left'>
         <AdvantageImgBox src='/index/advantage/dungeon.webp' alt='Эндский данж' side='left' />
         <Text>
           Изучай новые данжи
@@ -109,7 +117,7 @@ const AdvantageSection = () => (
       </Box>
 
       {/* Информация о кастомизации */}
-      <Box>
+      <Box side='right'>
         <AdvantageImgBox src='/index/advantage/pet.webp' alt='Питомец' side='right' />
         <Text>
           Кастомизируй свой внешний вид!

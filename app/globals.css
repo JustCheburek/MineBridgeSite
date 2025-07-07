@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 @plugin "tailwindcss-multi";
 
 @theme {
@@ -165,17 +165,102 @@
 
 @utility mask-gradient {
   mask: linear-gradient(
-    to right, 
-    color-mix(in oklab, var(--color-black) 30%, transparent) 0%, 
-    var(--color-black) 40%, 
+    to right,
+    color-mix(in oklab, var(--color-black) 30%, transparent) 0%,
+    var(--color-black) 40%,
     var(--color-black) 60%,
     color-mix(in oklab, var(--color-black) 30%, transparent) 100%
   );
 }
 
+@utility appear-start-* {
+  animation-range-start: calc(--value(integer) * 1%);
+}
+
+@utility appear-end-* {
+  animation-range-end: calc(--value(integer) * 1%);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0.1;
+    translate: 0 20%;
+  }
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
+
+@keyframes appear-left {
+  from {
+    opacity: 0.1;
+    translate: -20%;
+  }
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
+
+@keyframes appear-right {
+  from {
+    opacity: 0.1;
+    translate: 20%;
+  }
+  to {
+    opacity: 1;
+    translate: 0;
+  }
+}
+
+@keyframes appear-scale {
+  from {
+    opacity: 0.3;
+    scale: 0.1;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@utility appear {
+  animation-name: appear;
+  animation-timeline: view();
+  animation-range: 10% 60%;
+  animation-fill-mode: both;
+}
+
+@utility appear-left {
+  animation-name: appear-left;
+  animation-timeline: view();
+  animation-range: 10% 60%;
+  animation-fill-mode: both;
+}
+
+@utility appear-right {
+  animation-name: appear-right;
+  animation-timeline: view();
+  animation-range: 10% 60%;
+  animation-fill-mode: both;
+}
+
+@utility appear-scale {
+  animation-name: appear-scale;
+  animation-timeline: view();
+  animation-range: 10% 60%;
+  animation-fill-mode: both;
+}
+
+/* @media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;   
+  }
+} */
+
 @import '../ui/styles/text.css';
 @import '../ui/styles/global.css';
 @import '../ui/styles/button.css';
-@import '../ui/styles/appear.css';
 @import '../ui/styles/rarities.css';
 /* @import '../ui/styles/animation.css'; */
