@@ -81,7 +81,7 @@ const AdvantageSection = () => (
     <MaxSize className='grid place-items-center gap-32 bg-black'>
       {/* Информация о создании групп */}
       <Box side='left'>
-        <AdvantageImgBox src='/index/advantage/group.webp' alt='Ивент пандорума' side='left' />
+        <AdvantageImgBox src='/index/advantage/group.webp' alt='Ивент пандорума' />
         <Text>
           Объединяйся в{' '}
           <Link
@@ -100,7 +100,7 @@ const AdvantageSection = () => (
 
       {/* Информация о городах */}
       <Box side='right'>
-        <AdvantageImgBox src='/index/advantage/project.webp' alt='Пандорум здание' side='right' />
+        <AdvantageImgBox src='/index/advantage/project.webp' alt='Пандорум здание' />
         <Text>
           Строй города и фермы
           <br />с другими игроками!
@@ -109,7 +109,7 @@ const AdvantageSection = () => (
 
       {/* Информация о данжах */}
       <Box side='left'>
-        <AdvantageImgBox src='/index/advantage/dungeon.webp' alt='Эндский данж' side='left' />
+        <AdvantageImgBox src='/index/advantage/dungeon.webp' alt='Эндский данж' />
         <Text>
           Изучай новые данжи
           <br />и структуры!
@@ -118,7 +118,7 @@ const AdvantageSection = () => (
 
       {/* Информация о кастомизации */}
       <Box side='right'>
-        <AdvantageImgBox src='/index/advantage/pet.webp' alt='Питомец' side='right' />
+        <AdvantageImgBox src='/index/advantage/pet.webp' alt='Питомец' />
         <Text>
           Кастомизируй свой внешний вид!
           <br />
