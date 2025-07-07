@@ -39,7 +39,7 @@ export default function Design() {
         <PTitle>
           <h2>Авторы</h2>
         </PTitle>
-        <div className='*:borderbox flex flex-wrap justify-center gap-x-6 *:px-8 *:py-2'>
+        <div className='*:card flex flex-wrap justify-center gap-x-6 *:px-8 *:py-2'>
           <UserBox _id='j8bsrsdgzqa4n0c' />
           <UserBox _id='i5mqq2js4nos1yj' />
           <UserBox _id='t2dhhl5igw1sp43' />
@@ -66,7 +66,7 @@ export default function Design() {
         <PTitle>
           <h2>Цвета</h2>
         </PTitle>
-        <div className='borderbox grid w-full place-content-center gap-6 p-8 md:grid-cols-2'>
+        <div className='card grid w-full place-content-center gap-6 p-8 md:grid-cols-2'>
           <div className='my-auto'>
             {data.map(color => (
               <div
@@ -81,7 +81,7 @@ export default function Design() {
                   )}
                 ></div>
                 <p>{color.title}</p>
-                <span className='select-all'>{color.color}</span>
+                <code>{color.color}</code>
               </div>
             ))}
           </div>

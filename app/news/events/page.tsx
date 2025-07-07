@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import { H1 } from '@components/h1'
 import { Url } from '@components/button'
+import { List } from '@components/rules'
 
 export const metadata: Metadata = {
   title: 'Ивенты',
@@ -32,12 +33,12 @@ export default function Events() {
           </p>
           <br />
           <h4>Критерии ивентов:</h4>
-          <ol>
+          <List>
             <li>Уникальность</li>
             <li>Объём</li>
             <li>Красота</li>
             <li>Затрата ресурсов</li>
-          </ol>
+          </List>
 
           <br />
 

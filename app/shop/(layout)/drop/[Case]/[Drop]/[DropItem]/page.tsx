@@ -58,14 +58,14 @@ export default async function Rarities({ params }: ParamsProp) {
       >
         Редкость
       </H1>
-      <Section type='third'>
-        {rarityNames.map(rarity => (
-          <Box key={rarity}>
+      <Section>
+        {rarityNames.map((rarity, index) => (
+          <Box key={rarity} casebox={index === 2}>
             <Text>
               <h3>{RarityNames[rarity]}</h3>
               <Url
                 href={`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`}
-                margin='10px'
+                className='my-[10px]'
               >
                 Выбрать
               </Url>

@@ -14,7 +14,7 @@ interface WhitelistModalProps {
 export function WhitelistModal({ modal, setModal }: WhitelistModalProps) {
   return (
     <Modal setModal={setModal} modal={modal}>
-      <H1>Сброс</H1>
+      <h1>Сброс</h1>
       <Form action={whitelist} onSubmit={() => setModal(false)}>
         <p>Это действие удалит проходку у всех пользователей</p>
         <HookButton danger>Сбросить</HookButton>

@@ -41,9 +41,9 @@ export function InviteLink({ name }: InviteLink) {
           </FormLabel>
         ))}
       </FormGroup>
-      <p className='text-unic select-all break-all'>
+      <code className='text-unic break-all'>
         {process.env.NEXT_PUBLIC_EN_URL}/invite/{name}/{from}
-      </p>
+      </code>
     </Form>
   )
 }

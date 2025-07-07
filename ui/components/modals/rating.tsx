@@ -27,7 +27,7 @@ export function RatingModal({ name, user, modal, setModal }: RatingModal) {
 
   return (
     <Modal setModal={setModal} modal={modal}>
-      <H1>Звёзды</H1>
+      <h1>Звёзды</h1>
       <Form action={formAction} onSubmit={() => state.success && setModal(false)}>
         <FormLabel>
           <FormInput

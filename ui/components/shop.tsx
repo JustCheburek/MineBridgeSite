@@ -39,8 +39,8 @@ export const Author = ({ description, href, children, ...props }: Author) => (
 
 type Box = ComponentPropsWithoutRef<'div'> & {
   span2?: boolean
-  preview?: boolean
-  casebox?: boolean
+  preview?: boolean // первый
+  casebox?: boolean // последний
 }
 export const Box = ({
   children,

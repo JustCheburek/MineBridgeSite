@@ -267,10 +267,10 @@ export default function Rules() {
             <p>При этом наказания за нарушения ваших правил, должны быть равноценны содеянному</p>
             <br />
             <p>Чтобы запретить вход на вашу территорию, она должна:</p>
-            <ol>
+            <List>
               <li>Иметь таблички с информацией на всех главных входах и порталах на базу</li>
               <li>Договориться с мэром мира</li>
-            </ol>
+            </List>
             <br />
             <p>
               Запрещая вход на территорию означает, что человек попадающий на неё, должен уйти с неё
@@ -490,11 +490,11 @@ export default function Rules() {
           </Rule>
         </RulesBox>
 
-        <p className='red_line'>
+        <p className='red-line'>
           Заметили нарушение правил?{' '}
           <TextUrl href='https://discord.gg/VtXNje8xHq'>Напишите репорт!</TextUrl>
         </p>
-        <p className='red_line'>
+        <p className='red-line'>
           Админы не обязаны уведомлять игроков об небольшом изменении правил. Игрок сам должен
           следить за изменениями в{' '}
           <TextUrl href='https://t.me/MineBridgeOfficial'>Новостях проекта</TextUrl>

@@ -1,10 +1,11 @@
 'use client'
 
 import { type Dispatch, type SetStateAction, useState } from 'react'
-import { FormInput, type FormInputProps, FormLabel } from '@components/form'
+import { DangerProps, FormInput, type FormInputProps, FormLabel } from '@components/form'
 
-const InputName = ({ autoComplete = 'name', ...props }: FormInputProps) => (
-  <FormLabel>
+type InputNameProps = FormInputProps & DangerProps
+const InputName = ({ autoComplete = 'name', danger = false, ...props }: InputNameProps) => (
+  <FormLabel danger={danger}>
     <FormInput
       placeholder='Майнкрафт никнейм'
       name='name'
@@ -22,7 +23,7 @@ type InputNameCheck = {
   setAccess?: Dispatch<SetStateAction<boolean>>
 }
 
-export const InputNameCheck = ({ name, setName, ...props }: InputNameCheck & FormInputProps) => {
+export const InputNameCheck = ({ name, setName, ...props }: InputNameCheck & InputNameProps) => {
   const [symbol, setSymbol] = useState('')
 
   return (
@@ -61,7 +62,7 @@ export const InputNameCheckWithoutState = ({
 }: {
   defaultName?: string
   setAccess?: Dispatch<SetStateAction<boolean>>
-} & FormInputProps) => {
+} & InputNameProps) => {
   const [name, setName] = useState(defaultName)
   return <InputNameCheck name={name} setName={setName} {...props} />
 }

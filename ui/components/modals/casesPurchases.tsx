@@ -83,7 +83,7 @@ export const CasesPurchasesModal = ({
 
   return (
     <Modal setModal={setModal} modal={modal}>
-      <H1>Кейсы</H1>
+      <h1>Кейсы</h1>
 
       <Form
         action={() => {

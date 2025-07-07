@@ -106,9 +106,9 @@ function Provider({ id, user, name, isMe, children }: PropsWithChildren<Provider
         {children}
         {id
           ? <>
-            <p className={cn('select-all text-center font-medium max-xs:hidden')}>
+            <code className={cn('text-center font-medium max-xs:hidden')}>
               {id}
-            </p>
+            </code>
             <SuccessSvg className='size-[1.5em]' />
           </>
           : <span className='text-unic font-medium'>Привязать</span>

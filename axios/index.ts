@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Создаем экземпляр axios
 export const api = axios.create({
-  baseURL: `https://api.${process.env.NEXT_PUBLIC_EN_DOMAIN}:3000`,
+  baseURL: `https://api.${process.env.NEXT_PUBLIC_EN_DOMAIN}`,
   timeout: 10000,
   responseType: 'json',
   headers: {

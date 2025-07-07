@@ -1,10 +1,8 @@
-// React
 import type { Metadata } from 'next'
-
-// Компоненты
 import { BlacklistContent } from './components'
 import { H1 } from '@components/h1'
 import Link from 'next/link'
+import { List } from '@components/rules'
 
 export const metadata: Metadata = {
   title: 'Выражения',
@@ -16,7 +14,7 @@ export default function Blacklist() {
     <div className='blacklist_content'>
       <H1>Запретка</H1>
 
-      <p className='red_line'>
+      <p className='red-line'>
         Запрещены все вариации этих слов и выражений, в том числе с использованием цензуры или
         использованием иностранного языка
       </p>
@@ -26,19 +24,19 @@ export default function Blacklist() {
       <div>
         <p className='text-red'>Запрещено:</p>
 
-        <ul>
+        <List>
           <li>Распространение материалов, запрещенные законодательством Российской Федерации</li>
           <li>
             Использование экстремистских материалов и упоминание организаций, признанных
             террористическими на территории Российской Федерации
           </li>
-        </ul>
+        </List>
       </div>
       <br />
       <div>
         <p>Списки размещены на сайтах:</p>
 
-        <ul>
+        <List>
           <li>
             <Link
               target='_blank'
@@ -57,7 +55,7 @@ export default function Blacklist() {
               ФСБ России
             </Link>
           </li>
-        </ul>
+        </List>
       </div>
     </div>
   )

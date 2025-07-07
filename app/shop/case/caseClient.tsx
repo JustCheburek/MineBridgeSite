@@ -7,16 +7,13 @@ import { Case, CaseType, Chance, Drop, DropType, Info, RarityNames } from '@/typ
 import type { User } from 'lucia'
 import Link from 'next/link'
 
-// Стили
-import styles from './case.module.scss'
-
 // Компоненты
 import { MaxSize } from '@components/maxSize'
-import { Random, SumChances } from '@/lib/utils'
+import { ColorText, Random, SumChances, cn } from '@/lib/utils'
 import { Img, ImgBox } from '@components/img'
 import { MostikiSvg } from '@ui/SVGS'
 import { Button, Url } from '@components/button'
-import { cn } from '@/lib/utils'
+import { List } from '@components/rules'
 
 declare module 'csstype' {
   interface Properties {
@@ -112,7 +109,7 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
   function shuffle<T>(arr: T[]): void {
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Random(i + 1)
-      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+        ;[arr[i], arr[j]] = [arr[j], arr[i]]
     }
   }
 
@@ -171,7 +168,7 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
     setTimeout(() => {
       setIsWin(true)
       setSelectedItem(RESULT)
-    }, rollSettings.current.timeRoll)
+    }, rollSettings.current.timeRoll + 2000)
 
     const { caseType, dropType } = getInfo()
     Add(caseType, dropType, price, items[RESULT])
@@ -186,32 +183,46 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
 
   return (
     <MaxSize
-      className={cn(styles.max_size, 'max-w-[1440px]')}
-      style={{
-        '--_roll-time': `${rollSettings.current.timeRoll}ms`,
-        '--_roll-width': `-${rollSettings.current.rollWidth}px`,
-      }}
-      suppressHydrationWarning
+      className={cn(
+        'flex flex-col justify-center items-center]',
+      )}
     >
       {children}
 
-      <div className={styles.main_container}>
-        <div className={`${styles.left_container} ${styles.container} text-center`}>
+      <div className="grid xl:grid-cols-[1fr_700px_1fr] gap-2 max-w-[1385px]:my-[70px]">
+        <div className="grid grid-rows-[auto_auto] gap-2 h-full text-center max-w-[1385px]:flex-col-reverse">
           <SelectedItem items={items} selectedItem={selectedItem} />
 
-          <div className={`${styles.account} ${styles.box}`}>
+          <div className="flex justify-center flex-col card min-h-[150px] gap-2">
             <Account user={user} price={price} />
           </div>
         </div>
 
         <div
-          className={`${styles.visual_container} ${styles.box} text-center ${isWin ? styles.win : ''}`}
+          className={cn(
+            "relative flex justify-start items-center flex-row min-h-full h-[350px] overflow-hidden card px-[45px] text-center mask-gradient",
+            { "before:opacity-0": isWin }
+          )}
         >
-          <div className={`${styles.natural_container} ${isRolling ? styles.roll : ''}`}>
+          <span className="absolute left-[350px] z-20 w-[2px] h-full translate-x-[-50%] bg-unic/50 transition-opacity duration-300" />
+          <div className={cn(
+            "absolute flex flex-row",
+            { "animate-[roll_var(--_roll-time)_forwards]": isRolling }
+          )} style={{
+            '--_roll-time': `${rollSettings.current.timeRoll}ms`,
+            '--_roll-width': `-${rollSettings.current.rollWidth}px`,
+          }} suppressHydrationWarning>
             {/* Предметы которые можно выбить */}
             {items?.map((info, index) => (
               <ImgBox
-                className={`${styles.item} ${info?.rarity}_box ${index === 48 ? styles.result : ''}`}
+                className={cn(
+                  "flex justify-center items-center mx-[20px] w-[300px] h-[200px] rounded-base bg-[rgb(18,13,25)] transition-all duration-1000 overflow-hidden box",
+                  info?.rarity,
+                  {
+                    "scale-[1.3] [&_img]:w-full [&_img]:h-full": isWin && index === 48,
+                    "animate-disappear": isWin && index !== 48
+                  }
+                )}
                 key={index}
                 onMouseEnter={() => selectedItem !== 48 && setSelectedItem(index)}
                 hover
@@ -220,7 +231,7 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
                   <Img
                     src={info.img}
                     alt={info?.DropItem?.displayname || 'Картинка'}
-                    className={styles.img}
+                    className="object-cover"
                   />
                 ) : (
                   <h4>{info?.DropItem?.displayname}</h4>
@@ -230,45 +241,47 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
           </div>
         </div>
 
-        <div className={`${styles.right_container} ${styles.container}`}>
-          <form className={styles.box}>
-            <h3 className={`${styles.heading} text-unic text-center`}>Кейс</h3>
+        <div className="grid grid-rows-[auto_auto] gap-2 h-full">
+          <form className="flex justify-center flex-col card">
+            <h3 className="pb-4 text-unic text-center">Кейс</h3>
             {Cases.map(type => (
-              <label key={type.name} className={`${styles.select_item} select-none`}>
+              <label key={type.name} className="flex justify-between items-center gap-[15px] cursor-pointer transition-all duration-500 select-none hover:text-unic disabled:text-light-gray disabled:cursor-not-allowed has-checked:text-unic">
                 <input
                   type='radio'
                   value={type.name}
                   name='select_case'
-                  className={styles.select_input}
+                  className="hidden"
                   checked={rarity === type.name}
                   disabled={isRolling}
                   onChange={() => setSettingCase(type.name)}
                   onLoad={() => setSettingCase(rarity)}
+                  data-checked={rarity === type.name}
                 />
                 {type.displayname}
-                <p className={`${styles.mostiki_text} text-unic`}>
+                <p className="inline-flex gap-[5px] items-center text-unic">
                   {type.price} <MostikiSvg />
                 </p>
               </label>
             ))}
           </form>
 
-          <form className={styles.box}>
-            <h3 className={`${styles.heading} text-unic text-center`}>Дроп</h3>
+          <form className="flex justify-center flex-col card">
+            <h3 className="pb-4 text-unic text-center">Дроп</h3>
             {Drops.filter(Drop => Drop.name !== 'suffix').map(type => (
-              <label key={type.name} className={`${styles.select_item} select-none`}>
+              <label key={type.name} className="flex justify-between items-center gap-[15px] cursor-pointer transition-all duration-500 select-none hover:text-unic disabled:text-light-gray disabled:cursor-not-allowed has-checked:text-unic">
                 <input
                   type='radio'
                   value={type.name}
                   name='select_drop'
                   checked={drop === type.name}
-                  className={styles.select_input}
+                  className="hidden"
                   disabled={isRolling}
                   onChange={() => setSettingDrop(type.name)}
                   onLoad={() => setSettingDrop(drop)}
+                  data-checked={drop === type.name}
                 />
                 {type.displayname}
-                <p className={`${styles.mostiki_text} text-unic`}>
+                <p className="inline-flex gap-[5px] items-center text-unic">
                   {type.price} <MostikiSvg />
                 </p>
               </label>
@@ -286,10 +299,9 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
         Win={Win}
       />
 
-      <div>
-        <p>
-          Косметика автоматически выдаётся
-          <br />и записывается в{' '}
+      <div className="grid items-center justify-center max-w-sm mx-auto">
+        <p className="red-line">
+          Косметика автоматически выдаётся и записывается в{' '}
           <Link
             href={user ? `/user/${user?.name}/history` : '/auth'}
             className='text-unic font-medium'
@@ -297,14 +309,15 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
             вашу историю
           </Link>
         </p>
-        <br />
-        <p>Для использования косметики:</p>
-        <ul>
-          <li>Зайдите на сервер</li>
-          <li>
-            Введите <code className='select-all'>/uc menu</code>
-          </li>
-        </ul>
+        <div className="ml-6">
+          <p>Для использования косметики:</p>
+          <List>
+            <li>Зайдите на сервер</li>
+            <li>
+              Введите <code>/uc menu</code>
+            </li>
+          </List>
+        </div>
       </div>
     </MaxSize>
   )
@@ -313,26 +326,24 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
 function SelectedItem({ items, selectedItem }: { items: Info[]; selectedItem: number }) {
   if (!items[selectedItem]?.Item) {
     return (
-      <div className={styles.box}>
-        <p className={styles.text}>Наведите на картинку рулетки, чтобы увидеть характеристику</p>
+      <div className="flex justify-center flex-col card">
+        <p className="py-[5px] animate-change">Наведите на картинку рулетки, чтобы увидеть характеристику</p>
       </div>
     )
   }
 
   return (
-    <div className={styles.box} key={items[selectedItem]?.Item?.name}>
-      <h3 className={`${styles.text} ${styles.min_height} text-unic`}>
+    <div className="flex justify-between flex-col card" key={items[selectedItem]?.Item?.name}>
+      <h3 className="min-h-16 animate-change text-unic">
         {items[selectedItem]?.Item?.displayname}
       </h3>
-      <p className={styles.text}>
-        Редкость:
-        <br />
-        <span className={`${items[selectedItem]?.rarity || ''}`}>
-          {RarityNames[items[selectedItem]?.rarity || 'common']}
-        </span>
-      </p>
-      <p className={`${styles.text} ${styles.min_height} ${items[selectedItem]?.rarity || ''}`}>
+
+      <p className={cn("min-h-16 animate-change text", items[selectedItem]?.rarity)}>
         {items[selectedItem]?.DropItem?.description}
+      </p>
+
+      <p className={cn('animate-change text', items[selectedItem]?.rarity)}>
+        {RarityNames[items[selectedItem]?.rarity || 'common']}
       </p>
     </div>
   )
@@ -357,7 +368,7 @@ function Account({ user, price }: { user: User | null; price: number }) {
       <p>
         Баланс:{' '}
         <span
-          className={`${styles.mostiki_text} ${user.mostiki >= price ? 'text-green' : 'text-red'}`}
+          className={cn("inline-flex gap-[5px] items-center", ColorText(user.mostiki, price, "green"))}
         >
           {user.mostiki} <MostikiSvg />
         </span>
@@ -365,7 +376,7 @@ function Account({ user, price }: { user: User | null; price: number }) {
       <p>
         Стоимость:{' '}
         <span
-          className={`${styles.mostiki_text} ${user.mostiki >= price ? 'text-green' : 'text-red'}`}
+          className={cn("inline-flex gap-[5px] items-center", ColorText(user.mostiki, price, "green"))}
         >
           {price} <MostikiSvg />
         </span>

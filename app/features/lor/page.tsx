@@ -12,7 +12,7 @@ import { OnThisPage, OnThisPageLink } from '@components/sideNav'
 import { Number, SNumber } from '@components/number'
 import { LastUpdate } from '@components/lastUpdate'
 import { LASTLORUPDATE } from '@/const'
-import { cn } from '@/lib/utils'
+import { List } from '@components/rules'
 
 export const metadata: Metadata = {
   title: 'Лор',
@@ -30,9 +30,9 @@ type Page = {
 } & PropsWithChildren
 const Page = ({ children, day, number, all }: Page) => (
   <div className='px-[45px] py-5'>
-    {day && <p className='text-unic'>День {day}</p>}
+    {day && <p className='text-unic text-center'>День {day}</p>}
     {number && (
-      <p className='text-unic flex items-center justify-start gap-2'>
+      <p className='text-unic flex items-center justify-center gap-2 text-center'>
         <SNumber>{number}</SNumber> / <SNumber>{all}</SNumber>
       </p>
     )}
@@ -101,13 +101,13 @@ export default function Lor() {
               </Page>
             </Book>
             <p>Открылся энд. Игроки зашли в эндер мир и встретили 2 постройки:</p>
-            <ol>
+            <List>
               <li>В первой маленькой постройке был второй дневник, в нём было 5 страниц</li>
               <li>
                 Второй постройкой был огромный обсидиановый шар со странной красной колбой внутри.
                 Содержимое было похоже на <span className='text-red font-medium'>кровь</span>...
               </li>
-            </ol>
+            </List>
             <Book>
               <Page day={36}>
                 <p>
@@ -173,30 +173,30 @@ export default function Lor() {
             </p>
             <br />
             <h4>Игроки поделились на 2 группы</h4>
-            <ol>
+            <List>
               <li>Которые съедали обычную еду, и сразу лечились</li>
               <li>Которые ждали, постепенно превращаясь в вампиров</li>
-            </ol>
+            </List>
             <br />
             <h4>Вампиры:</h4>
-            <ul>
+            <List>
               <li>Горели на солнце</li>
               <li>Ели живых существ</li>
               <li>Могли превращаться в летучих мышей</li>
-            </ul>
+            </List>
             <br />
             <p>
               Противостояние было долгим, некоторые игроки заражались и сразу пытались лечится. Было
               целых 3 фазы вампиризма, на каждой лекарство было разным:
             </p>
-            <ol>
+            <List>
               <li>Любая человеческая еда</li>
               <li>Мистическая похлёбка</li>
               <li>
                 Чесночная водичка - уникальный предмет, состоящий из бутылки, лук батуна и слезы
                 гаста
               </li>
-            </ol>
+            </List>
           </PText>
         </PBox>
 
@@ -207,7 +207,7 @@ export default function Lor() {
           </PTitle>
           <PText>
             <p>Игроки нашли лабораторию с разбросанными бумагами и книгами, из них можно понять</p>
-            <ul>
+            <List>
               <li>Владелец лаборатории - Демиан Росси</li>
               <li>Ему на момент написания 23 года, он 1919 года рождения</li>
               <li>Он проработал 2 года археологом</li>
@@ -216,9 +216,8 @@ export default function Lor() {
                 цель
               </li>
               <li>Что-то натворил со своей последней целью, что-то невозвратное...</li>
-            </ul>
-            <br />
-            <p>
+            </List>
+            <p className='red-line'>
               После игроки нашли эту цель, это была структура очень напоминающая замок, в центре
               была найдена брошенная книга и бочка, внутри лежала поддельная рука вампира и тёмная
               кровь...
@@ -245,8 +244,7 @@ export default function Lor() {
                 <p>Модулев А. Д.</p>
               </Page>
             </Book>
-            <br />
-            <p>После открытия энда игрокам стала доступна ещё одна книга</p>
+            <p className='red-line'>После открытия энда игрокам стала доступна ещё одна книга</p>
             <Book>
               <Page day={993}>
                 Я всего лишь хотел спастись от этого чудов<Blur>и</Blur>ща, но Он унич<Blur>т</Blur>
@@ -277,17 +275,16 @@ export default function Lor() {
           </PTitle>
 
           <PText>
-            <p>Игроки нашли лабораторию из 5 сезона в адском стиле в аду</p>
-            <p>В ней была загадка, нужно было перейти по ссылке:</p>
-            <h4>
+            <p className='red-line'>Игроки нашли лабораторию из 5 сезона в адском стиле в аду</p>
+            <p className='red-line'>В ней была загадка, нужно было перейти по ссылке:</p>
+            <h4 className='text-center'>
               <Link href='/video' className='text-unic font-medium'>
                 {process.env.NEXT_PUBLIC_RU_DOMAIN}/video
               </Link>
             </h4>
-            <br />
-            <p>После открытия энда игроки нашли прогнившую маленькую постройку с 4 сезона</p>
-            <p>В ней была книга с доступом к камере учёного</p>
-            <h4>
+            <p className='red-line'>После открытия энда игроки нашли прогнившую маленькую постройку с 4 сезона</p>
+            <p className='red-line'>В ней была книга с доступом к камере учёного</p>
+            <h4 className='text-center'>
               <Link href='/scientist' className='text-unic font-medium'>
                 {process.env.NEXT_PUBLIC_RU_DOMAIN}/scientist
               </Link>
@@ -342,12 +339,11 @@ export default function Lor() {
               </Page>
             </Book>
 
-            <p className='red_line'>
+            <p className='red-line'>
               Игроки обнаружили книгу в самом замке, но всё началось задолго до этого – с
               судьбоносной встречи с местом, где всё изменилось
             </p>
-            <br />
-            <p className='red_line'>
+            <p className='red-line'>
               У входа в замок раздался разговор вампиров: какие-то люди убили дочь древней семьи.
               Несмотря на боль утраты, в стенах замка продолжается пир-маскарад, позволяющий
               временно забыть о трагедии
@@ -361,33 +357,32 @@ export default function Lor() {
               </h3>
               <Page>
                 <p className='text-red'>Вход запрещён:</p>
-                <ul>
+                <List>
                   <li>Людям</li>
                   <li>Без маски</li>
                   <li>Неприглашённым</li>
-                </ul>
+                </List>
                 <br />
                 <p className='text-red text-center'>Да выпьем же всю кровь!</p>
                 <small>Предъявить данное приглашение на входе</small>
               </Page>
             </Book>
 
-            <p className='red_line'>
+            <p className='red-line'>
               Получив приглашение, игроки, надев маски, бесшумно проникли в замок
             </p>
-            <br />
-            <p className='red_line'>
+            <p className='red-line'>
               В недрах замка они оказались вовлечены в хитросплетения интриг: помогая различным
               гостям-вампирам, они получили книгу «Легенда о Имперцах», в которой скрывалось сразу
               две загадки:
             </p>
-            <ul>
+            <List>
               <li>
-                <p className='font-medium'>Разбив время — увидишь настоящее</p>
+                <span className='font-medium'>Разбив время — увидишь настоящее</span>{" "}
                 <small>(послание, составленное из заглавных букв)</small>
               </li>
               <li>Белый текст на белом фоне</li>
-            </ul>
+            </List>
 
             <Book>
               <Page>
@@ -404,32 +399,28 @@ export default function Lor() {
               </Page>
             </Book>
 
-            <p className='red_line'>
+            <p className='red-line'>
               Среди множества книг особое место занимает записка с зашифрованным посланием, ведущим
               в Незер. В нижнем мире игроки обнаружили ссылку на страницу сайта, где, преодолев
               головоломку, получали уникальное зелье исцеления
             </p>
-            <br />
-            <p className='red_line'>
+            <p className='red-line'>
               Болезнь, поразившая супругу главы древней семьи, оказалась коварной: даже волшебное
               обручальное кольцо не смогло даровать ей силы. Лишь появление игроков и их
               чудодейственное зелье внушили надежду на спасение, открывая новые тайны прошлого
             </p>
-            <br />
-            <p className='red_line'>
+            <p className='red-line'>
               Внезапно Дракула возвращается — муж больной вампирессы, оказавшийся бессильным в
               отчаянной попытке спасти супругу. Обвинив людей, он решается на отчаянный шаг —
               использовать телепортацию во времени
             </p>
-            <br />
-            <p className='red_line'>
+            <p className='red-line'>
               За пределами замка солнце неумолимо палит, обжигая всё вокруг. Игрокам пришлось срочно
               разрабатывать план спасения от ожогов: изучив видео на ютуб-канале сервера, они
               обнаружили «25 кадр», скрывающий координаты, и, следуя им, нашли сумасшедшего старца,
               продающего зонты
             </p>
-            <br />
-            <p className='red_line'>
+            <p className='red-line'>
               Но опасности на этом не исчерпались: ослабевший озоновый слой падал в виде осколков
               стеклянных метеоритов
             </p>

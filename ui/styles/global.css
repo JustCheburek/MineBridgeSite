@@ -26,7 +26,7 @@
 
   html {
     @apply scroll-smooth dark:text-white;
-    scroll-padding: calc(var(--spacing-header-header) + var(--spacing-page));
+    scroll-padding: calc(var(--spacing-header) + 1vh);
     color-scheme: dark;
     scrollbar-gutter: stable;
   }
@@ -42,12 +42,11 @@
   }
 
   *::-webkit-scrollbar-track {
-    background: var(--color-black);
+    @apply bg-black;
   }
 
   *::-webkit-scrollbar-thumb {
-    background: var(--color-unic);
-    border-radius: var(--radius-base);
+    @apply bg-unic rounded-base;
   }
 
   button,
@@ -75,9 +74,7 @@
   }
 
   path {
-    transition:
-      var(--transition-short) fill,
-      var(--transition-short) stroke;
+    @apply transition-[fill_300ms,stroke_300ms];
   }
 
   a.text-unic:active,
@@ -94,41 +91,9 @@
   }
 }
 
-/* Утилитарные классы */
-.edit,
-.add {
-  @apply inline-flex items-center justify-center font-medium;
-  width: max(0.55em, 0.9rem);
-  height: 1em;
-  transition: color var(--transition-short);
-}
-
-.edit:hover,
-.edit:active,
-.add:hover,
-.add:active {
-  color: var(--color-unic);
-}
-
-.mostiki {
-  @apply inline;
-  width: 1em;
-  height: 0.85em;
-}
-
-/* .border {
-  @apply rounded-base;
-  border: 1px solid var(--color-border);
-  background: var(--color-black-transparent);
-} */
-
 .background {
   @apply rounded-base;
   background: var(--color-black-transparent);
-}
-
-.pixel {
-  @apply [image-rendering:pixelated];
 }
 
 .helper-box,
@@ -158,23 +123,4 @@
 
 .helper {
   @apply absolute right-4 top-4 grid place-items-center font-medium;
-}
-
-/* Адаптивные классы */
-@media (min-width: 1024px) {
-  .for-mobile {
-    @apply hidden;
-  }
-}
-
-@media (max-width: 1199px) {
-  .for-tablet {
-    @apply hidden;
-  }
-}
-
-@media (max-width: 1023px) {
-  .for-pc {
-    @apply hidden;
-  }
 }

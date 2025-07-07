@@ -180,26 +180,6 @@
   min-width: 100%;
 }
 
-.item {
-  border-radius: var(--border-radius);
-  background: var(--black-color);
-  contain: strict;
-}
-
-.img {
-  object-position: center;
-  object-fit: cover;
-  contain: layout;
-}
-
-.button:disabled {
-  color: #939393;
-
-  &:before {
-    @include mixins.border($width: 1px, $color: #767676, $background: #263034);
-  }
-}
-
 @media (width > 768px) {
   .card:has(.item:hover),
   .card:has(.text:hover) {

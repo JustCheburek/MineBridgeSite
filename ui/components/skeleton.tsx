@@ -1,10 +1,13 @@
-import { cn } from '@/lib/utils'
-import { ComponentPropsWithoutRef } from 'react'
+import { cn } from "@/lib/utils"
 
-type Skeleton = ComponentPropsWithoutRef<'div'>
-
-export function Skeleton({ className, ...props }: Skeleton) {
+function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div className={cn('rounded-base bg-black motion-safe:animate-pulse', className)} {...props} />
+    <div
+      data-slot="skeleton"
+      className={cn("bg-black/30 motion-safe:animate-pulse rounded-base", className)}
+      {...props}
+    />
   )
 }
+
+export { Skeleton }

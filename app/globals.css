@@ -55,8 +55,9 @@
   --color-legendary: rgb(255, 215, 0); /* Легендарный */
 
   /* Скругления */
-  --radius-base: 35px;
   --radius-button: 45px;
+  --radius-base: 35px;
+  --radius-card: 25px;
   --radius-input: 12px;
 
   /* Анимация */
@@ -72,6 +73,7 @@
   --spacing-page: clamp(0.5rem, 3svw, 3rem);
   --spacing-header: clamp(108px, 15svh, 180px);
 
+  /* Анимация загрузки */
   --animate-moveBlock1: moveBlock1 1.5s ease-in-out infinite;
   --animate-moveBlock2: moveBlock2 1.5s ease-in-out infinite;
 
@@ -106,10 +108,49 @@
       transform: translate(12px, 0);
     }
   }
+
+  /* Анимация рулетки */
+  @keyframes roll {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: var(--_roll-width);
+    }
+  }
+
+  /* Анимация пропадания линии */
+  --animate-disappear: disappear 1s forwards;
+  @keyframes disappear {
+    30% {
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 0;
+      scale: 0.5;
+    }
+  }
+
+  /* Анимация изменения текста */
+  --animate-change: change 800ms;
+  @keyframes change {
+    0% {
+      opacity: 0.5;
+      translate: 20px;
+    }
+    100% {
+      opacity: 1;
+      translate: 0;
+    }
+  }
 }
 
 @utility borderbox {
   @apply border-border rounded-base bg-background/80 border;
+}
+
+@utility card {
+  @apply borderbox rounded-card bg-black/30 px-6 py-4;
 }
 
 /* Кастомные утилитарные классы */
@@ -118,8 +159,23 @@
   grid-template-columns: repeat(auto-fit, minmax(min(--value([percentage], [length]), 100%), 1fr));
 }
 
+@utility pixel {
+  image-rendering: pixelated;
+}
+
+@utility mask-gradient {
+  mask: linear-gradient(
+    to right, 
+    color-mix(in oklab, var(--color-black) 30%, transparent) 0%, 
+    var(--color-black) 40%, 
+    var(--color-black) 60%,
+    color-mix(in oklab, var(--color-black) 30%, transparent) 100%
+  );
+}
+
 @import '../ui/styles/text.css';
 @import '../ui/styles/global.css';
 @import '../ui/styles/button.css';
 @import '../ui/styles/appear.css';
+@import '../ui/styles/rarities.css';
 /* @import '../ui/styles/animation.css'; */

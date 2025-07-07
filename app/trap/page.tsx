@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 // Компоненты
 import { MaxSize } from '@components/maxSize'
 import { H1 } from '@components/h1'
+import { List } from '@components/rules'
 
 export const metadata: Metadata = {
   title: 'Ловушка',
@@ -24,7 +25,7 @@ export default function Trap() {
       <p>Да-да, это горячая картошка! Тебе нужно передать эту карту другому игроку</p>
       <br />
       <p>Немного правил:</p>
-      <ul>
+      <List>
         <li>Передать надо в течение 4 дней</li>
         <li>Игрок может получить карту, даже если он её уже получал</li>
         <li>Убивать нельзя, передавать предмет только выбрасыванием предмета</li>
@@ -36,7 +37,7 @@ export default function Trap() {
           окончанию ивента скинуть видео в общий чатик
         </li>
         <li>При нарушении правил можно получить снижение звёзд</li>
-      </ul>
+      </List>
     </MaxSize>
   )
 }

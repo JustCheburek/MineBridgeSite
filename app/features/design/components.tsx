@@ -75,7 +75,7 @@ export function Download() {
   const path = `/logos/${logoName}/logo.${logos.find(logo => logo.name === logoName)?.type}`
 
   return (
-    <div className='borderbox flex w-full flex-wrap place-content-center gap-4 gap-x-12 p-8'>
+    <div className='card flex w-full flex-wrap place-content-center gap-4 gap-x-12 p-8'>
       <div>
         <Form action=''>
           <FormSelect name='logos' id='logos' onChange={selectLogo} value={logoName}>

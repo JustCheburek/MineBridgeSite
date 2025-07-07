@@ -59,7 +59,9 @@ export default function WhitelistSection({ user, isMe }: { user: User; isMe: boo
       <h4 className='text-unic font-medium'>{process.env.NEXT_PUBLIC_VERSION} Java Edition</h4>
       <p>
         IP:{' '}
-        <strong className='text-unic select-all'>secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}</strong>
+        <code className='text-unic font-bold'>
+          secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}
+        </code>
       </p>
       <small>
         Если просит авторизацию, то

@@ -28,7 +28,11 @@
 
 @layer components {
   /* Красная строка */
-  .red_line::first-letter {
-    @apply my-[9px] ml-[30px];
+  .red-line {
+    @apply my-2;
+  }
+
+  .red-line::first-letter {
+    @apply ml-6;
   }
 }

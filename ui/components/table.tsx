@@ -31,11 +31,8 @@ import TimeAgo from 'javascript-time-ago'
 import ru from 'javascript-time-ago/locale/ru'
 import { Number } from '@components/number'
 
-// Стили
-import styles from './styles/table.module.scss'
-
 // Utils
-import { ColorText } from '@/lib/utils'
+import { cn, ColorText } from '@/lib/utils'
 import { FormButton, FormInput, FormLabel } from '@components/form'
 import { Button } from '@components/button'
 import { HookButton } from '@components/hookbutton'
@@ -168,9 +165,11 @@ export function Table<T>({
     return (
       <th
         scope='col'
-        className={`${styles.th} ${styles.header}`}
         onClick={header.column.getToggleSortingHandler()}
-        style={{ cursor: header.column.getCanSort() ? 'cursor-pointer' : 'default' }}
+        className={cn(
+          'py-4 px-6 whitespace-nowrap',
+          { 'cursor-pointer': header.column.getCanSort() }
+        )}
       >
         {flexRender(header.column.columnDef.header, header.getContext())}
         {sortItem && (sortItem.desc ? ' ↓' : ' ↑')}
@@ -184,15 +183,15 @@ export function Table<T>({
     const start = Math.max(0, current - 2)
     const end = Math.min(pageCount, start + 5)
     return (
-      <div className={styles.pagination}>
+      <div className="flex justify-center items-center gap-2 my-4 mx-auto">
         <button
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
-          className={styles.start}
+          className="py-2 px-3 cursor-pointer disabled:opacity-50 disabled:cursor-default"
         >
           &laquo;
         </button>
-        <div className={styles.buttons}>
+        <div className="flex gap-2 justify-center items-center">
           {Array.from({ length: end - start }).map((_, i) => {
             const idx = start + i
             return (
@@ -201,7 +200,7 @@ export function Table<T>({
                 className={current === idx ? 'font-bold' : ''}
                 onClick={() => table.setPageIndex(idx)}
               >
-                <Number removeM>{idx + 1}</Number>
+                <Number>{idx + 1}</Number>
               </button>
             )
           })}
@@ -209,6 +208,7 @@ export function Table<T>({
         <button
           onClick={() => table.setPageIndex(pageCount - 1)}
           disabled={!table.getCanNextPage()}
+          className="py-2 px-3 cursor-pointer disabled:opacity-50 disabled:cursor-default"
         >
           &raquo;
         </button>
@@ -217,9 +217,10 @@ export function Table<T>({
   }
 
   return (
-    <div className={styles.table_container}>
-      <div className={`text-center ${styles.caption}`}>{children}</div>
-      <FormLabel>
+    <div className="max-md:overflow-x-auto">
+      <div className="text-center mb-10">{children}</div>
+
+      <FormLabel className='block max-sm:mx-2 sm:w-[70%] mx-auto'>
         <FormInput
           value={globalFilter}
           onChange={e => setState({ globalFilter: e.target.value })}
@@ -230,24 +231,24 @@ export function Table<T>({
 
       {pagination && <PaginationControls />}
 
-      <table className={styles.table}>
-        <thead className={styles.thead}>
+      <table className="relative border-separate border-spacing-y-6 w-full">
+        <thead className="bg-background/80 backdrop-blur-md z-10 lg:sticky lg:top-(--spacing-header) lg:-translate-y-0.25">
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id} className={styles.tr}>
+            <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
                 <Header key={header.id} header={header} />
               ))}
               {editable && (
-                <th scope='col' className={styles.th}>
+                <th scope='col' className="py-4 px-6 whitespace-nowrap">
                   ✐
                 </th>
               )}
             </tr>
           ))}
         </thead>
-        <tbody className={styles.tbody}>
+        <tbody>
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id} className={styles.tr}>
+            <tr key={row.id} className="even:bg-black/30">
               {row.getVisibleCells().map(cell => {
                 const value = cell.getValue<string | number>()
                 const { columnDef } = cell.column
@@ -267,7 +268,7 @@ export function Table<T>({
                 const className = `${textcenter || ''} ${number || ''} ${meta?.className || ''}`
 
                 return (
-                  <td key={cell.id} className={`${styles.td} ${className}`}>
+                  <td key={cell.id} className={cn("py-4 px-2 text-wrap-balance first:rounded-l-[15px] last:rounded-r-[15px]", className)}>
                     <Value<T>
                       cell={cell}
                       row={row}
@@ -282,8 +283,8 @@ export function Table<T>({
                 )
               })}
               {editable && (
-                <td className={`text-center ${styles.td}`}>
-                  <div className={styles.func_buttons}>
+                <td className="text-center p-4 px-2 text-wrap-balance first:rounded-l-[15px] last:rounded-r-[15px]">
+                  <div className="flex place-content-center gap-2.5">
                     {/* @ts-ignore */}
                     {editingRows[row.id] ? (
                       <>
@@ -328,16 +329,16 @@ export function Table<T>({
           ))}
         </tbody>
         {editable && (
-          <tfoot className={styles.tfoot}>
-            <tr className={styles.tr}>
-              <th colSpan={table.getCenterLeafColumns().length - 1} className={styles.th}>
+          <tfoot>
+            <tr>
+              <th colSpan={table.getCenterLeafColumns().length - 1} className="py-4 px-6 whitespace-nowrap">
                 {table.getSelectedRowModel().rows.length > 0 && (
                   <HookButton className='text-red' onClick={removeRows} danger>
                     Удалить выделенное
                   </HookButton>
                 )}
               </th>
-              <th colSpan={table.getCenterLeafColumns().length} className={styles.th}>
+              <th colSpan={table.getCenterLeafColumns().length} className="py-4 px-6 whitespace-nowrap">
                 {setModal && (
                   <FormButton
                     onClick={e => {

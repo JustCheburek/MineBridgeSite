@@ -98,10 +98,10 @@ export function ImgUpload({
         {imageUrl && !disabled && (
           <button
             className={cn(
-              'absolute right-0 top-0 h-12 w-12 -translate-y-1/4 translate-x-1/4',
+              'absolute right-2 top-2 size-8',
               'flex items-center justify-center',
-              'border-gray bg-gray/80 rounded-md border backdrop-blur-sm',
-              'hover:text-red transition-all duration-300'
+              'borderbox bg-black/50 backdrop-blur-md',
+              'hover:text-red transition-all duration-500'
             )}
             onClick={e => {
               e.stopPropagation()

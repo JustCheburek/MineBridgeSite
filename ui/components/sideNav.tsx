@@ -20,7 +20,7 @@ export function Subsections({ children, menu }: PropsWithChildren<{ menu: string
   return (
     <nav
       className={cn(
-        'max-lg:borderbox max-lg:fixed max-lg:bottom-[-1px] max-lg:left-0 max-lg:z-20 max-lg:flex max-lg:h-[calc(var(--spacing-header)/1.5)] max-lg:w-full max-lg:flex-col max-lg:items-center max-lg:justify-center max-lg:rounded-none max-lg:py-6 max-lg:backdrop-blur-sm',
+        'max-lg:borderbox max-lg:fixed max-lg:bottom-[-1px] max-lg:left-0 max-lg:z-20 max-lg:flex max-lg:h-[calc(var(--spacing-header)/1.5)] max-lg:w-full max-lg:flex-col max-lg:items-center max-lg:justify-center max-lg:rounded-none max-lg:py-6 max-lg:backdrop-blur-md',
         { 'max-lg:burger-active': burger }
       )}
     >

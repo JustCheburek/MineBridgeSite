@@ -13,7 +13,7 @@ import { AuthSvg, MinebridgeSvg, MostikiSvg, StarSvg } from '@ui/SVGS'
 import { NavLink } from '@components/navlink'
 import { Burger } from '@components/burger'
 import { Skeleton } from '@components/skeleton'
-import { MiniLink } from '@components/button'
+import { MiniA, MiniLink } from '@components/button'
 
 const Avatar = dynamic(() => import('@components/avatar'))
 
@@ -114,7 +114,7 @@ function User({ user }: { user: User | null }) {
 
       <nav
         className={cn(
-          'border-info-border rounded-base rounded-tr-1 bg-background/80 absolute right-0 rounded-tr-md border p-[15px]',
+          'borderbox rounded-tr-1 absolute right-0 rounded-tr-md p-[15px]',
           {
             block: isMenu,
             hidden: !isMenu,
@@ -135,9 +135,9 @@ function User({ user }: { user: User | null }) {
             <MiniLink href='https://discord.gg/UBB92NjedW'>Кланы</MiniLink>
           </li>
           <li>
-            <MiniLink href='/api/logout' danger>
-              Выход
-            </MiniLink>
+            <MiniA href='/api/logout' className='text-red'>
+              Выйти
+            </MiniA>
           </li>
         </ul>
       </nav>
@@ -159,7 +159,7 @@ export function HeaderClient({ user }: { user: User | null }) {
   return (
     <header
       className={cn(
-        'min-h-header borderbox sticky top-[-1px] z-40 flex items-center justify-center rounded-none border-none backdrop-blur-sm',
+        'min-h-header borderbox sticky top-0 z-40 flex items-center justify-center rounded-none border-none backdrop-blur-md',
         {
           burger_active: burger,
         }

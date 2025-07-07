@@ -26,7 +26,7 @@ export function GiftModal({ user, author, modal, setModal }: GiftModal) {
 
   return (
     <Modal setModal={setModal} modal={modal}>
-      <H1>Перевод</H1>
+      <h1>Перевод</h1>
       <h2>{user.name}</h2>
 
       <Form action={formAction} onSubmit={() => state.success && setModal(false)}>

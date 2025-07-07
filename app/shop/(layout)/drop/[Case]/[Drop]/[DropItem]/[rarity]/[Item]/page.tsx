@@ -2,7 +2,6 @@ import { getCase, getDrop, getItem, getItems } from '@services/shop'
 import { Img, ImgBox } from '@components/img'
 import { Case, Drop, Item, RarityCost, RarityNames, type RarityType } from '@/types/case'
 import { validate } from '@services/user/validate'
-import styles from './item.module.scss'
 import { MostikiSvg } from '@ui/SVGS'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
@@ -11,6 +10,7 @@ import { Button, Url } from '@components/button'
 import { User } from 'lucia'
 import { AddCasePurchase, GetCosmetic } from '@services/user/casePurchase'
 import { CaseData } from '@/types/purchase'
+import { cn } from '@/lib/utils'
 
 type ParamsProp = {
   params: Promise<{
@@ -151,19 +151,19 @@ export default async function ShowCase({ params }: ParamsProp) {
         {Item?.displayname}
       </H1>
 
-      <div className={styles.item}>
+      <div className="grid justify-center items-center gap-4 sm:grid-cols-2">
         {DropItem.name !== 'suffix' ? (
-          <ImgBox className={`rounded-base ${rarity}_box h-[160px] w-[280px]`} hover>
+          <ImgBox className={cn(`rounded-base h-[160px] w-[280px]`, 'box', rarity)} hover>
             <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname} />
           </ImgBox>
         ) : (
           <p
-            className={`rounded-base grid place-items-center text-center ${rarity}_box h-[160px] w-[280px]`}
+            className={cn(`rounded-base grid place-items-center text-center h-[160px] w-[280px]`, 'box', rarity)}
           >
             Суффикс
           </p>
         )}
-        <div className={styles.left_text}>
+        <div className="sm:order-[-1] mx-auto">
           <p className={rarity}>{RarityNames[rarity]}</p>
           <p>{DropItem?.description}</p>
           <p>
@@ -172,11 +172,11 @@ export default async function ShowCase({ params }: ParamsProp) {
           <p>У тебя есть: {userHave}</p>
         </div>
       </div>
-      <div className={styles.case}>
+      <div className="grid justify-center items-center gap-4 mt-4 sm:grid-cols-2">
         <ImgBox hover>
           <Img src={`/shop/${Case.name}.png`} alt={`${Case.displayname} кейс`} width={185} />
         </ImgBox>
-        <div className={styles.right_text}>
+        <div className="sm:text-right mx-auto">
           <p>{Case?.displayname}</p>
           <p>{Drop?.displayname}</p>
           <p>
@@ -188,27 +188,30 @@ export default async function ShowCase({ params }: ParamsProp) {
       <BuyButton user={user} price={fullPrice} caseData={{ rarity, Item, Case, Drop, DropItem }} />
 
       {isHelper && (
-        <div className='text-light-gray grid place-items-center'>
-          {DropItem.give && (
-            <small className='select-all'>
-              {DropItem.give}.{DropItem.name}.{Item.name}
-            </small>
-          )}
-          <small>
-            Case: <span className='select-all'>{Case._id.toString()}</span>
-          </small>
-          <small>
-            Drop: <span className='select-all'>{Drop._id.toString()}</span>
-          </small>
-          <small>
-            DropItem: <span className='select-all'>{DropItem._id.toString()}</span>
-          </small>
-          <small>
-            Item: <span className='select-all'>{Item._id.toString()}</span>
-          </small>
-          <small>
-            rarity: <span className='select-all'>{rarity}</span>
-          </small>
+        <div className='text-light-gray mx-auto'>
+          {DropItem.give &&
+            <p>
+              Право:{" "}
+              <code>
+                {DropItem.give}.{DropItem.name}.{Item.name}
+              </code>
+            </p>
+          }
+          <p>
+            Case: <code>{Case._id.toString()}</code>
+          </p>
+          <p>
+            Drop: <code>{Drop._id.toString()}</code>
+          </p>
+          <p>
+            DropItem: <code>{DropItem._id.toString()}</code>
+          </p>
+          <p>
+            Item: <code>{Item._id.toString()}</code>
+          </p>
+          <p>
+            rarity: <code>{rarity}</code>
+          </p>
         </div>
       )}
     </div>

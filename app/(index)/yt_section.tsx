@@ -13,7 +13,7 @@ const YtSection = () => (
       </h3>
     </div>
 
-    <div className='borderbox h-full w-full overflow-hidden'>
+    <div className='borderbox size-full overflow-hidden'>
       <YouTubeEmbed videoid='m7ipkVv_FPE' params='controls=0' />
     </div>
   </section>

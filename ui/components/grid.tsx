@@ -16,8 +16,8 @@ type GContainer = {
 export const GContainer = ({ children, className = '', border = false, ...props }: GContainer) => (
   <div
     className={cn(
-      'relative grid place-content-center gap-x-8 gap-y-20 *:h-60 *:w-72',
-      'grid-cols-autofit-72',
+      'relative grid place-content-center gap-x-8 gap-y-20 *:h-64 *:w-80',
+      'grid-cols-autofit-80',
       {
         '*:border-border *:rounded-base *:bg-background/80 *:border *:border-solid': border,
       },

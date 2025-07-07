@@ -22,7 +22,7 @@ export function PreSeason({ author }: { author: User | null }) {
           className='max-md:brightness-40'
         />
         <Box className='absolute bottom-0 right-0 z-20 max-md:static max-md:min-w-[50%]'>
-          <Text className='bg-background/80 rounded-tl-base rounded-none max-md:border-0 max-md:bg-transparent md:backdrop-blur-sm'>
+          <Text className='bg-background/80 rounded-tl-base rounded-none max-md:border-0 max-md:bg-transparent md:backdrop-blur-md'>
             <h3 className='text-center'>Межсезонье</h3>
             <Price>100</Price>
             <BuyButton onClick={() => setModal(true)} author={author} />

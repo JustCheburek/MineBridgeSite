@@ -12,6 +12,7 @@ import { MaxSize } from '@components/maxSize'
 import { PBox, PText, PTitle } from '@components/post'
 import { Img, ImgBox } from '@components/img'
 import { H1 } from '@components/h1'
+import { List } from '@components/rules'
 
 export const metadata: Metadata = {
   title: 'BreweryX',
@@ -46,7 +47,7 @@ export default function Brewery() {
         </PTitle>
 
         <PText>
-          <ul>
+          <List>
             <li>
               Поставьте <span className='font-medium'>котёл</span> на источник тепла
               <br />
@@ -60,7 +61,7 @@ export default function Brewery() {
             <li>
               Забирайте закваску <span className='font-medium'>стеклянными бутыльками</span>
             </li>
-          </ul>
+          </List>
         </PText>
       </PBox>
 
@@ -75,7 +76,7 @@ export default function Brewery() {
         </PTitle>
 
         <PText>
-          <ul>
+          <List>
             <li>
               Положите бутылку с закваской в <span className='font-medium'>зельеварку</span>
             </li>
@@ -83,7 +84,7 @@ export default function Brewery() {
               Поместите <span className='font-medium'>светящуюся пыль</span> сверху в качестве
               ингредиента
             </li>
-          </ul>
+          </List>
         </PText>
       </PBox>
 
@@ -114,13 +115,12 @@ export default function Brewery() {
           <div>
             <p>Для постройки нужно:</p>
 
-            <ul>
+            <List>
               <li>8 ступенек</li>
               <li>
-                Табличка с надписью «<span className='text-unic select-all font-medium'>Бочка</span>
-                »
+                Табличка с надписью «<code className='text-unic font-medium'>Бочка</code>»
               </li>
-            </ul>
+            </List>
           </div>
         </PText>
 
@@ -136,15 +136,14 @@ export default function Brewery() {
         <PText>
           <div>
             <p>Для постройки нужно (полая внутри):</p>
-            <ul>
+            <List>
               <li>16 ступенек</li>
               <li>18 досок</li>
               <li>1 забор</li>
               <li>
-                Табличка с надписью «<span className='text-unic select-all font-medium'>Бочка</span>
-                »
+                Табличка с надписью «<code className='text-unic font-medium'>Бочка</code>»
               </li>
-            </ul>
+            </List>
           </div>
         </PText>
       </PBox>

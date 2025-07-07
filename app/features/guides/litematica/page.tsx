@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { Img, ImgBox } from '@components/img'
 import type { PropsWithChildren } from 'react'
 import { OnThisPage, OnThisPageLink } from '@components/sideNav'
+import { List } from '@components/rules'
 
 export const metadata: Metadata = {
   title: 'Litematica',
@@ -54,7 +55,7 @@ export default function Litematica() {
           </PTitle>
 
           <PText>
-            <ul>
+            <List>
               <li>
                 Скачиваем{' '}
                 <Link
@@ -67,7 +68,7 @@ export default function Litematica() {
               </li>
               <li>Закидываем в папку .minecraft/mods</li>
               <li>Запускаем майн</li>
-            </ul>
+            </List>
           </PText>
         </PBox>
 
@@ -80,7 +81,7 @@ export default function Litematica() {
 
           <PText>
             <h4>С помощью палочки</h4>
-            <ul>
+            <List>
               <li>
                 Выберите на палочке первый режим <code>Выбор области</code>
               </li>
@@ -88,17 +89,17 @@ export default function Litematica() {
                 Зажимайте <code>Alt</code>
               </li>
               <li>Вращайте колёсико мыши, смотря в нужную сторону</li>
-            </ul>
+            </List>
             <br />
             <p>Чтобы поменять угол нажмите среднюю кнопку мыши по другому углу</p>
             <br />
             <h4>С помощью координат</h4>
-            <ul>
+            <List>
               <li>
                 <code>Редактор области</code>
               </li>
               <li>Вводите координаты для 2 углов</li>
-            </ul>
+            </List>
           </PText>
         </PBox>
 
@@ -111,7 +112,7 @@ export default function Litematica() {
           </PTitle>
 
           <PText>
-            <ul>
+            <List>
               <li>
                 <code>Редактор области</code>
               </li>
@@ -122,7 +123,7 @@ export default function Litematica() {
               <li>
                 <code>Сохранить схему</code>
               </li>
-            </ul>
+            </List>
           </PText>
         </PBox>
 
@@ -135,7 +136,7 @@ export default function Litematica() {
           </PTitle>
 
           <PText>
-            <ul>
+            <List>
               <li>
                 <code>Загрузить схему</code>
               </li>
@@ -143,10 +144,10 @@ export default function Litematica() {
               <li>
                 <code>Загрузить схему</code>
               </li>
-            </ul>
+            </List>
             <br />
             <p>Для перемещения схемы:</p>
-            <ul>
+            <List>
               <li>Выбираете второй режим на палочке</li>
               <li>
                 Зажимайте <code>Alt</code>
@@ -155,7 +156,7 @@ export default function Litematica() {
               <li>
                 Или нажимайте <code>ПКМ</code> по блокам
               </li>
-            </ul>
+            </List>
           </PText>
         </PBox>
 
@@ -173,13 +174,13 @@ export default function Litematica() {
             </p>
             <small>Можно настраивать по координатам X, Y и Z</small>
             <br />
-            <ol>
+            <List>
               <li>Все слои</li>
               <li>Один слой</li>
               <li>“Отрезки”</li>
               <li>Ниже определённой координаты</li>
               <li>Выше определённой координаты</li>
-            </ol>
+            </List>
           </PText>
         </PBox>
 
@@ -196,7 +197,7 @@ export default function Litematica() {
           </PTitle>
 
           <PText>
-            <ul>
+            <List>
               <li>
                 <code>Настройки</code>
               </li>
@@ -207,7 +208,7 @@ export default function Litematica() {
                 <code>easyPlaceToggle</code>
               </li>
               <li>Забиндите на удобную клавишу</li>
-            </ul>
+            </List>
           </PText>
 
           <ImgBox type='post' className='rounded-none'>
@@ -222,7 +223,7 @@ export default function Litematica() {
           </PTitle>
 
           <PText>
-            <ul>
+            <List>
               <li>
                 <code>Основные</code>
               </li>
@@ -230,7 +231,7 @@ export default function Litematica() {
                 <code>pickBlockableSlots</code>
               </li>
               <li>Дописывайте все слоты до 9</li>
-            </ul>
+            </List>
             <br />
             <p>
               При активации бинда включится <code>EasyPlace</code>, который автоматически будет
@@ -248,7 +249,7 @@ export default function Litematica() {
           </PTitle>
 
           <PText>
-            <ul>
+            <List>
               <li>
                 <code>Размещение схемы</code>
               </li>
@@ -261,7 +262,7 @@ export default function Litematica() {
               </li>
               <li>Выбираем блоки</li>
               <li>Проверяем блоки в самой схеме</li>
-            </ul>
+            </List>
           </PText>
         </PBox>
 
@@ -282,11 +283,11 @@ export default function Litematica() {
             <p>
               <code>Настройки</code> → <code>Клавиши</code> → <code>executeOperation</code>
             </p>
-            <ul>
+            <List>
               <li>Забиндите на удобную клавишу</li>
               <li>Выберите на палочке пятый режим</li>
               <li>Нажмите бинд</li>
-            </ul>
+            </List>
           </PText>
           <ImgBox type='post'>
             <Img
@@ -304,7 +305,7 @@ export default function Litematica() {
           </PTitle>
           <PText>
             <p>Определяет что делать с блоками, которые мешают вставке схемы</p>
-            <ul>
+            <List>
               <li>
                 <p>
                   Вся схема <small>(рекомендуемо)</small>
@@ -316,7 +317,7 @@ export default function Litematica() {
               <li>
                 <p>Не заменять блоки</p>
               </li>
-            </ul>
+            </List>
           </PText>
           <Video name='paste' className='rounded-t-none'>
             Вставка схемы

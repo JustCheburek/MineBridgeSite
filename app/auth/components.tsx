@@ -18,7 +18,7 @@ export function AuthForm({ savedName }: { savedName?: string }) {
         <InputNameCheck name={name} setName={setName} autoFocus />
 
         <FormGroup>
-          <FormLabel className='grid place-content-center' hasRadio>
+          <FormLabel className='grid place-content-center'>
             <FormInput
               name='provider'
               type='radio'
@@ -29,7 +29,7 @@ export function AuthForm({ savedName }: { savedName?: string }) {
             <GoogleSvg colorful className='size-[1em] scale-150' />
           </FormLabel>
 
-          <FormLabel className='grid place-content-center' hasRadio>
+          <FormLabel className='grid place-content-center'>
             <FormInput
               name='provider'
               type='radio'
@@ -40,7 +40,7 @@ export function AuthForm({ savedName }: { savedName?: string }) {
             <DiscordSvg colorful className='size-[1em] scale-[2]' />
           </FormLabel>
 
-          <FormLabel className='grid place-content-center' hasRadio>
+          <FormLabel className='grid place-content-center'>
             <FormInput
               name='provider'
               type='radio'

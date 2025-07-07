@@ -36,13 +36,13 @@ export default async function Drops({ params }: ParamsProp) {
       >
         Дроп кейса
       </H1>
-      <Section type='third'>
-        {Drops.map(Drop => (
-          <Box key={Drop.name}>
+      <Section>
+        {Drops.map((Drop, index) => (
+          <Box key={Drop.name} casebox={index === 2}>
             <Text>
               <h3>{Drop.displayname}</h3>
               <Price>{Drop.price}</Price>
-              <Url href={`/shop/drop/${CaseName}/${Drop.name}`} margin='10px'>
+              <Url href={`/shop/drop/${CaseName}/${Drop.name}`} className='my-[10px]'>
                 Выбрать
               </Url>
             </Text>

@@ -2,18 +2,13 @@
 
 import { usePathname } from 'next/navigation'
 import Link, { type LinkProps } from 'next/link'
-import type { PropsWithChildren } from 'react'
-import type { DangerProps } from './form'
+import type { ComponentPropsWithoutRef } from 'react'
 import { cn } from '@/lib/utils'
 
 export type NavLink = {
-  href: string
   activeClassName?: string
-  className?: string
   exact?: boolean
-} & LinkProps &
-  PropsWithChildren &
-  DangerProps
+} & LinkProps & ComponentPropsWithoutRef<'a'>
 
 export function NavLink({
   href,
@@ -21,7 +16,6 @@ export function NavLink({
   activeClassName = 'text-unic',
   className = '',
   exact = false,
-  danger = false,
   ...props
 }: NavLink) {
   const pathname = usePathname()
@@ -35,7 +29,6 @@ export function NavLink({
       href={href}
       className={cn(
         {
-          'text-red': danger,
           [activeClassName]: isActive,
         },
         className

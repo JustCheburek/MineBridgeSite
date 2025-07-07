@@ -1,0 +1,55 @@
+@layer components {
+  /* Common (Обычный) */
+  .box.common {
+    @apply border-common shadow-common/70 border shadow-[0_0_30px];
+  }
+
+  .text.common {
+    @apply text-common text-shadow-common/90 text-shadow-[0_0_15px];
+  }
+
+  /* Uncommon (Необычный) */
+  .box.uncommon {
+    @apply border-uncommon shadow-uncommon/60 border shadow-[0_0_20px];
+  }
+
+  .text.uncommon {
+    @apply text-uncommon text-shadow-uncommon/60 text-shadow-[0_0_20px];
+  }
+
+  /* Rare (Редкий) */
+  .box.rare {
+    @apply border-rare shadow-rare/100 border shadow-[0_0_30px];
+  }
+
+  .text.rare {
+    @apply text-rare text-shadow-rare/100 text-shadow-[0_0_30px];
+  }
+
+  /* Epic (Эпический) */
+  .box.epic {
+    @apply border-epic shadow-epic/90 border shadow-[0_0_30px];
+  }
+
+  .text.epic {
+    @apply text-epic text-shadow-epic/90 text-shadow-[0_0_30px];
+  }
+
+  /* Mythic (Мифический) */
+  .box.mythic {
+    @apply border-mythic shadow-mythic border shadow-[0_0_35px];
+  }
+
+  .text.mythic {
+    @apply text-mythic text-shadow-mythic text-shadow-[0_0_35px];
+  }
+
+  /* Legendary (Легендарный) */
+  .box.legendary {
+    @apply border-legendary shadow-legendary border shadow-[0_0_40px];
+  }
+
+  .text.legendary {
+    @apply text-legendary text-shadow-legendary text-shadow-[0_0_40px];
+  }
+}

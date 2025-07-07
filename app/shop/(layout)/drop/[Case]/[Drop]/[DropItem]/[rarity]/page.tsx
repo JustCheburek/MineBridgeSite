@@ -6,6 +6,7 @@ import { H1 } from '@components/h1'
 import { Img, ImgBox } from '@components/img'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 type ParamsProp = {
   params: Promise<{
@@ -63,10 +64,10 @@ export default async function Items({ params }: ParamsProp) {
       >
         Предмет
       </H1>
-      <Section type='third'>
-        {Items.map(Item => (
-          <Box key={Item.name}>
-            <ImgBox className={`rounded-base ${rarity}_box h-[160px] w-[280px]`} hover>
+      <Section>
+        {Items.map((Item, index) => (
+          <Box key={Item.name} casebox={index === 2}>
+            <ImgBox className={cn(`rounded-base h-[160px] w-[280px]`, 'box', rarity)} hover>
               <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname} />
             </ImgBox>
             <Text>

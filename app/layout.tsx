@@ -11,7 +11,6 @@ import { z } from 'zod/v4'
 
 // Стили
 import './globals.css'
-import '@styles/rarities.scss'
 
 // Компоненты
 import { Header } from '@components/header'

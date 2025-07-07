@@ -140,27 +140,18 @@ export const FormA = ({
   )
 }
 
-type FormLabelProps = {
-  hasRadio?: boolean
-  hasCheckbox?: boolean
-} & ComponentPropsWithoutRef<'label'> &
-  DangerProps
+type FormLabelProps = ComponentPropsWithoutRef<'label'> & DangerProps
 
 export const FormLabel = ({
   children,
   className = '',
   danger = false,
-  hasRadio = false,
-  hasCheckbox = false,
   ...props
 }: FormLabelProps) => {
   return (
     <label
       className={cn(
         ElementStyles,
-        {
-          'flex items-center gap-[0.8em]': hasCheckbox || hasRadio,
-        },
         'group select-none',
         danger
           ? formStateStyles.danger + ' has-checked:border-red'
@@ -272,7 +263,7 @@ interface AddProps extends ComponentPropsWithoutRef<'button'> {
 }
 
 export const Add = ({ className = '', setModal, children, ...props }: AddProps) => (
-  <button className={`add ${className}`} onClick={() => setModal && setModal(true)} {...props}>
+  <button className={cn('inline-flex items-center justify-center font-medium w-[max(0.55em,0.9rem)] h-[1em] transition-colors duration-300 hover:text-unic active:text-unic', className)} onClick={() => setModal && setModal(true)} {...props}>
     {children || '+'}
   </button>
 )

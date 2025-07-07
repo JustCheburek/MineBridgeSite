@@ -19,7 +19,7 @@ export const SeasonModal = ({ modal, setModal }: SeasonModal) => {
 
   return (
     <Modal setModal={setModal} modal={modal}>
-      <H1>Новый сезон</H1>
+      <h1>Новый сезон</h1>
       <Form action={createSeason} onSubmit={() => setModal(false)}>
         <FormLabel>
           <FormInput

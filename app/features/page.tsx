@@ -63,7 +63,7 @@ export default function Features() {
         </GLink>
 
         <GBox anotherSite>
-          <ul className='not_indent remove_marker flex flex-wrap justify-center gap-4'>
+          <ul className='flex flex-wrap justify-center gap-4'>
             <li>
               <Url href='https://hotmc.ru/minecraft-server-259948' className='m-0'>
                 HotMC

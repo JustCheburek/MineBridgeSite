@@ -56,7 +56,7 @@ export const H1 = ({
 }: PropsWithChildren<H1Props>) => (
   <div
     className={cn(
-      'min-h-header bg-background/80 sticky top-[-1px] z-30 mb-6 grid place-content-center backdrop-blur-sm',
+      'min-h-header bg-background/80 sticky top-[-1px] z-30 mb-6 grid place-content-center backdrop-blur-md',
       className
     )}
   >

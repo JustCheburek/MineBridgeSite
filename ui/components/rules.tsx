@@ -22,14 +22,14 @@ export const RulesBox = ({
       {/* Заголовок */}
       <div className='mb-[1.2rem] grid grid-cols-[auto_1fr]'>
         {/* Цифра */}
-        <LinkNumber href={name}>{number}</LinkNumber>
+        <LinkNumber href={name} className='mr-3'>{number}</LinkNumber>
 
         {/* Кнопка */}
         <h3>{heading}</h3>
       </div>
 
       {/* Содержание */}
-      <List id={name + '_box'} className='pl-[5px]' marker={marker}>
+      <List id={name + '_box'} marker={marker}>
         {/* Rule */}
         {children}
       </List>
@@ -45,7 +45,7 @@ type Rule = {
 
 export const Rule = ({ number, children, stars, text }: Rule) => (
   <li className='relative my-[1.2rem] grid has-[a]:grid-cols-[auto_1fr]' id={number?.toString()}>
-    <LinkNumber href={number.toString()} box={false}>
+    <LinkNumber href={number.toString()} box={false} className='mr-3'>
       {number}
     </LinkNumber>
 

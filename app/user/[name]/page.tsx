@@ -93,7 +93,7 @@ export default async function Profile({ params }: NameParams) {
             )}
           </h2>
 
-          {isHelper && <small className='text-light-gray select-all'>{user._id}</small>}
+          {isHelper && <code className='text-light-gray'>{user._id}</code>}
           {isContentMaker && (
             <div className="flex flex-wrap whitespace-nowrap gap-x-4 gap-y-0.5">
               {user?.socials?.map(({ social, url, name }: Social) => {

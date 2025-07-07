@@ -19,10 +19,3 @@
     }
   }
 }
-
-@mixin background() {
-  // Бекграунд
-  backdrop-filter: blur(8px);
-  background: var(--background-color-transparent);
-  z-index: var(--1z);
-}

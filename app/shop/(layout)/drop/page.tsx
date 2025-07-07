@@ -16,14 +16,14 @@ export default async function Cases() {
   return (
     <div>
       <H1>Кейсы</H1>
-      <Section type='third'>
-        {Cases.map(Case => (
-          <Box key={Case.name}>
+      <Section>
+        {Cases.map((Case, index) => (
+          <Box key={Case.name} casebox={index === 2}>
             <CaseBoxWithModal Case={Case} Drops={Drops} />
             <Text>
               <h3>{Case.displayname}</h3>
               <Price oldPrice={Case.oldPrice}>{Case.price}</Price>
-              <Url href={`/shop/drop/${Case.name}`} className='mx-2.5'>
+              <Url href={`/shop/drop/${Case.name}`} className='my-[10px]'>
                 Выбрать
               </Url>
             </Text>

@@ -23,7 +23,7 @@ export const columns: ColumnDef<RecipeProps>[] = [
       const ingredients: string[] = getValue()
 
       return (
-        <ul className='not_indent remove_marker'>
+        <ul>
           {ingredients.map(ingredient => (
             <li key={ingredient}>{ingredient}</li>
           ))}

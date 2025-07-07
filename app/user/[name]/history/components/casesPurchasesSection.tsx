@@ -66,7 +66,7 @@ function Suffix({ _id, name, isMe, suffix, index, selected }: Suffix) {
   }
 
   return (
-    <Form action={(formData: FormData) => AddSuffix(formData, _id, name, index)}>
+    <Form action={(formData: FormData) => AddSuffix(formData, _id, name, index)} className='m-0'>
       <FormLabel>
         <FormInput name='name' placeholder='Суффикс (не меняется)' maxLength={15} required />
       </FormLabel>
@@ -112,12 +112,13 @@ export default function CasesPurchasesSection({
         </Form>
       )}
 
-      <div className="flex flex-wrap justify-center gap-12">
+      <div className="flex flex-wrap justify-center gap-6">
         {caseDatas.map(({ MultiCase, Drop, DropItem, rarity, Item, suffix }, index) => (
           <div
-            style={{ width: '280px', height: '160px' }}
-            // todo: починить rarity box 
-            className={`rounded-base grid place-items-center relative bg-gray overflow-hidden group ${rarity}_box`}
+            className={cn(
+              "rounded-input grid place-items-center relative bg-gray overflow-hidden group w-[280px] h-[160px]",
+              'box', rarity
+            )}
             key={index}
           >
             {DropItem?.name === 'suffix' ? (
@@ -139,7 +140,7 @@ export default function CasesPurchasesSection({
             )}
 
             {MultiCase && DropItem?.name !== 'suffix' && (
-              <div className="absolute top-[0.6rem] right-[1.4rem] flex gap-[0.3rem] justify-center items-center">
+              <div className="absolute top-[0.6rem] right-[1.4rem] flex gap-1 justify-center items-center">
                 {MultiCase.map(
                   ({ Case, amount }) =>
                     Case && (
@@ -161,7 +162,7 @@ export default function CasesPurchasesSection({
             )}
 
             {access && (
-              <div className="absolute top-[0.6rem] left-[1.4rem] flex gap-[0.3rem] justify-center items-center">
+              <div className="absolute top-[0.6rem] left-[1.4rem] flex gap-1 justify-center items-center">
                 <form
                   action={() => {
                     DeleteCasePurchase(user._id, Item?._id, suffix)

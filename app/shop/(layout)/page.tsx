@@ -17,7 +17,6 @@ import { TextUrl } from '@components/textUrl'
 import { PreSeason } from './preseason'
 import { validate } from '@/services/user/validate'
 import { StarSlider } from './starslider'
-import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'Магазин',

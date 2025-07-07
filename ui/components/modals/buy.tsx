@@ -23,7 +23,7 @@ export const BuyModal = ({ author, modal, setModal }: BuyModal) => {
 
   return (
     <Modal setModal={setModal} modal={modal}>
-      <H1>Межсезонье</H1>
+      <h1>Межсезонье</h1>
       <Form action={formAction} onSubmit={() => state.success && setModal(false)}>
         <p>
           Твой баланс: {author.mostiki} <MostikiSvg />
