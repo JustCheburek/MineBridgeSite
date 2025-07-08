@@ -3,7 +3,7 @@ import Avatar from "@components/avatar";
 import { GImg, GText, GLink } from "@components/grid";
 
 export async function Streamers() {
-    const contentMakersId = ["j8bsrsdgzqa4n0c", "8v4pdxujk92dgh5", "i5mqq2js4nos1yj"]
+    const contentMakersId = ["8v4pdxujk92dgh5", "j8bsrsdgzqa4n0c", "t2dhhl5igw1sp43"]
     const contentMakers = await getAllContentMakers()
 
     return (
