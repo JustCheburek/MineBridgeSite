@@ -18,7 +18,7 @@ export function Footer() {
   const YEAR = new Date().getFullYear()
 
   return (
-    <footer className='flex min-h-[350px] items-center justify-center bg-black'>
+    <footer className='flex min-h-[350px] items-center justify-center bg-black flex-none'>
       <div className='p-page flex w-[min(900px,100%)] flex-col items-center'>
         <div>
           <Urls className='urls' />

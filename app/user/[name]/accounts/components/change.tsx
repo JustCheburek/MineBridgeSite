@@ -27,7 +27,7 @@ function DeleteModal({ modal, setModal, user }: ModalAction & Modal) {
 
   return (
     <Modal modal={modal} setModal={setModal}>
-      <H1>Удаление</H1>
+      <h1>Удаление</h1>
       <p>Ты уверен, что хочешь</p>
       <p>
         удалить аккаунт <strong className='text-red'>безвозвратно</strong>?

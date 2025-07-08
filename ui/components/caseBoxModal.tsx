@@ -28,7 +28,7 @@ export function CaseBoxWithModal({
         {children}
       </CaseBox>
       <Modal modal={modal} setModal={setModal}>
-        <H1>{Case.displayname}</H1>
+        <h1>{Case.displayname}</h1>
         <div className='grid gap-16 md:grid-cols-2'>
           <div className='md:text-left'>
             <h2 className='text-unic mb-8'>Редкости</h2>
