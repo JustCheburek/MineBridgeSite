@@ -8,6 +8,9 @@ import { GLink, GContainer, GImg, GText, GBox } from '@components/grid'
 import { Url } from '@components/button'
 import { Img } from '@components/img'
 import { H1 } from '@components/h1'
+import { Suspense } from 'react'
+import { Skeleton } from '@components/skeleton'
+import { Streamers } from './streamers'
 
 export const metadata: Metadata = {
   title: 'Фичи',
@@ -61,6 +64,10 @@ export default function Features() {
 
           <GText>Карта</GText>
         </GLink>
+
+        <Suspense fallback={<Skeleton className='h-64 w-80'/>}>
+          <Streamers />
+        </Suspense>
 
         <GBox anotherSite>
           <ul className='flex flex-wrap justify-center gap-4'>

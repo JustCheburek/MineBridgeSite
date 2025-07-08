@@ -98,7 +98,6 @@ export default async function Profile({ params }: NameParams) {
             <div className="flex flex-wrap whitespace-nowrap gap-x-4 gap-y-0.5">
               {user?.socials?.map(({ social, url, name }: Social) => {
                 if (!social || (!url && !name)) return
-
                 url = url || `${URLS_START[social]}${name}`
 
                 return (

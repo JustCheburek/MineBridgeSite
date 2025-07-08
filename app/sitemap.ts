@@ -121,6 +121,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'daily',
       priority: 0.8,
     },
+    {
+      url: `${process.env.NEXT_PUBLIC_RU_URL}/features/streamers`,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     // Гайды
     {
       url: `${process.env.NEXT_PUBLIC_RU_URL}/features/guides`,
