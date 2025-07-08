@@ -23,19 +23,12 @@ type Burger = {
 }
 
 // todo: Анимация появления
-const MainNav = ({ burger, setBurger }: Burger) => (
+const PCNav = ({ burger, setBurger }: Burger) => (
   <nav
-    className={cn(
-      'lg:grid lg:grid-cols-[3fr_1fr] lg:place-items-center lg:gap-8 xl:gap-14',
-      'max-lg:bg-background/80 max-lg:fixed max-lg:inset-0 max-lg:flex max-lg:h-dvh max-lg:flex-col max-lg:items-center max-lg:justify-center max-lg:gap-x-8 max-lg:gap-y-2 max-lg:overflow-y-auto',
-      {
-        'max-lg:flex': burger,
-        'max-lg:hidden': !burger,
-      }
-    )}
+    className={'grid grid-cols-[3fr_1fr] place-items-center gap-8 xl:gap-14 max-lg:hidden'}
     onClick={() => setBurger(false)}
   >
-    <ul className='max-lg:text-h2 max-lg:leading-h2 max-lg:borderbox flex items-center justify-between gap-2.5 max-lg:flex-col max-lg:gap-[clamp(0.1rem,1vh,1.5rem)] max-lg:p-6'>
+    <ul className='flex items-center justify-between gap-2.5'>
       {/* Основная навигация */}
       <li>
         <MiniLink href='/'>Главная</MiniLink>
@@ -54,7 +47,52 @@ const MainNav = ({ burger, setBurger }: Burger) => (
       </li>
     </ul>
 
-    <Urls className='max-lg:borderbox flex items-center justify-between gap-2.5 max-lg:p-6' />
+    <Urls className='flex items-center justify-between gap-2.5' />
+  </nav>
+)
+
+const MobileNav = ({ burger, setBurger }: Burger) => (
+  <nav
+    className={cn(
+      'lg:hidden',
+      'z-40 backdrop-blur-md fixed inset-0 flex h-dvh flex-col items-center justify-center gap-x-8 gap-y-2 overflow-y-auto pt-header',
+      {
+        'max-lg:flex': burger,
+        'max-lg:hidden': !burger,
+      }
+    )}
+    onClick={() => setBurger(false)}
+  >
+    <ul className='borderbox bg-black/50 backdrop-blur-xl flex items-center justify-between flex-col gap-[clamp(0.1rem,1vh,1.5rem)] p-6'>
+      {/* Основная навигация */}
+      <li>
+        <h2 className='font-medium'>
+          <MiniLink href='/'>Главная</MiniLink>
+        </h2>
+      </li>
+      <li>
+        <h2 className='font-medium'>
+          <MiniLink href='/shop'>Магазин</MiniLink>
+        </h2>
+      </li>
+      <li>
+        <h2 className='font-medium'>
+          <MiniLink href='/rules'>Правила</MiniLink>
+        </h2>
+      </li>
+      <li>
+        <h2 className='font-medium'>
+          <MiniLink href='/news'>Новости</MiniLink>
+        </h2>
+      </li>
+      <li>
+        <h2 className='font-medium'>
+          <MiniLink href='/features'>Фичи</MiniLink>
+        </h2>
+      </li>
+    </ul>
+
+    <Urls className='borderbox bg-black/50 backdrop-blur-xl flex items-center justify-between gap-2.5 p-6' />
   </nav>
 )
 
@@ -156,13 +194,10 @@ export function HeaderClient({ user }: { user: User | null }) {
     }
   }, [burger])
 
-  return (
+  return (<>
     <header
       className={cn(
-        'min-h-header borderbox sticky top-0 z-40 flex items-center justify-center rounded-none border-none backdrop-blur-md',
-        {
-          burger_active: burger,
-        }
+        'min-h-header borderbox sticky top-0 z-50 flex items-center justify-center rounded-none border-none backdrop-blur-md'
       )}
     >
       <div className='container mx-auto grid w-full grid-cols-3 place-items-center gap-[35px] font-medium lg:grid-cols-[1fr_5fr_1fr]'>
@@ -174,20 +209,22 @@ export function HeaderClient({ user }: { user: User | null }) {
         {/* Лого */}
         <Link
           href='/'
-          className='h-[38px] w-[38px]'
+          className='size-[38px]'
           rel='shortcut icon'
           aria-label='Переход на главную страницу'
         >
           <MinebridgeSvg className='size-full' />
         </Link>
 
-        {/* Навигация */}
-        <MainNav burger={burger} setBurger={setBurger} />
+        {/* Пк навигация */}
+        <PCNav burger={burger} setBurger={setBurger} />
 
         <Suspense fallback={<Skeleton className='h-[40px] w-[180px]' />}>
           <User user={user} />
         </Suspense>
       </div>
     </header>
-  )
+    {/* Мобильная навигация */}
+    <MobileNav burger={burger} setBurger={setBurger} />
+  </>)
 }

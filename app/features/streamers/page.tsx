@@ -15,7 +15,7 @@ const Avatar = dynamic(() => import('@components/avatar'))
 
 export const metadata: Metadata = {
   title: 'Контент-мейкеры',
-  description: 'Контент-мейкеры сервера Майнбридж',
+  description: 'Снимают видосики про сервер',
 }
 
 export default async function StreamersPage() {
