@@ -14,7 +14,15 @@ export async function MGConnect() {
   while (true) {
     try {
       console.log('Подключение к DB')
-      await connect(MONGO_URL, { minPoolSize: 10 })
+      await connect(MONGO_URL, { 
+        maxPoolSize: 20,               // Максимальный размер пула подключений
+        minPoolSize: 10,               // Минимальный размер пула
+        serverSelectionTimeoutMS: 5000, // Быстрое завершение при ошибках
+        socketTimeoutMS: 45000,        // Закрытие "мертвых" сокетов
+        connectTimeoutMS: 10000,       // Время ожидания соединения
+        family: 4,                      // IPv4-only для ускорения
+        keepAliveInitialDelay: 300000,  // Задержка перед первым keep-alive
+      })
       console.log('Подключено к DB')
 
       break

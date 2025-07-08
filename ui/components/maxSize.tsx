@@ -15,7 +15,7 @@ export function MaxSize({
   return (
     <div
       className={cn(
-        'py-(--spacing-page) container relative mx-auto',
+        'py-(--spacing-page) max-md:px-3 container relative mx-auto',
         sideNav && 'grid lg:grid-cols-[1fr_4fr_1fr] lg:gap-12',
         className
       )}
