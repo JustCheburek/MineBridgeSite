@@ -324,9 +324,10 @@ export default async function MilkyWay() {
     )
   }
 
+  //bg-gradient-to-b from-background to-black
   return (
     <div
-      className='bg-gradient-to-b from-background to-black text-center'
+      className='text-center'
       style={{ '--_size': `${SIZE}rem` }}
     >
       <H1
