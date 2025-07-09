@@ -138,6 +138,9 @@ export default async function Profile({ params }: NameParams) {
               </Link>
             )}
           </h4>
+          <h4 >
+            Погашенные: <strong className='text-yellow/85'>{user.faded_rating}</strong> <StarSvg className='text-yellow/85'/>
+          </h4>
           <div className="flex items-center gap-1">
             <h4>
               Мостики: <strong className='text-unic'>{user.mostiki}</strong> <MostikiSvg />

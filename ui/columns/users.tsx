@@ -48,10 +48,17 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: 'rating',
-    header: 'Рейтинг',
+    header: 'Звёзды',
     meta: {
       type: 'number',
       defaultSort: 'desc',
+    },
+  },
+  {
+    accessorFn: row => row.faded_rating || 0,
+    header: 'Погашенные',
+    meta: {
+      type: 'number'
     },
   },
   {

@@ -48,7 +48,6 @@ export default function Lor() {
       <div />
       <div>
         <H1
-          up
           paths={[
             { name: 'features', displayname: 'Фичи' },
             { name: 'lor', displayname: 'Лор' },

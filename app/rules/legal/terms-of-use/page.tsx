@@ -17,7 +17,6 @@ export default function TermsOfUse() {
     <>
       <div className='termsofuse_content'>
         <H1
-          up
           paths={[
             { name: 'rules', displayname: 'Правила' },
             { name: 'legal', displayname: 'Legal' },

@@ -12,7 +12,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
 
   return (
     <MaxSize className='text-center'>
-      <H1>{error.name}</H1>
+      <H1 up={false}>{error.name}</H1>
       <h3>{error.message}</h3>
       <Button onClick={() => reset()}>Перезагрузить</Button>
       <Url href='/'>На главную</Url>

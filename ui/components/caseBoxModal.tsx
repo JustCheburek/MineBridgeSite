@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { Drop, RarityNames } from '@/types/case'
 import { SumChances } from '@/lib/utils'
 import { Modal } from '@components/modal'
-import { H1 } from '@components/h1'
 import { CaseBox, type CaseBoxProps } from '@components/caseBox'
 
 type CaseBoxWithModal = {

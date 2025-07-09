@@ -17,7 +17,6 @@ export default function PrivacyPolicy() {
     <>
       <div className='privacy_content'>
         <H1
-          up
           paths={[
             { name: 'rules', displayname: 'Правила' },
             { name: 'legal', displayname: 'Legal' },

@@ -18,7 +18,7 @@ export default async function Analytics() {
       <H1
         reload={async () => {
           'use server'
-          revalidateTag('seasons')
+          revalidateTag('all')
         }}
         paths={[
           { name: 'features', displayname: 'Фичи' },

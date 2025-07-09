@@ -37,7 +37,6 @@ export default async function CasePage() {
   return (
     <CaseClient Cases={Cases} Drops={Drops} user={user} Add={Add}>
       <H1
-        up
         reload={async () => {
           'use server'
           revalidateTag('all')

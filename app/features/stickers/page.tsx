@@ -17,7 +17,6 @@ export default function Stickers() {
   return (
     <MaxSize>
       <H1
-        up
         paths={[
           { name: 'features', displayname: 'Фичи' },
           { name: 'stickers', displayname: 'Стикеры' },

@@ -4,6 +4,7 @@ import { getCase, getDrops } from '@services/shop'
 import { Case } from '@/types/case'
 import type { Metadata } from 'next'
 import { H1 } from '@components/h1'
+import { revalidateTag } from 'next/cache'
 
 type ParamsProp = {
   params: Promise<{
@@ -28,6 +29,10 @@ export default async function Drops({ params }: ParamsProp) {
   return (
     <div>
       <H1
+        reload={async () => {
+          'use server'
+          revalidateTag('all')
+        }}
         paths={[
           { displayname: 'Магазин', name: 'shop', hide: true },
           { displayname: 'Дроп', name: 'drop', hide: true },

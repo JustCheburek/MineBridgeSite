@@ -14,7 +14,6 @@ import Link from 'next/link'
 import { ImgUpload } from '@components/imgUpload'
 import { useEdgeStore } from '@/lib/edgestore'
 import { Modal, type ModalAction } from '@components/modal'
-import { H1 } from '@components/h1'
 import { HookButton } from '@components/hookbutton'
 
 type Modal = {

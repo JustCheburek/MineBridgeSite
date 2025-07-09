@@ -26,7 +26,6 @@ export default function Design() {
   return (
     <MaxSize className='max-w-[900px]'>
       <H1
-        up
         paths={[
           { name: 'features', displayname: 'Фичи' },
           { name: 'design', displayname: 'Дизайн' },

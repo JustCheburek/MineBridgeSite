@@ -1,20 +1,14 @@
 'use client'
 
 // Компоненты
-import { Modal, type setModal } from '@components/modal'
+import { Modal, type ModalAction } from '@components/modal'
 import { Form, FormInput, FormLabel } from '@components/form'
 import { useChangeDictState } from '@hooks/useChangeState'
 import { Season } from '@/types/season'
-import { H1 } from '@components/h1'
 import { createSeason } from '@services/seasons/create'
 import { HookButton } from '../hookbutton'
 
-type SeasonModal = {
-  modal: boolean
-  setModal: setModal
-}
-
-export const SeasonModal = ({ modal, setModal }: SeasonModal) => {
+export const SeasonModal = ({ modal, setModal }: ModalAction) => {
   const [season, , onSeasonChange] = useChangeDictState({} as Season)
 
   return (

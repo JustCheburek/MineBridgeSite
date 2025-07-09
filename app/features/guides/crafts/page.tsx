@@ -17,7 +17,6 @@ export default function Crafts() {
   return (
     <MaxSize>
       <H1
-        up
         paths={[
           { name: 'features', displayname: 'Фичи' },
           { name: 'guides', displayname: 'Гайды' },

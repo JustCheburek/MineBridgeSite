@@ -80,8 +80,8 @@ export const getAllContentMakers = cache(
     const users: User[] = JSON.parse(
       JSON.stringify(
         await userModel.find(
-          { 
-            socials: { $exists: true, $ne: [] } 
+          {
+            socials: { $exists: true, $ne: [] }
           },
           {
             name: 1,
@@ -101,10 +101,10 @@ export const getAllContentMakers = cache(
 
     // Фильтруем только тех, у кого есть и YouTube, и Twitch
     return users.filter(user => {
-      const isTwitch = user.socials?.some(({social, url, name}) => 
+      const isTwitch = user.socials?.some(({ social, url, name }) =>
         social === 'youtube' && (url || name)
       )
-      const isYoutube = user.socials?.some(({social, url, name}) => 
+      const isYoutube = user.socials?.some(({ social, url, name }) =>
         social === 'twitch' && (url || name)
       )
       return isTwitch && isYoutube
@@ -118,6 +118,25 @@ export const getAllContentMakers = cache(
   },
   ['contentMakers', 'userLike', 'all'],
   { revalidate: 600, tags: ['contentMakers', 'userLike', 'all'] }
+)
+
+export const getUsersWhitelist = cache(
+  async () => {
+    const users: User[] = JSON.parse(
+      JSON.stringify(
+        await userModel.find({ whitelist: true }, {
+          name: 1,
+          photo: 1,
+          mostiki: 1,
+          rating: 1,
+          createdAt: 1
+        }, { lean: true })
+      )
+    )
+    return users
+  },
+  ['usersWhitelist', 'userLike', 'all'],
+  { revalidate: 300, tags: ['usersWhitelist', 'userLike', 'all'] }
 )
 
 type GetUser = {
@@ -217,6 +236,7 @@ export const getUsers = cache(
             from: 1,
             whitelist: 1,
             suffix: 1,
+            faded_rating: 1
           },
           {
             lean: true,

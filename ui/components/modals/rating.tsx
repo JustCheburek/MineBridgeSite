@@ -4,9 +4,8 @@
 import type { User } from 'lucia'
 
 // Компоненты
-import { Modal, type setModal } from '@components/modal'
+import { Modal, type ModalAction } from '@components/modal'
 import { Form, FormGroup, FormInput, FormLabel } from '@components/form'
-import { H1 } from '@components/h1'
 import { AddPunishment } from '@services/user/punishment'
 import { HookButton } from '@components/hookbutton'
 import { ErrorMessage } from '@components/error'
@@ -15,9 +14,7 @@ import { useActionStateId } from '@/hooks/useActionStateId'
 type RatingModal = {
   name?: User['name']
   user: User
-  modal: boolean
-  setModal: setModal
-}
+} & ModalAction
 
 export function RatingModal({ name, user, modal, setModal }: RatingModal) {
   const [state, formAction] = useActionStateId(AddPunishment, {

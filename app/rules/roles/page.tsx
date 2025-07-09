@@ -16,7 +16,7 @@ export default function Roles() {
   return (
     <>
       <div className='roles_content'>
-        <H1 up>Роли</H1>
+        <H1>Роли</H1>
         <RulesBox name='general' heading='Общие сведения' number={1}>
           <Rule number={1.1}>Вышестоящая роль управляет нижестоящей</Rule>
           <Rule number={1.2}>

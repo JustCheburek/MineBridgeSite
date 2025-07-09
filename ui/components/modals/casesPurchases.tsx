@@ -6,9 +6,8 @@ import { CaseData } from '@/types/purchase'
 import { AddCasePurchase } from '@services/user/casePurchase'
 
 // Компоненты
-import { Modal, type setModal } from '@components/modal'
+import { Modal, type ModalAction } from '@components/modal'
 import { Form, FormInput, FormLabel, FormSelect } from '@components/form'
-import { H1 } from '@components/h1'
 import { valueOf } from '@/types/valueOf'
 import { HookButton } from '../hookbutton'
 
@@ -16,10 +15,8 @@ type CasesPurchasesModal = {
   Cases: Case[]
   Drops: Drop[]
   _id: string
-  modal: boolean
-  setModal: setModal
   access: boolean
-}
+} & ModalAction
 
 export const CasesPurchasesModal = ({
   Cases,

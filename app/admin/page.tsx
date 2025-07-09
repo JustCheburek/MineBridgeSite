@@ -4,17 +4,20 @@ import { GLink, GContainer, GText } from '@components/grid'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Админ панель',
+  title: 'Админка',
 }
 
 export default async function AdminPanel() {
   return (
     <MaxSize className='grid place-items-center text-center'>
-      <H1>Админ панель</H1>
+      <H1>Админка</H1>
 
-      <GContainer className='grid-cols-autofit-[300px] *:w-[300px] *:h-[60px] gap-2' border>
+      <GContainer className='grid-cols-autofit-[300px] *:w-[300px] *:h-[60px] gap-4' border>
         <GLink href='/admin/whitelist'>
           <h3>Проходка</h3>
+        </GLink>
+        <GLink href='/admin/stars'>
+          <h3>Звёзды</h3>
         </GLink>
         <GLink href='/admin/email'>
           <h3>Почта</h3>

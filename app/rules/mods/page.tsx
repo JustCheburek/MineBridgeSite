@@ -118,7 +118,7 @@ export default function Mods() {
   return (
     <>
       <div className='mods_content'>
-        <H1 up>Файлы</H1>
+        <H1>Файлы</H1>
 
         <section id='allowed_mods' className='mt-[25px]'>
           <div className='py-[30px] text-center'>

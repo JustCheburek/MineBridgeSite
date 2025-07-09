@@ -14,7 +14,7 @@ export default function Events() {
   return (
     <>
       <div className='events_content'>
-        <H1 up>Ивенты</H1>
+        <H1>Ивенты</H1>
 
         <div>
           <p>

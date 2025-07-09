@@ -24,7 +24,6 @@ export default function Brewery() {
   return (
     <MaxSize>
       <H1
-        up
         paths={[
           { name: 'features', displayname: 'Фичи' },
           { name: 'guides', displayname: 'Гайды' },

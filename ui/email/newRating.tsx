@@ -13,7 +13,7 @@ export const NewRatingEmail = async ({
 }) => (
   <Template name={name}>
     <p>
-      Твой рейтинг был изменён! {punishment.author} {punishment.rating > 0 ? 'добавил' : 'забрал'}{' '}
+      Твои звёзды были изменены! {punishment.author} {punishment.rating > 0 ? 'добавил' : 'забрал'}{' '}
       <strong>{Math.abs(punishment.rating)} звёзд</strong> по причине "{punishment.reason}"
     </p>
     <p>

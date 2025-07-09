@@ -32,7 +32,7 @@ export function Subsections({ children, menu }: PropsWithChildren<{ menu: string
 
       <ul
         className={cn(
-          'list-none p-0 lg:sticky lg:top-[calc(var(--spacing-header)*1.4)] lg:w-fit',
+          'p-0 lg:sticky lg:top-[calc(var(--spacing-header)*1.4)] lg:w-fit',
           'max-lg:bg-background/80 max-lg:absolute max-lg:inset-0 max-lg:hidden max-lg:h-min max-lg:w-full max-lg:translate-y-[-100%] max-lg:place-content-center max-lg:gap-[clamp(0.1rem,5svh,1.5rem)] max-lg:overflow-y-auto max-lg:p-4',
           { 'max-lg:grid': burger }
         )}
@@ -111,6 +111,6 @@ export const OnThisPageButton = ({
 
 export const OnThisPageBox = ({ children }: PropsWithChildren) => (
   <li>
-    <ul className='ml-auto list-none'>{children}</ul>
+    <ul className='ml-auto'>{children}</ul>
   </li>
 )

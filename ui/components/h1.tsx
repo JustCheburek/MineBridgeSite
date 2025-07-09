@@ -50,7 +50,7 @@ export const H1 = ({
   paths,
   reload,
   description,
-  up = false,
+  up = true,
   className = '',
   ...props
 }: PropsWithChildren<H1Props>) => (

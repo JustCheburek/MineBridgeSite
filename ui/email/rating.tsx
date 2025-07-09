@@ -12,7 +12,7 @@ export const RatingEmail = async ({
 }) => (
   <Template name={name}>
     <p>
-      Твой рейтинг был пересмотрен! Теперь у тебя <strong>{rating} звёзд</strong> (было{' '}
+      Твои звёзды были пересмотрены! Теперь у тебя <strong>{rating} звёзд</strong> (было{' '}
       <strong>{oldRating} звёзд</strong>)
     </p>
     <p>

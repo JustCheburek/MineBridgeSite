@@ -10,6 +10,7 @@ import { Skeleton } from '@components/skeleton'
 import type { User } from 'lucia'
 import { H1 } from '@components/h1'
 import { GBox, GContainer } from '@components/grid'
+import { revalidateTag } from 'next/cache'
 
 const Avatar = dynamic(() => import('@components/avatar'))
 
@@ -26,7 +27,10 @@ export default async function StreamersPage() {
   return (
     <div className="container mx-auto py-8">
       <H1
-        up
+        reload={async () => {
+          'use server'
+          revalidateTag('all')
+        }}
         paths={[
           { name: 'features', displayname: 'Фичи' },
           { name: 'streamers', displayname: 'Контент-мейкеры' },

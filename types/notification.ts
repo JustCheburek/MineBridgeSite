@@ -4,7 +4,7 @@ export const notificationsLabels = [
   { name: 'code', label: 'Код' },
   { name: 'news', label: 'Новости' },
   { name: 'mostiki', label: 'Мостики' },
-  { name: 'rating', label: 'Рейтинг' },
+  { name: 'rating', label: 'Звёзды' },
   { name: 'invite', label: 'Приглашения' },
 ]
 

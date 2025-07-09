@@ -17,7 +17,7 @@ export default async function Success() {
       <H1
         reload={async () => {
           'use server'
-          revalidateTag('userLike')
+          revalidateTag('all')
         }}
       >
         Успешно

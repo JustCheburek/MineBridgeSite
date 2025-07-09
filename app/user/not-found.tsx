@@ -11,7 +11,7 @@ export default async function NotFound() {
 
   return (
     <MaxSize className='text-center'>
-      <H1>А, кто это?</H1>
+      <H1 up={false}>А, кто это?</H1>
       <h3>Игрок не найден</h3>
       <Url href='/users'>Посмотреть игроков</Url>
     </MaxSize>

@@ -21,7 +21,7 @@ export default function Rules() {
   return (
     <>
       <div className='rules_content'>
-        <H1 up>Правила</H1>
+        <H1>Правила</H1>
         <LastUpdate time={LASTRULESUPDATE} />
         <div className='mx-auto my-6 w-fit p-6 px-14'>
           <div className='text-center'>
@@ -456,7 +456,7 @@ export default function Rules() {
             </List>
           </Rule>
           <Rule number={10.3}>
-            Перед каждым сезоном звёзды сбрасываются <small>(если общий рейтинг больше 0)</small>
+            Перед каждым сезоном звёзды сбрасываются <small>(если общие звёзды больше 0)</small>
           </Rule>
           <Rule number={10.4}>
             <p>Звёзды можно заработать:</p>
@@ -467,7 +467,7 @@ export default function Rules() {
               <li>
                 Стримы и видео:
                 <p>
-                  1 регистрация по реферальной ссылке = 5 рейтинга
+                  1 регистрация по реферальной ссылке = 5 звёзд
                   <br />
                   <small>(и 5 мостиков для контент мейкеров)</small>
                 </p>

@@ -79,11 +79,9 @@ export default async function History({ params }: NameParams) {
   return (
     <div className="grid gap-10">
       <H1
-        up
         reload={async () => {
           'use server'
-          revalidateTag('author')
-          revalidateTag('userLike')
+          revalidateTag('all')
         }}
       >
         История

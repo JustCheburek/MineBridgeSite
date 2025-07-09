@@ -5,9 +5,9 @@ import type { User } from 'lucia'
 import { Button } from '@components/button'
 import { WhitelistModal } from '@ui/components/modals/whitelist'
 
-export function AdminWhitelistReset({ userswl }: { userswl: User[] }) {
+export function WhitelistReset({ users }: { users: User[] }) {
   const [modal, setModal] = useState(false)
-  if (!userswl.length) return null
+  if (!users.length) return null
   return (
     <>
       <Button danger onClick={() => setModal(true)} className='mb-[16px]'>

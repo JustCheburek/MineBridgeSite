@@ -25,10 +25,9 @@ export default async function Component() {
   return (
     <MaxSize>
       <H1
-        up
         reload={async () => {
           'use server'
-          revalidateTag('users')
+          revalidateTag('all')
         }}
       >
         Игроки

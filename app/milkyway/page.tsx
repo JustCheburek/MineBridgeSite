@@ -330,7 +330,6 @@ export default async function MilkyWay() {
       style={{ '--_size': `${SIZE}rem` }}
     >
       <H1
-        up
         description='Боевой пропуск 7 сезона'
         reload={async () => {
           'use server'

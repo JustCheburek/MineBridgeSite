@@ -1,9 +1,8 @@
 'use client'
 
 // Компоненты
-import { Modal, type setModal } from '@components/modal'
+import { Modal, type ModalAction } from '@components/modal'
 import { Form, FormInput, FormLabel } from '@components/form'
-import { H1 } from '@components/h1'
 import type { User } from 'lucia'
 import { MostikiSvg } from '@ui/SVGS'
 import { AuthorId, GiveGift } from '@services/user/gift'
@@ -12,11 +11,9 @@ import { HookButton } from '@components/hookbutton'
 import { ErrorMessage } from '@components/error'
 
 type GiftModal = {
-  modal: boolean
-  setModal: setModal
   user: User
   author: User
-}
+} & ModalAction
 
 export function GiftModal({ user, author, modal, setModal }: GiftModal) {
   const [state, formAction] = useActionStateId<AuthorId>(GiveGift, {

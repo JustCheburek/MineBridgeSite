@@ -2,6 +2,7 @@
 import type { PropsWithChildren } from 'react'
 import { validate } from '@services/user/validate'
 import { getUser } from '@services/user'
+import { revalidateTag } from 'next/cache'
 
 // Компоненты
 import { AutoSvg, SuccessSvg } from '@ui/SVGS'
@@ -44,7 +45,13 @@ export default async function Accounts({ params }: NameParams) {
 
   return (
     <div className='account_content'>
-      <H1 up className="hidden sm:block">
+      <H1
+        reload={async () => {
+          'use server'
+          revalidateTag('all')
+        }}
+        className="hidden sm:block"
+      >
         Аккаунты
       </H1>
       <H1 className="block sm:hidden">Акки</H1>

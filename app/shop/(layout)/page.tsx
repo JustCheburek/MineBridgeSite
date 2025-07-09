@@ -44,7 +44,6 @@ export default async function Shop() {
     <>
       <div>
         <H1
-          up
           reload={async () => {
             'use server'
             revalidateTag('all')
@@ -184,8 +183,7 @@ export default async function Shop() {
         <Heading id='pass'>
           <h2 className='text-center'>Проходки</h2>
           <p>
-            Валюта скидок — <strong className='text-unic'>погасшие звёзды</strong>
-            <br />
+            Валюта скидок — <strong className='text-yellow'>погасшие звёзды</strong>
           </p>
         </Heading>
 

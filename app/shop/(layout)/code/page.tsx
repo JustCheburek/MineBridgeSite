@@ -42,7 +42,6 @@ export default async function Component() {
   return (
     <div>
       <H1
-        up
         reload={async () => {
           'use server'
           revalidateTag('all')
