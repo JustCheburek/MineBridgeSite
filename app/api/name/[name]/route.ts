@@ -1,7 +1,14 @@
 import { getUser } from "@/services/user";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(_: Request, { params }: { params: { name: string } }) {
+export async function GET(
+    _: NextRequest,
+  {
+    params,
+  }: {
+    params: Promise<{ name: string; place: string }>
+  }
+) {
     const { name } = await params
 
     const {user} = await getUser({ name })
