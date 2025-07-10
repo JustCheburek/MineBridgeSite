@@ -6,7 +6,7 @@ import { H1 } from '@components/h1'
 export default function NotFound() {
   return (
     <MaxSize className='text-center'>
-      <H1>Код не найден</H1>
+      <H1 up={false}>Код не найден</H1>
       <Button onClick={() => location.reload()}>Перезагрузка</Button>
     </MaxSize>
   )
