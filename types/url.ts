@@ -7,7 +7,4 @@ export class Social {
 
   @prop({ trim: true })
   public name?: string
-
-  @prop({ trim: true })
-  public url?: string
 }

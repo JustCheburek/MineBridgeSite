@@ -89,7 +89,8 @@ export const getAllContentMakers = cache(
             mostiki: 1,
             rating: 1,
             socials: 1,
-            onlineAt: 1
+            onlineAt: 1,
+            discordId: 1
           },
           {
             lean: true,
@@ -101,11 +102,11 @@ export const getAllContentMakers = cache(
 
     // Фильтруем только тех, у кого есть и YouTube, и Twitch
     return users.filter(user => {
-      const isTwitch = user.socials?.some(({ social, url, name }) =>
-        social === 'youtube' && (url || name)
+      const isTwitch = user.socials?.some(({ social, name }) =>
+        social === 'twitch' && name
       )
-      const isYoutube = user.socials?.some(({ social, url, name }) =>
-        social === 'twitch' && (url || name)
+      const isYoutube = user.socials?.some(({ social, name }) =>
+        social === 'youtube' && name
       )
       return isTwitch && isYoutube
     })
@@ -172,13 +173,12 @@ export const getUser = cache(
       user.email = '×'.repeat(user.email.length - 4) + user.email.substring(user.email.length - 4)
 
       const googleId = user.googleId?.toString()
-      const discordId = user.discordId?.toString()
+      const twitchId = user.twitchId?.toString()
       if (googleId) {
         user.googleId = '×'.repeat(googleId.length - 4) + googleId.substring(googleId.length - 4)
       }
-      if (discordId) {
-        user.discordId =
-          '×'.repeat(discordId.length - 4) + discordId.substring(discordId.length - 4)
+      if (twitchId) {
+        user.twitchId = '×'.repeat(twitchId.length - 4) + twitchId.substring(twitchId.length - 4)
       }
     }
 

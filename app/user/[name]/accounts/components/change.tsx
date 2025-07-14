@@ -217,15 +217,6 @@ export function ChangeForm({ user, isHelper, isAdmin, isContentMaker }: ChangePa
             </FormLabel>
             <FormLabel>
               <FormInput
-                placeholder='Twitch'
-                name='twitch'
-                autoComplete='name'
-                title='Твич'
-                defaultValue={user.socials?.find(({ social }) => social === 'twitch')?.name}
-              />
-            </FormLabel>
-            <FormLabel>
-              <FormInput
                 placeholder='VK'
                 name='vk'
                 autoComplete='name'
@@ -240,25 +231,6 @@ export function ChangeForm({ user, isHelper, isAdmin, isContentMaker }: ChangePa
                 autoComplete='name'
                 title='DonationAlerts'
                 defaultValue={user.socials?.find(({ social }) => social === 'donationAlerts')?.name}
-              />
-            </FormLabel>
-            <div className='text-center'>
-              <h3>Ссылки на каналы</h3>
-            </div>
-            <FormLabel>
-              <FormInput
-                placeholder='Discord'
-                name='discord'
-                title='Дискорд'
-                defaultValue={user.socials?.find(({ social }) => social === 'discord')?.url}
-              />
-            </FormLabel>
-            <FormLabel>
-              <FormInput
-                placeholder='Telegram'
-                name='telegram'
-                title='Телеграм'
-                defaultValue={user.socials?.find(({ social }) => social === 'telegram')?.url}
               />
             </FormLabel>
           </>

@@ -34,6 +34,7 @@
 
   --color-border: #52525b4d;
   --color-yellow: #f6d51a;
+  --color-faded: #b489ff;
   --color-red: oklch(from rgb(255, 77, 77) 65% 0.25 25);
   --color-green: oklch(from rgb(133, 187, 101) 70% 0.15 140);
 

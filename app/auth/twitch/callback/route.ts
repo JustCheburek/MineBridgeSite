@@ -7,6 +7,7 @@ import { userModel } from '@db/models'
 import { NextRequest, NextResponse } from 'next/server'
 import { validate } from '@services/user/validate'
 import axios from 'axios'
+import { Social } from '@/types/url'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
@@ -64,36 +65,26 @@ export async function GET(request: NextRequest) {
       name: cookiesStore.get('name')?.value || twUser.login,
       twitchId: twUser.id,
       email: twUser.email,
-      photo: twUser.profile_image_url,
-      socials: [
-        {
-          social: 'twitch',
-          name: twUser.login,
-        },
-      ],
+      photo: twUser.profile_image_url
     } as User
 
     const { user } = await validate()
 
+    let candidate: User | null = null
+
     if (user) {
-      await userModel.findByIdAndUpdate(user._id, {
+      candidate = await userModel.findByIdAndUpdate(user._id, {
         email: userData.email,
         twitchId: userData.twitchId,
-        $set: {
-          socials: userData.socials[0],
-        },
       })
     } else {
-      let candidate = await userModel.findOneAndUpdate(
+      candidate = await userModel.findOneAndUpdate(
         {
           $or: [{ twitchId: userData.twitchId }, { email: userData.email }],
         },
         {
           email: userData.email,
           twitchId: userData.twitchId,
-          $set: {
-            socials: userData.socials[0],
-          },
         },
         {
           new: true,
@@ -101,13 +92,29 @@ export async function GET(request: NextRequest) {
       )
 
       if (!candidate) {
-        candidate = await userModel.create(userData)
+        candidate = (await userModel.create(userData)) as User
       }
 
       const session = await lucia.createSession(candidate?._id || userData._id, {})
       const sessionCookie = lucia.createSessionCookie(session.id)
       cookiesStore.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)
     }
+
+    // Check if social already exists
+    // if (
+    //   candidate &&
+    //   !candidate.socials.some((social: Social) => social.social === 'twitch')
+    // ) {
+    //   console.log('Нет твича', candidate.socials)
+    //   await userModel.findByIdAndUpdate(candidate._id, {
+    //     $push: {
+    //       socials: {
+    //         social: 'twitch',
+    //         name: twUser.login,
+    //       }
+    //     },
+    //   })
+    // }
 
     return new NextResponse(`Всё успешно`, {
       status: 302,

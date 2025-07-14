@@ -7,7 +7,7 @@ import { validate } from '@services/user/validate'
 import { getUser, updateFrom } from '@services/user'
 import { Social } from '@/types/url'
 import { userModel } from '@db/models'
-import { AutoSvg, EditSvg, MostikiSvg, StarSvg } from '@ui/SVGS'
+import { AutoSvg, DiscordSvg, EditSvg, MostikiSvg, StarSvg } from '@ui/SVGS'
 import { URLS_START } from '@/const'
 import type { NameParams } from '@/types/params'
 import { Skeleton } from '@components/skeleton'
@@ -96,9 +96,9 @@ export default async function Profile({ params }: NameParams) {
           {isHelper && <code className='text-light-gray'>{user._id}</code>}
           {isContentMaker && (
             <div className="flex flex-wrap whitespace-nowrap gap-x-4 gap-y-0.5">
-              {user?.socials?.map(({ social, url, name }: Social) => {
-                if (!social || (!url && !name)) return
-                url = url || `${URLS_START[social]}${name}`
+              {user?.socials?.map(({ social, name }: Social) => {
+                if (!social || !name) return
+                const url = `${URLS_START[social]}${name}`
 
                 return (
                   <Link href={url} target='_blank' title={social} key={social}>
@@ -106,6 +106,11 @@ export default async function Profile({ params }: NameParams) {
                   </Link>
                 )
               })}
+              {user.discordId && (
+                <Link href={`https://discord.com/users/${user.discordId}`} target='_blank' title='Discord' key='discord'>
+                  <DiscordSvg className='size-[38px]' />
+                </Link>
+              )}
             </div>
           )}
           <div className="flex flex-wrap whitespace-nowrap gap-x-4 gap-y-0.5">
@@ -139,7 +144,7 @@ export default async function Profile({ params }: NameParams) {
             )}
           </h4>
           <h4 >
-            Погашенные: <strong className='text-yellow/85'>{user.faded_rating}</strong> <StarSvg className='text-yellow/85'/>
+            Погасшие: <strong className='text-faded'>{user.faded_rating}</strong> <StarSvg className='text-faded'/>
           </h4>
           <div className="flex items-center gap-1">
             <h4>

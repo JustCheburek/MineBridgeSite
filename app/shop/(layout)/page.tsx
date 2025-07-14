@@ -183,7 +183,7 @@ export default async function Shop() {
         <Heading id='pass'>
           <h2 className='text-center'>Проходки</h2>
           <p>
-            Валюта скидок — <strong className='text-yellow'>погасшие звёзды</strong>
+            Валюта скидок — <strong className='text-faded'>погасшие звёзды</strong>
           </p>
         </Heading>
 

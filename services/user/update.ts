@@ -92,21 +92,8 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
     { name: formData.get('youtube')?.toString(), social: 'youtube' },
     { name: formData.get('twitch')?.toString(), social: 'twitch' },
     { name: formData.get('vk')?.toString(), social: 'vk' },
-    { name: formData.get('donationAlerts')?.toString(), social: 'donationAlerts' },
-    { url: formData.get('discord')?.toString(), social: 'discord' },
-    { url: formData.get('telegram')?.toString(), social: 'telegram' },
+    { name: formData.get('donationAlerts')?.toString(), social: 'donationAlerts' }
   ]
-
-  socials.forEach(({ url, social }) => {
-    if (
-      url &&
-      !url.match(
-        /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)/
-      )
-    ) {
-      throw new Error(`Некорректная ссылка в ${social}`)
-    }
-  })
 
   let mostiki = user.mostiki
   if (isAdmin) {
