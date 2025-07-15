@@ -101,20 +101,20 @@ export async function GET(request: NextRequest) {
     }
 
     // Check if social already exists
-    // if (
-    //   candidate &&
-    //   !candidate.socials.some((social: Social) => social.social === 'twitch')
-    // ) {
-    //   console.log('Нет твича', candidate.socials)
-    //   await userModel.findByIdAndUpdate(candidate._id, {
-    //     $push: {
-    //       socials: {
-    //         social: 'twitch',
-    //         name: twUser.login,
-    //       }
-    //     },
-    //   })
-    // }
+    if (
+      candidate &&
+      !candidate.socials.some(({social}: Social) => social === 'twitch')
+    ) {
+      console.log('Нет твича', candidate.socials)
+      await userModel.findByIdAndUpdate(candidate._id, {
+        $push: {
+          socials: {
+            social: 'twitch',
+            name: twUser.login,
+          }
+        },
+      })
+    }
 
     return new NextResponse(`Всё успешно`, {
       status: 302,

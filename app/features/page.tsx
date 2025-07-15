@@ -54,7 +54,7 @@ export default function Features() {
         </GLink>
 
         <GLink
-          href={`http://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`}
+          href={`https://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`}
           anotherSite
           id='map'
         >

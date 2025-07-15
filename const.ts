@@ -13,8 +13,6 @@ export const LASTPRIVACYPOLICYUPDATE = new Date(new Date(2025, 4 - 1, 5, 22 - 10
 export const LASTREFUNDPOLICYUPDATE = new Date(new Date(2025, 4 - 1, 5, 22 - 10, 0).toUTCString())
 
 export const URLS_START = {
-  discord: `https://discord.gg/`,
-  telegram: `https://t.me/`,
   vk: `https://vk.com/`,
   twitch: `https://www.twitch.tv/`,
   youtube: `https://youtube.com/@`,
