@@ -62,8 +62,7 @@ export const BG = ({ className = '', danger = false, disabled = false, ...props 
   )
 }
 
-type Url = ComponentPropsWithoutRef<'a'> & LinkProps & DangerProps & { bg?: boolean }
-
+export type UrlProps = ComponentPropsWithoutRef<'a'> & LinkProps & DangerProps & { bg?: boolean, disabled?: boolean }
 export const Url = ({
   href,
   children,
@@ -72,8 +71,9 @@ export const Url = ({
   download = false,
   danger = false,
   bg = true,
+  disabled = false,
   ...props
-}: Url) => {
+}: UrlProps) => {
   if (!target) {
     if (download || href.toString().startsWith('http')) {
       target = '_blank'
@@ -88,9 +88,10 @@ export const Url = ({
       target={target}
       className={cn(buttonBaseStyles.container, className)}
       download={download}
+      aria-disabled={disabled}
       {...props}
     >
-      {bg && <BG danger={danger}/>}
+      {bg && <BG danger={danger} disabled={disabled}/>}
       <h3>{children}</h3>
     </Link>
   )

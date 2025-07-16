@@ -76,11 +76,11 @@ export const Text = ({ children, className = '', ...props }: Text) => (
   </div>
 )
 
-export const Price = ({ children, oldPrice }: PropsWithChildren<{ oldPrice?: number }>) => (
+export const Price = ({ children, not }: PropsWithChildren<{ not?: number }>) => (
   <div className='relative my-[5px] flex items-center justify-center gap-2'>
-    {oldPrice && (
+    {not && (
       <p className="text-light-gray before:bg-red absolute -top-[5px] right-[15px] rotate-[25deg] font-medium opacity-[0.68] before:absolute before:-left-[18%] before:top-[40%] before:h-[2px] before:w-[135%] before:rotate-[18deg] before:opacity-[0.68] before:content-['']">
-        {oldPrice}
+        {not}
       </p>
     )}
 
@@ -91,3 +91,5 @@ export const Price = ({ children, oldPrice }: PropsWithChildren<{ oldPrice?: num
     </h3>
   </div>
 )
+
+

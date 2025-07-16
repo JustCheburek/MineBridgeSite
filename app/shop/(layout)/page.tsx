@@ -16,7 +16,7 @@ import { LastUpdate } from '@components/lastUpdate'
 import { TextUrl } from '@components/textUrl'
 import { PreSeason } from './preseason'
 import { validate } from '@/services/user/validate'
-import { StarSlider } from './starslider'
+import { Pass } from './pass'
 
 export const metadata: Metadata = {
   title: 'Магазин',
@@ -29,7 +29,7 @@ const CaseButton = () => (
   </Url>
 )
 
-const MostikiButton = ({ mostiki = 1 }: { mostiki?: number }) => (
+export const MostikiButton = ({ mostiki = 1 }: { mostiki?: number }) => (
   <Url href={`/shop/buy?mostiki=${mostiki}`} className='my-[10px]'>
     Купить
   </Url>
@@ -75,6 +75,15 @@ export default async function Shop() {
 
         <PreSeason author={author} />
 
+        <Heading id='pass'>
+          <h2 className='text-center'>Проходки</h2>
+          <p>
+            Валюта скидок — <strong className='text-faded'>погасшие звёзды</strong>
+          </p>
+        </Heading>
+
+        <Pass max={author?.faded_rating ?? 0} />
+
         <Heading id='cases'>
           <h2 className='text-center'>
             <Link href='/shop/case'>Кейсы</Link>
@@ -93,7 +102,7 @@ export default async function Shop() {
                 <CaseBoxWithModal Case={Case} Drops={Drops} />
                 <Text>
                   <h3>{Case.displayname}</h3>
-                  <Price oldPrice={Case.oldPrice}>{Case.price}</Price>
+                  <Price not={Case.oldPrice}>{Case.price}</Price>
                   <CaseButton />
                 </Text>
               </Box>
@@ -180,56 +189,6 @@ export default async function Shop() {
           </Box>
         </Section>
 
-        <Heading id='pass'>
-          <h2 className='text-center'>Проходки</h2>
-          <p>
-            Валюта скидок — <strong className='text-faded'>погасшие звёзды</strong>
-          </p>
-        </Heading>
-
-        <StarSlider max={author?.faded_rating ?? 0} />
-        <Section>
-          <Box>
-            {/* <ImgBox hover>
-                        <Img
-                            src={`/shop/month.png`} alt={`Месяц`}
-                            width={185}
-                        />
-                    </ImgBox> */}
-            <Text>
-              <h3>1 месяц</h3>
-              <Price>?</Price>
-              <MostikiButton />
-            </Text>
-          </Box>
-          <Box>
-            {/* <ImgBox hover>
-                        <Img
-                            src={`/shop/3months.png`} alt={`3 месяца`}
-                            width={185}
-                        />
-                    </ImgBox> */}
-            <Text>
-              <h3>3 месяца</h3>
-              <Price>?</Price>
-              <MostikiButton />
-            </Text>
-          </Box>
-          <Box span2>
-            {/* <ImgBox hover>
-                        <Img
-                            src={`/shop/legendary.png`} alt={`Год`}
-                            width={185}
-                        />
-                    </ImgBox> */}
-            <Text>
-              <h3>12 месяцев</h3>
-              <Price>?</Price>
-              <MostikiButton />
-            </Text>
-          </Box>
-        </Section>
-
         {/*<Heading id="kits">
                 <h2 className="text-center">
                     Киты
@@ -246,9 +205,9 @@ export default async function Shop() {
       <OnThisPage>
         <OnThisPageLink href='#mostiki'>Мостики</OnThisPageLink>
         <OnThisPageLink href='#preseason'>Межсезонье</OnThisPageLink>
+        <OnThisPageLink href='#pass'>Проходки</OnThisPageLink>
         <OnThisPageLink href='#cases'>Кейсы</OnThisPageLink>
         <OnThisPageLink href='#stickers'>Стикеры</OnThisPageLink>
-        <OnThisPageLink href='#pass'>Проходки</OnThisPageLink>
         {/*<OnThisPageLink href="#kits">
                 Киты
             </OnThisPageLink>*/}
