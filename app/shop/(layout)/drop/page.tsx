@@ -22,7 +22,7 @@ export default async function Cases() {
             <CaseBoxWithModal Case={Case} Drops={Drops} />
             <Text>
               <h3>{Case.displayname}</h3>
-              <Price oldPrice={Case.oldPrice}>{Case.price}</Price>
+              <Price not={Case.oldPrice}>{Case.price}</Price>
               <Url href={`/shop/drop/${Case.name}`} className='my-[10px]'>
                 Выбрать
               </Url>
