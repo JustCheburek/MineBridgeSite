@@ -29,7 +29,7 @@ const CaseButton = () => (
   </Url>
 )
 
-export const MostikiButton = ({ mostiki = 1 }: { mostiki?: number }) => (
+const MostikiButton = ({ mostiki = 1 }: { mostiki?: number }) => (
   <Url href={`/shop/buy?mostiki=${mostiki}`} className='my-[10px]'>
     Купить
   </Url>
