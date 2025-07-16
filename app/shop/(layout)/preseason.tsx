@@ -41,17 +41,9 @@ function BuyButton({ onClick, author }: { onClick: () => void; author: User | nu
     return <Button className='my-2.5'>Войти</Button>
   }
 
-  if (author.whitelist) {
-    return (
-      <Button className='my-2.5' disabled>
-        Куплено
-      </Button>
-    )
-  }
-
   return (
-    <Button onClick={onClick} className='my-2.5'>
-      Купить
+    <Button className='my-2.5' disabled>
+      Распроданы
     </Button>
   )
 }
