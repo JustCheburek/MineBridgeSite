@@ -276,7 +276,7 @@ export const ErrorSvg = ({ className = '', ...props }: Svg) => (
   </svg>
 )
 
-export const EmailSvg = ({ className = '', ...props }: Svg) => (
+export const EmailSvg = ({ className = '', colorful = false, ...props }: ColorSvg) => (
   <svg
     fill='currentColor'
     viewBox='0 0 16 16'

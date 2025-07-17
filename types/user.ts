@@ -3,7 +3,7 @@ import { Punishment } from '@/types/punishment'
 import { CasePurchase, StickerPurchase } from '@/types/purchase'
 import { modelOptions, pre, prop } from '@typegoose/typegoose'
 import { From } from '@/types/invite'
-import { Social } from '@/types/url'
+import { Urls } from '@/types/url'
 import { Notifications } from '@/types/notification'
 
 async function updateRating(this: User) {
@@ -51,12 +51,15 @@ export class User {
   @prop({ default: 0 })
   public rating!: number
 
-  @prop({ default: 0 })
+  @prop({ default: 0, min: 0 })
   public faded_rating!: number
 
   // Проходки
   @prop({ default: false })
   public whitelist!: boolean
+
+  @prop({ default: 0, min: 0 })
+  public days!: number
 
   // Истории
   @prop({ type: () => [Punishment] })
@@ -75,8 +78,8 @@ export class User {
   @prop({ type: () => From })
   public from?: From
 
-  @prop({ type: () => [Social] })
-  public socials: Social[]
+  @prop({ type: () => Urls })
+  public urls?: Urls
 
   @prop({ type: () => [String], unique: true })
   public invites!: string[]

@@ -8,54 +8,54 @@ export default function WhitelistSection({ user, isMe }: { user: User; isMe: boo
   if (user.rating <= -200) {
     return (
       <section className='text-center'>
-        <h2>{isMe ? 'Ты в бане' : 'Игрок в бане'}</h2>
+        <h3>{isMe ? 'Ты в бане' : 'Игрок в бане'}</h3>
       </section>
     )
   }
 
   if (!isMe) {
-    if (!user.whitelist) {
+    if (!user.days || user.days < 1) {
       return (
         <section className='text-center'>
-          <h2 className='text-red'>
+          <h3 className='text-red'>
             Игрок не купил{' '}
-            <Link href='/shop' className='text-unic'>
+            <Link href='/shop#pass' className='text-unic'>
               проходку
             </Link>
-          </h2>
+          </h3>
         </section>
       )
     }
 
     return (
       <section className='text-center'>
-        <h2>
+        <h3>
           Игрок купил{' '}
-          <Link href='/shop' className='text-unic'>
+          <Link href='/shop#pass' className='text-unic'>
             проходку
           </Link>
-        </h2>
+        </h3>
       </section>
     )
   }
 
-  if (!user.whitelist) {
+  if (!user.days || user.days < 1) {
     return (
       <section className='text-center'>
-        <h2>
+        <h3>
           Купите{' '}
-          <Link href='/shop' className='text-unic'>
+          <Link href='/shop#pass' className='text-unic'>
             проходку
           </Link>
           , чтобы играть на сервере
-        </h2>
+        </h3>
       </section>
     )
   }
 
   return (
     <section className="grid place-items-center text-center">
-      <h2>Межсезонье</h2>
+      <h2>8 сезон</h2>
       <h4 className='text-unic font-medium'>{process.env.NEXT_PUBLIC_VERSION} Java Edition</h4>
       <p>
         IP:{' '}
@@ -63,11 +63,9 @@ export default function WhitelistSection({ user, isMe }: { user: User; isMe: boo
           secure.{process.env.NEXT_PUBLIC_EN_DOMAIN}
         </code>
       </p>
-      <small>
-        Если просит авторизацию, то
-        <br />
-        перезагрузите страницу
-      </small>
+      <p>
+        Ещё {user.days ?? 0} дн. проходки
+      </p>
     </section>
   )
 }

@@ -4,7 +4,7 @@ import { generateId, type User } from 'lucia'
 import type { DSUser, GuildDSUser } from '@/types/user'
 import { userModel } from '@db/models'
 import { NextRequest, NextResponse } from 'next/server'
-import { validate } from '@services/user/validate'
+import { getId } from '@services/user/validate'
 import axios from 'axios'
 import { OAuth2RequestError } from 'arctic'
 import { DS_URL } from '@/const'
@@ -130,10 +130,10 @@ export async function GET(request: NextRequest) {
         : `https://cdn.discordapp.com/embed/avatars/${(BigInt(dsUser.id) >> 22n) % 6n}.png`,
     } as User
 
-    const { user } = await validate()
+    const id = await getId()
 
-    if (user) {
-      await userModel.findByIdAndUpdate(user._id, {
+    if (!!id) {
+      await userModel.findByIdAndUpdate(id, {
         email: userData.email,
         discordId: userData.discordId,
       })

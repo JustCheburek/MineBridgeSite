@@ -1,7 +1,7 @@
 import type { User } from 'lucia'
 
 export default function TwitchFrame({ user }: { user: User }) {
-  const twitchName = user?.socials?.find(({ social }) => social === 'twitch')?.name
+  const twitchName = user?.urls?.twitch
   if (!twitchName) return
 
   return (

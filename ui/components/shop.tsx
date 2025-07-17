@@ -78,7 +78,7 @@ export const Text = ({ children, className = '', ...props }: Text) => (
 
 export const Price = ({ children, not }: PropsWithChildren<{ not?: number }>) => (
   <div className='relative my-[5px] flex items-center justify-center gap-2'>
-    {not && (
+    {not && not !== children && (
       <p className="text-light-gray before:bg-red absolute -top-[5px] right-[15px] rotate-[25deg] font-medium opacity-[0.68] before:absolute before:-left-[18%] before:top-[40%] before:h-[2px] before:w-[135%] before:rotate-[18deg] before:opacity-[0.68] before:content-['']">
         {not}
       </p>

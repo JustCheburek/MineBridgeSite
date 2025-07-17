@@ -14,6 +14,7 @@ import { NameParams } from '@/types/params'
 import { NotificationsForm } from './components/notifications'
 import { PassForm } from '@app/user/[name]/accounts/components/pass'
 import { cn } from '@/lib/utils'
+import { redirect } from 'next/navigation'
 
 export const generateMetadata = async ({ params }: NameParams) => {
   const { name } = await params
@@ -43,6 +44,10 @@ export default async function Accounts({ params }: NameParams) {
     show: isHelper,
   })
 
+  if (!isHelper && !isMe) {
+    redirect(`/user/${name}`)
+  }
+
   return (
     <div className='account_content'>
       <H1
@@ -50,25 +55,23 @@ export default async function Accounts({ params }: NameParams) {
           'use server'
           revalidateTag('all')
         }}
-        className="hidden sm:block"
+        className='hidden sm:block'
       >
         Аккаунты
       </H1>
-      <H1 className="block sm:hidden">Акки</H1>
+      <H1 className='block sm:hidden'>Акки</H1>
 
-      {(isMe || isHelper) && (
-        <ChangeForm
-          user={user}
-          isMe={isMe}
-          isHelper={isHelper}
-          isAdmin={isAdmin}
-          isContentMaker={isContentMakerCheck}
-        />
-      )}
+      <ChangeForm
+        user={user}
+        isMe={isMe}
+        isHelper={isHelper}
+        isAdmin={isAdmin}
+        isContentMaker={isContentMakerCheck}
+      />
 
-      {(isMe || isHelper) && <NotificationsForm user={user} />}
+      <NotificationsForm user={user} />
 
-      <div className="grid gap-4 justify-center items-center">
+      <div className='grid items-center justify-center gap-4'>
         {providersNames.map(id => (
           <Provider
             // @ts-ignore
@@ -82,14 +85,14 @@ export default async function Accounts({ params }: NameParams) {
               type={id}
               colorful
               className={cn('size-[1.5em]', {
-                "scale-[1.3]": id === 'discord',
+                'scale-[1.3]': id === 'discord',
               })}
             />
           </Provider>
         ))}
       </div>
 
-      {(isMe || isModer) && <PassForm user={user} />}
+      <PassForm user={user} />
       {isModer && <DeleteUserBox user={user} />}
     </div>
   )
@@ -109,17 +112,16 @@ function Provider({ id, user, name, isMe, children }: PropsWithChildren<Provider
 
   return (
     <CheckLink href={name === 'email' ? undefined : `/auth/${name}?name=${user.name}`}>
-      <div className="py-4 px-6 borderbox rounded-input bg-gray grid grid-cols-[auto_1fr_auto] space-x-4 w-full">
+      <div className='borderbox rounded-input bg-gray grid w-full grid-cols-[auto_1fr_auto] space-x-4 px-6 py-4'>
         {children}
-        {id
-          ? <>
-            <code className={cn('text-center font-medium max-xs:hidden')}>
-              {id}
-            </code>
+        {id ? (
+          <>
+            <code className={cn('max-xs:hidden text-center font-medium')}>{id}</code>
             <SuccessSvg className='size-[1.5em]' />
           </>
-          : <span className='text-unic font-medium'>Привязать</span>
-        }
+        ) : (
+          <span className='text-unic font-medium'>Привязать</span>
+        )}
       </div>
     </CheckLink>
   )

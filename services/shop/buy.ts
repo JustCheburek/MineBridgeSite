@@ -4,17 +4,21 @@ import { MostikiEmail } from '@email/mostiki'
 import { Resend } from 'resend'
 import { revalidateTag } from 'next/cache'
 import { AddWLConsole } from '@services/console'
-import { redirect } from 'next/navigation'
 import type { StateId } from '@/types/state'
-import { PREMBCOST } from '@/const'
+import { GetMostiki } from '@/lib/utils'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function Buy({ data: { _id } }: StateId): Promise<StateId> {
+export async function Buy({ data: { _id } }: StateId, formData: FormData): Promise<StateId> {
+  const months = Number(formData.get('months'))
+  const faded_rating = Number(formData.get('faded_rating'))
+  const mostiki = GetMostiki(months, faded_rating)
+
   const author = await userModel.findByIdAndUpdate(_id, {
-    whitelist: true,
     $inc: {
-      mostiki: -PREMBCOST,
-    },
+      mostiki: -mostiki,
+      days: 30 * months,
+      faded_rating: -faded_rating,
+    }
   })
 
   revalidateTag('userLike')
@@ -30,11 +34,11 @@ export async function Buy({ data: { _id } }: StateId): Promise<StateId> {
       subject: 'Изменения в мостиках на MineBridge',
       react: MostikiEmail({
         name: author.name,
-        mostiki: -PREMBCOST,
-        allMostiki: author.mostiki - PREMBCOST,
+        mostiki: -mostiki,
+        allMostiki: author.mostiki - mostiki,
       }),
     })
   }
 
-  redirect(`/user/${author.name}`)
+  return { success: true, data: { _id } }
 }

@@ -5,39 +5,89 @@ import { Modal, type ModalAction } from '@components/modal'
 import { Form, FormLink } from '@components/form'
 import { HookButton } from '@components/hookbutton'
 import type { User } from 'lucia'
-import { MostikiSvg } from '@ui/SVGS'
+import { MostikiSvg, StarSvg } from '@ui/SVGS'
 import { Buy } from '@services/shop/buy'
 import { ErrorMessage } from '@components/error'
-import { PREMBCOST } from '@/const'
 import { useActionStateId } from '@/hooks/useActionStateId'
+import { cn, GetMostiki } from '@/lib/utils'
 
 type BuyModal = {
   author: User
+  months: number
+  faded_rating: number
 } & ModalAction
 
-export const BuyModal = ({ author, modal, setModal }: BuyModal) => {
-  const [state, formAction] = useActionStateId(Buy, { success: true, data: { _id: author._id } })
+export const BuyModal = ({ author, faded_rating, months, modal, setModal }: BuyModal) => {
+  const mostiki = GetMostiki(months, faded_rating)
+  const [state, formAction] = useActionStateId(Buy, {
+    success: true,
+    data: { _id: author._id },
+  })
 
   return (
     <Modal setModal={setModal} modal={modal}>
-      <h1>Межсезонье</h1>
+      <h1>Проходка</h1>
       <Form action={formAction} onSubmit={() => state.success && setModal(false)}>
-        <p>
-          Твой баланс: {author.mostiki} <MostikiSvg />
-        </p>
-
-        <p>
-          Стоимость: {PREMBCOST} <MostikiSvg />
-        </p>
+        <input type='hidden' name='months' value={months} />
+        <input type='hidden' name='faded_rating' value={faded_rating} />
+        <div>
+          <p>
+            Твой баланс:{' '}
+            <span className='text-unic'>
+              {author.mostiki} <MostikiSvg />
+            </span>
+          </p>
+          <p>
+            Стоимость:{' '}
+            <span className={cn(mostiki > author.mostiki ? 'text-red' : 'text-unic')}>
+              {mostiki} <MostikiSvg />
+            </span>
+          </p>
+        </div>
+        <div>
+          <p>
+            Погасшие:{' '}
+            <span className='text-faded'>
+              {author.faded_rating} <StarSvg className='text-faded' />
+            </span>
+          </p>
+          <p>
+            Тратишь:{' '}
+            <span className={cn(faded_rating > author.faded_rating ? 'text-red' : 'text-faded')}>
+              {faded_rating}{' '}
+              <StarSvg className={cn(faded_rating > author.faded_rating ? 'text-red' : 'text-faded')} />
+            </span>
+          </p>
+        </div>
+        <div>
+          <p>После покупки ты получишь</p>
+          <p className='text-unic font-semibold'>{months * 30} дней проходки</p>
+        </div>
 
         <ErrorMessage state={state} />
 
-        {author.mostiki >= PREMBCOST ? (
-          <HookButton>Купить</HookButton>
-        ) : (
-          <FormLink href='/shop/buy'>Пополнить баланс</FormLink>
-        )}
+        <BuyButton author={author} mostiki={mostiki} faded_rating={faded_rating} />
       </Form>
     </Modal>
   )
+}
+
+function BuyButton({
+  author,
+  mostiki,
+  faded_rating,
+}: {
+  author: User
+  mostiki: number
+  faded_rating: number
+}) {
+  if (author.mostiki < mostiki) {
+    return <FormLink href={`/shop/buy?mostiki=${mostiki - author.mostiki}`}>Пополнить баланс</FormLink>
+  }
+
+  if (faded_rating > author.faded_rating) {
+    return <HookButton disabled>Нет звёзд</HookButton>
+  }
+
+  return <HookButton>Купить</HookButton>
 }

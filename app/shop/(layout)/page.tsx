@@ -24,13 +24,13 @@ export const metadata: Metadata = {
 }
 
 const CaseButton = () => (
-  <Url href='/shop/case' className='my-[10px]'>
+  <Url href='/shop/case' className='my-2.5'>
     Купить
   </Url>
 )
 
 const MostikiButton = ({ mostiki = 1 }: { mostiki?: number }) => (
-  <Url href={`/shop/buy?mostiki=${mostiki}`} className='my-[10px]'>
+  <Url href={`/shop/buy?mostiki=${mostiki}`} className='my-2.5'>
     Купить
   </Url>
 )
@@ -82,7 +82,7 @@ export default async function Shop() {
           </p>
         </Heading>
 
-        <Pass max={author?.faded_rating ?? 0} />
+        <Pass author={author} />
 
         <Heading id='cases'>
           <h2 className='text-center'>

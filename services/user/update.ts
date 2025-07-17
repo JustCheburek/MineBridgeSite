@@ -5,9 +5,10 @@ import { userModel } from '@db/models'
 import { revalidateTag } from 'next/cache'
 import type { User } from 'lucia'
 import axios from 'axios'
-import { Social } from '@/types/url'
+import { Urls, urlsLabels } from '@/types/url'
 import { Resend } from 'resend'
 import { MostikiEmail } from '@email/mostiki'
+import { ExtraStateId, StateId } from '@/types/state'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -57,15 +58,36 @@ export async function SendEmail(formData: FormData) {
     }
 }*/
 
-export async function UpdateProfile(user: User, formData: FormData, isAdmin: boolean) {
+type Data = ExtraStateId<{
+  isAdmin: boolean
+}>
+export async function UpdateProfile(
+  { data: { _id, isAdmin } }: Data,
+  formData: FormData
+): Promise<Data> {
+  const user = await userModel.findById(_id)
+
+  if (!user) {
+    return { success: false, error: 'Пользователь не найден', data: { _id, isAdmin } }
+  }
+
   const name = formData.get('name') as string
   const photo = formData.get('photo') as string
   const fullPhoto = formData.get('fullPhoto') as string
+  const urls: Record<string, string> = {}
+
+  // калькулируем новый вложенный set для urls:
+  for (const { name } of urlsLabels) {
+    const v = formData.get(name)
+    if (v != null) {
+      urls[`urls.${ name }`] = v.toString()
+    }
+  }
 
   if (name !== user.name) {
     const candidate = await userModel.findOne({ name })
     if (candidate) {
-      throw new Error(`Ник занят`)
+      return { success: false, error: 'Ник занят', data: { _id, isAdmin } }
     }
     if (user.discordId) {
       await axios
@@ -87,13 +109,6 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
     const client = await RconVC()
     await client.send(`librelogin user migrate ${user.name} ${name}`)
   }
-
-  const socials: Social[] = [
-    { name: formData.get('youtube')?.toString(), social: 'youtube' },
-    { name: formData.get('twitch')?.toString(), social: 'twitch' },
-    { name: formData.get('vk')?.toString(), social: 'vk' },
-    { name: formData.get('donationAlerts')?.toString(), social: 'donationAlerts' }
-  ]
 
   let mostiki = user.mostiki
   if (isAdmin) {
@@ -117,7 +132,15 @@ export async function UpdateProfile(user: User, formData: FormData, isAdmin: boo
     }
   }
 
-  await userModel.findByIdAndUpdate(user._id, { name, photo, fullPhoto, mostiki, socials })
+  await userModel.findByIdAndUpdate(user._id, {
+    name,
+    photo,
+    fullPhoto,
+    mostiki,
+    ...urls,
+  })
 
   revalidateTag('userLike')
+
+  return { success: true, data: { _id, isAdmin } }
 }

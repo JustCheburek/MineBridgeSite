@@ -13,4 +13,7 @@ export class Session {
 
   @prop({ required: true })
   public expires_at!: Date
+
+  @prop({ required: true, default: true })
+  public fresh!: boolean
 }

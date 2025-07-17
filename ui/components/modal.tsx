@@ -42,7 +42,7 @@ export function Modal({
       onClick={() => setModal(false)}
     >
       <div 
-        className="relative m-auto min-w-[min(70%,500px)] min-h-[min(70%,300px)] pt-10 px-12 pb-5 z-50 scale-50 transition-transform duration-500 borderbox bg-black/50 backdrop-blur-xl group-[.opacity-100]:scale-100"
+        className="relative m-auto min-w-[min(70%,500px)] min-h-[min(70%,300px)] pt-10 px-12 pb-5 z-50 scale-50 transition-transform duration-500 card bg-black/60 backdrop-blur-xl group-[.opacity-100]:scale-100"
         onClick={e => e.stopPropagation()}
       >
         <button 

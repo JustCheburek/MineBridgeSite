@@ -15,6 +15,8 @@ import { ImgUpload } from '@components/imgUpload'
 import { useEdgeStore } from '@/lib/edgestore'
 import { Modal, type ModalAction } from '@components/modal'
 import { HookButton } from '@components/hookbutton'
+import { useActionStateId } from '@/hooks/useActionStateId'
+import { ErrorMessage } from '@/ui/components/error'
 
 type Modal = {
   user: User
@@ -88,7 +90,6 @@ type ChangeParam = {
 }
 
 export function ChangeForm({ user, isHelper, isAdmin, isContentMaker }: ChangeParam) {
-  const [result, setResult] = useState('')
   const ratingAccess = -50
 
   const { edgestore } = useEdgeStore()
@@ -99,6 +100,11 @@ export function ChangeForm({ user, isHelper, isAdmin, isContentMaker }: ChangePa
   }
   const [urls, setUrls] = useState<Urls>({
     thumbnail: user.photo,
+  })
+
+  const [state, formAction] = useActionStateId(UpdateProfile, {
+    success: true,
+    data: { _id: user._id, isAdmin },
   })
 
   return (
@@ -125,11 +131,7 @@ export function ChangeForm({ user, isHelper, isAdmin, isContentMaker }: ChangePa
             })
           }
 
-          try {
-            await UpdateProfile(user, formData, isAdmin)
-          } catch (e) {
-            setResult((e as Error).message)
-          }
+          formAction(formData)
         }}
       >
         <InputNameCheckWithoutState
@@ -212,7 +214,7 @@ export function ChangeForm({ user, isHelper, isAdmin, isContentMaker }: ChangePa
                 name='youtube'
                 autoComplete='name'
                 title='Ютуб'
-                defaultValue={user.socials?.find(({ social }) => social === 'youtube')?.name}
+                defaultValue={user.urls?.youtube}
               />
             </FormLabel>
             <FormLabel>
@@ -221,7 +223,7 @@ export function ChangeForm({ user, isHelper, isAdmin, isContentMaker }: ChangePa
                 name='vk'
                 autoComplete='name'
                 title='Вк'
-                defaultValue={user.socials?.find(({ social }) => social === 'vk')?.name}
+                defaultValue={user.urls?.vk}
               />
             </FormLabel>
             <FormLabel>
@@ -230,12 +232,12 @@ export function ChangeForm({ user, isHelper, isAdmin, isContentMaker }: ChangePa
                 name='donationAlerts'
                 autoComplete='name'
                 title='DonationAlerts'
-                defaultValue={user.socials?.find(({ social }) => social === 'donationAlerts')?.name}
+                defaultValue={user.urls?.donationAlerts}
               />
             </FormLabel>
           </>
         )}
-        {result && <strong className='text-red text-center'>{result}</strong>}
+        <ErrorMessage state={state} />
         <HookButton disabled={user.rating <= ratingAccess && !isHelper}>Сохранить</HookButton>
       </Form>
     </>

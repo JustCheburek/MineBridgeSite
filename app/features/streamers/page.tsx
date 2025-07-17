@@ -4,13 +4,12 @@ import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { getAllContentMakers } from '@services/user'
 import { AutoSvg, DiscordSvg } from '@ui/SVGS'
-import { URLS_START } from '@/const'
-import type { Social } from '@/types/url'
 import { Skeleton } from '@components/skeleton'
 import type { User } from 'lucia'
 import { H1 } from '@components/h1'
 import { GBox, GContainer } from '@components/grid'
 import { revalidateTag } from 'next/cache'
+import { URLS_START } from '@/const'
 
 const Avatar = dynamic(() => import('@components/avatar'))
 
@@ -23,7 +22,7 @@ export default async function StreamersPage() {
   const contentMakers = await getAllContentMakers()
 
   return (
-    <div className="container mx-auto py-8">
+    <div className='container mx-auto py-8'>
       <H1
         reload={async () => {
           'use server'
@@ -41,29 +40,32 @@ export default async function StreamersPage() {
         <Suspense fallback={<ContentMakersSkeleton />}>
           {contentMakers.map((user: User) => (
             <GBox key={user._id} className='flex-col space-y-2'>
-              <Link href={`/user/${user.name}`} className="text-center space-y-2">
-                <Avatar src={user.photo} className="mx-auto size-[80px]" />
+              <Link href={`/user/${user.name}`} className='space-y-2 text-center'>
+                <Avatar src={user.photo} className='mx-auto size-[80px]' />
                 <h4>{user.name}</h4>
               </Link>
 
-              <div className="flex flex-wrap justify-center gap-x-4 gap-y-0.5">
-                {user?.socials?.map(({ social, name }: Social) => {
-                  if (!social || !name) return null
-                  const url = `${URLS_START[social]}${name}`
-
-                  return (
-                    <Link
-                      href={url}
-                      target="_blank"
-                      title={social}
-                      key={social}
-                    >
-                      <AutoSvg className="size-[38px]" type={social} />
-                    </Link>
-                  )
-                })}
+              <div className='flex flex-wrap justify-center gap-x-4 gap-y-0.5'>
+                {user.urls &&
+                  Object.entries(user.urls).map(([url, name]) => {
+                    if (!name || url === '_id') return
+                    return (
+                      <Link
+                        key={url}
+                        href={`${URLS_START[url as keyof typeof URLS_START]}${name}`}
+                        target='_blank'
+                        title={url}
+                      >
+                        <AutoSvg className='size-[38px]' type={url} />
+                      </Link>
+                    )
+                  })}
                 {user.discordId && (
-                  <Link href={`https://discord.com/users/${user.discordId}`} target='_blank' title='Discord'>
+                  <Link
+                    href={`https://discord.com/users/${user.discordId}`}
+                    target='_blank'
+                    title='Discord'
+                  >
                     <DiscordSvg className='size-[38px]' />
                   </Link>
                 )}
@@ -80,15 +82,15 @@ function ContentMakersSkeleton() {
   return (
     <>
       {[...Array(6)].map((_, i) => (
-        <div key={i} className="bg-dark-gray rounded-lg p-6">
-          <Skeleton className="size-[80px] mx-auto mb-2 rounded-full" />
-          <Skeleton className="h-6 w-32 mx-auto mb-4" />
-          <div className="flex justify-center gap-3">
-            <Skeleton className="size-[42px] rounded-full" />
-            <Skeleton className="size-[42px] rounded-full" />
+        <div key={i} className='bg-dark-gray rounded-lg p-6'>
+          <Skeleton className='mx-auto mb-2 size-[80px] rounded-full' />
+          <Skeleton className='mx-auto mb-4 h-6 w-32' />
+          <div className='flex justify-center gap-3'>
+            <Skeleton className='size-[42px] rounded-full' />
+            <Skeleton className='size-[42px] rounded-full' />
           </div>
         </div>
       ))}
     </>
   )
-} 
+}

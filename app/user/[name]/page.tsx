@@ -5,7 +5,6 @@ import { Suspense } from 'react'
 import TimeAgo from 'javascript-time-ago'
 import { validate } from '@services/user/validate'
 import { getUser, updateFrom } from '@services/user'
-import { Social } from '@/types/url'
 import { userModel } from '@db/models'
 import { AutoSvg, DiscordSvg, EditSvg, MostikiSvg, StarSvg } from '@ui/SVGS'
 import { URLS_START } from '@/const'
@@ -96,13 +95,11 @@ export default async function Profile({ params }: NameParams) {
           {isHelper && <code className='text-light-gray'>{user._id}</code>}
           {isContentMaker && (
             <div className="flex flex-wrap whitespace-nowrap gap-x-4 gap-y-0.5">
-              {user?.socials?.map(({ social, name }: Social) => {
-                if (!social || !name) return
-                const url = `${URLS_START[social]}${name}`
-
+              {user.urls && Object.entries(user.urls).map(([url, name]) => {
+                if (!name || url === '_id') return
                 return (
-                  <Link href={url} target='_blank' title={social} key={social}>
-                    <AutoSvg className='size-[38px]' type={social} />
+                  <Link href={`${URLS_START[url as keyof typeof URLS_START]}${name}`} target='_blank' title={url} key={url}>
+                    <AutoSvg className='size-[38px]' type={url} />
                   </Link>
                 )
               })}
@@ -144,7 +141,9 @@ export default async function Profile({ params }: NameParams) {
             )}
           </h4>
           <h4 >
-            Погасшие: <strong className='text-faded'>{user.faded_rating}</strong> <StarSvg className='text-faded'/>
+            <Link href='/shop#pass'>
+              Погасшие: <strong className='text-faded'>{user.faded_rating ?? 0}</strong> <StarSvg className='text-faded'/>
+            </Link>
           </h4>
           <div className="flex items-center gap-1">
             <h4>

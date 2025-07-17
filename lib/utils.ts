@@ -58,3 +58,26 @@ export const Random = (maxNumber: number): number => {
   // Фоллбэк для совсем старых окружений
   return Math.floor(Math.random() * maxNumber)
 }
+
+/**
+ * Возвращает стоимость проходки с учётом скидки
+ */
+export function GetMostiki(months: number, selected: number) {
+  // 100 -> 0.9
+  // 200 -> 0.8
+  // 300 -> 0.7
+  // 400 -> 0.6
+  // 500 -> 0.5
+  const reverse = 1 - selected / 1000
+  const price = (months * 90 + 10) * reverse
+  // Округление до ближайщего 5 или 10
+  const rounded = Math.round(price / 5) * 5
+  return rounded
+}
+
+/**
+ * Возвращает стоимость проходки без учёта скидки
+ */
+export function GetOriginalMostiki(months: number) {
+  return months * 100
+}

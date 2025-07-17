@@ -2,10 +2,10 @@ import { google, lucia } from '@db/lucia'
 import { cookies } from 'next/headers'
 import { generateId, type User } from 'lucia'
 import type { GUser } from '@/types/user'
-import { OAuth2RequestError } from 'arctic'
+import { OAuth2RequestError, decodeIdToken } from 'arctic'
 import { userModel } from '@db/models'
 import { NextRequest, NextResponse } from 'next/server'
-import { validate } from '@services/user/validate'
+import { getId } from '@services/user/validate'
 import axios from 'axios'
 
 export async function GET(request: NextRequest) {
@@ -57,10 +57,10 @@ export async function GET(request: NextRequest) {
       photo: gUser.picture,
     } as User
 
-    const { user } = await validate()
+    const id = await getId()
 
-    if (user) {
-      await userModel.findByIdAndUpdate(user._id, {
+    if (!!id) {
+      await userModel.findByIdAndUpdate(id, {
         email: userData.email,
         googleId: userData.googleId,
       })

@@ -17,6 +17,7 @@ export const URLS_START = {
   twitch: `https://www.twitch.tv/`,
   youtube: `https://youtube.com/@`,
   donationAlerts: `https://donationalerts.com/r/`,
+  discord: `https://discord.com/users/`,
 }
 
 export const NO_ROLES = {
@@ -32,7 +33,7 @@ export const AUTO = {
 }
 
 export const MBSESSION = 'minebridge-session'
-export type SocialName = keyof typeof URLS_START
+export type UrlName = keyof typeof URLS_START
 
 export const ROLES = {
   admin: 'админ',

@@ -76,19 +76,18 @@ export const getRoles = cache(
 // Получение всех контент-мейкеров (стримеров и ютуберов)
 export const getAllContentMakers = cache(
   async (): Promise<User[]> => {
-    // Получаем всех пользователей с социальными сетями
     const users: User[] = JSON.parse(
       JSON.stringify(
         await userModel.find(
           {
-            socials: { $exists: true, $ne: [] }
+            urls: { $ne: {} }
           },
           {
             name: 1,
             photo: 1,
             mostiki: 1,
             rating: 1,
-            socials: 1,
+            urls: 1,
             onlineAt: 1,
             discordId: 1
           },
@@ -100,22 +99,7 @@ export const getAllContentMakers = cache(
       )
     )
 
-    // Фильтруем только тех, у кого есть и YouTube, и Twitch
-    return users.filter(user => {
-      const isTwitch = user.socials?.some(({ social, name }) =>
-        social === 'twitch' && name
-      )
-      const isYoutube = user.socials?.some(({ social, name }) =>
-        social === 'youtube' && name
-      )
-      return isTwitch && isYoutube
-    })
-
-    // return users.filter(user => {
-    //   const hasTwitch = user.socials?.some(({social, url}) => social === 'twitch' && url)
-    //   const hasYoutube = user.socials?.some(({social, url}) => social === 'youtube' && url)
-    //   return hasTwitch && hasYoutube
-    // })
+    return users.filter(user => user.urls?.youtube)
   },
   ['contentMakers', 'userLike', 'all'],
   { revalidate: 600, tags: ['contentMakers', 'userLike', 'all'] }
