@@ -9,9 +9,12 @@ export async function GET(request: NextRequest) {
     })
   }
 
-  const user = await userModel.findOneAndUpdate(
+  if (process.env.NEXT_PUBLIC_DAYS !== 'on') {
+    return Response.json({ success: false, message: 'Days is off' })
+  }
+
+  const users = await userModel.updateMany(
     {
-      name: 'JustCheburek',
       days: { $gt: 0 },
     },
     {
@@ -24,11 +27,6 @@ export async function GET(request: NextRequest) {
     }
   )
 
-  if (!user) {
-    return new Response('User not found', {
-      status: 404,
-    })
-  }
-
-  return Response.json({ success: true, days: user.days })
+  console.log(`-1 день у ${users.modifiedCount} пользователей`)
+  return Response.json({ success: true, updated: users.modifiedCount })
 }

@@ -114,7 +114,8 @@ export const getUsersWhitelist = cache(
           photo: 1,
           mostiki: 1,
           rating: 1,
-          createdAt: 1
+          createdAt: 1,
+          days: 1
         }, { lean: true })
       )
     )
@@ -220,7 +221,8 @@ export const getUsers = cache(
             from: 1,
             whitelist: 1,
             suffix: 1,
-            faded_rating: 1
+            faded_rating: 1,
+            days: 1
           },
           {
             lean: true,

@@ -69,6 +69,13 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
+    accessorFn: row => row.days || 0,
+    header: 'Дни',
+    meta: {
+      type: 'number',
+    },
+  },
+  {
     accessorKey: 'createdAt',
     header: 'Создание',
     meta: {

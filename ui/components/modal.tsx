@@ -49,7 +49,7 @@ export function Modal({
           className="absolute top-[0.3rem] right-[0.8rem] text-unic p-[0.8rem] rounded-base font-bold"
           onClick={() => setModal(false)}
         >
-          x
+          ✕
         </button>
         {children}
       </div>

@@ -1,22 +1,17 @@
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import { Suspense } from 'react'
-import TimeAgo from 'javascript-time-ago'
 import { validate } from '@services/user/validate'
 import { getUser, updateFrom } from '@services/user'
 import { userModel } from '@db/models'
-import { AutoSvg, DiscordSvg, EditSvg, MostikiSvg, StarSvg } from '@ui/SVGS'
-import { URLS_START } from '@/const'
 import type { NameParams } from '@/types/params'
 import { Skeleton } from '@components/skeleton'
-import type { User } from 'lucia'
-import { GiftBox } from './components/gift'
 import { cookies } from 'next/headers'
 
-const Avatar = dynamic(() => import('@components/avatar'))
 const ServerStatusSection = dynamic(() => import('./components/serverStatus'))
 const TwitchFrame = dynamic(() => import('./components/twitch'))
+const LinkAccounts = dynamic(() => import('./components/linkAcc'))
+const Profile = dynamic(() => import('./components/profile'))
 
 export const generateMetadata = async ({ params }: NameParams): Promise<Metadata> => {
   const { name } = await params
@@ -27,35 +22,7 @@ export const generateMetadata = async ({ params }: NameParams): Promise<Metadata
   }
 }
 
-const Mostiki = ({
-  isMe,
-  isAdmin,
-  user,
-  author,
-}: {
-  isMe: boolean
-  isAdmin: boolean
-  user: User
-  author: User | null
-}) => {
-  if ((!isMe || !isAdmin) && author?.mostiki && author?.mostiki <= 0) return
-
-  return (
-    <>
-      {(isAdmin || isMe) && (
-        <Link href={isMe ? '/shop' : `/user/${user.name}/accounts`} className='add'>
-          +
-        </Link>
-      )}
-
-      {author && <GiftBox user={user} author={author} isMe={isMe} />}
-    </>
-  )
-}
-
-const timeAgo = new TimeAgo('ru-RU')
-
-export default async function Profile({ params }: NameParams) {
+export default async function ProfilePage({ params }: NameParams) {
   const cookiesStore = await cookies()
 
   const { name } = await params
@@ -78,80 +45,20 @@ export default async function Profile({ params }: NameParams) {
   }
 
   return (
-    <div className="grid place-content-center gap-[100px]">
-      <div className="grid place-content-center gap-[50px] md:grid-cols-[1fr_2fr] [&>*]:mx-auto">
-        <Avatar src={user.photo} />
+    <div className='grid place-content-center gap-[100px]'>
+      {/* Рекомендация привязка аккаунтов */}
+      <div className='w-full grid place-content-center gap-6'>
+        {isMe && <LinkAccounts user={user} />}
 
-        <div className="grid gap-2.5 font-medium">
-          <h2>
-            <span className='text-unic select-all'>{user.name}</span>{' '}
-            {(isMe || isHelper) && (
-              <Link href={`/user/${user.name}/accounts`}>
-                <EditSvg className='text-unic size-[0.6em]' />
-              </Link>
-            )}
-          </h2>
-
-          {isHelper && <code className='text-light-gray'>{user._id}</code>}
-          {isContentMaker && (
-            <div className="flex flex-wrap whitespace-nowrap gap-x-4 gap-y-0.5">
-              {user.urls && Object.entries(user.urls).map(([url, name]) => {
-                if (!name || url === '_id') return
-                return (
-                  <Link href={`${URLS_START[url as keyof typeof URLS_START]}${name}`} target='_blank' title={url} key={url}>
-                    <AutoSvg className='size-[38px]' type={url} />
-                  </Link>
-                )
-              })}
-              {user.discordId && (
-                <Link href={`https://discord.com/users/${user.discordId}`} target='_blank' title='Discord' key='discord'>
-                  <DiscordSvg className='size-[38px]' />
-                </Link>
-              )}
-            </div>
-          )}
-          <div className="flex flex-wrap whitespace-nowrap gap-x-4 gap-y-0.5">
-            {roles.map(role => {
-              const color = `#${role.color.toString(16)}`
-              return (
-                <small key={role.id} style={{ color }}>
-                  {role.name}
-                </small>
-              )
-            })}
-          </div>
-          {!isMe && (
-            <div>
-              <h4>
-                Онлайн:{' '}
-                <time dateTime={new Date(user.onlineAt || 0).toISOString()}>
-                  {timeAgo.format(new Date(user.onlineAt || 0))}
-                </time>
-              </h4>
-            </div>
-          )}
-          <h4>
-            <Link href='/milkyway'>
-              Звёзды: <strong className='text-yellow'>{user.rating}</strong> <StarSvg />
-            </Link>{' '}
-            {(isMe || isHelper) && (
-              <Link href={isHelper ? `/user/${user.name}/history` : '/rules'} className='add'>
-                +
-              </Link>
-            )}
-          </h4>
-          <h4 >
-            <Link href='/shop#pass'>
-              Погасшие: <strong className='text-faded'>{user.faded_rating ?? 0}</strong> <StarSvg className='text-faded'/>
-            </Link>
-          </h4>
-          <div className="flex items-center gap-1">
-            <h4>
-              Мостики: <strong className='text-unic'>{user.mostiki}</strong> <MostikiSvg />
-            </h4>{' '}
-            <Mostiki user={user} author={author} isMe={isMe} isAdmin={isAdmin} />
-          </div>
-        </div>
+        <Profile
+          user={user}
+          isMe={isMe}
+          isHelper={isHelper}
+          isContentMaker={isContentMaker}
+          author={author}
+          roles={roles}
+          isAdmin={isAdmin}
+        />
       </div>
 
       <Suspense fallback={<Skeleton className='h-[450px] w-[100%]' />}>
