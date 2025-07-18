@@ -14,7 +14,7 @@ export default function WhitelistSection({ user, isMe }: { user: User; isMe: boo
   }
 
   if (!isMe) {
-    if (!user.days || user.days < 1) {
+    if (!user.days || user.days <= 0) {
       return (
         <section className='text-center'>
           <h3 className='text-red'>
@@ -39,7 +39,7 @@ export default function WhitelistSection({ user, isMe }: { user: User; isMe: boo
     )
   }
 
-  if (!user.days || user.days < 1) {
+  if (!user.days || user.days <= 0) {
     return (
       <section className='text-center'>
         <h3>
@@ -56,7 +56,7 @@ export default function WhitelistSection({ user, isMe }: { user: User; isMe: boo
   return (
     <section className="grid place-items-center text-center">
       <h2>8 сезон</h2>
-      <h4 className='text-unic font-medium'>{process.env.NEXT_PUBLIC_VERSION} Java Edition</h4>
+      <h4 className='font-medium'>{process.env.NEXT_PUBLIC_VERSION} Java Edition</h4>
       <p>
         IP:{' '}
         <code className='text-unic font-bold'>
@@ -64,7 +64,7 @@ export default function WhitelistSection({ user, isMe }: { user: User; isMe: boo
         </code>
       </p>
       <p>
-        Ещё {user.days ?? 0} дн. проходки
+        Ещё <span className='text-green font-medium'>{user.days ?? 0}</span> дн. проходки
       </p>
     </section>
   )
