@@ -109,50 +109,78 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
         '--_angle': `${angle}rad`,
       }}
     >
-      <div className={cn('relative grid gap-10 justify-center items-center md:ml-[var(--_x)] max-md:flex-col')}>
-        <div className='max-md:flex max-md:justify-center max-md:items-center max-md:flex-col max-md:mt-4 group/card'>
-          {!suffix
-            ? <ItemImg x={x} Item={Item} DropItem={DropItem} rarity={rarity} author={author} isPerm={isPerm} isHas={isHas} caseData={caseData} />
-            : <Suffix suffix={suffix} DropItem={DropItem} rarity={rarity} author={author} isPerm={isPerm} isHas={isHas} caseData={caseData} />
-          }
+      <div
+        className={cn(
+          'relative grid items-center justify-center gap-10 max-md:flex-col md:ml-[var(--_x)]'
+        )}
+      >
+        <div className='group/card max-md:mt-4 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center'>
+          {!suffix ? (
+            <ItemImg
+              x={x}
+              Item={Item}
+              DropItem={DropItem}
+              rarity={rarity}
+              author={author}
+              isPerm={isPerm}
+              isHas={isHas}
+              caseData={caseData}
+            />
+          ) : (
+            <Suffix
+              suffix={suffix}
+              DropItem={DropItem}
+              rarity={rarity}
+              author={author}
+              isPerm={isPerm}
+              isHas={isHas}
+              caseData={caseData}
+            />
+          )}
         </div>
         <div className='relative flex flex-col items-center gap-4'>
-          <div className={cn(
-            "size-(--_size) z-10 rounded-full shadow-[0_0_30px] max-md:hidden",
-            isHas
-              ? "bg-text shadow-text"
-              : "bg-light-gray shadow-light-gray"
-          )} />
-          <h3 className='text-yellow flex justify-center items-center gap-[5px] text-shadow-[0_0_30px] text-shadow-yellow'>
+          <div
+            className={cn(
+              'size-(--_size) z-10 rounded-full shadow-[0_0_30px] max-md:hidden',
+              isHas ? 'bg-text shadow-text' : 'bg-light-gray shadow-light-gray'
+            )}
+          />
+          <h3 className='text-yellow text-shadow-[0_0_30px] text-shadow-yellow flex items-center justify-center gap-[5px]'>
             {rating} <StarSvg className='size-[0.9em]' />
           </h3>
-          {difference > 0 && <>
-            <div className={cn(
-              'absolute w-(--_long) h-[3px] bg-light-gray max-md:hidden',
-              'rotate-(--_angle) translate-y-[calc(var(--_size)/2)] translate-x-1/2 origin-left'
-            )} />
-            <div className={cn(
-              'absolute w-(--_complete) h-[7px] bg-text rounded-base max-md:hidden',
-              'rotate-(--_angle) translate-y-[calc(var(--_size)/2)] translate-x-1/2 origin-left'
-            )} />
-          </>}
-
-          {avatar && (
-            <div className={cn(
-              'absolute size-[calc(var(--_size)-1rem)] z-20 bg-text rounded-full max-md:hidden',
-              'flex justify-center items-center',
-              'transform-[rotate(var(--_angle))_translate(var(--_complete))]'
-            )}>
+          {difference > 0 && (
+            <>
               <div
                 className={cn(
-                  'absolute flex gap-4 p-4 borderbox border-text box common -rotate-(--_angle)',
-                  x >= 0
-                  ? '-translate-x-15 -translate-y-22'
-                  : '-translate-x-22 translate-y-15'
+                  'w-(--_long) bg-light-gray absolute h-[3px] max-md:hidden',
+                  'rotate-(--_angle) origin-left translate-x-1/2 translate-y-[calc(var(--_size)/2)]'
+                )}
+              />
+              <div
+                className={cn(
+                  'w-(--_complete) bg-text rounded-base absolute h-[7px] max-md:hidden',
+                  'rotate-(--_angle) origin-left translate-x-1/2 translate-y-[calc(var(--_size)/2)]'
+                )}
+              />
+            </>
+          )}
+
+          {avatar && (
+            <div
+              className={cn(
+                'bg-text absolute z-20 size-[calc(var(--_size)-1rem)] rounded-full max-md:hidden',
+                'flex items-center justify-center',
+                'transform-[rotate(var(--_angle))_translate(var(--_complete))]'
+              )}
+            >
+              <div
+                className={cn(
+                  'borderbox border-text box common -rotate-(--_angle) absolute flex gap-4 p-4',
+                  x >= 0 ? '-translate-x-15 -translate-y-22' : '-translate-x-22 translate-y-15'
                 )}
               >
                 <Avatar src={author.photo} className='size-9' />
-                <h3 className='text-yellow flex justify-center items-center gap-[5px] text-shadow-yellow text-shadow-[0_0_30px]'>
+                <h3 className='text-yellow text-shadow-yellow text-shadow-[0_0_30px] flex items-center justify-center gap-[5px]'>
                   {author.rating} <StarSvg className='size-[0.9em]' />
                 </h3>
               </div>
@@ -169,8 +197,6 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
           width: {width} <br />
           height: {height}
         </p> */}
-
-
       </div>
     </div>
   )
@@ -183,7 +209,12 @@ type Suffix = {
 } & GetButton
 function Suffix({ suffix, DropItem, rarity, ...props }: Suffix) {
   return (
-    <div className={cn('rounded-base bg-black grid place-items-center size-[18rem] [contain:strict] box', rarity)}>
+    <div
+      className={cn(
+        'rounded-base box grid size-[18rem] place-items-center bg-black [contain:strict]',
+        rarity
+      )}
+    >
       <div>
         <h2>{suffix}</h2>
         <p>{DropItem.description}</p>
@@ -200,16 +231,20 @@ type ItemImg = {
   rarity: RarityType
 } & GetButton
 function ItemImg({ x, Item, DropItem, rarity, ...props }: ItemImg) {
-  return (<>
-    <ImgBox className={cn('rounded-base bg-black size-[18rem] [contain:strict] z-10 box', rarity)} hover>
-      <Img
-        src={`/shop/${DropItem.name}/${Item.name}.webp`}
-        alt={Item.displayname || DropItem.name || ''}
-        className='object-center object-cover contain-layout'
-      />
-    </ImgBox>
+  return (
+    <>
+      <ImgBox
+        className={cn('rounded-base box z-10 size-[18rem] bg-black [contain:strict]', rarity)}
+        hover
+      >
+        <Img
+          src={`/shop/${DropItem.name}/${Item.name}.webp`}
+          alt={Item.displayname || DropItem.name || ''}
+          className='object-cover object-center contain-layout'
+        />
+      </ImgBox>
 
-    {/* <div className={cn(
+      {/* <div className={cn(
       'md:absolute top-1/2 md:-translate-y-1/2 grid items-center w-[70vw] h-64 p-4 md:p-10 overflow-hidden max-md:w-full max-md:h-auto',
       x <= 0
         ? 'left-0'
@@ -227,7 +262,8 @@ function ItemImg({ x, Item, DropItem, rarity, ...props }: ItemImg) {
         <GetButton {...props} />
       </div>
     </div> */}
-  </>)
+    </>
+  )
 }
 
 type GetButton = {
@@ -326,10 +362,7 @@ export default async function MilkyWay() {
 
   //bg-gradient-to-b from-background to-black
   return (
-    <div
-      className='text-center'
-      style={{ '--_size': `${SIZE}rem` }}
-    >
+    <div className='text-center' style={{ '--_size': `${SIZE}rem` }}>
       <H1
         description='Боевой пропуск 7 сезона'
         reload={async () => {
@@ -340,9 +373,9 @@ export default async function MilkyWay() {
         Млечный путь
       </H1>
 
-      <div className='h-28 bg-gradient-to-b from-background to-black' />
+      <div className='from-background h-28 bg-gradient-to-b to-black' />
 
-      <div className='bg-black bg-[url(/milkyway/stars.svg)] bg-repeat bg-size-[500px] will-change-transform py-5'>
+      <div className='bg-size-[500px] bg-black bg-[url(/milkyway/stars.svg)] bg-repeat py-5 will-change-transform'>
         <PathsLoader Drops={Drops} author={author} Case={Case} />
       </div>
     </div>

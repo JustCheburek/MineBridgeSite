@@ -46,7 +46,9 @@ export default async function UserLayout({ children, params }: PropsWithChildren
       <Subsections menu='Меню профиля'>
         <SubsectionItem href={`/user/${name}`}>Профиль</SubsectionItem>
         <SubsectionItem href={`/user/${name}/history`}>История</SubsectionItem>
-        {(isHelper || isMe) && <SubsectionItem href={`/user/${name}/accounts`}>Аккаунты</SubsectionItem>}
+        {(isHelper || isMe) && (
+          <SubsectionItem href={`/user/${name}/accounts`}>Аккаунты</SubsectionItem>
+        )}
       </Subsections>
 
       <script

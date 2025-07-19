@@ -17,7 +17,7 @@ export const GContainer = ({ children, className = '', border = false, ...props 
   <div
     className={cn(
       'relative grid place-content-center gap-x-8 gap-y-20 *:h-64 *:w-80',
-      'grid-cols-autofit-80',
+      { 'grid-cols-autofit-80': !className.includes('grid-cols-autofit') },
       {
         '*:border-border *:rounded-base *:bg-background/80 *:border *:border-solid': border,
       },
@@ -32,27 +32,30 @@ export const GContainer = ({ children, className = '', border = false, ...props 
 type AnotherSite = { anotherSite?: boolean }
 export const AnotherSite = ({ className = '', ...props }: ComponentPropsWithoutRef<'svg'>) => (
   <AnotherSiteSvg
-    className={cn('text-p hover:text-unic absolute right-[10px] top-[10px] transition-colors duration-300', className)}
+    className={cn(
+      'text-p hover:text-unic absolute right-[10px] top-[10px] transition-colors duration-300',
+      className
+    )}
     {...props}
   />
 )
 
 type GBox = AnotherSite & ComponentPropsWithoutRef<'div'>
 export const GBox = ({ children, className = '', anotherSite = false, ...props }: GBox) => (
-  <div className={cn('group/grid relative mx-auto flex flex-wrap items-center justify-center', className)} {...props}>
+  <div
+    className={cn(
+      'group/grid relative mx-auto flex flex-wrap items-center justify-center',
+      className
+    )}
+    {...props}
+  >
     {children}
     {anotherSite && <AnotherSite />}
   </div>
 )
 
 type GLink = AnotherSite & LinkProps & ComponentPropsWithoutRef<'a'>
-export const GLink = ({
-  children,
-  href,
-  anotherSite = false,
-  className = '',
-  ...props
-}: GLink) => {
+export const GLink = ({ children, href, anotherSite = false, className = '', ...props }: GLink) => {
   return (
     <Link
       href={href}
@@ -96,16 +99,16 @@ export const GImg = ({ children, className, imgs, ...props }: GImg) => (
     type='grid'
     className={cn(
       {
-        'w-[70%] -translate-y-4 group-hover/grid:multi-["scale-115;rotate-6;-translate-y-6"]': 
+        'w-[70%] -translate-y-4 group-hover/grid:multi-["scale-115;rotate-6;-translate-y-6"]':
           imgs === 'one',
-        '-translate-y-3 first:multi-["-translate-x-17;-rotate-12;z-10"] nth-[2]:multi-["translate-x-17;rotate-12;z-20"]':
+        'nth-[2]:multi-["translate-x-17;rotate-12;z-20"] -translate-y-3 first:multi-["-translate-x-17;-rotate-12;z-10"]':
           imgs === 'two',
         'group-hover/grid:multi-["first:-translate-x-20;first:-rotate-17;nth-[2]:translate-x-20;nth-[2]:rotate-17;-translate-y-4"]':
           imgs === 'two',
-        'first:multi-["-translate-x-16;-rotate-18;z-10"] nth-[2]:multi-["-translate-y-5.5;z-20"] nth-3:multi-["translate-x-16;rotate-18;z-10"]':
+        'nth-[2]:multi-["-translate-y-5.5;z-20"] nth-3:multi-["translate-x-16;rotate-18;z-10"] first:multi-["-translate-x-16;-rotate-18;z-10"]':
           imgs === 'three',
         'group-hover/grid:multi-["first:-translate-x-25;first:-rotate-25;nth-[2]:-translate-y-12;nth-3:translate-x-25;nth-3:rotate-25"]':
-          imgs === 'three'
+          imgs === 'three',
       },
       className
     )}

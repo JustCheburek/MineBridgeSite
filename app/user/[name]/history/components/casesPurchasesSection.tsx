@@ -25,7 +25,10 @@ type Select = {
 function Select({ selected, _id, name, suffix }: Select) {
   if (selected) {
     return (
-      <form action={() => DropSuffix(_id, name)} className="absolute bottom-[0.6rem] right-[1.4rem]">
+      <form
+        action={() => DropSuffix(_id, name)}
+        className='absolute bottom-[0.6rem] right-[1.4rem]'
+      >
         <button>
           <small>убрать</small>
         </button>
@@ -34,7 +37,10 @@ function Select({ selected, _id, name, suffix }: Select) {
   }
 
   return (
-    <form action={() => SelectSuffix(suffix, _id, name)} className="absolute bottom-[0.6rem] right-[1.4rem]">
+    <form
+      action={() => SelectSuffix(suffix, _id, name)}
+      className='absolute bottom-[0.6rem] right-[1.4rem]'
+    >
       <button>
         <small>выбрать</small>
       </button>
@@ -99,7 +105,7 @@ export default function CasesPurchasesSection({
     <section>
       <div className='text-center'>
         <h2>Покупки кейсов</h2>
-        <p className="mt-2">
+        <p className='mt-2'>
           <code>/uc menu</code> для использования косметики
         </p>
       </div>
@@ -112,12 +118,13 @@ export default function CasesPurchasesSection({
         </Form>
       )}
 
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className='flex flex-wrap justify-center gap-6'>
         {caseDatas.map(({ MultiCase, Drop, DropItem, rarity, Item, suffix }, index) => (
           <div
             className={cn(
-              "rounded-input grid place-items-center relative bg-gray overflow-hidden group w-[280px] h-[160px]",
-              'box', rarity
+              'rounded-input bg-gray group relative grid h-[160px] w-[280px] place-items-center overflow-hidden',
+              'box',
+              rarity
             )}
             key={index}
           >
@@ -140,7 +147,7 @@ export default function CasesPurchasesSection({
             )}
 
             {MultiCase && DropItem?.name !== 'suffix' && (
-              <div className="absolute top-[0.6rem] right-[1.4rem] flex gap-1 justify-center items-center">
+              <div className='absolute right-[1.4rem] top-[0.6rem] flex items-center justify-center gap-1'>
                 {MultiCase.map(
                   ({ Case, amount }) =>
                     Case && (
@@ -150,7 +157,9 @@ export default function CasesPurchasesSection({
                       >
                         <CaseBox Case={Case} className='size-[40px]'>
                           {amount > 1 && (
-                            <p className={cn('font-semibold absolute bottom-[-0.2em] right-[0.1em]')}>
+                            <p
+                              className={cn('absolute bottom-[-0.2em] right-[0.1em] font-semibold')}
+                            >
                               {amount}
                             </p>
                           )}
@@ -162,7 +171,7 @@ export default function CasesPurchasesSection({
             )}
 
             {access && (
-              <div className="absolute top-[0.6rem] left-[1.4rem] flex gap-1 justify-center items-center">
+              <div className='absolute left-[1.4rem] top-[0.6rem] flex items-center justify-center gap-1'>
                 <form
                   action={() => {
                     DeleteCasePurchase(user._id, Item?._id, suffix)

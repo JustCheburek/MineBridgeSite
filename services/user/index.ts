@@ -80,7 +80,7 @@ export const getAllContentMakers = cache(
       JSON.stringify(
         await userModel.find(
           {
-            urls: { $ne: {} }
+            urls: { $ne: {} },
           },
           {
             name: 1,
@@ -89,11 +89,11 @@ export const getAllContentMakers = cache(
             rating: 1,
             urls: 1,
             onlineAt: 1,
-            discordId: 1
+            discordId: 1,
           },
           {
             lean: true,
-            sort: { name: 1 }
+            sort: { name: 1 },
           }
         )
       )
@@ -109,14 +109,18 @@ export const getUsersWhitelist = cache(
   async () => {
     const users: User[] = JSON.parse(
       JSON.stringify(
-        await userModel.find({ whitelist: true }, {
-          name: 1,
-          photo: 1,
-          mostiki: 1,
-          rating: 1,
-          createdAt: 1,
-          days: 1
-        }, { lean: true })
+        await userModel.find(
+          { whitelist: true },
+          {
+            name: 1,
+            photo: 1,
+            mostiki: 1,
+            rating: 1,
+            createdAt: 1,
+            days: 1,
+          },
+          { lean: true }
+        )
       )
     )
     return users
@@ -222,7 +226,7 @@ export const getUsers = cache(
             whitelist: 1,
             suffix: 1,
             faded_rating: 1,
-            days: 1
+            days: 1,
           },
           {
             lean: true,

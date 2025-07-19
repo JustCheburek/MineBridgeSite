@@ -151,19 +151,23 @@ export default async function ShowCase({ params }: ParamsProp) {
         {Item?.displayname}
       </H1>
 
-      <div className="grid justify-center items-center gap-4 sm:grid-cols-2">
+      <div className='grid items-center justify-center gap-4 sm:grid-cols-2'>
         {DropItem.name !== 'suffix' ? (
           <ImgBox className={cn(`rounded-base h-[160px] w-[280px]`, 'box', rarity)} hover>
             <Img src={`/shop/${DropItem.name}/${Item.name}.webp`} alt={Item.displayname} />
           </ImgBox>
         ) : (
           <p
-            className={cn(`rounded-base grid place-items-center text-center h-[160px] w-[280px]`, 'box', rarity)}
+            className={cn(
+              `rounded-base grid h-[160px] w-[280px] place-items-center text-center`,
+              'box',
+              rarity
+            )}
           >
             Суффикс
           </p>
         )}
-        <div className="sm:order-[-1] mx-auto">
+        <div className='mx-auto sm:order-[-1]'>
           <p className={rarity}>{RarityNames[rarity]}</p>
           <p>{DropItem?.description}</p>
           <p>
@@ -172,11 +176,11 @@ export default async function ShowCase({ params }: ParamsProp) {
           <p>У тебя есть: {userHave}</p>
         </div>
       </div>
-      <div className="grid justify-center items-center gap-4 mt-4 sm:grid-cols-2">
+      <div className='mt-4 grid items-center justify-center gap-4 sm:grid-cols-2'>
         <ImgBox hover>
           <Img src={`/shop/${Case.name}.png`} alt={`${Case.displayname} кейс`} width={185} />
         </ImgBox>
-        <div className="sm:text-right mx-auto">
+        <div className='mx-auto sm:text-right'>
           <p>{Case?.displayname}</p>
           <p>{Drop?.displayname}</p>
           <p>
@@ -189,14 +193,14 @@ export default async function ShowCase({ params }: ParamsProp) {
 
       {isHelper && (
         <div className='text-light-gray mx-auto'>
-          {DropItem.give &&
+          {DropItem.give && (
             <p>
-              Право:{" "}
+              Право:{' '}
               <code>
                 {DropItem.give}.{DropItem.name}.{Item.name}
               </code>
             </p>
-          }
+          )}
           <p>
             Case: <code>{Case._id.toString()}</code>
           </p>

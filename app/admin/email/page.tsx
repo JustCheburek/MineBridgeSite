@@ -9,7 +9,10 @@ export default async function AdminPanel() {
         paths={[
           { name: 'admin', displayname: 'Админка' },
           { name: 'email', displayname: 'Почта' },
-        ]}>Почта</H1>
+        ]}
+      >
+        Почта
+      </H1>
 
       <h3>Отправить письмо</h3>
       <SendEmailForm />

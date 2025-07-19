@@ -142,7 +142,7 @@ export function Places({ users }: { users: User[] }) {
         </h4>
         <h4>Топ {topPlaces.length} мест:</h4>
         {topPlaces.map(({ place, count }) => (
-          <div key={place} className='flex justify-between items-center gap-4'>
+          <div key={place} className='flex items-center justify-between gap-4'>
             <p className='text-unic font-medium'>{place}</p>
             <p className='text-green font-medium'>{count}</p>
           </div>

@@ -186,16 +186,16 @@ declare module '@tanstack/react-table' {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang='ru' className='h-full scroll-smooth'>
-      <body className={cn(
-        montserrat.className,
-        'relative h-full text-p leading-p bg-background text-text accent-unic caret-unic flex min-h-full flex-col'
-      )}>
+      <body
+        className={cn(
+          montserrat.className,
+          'text-p leading-p bg-background text-text accent-unic caret-unic relative flex h-full min-h-full flex-col'
+        )}
+      >
         <Providers>
           <EdgeStoreProvider>
             <Header />
-            <main className="flex-1 flex-shrink-0">
-              {children}
-            </main>
+            <main className='flex-1 flex-shrink-0'>{children}</main>
             <Footer />
           </EdgeStoreProvider>
         </Providers>

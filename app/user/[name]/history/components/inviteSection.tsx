@@ -20,14 +20,16 @@ export default function InviteSection({ user, isMe, isHelper }: InviteSection) {
       <h4>
         Приглашений: <strong className='text-unic'>{user.invites.length}</strong>
       </h4>
-      {invites.length > 0 && <>
-        <p>Последние {invites.length}:</p>
-        <div className="grid grid-cols-autofit-60 gap-x-4">
-          {invites.map(userId => (
-            <UserBox key={userId} _id={userId} />
-          ))}
-        </div>
-      </>}
+      {invites.length > 0 && (
+        <>
+          <p>Последние {invites.length}:</p>
+          <div className='grid-cols-autofit-60 grid gap-x-4'>
+            {invites.map(userId => (
+              <UserBox key={userId} _id={userId} />
+            ))}
+          </div>
+        </>
+      )}
     </section>
   )
 }
@@ -36,7 +38,7 @@ function FromBox({ user, isMe, isHelper }: { user: User; isMe: boolean; isHelper
   if (!user?.from || !user.from?.userId || !user.from?.place) return
 
   return (
-    <div className="flex justify-center items-center flex-wrap gap-[0.6em]">
+    <div className='flex flex-wrap items-center justify-center gap-[0.6em]'>
       <p>{isMe ? 'Ты пришёл' : 'Пришёл'} от</p>
       <UserBox _id={user.from.userId} />
       {isHelper && <p className='text-unic'>{user.from.place}</p>}

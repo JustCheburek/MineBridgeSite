@@ -1,3 +1,5 @@
+import { User } from 'lucia'
+
 export interface PaymentPost {
   payment_id: number
   shop_id: number
@@ -12,6 +14,28 @@ export interface PaymentPost {
   updated_at: string
   products: Product[]
   signature: string
+}
+
+export interface Payment {
+  id: number
+  customer: string
+  email: string | null
+  shop_id: number
+  server_id: number
+  status: number
+  enrolled: number
+  payment_type: string
+  send_commands: string[]
+  created_at: string
+  updated_at: string
+  ip: string
+  cost: number
+  products: Product[]
+  server: ServerInfo
+}
+
+export interface PaymentWithUser extends Payment {
+  user: User
 }
 
 export interface ServerInfo {

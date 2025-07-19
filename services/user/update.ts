@@ -80,7 +80,7 @@ export async function UpdateProfile(
   for (const { name } of urlsLabels) {
     const v = formData.get(name)
     if (v != null) {
-      urls[`urls.${ name }`] = v.toString()
+      urls[`urls.${name}`] = v.toString()
     }
   }
 

@@ -166,10 +166,9 @@ export function Table<T>({
       <th
         scope='col'
         onClick={header.column.getToggleSortingHandler()}
-        className={cn(
-          'py-4 px-6 whitespace-nowrap',
-          { 'cursor-pointer': header.column.getCanSort() }
-        )}
+        className={cn('whitespace-nowrap px-6 py-4', {
+          'cursor-pointer': header.column.getCanSort(),
+        })}
       >
         {flexRender(header.column.columnDef.header, header.getContext())}
         {sortItem && (sortItem.desc ? ' ↓' : ' ↑')}
@@ -183,15 +182,15 @@ export function Table<T>({
     const start = Math.max(0, current - 2)
     const end = Math.min(pageCount, start + 5)
     return (
-      <div className="flex justify-center items-center gap-2 my-4 mx-auto">
+      <div className='mx-auto my-4 flex items-center justify-center gap-2'>
         <button
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
-          className="py-2 px-3 cursor-pointer disabled:opacity-50 disabled:cursor-default"
+          className='cursor-pointer px-3 py-2 disabled:cursor-default disabled:opacity-50'
         >
           &laquo;
         </button>
-        <div className="flex gap-2 justify-center items-center">
+        <div className='flex items-center justify-center gap-2'>
           {Array.from({ length: end - start }).map((_, i) => {
             const idx = start + i
             return (
@@ -208,7 +207,7 @@ export function Table<T>({
         <button
           onClick={() => table.setPageIndex(pageCount - 1)}
           disabled={!table.getCanNextPage()}
-          className="py-2 px-3 cursor-pointer disabled:opacity-50 disabled:cursor-default"
+          className='cursor-pointer px-3 py-2 disabled:cursor-default disabled:opacity-50'
         >
           &raquo;
         </button>
@@ -217,10 +216,10 @@ export function Table<T>({
   }
 
   return (
-    <div className="max-md:overflow-x-auto">
-      <div className="text-center mb-10">{children}</div>
+    <div className='max-md:overflow-x-auto'>
+      <div className='mb-10 text-center'>{children}</div>
 
-      <FormLabel className='block max-sm:mx-2 sm:w-[70%] mx-auto'>
+      <FormLabel className='mx-auto block max-sm:mx-2 sm:w-[70%]'>
         <FormInput
           value={globalFilter}
           onChange={e => setState({ globalFilter: e.target.value })}
@@ -231,15 +230,15 @@ export function Table<T>({
 
       {pagination && <PaginationControls />}
 
-      <table className="relative border-separate border-spacing-y-6 w-full">
-        <thead className="bg-background/80 backdrop-blur-md z-10 lg:sticky lg:top-(--spacing-header) lg:-translate-y-0.25">
+      <table className='relative w-full border-separate border-spacing-y-6'>
+        <thead className='bg-background/80 lg:top-(--spacing-header) lg:-translate-y-0.25 z-10 backdrop-blur-md lg:sticky'>
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
                 <Header key={header.id} header={header} />
               ))}
               {editable && (
-                <th scope='col' className="py-4 px-6 whitespace-nowrap">
+                <th scope='col' className='whitespace-nowrap px-6 py-4'>
                   ✐
                 </th>
               )}
@@ -248,7 +247,7 @@ export function Table<T>({
         </thead>
         <tbody>
           {table.getRowModel().rows.map(row => (
-            <tr key={row.id} className="even:bg-black/30">
+            <tr key={row.id} className='even:bg-black/30'>
               {row.getVisibleCells().map(cell => {
                 const value = cell.getValue<string | number>()
                 const { columnDef } = cell.column
@@ -268,7 +267,13 @@ export function Table<T>({
                 const className = `${textcenter || ''} ${number || ''} ${meta?.className || ''}`
 
                 return (
-                  <td key={cell.id} className={cn("py-4 px-2 text-wrap-balance first:rounded-l-[15px] last:rounded-r-[15px]", className)}>
+                  <td
+                    key={cell.id}
+                    className={cn(
+                      'text-wrap-balance px-2 py-4 first:rounded-l-[15px] last:rounded-r-[15px]',
+                      className
+                    )}
+                  >
                     <Value<T>
                       cell={cell}
                       row={row}
@@ -283,8 +288,8 @@ export function Table<T>({
                 )
               })}
               {editable && (
-                <td className="text-center p-4 px-2 text-wrap-balance first:rounded-l-[15px] last:rounded-r-[15px]">
-                  <div className="flex place-content-center gap-2.5">
+                <td className='text-wrap-balance p-4 px-2 text-center first:rounded-l-[15px] last:rounded-r-[15px]'>
+                  <div className='flex place-content-center gap-2.5'>
                     {/* @ts-ignore */}
                     {editingRows[row.id] ? (
                       <>
@@ -331,14 +336,20 @@ export function Table<T>({
         {editable && (
           <tfoot>
             <tr>
-              <th colSpan={table.getCenterLeafColumns().length - 1} className="py-4 px-6 whitespace-nowrap">
+              <th
+                colSpan={table.getCenterLeafColumns().length - 1}
+                className='whitespace-nowrap px-6 py-4'
+              >
                 {table.getSelectedRowModel().rows.length > 0 && (
                   <HookButton className='text-red' onClick={removeRows} danger>
                     Удалить выделенное
                   </HookButton>
                 )}
               </th>
-              <th colSpan={table.getCenterLeafColumns().length} className="py-4 px-6 whitespace-nowrap">
+              <th
+                colSpan={table.getCenterLeafColumns().length}
+                className='whitespace-nowrap px-6 py-4'
+              >
                 {setModal && (
                   <FormButton
                     onClick={e => {

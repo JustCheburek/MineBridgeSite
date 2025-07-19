@@ -6,7 +6,11 @@ import { cn } from '@/lib/utils'
 TimeAgo.addLocale(ru)
 const timeAgo = new TimeAgo('ru-RU')
 
-export const LastUpdate = ({ time, className, ...props }: { time: Date } & ComponentPropsWithoutRef<'p'>) => (
+export const LastUpdate = ({
+  time,
+  className,
+  ...props
+}: { time: Date } & ComponentPropsWithoutRef<'p'>) => (
   <p className={cn('text-center', className)} {...props}>
     Последнее изменение:{' '}
     <time dateTime={time.toISOString()}>

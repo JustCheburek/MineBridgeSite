@@ -25,7 +25,7 @@ export function Modal({
     } else {
       document.body.style.overflow = ''
     }
-    
+
     return () => {
       document.body.style.overflow = ''
     }
@@ -34,19 +34,19 @@ export function Modal({
   return (
     <section
       className={cn(
-        'fixed inset-0 flex justify-center items-start w-full h-auto opacity-0 pointer-events-none transition-all duration-500 overflow-y-scroll p-5 font-medium group',
+        'group pointer-events-none fixed inset-0 flex h-auto w-full items-start justify-center overflow-y-scroll p-5 font-medium opacity-0 transition-all duration-500',
         centerText && 'text-center',
-        modal && 'opacity-100 pointer-events-auto z-50 backdrop-blur-md',
+        modal && 'pointer-events-auto z-50 opacity-100 backdrop-blur-md',
         className
       )}
       onClick={() => setModal(false)}
     >
-      <div 
-        className="relative m-auto min-w-[min(70%,500px)] min-h-[min(70%,300px)] pt-10 px-12 pb-5 z-50 scale-50 transition-transform duration-500 card bg-black/60 backdrop-blur-xl group-[.opacity-100]:scale-100"
+      <div
+        className='card relative z-50 m-auto min-h-[min(70%,300px)] min-w-[min(70%,500px)] scale-50 bg-black/60 px-12 pb-5 pt-10 backdrop-blur-xl transition-transform duration-500 group-[.opacity-100]:scale-100'
         onClick={e => e.stopPropagation()}
       >
-        <button 
-          className="absolute top-[0.3rem] right-[0.8rem] text-unic p-[0.8rem] rounded-base font-bold"
+        <button
+          className='text-unic rounded-base absolute right-[0.8rem] top-[0.3rem] p-[0.8rem] font-bold'
           onClick={() => setModal(false)}
         >
           ✕

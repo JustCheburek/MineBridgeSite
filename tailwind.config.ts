@@ -5,9 +5,7 @@ const config: Config = {
   theme: {
     // Все стили в global.css, так как это версия v4
   },
-  plugins: [
-    require('tailwindcss-multi'),
-  ],
+  plugins: [require('tailwindcss-multi')],
 }
 
 export default config

@@ -58,7 +58,7 @@ export const columns: ColumnDef<User>[] = [
     accessorFn: row => row.faded_rating || 0,
     header: 'Погасшие',
     meta: {
-      type: 'number'
+      type: 'number',
     },
   },
   {

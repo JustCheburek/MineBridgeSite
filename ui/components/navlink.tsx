@@ -8,7 +8,8 @@ import { cn } from '@/lib/utils'
 export type NavLink = {
   activeClassName?: string
   exact?: boolean
-} & LinkProps & ComponentPropsWithoutRef<'a'>
+} & LinkProps &
+  ComponentPropsWithoutRef<'a'>
 
 export function NavLink({
   href,

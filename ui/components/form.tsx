@@ -263,7 +263,14 @@ interface AddProps extends ComponentPropsWithoutRef<'button'> {
 }
 
 export const Add = ({ className = '', setModal, children, ...props }: AddProps) => (
-  <button className={cn('inline-flex items-center justify-center font-medium w-[max(0.55em,0.9rem)] h-[1em] transition-colors duration-300 hover:text-unic active:text-unic', className)} onClick={() => setModal && setModal(true)} {...props}>
+  <button
+    className={cn(
+      'hover:text-unic active:text-unic inline-flex h-[1em] w-[max(0.55em,0.9rem)] items-center justify-center font-medium transition-colors duration-300',
+      className
+    )}
+    onClick={() => setModal && setModal(true)}
+    {...props}
+  >
     {children || '+'}
   </button>
 )

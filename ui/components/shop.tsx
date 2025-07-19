@@ -91,5 +91,3 @@ export const Price = ({ children, not }: PropsWithChildren<{ not?: number }>) =>
     </h3>
   </div>
 )
-
-

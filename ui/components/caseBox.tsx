@@ -27,11 +27,7 @@ export function CaseBox({ Case, children, className, ...props }: CaseBoxProps) {
       hover
       {...props}
     >
-      <Img
-        src={`/shop/${Case.name}.png`}
-        alt={`${Case.displayname} кейс`}
-        className='size-full'
-      />
+      <Img src={`/shop/${Case.name}.png`} alt={`${Case.displayname} кейс`} className='size-full' />
       {children}
     </ImgBox>
   )

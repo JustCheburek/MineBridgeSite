@@ -1,7 +1,7 @@
 import { Url } from '@components/button'
 
 const RegistrationSection = () => (
-  <section className='py-page grid place-items-center text-center appear'>
+  <section className='py-page appear grid place-items-center text-center'>
     <article className='md:px-page md:card hidden_once grid w-[min(910px,90%)] md:pb-[10px] md:pt-[50px]'>
       <div className='grid gap-8'>
         <h2 className='text-unic'>Заходи прямо сейчас</h2>

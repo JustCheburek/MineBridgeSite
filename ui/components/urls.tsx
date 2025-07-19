@@ -5,7 +5,7 @@ export function Urls({ className }: { className?: string }) {
   return (
     <ul
       className={cn(
-        'mx-auto flex w-fit min-w-[180px] items-center justify-between select-none',
+        'mx-auto flex w-fit min-w-[180px] select-none items-center justify-between',
         '*:inline-flex *:aspect-square *:items-center *:justify-center',
         className
       )}

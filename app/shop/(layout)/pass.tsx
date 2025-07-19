@@ -22,10 +22,13 @@ function BuyButton({ author, setModal, setMonths, months }: BuyButtonProps) {
   }
 
   return (
-    <Button className='my-2.5' onClick={() => {
-      setMonths(months)
-      setModal(true)
-    }}>
+    <Button
+      className='my-2.5'
+      onClick={() => {
+        setMonths(months)
+        setModal(true)
+      }}
+    >
       Купить
     </Button>
   )
@@ -42,7 +45,13 @@ export function Pass({ author }: { author: User | null }) {
       <PassSection selected={selected} author={author} setModal={setModal} setMonths={setMonths} />
       <DaySlider months={months} setMonths={setMonths} selected={selected} setModal={setModal} />
       {author && (
-        <BuyModal modal={modal} setModal={setModal} author={author} months={months} faded_rating={selected} />
+        <BuyModal
+          modal={modal}
+          setModal={setModal}
+          author={author}
+          months={months}
+          faded_rating={selected}
+        />
       )}
     </>
   )
@@ -116,7 +125,7 @@ function PassSection({ selected, author, setModal, setMonths }: PassSectionProps
         <Text>
           <h3>1 месяц</h3>
           <Price not={origMonth1}>{month1}</Price>
-          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={1}/>
+          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={1} />
         </Text>
       </Box>
       <Box>
@@ -129,7 +138,7 @@ function PassSection({ selected, author, setModal, setMonths }: PassSectionProps
         <Text>
           <h3>3 месяца</h3>
           <Price not={origMonth3}>{month3}</Price>
-          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={3}/>
+          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={3} />
         </Text>
       </Box>
       <Box span2>
@@ -142,7 +151,7 @@ function PassSection({ selected, author, setModal, setMonths }: PassSectionProps
         <Text>
           <h3>12 месяцев</h3>
           <Price not={origMonth12}>{month12}</Price>
-          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={12}/>
+          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={12} />
         </Text>
       </Box>
     </Section>
@@ -157,7 +166,7 @@ type DaySliderProps = {
 }
 export function DaySlider({ months, setMonths, selected, setModal }: DaySliderProps) {
   const mostiki = GetMostiki(months, selected)
-  
+
   return (
     <div className='borderbox bg-gray/80 mt-8 flex flex-col items-center gap-2 p-4 px-8'>
       <div className='text-center'>

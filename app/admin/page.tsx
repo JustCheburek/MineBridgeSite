@@ -12,7 +12,7 @@ export default async function AdminPanel() {
     <MaxSize className='grid place-items-center text-center'>
       <H1>Админка</H1>
 
-      <GContainer className='grid-cols-autofit-[300px] *:w-[300px] *:h-[60px] gap-4' border>
+      <GContainer className='grid-cols-autofit-[300px] gap-4 *:h-[60px] *:w-[300px]' border>
         <GLink href='/admin/whitelist'>
           <h3>Проходка</h3>
         </GLink>

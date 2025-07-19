@@ -181,6 +181,4 @@ export const PREMBCOST = 100
 //   },
 // ]
 
-export const Paths: PathID[] = [
-  
-]
+export const Paths: PathID[] = []

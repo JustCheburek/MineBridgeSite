@@ -22,7 +22,9 @@ export const RulesBox = ({
       {/* Заголовок */}
       <div className='mb-[1.2rem] grid grid-cols-[auto_1fr]'>
         {/* Цифра */}
-        <LinkNumber href={name} className='mr-3'>{number}</LinkNumber>
+        <LinkNumber href={name} className='mr-3'>
+          {number}
+        </LinkNumber>
 
         {/* Кнопка */}
         <h3>{heading}</h3>

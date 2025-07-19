@@ -55,7 +55,9 @@ export const BuyModal = ({ author, faded_rating, months, modal, setModal }: BuyM
             Тратишь:{' '}
             <span className={cn(faded_rating > author.faded_rating ? 'text-red' : 'text-faded')}>
               {faded_rating}{' '}
-              <StarSvg className={cn(faded_rating > author.faded_rating ? 'text-red' : 'text-faded')} />
+              <StarSvg
+                className={cn(faded_rating > author.faded_rating ? 'text-red' : 'text-faded')}
+              />
             </span>
           </p>
         </div>
@@ -82,7 +84,9 @@ function BuyButton({
   faded_rating: number
 }) {
   if (author.mostiki < mostiki) {
-    return <FormLink href={`/shop/buy?mostiki=${mostiki - author.mostiki}`}>Пополнить баланс</FormLink>
+    return (
+      <FormLink href={`/shop/buy?mostiki=${mostiki - author.mostiki}`}>Пополнить баланс</FormLink>
+    )
   }
 
   if (faded_rating > author.faded_rating) {

@@ -39,7 +39,7 @@ type AdvantageImgBoxProps = {
 const AdvantageImgBox = ({ src, alt }: AdvantageImgBoxProps) => (
   <ImgBox
     className={cn(
-      'border-3 border-light-gray rounded-base w-[min(550px,100%)] max-lg:appear',
+      'border-3 border-light-gray rounded-base max-lg:appear w-[min(550px,100%)]',
       'transition-all duration-1000',
       'hover:border-unic',
       'shadow-light-gray/90 hover:shadow-unic shadow-[0_5px_20px] hover:shadow-[0_5px_35px]',
@@ -53,11 +53,13 @@ const AdvantageImgBox = ({ src, alt }: AdvantageImgBoxProps) => (
 )
 
 const Text = ({ children }: PropsWithChildren) => (
-  <h4 className={cn(
-    'min-w-[60%]',
-    'group-[.left]:lg:appear-right group-[.right]:lg:appear-left',
-    'max-lg:appear'
-  )}>
+  <h4
+    className={cn(
+      'min-w-[60%]',
+      'group-[.left]:lg:appear-right group-[.right]:lg:appear-left',
+      'max-lg:appear'
+    )}
+  >
     {children}
   </h4>
 )
@@ -69,7 +71,8 @@ const Box = ({ children, side }: PropsWithChildren<{ side: 'left' | 'right' }>) 
       'grid min-w-full max-w-[800px] place-items-center gap-16',
       'lg:grid-cols-2',
       'max-lg:text-center',
-      'group', side
+      'group',
+      side
     )}
   >
     {children}

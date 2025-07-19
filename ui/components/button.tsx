@@ -29,7 +29,12 @@ export const MiniLink = ({ children, className = '', href, ...props }: NavLink) 
   )
 }
 
-export const MiniA = ({ children, className = '', href, ...props }: ComponentPropsWithoutRef<'a'>) => {
+export const MiniA = ({
+  children,
+  className = '',
+  href,
+  ...props
+}: ComponentPropsWithoutRef<'a'>) => {
   return (
     <a
       href={href}
@@ -45,11 +50,16 @@ export const MiniA = ({ children, className = '', href, ...props }: ComponentPro
   )
 }
 
-export const BG = ({ className = '', danger = false, disabled = false, ...props }: ComponentPropsWithoutRef<'span'> & DangerProps & { disabled?: boolean }) => {
+export const BG = ({
+  className = '',
+  danger = false,
+  disabled = false,
+  ...props
+}: ComponentPropsWithoutRef<'span'> & DangerProps & { disabled?: boolean }) => {
   return (
     <span
       className={cn(
-        'absolute inset-0 rounded-button -z-10 opacity-75 transition-all duration-600 drop-shadow-[0_0_10px]',
+        'rounded-button duration-600 absolute inset-0 -z-10 opacity-75 drop-shadow-[0_0_10px] transition-all',
         danger ? 'bg-red drop-shadow-red' : 'bg-unic drop-shadow-unic',
         { 'group-hover/button:multi-["scale-115;opacity-100;drop-shadow-[0_0_13px]"]': !disabled },
         'group-active/button:multi-["opacity-50;drop-shadow-[0_0_7px]"]',
@@ -62,7 +72,9 @@ export const BG = ({ className = '', danger = false, disabled = false, ...props 
   )
 }
 
-export type UrlProps = ComponentPropsWithoutRef<'a'> & LinkProps & DangerProps & { bg?: boolean, disabled?: boolean }
+export type UrlProps = ComponentPropsWithoutRef<'a'> &
+  LinkProps &
+  DangerProps & { bg?: boolean; disabled?: boolean }
 export const Url = ({
   href,
   children,
@@ -91,7 +103,7 @@ export const Url = ({
       aria-disabled={disabled}
       {...props}
     >
-      {bg && <BG danger={danger} disabled={disabled}/>}
+      {bg && <BG danger={danger} disabled={disabled} />}
       <h3>{children}</h3>
     </Link>
   )
@@ -99,10 +111,17 @@ export const Url = ({
 
 export type Button = ComponentPropsWithoutRef<'button'> & DangerProps & { bg?: boolean }
 
-export const Button = ({ children, className = '', danger = false, disabled = false, bg=true, ...props }: Button) => {
+export const Button = ({
+  children,
+  className = '',
+  danger = false,
+  disabled = false,
+  bg = true,
+  ...props
+}: Button) => {
   return (
     <button className={cn(buttonBaseStyles.container, className)} disabled={disabled} {...props}>
-      {bg && <BG danger={danger} disabled={disabled}/>}
+      {bg && <BG danger={danger} disabled={disabled} />}
       <h3>{children}</h3>
     </button>
   )

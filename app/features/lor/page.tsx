@@ -281,7 +281,9 @@ export default function Lor() {
                 {process.env.NEXT_PUBLIC_RU_DOMAIN}/video
               </Link>
             </h4>
-            <p className='red-line'>После открытия энда игроки нашли прогнившую маленькую постройку с 4 сезона</p>
+            <p className='red-line'>
+              После открытия энда игроки нашли прогнившую маленькую постройку с 4 сезона
+            </p>
             <p className='red-line'>В ней была книга с доступом к камере учёного</p>
             <h4 className='text-center'>
               <Link href='/scientist' className='text-unic font-medium'>
@@ -377,7 +379,7 @@ export default function Lor() {
             </p>
             <List>
               <li>
-                <span className='font-medium'>Разбив время — увидишь настоящее</span>{" "}
+                <span className='font-medium'>Разбив время — увидишь настоящее</span>{' '}
                 <small>(послание, составленное из заглавных букв)</small>
               </li>
               <li>Белый текст на белом фоне</li>

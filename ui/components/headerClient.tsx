@@ -25,7 +25,7 @@ type Burger = {
 // todo: Анимация появления
 const PCNav = ({ burger, setBurger }: Burger) => (
   <nav
-    className={'grid grid-cols-[3fr_1fr] place-items-center gap-8 xl:gap-14 max-lg:hidden'}
+    className={'grid grid-cols-[3fr_1fr] place-items-center gap-8 max-lg:hidden xl:gap-14'}
     onClick={() => setBurger(false)}
   >
     <ul className='flex items-center justify-between gap-2.5'>
@@ -55,7 +55,7 @@ const MobileNav = ({ burger, setBurger }: Burger) => (
   <nav
     className={cn(
       'lg:hidden',
-      'z-40 backdrop-blur-md fixed inset-0 flex h-dvh flex-col items-center justify-center gap-x-8 gap-y-2 overflow-y-auto pt-header',
+      'pt-header fixed inset-0 z-40 flex h-dvh flex-col items-center justify-center gap-x-8 gap-y-2 overflow-y-auto backdrop-blur-md',
       {
         'max-lg:flex': burger,
         'max-lg:hidden': !burger,
@@ -63,7 +63,7 @@ const MobileNav = ({ burger, setBurger }: Burger) => (
     )}
     onClick={() => setBurger(false)}
   >
-    <ul className='borderbox bg-black/50 backdrop-blur-xl flex items-center justify-between flex-col gap-[clamp(0.1rem,1vh,1.5rem)] p-6'>
+    <ul className='borderbox flex flex-col items-center justify-between gap-[clamp(0.1rem,1vh,1.5rem)] bg-black/50 p-6 backdrop-blur-xl'>
       {/* Основная навигация */}
       <li>
         <h2 className='font-medium'>
@@ -92,7 +92,7 @@ const MobileNav = ({ burger, setBurger }: Burger) => (
       </li>
     </ul>
 
-    <Urls className='borderbox bg-black/50 backdrop-blur-xl flex items-center justify-between gap-2.5 p-6' />
+    <Urls className='borderbox flex items-center justify-between gap-2.5 bg-black/50 p-6 backdrop-blur-xl' />
   </nav>
 )
 
@@ -151,13 +151,10 @@ function User({ user }: { user: User | null }) {
       </div>
 
       <nav
-        className={cn(
-          'borderbox rounded-tr-1 absolute right-0 rounded-tr-md p-[15px]',
-          {
-            block: isMenu,
-            hidden: !isMenu,
-          }
-        )}
+        className={cn('borderbox rounded-tr-1 absolute right-0 rounded-tr-md p-[15px]', {
+          block: isMenu,
+          hidden: !isMenu,
+        })}
       >
         <ul>
           <li>
@@ -194,37 +191,39 @@ export function HeaderClient({ user }: { user: User | null }) {
     }
   }, [burger])
 
-  return (<>
-    <header
-      className={cn(
-        'min-h-header borderbox sticky top-0 z-50 flex items-center justify-center rounded-none border-none backdrop-blur-md'
-      )}
-    >
-      <div className='container mx-auto grid w-full grid-cols-3 place-items-center gap-[35px] font-medium lg:grid-cols-[1fr_5fr_1fr]'>
-        {/* Бургер иконка */}
-        <div className='max-lg:block lg:hidden'>
-          <Burger burger={burger} setBurger={setBurger} />
+  return (
+    <>
+      <header
+        className={cn(
+          'min-h-header borderbox sticky top-0 z-50 flex items-center justify-center rounded-none border-none backdrop-blur-md'
+        )}
+      >
+        <div className='container mx-auto grid w-full grid-cols-3 place-items-center gap-[35px] font-medium lg:grid-cols-[1fr_5fr_1fr]'>
+          {/* Бургер иконка */}
+          <div className='max-lg:block lg:hidden'>
+            <Burger burger={burger} setBurger={setBurger} />
+          </div>
+
+          {/* Лого */}
+          <Link
+            href='/'
+            className='size-[38px]'
+            rel='shortcut icon'
+            aria-label='Переход на главную страницу'
+          >
+            <MinebridgeSvg className='size-full' />
+          </Link>
+
+          {/* Пк навигация */}
+          <PCNav burger={burger} setBurger={setBurger} />
+
+          <Suspense fallback={<Skeleton className='h-[40px] w-[180px]' />}>
+            <User user={user} />
+          </Suspense>
         </div>
-
-        {/* Лого */}
-        <Link
-          href='/'
-          className='size-[38px]'
-          rel='shortcut icon'
-          aria-label='Переход на главную страницу'
-        >
-          <MinebridgeSvg className='size-full' />
-        </Link>
-
-        {/* Пк навигация */}
-        <PCNav burger={burger} setBurger={setBurger} />
-
-        <Suspense fallback={<Skeleton className='h-[40px] w-[180px]' />}>
-          <User user={user} />
-        </Suspense>
-      </div>
-    </header>
-    {/* Мобильная навигация */}
-    <MobileNav burger={burger} setBurger={setBurger} />
-  </>)
+      </header>
+      {/* Мобильная навигация */}
+      <MobileNav burger={burger} setBurger={setBurger} />
+    </>
+  )
 }

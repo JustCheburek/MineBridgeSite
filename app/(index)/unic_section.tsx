@@ -8,7 +8,10 @@ import { cn } from '@/lib/utils'
 type BoxProps = ComponentPropsWithRef<'article'>
 const Box = ({ children, className, ...props }: BoxProps) => {
   return (
-    <article className={cn('mx-auto grid w-fit place-items-center gap-12 appear', className)} {...props}>
+    <article
+      className={cn('appear mx-auto grid w-fit place-items-center gap-12', className)}
+      {...props}
+    >
       {children}
     </article>
   )

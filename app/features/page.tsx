@@ -24,7 +24,7 @@ export default function Features() {
 
       <GContainer border>
         <GLink href='/features/lor'>
-          <GImg imgs="one">
+          <GImg imgs='one'>
             <BatSvg className='size-[100%]' />
           </GImg>
 
@@ -32,10 +32,10 @@ export default function Features() {
         </GLink>
 
         <GLink href='/features/guides'>
-          <GImg imgs="two">
+          <GImg imgs='two'>
             <Img src='/features/guides/thinking.png' alt='Думающий чел' />
           </GImg>
-          <GImg imgs="two">
+          <GImg imgs='two'>
             <Img src='/features/guides/blocks.png' alt='Блоки' />
           </GImg>
 
@@ -43,29 +43,25 @@ export default function Features() {
         </GLink>
 
         <GLink href='/rules/mods'>
-          <GImg imgs="two">
+          <GImg imgs='two'>
             <Img src='/features/mods/replay_mod.png' alt='Реплей мод' />
           </GImg>
-          <GImg imgs="two">
+          <GImg imgs='two'>
             <Img src='/features/mods/voice_chat.png' alt='Войс чат' />
           </GImg>
 
           <GText>Файлы</GText>
         </GLink>
 
-        <GLink
-          href={`https://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`}
-          anotherSite
-          id='map'
-        >
-          <GImg imgs="one">
+        <GLink href={`https://map.${process.env.NEXT_PUBLIC_EN_DOMAIN}`} anotherSite id='map'>
+          <GImg imgs='one'>
             <Img src='/features/map.png' alt='Карта' />
           </GImg>
 
           <GText>Карта</GText>
         </GLink>
 
-        <Suspense fallback={<Skeleton className='h-64 w-80'/>}>
+        <Suspense fallback={<Skeleton className='h-64 w-80' />}>
           <Streamers />
         </Suspense>
 
@@ -87,13 +83,13 @@ export default function Features() {
         </GBox>
 
         <GLink href='/features/stickers'>
-          <GImg imgs="three">
+          <GImg imgs='three'>
             <Img src='/features/stickers/10.png' alt='Стикер' />
           </GImg>
-          <GImg imgs="three">
+          <GImg imgs='three'>
             <Img src='/features/stickers/0.png' alt='Стикер' />
           </GImg>
-          <GImg imgs="three">
+          <GImg imgs='three'>
             <Img src='/features/stickers/8.png' alt='Стикер' />
           </GImg>
 
@@ -101,10 +97,10 @@ export default function Features() {
         </GLink>
 
         <GLink href='/features/design'>
-          <GImg imgs="two">
+          <GImg imgs='two'>
             <Img src='/index/unic/heart.webp' alt='Сердце' pixel />
           </GImg>
-          <GImg imgs="two">
+          <GImg imgs='two'>
             <Img src='/index/unic/calendar.webp' alt='Календарь' pixel />
           </GImg>
 
@@ -112,7 +108,7 @@ export default function Features() {
         </GLink>
 
         <GLink href='/features/analytics'>
-          <GImg imgs="one">
+          <GImg imgs='one'>
             <AnalyticsSvg className='size-[90%]' />
           </GImg>
 

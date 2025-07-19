@@ -9,7 +9,7 @@ export default async function WhitelistPage() {
 
   return (
     <MaxSize className='grid place-items-center'>
-      <H1 
+      <H1
         reload={async () => {
           'use server'
           revalidateTag('all')
@@ -17,7 +17,10 @@ export default async function WhitelistPage() {
         paths={[
           { name: 'admin', displayname: 'Админка' },
           { name: 'whitelist', displayname: 'Проходка' },
-        ]}>Проходка</H1>
+        ]}
+      >
+        Проходка
+      </H1>
       <WhitelistReset users={users} />
       {users.length === 0 && <p className='text-center'>Нет пользователей с проходкой</p>}
       {users.map((user: any) => (

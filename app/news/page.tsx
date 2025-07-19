@@ -35,19 +35,27 @@ export default async function News() {
 
       <PBox>
         <Link href={TG_URL}>
-            <ImgBox type="post">
-              <Img src='/news/tg.jpg' alt='Новости' />
-            </ImgBox>
-          </Link>
+          <ImgBox type='post'>
+            <Img src='/news/tg.jpg' alt='Новости' />
+          </ImgBox>
+        </Link>
         <PTitle>
           <h3>🌶 Новости сервера 🌶</h3>
         </PTitle>
-        <PText className="whitespace-pre-line [&_*]:leading-[1.7em] [&>p]:my-0.5 [&>.blockquote]:my-0.5">
+        <PText className='whitespace-pre-line [&>.blockquote]:my-0.5 [&>p]:my-0.5 [&_*]:leading-[1.7em]'>
           <p>
-            Следить за новостями можно в нашем <Link href={TG_URL} className='text-unic font-bold'>телеграм-канале</Link> 📲
+            Следить за новостями можно в нашем{' '}
+            <Link href={TG_URL} className='text-unic font-bold'>
+              телеграм-канале
+            </Link>{' '}
+            📲
           </p>
           <p>
-            Подписывайся, чтобы не пропустить <Link href={TG_URL} className='text-unic font-bold'>важные новости</Link> 💬
+            Подписывайся, чтобы не пропустить{' '}
+            <Link href={TG_URL} className='text-unic font-bold'>
+              важные новости
+            </Link>{' '}
+            💬
           </p>
         </PText>
       </PBox>

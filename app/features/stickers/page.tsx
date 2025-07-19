@@ -35,7 +35,7 @@ export default function Stickers() {
 
       <Url href='https://t.me/addstickers/MineBridge'>Добавить</Url>
 
-      <GContainer className='grid-cols-autofit-[200px] *:w-[200px] *:h-[200px]'>
+      <GContainer className='grid-cols-autofit-[200px] *:h-[200px] *:w-[200px]'>
         {Array(15)
           .fill(null)
           .map((_, sticker) => {

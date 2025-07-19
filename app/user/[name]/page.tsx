@@ -47,7 +47,7 @@ export default async function ProfilePage({ params }: NameParams) {
   return (
     <div className='grid place-content-center gap-[100px]'>
       {/* Рекомендация привязка аккаунтов */}
-      <div className='w-full grid place-content-center gap-6'>
+      <div className='grid w-full place-content-center gap-6'>
         {isMe && <LinkAccounts user={user} />}
 
         <Profile

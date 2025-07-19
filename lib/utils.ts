@@ -25,10 +25,10 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Красный < 0 < Зелёный
  */
-export function ColorText(number: number, need: number = 0, zero: "white" | "green" = "white") {
+export function ColorText(number: number, need: number = 0, zero: 'white' | 'green' = 'white') {
   if (number > need) return 'text-green'
   if (number < need) return 'text-red'
-  return zero === "white" ? 'text-white' : 'text-green'
+  return zero === 'white' ? 'text-white' : 'text-green'
 }
 
 /**

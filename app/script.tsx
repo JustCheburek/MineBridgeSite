@@ -10,13 +10,13 @@ export function Metrika() {
 
   function metrica() {
     setTimeout(() => {
-      ; (function (m, e, t, r, i, k, a) {
+      ;(function (m, e, t, r, i, k, a) {
         // @ts-ignore
         m[i] =
           m[i] ||
           function () {
             // @ts-ignore
-            ; (m[i].a = m[i].a || []).push(arguments)
+            ;(m[i].a = m[i].a || []).push(arguments)
           }
         // @ts-ignore
         m[i].l = 1 * new Date()
@@ -26,7 +26,7 @@ export function Metrika() {
           }
         }
         // @ts-ignore
-        ; ((k = e.createElement(t)),
+        ;(k = e.createElement(t)),
           // @ts-ignore
           (a = e.getElementsByTagName(t)[0]),
           // @ts-ignore
@@ -34,7 +34,7 @@ export function Metrika() {
           // @ts-ignore
           (k.src = r),
           // @ts-ignore
-          a.parentNode.insertBefore(k, a))
+          a.parentNode.insertBefore(k, a)
       })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
 
       // @ts-ignore

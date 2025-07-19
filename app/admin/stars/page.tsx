@@ -5,16 +5,18 @@ import { StarsReset } from './button'
 export default async function AdminPanel() {
   return (
     <MaxSize className='grid place-items-center text-center'>
-      <H1 paths={[
-        { name: 'admin', displayname: 'Админка' },
-        { name: 'stars', displayname: 'Звёзды' },
-      ]}>Звёзды</H1>
+      <H1
+        paths={[
+          { name: 'admin', displayname: 'Админка' },
+          { name: 'stars', displayname: 'Звёзды' },
+        ]}
+      >
+        Звёзды
+      </H1>
 
-      <p>
-        Сделать из звёзд погасшие
-      </p>
+      <p>Сделать из звёзд погасшие</p>
 
-      <StarsReset/>
+      <StarsReset />
     </MaxSize>
   )
 }

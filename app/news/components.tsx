@@ -13,11 +13,15 @@ import { useMdxCompile } from '@/hooks/useMdxCompile'
 import React from 'react'
 
 function P({ children }: PropsWithChildren) {
-  return <p className="my-0.5">{children}</p>
+  return <p className='my-0.5'>{children}</p>
 }
 
 function Blockquote({ children }: PropsWithChildren) {
-  return <blockquote className="my-0.5 border-l-[3.5px] border-l-unic px-2.5 bg-unic/10 rounded-[5px]">{children}</blockquote>
+  return (
+    <blockquote className='border-l-unic bg-unic/10 my-0.5 rounded-[5px] border-l-[3.5px] px-2.5'>
+      {children}
+    </blockquote>
+  )
 }
 
 function A({ href, children }: PropsWithChildren<{ href: string }>) {
@@ -161,7 +165,7 @@ export function NewsInfiniteList() {
                   <PTitle>
                     <h3>{news.heading || 'Без заголовка'}</h3>
                   </PTitle>
-                  <PText className="whitespace-pre-line [&_*]:leading-[1.7em] [&>p]:my-0.5 [&>.blockquote]:my-0.5">
+                  <PText className='whitespace-pre-line [&>.blockquote]:my-0.5 [&>p]:my-0.5 [&_*]:leading-[1.7em]'>
                     <MDXContent source={news.text} />
 
                     {news.tags && (
@@ -178,7 +182,7 @@ export function NewsInfiniteList() {
         </div>
       ))}
 
-      <div ref={loadMoreRef} className="text-center my-5">
+      <div ref={loadMoreRef} className='my-5 text-center'>
         <small className='text-light-gray'>
           {isFetchingNextPage
             ? 'Загрузка...'

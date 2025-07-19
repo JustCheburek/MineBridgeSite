@@ -43,7 +43,11 @@ export const ImgBox = ({
       {...props}
     >
       {children}
-      {helper && <p className='text-white absolute right-4 top-4 flex justify-center items-center font-medium size-[1.5em] border border-info-border rounded-base bg-info-bg transition-colors duration-300 hover:text-unic'>?</p>}
+      {helper && (
+        <p className='border-info-border rounded-base bg-info-bg hover:text-unic absolute right-4 top-4 flex size-[1.5em] items-center justify-center border font-medium text-white transition-colors duration-300'>
+          ?
+        </p>
+      )}
     </figure>
   )
 }

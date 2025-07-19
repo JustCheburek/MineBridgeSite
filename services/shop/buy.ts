@@ -18,7 +18,7 @@ export async function Buy({ data: { _id } }: StateId, formData: FormData): Promi
       mostiki: -mostiki,
       days: 30 * months,
       faded_rating: -faded_rating,
-    }
+    },
   })
 
   revalidateTag('userLike')

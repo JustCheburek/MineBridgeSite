@@ -68,18 +68,20 @@ export function HeadBreakBox() {
     <>
       {step < 2 ? (
         <>
-          <h3 className="my-6 text-center xs:hidden">
+          <h3 className='xs:hidden my-6 text-center'>
             Зайдите с устройства большего размера для наилучшего экспериенса
           </h3>
 
-          <div className={cn("grid grid-cols-5 mb-4 borderbox overflow-hidden", {
-            "grid-cols-5": step === 0,
-            "grid-cols-10": step === 1,
-          })}>
+          <div
+            className={cn('borderbox mb-4 grid grid-cols-5 overflow-hidden', {
+              'grid-cols-5': step === 0,
+              'grid-cols-10': step === 1,
+            })}
+          >
             {path.map((e, index) => (
               <p
                 key={index}
-                className="flex items-center justify-center borderbox rounded-none w-26 h-20 text-h3"
+                className='borderbox w-26 text-h3 flex h-20 items-center justify-center rounded-none'
               >
                 {e}
               </p>
@@ -87,14 +89,17 @@ export function HeadBreakBox() {
           </div>
 
           {steps[step].buttons.map((path, index) => (
-            <label className={cn("borderbox overflow-hidden grid", {
-              "grid-cols-5": step === 0,
-              "grid-cols-10": step === 1,
-            })} key={index}>
+            <label
+              className={cn('borderbox grid overflow-hidden', {
+                'grid-cols-5': step === 0,
+                'grid-cols-10': step === 1,
+              })}
+              key={index}
+            >
               {path.map((e, index) => (
                 <button
                   key={index}
-                  className="flex items-center justify-center borderbox rounded-none w-26 h-20 text-h3"
+                  className='borderbox w-26 text-h3 flex h-20 items-center justify-center rounded-none'
                   onClick={() => {
                     updatePath(path)
                   }}
