@@ -24,19 +24,20 @@ export default function Stickers() {
       >
         Стикеры
       </H1>
+      <div className='mx-auto w-fit'>
       <p>
-        Рисовка стикера занимает <span className='font-medium'>от 2 до 6 недель</span> в зависимости
-        от сложности, возможны задержки
+        Рисовка стикера занимает <span className='font-medium'>от 1 до 3 недель</span> в зависимости
+        от сложности
       </p>
       <p>
-        Стикеры добавляются в <span className='font-medium'>телеграм</span>, по желанию
-        администрации могут добавиться и на <span className='font-medium'>дискорд сервер</span>
+        Стикеры добавляются в <span className='font-medium'>телеграм</span>,
+        могут добавиться и на <span className='font-medium'>дискорд сервер</span>
       </p>
-
+      </div>
       <Url href='https://t.me/addstickers/MineBridge'>Добавить</Url>
 
-      <GContainer className='grid-cols-autofit-[200px] *:h-[200px] *:w-[200px]'>
-        {Array(15)
+      <GContainer className='grid-cols-autofit-[200px] *:h-[200px] *:w-[200px] mb-4'>
+        {Array(16)
           .fill(null)
           .map((_, sticker) => {
             let path = `/features/stickers/${sticker}.png`

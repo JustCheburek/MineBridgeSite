@@ -2,6 +2,7 @@ import type { ComponentPropsWithoutRef, PropsWithChildren } from 'react'
 import Link from 'next/link'
 import { MostikiSvg } from '@ui/SVGS'
 import { cn } from '@/lib/utils'
+import { CheckLink } from './checkLink'
 
 type Section = ComponentPropsWithoutRef<'div'>
 export const Section = ({ children, ...props }: Section) => {
@@ -25,15 +26,15 @@ export const Heading = ({ children, className, ...props }: Heading) => (
 )
 
 type Author = {
-  description: string
-  href: string
+  description?: string
+  href?: string
 } & ComponentPropsWithoutRef<'div'>
 export const Author = ({ description, href, children, ...props }: Author) => (
   <div className='my-8 grid place-items-center text-center' {...props}>
-    <Link href={href} target='_blank'>
+    <CheckLink href={href}>
       <h3 className='font-mono'>{children}</h3>
-      <small>{description}</small>
-    </Link>
+      {description && <small>{description}</small>}
+    </CheckLink>
   </div>
 )
 

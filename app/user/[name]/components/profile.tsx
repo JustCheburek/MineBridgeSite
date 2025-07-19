@@ -72,34 +72,33 @@ export default function Profile({
         </h2>
 
         {isHelper && <code className='text-light-gray'>{user._id}</code>}
-        {isContentMaker && (
-          <div className='flex flex-wrap gap-x-4 gap-y-0.5 whitespace-nowrap'>
-            {user.urls &&
-              Object.entries(user.urls).map(([url, name]) => {
-                if (!name || url === '_id') return
-                return (
-                  <Link
-                    href={`${URLS_START[url as keyof typeof URLS_START]}${name}`}
-                    target='_blank'
-                    title={url}
-                    key={url}
-                  >
-                    <AutoSvg className='size-[38px]' type={url} />
-                  </Link>
-                )
-              })}
-            {user.discordId && (
-              <Link
-                href={`https://discord.com/users/${user.discordId}`}
-                target='_blank'
-                title='Discord'
-                key='discord'
-              >
-                <DiscordSvg className='size-[38px]' />
-              </Link>
-            )}
-          </div>
-        )}
+        <div className='flex flex-wrap gap-x-4 gap-y-0.5 whitespace-nowrap'>
+          {user.urls &&
+            Object.entries(user.urls).map(([url, name]) => {
+              if (!name || url === '_id') return
+              return (
+                <Link
+                  href={`${URLS_START[url as keyof typeof URLS_START]}${name}`}
+                  target='_blank'
+                  title={url}
+                  key={url}
+                >
+                  <AutoSvg className='size-[38px]' type={url} />
+                </Link>
+              )
+            })}
+          {user.discordId && (
+            <Link
+              href={`https://discord.com/users/${user.discordId}`}
+              target='_blank'
+              title='Discord'
+              key='discord'
+            >
+              <DiscordSvg className='size-[38px]' />
+            </Link>
+          )}
+        </div>
+
         <div className='flex flex-wrap gap-x-4 gap-y-0.5 whitespace-nowrap'>
           {roles.map(role => {
             const color = `#${role.color.toString(16)}`

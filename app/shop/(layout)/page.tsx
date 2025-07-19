@@ -110,6 +110,44 @@ export default async function Shop() {
           </Suspense>
         </Section>
 
+        <Heading id='3d'>
+          <h2 className='text-center'>3D модели</h2>
+          <p>
+            <TextUrl href='https://discord.gg/7zx8u4rY'>#покупка</TextUrl>{' '}
+            <TextUrl href='https://t.me/Dezelink'>Dezelink</TextUrl>
+          </p>
+        </Heading>
+
+        <Author description='3D модельер с опытом' href='https://t.me/coolpilot2O1O'>
+          Dezelink
+        </Author>
+
+        <Section>
+          <Box preview>
+            <ImgBox hover>
+              <Img src='/shop/3d/dezi.jpg' alt='Стикер' width={225} />
+            </ImgBox>
+          </Box>
+
+          <Box>
+            <Text>
+              <h3>3D chill</h3>
+              <small>Обычная 3D модель</small>
+              <Price>500</Price>
+              <MostikiButton mostiki={500} />
+            </Text>
+          </Box>
+
+          <Box>
+            <Text>
+              <h3>3D GO!</h3>
+              <small>Вне очереди</small>
+              <Price>1000</Price>
+              <MostikiButton mostiki={1000} />
+            </Text>
+          </Box>
+        </Section>
+
         <Heading id='stickers'>
           <h2 className='text-center'>
             <Link href='/features/stickers'>Стикеры</Link>
@@ -117,13 +155,45 @@ export default async function Shop() {
           <p>
             Показывайте свой скин, пожелания и идеи,
             <br />
-            чтобы телеграм стикер ещё уникальнее
+            чтобы телеграм стикер стал ещё уникальнее
             <br />
             <TextUrl href='https://discord.gg/7zx8u4rY'>#покупка</TextUrl>{' '}
             <TextUrl href='https://t.me/JustCheburek'>JustCheburek</TextUrl>{' '}
             <TextUrl href='https://t.me/Dezelink'>Dezelink</TextUrl>
           </p>
         </Heading>
+
+        <Author description='Не заменяйте художников...'>
+          Нейронка?
+        </Author>
+
+        <Section>
+          <Box preview>
+            <Link href='/features/stickers'>
+              <ImgBox hover helper>
+                <Img src='/features/stickers/15.png' alt='Стикер' width={225} />
+              </ImgBox>
+            </Link>
+          </Box>
+
+          <Box>
+            <Text>
+              <h3>1 класс</h3>
+              <small>С первого промта</small>
+              <Price>100</Price>
+              <MostikiButton mostiki={100} />
+            </Text>
+          </Box>
+
+          <Box>
+            <Text>
+              <h3>ИИдеал</h3>
+              <small>Шлифуется до идеала</small>
+              <Price>200</Price>
+              <MostikiButton mostiki={200} />
+            </Text>
+          </Box>
+        </Section>
 
         <Author description='Художник-приколист' href='https://t.me/coolpilot2O1O'>
           @coolpilot2O1O
@@ -133,7 +203,7 @@ export default async function Shop() {
           <Box preview>
             <Link href='/features/stickers'>
               <ImgBox hover helper>
-                <Img src='/features/stickers/4.png' alt='Стикер' width={225} />
+                <Img src='/features/stickers/0.png' alt='Стикер' width={225} />
               </ImgBox>
             </Link>
           </Box>
@@ -142,8 +212,8 @@ export default async function Shop() {
             <Text>
               <h3>Стандарт</h3>
               <small>Обычный стикер</small>
-              <Price>200</Price>
-              <MostikiButton mostiki={200} />
+              <Price>450</Price>
+              <MostikiButton mostiki={450} />
             </Text>
           </Box>
 
@@ -151,40 +221,8 @@ export default async function Shop() {
             <Text>
               <h3>Экспресс</h3>
               <small>Невероятно быстро</small>
-              <Price>300</Price>
-              <MostikiButton mostiki={300} />
-            </Text>
-          </Box>
-        </Section>
-
-        <Author description='Абстрактный художник' href='https://t.me/Dezelink'>
-          @Dezelink
-        </Author>
-
-        <Section>
-          <Box preview>
-            <Link href='/features/stickers'>
-              <ImgBox hover helper>
-                <Img src='/features/stickers/14.png' alt='Стикер' width={225} />
-              </ImgBox>
-            </Link>
-          </Box>
-
-          <Box>
-            <Text>
-              <h3>Необычные</h3>
-              <small>Абстрактные стикеры</small>
-              <Price>400</Price>
-              <MostikiButton mostiki={400} />
-            </Text>
-          </Box>
-
-          <Box>
-            <Text>
-              <h3>Speed UP</h3>
-              <small>А где очередь?</small>
-              <Price>500</Price>
-              <MostikiButton mostiki={500} />
+              <Price>600</Price>
+              <MostikiButton mostiki={600} />
             </Text>
           </Box>
         </Section>
@@ -207,6 +245,7 @@ export default async function Shop() {
         <OnThisPageLink href='#preseason'>Межсезонье</OnThisPageLink>
         <OnThisPageLink href='#pass'>Проходки</OnThisPageLink>
         <OnThisPageLink href='#cases'>Кейсы</OnThisPageLink>
+        <OnThisPageLink href='#3d'>3D модели</OnThisPageLink>
         <OnThisPageLink href='#stickers'>Стикеры</OnThisPageLink>
         {/*<OnThisPageLink href="#kits">
                 Киты

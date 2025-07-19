@@ -171,7 +171,7 @@ export function DaySlider({ months, setMonths, selected, setModal }: DaySliderPr
     <div className='borderbox bg-gray/80 mt-8 flex flex-col items-center gap-2 p-4 px-8'>
       <div className='text-center'>
         <h3>Количество месяцев</h3>
-        <p>Можно поставить своё количество месяцев проходки</p>
+        <p>Чем дольше проходка, тем выгодней</p>
       </div>
 
       <Form className='my-0 flex w-full flex-wrap items-center justify-center *:flex-1'>
