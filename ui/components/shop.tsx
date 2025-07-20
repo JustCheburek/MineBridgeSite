@@ -53,7 +53,7 @@ export const Box = ({
 }: Box) => (
   <div
     className={cn(
-      'grid items-center justify-center gap-8',
+      'grid items-center justify-center gap-8 relative',
       {
         'sm:max-xl:col-span-2 sm:max-xl:mx-auto': span2 || preview || casebox,
         'xl:col-start-2 xl:row-start-1': preview,

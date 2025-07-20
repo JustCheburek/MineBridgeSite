@@ -379,6 +379,15 @@ export const HorizontalLoadingSvg = ({ className = '', ...props }: Svg) => (
   </svg>
 )
 
+export const ArrowsMoveSvg = ({ className = '', ...props }: Svg) => (
+  <svg viewBox='0 0 24 24' className={cn(`size-[1em]`, className)} {...props}>
+    <path
+      fill='currentColor'
+      d='M13 11h5l-1.5-1.5l1.42-1.42L21.84 12l-3.92 3.92l-1.42-1.42L18 13h-5v5l1.5-1.5l1.42 1.42L12 21.84l-3.92-3.92L9.5 16.5L11 18v-5H6l1.5 1.5l-1.42 1.42L2.16 12l3.92-3.92L7.5 9.5L6 11h5V6L9.5 7.5L8.08 6.08L12 2.16l3.92 3.92L14.5 7.5L13 6z'
+    />
+  </svg>
+)
+
 export const UpSvg = ({ className = '', ...props }: Svg) => (
   <svg fill='currentColor' viewBox='0 0 16 16' className={cn(`size-[1em]`, className)} {...props}>
     <path d='M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5' />
