@@ -14,9 +14,13 @@ import { revalidateTag } from 'next/cache'
 import { LASTSHOPUPDATE } from '@/const'
 import { LastUpdate } from '@components/lastUpdate'
 import { TextUrl } from '@components/textUrl'
-import { PreSeason } from './preseason'
 import { validate } from '@/services/user/validate'
-import { Pass } from './pass'
+import dynamic from 'next/dynamic'
+
+const Model3D = dynamic(() => import('@components/3d'))
+const Pass = dynamic(() => import('./pass'))
+const PreSeason = dynamic(() => import('./preseason'))
+
 
 export const metadata: Metadata = {
   title: 'Магазин',
@@ -73,7 +77,9 @@ export default async function Shop() {
           <p>Проходки на межсезонье</p>
         </Heading>
 
-        <PreSeason author={author} />
+        <Suspense fallback={<Skeleton className='h-[440px] w-[100%]' />}>
+          <PreSeason author={author} />
+        </Suspense>
 
         <Heading id='pass'>
           <h2 className='text-center'>Проходки</h2>
@@ -82,7 +88,9 @@ export default async function Shop() {
           </p>
         </Heading>
 
-        <Pass author={author} />
+        <Suspense fallback={<Skeleton className='h-[480px] w-[100%]' />}>
+          <Pass author={author} />
+        </Suspense>
 
         <Heading id='cases'>
           <h2 className='text-center'>
@@ -118,15 +126,13 @@ export default async function Shop() {
           </p>
         </Heading>
 
-        <Author description='3D модельер с опытом' href='https://t.me/coolpilot2O1O'>
+        <Author description='3D модельер с опытом' href='https://t.me/Dezelink'>
           Dezelink
         </Author>
 
         <Section>
           <Box preview>
-            <ImgBox hover>
-              <Img src='/shop/3d/dezi.jpg' alt='Стикер' width={225} />
-            </ImgBox>
+            <Model3D />
           </Box>
 
           <Box>

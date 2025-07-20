@@ -34,7 +34,7 @@ function BuyButton({ author, setModal, setMonths, months }: BuyButtonProps) {
   )
 }
 
-export function Pass({ author }: { author: User | null }) {
+export default function Pass({ author }: { author: User | null }) {
   const [months, setMonths] = useState(1.5)
   const [selected, setSelected] = useState(0)
   const [modal, setModal] = useState(false)
@@ -114,47 +114,47 @@ function PassSection({ selected, author, setModal, setMonths }: PassSectionProps
   const origMonth12 = GetOriginalMostiki(12)
 
   return (
-    <Section>
-      <Box>
-        {/* <ImgBox hover>
+      <Section>
+        <Box>
+          {/* <ImgBox hover>
               <Img
                   src={`/shop/month.png`} alt={`Месяц`}
                   width={185}
               />
           </ImgBox> */}
-        <Text>
-          <h3>1 месяц</h3>
-          <Price not={origMonth1}>{month1}</Price>
-          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={1} />
-        </Text>
-      </Box>
-      <Box>
-        {/* <ImgBox hover>
+          <Text>
+            <h3>1 месяц</h3>
+            <Price not={origMonth1}>{month1}</Price>
+            <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={1} />
+          </Text>
+        </Box>
+        <Box>
+          {/* <ImgBox hover>
               <Img
                   src={`/shop/3months.png`} alt={`3 месяца`}
                   width={185}
               />
           </ImgBox> */}
-        <Text>
-          <h3>3 месяца</h3>
-          <Price not={origMonth3}>{month3}</Price>
-          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={3} />
-        </Text>
-      </Box>
-      <Box span2>
-        {/* <ImgBox hover>
+          <Text>
+            <h3>3 месяца</h3>
+            <Price not={origMonth3}>{month3}</Price>
+            <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={3} />
+          </Text>
+        </Box>
+        <Box span2>
+          {/* <ImgBox hover>
               <Img
                   src={`/shop/legendary.png`} alt={`Год`}
                   width={185}
               />
           </ImgBox> */}
-        <Text>
-          <h3>12 месяцев</h3>
-          <Price not={origMonth12}>{month12}</Price>
-          <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={12} />
-        </Text>
-      </Box>
-    </Section>
+          <Text>
+            <h3>12 месяцев</h3>
+            <Price not={origMonth12}>{month12}</Price>
+            <BuyButton author={author} setModal={setModal} setMonths={setMonths} months={12} />
+          </Text>
+        </Box>
+      </Section>
   )
 }
 

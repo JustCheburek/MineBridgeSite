@@ -6,7 +6,7 @@ import { Box } from '@components/shop'
 import { Text } from '@components/shop'
 import { Price } from '@components/shop'
 
-export function PreSeason({ author }: { author: User | null }) {
+export default function PreSeason({ author }: { author: User | null }) {
   return (
     <ImgBox type='post' className='rounded-base'>
       <Img

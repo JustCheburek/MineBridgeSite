@@ -17,6 +17,8 @@
     "@next/third-parties": "^15.4.1",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
+    "@react-three/drei": "^10.5.1",
+    "@react-three/fiber": "^9.2.0",
     "@scondic/easydonate-sdk": "^0.1.0",
     "@tailwindcss/postcss": "^4.1.11",
     "@tanstack/react-query": "^5.83.0",
@@ -45,7 +47,8 @@
     "resend": "^4.6.0",
     "state-in-url": "^4.3.3",
     "tailwind-merge": "^3.3.1",
-    "tailwindcss-multi": "^0.4.6"
+    "tailwindcss-multi": "^0.4.6",
+    "three": "^0.178.0"
   },
   "devDependencies": {
     "@0x0c/rcon": "^1.0.0",
@@ -55,6 +58,7 @@
     "@types/node": "^22.16.4",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@types/three": "^0.178.1",
     "arctic": "^3.7.0",
     "autoprefixer": "^10.4.21",
     "esbuild": "^0.25.6",
