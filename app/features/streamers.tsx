@@ -1,4 +1,4 @@
-import { getAllContentMakers } from '@/services/user'
+import { getAllContentMakers } from '@services/user'
 import Avatar from '@components/avatar'
 import { GImg, GText, GLink } from '@components/grid'
 

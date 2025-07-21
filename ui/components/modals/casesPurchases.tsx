@@ -3,7 +3,7 @@
 import { type ChangeEvent, useEffect, useState } from 'react'
 import { Case, Drop, Item, RarityNames, rarityNames } from '@/types/case'
 import { CaseData } from '@/types/purchase'
-import { AddCasePurchase } from '@services/user/casePurchase'
+import { AddCasePurchase } from '@services/user/payments/case/add'
 
 // Компоненты
 import { Modal, type ModalAction } from '@components/modal'

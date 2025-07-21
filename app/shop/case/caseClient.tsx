@@ -1,19 +1,14 @@
 'use client'
 
-// Next и сервер
 import type { MouseEventHandler, PropsWithChildren } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { Case, CaseType, Chance, Drop, DropType, Info, RarityNames } from '@/types/case'
 import type { User } from 'lucia'
 import Link from 'next/link'
-
-// Компоненты
-import { MaxSize } from '@components/maxSize'
-import { ColorText, Random, SumChances, cn } from '@/lib/utils'
+import { ColorText, GetDropCost, Random, SumChances, cn } from '@/lib/utils'
 import { Img, ImgBox } from '@components/img'
 import { MostikiSvg } from '@ui/SVGS'
 import { Button, Url } from '@components/button'
-import { List } from '@components/rules'
 
 declare module 'csstype' {
   interface Properties {
@@ -182,12 +177,10 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
   }, [price])
 
   return (
-    <MaxSize className={cn('items-center] flex flex-col justify-center')}>
-      {children}
-
+    <>
       <div className='max-w-[1385px]:my-[70px] grid gap-2 xl:grid-cols-[1fr_700px_1fr]'>
         <div className='max-w-[1385px]:flex-col-reverse grid h-full grid-rows-[auto_auto] gap-2 text-center'>
-          <SelectedItem items={items} selectedItem={selectedItem} />
+          <SelectedItem info={items[selectedItem]} />
 
           <div className='card flex min-h-[150px] flex-col justify-center gap-2'>
             <Account user={user} price={price} />
@@ -226,6 +219,9 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
                 onMouseEnter={() => selectedItem !== 48 && setSelectedItem(index)}
                 hover
               >
+                <p className='absolute bottom-4 right-8 opacity-40 z-10'>
+                  {GetDropCost(info?.DropItem!, info?.rarity!)} <MostikiSvg />
+                </p>
                 {info.img ? (
                   <Img
                     src={info.img}
@@ -303,33 +299,12 @@ export function CaseClient({ Cases, Drops, user, Add, children }: CaseClient) {
         Roll={Roll}
         Win={Win}
       />
-
-      <div className='mx-auto grid max-w-sm items-center justify-center'>
-        <p className='red-line'>
-          Косметика автоматически выдаётся и записывается в{' '}
-          <Link
-            href={user ? `/user/${user?.name}/history` : '/auth'}
-            className='text-unic font-medium'
-          >
-            вашу историю
-          </Link>
-        </p>
-        <div className='ml-6'>
-          <p>Для использования косметики:</p>
-          <List>
-            <li>Зайдите на сервер</li>
-            <li>
-              Введите <code>/uc menu</code>
-            </li>
-          </List>
-        </div>
-      </div>
-    </MaxSize>
+    </>
   )
 }
 
-function SelectedItem({ items, selectedItem }: { items: Info[]; selectedItem: number }) {
-  if (!items[selectedItem]?.Item) {
+function SelectedItem({ info }: { info: Info }) {
+  if (!info?.Item) {
     return (
       <div className='card flex flex-col justify-center'>
         <p className='animate-change py-[5px]'>
@@ -340,17 +315,15 @@ function SelectedItem({ items, selectedItem }: { items: Info[]; selectedItem: nu
   }
 
   return (
-    <div className='card flex flex-col justify-between' key={items[selectedItem]?.Item?.name}>
-      <h3 className='animate-change text-unic min-h-16'>
-        {items[selectedItem]?.Item?.displayname}
-      </h3>
+    <div className='card flex flex-col justify-between' key={info?.Item?.name}>
+      <h3 className='animate-change text-unic min-h-16'>{info?.Item?.displayname}</h3>
 
-      <p className={cn('animate-change text min-h-16', items[selectedItem]?.rarity)}>
-        {items[selectedItem]?.DropItem?.description}
+      <p className={cn('animate-change text min-h-16', info?.rarity)}>
+        {info?.DropItem?.description}
       </p>
 
-      <p className={cn('animate-change text', items[selectedItem]?.rarity)}>
-        {RarityNames[items[selectedItem]?.rarity || 'common']}
+      <p className={cn('animate-change text', info?.rarity)}>
+        {RarityNames[info?.rarity || 'common']}
       </p>
     </div>
   )
@@ -367,11 +340,12 @@ function Account({ user, price }: { user: User | null; price: number }) {
 
   return (
     <>
-      <h3>
-        <Link href={`/user/${user.name}/history`} className='text-unic'>
-          {user.name}
-        </Link>
-      </h3>
+      <Link href={`/user/${user.name}/history`}>
+        <h3 className='text-unic leading-4'>
+            {user.name}
+        </h3>
+        <small className='text-light-gray text-xs'>история кейсов</small>
+      </Link>
       <p>
         Баланс:{' '}
         <span

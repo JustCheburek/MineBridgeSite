@@ -10,22 +10,23 @@ import { cn } from '@/lib/utils'
 import { Skeleton } from '@components/skeleton'
 const Avatar = dynamic(() => import('@components/avatar'))
 
-type UserBox = PropsWithChildren<idOrNameUser & { className?: string }>
-export async function UserBox({ _id, name, className, children }: UserBox) {
-  const info = await getUser({ _id, name, throwNotFound: false }).catch(console.error)
-
-  if (!info) return
-
-  const { user } = info
+type UserBox = PropsWithChildren<idOrNameUser & { className?: string, photo?: string }>
+export async function UserBox({ _id, name, photo, className, children }: UserBox) {
+  if (!name && !photo) {
+    const info = await getUser({ _id, name, throwNotFound: false }).catch(console.error)
+    if (!info) return
+    name = info.user.name
+    photo = info.user.photo
+  }
 
   return (
     <Suspense fallback={<Skeleton className='h-[50px] w-[150px]' />}>
       <Link
-        href={`/user/${user.name}`}
+        href={`/user/${name}`}
         className={cn('my-[0.6rem] flex items-center gap-4', className)}
       >
-        <Avatar src={user.photo} className='size-[50px]' />
-        <p>{user.name}</p>
+        <Avatar src={photo || ''} className='size-[50px]' />
+        <p>{name}</p>
         {children}
       </Link>
     </Suspense>

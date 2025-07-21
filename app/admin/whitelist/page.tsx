@@ -1,6 +1,6 @@
 import { MaxSize } from '@components/maxSize'
 import { H1 } from '@components/h1'
-import { getUsersWhitelist } from '@services/user'
+import { getUsersWhitelist } from '@services/user/whitelist'
 import { WhitelistReset } from './button'
 import { revalidateTag } from 'next/cache'
 

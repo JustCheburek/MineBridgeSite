@@ -57,6 +57,7 @@ export const DBS = {
 }
 
 export const PREMBCOST = 100
+export const MINCOST = 700
 
 // MB 7 сезон
 // export const Paths: PathID[] = [

@@ -1,7 +1,7 @@
 'use server'
 import type { User } from 'lucia'
 import { Url } from '@components/button'
-import { GetStarsForm } from '@app/user/[name]/components/getStars'
+import { GetStarsForm } from './getStars'
 
 export default async function HourStarSection({
   user,

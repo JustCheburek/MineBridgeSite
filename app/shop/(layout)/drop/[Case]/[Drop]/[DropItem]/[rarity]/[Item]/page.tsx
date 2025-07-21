@@ -1,6 +1,6 @@
 import { getCase, getDrop, getItem, getItems } from '@services/shop'
 import { Img, ImgBox } from '@components/img'
-import { Case, Drop, Item, RarityCost, RarityNames, type RarityType } from '@/types/case'
+import { Case, Drop, Item, RarityNames, type RarityType } from '@/types/case'
 import { validate } from '@services/user/validate'
 import { MostikiSvg } from '@ui/SVGS'
 import type { Metadata } from 'next'
@@ -8,9 +8,10 @@ import { redirect } from 'next/navigation'
 import { H1 } from '@components/h1'
 import { Button, Url } from '@components/button'
 import { User } from 'lucia'
-import { AddCasePurchase, GetCosmetic } from '@services/user/casePurchase'
+import { GetCosmetic } from '@services/user/cosmetics/get'
+import { AddCasePurchase } from '@services/user/payments/case/add'
 import { CaseData } from '@/types/purchase'
-import { cn } from '@/lib/utils'
+import { cn, GetDropCost } from '@/lib/utils'
 
 type ParamsProp = {
   params: Promise<{
@@ -123,7 +124,7 @@ export default async function ShowCase({ params }: ParamsProp) {
     redirect(`/shop/drop/${CaseName}/${DropName}/${DropItemName}/${rarity}`)
   }
 
-  const fullPrice = DropItem?.price * 2 + RarityCost[rarity]
+  const fullPrice = GetDropCost(DropItem, rarity)
 
   let userHave = 0
   if (user) {

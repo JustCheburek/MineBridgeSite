@@ -2,7 +2,7 @@
 
 import { Button } from '@components/button'
 import { Form } from '@components/form'
-import { GetStars } from '@services/user/get'
+import { GetStars } from '@services/user/stars/get'
 
 export function GetStarsForm({ _id }: { _id: string }) {
   return (

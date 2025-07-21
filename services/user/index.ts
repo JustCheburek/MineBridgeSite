@@ -105,30 +105,6 @@ export const getAllContentMakers = cache(
   { revalidate: 600, tags: ['contentMakers', 'userLike', 'all'] }
 )
 
-export const getUsersWhitelist = cache(
-  async () => {
-    const users: User[] = JSON.parse(
-      JSON.stringify(
-        await userModel.find(
-          { whitelist: true },
-          {
-            name: 1,
-            photo: 1,
-            mostiki: 1,
-            rating: 1,
-            createdAt: 1,
-            days: 1,
-          },
-          { lean: true }
-        )
-      )
-    )
-    return users
-  },
-  ['usersWhitelist', 'userLike', 'all'],
-  { revalidate: 300, tags: ['usersWhitelist', 'userLike', 'all'] }
-)
-
 type GetUser = {
   throwNotFound?: boolean
   roles?: boolean

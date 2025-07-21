@@ -3,12 +3,11 @@
 import { unstable_cache as cache } from 'next/cache'
 import { caseModel, dropModel, userModel } from '@db/models'
 import { Case, Drop, Item, RarityType } from '@/types/case'
+import { CasePurchase, CaseData } from '@/types/purchase'
 import { idOrName } from '@/types/idOrName'
-import { Payment, PaymentWithUser } from '@/types/payment'
-import { EasyDonateApiClient } from '@scondic/easydonate-sdk'
 import { User } from 'lucia'
-
-const easydonate = new EasyDonateApiClient(process.env.EASYDONATE_SECRET!)
+import { GetDropCost } from '@/lib/utils'
+import { MINCOST } from '@/const'
 
 export const getCaseLocal = cache(
   async (param: idOrName, Cases: Case[]) => {
@@ -166,41 +165,84 @@ export const getItem = cache(
   { revalidate: 3600, tags: ['item', 'shop', 'all'] }
 )
 
-export const getAllPayments = cache(
-  async (): Promise<PaymentWithUser[]> => {
-    const data = await easydonate.getAllPaymentById(Number(process.env.EASYDONATE_MOSTIKIID!))
-    const payments = data?.response as unknown as Payment[]
+interface DataWithCost extends CaseData {
+  cost: number
+  user: User
+  img?: string
+}
 
-    const paymentsByNick: Payment[] = []
+export const getAllCasesPurchases = cache(
+  async (): Promise<DataWithCost[]> => {
+    // 1. Получаем пользователей с непустым массивом casesPurchases
+    const users = await userModel.find(
+      { casesPurchases: { $ne: [] } }, 
+      { casesPurchases: 1, name: 1, photo: 1 }
+    ) as User[]
+    
+    // 2. Получаем все Drops и Cases
+    const Drops = await getDrops()
+    const Cases = await getCases()
+    
+    // 3. Обрабатываем каждого пользователя и создаем массив DataWithCost
+    const allPurchasesWithCost: DataWithCost[] = []
+    
+    await Promise.all(
+      users.map(async (user) => {
+        // Создаем копию пользователя для модификации
+        const userCopy: User = JSON.parse(JSON.stringify(user))
+        
+        // Обрабатываем каждую покупку, заменяя ID на объекты
+        const processedPurchases = await Promise.all(
+          userCopy.casesPurchases.map(async (purchase: CasePurchase): Promise<DataWithCost | null> => {
+            const Drop = await getDropLocal({ _id: purchase.Drop }, Drops)
+            const DropItem = await getDropLocal({ _id: purchase.DropItem }, Drops)
+            const Case = await getCaseLocal({ _id: purchase.Case }, Cases)
+            
+            const Items = await getItems(purchase.rarity, DropItem)
+            const Item = await getItem({ _id: purchase.Item }, Items)
 
-    payments
-      .filter(payment => payment.payment_type !== 'test')
-      .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-      .forEach(payment => {
-        const index = paymentsByNick.findIndex(p => p.customer === payment.customer)
-        if (index === -1) {
-          paymentsByNick.push(payment)
-        } else {
-          paymentsByNick[index].cost += payment.cost
-          paymentsByNick[index].enrolled += payment.enrolled
-          paymentsByNick[index].products.push(...payment.products)
-        }
+            if (!Drop || !Case || !DropItem || !Item) {
+              return null
+            }
+
+            // Создаем объект DataWithCost с полем user
+            return {
+              ...purchase,
+              Case,
+              Drop,
+              DropItem,
+              Item,
+              cost: GetDropCost(Drop, purchase.rarity),
+              user: userCopy,
+              img: Item.img ? `/shop/${Drop.name}/${Item.name}.webp` : undefined
+            }
+          })
+        )
+        
+        // Фильтруем null значения и добавляем в общий массив
+        const validPurchases = processedPurchases.filter((purchase): purchase is DataWithCost => 
+          purchase !== null && purchase.cost >= MINCOST
+        )
+        
+        // Если есть покупки, добавляем самую дорогую в результат
+        if (validPurchases.length <= 0) return null
+
+        // Сортируем покупки по стоимости (дорогие в начале)
+        validPurchases.sort((a, b) => b.cost - a.cost)
+        // Добавляем только самую дорогую покупку
+        allPurchasesWithCost.push(validPurchases[0])
       })
-
-    // Проверка существования пользователей
-    const users = (await userModel.find({
-      name: { $in: paymentsByNick.map(p => p.customer) },
-    })) as User[]
-
-    const paymentsByNickWithUser = paymentsByNick.map(p => {
-      const user = users.find(u => u.name === p.customer)
-      if (user) {
-        return { ...p, user }
-      }
-    }).filter(Boolean) as PaymentWithUser[]
-
-    return paymentsByNickWithUser
+    )
+    
+    // 4. Сортируем по дате последней покупки
+    allPurchasesWithCost.sort((a, b) => {
+      const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0
+      const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0
+      return dateB - dateA
+    })
+    
+    return allPurchasesWithCost
   },
-  ['payments', 'shop', 'all'],
-  { revalidate: 3600, tags: ['payments', 'shop', 'all'] }
+  ['casesPurchases', 'shop', 'all'],
+  { revalidate: 3600, tags: ['casesPurchases', 'shop', 'all'] }
 )

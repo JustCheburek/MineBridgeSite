@@ -2,7 +2,7 @@
 
 import { z } from 'zod/v4'
 import { EasyDonateApiClient } from '@scondic/easydonate-sdk'
-import { userModel } from '@db/models'
+import { getUser } from '@services/user'
 import type { ExtraStateId } from '@/types/state'
 
 export type Url = { url?: string }
@@ -31,10 +31,12 @@ export async function CreatePaymentLink(
 
   const { mostiki, code } = result.data
 
-  try {
-    const user = await userModel.findById(_id)
-    if (!user) return { success: false, error: 'Пользователь не найден', data: { _id } }
+  const { user } = await getUser({ _id, throwNotFound: false }).catch(() => ({ user: null }))
+  if (!user) {
+    return { success: false, error: 'Пользователь не найден', data: { _id } }
+  }
 
+  try {
     const payment = await easydonate.getPaymentLink(
       user.name,
       Number(process.env.EASYDONATE_SERVERID!),

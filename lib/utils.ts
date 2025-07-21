@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { Chance } from '@/types/case'
+import { Chance, Drop, RarityCost, RarityType } from '@/types/case'
 
 /**
  * Объединяет классы с поддержкой групп вариантов
@@ -80,4 +80,11 @@ export function GetMostiki(months: number, selected: number) {
  */
 export function GetOriginalMostiki(months: number) {
   return months * 100
+}
+
+/**
+ * Получить стоимость дропа
+ */
+export function GetDropCost(DropItem: Drop, rarity: RarityType) {
+  return DropItem.price * 2 + RarityCost[rarity]
 }

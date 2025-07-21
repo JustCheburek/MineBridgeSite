@@ -5,7 +5,7 @@ import { MostikiSvg } from '@ui/SVGS'
 import { H1 } from '@components/h1'
 import { TextUrl } from '@components/textUrl'
 import { PaymentForm } from './components'
-import { getAllPayments } from '@/services/shop'
+import { getAllPayments } from '@services/user/payments'
 import { GBox, GContainer } from '@components/grid'
 import TimeAgo from 'javascript-time-ago'
 import ru from 'javascript-time-ago/locale/ru'
@@ -55,7 +55,7 @@ export default async function Component() {
         {payments.map(payment => (
           <GBox key={payment.id}>
             <div className='text-center'>
-              <UserBox _id={payment.user._id} />
+              <UserBox name={payment.user.name} photo={payment.user.photo} />
               <h3>
                 {payment.cost} <MostikiSvg />
               </h3>

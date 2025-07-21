@@ -5,7 +5,7 @@ import { SubsectionItem, Subsections } from '@components/sideNav'
 import { MaxSize } from '@components/maxSize'
 import type { Metadata } from 'next'
 import { NameParams } from '@/types/params'
-import { validate } from '@/services/user/validate'
+import { validate } from '@services/user/validate'
 
 export const generateMetadata = async ({ params }: NameParams): Promise<Metadata> => {
   const { name } = await params

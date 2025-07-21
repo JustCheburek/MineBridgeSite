@@ -8,7 +8,7 @@ import type { StateId } from '@/types/state'
 import { GetMostiki } from '@/lib/utils'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function Buy({ data: { _id } }: StateId, formData: FormData): Promise<StateId> {
+export async function BuyPass({ data: { _id } }: StateId, formData: FormData): Promise<StateId> {
   const months = Number(formData.get('months'))
   const faded_rating = Number(formData.get('faded_rating'))
   const mostiki = GetMostiki(months, faded_rating)

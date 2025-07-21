@@ -14,7 +14,7 @@ import { revalidateTag } from 'next/cache'
 import { LASTSHOPUPDATE } from '@/const'
 import { LastUpdate } from '@components/lastUpdate'
 import { TextUrl } from '@components/textUrl'
-import { validate } from '@/services/user/validate'
+import { validate } from '@services/user/validate'
 import dynamic from 'next/dynamic'
 
 const Model3D = dynamic(() => import('@components/3d'))

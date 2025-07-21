@@ -1,7 +1,8 @@
 'use client'
 
 import { AddSuffix, DropSuffix, SelectSuffix } from '@services/user/suffix'
-import { DeleteCasePurchase, GetCosmetics } from '@services/user/casePurchase'
+import { DeleteCasePurchase } from '@services/user/payments/case/delete'
+import { GetCosmetics } from '@services/user/cosmetics/get'
 import { useState } from 'react'
 import type { User } from 'lucia'
 import { Case, Drop } from '@/types/case'

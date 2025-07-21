@@ -6,7 +6,7 @@ import { useUrlState } from 'state-in-url'
 import { HookButton } from '@components/hookbutton'
 import { ErrorMessage } from '@components/error'
 import { useActionStateId } from '@/hooks/useActionStateId'
-import { CreatePaymentLink, Url } from '@services/user/payment'
+import { CreatePaymentLink, Url } from '@services/user/payments/createLink'
 import { useEffect } from 'react'
 
 export function PaymentForm({ user }: { user: User }) {
