@@ -5,7 +5,6 @@ import type { HTMLInputTypeAttribute, PropsWithChildren } from 'react'
 import { Montserrat } from 'next/font/google'
 import TimeAgo from 'javascript-time-ago'
 import ru from 'javascript-time-ago/locale/ru'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import { EdgeStoreProvider } from '@/lib/edgestore'
 import { z } from 'zod/v4'
 import { cn } from '@/lib/utils'
@@ -199,7 +198,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <Footer />
           </EdgeStoreProvider>
         </Providers>
-        <SpeedInsights />
         <Metrika />
       </body>
     </html>

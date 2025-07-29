@@ -30,7 +30,8 @@
       "@modals/*": ["./ui/components/modals/*"],
       "@columns/*": ["./ui/columns/*"],
       "@email/*": ["./ui/email/*"],
-      "@db/*": ["./db/*"]
+      "@db/*": ["./db/*"],
+      "@rbits/*": ["./ui/rbits/*"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true

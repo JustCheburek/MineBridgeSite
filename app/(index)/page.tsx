@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function Index() {
   return (
-    <>
+    <div>
       {/*
             Секция первая
             Серверная информация для входа
@@ -54,6 +54,6 @@ export default function Index() {
             видео
             */}
       <YtSection />
-    </>
+    </div>
   )
 }

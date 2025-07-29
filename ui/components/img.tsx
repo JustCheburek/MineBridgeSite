@@ -20,10 +20,6 @@ export const ImgBox = ({
   helper = false,
   ...props
 }: ImgBox) => {
-  if (type === 'post') {
-    hover = true
-  }
-
   // Проверка на rounded-base
   const isRounded = className.includes('rounded')
 
@@ -36,7 +32,7 @@ export const ImgBox = ({
           'rounded-b-none': !isRounded && type === 'post',
           'absolute aspect-square w-1/2': type === 'grid',
           'cursor-pointer': helper,
-          'hover:[&>img]:scale-110': hover,
+          'hover:[&>img]:scale-110': hover && (type === 'post' && hover === undefined),
         },
         className
       )}

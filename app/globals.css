@@ -196,7 +196,7 @@
 @keyframes appear-left {
   from {
     opacity: 0.1;
-    translate: -20%;
+    translate: -5%;
   }
   to {
     opacity: 1;
@@ -207,7 +207,7 @@
 @keyframes appear-right {
   from {
     opacity: 0.1;
-    translate: 20%;
+    translate: 5%;
   }
   to {
     opacity: 1;

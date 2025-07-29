@@ -188,16 +188,6 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
             </div>
           )}
         </div>
-
-        {/* <p className='absolute top-0 right-0 z-50'>
-          x: {x} <br />
-          long: {long} <br />
-          angle: {angle} <br />
-          place1: {place1} <br />
-          place2: {place2} <br />
-          width: {width} <br />
-          height: {height}
-        </p> */}
       </div>
     </div>
   )
@@ -363,7 +353,10 @@ export default async function MilkyWay() {
 
   //bg-gradient-to-b from-background to-black
   return (
-    <div className='text-center' style={{ '--_size': `${SIZE}rem` }}>
+    <div
+      className='text-center'
+      style={{ '--_size': `${SIZE}rem` }}
+    >
       <H1
         description='Боевой пропуск 7 сезона'
         reload={async () => {
@@ -374,7 +367,7 @@ export default async function MilkyWay() {
         Млечный путь
       </H1>
 
-      <div className='from-background h-28 bg-gradient-to-b to-black' />
+      <div className='from-background h-12 bg-gradient-to-b to-black' />
 
       <div className='bg-size-[500px] bg-black bg-[url(/milkyway/stars.svg)] bg-repeat py-5 will-change-transform'>
         <PathsLoader Drops={Drops} author={author} Case={Case} />
@@ -382,3 +375,13 @@ export default async function MilkyWay() {
     </div>
   )
 }
+
+{/* <Galaxy
+          className='w-[99%] right-0'
+          mouseRepulsion={false}
+          density={2}
+          glowIntensity={0.1}
+          starSpeed={0.01}
+          rotationSpeed={0.01}
+          saturation={0.6}
+        /> */}

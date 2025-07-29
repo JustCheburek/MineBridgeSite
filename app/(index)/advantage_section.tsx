@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Img, ImgBox } from '@components/img'
 import { MaxSize } from '@components/maxSize'
+import TiltedCard from '@/ui/rbits/Components/TiltedCard/TiltedCard'
 
 /*
 export function Video({name}) {
@@ -37,19 +38,38 @@ type AdvantageImgBoxProps = {
 }
 
 const AdvantageImgBox = ({ src, alt }: AdvantageImgBoxProps) => (
-  <ImgBox
+  // <ImgBox
+  //   className={cn(
+  //     'border-3 border-light-gray rounded-base max-lg:appear w-[min(550px,100%)]',
+  //     'transition-all duration-1000',
+  //     'hover:border-unic',
+  //     'shadow-light-gray/90 hover:shadow-unic shadow-[0_5px_20px] hover:shadow-[0_5px_35px]',
+  //     'group-[.right]:lg:multi-["col-start-2;row-start-1;shadow-[5px_5px_20px];hover:shadow-[10px_5px_35px];appear-right"]',
+  //     'group-[.left]:lg:multi-["col-start-1;row-start-1;shadow-[-5px_5px_20px];hover:shadow-[-10px_5px_35px];appear-left"]'
+  //   )}
+  //   type='post'
+  // >
+  //   <Img src={src} alt={alt} />
+  // </ImgBox>
+  <TiltedCard
     className={cn(
-      'border-3 border-light-gray rounded-base max-lg:appear w-[min(550px,100%)]',
-      'transition-all duration-1000',
-      'hover:border-unic',
-      'shadow-light-gray/90 hover:shadow-unic shadow-[0_5px_20px] hover:shadow-[0_5px_35px]',
-      'group-[.right]:lg:multi-["col-start-2;row-start-1;shadow-[5px_5px_20px];hover:shadow-[10px_5px_35px];appear-right"]',
-      'group-[.left]:lg:multi-["col-start-1;row-start-1;shadow-[-5px_5px_20px];hover:shadow-[-10px_5px_35px];appear-left"]'
+      'group-[.right]:lg:multi-["col-start-2;row-start-1;appear-right"]',
+      'group-[.left]:lg:multi-["col-start-1;row-start-1;;appear-left"]'
     )}
-    type='post'
   >
-    <Img src={src} alt={alt} />
-  </ImgBox>
+    <ImgBox
+      className={cn(
+        'border-3 border-light-gray rounded-base max-lg:appear mx-auto',
+        'transition-all duration-1000',
+        'hover:border-unic',
+        'shadow-light-gray/90 hover:shadow-unic shadow-[0_5px_20px] hover:shadow-[0_5px_35px]'
+      )}
+      type='post'
+      hover={false}
+    >
+      <Img src={src} alt={alt} />
+    </ImgBox>
+  </TiltedCard>
 )
 
 const Text = ({ children }: PropsWithChildren) => (
