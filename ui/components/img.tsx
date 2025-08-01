@@ -63,7 +63,7 @@ export const Img = ({
       'translate-0 rotate-0 scale-100 transition-all duration-500 ease-in-out',
       {
         'object-cover': fill,
-        pixel: pixel,
+        pixel,
       },
       className
     )}
