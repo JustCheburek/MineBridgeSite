@@ -14,7 +14,7 @@ export default async function Image() {
   ).then(res => res.arrayBuffer())
 
   return new ImageResponse(
-    <OGImageBox paths={['Главная']}>Бесплатный полуванильный майнкрафт сервер</OGImageBox>,
+    <OGImageBox paths={['Главная']}>Полуванильный майнкрафт сервер</OGImageBox>,
     {
       ...size,
       fonts: [

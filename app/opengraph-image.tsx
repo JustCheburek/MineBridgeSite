@@ -13,7 +13,7 @@ export default async function Image() {
     new URL('./Montserrat-Bold.ttf', process.env.NEXT_PUBLIC_GITHUB_URL!)
   ).then(res => res.arrayBuffer())
 
-  return new ImageResponse(<OGImageBox>Бесплатный полуванильный майнкрафт сервер</OGImageBox>, {
+  return new ImageResponse(<OGImageBox>Полуванильный майнкрафт сервер</OGImageBox>, {
     ...size,
     fonts: [
       {
