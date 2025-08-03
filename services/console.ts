@@ -37,15 +37,15 @@ export const GetHoursConsole = cache(async (name: string) => {
 })
 
 export const AddWLConsole = cache(async (name: string) => {
-  const client = await RconVC()
-
   try {
+    const client = await RconVC()
+
     await client.send(`vclist add ${name}`)
+
+    client.disconnect()
   } catch (e) {
     console.error(e)
   }
-
-  client.disconnect()
 })
 
 export const SetSuffixConsole = cache(async (suffix: string, name: string) => {

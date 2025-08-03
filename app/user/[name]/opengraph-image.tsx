@@ -18,24 +18,21 @@ export default async function Image({ params }: NameParams) {
     new URL('./Montserrat-Bold.ttf', process.env.NEXT_PUBLIC_GITHUB_URL!)
   ).then(res => res.arrayBuffer())
 
-  return new ImageResponse(
-    <OGImageBox paths={[name]}>{name} играет на Майнбридж, а ты?)</OGImageBox>,
-    {
-      ...size,
-      fonts: [
-        {
-          name: 'Montserrat',
-          data: MontserratBold,
-          style: 'normal',
-          weight: 700,
-        },
-        {
-          name: 'Montserrat',
-          data: MontserratMedium,
-          style: 'normal',
-          weight: 500,
-        },
-      ],
-    }
-  )
+  return new ImageResponse(<OGImageBox paths={[name]}>{name} играет на Майнбридж, а ты?)</OGImageBox>, {
+    ...size,
+    fonts: [
+      {
+        name: 'Montserrat',
+        data: MontserratBold,
+        style: 'normal',
+        weight: 700,
+      },
+      {
+        name: 'Montserrat',
+        data: MontserratMedium,
+        style: 'normal',
+        weight: 500,
+      },
+    ],
+  })
 }

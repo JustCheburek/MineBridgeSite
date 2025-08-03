@@ -1,7 +1,8 @@
 import { PropsWithChildren } from 'react'
 import { MinebridgeSvg } from '@ui/SVGS'
 
-export function OGImageBox({ children, paths }: PropsWithChildren<{ paths?: string[] }>) {
+type OGImageBox = { paths?: string[] } & PropsWithChildren
+export function OGImageBox({ children, paths }: OGImageBox) {
   return (
     <div
       style={{
@@ -15,7 +16,16 @@ export function OGImageBox({ children, paths }: PropsWithChildren<{ paths?: stri
         flexDirection: 'column',
       }}
     >
-      <MinebridgeSvg className='absolute left-[30px] top-[30px] size-[80px]' />
+      <MinebridgeSvg
+        className='absolute left-[30px] top-[30px] size-[80px]'
+        style={{
+          width: '90px',
+          height: '90px',
+          position: 'absolute',
+          left: '30px',
+          top: '30px',
+        }}
+      />
       {paths && (
         <h4 style={{ fontSize: 50, color: '#D6D6D6', fontWeight: 500, display: 'flex', gap: 6 }}>
           {paths.map((path, index) => (
@@ -31,15 +41,20 @@ export function OGImageBox({ children, paths }: PropsWithChildren<{ paths?: stri
           fontSize: 110,
           color: '#00A7B1',
           fontWeight: 700,
-          lineHeight: 0.85,
-          marginBottom: 20,
+          lineHeight: 0.7,
+          marginBottom: 30,
         }}
       >
         MineBridge
       </h1>
-      <p
+      <div
         style={{
-          fontSize: 42,
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: 40,
+          gap: 0,
           color: '#9C9C9C',
           textAlign: 'center',
           maxWidth: '65%',
@@ -47,7 +62,7 @@ export function OGImageBox({ children, paths }: PropsWithChildren<{ paths?: stri
         }}
       >
         {children}
-      </p>
+      </div>
     </div>
   )
 }

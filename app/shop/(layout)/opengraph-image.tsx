@@ -14,7 +14,10 @@ export default async function Image() {
   ).then(res => res.arrayBuffer())
 
   return new ImageResponse(
-    <OGImageBox paths={['Магазин']}>Мостики — внутриигровая валюта 1 ₽ = 1 мостик</OGImageBox>,
+    <OGImageBox paths={['Магазин']}>
+      Мостики — внутриигровая валюта <br />
+      1 ₽ = 1 мостик
+    </OGImageBox>,
     {
       ...size,
       fonts: [
