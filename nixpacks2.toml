@@ -1,11 +1,15 @@
 [phases.setup]
-nixPkgs = ['bun', 'nodejs']
+# Добавляем Bun как системный пакет
+packages = ["...", "nodejs", "bun"]
 
 [phases.install]
-cmds = ['bun install']
+# Устанавливаем зависимости с помощью Bun
+cmd = ["bun install"]
 
 [phases.build]
-cmds = ['bun run build']
+# Собираем Next.js-приложение
+cmd = ["bun run build"]
 
 [start]
-cmd = 'bun run start'
+# Запускаем приложение в production-режиме
+cmd = "bun run start"
