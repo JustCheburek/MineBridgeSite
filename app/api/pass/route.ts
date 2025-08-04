@@ -21,9 +21,6 @@ export async function GET(request: NextRequest) {
       $inc: {
         days: -1,
       },
-    },
-    {
-      new: true,
     }
   )
 

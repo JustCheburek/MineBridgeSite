@@ -220,7 +220,7 @@ export const getUsers = cache(
 
 export const getUsersL = cache(
   async () => {
-    return userModel.countDocuments({}, { lean: true })
+    return userModel.countDocuments({})
   },
   ['users', 'userLike', 'all'],
   { revalidate: 450, tags: ['users', 'userLike', 'all'] }
