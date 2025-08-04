@@ -15,6 +15,7 @@ export async function MGConnect() {
     try {
       console.log('Подключение к DB')
       await connect(MONGO_URL, {
+        authSource: "admin",
         maxPoolSize: 20, // Максимальный размер пула подключений
         minPoolSize: 10, // Минимальный размер пула
         serverSelectionTimeoutMS: 5000, // Быстрое завершение при ошибках
