@@ -1,20 +1,36 @@
 # 1. Билд-образ
 FROM node:18-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+
+# 2. Копируем package.json и ставим зависимости
+COPY package.json ./
+RUN npm install --production=false
+
+# 3. Копируем код и собираем
 COPY . .
 RUN npm run build
 
-# 2. Рантайм-образ
+# 4. Рантайм-образ
 FROM node:18-alpine AS runner
 WORKDIR /app
-# копируем собранные файлы и зависимости
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
+
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# создаём пользователя без прав root
+RUN adduser --system --uid 1001 nextjs
+
+# копируем публичные файлы
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/package*.json ./
-# порт приложения
+
+# standalone-сборка Next.js (включает server.js и трассированные файлы)
+COPY --from=builder --chown=nextjs:node /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:node /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 3000
-# команда запуска
-CMD ["npm", "start"]
+
+CMD ["node", "server.js"]
