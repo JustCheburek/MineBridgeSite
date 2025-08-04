@@ -4,7 +4,7 @@ WORKDIR /app
 
 # 2. Копируем package.json и ставим зависимости
 COPY package.json ./
-RUN npm install --production=false
+RUN npm install --legacy-peer-deps
 
 # 3. Копируем код и собираем
 COPY . .
