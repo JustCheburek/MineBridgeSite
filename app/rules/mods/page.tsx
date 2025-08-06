@@ -20,17 +20,9 @@ export default function Mods() {
 
   const packs: NameUrl[] = [
     {
-      name: 'Kawa11Fox 1.21',
-      url: new URL('https://disk.yandex.ru/d/ToOOD2brmUWULA'),
-    },
-    {
       name: 'JustCheburek 1.21',
       url: new URL('https://modrinth.com/modpack/minebridge-pack'),
-    },
-    {
-      name: '_rkrmv',
-      url: new URL('https://t.me/rkrmv_modpacks'),
-    },
+    }
   ]
 
   const recommendMods: NameUrl[] = [
