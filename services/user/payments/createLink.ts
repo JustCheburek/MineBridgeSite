@@ -31,7 +31,7 @@ export async function CreatePaymentLink(
 
   const { mostiki, code } = result.data
 
-  const { user } = await getUser({ _id, throwNotFound: false }).catch(() => ({ user: null }))
+  const { user } = await getUser({ _id, throwNotFound: false, show: true }).catch(() => ({ user: null }))
   if (!user) {
     return { success: false, error: 'Пользователь не найден', data: { _id } }
   }
