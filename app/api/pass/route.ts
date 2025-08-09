@@ -13,17 +13,34 @@ export async function GET(request: NextRequest) {
     return Response.json({ success: false, message: 'Days is off' })
   }
 
-  const users = await userModel.updateMany(
+  // const users = await userModel.updateMany(
+  //   {
+  //     days: { $gt: 0 },
+  //   },
+  //   {
+  //     $inc: {
+  //       days: -1,
+  //     },
+  //   }
+  // )
+
+  // console.log(`-1 день у ${users.modifiedCount} пользователей`)
+  // return Response.json({ success: true, updated: users.modifiedCount })
+
+  const user = await userModel.findOne(
     {
-      days: { $gt: 0 },
+      name: 'JustCheburek',
     },
     {
       $inc: {
         days: -1,
-      },
+      }
     }
   )
 
-  console.log(`-1 день у ${users.modifiedCount} пользователей`)
-  return Response.json({ success: true, updated: users.modifiedCount })
+  if (!user) {
+    return Response.json({ success: false, message: 'User not found' })
+  }
+
+  return Response.json({ success: true, days: user.days, name: user.name })
 }
