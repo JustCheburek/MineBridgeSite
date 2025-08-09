@@ -9,7 +9,7 @@ export const getUsersWhitelist = cache(
     const users: User[] = JSON.parse(
       JSON.stringify(
         await userModel.find(
-          { whitelist: true },
+          { days: { $gt: 0 } },
           {
             name: 1,
             photo: 1,

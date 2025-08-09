@@ -21,10 +21,10 @@ export default async function WhitelistPage() {
       >
         Проходка
       </H1>
-      <WhitelistReset users={users} />
+      {/* <WhitelistReset users={users} /> */}
       {users.length === 0 && <p className='text-center'>Нет пользователей с проходкой</p>}
       {users.map((user: any) => (
-        <p key={user._id}>{user.name}</p>
+        <p key={user._id}>{user.name} - {user.days}</p>
       ))}
     </MaxSize>
   )

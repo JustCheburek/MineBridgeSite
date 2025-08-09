@@ -15,8 +15,12 @@ export function GET() {
 
 // Обработчик POST-запросов
 export async function POST(request: NextRequest) {
+  console.log(request)
+
   // Получение данных из запроса
   const payment = (await request.json()) as PaymentPost
+
+  console.log(payment)
 
   // Создание строки для подписи
   const hashString = [payment.payment_id, payment.cost, payment.customer].join('@')
@@ -31,12 +35,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Bad signature.' }, { status: 400 })
   }
 
-  const mostiki = payment.cost
+  const mostiki = payment.products[0].count
 
-  console.log(`Оплата! Почта: ${payment.email}; Мостики: ${mostiki}`)
+  console.log(`Оплата! Ник: ${payment.customer}; Мостики: ${mostiki}`)
 
   // Добавление товара
-  const user = await userModel.findOneAndUpdate({ email: payment.email }, { $inc: { mostiki } })
+  const user = await userModel.findOneAndUpdate({ name: payment.customer }, { $inc: { mostiki } })
 
   // Сообщение на почту
   if (user?.notifications?.mostiki) {
