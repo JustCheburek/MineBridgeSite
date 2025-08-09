@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
   // console.log(`-1 день у ${users.modifiedCount} пользователей`)
   // return Response.json({ success: true, updated: users.modifiedCount })
 
-  const user = await userModel.findOne(
+  const user = await userModel.findOneAndUpdate(
     {
       name: 'JustCheburek',
     },
