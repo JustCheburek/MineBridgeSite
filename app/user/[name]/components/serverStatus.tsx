@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic'
 import type { User } from 'lucia'
-import { AddWLConsole, GetHoursConsole } from '@services/console'
+import { AddWLConsole } from '@services/console'
 
-const HourStarSection = dynamic(() => import('./hourstar'))
+// const HourStarSection = dynamic(() => import('./hourstar'))
 const WhitelistSection = dynamic(() => import('./whitelist'))
 
 type ServerStatus = {
