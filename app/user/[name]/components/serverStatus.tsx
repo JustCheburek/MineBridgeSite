@@ -11,14 +11,13 @@ type ServerStatus = {
 }
 
 export default async function ServerStatusSection({ user, isMe }: ServerStatus) {
-  const [hours] = await Promise.all([
-    GetHoursConsole(user.name),
-    user.days > 0 && AddWLConsole(user.name),
-  ])
+  if (user.days > 0) {
+    AddWLConsole(user.name)
+  }
 
   return (
     <>
-      {hours > -1 && <HourStarSection user={user} hours={hours} isMe={isMe} />}
+      {/* {hours > -1 && <HourStarSection user={user} hours={hours} isMe={isMe} />} */}
 
       <WhitelistSection user={user} isMe={isMe} />
     </>

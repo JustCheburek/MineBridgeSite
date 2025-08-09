@@ -15,12 +15,8 @@ export function GET() {
 
 // Обработчик POST-запросов
 export async function POST(request: NextRequest) {
-  console.log(request)
-
   // Получение данных из запроса
   const payment = (await request.json()) as PaymentPost
-
-  console.log(payment)
 
   // Создание строки для подписи
   const hashString = [payment.payment_id, payment.cost, payment.customer].join('@')

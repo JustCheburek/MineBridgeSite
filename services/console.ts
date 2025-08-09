@@ -21,21 +21,6 @@ export const RconVC = cache(async () => {
   })
 })
 
-export const GetHoursConsole = cache(async (name: string) => {
-  const client = await RconMB()
-  let hours = -1
-
-  try {
-    hours = Number((await client.send(`scoreboard players get ${name} hours`)).split(' ')[2])
-  } catch (e) {
-    console.error(e)
-  }
-
-  client.disconnect()
-
-  return hours
-})
-
 export const AddWLConsole = cache(async (name: string) => {
   try {
     const client = await RconVC()
