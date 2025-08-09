@@ -14,5 +14,5 @@ export async function GET(request: Request) {
 
   revalidatePath('/')
 
-  return NextResponse.redirect(new URL('/', request.url))
+  return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_RU_URL))
 }
