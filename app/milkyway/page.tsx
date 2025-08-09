@@ -265,6 +265,13 @@ type GetButton = {
 }
 
 function GetButton({ author, isPerm, isHas, caseData }: GetButton) {
+  return (
+    <Button className='my-[0.8rem] text-[#939393]' bg={false} disabled>
+      <BG disabled className='border-1 border-[#767676] bg-[#263034] drop-shadow-[#263034]' />
+      Устарело
+    </Button>
+  )
+
   if (!isHas) {
     return (
       <Button className='my-[0.8rem] text-[#939393]' bg={false} disabled>
@@ -353,10 +360,7 @@ export default async function MilkyWay() {
 
   //bg-gradient-to-b from-background to-black
   return (
-    <div
-      className='text-center'
-      style={{ '--_size': `${SIZE}rem` }}
-    >
+    <div className='text-center' style={{ '--_size': `${SIZE}rem` }}>
       <H1
         description='Боевой пропуск 7 сезона'
         reload={async () => {
@@ -376,7 +380,8 @@ export default async function MilkyWay() {
   )
 }
 
-{/* <Galaxy
+{
+  /* <Galaxy
           className='w-[99%] right-0'
           mouseRepulsion={false}
           density={2}
@@ -384,4 +389,5 @@ export default async function MilkyWay() {
           starSpeed={0.01}
           rotationSpeed={0.01}
           saturation={0.6}
-        /> */}
+        /> */
+}
