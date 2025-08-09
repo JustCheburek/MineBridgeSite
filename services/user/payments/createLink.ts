@@ -12,7 +12,7 @@ const easydonate = new EasyDonateApiClient(process.env.EASYDONATE_SECRET!)
 
 const paymentSchema = z.object({
   mostiki: z.preprocess(val => Number(val), z.number().positive().int().min(1)),
-  code: z.string().optional(),
+  promocode: z.string().optional(),
 })
 
 export async function CreatePaymentLink(
@@ -29,7 +29,8 @@ export async function CreatePaymentLink(
     }
   }
 
-  const { mostiki, code } = result.data
+  console.log(result.data)
+  const { mostiki, promocode } = result.data
 
   const { user } = await getUser({ _id, throwNotFound: false, show: true }).catch(() => ({ user: null }))
   if (!user) {
@@ -43,8 +44,10 @@ export async function CreatePaymentLink(
       { [Number(process.env.EASYDONATE_MOSTIKIID!)]: mostiki },
       new URL('/shop/buy/success', process.env.NEXT_PUBLIC_EN_URL!).toString(),
       user.email,
-      code
+      promocode
     )
+
+    console.log(payment)
 
     return { success: true, data: { _id, url: payment.response.url } }
   } catch (error) {

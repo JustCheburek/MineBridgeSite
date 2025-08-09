@@ -11,11 +11,11 @@ import { useEffect } from 'react'
 
 export function PaymentForm({ user }: { user: User }) {
   const {
-    urlState: { mostiki, code },
+    urlState: { mostiki, promocode },
     setUrl,
   } = useUrlState({
     mostiki: 1,
-    code: '',
+    promocode: '',
   })
 
   const [state, formAction] = useActionStateId<Url>(CreatePaymentLink, {
@@ -40,7 +40,7 @@ export function PaymentForm({ user }: { user: User }) {
           autoComplete='mostiki'
           value={mostiki}
           onChange={e => {
-            setUrl({ mostiki: Number(e.target.value) })
+            setUrl({ mostiki: Number(e.target.value.trim()) })
           }}
         />
       </FormLabel>
@@ -51,9 +51,9 @@ export function PaymentForm({ user }: { user: User }) {
           type='text'
           placeholder='Промокод'
           autoComplete='promocode'
-          value={code}
+          value={promocode}
           onChange={e => {
-            setUrl({ code: e.target.value })
+            setUrl({ promocode: e.target.value.trim().toUpperCase() })
           }}
         />
       </FormLabel>
