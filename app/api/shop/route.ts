@@ -8,6 +8,11 @@ import { Resend } from 'resend'
 // Инициализация Resend (для почты)
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+export function GET() {
+  console.log(`GET запрос в /api/shop`)
+  return NextResponse.json({ status: 'Error', message: "Only POST requests" })
+}
+
 // Обработчик POST-запросов
 export async function POST(request: NextRequest) {
   // Получение данных из запроса
