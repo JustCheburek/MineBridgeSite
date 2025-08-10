@@ -9,7 +9,6 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export function GET() {
-  console.log(`GET запрос в /api/shop`)
   return NextResponse.json({ status: 'Error', message: "Only POST requests" })
 }
 
@@ -27,7 +26,7 @@ export async function POST(request: NextRequest) {
 
   // Проверка подписи
   if (expected !== payment.signature) {
-    console.log(`Bad signature: ${expected}, ${payment.signature}`)
+    console.error(`Bad signature: ${expected}, ${payment.signature}`)
     return NextResponse.json({ error: 'Bad signature.' }, { status: 400 })
   }
 

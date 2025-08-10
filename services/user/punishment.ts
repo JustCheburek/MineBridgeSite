@@ -100,8 +100,6 @@ export async function AddPunishment(
 ): Promise<StateId> {
   const result = punishmentSchema.safeParse(Object.fromEntries(formData.entries()))
 
-  console.log(Object.fromEntries(formData.entries()))
-
   if (!result.success) {
     return {
       success: false,

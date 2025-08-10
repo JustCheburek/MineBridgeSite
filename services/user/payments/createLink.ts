@@ -29,7 +29,6 @@ export async function CreatePaymentLink(
     }
   }
 
-  console.log(result.data)
   const { mostiki, promocode } = result.data
 
   const { user } = await getUser({ _id, throwNotFound: false, show: true }).catch(() => ({ user: null }))
@@ -46,8 +45,6 @@ export async function CreatePaymentLink(
       user.email,
       promocode
     )
-
-    console.log(payment)
 
     return { success: true, data: { _id, url: payment.response.url } }
   } catch (error) {

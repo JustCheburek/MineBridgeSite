@@ -54,6 +54,7 @@ export const ROLES_START = {
 
 export const DBS = {
   LL: 'librelogin',
+  PT: 'playtime'
 }
 
 export const PREMBCOST = 100

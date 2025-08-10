@@ -10,7 +10,6 @@ const notificationSchema = z.object({
   news: z.string().optional(),
   mostiki: z.string().optional(),
   rating: z.string().optional(),
-  hours: z.string().optional(),
   invite: z.string().optional(),
   code: z.string().optional(),
 })
@@ -51,9 +50,6 @@ export async function UpdateNotification(
       // Если поле есть в formData, устанавливаем true, иначе false
       ;(user.notifications as any)[fieldName] = notificationSettings[fieldName] === 'on'
     })
-
-    console.log('Отправлено в форме:', notificationSettings)
-    console.log('Сохранено в базе:', user.notifications)
 
     await user.save()
     revalidateTag('userLike')

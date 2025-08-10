@@ -54,6 +54,9 @@ export class User {
   @prop({ default: 0, min: 0 })
   public faded_rating!: number
 
+  @prop({ default: 0, min: 0 })
+  public hours!: number
+
   // Проходки
   @prop({ default: false })
   public whitelist!: boolean

@@ -19,9 +19,6 @@ export class Notifications {
   public rating!: boolean
 
   @prop({ default: true })
-  public hours!: boolean
-
-  @prop({ default: true })
   public invite!: boolean
 
   @prop({ default: true })

@@ -71,14 +71,12 @@ export async function GET(request: NextRequest) {
     let candidate: User | null = null
 
     if (!!id) {
-      console.log('Обновляем твича', id)
       candidate = await userModel.findByIdAndUpdate(id, {
         email: userData.email,
         twitchId: userData.twitchId,
         'urls.twitch': twUser.login,
       })
     } else {
-      console.log('Создаём твича', userData.name)
       candidate = await userModel.findOneAndUpdate(
         {
           $or: [{ twitchId: userData.twitchId }, { email: userData.email }],
@@ -97,7 +95,6 @@ export async function GET(request: NextRequest) {
         candidate = (await userModel.create(userData)) as User
       }
 
-      console.log('Новый куки')
       const session = await lucia.createSession(candidate?._id || userData._id, {})
       const sessionCookie = lucia.createSessionCookie(session.id)
       cookiesStore.set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes)

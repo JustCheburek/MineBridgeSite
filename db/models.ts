@@ -4,12 +4,13 @@ import { Session } from '@/types/session'
 import { Case, Drop } from '@/types/case'
 import { Season } from '@/types/season'
 import { Code } from '@/types/code'
-import { MGConnect } from './connect'
+import { MGConnect, MySQLConnect } from './connect'
 import { models } from 'mongoose'
 import { Event } from '@/types/event'
+import { DBS } from '@/const'
 
 MGConnect()
-// export const sqlPool = await MySQLConnect(DBS.LL)
+export const sqlPool = await MySQLConnect(DBS.PT)
 
 export const userModel = (models.User as ReturnModelType<typeof User>) || getModelForClass(User)
 const sessionModel =
