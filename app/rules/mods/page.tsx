@@ -20,7 +20,7 @@ export default function Mods() {
 
   const packs: NameUrl[] = [
     {
-      name: 'JustCheburek 1.21',
+      name: 'JustCheburek 1.21.6',
       url: new URL('https://modrinth.com/modpack/minebridge-pack'),
     }
   ]
