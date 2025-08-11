@@ -115,7 +115,7 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
           'relative grid items-center justify-center gap-10 max-md:flex-col md:ml-[var(--_x)]'
         )}
       >
-        <div className='group/card max-md:mt-4 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center'>
+        <div className='group/card relative max-md:mt-4 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center'>
           {!suffix ? (
             <ItemImg
               x={x}
@@ -126,6 +126,7 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
               isPerm={isPerm}
               isHas={isHas}
               caseData={caseData}
+              rating={rating}
             />
           ) : (
             <Suffix
@@ -136,6 +137,7 @@ async function Path({ rating, author, x, caseData, index }: PathDB) {
               isPerm={isPerm}
               isHas={isHas}
               caseData={caseData}
+              rating={rating}
             />
           )}
         </div>
@@ -235,24 +237,26 @@ function ItemImg({ x, Item, DropItem, rarity, ...props }: ItemImg) {
         />
       </ImgBox>
 
-      {/* <div className={cn(
-      'md:absolute top-1/2 md:-translate-y-1/2 grid items-center w-[70vw] h-64 p-4 md:p-10 overflow-hidden max-md:w-full max-md:h-auto',
-      x <= 0
-        ? 'left-0'
-        : 'right-0'
-    )}>
-      <div className={cn(
-        'md:absolute p-[0.8rem_2rem] border border-[#a6a6a6] bg-[#151b1e]',
-        'transition-all duration-700 max-md:rounded-base',
-        x <= 0
-          ? 'right-[calc(70vw-19rem)] rounded-r-base md:hover:translate-x-[calc(100%-1rem)] md:group-has-[figure:hover]/card:translate-x-[calc(100%-1rem)]'
-          : 'left-[calc(70vw-19rem)] rounded-l-base md:hover:translate-x-[calc(-100%+1rem)] md:group-has-[figure:hover]/card:translate-x-[calc(-100%+1rem)]'
-      )}>
-        <h2 className='w-max min-w-full'>{Item.displayname}</h2>
-        <p>{DropItem.description}</p>
-        <GetButton {...props} />
+      <div
+        className={cn(
+          'top-1/2 grid h-64 w-[70vw] items-center overflow-hidden p-4 max-md:h-auto max-md:w-full md:absolute md:p-10 md:-translate-y-1/2',
+          x <= 0 ? 'left-0' : 'right-0'
+        )}
+      >
+        <div
+          className={cn(
+            'border border-[#a6a6a6] bg-[#151b1e] p-[0.8rem_2rem] md:absolute',
+            'max-md:rounded-base transition-all duration-700',
+            x <= 0
+              ? 'rounded-r-base right-[calc(70vw-19rem)] md:hover:translate-x-[calc(100%-1rem)] md:group-has-[figure:hover]/card:translate-x-[calc(100%-1rem)]'
+              : 'rounded-l-base left-[calc(70vw-19rem)] md:hover:translate-x-[calc(-100%+1rem)] md:group-has-[figure:hover]/card:translate-x-[calc(-100%+1rem)]'
+          )}
+        >
+          <h2 className='w-max min-w-full'>{Item.displayname}</h2>
+          <p>{DropItem.description}</p>
+          <GetButton {...props} />
+        </div>
       </div>
-    </div> */}
     </>
   )
 }
@@ -262,21 +266,22 @@ type GetButton = {
   isPerm: boolean
   isHas: boolean
   caseData: CaseData
+  rating: number
 }
 
-function GetButton({ author, isPerm, isHas, caseData }: GetButton) {
-  return (
-    <Button className='my-[0.8rem] text-[#939393]' bg={false} disabled>
-      <BG disabled className='border-1 border-[#767676] bg-[#263034] drop-shadow-[#263034]' />
-      Устарело
-    </Button>
-  )
+function GetButton({ author, isPerm, isHas, caseData, rating }: GetButton) {
+  // return (
+  //   <Button className='my-[0.8rem] text-[#939393]' bg={false} disabled>
+  //     <BG disabled className='border-1 border-[#767676] bg-[#263034] drop-shadow-[#263034]' />
+  //     Устарело
+  //   </Button>
+  // )
 
   if (!isHas) {
     return (
       <Button className='my-[0.8rem] text-[#939393]' bg={false} disabled>
         <BG disabled className='border-1 border-[#767676] bg-[#263034] drop-shadow-[#263034]' />
-        Получить
+        Ещё {rating - author.rating} <StarSvg/>
       </Button>
     )
   }

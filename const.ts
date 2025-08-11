@@ -61,12 +61,134 @@ export const PREMBCOST = 100
 export const MINCOST = 700
 
 // MB 7 сезон
+// export const Paths: PathID[] = [
+//   {
+//     rating: 25,
+//     x: -35,
+//     caseData: {
+//       Item: '662ddb0f8d5044c0b4ad7b5a',
+//       DropItem: '662ddb0f8d5044c0b4ad7b57',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 50,
+//     x: 40,
+//     caseData: {
+//       Item: '662de3cd8d5044c0b4ad86fb',
+//       DropItem: '662de3cd8d5044c0b4ad86fa',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 75,
+//     x: -30,
+//     caseData: {
+//       Item: '662de3d68d5044c0b4ad871b',
+//       DropItem: '662de3d68d5044c0b4ad871a',
+//       rarity: 'epic',
+//       suffix: '&7крутой',
+//     },
+//   },
+//   {
+//     rating: 100,
+//     x: 45,
+//     caseData: {
+//       Item: '662ddb0f8d5044c0b4ad7b5c',
+//       DropItem: '662ddb0f8d5044c0b4ad7b57',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 125,
+//     x: -50,
+//     caseData: {
+//       DropItem: '662de3cd8d5044c0b4ad86fa',
+//       Item: '662de3cd8d5044c0b4ad86fc',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 150,
+//     x: 50,
+//     caseData: {
+//       DropItem: '677bc4cdc10a0180e42f7f1c',
+//       Item: '677c94c241427b6b226c8d1a',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 200,
+//     x: 10,
+//     caseData: {
+//       DropItem: '662ddb0f8d5044c0b4ad7b57',
+//       Item: '662ddb0f8d5044c0b4ad7b58',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 250,
+//     x: -30,
+//     caseData: {
+//       Item: '662de3d68d5044c0b4ad871b',
+//       DropItem: '662de3d68d5044c0b4ad871a',
+//       rarity: 'epic',
+//       suffix: '&7атом',
+//     },
+//   },
+//   {
+//     rating: 300,
+//     x: 45,
+//     caseData: {
+//       DropItem: '662ddb0f8d5044c0b4ad7b57',
+//       Item: '662ddb0f8d5044c0b4ad7b5e',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 350,
+//     x: -50,
+//     caseData: {
+//       DropItem: '662de3cd8d5044c0b4ad86fa',
+//       Item: '662de3cd8d5044c0b4ad86ff',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 400,
+//     x: 50,
+//     caseData: {
+//       DropItem: '662ddb0f8d5044c0b4ad7b57',
+//       Item: '662ddb0f8d5044c0b4ad7b60',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 500,
+//     x: 10,
+//     caseData: {
+//       DropItem: '677bc4cdc10a0180e42f7f1c',
+//       Item: '677c94eb41427b6b226c8d1d',
+//       rarity: 'common',
+//     },
+//   },
+//   {
+//     rating: 700,
+//     x: -40,
+//     caseData: {
+//       DropItem: '677bc4cdc10a0180e42f7f1c',
+//       Item: '677c950941427b6b226c8d20',
+//       rarity: 'rare',
+//     },
+//   },
+// ]
+
 export const Paths: PathID[] = [
   {
     rating: 25,
     x: -35,
     caseData: {
-      Item: '662ddb0f8d5044c0b4ad7b5a',
+      Item: '662ddb0f8d5044c0b4ad7b59',
       DropItem: '662ddb0f8d5044c0b4ad7b57',
       rarity: 'common',
     },
@@ -75,9 +197,9 @@ export const Paths: PathID[] = [
     rating: 50,
     x: 40,
     caseData: {
-      Item: '662de3cd8d5044c0b4ad86fb',
+      Item: '662de3cd8d5044c0b4ad8706',
       DropItem: '662de3cd8d5044c0b4ad86fa',
-      rarity: 'common',
+      rarity: 'uncommon',
     },
   },
   {
@@ -87,15 +209,15 @@ export const Paths: PathID[] = [
       Item: '662de3d68d5044c0b4ad871b',
       DropItem: '662de3d68d5044c0b4ad871a',
       rarity: 'epic',
-      suffix: '&7крутой',
+      suffix: '&7опасный',
     },
   },
   {
     rating: 100,
     x: 45,
     caseData: {
-      Item: '662ddb0f8d5044c0b4ad7b5c',
-      DropItem: '662ddb0f8d5044c0b4ad7b57',
+      Item: '677c94eb41427b6b226c8d1d',
+      DropItem: '677bc4cdc10a0180e42f7f1c',
       rarity: 'common',
     },
   },
@@ -104,7 +226,7 @@ export const Paths: PathID[] = [
     x: -50,
     caseData: {
       DropItem: '662de3cd8d5044c0b4ad86fa',
-      Item: '662de3cd8d5044c0b4ad86fc',
+      Item: '662de3cd8d5044c0b4ad86fb',
       rarity: 'common',
     },
   },
@@ -112,8 +234,8 @@ export const Paths: PathID[] = [
     rating: 150,
     x: 50,
     caseData: {
-      DropItem: '677bc4cdc10a0180e42f7f1c',
-      Item: '677c94c241427b6b226c8d1a',
+      DropItem: '662ddb0f8d5044c0b4ad7b57',
+      Item: '662ddb0f8d5044c0b4ad7b5b',
       rarity: 'common',
     },
   },
@@ -121,8 +243,8 @@ export const Paths: PathID[] = [
     rating: 200,
     x: 10,
     caseData: {
-      DropItem: '662ddb0f8d5044c0b4ad7b57',
-      Item: '662ddb0f8d5044c0b4ad7b58',
+      DropItem: '677bc4cdc10a0180e42f7f1c',
+      Item: '677c94c241427b6b226c8d1a',
       rarity: 'common',
     },
   },
@@ -133,7 +255,7 @@ export const Paths: PathID[] = [
       Item: '662de3d68d5044c0b4ad871b',
       DropItem: '662de3d68d5044c0b4ad871a',
       rarity: 'epic',
-      suffix: '&7атом',
+      suffix: '&7ядовитый',
     },
   },
   {
@@ -141,8 +263,8 @@ export const Paths: PathID[] = [
     x: 45,
     caseData: {
       DropItem: '662ddb0f8d5044c0b4ad7b57',
-      Item: '662ddb0f8d5044c0b4ad7b5e',
-      rarity: 'common',
+      Item: '662ddb0f8d5044c0b4ad7b67',
+      rarity: 'uncommon',
     },
   },
   {
@@ -150,7 +272,7 @@ export const Paths: PathID[] = [
     x: -50,
     caseData: {
       DropItem: '662de3cd8d5044c0b4ad86fa',
-      Item: '662de3cd8d5044c0b4ad86ff',
+      Item: '662de3cd8d5044c0b4ad86fe',
       rarity: 'common',
     },
   },
@@ -159,17 +281,18 @@ export const Paths: PathID[] = [
     x: 50,
     caseData: {
       DropItem: '662ddb0f8d5044c0b4ad7b57',
-      Item: '662ddb0f8d5044c0b4ad7b60',
-      rarity: 'common',
+      Item: '662ddb0f8d5044c0b4ad7b62',
+      rarity: 'uncommon',
     },
   },
   {
     rating: 500,
     x: 10,
     caseData: {
-      DropItem: '677bc4cdc10a0180e42f7f1c',
-      Item: '677c94eb41427b6b226c8d1d',
-      rarity: 'common',
+      Item: '662de3d68d5044c0b4ad871b',
+      DropItem: '662de3d68d5044c0b4ad871a',
+      rarity: 'epic',
+      suffix: '&7огненный',
     },
   },
   {
@@ -177,10 +300,8 @@ export const Paths: PathID[] = [
     x: -40,
     caseData: {
       DropItem: '677bc4cdc10a0180e42f7f1c',
-      Item: '677c950941427b6b226c8d20',
-      rarity: 'rare',
+      Item: '677c955741427b6b226c8d25',
+      rarity: 'epic',
     },
-  },
+  }
 ]
-
-// export const Paths: PathID[] = []
