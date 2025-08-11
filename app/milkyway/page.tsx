@@ -385,7 +385,7 @@ export default async function MilkyWay() {
   )
 }
 
-{
+
   /* <Galaxy
           className='w-[99%] right-0'
           mouseRepulsion={false}
@@ -395,4 +395,4 @@ export default async function MilkyWay() {
           rotationSpeed={0.01}
           saturation={0.6}
         /> */
-}
+
