@@ -367,7 +367,7 @@ export default async function MilkyWay() {
   return (
     <div className='text-center' style={{ '--_size': `${SIZE}rem` }}>
       <H1
-        description='Боевой пропуск 7 сезона'
+        description='Боевой пропуск 8 сезона'
         reload={async () => {
           'use server'
           revalidateTag('all')
